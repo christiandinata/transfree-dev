@@ -17,7 +17,7 @@ const Login = () => (
           <label for="password">Password</label><br/>
           <input type="password" id="password" placeholder="Enter a secure password"/>
 
-          <Link href="/phone">
+          <Link href="/account">
             <a className="btn-primary">Log in</a>
           </Link>
         </form>
