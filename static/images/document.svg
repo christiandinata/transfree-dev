@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="155px" height="195px" viewBox="0 0 155 195" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>file-2</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Awaiting-confirmation" transform="translate(-644.000000, -305.000000)">
+            <g id="file-2" transform="translate(644.000000, 305.000000)">
+                <polygon id="Path" fill="#EDEADA" fill-rule="nonzero" points="144 67.1 93.8684211 17 17 17 17 184 144 184"></polygon>
+                <ellipse id="Oval" stroke="#7383BF" stroke-width="2" fill="#FFFFFF" fill-rule="nonzero" stroke-linecap="round" cx="85.5" cy="125" rx="36.5" ry="36"></ellipse>
+                <path d="M111,151 L154,194" id="Path" stroke="#7383BF" stroke-width="2" stroke-linecap="round"></path>
+                <path d="M85.625,117 L65.375,117 C63.508625,117 62,115.4355 62,113.5 C62,111.5645 63.508625,110 65.375,110 L85.625,110 C87.491375,110 89,111.5645 89,113.5 C89,115.4355 87.491375,117 85.625,117 Z" id="Path" fill="#CEC9AE" fill-rule="nonzero"></path>
+                <path d="M105.642857,137 L65.3571429,137 C63.5006429,137 62,135.4355 62,133.5 C62,131.5645 63.5006429,130 65.3571429,130 L105.642857,130 C107.499357,130 109,131.5645 109,133.5 C109,135.4355 107.499357,137 105.642857,137 Z" id="Path" fill="#CEC9AE" fill-rule="nonzero"></path>
+                <polygon id="Path" fill="#E2DBBF" fill-rule="nonzero" points="16.7105263 16.7 93.5789474 16.7 127 50.1 127 0 0 0 0 167 16.7105263 167"></polygon>
+                <path d="M143.598345,67 L94,67 L94,17.4031408 C94,17.0457953 94.4348958,16.8637513 94.6877421,17.1199613 L143.881532,66.3122785 C144.134379,66.5651173 143.955701,67 143.598345,67 Z" id="Path" fill="#CEC9AE" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>
