@@ -2,10 +2,10 @@ import Header from '../components/header.js';
 import Menu from '../components/menu.js';
 import Link from 'next/link';
 
-const AccountLayout = ({children}) => (
+const AccountLayout = ({children, isApproved}) => (
   <div>
     <Header />
-    <Menu />
+    <Menu isApproved={isApproved}/>
     <div className="container-fluid">
       {children}
     </div>

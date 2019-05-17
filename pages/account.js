@@ -412,7 +412,7 @@ class Account extends React.Component {
 
   render() {
     return (
-      <AccountLayout>
+      <AccountLayout isApproved={this.props.isApproved}>
         {this.renderContent()}
       </AccountLayout>
     );

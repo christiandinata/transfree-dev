@@ -5,7 +5,9 @@ import Link from 'next/link';
 import React from 'react';
 import { connect } from 'react-redux';
 import rateActions from '../redux/actions';
+import userActions from '../redux/actions';
 import initialize from '../utils/initialize';
+import { getCookie } from '../utils/cookie';
 import NumberFormat from 'react-number-format';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '@fortawesome/fontawesome-svg-core/styles.css';
@@ -31,6 +33,7 @@ class Index extends React.Component {
   static async getInitialProps(ctx) {
     initialize(ctx);
     await ctx.store.dispatch(rateActions.getRates('GBP','IDR'));
+    await ctx.store.dispatch(userActions.getUser(getCookie('uid', ctx.req),'user'));
   };
 
   componentDidMount() {
@@ -109,7 +112,7 @@ class Index extends React.Component {
     return (
       <div>
         <Header/>
-        <Menu />
+        <Menu isApproved={this.props.isApproved}/>
         <div className="row hero">
           <div className="container">
             <div className="left-container">
@@ -785,8 +788,20 @@ class Index extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  rate: state.rate.rates,
-});
+const mapStateToProps = (state) => {
+  const userData = JSON.parse(state.user.user_data);
+  return {
+    rate: state.rate.rates,
+    isApproved: !!userData.isApproved,
+  }
 
-export default connect(mapStateToProps, rateActions)(Index);
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    userActions,
+    rateActions
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Index);

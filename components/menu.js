@@ -84,10 +84,9 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
 )
 
 const mapStateToProps = (state) => {
-  const userData = JSON.parse(state.user.user_data);
-  console.log(state);
   return {
-    isAuthenticated: !!state.authentication.token, isApproved: !!userData.isApproved
+    isAuthenticated: !!state.authentication.token,
+
   }
 }
 
