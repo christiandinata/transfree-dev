@@ -1,0 +1,16 @@
+export const REGISTER = 'register';
+export const AUTHENTICATE = 'authenticate';
+export const DEAUTHENTICATE = 'deauthenticate';
+export const USER = 'user';
+export const ERROR_MESSAGE = 'error_message';
+export const VERIFY_PHONE = 'verify_phone';
+export const VERIFY_PHONE_NUMBER = 'verify_phone_number';
+export const VERIFY_PHONE_CHECK = 'verify_phone_check';
+export const USER_EMAIL = 'user_email';
+export const USER_STATUS = 'user_status';
+export const USER_DATA = 'user_data';
+export const ID_VERIFY_CHECK = 'id_verify_check';
+export const REGISTRATION_STEP = 'registration_step';
+export const EXCHANGE_RATE = 'exchange_rate';
+export const ORDER_DATA = 'order_data';
+export const ORDER_DATA_ARRAY = 'order_data_array';

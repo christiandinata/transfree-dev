@@ -158,20 +158,26 @@ const MyAccount = () => (
         margin: 20px auto;
       }
 
-      input {
+      input[type=text] {
         border: 1px solid #EAEDF2;
         font-size: 14px;
-        padding: 8px;
+        padding: 8px 8px 8px 30px;
         border-bottom: 1px solid #eaeaea;
         font-family: "Campton-Book", sans-serif;
         background-color: #EAEDF2;
         border-radius: 8px;
-        transition: 0.2s;
+        transition: all 0.4s ease-in-out;
+        width: 200px;
+        background-image: url('../static/images/ic-search.svg');
+        background-position: 8px 8px;
+        background-repeat: no-repeat;
       }
 
-      input:focus {
+      input[type=text]:focus {
         outline: none;
         border: 1px solid #469DDD;
+        background-color: #ECF3FA;
+        width: 300px;
       }
 
       ::placeholder {

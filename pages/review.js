@@ -5,7 +5,6 @@ import Link from 'next/link';
 const Review = () => (
   <div>
     <Header />
-    <MenuCheckout />
     <div className="container-fluid">
       <div className="header-progress-container">
         <ol className="header-progress-list">

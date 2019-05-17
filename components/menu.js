@@ -1,26 +1,31 @@
 import Link from 'next/link';
+import { connect } from 'react-redux';
+import authActions from '../redux/actions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import '@fortawesome/fontawesome-svg-core/styles.css';
 
-const Menu = () => (
+const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
   <div className="row">
     <div className="container">
       <div className="header-container">
         <div className="logo">
-            <Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>
+            {(isAuthenticated && (<Link href="/account"><a><img src="../static/images/transfree-logo.png"/></a></Link>)) ||
+             (<Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>)}
         </div>
         <div className="header-menu">
           <ul>
-            <li><Link href="/"><a>About</a></Link></li>
-            <li><Link href="/"><a>Help</a></Link></li>
-            <li><Link href="/"><a>How it works</a></Link></li>
+            {!isAuthenticated && <li><Link href="/"><a>About</a></Link></li>}
+            {!isAuthenticated && <li><Link href="/"><a>Help</a></Link></li>}
+            {!isAuthenticated && <li><Link href="/"><a>How it works</a></Link></li>}
+            {isAuthenticated && isApproved && <li><Link href="/order"><a>Send money</a></Link></li>}
+            {isAuthenticated && isApproved && <li><Link href="/account"><a>Transactions</a></Link></li>}
           </ul>
         </div>
         <div className="header-cta">
-          <Link href="/login">
-            <a className="btn-secondary">Log in</a>
-          </Link>
-          <Link href="/signup">
-            <a className="btn-primary">Sign up</a>
-          </Link>
+          {!isAuthenticated && <Link href="/login"><a className="btn-secondary">Log in</a></Link>}
+          {!isAuthenticated && <Link href="/signup"><a className="btn-primary">Sign up</a></Link>}
+          {isAuthenticated && <li><Link href=""><a><FontAwesomeIcon icon="bell"/></a></Link></li>}
+          {isAuthenticated && <li><Link href="/logout"><a>Logout</a></Link></li>}
         </div>
       </div>
     </div>
@@ -78,4 +83,8 @@ const Menu = () => (
   </div>
 )
 
-export default Menu
+const mapStateToProps = (state) => (
+  {isAuthenticated: !!state.authentication.token, isApproved: !!state.user.status}
+);
+
+export default connect(mapStateToProps, authActions)(Menu);

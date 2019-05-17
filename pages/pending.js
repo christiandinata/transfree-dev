@@ -15,7 +15,7 @@ const AccountPending = () => (
         <h1>Awaiting confirmation</h1>
         <p>We are now reviewing your account details. We will send you an email & WhatsApp message once the verification process is completed.</p>
 
-        <Link href="/index">
+        <Link href="/">
           <a className="btn-primary">Back to home</a>
         </Link>
       </div>
