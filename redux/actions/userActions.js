@@ -6,7 +6,6 @@ import {
 import { API } from '../../config';
 
 const getUser = (uid, type) => {
-  console.log(type);
   if (type !== 'user') {
     throw new Error('Wrong API call!');
   }

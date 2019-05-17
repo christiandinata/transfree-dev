@@ -83,8 +83,12 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
   </div>
 )
 
-const mapStateToProps = (state) => (
-  {isAuthenticated: !!state.authentication.token, isApproved: !!state.user.status}
-);
+const mapStateToProps = (state) => {
+  const userData = JSON.parse(state.user.user_data);
+  console.log(state);
+  return {
+    isAuthenticated: !!state.authentication.token, isApproved: !!userData.isApproved
+  }
+}
 
 export default connect(mapStateToProps, authActions)(Menu);
