@@ -1,3 +1,3 @@
 module.exports = {
-    API: 'http://localhost:8000'
+    API: 'http://transfree-server-dev.herokuapp.com'
   };
