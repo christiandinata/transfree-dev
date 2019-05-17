@@ -33,7 +33,10 @@ class Index extends React.Component {
   static async getInitialProps(ctx) {
     initialize(ctx);
     await ctx.store.dispatch(rateActions.getRates('GBP','IDR'));
-    await ctx.store.dispatch(userActions.getUser(getCookie('uid', ctx.req),'user'));
+    if(ctx.req.headers.cookie) {
+      await ctx.store.dispatch(userActions.getUser(getCookie('uid', ctx.req),'user'));
+    }
+
   };
 
   componentDidMount() {
@@ -789,10 +792,14 @@ class Index extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const userData = JSON.parse(state.user.user_data);
   return {
     rate: state.rate.rates,
-    isApproved: !!userData.isApproved,
+  }
+  if (state.user.user_data) {
+    const userData = JSON.parse(state.user.user_data);
+    return {
+      isApproved: !!userData.isApproved,
+    }
   }
 
 };
