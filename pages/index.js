@@ -33,8 +33,10 @@ class Index extends React.Component {
   static async getInitialProps(ctx) {
     initialize(ctx);
     await ctx.store.dispatch(rateActions.getRates('GBP','IDR'));
-    if(ctx.req.headers.cookie) {
-      await ctx.store.dispatch(userActions.getUser(getCookie('uid', ctx.req),'user'));
+    if (ctx.isServer) {
+      if(ctx.req.headers.cookie) {
+        await ctx.store.dispatch(userActions.getUser(getCookie('uid', ctx.req),'user'));
+      }
     }
 
   };
