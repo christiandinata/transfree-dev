@@ -16,6 +16,7 @@ const addOrder = ({ uid, rate, fromCurrency, toCurrency, fromAmount, toAmount, e
         dispatch({type: ORDER_DATA, payload: response.data.order_data});
       })
       .catch((error) => {
+        conosel.log(error);
         throw new Error(error);
       });
   };

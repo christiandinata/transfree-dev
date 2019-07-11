@@ -2,7 +2,7 @@ import Header from '../components/header';
 import Menu from '../components/menu';
 import Link from 'next/link';
 import { connect } from 'react-redux';
-import verifyActions from '../redux/actions';
+import actions from '../redux/actions';
 
 class PhoneVerification extends React.Component {
   constructor({ props }) {
@@ -124,5 +124,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  verifyActions
+  actions
 )(PhoneVerification);

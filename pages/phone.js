@@ -4,7 +4,8 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { connect } from 'react-redux';
 import initialize from '../utils/initialize';
-import verifyActions from '../redux/actions';
+import actions from '../redux/actions';
+import { getCookie } from '../utils/cookie';
 import PhoneInput from 'react-phone-number-input';
 
 class Phone extends React.Component {
@@ -15,8 +16,13 @@ class Phone extends React.Component {
     };
   }
 
-  static getInitialProps(ctx) {
+  static async getInitialProps(ctx) {
     initialize(ctx);
+    if (ctx.isServer) {
+      if(ctx.req.headers.cookie) {
+        await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
+      }
+    }
   }
 
   handleSubmit(e) {
@@ -92,7 +98,7 @@ class Phone extends React.Component {
             font-size: 16px;
             padding: 15px 0;
             border-bottom: 1px solid #eaeaea;
-            font-family: "Campton-Book", sans-serif;
+
           }
 
           .form-container input:focus {
@@ -124,5 +130,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  verifyActions
+  actions
 )(Phone);

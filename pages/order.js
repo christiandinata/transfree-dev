@@ -7,13 +7,15 @@ import Review from '../components/order/Review';
 import Pay from '../components/order/Pay';
 import Status from '../components/order/Status';
 import { connect } from 'react-redux';
-import rateActions from '../redux/actions';
-import userActions from '../redux/actions';
+import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { getCookie } from '../utils/cookie';
 import NumberFormat from 'react-number-format';
+import orderid from 'order-id';
+import uuidv4 from 'uuid/v4';
 
 class Order extends React.Component {
+
 
   constructor({ props }) {
     super(props);
@@ -21,30 +23,37 @@ class Order extends React.Component {
       step: 1,
       uid: 0,
       rate: 0,
-      fromCurrency: '',
-      toCurrency: '',
+      fromCurrency: 'GBP',
+      toCurrency: 'IDR',
       fromAmount: 0,
       toAmount: 0,
       email: '',
       name: '',
       bankName: '',
-      bankAccount: ''
+      bankAccountNumber: '',
+      accountNumber: '',
+      sortcode: '',
+      iban: '',
+      swift: '',
+      isVAgenerated: false,
+      vaNumber: 12345678
     };
 
     this.nextStep = this.nextStep.bind(this);
     this.previousStep = this.previousStep.bind(this);
     this.saveValues = this.saveValues.bind(this);
+    this.generateVA = this.generateVA.bind(this);
   }
 
   static async getInitialProps(ctx) {
     initialize(ctx);
-    await ctx.store.dispatch(rateActions.getRates('GBP','IDR'));
-    await ctx.store.dispatch(userActions.getUser(getCookie('uid', ctx.req),'user'));
+    await ctx.store.dispatch(actions.getRates('GBP','IDR'));
+    await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
   };
 
   componentDidMount() {
     this.setState({
-      uid: this.props.userData.id
+      uid: this.props.userData._id
     })
   }
 
@@ -68,7 +77,8 @@ class Order extends React.Component {
       case 4:
         return <Pay
                   nextStep={this.nextStep}
-                  data={this.state} />
+                  data={this.state}
+                  generateVA={this.generateVA} />
       case 5:
         return <Status
                   data={this.state}/>
@@ -93,6 +103,38 @@ class Order extends React.Component {
         [key]: value
       })
     })
+  }
+
+  generateVA(bankName) {
+    let merchantId='', merchantRefCode='', secretWord='';
+    switch(bankName) {
+      case 'bni': {
+        merchantId='160';
+        secretWord='K3vrOmpBjhqtsNr';
+        break;
+      }
+      case 'mandiri': {
+        merchantId='187';
+        secretWord='lj0XEbKLtLeJZ0s';
+        break;
+      }
+      case 'maybank': {
+        merchantId='158';
+        secretWord='Vua4ZUPQbJDOu7Q';
+        break;
+      }
+      case 'permata': {
+        merchantId='162';
+        secretWord='R3k3mTLkzG3MNvV';
+        break;
+      }
+      case 'sinarmas': {
+        merchantId='163';
+        secretWord='py1PRDAVMZ2D8hV';
+        break;
+      }
+    }
+    this.props.getToken(merchantId, uuidv4(), secretWord, this.state.name, this.state.fromAmount);
   }
 
 
@@ -205,14 +247,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    rateActions,
-    userActions
-  }
-}
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  actions
 )(Order);

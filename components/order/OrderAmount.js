@@ -21,6 +21,8 @@ class OrderAmount extends React.Component {
     this.hideSource = this.hideSource.bind(this);
     this.toggleDestination = this.toggleDestination.bind(this);
     this.hideDestination = this.hideDestination.bind(this);
+    this.handleSourceChange = this.handleSourceChange.bind(this);
+    this.handleDestinationChange = this.handleDestinationChange.bind(this);
   }
 
   componentDidMount() {
@@ -28,7 +30,6 @@ class OrderAmount extends React.Component {
       rate: this.props.rate,
       toAmount: this.state.fromAmount * this.props.rate
     })
-
   }
 
   toggleSource() {
@@ -83,24 +84,40 @@ class OrderAmount extends React.Component {
     });
   }
 
-  handleSourceChange(value) {
-    this.setState((state) => {
-      return {
-        fromAmount: value,
-        toAmount: value * this.props.rate
+  handleSourceChange(e) {
+    const fromAmount = e.target.value.replace(/,/g, '');
+    if (this.state.fromCurrency == 'idr') {
+      if (fromAmount < 100000) {
+        this.setState((state) => {
+          return {
+            fromAmount: fromAmount,
+            toAmount: 0
+          }
+        })
+      } else {
+        this.setState((state) => {
+          return {
+            fromAmount: fromAmount,
+            toAmount: fromAmount * this.props.rate
+          }
+        })
       }
-    })
-
+    } else {
+      this.setState((state) => {
+        return {
+          fromAmount: fromAmount,
+          toAmount: fromAmount * this.props.rate
+        }
+      })
+    }
   }
 
-  handleDestinationChange(value) {
-    this.setState((state) => {
-      return {
-        fromAmount: value / this.props.rate,
-        toAmount: value
-      }
+  handleDestinationChange(e) {
+    const toAmount = e.target.value.replace(/,/g, '');
+    this.setState({
+      fromAmount: toAmount / this.props.rate,
+      toAmount: toAmount
     })
-
   }
 
   saveAndContinue = (e) => {
@@ -179,8 +196,7 @@ class OrderAmount extends React.Component {
                   thousandSeparator={true}
                   decimalScale={2}
                   value={this.state.fromAmount}
-                  onValueChange={values => this.handleSourceChange(values.value)}/>
-                {/* <input id="money-from" type="text" value={this.toCurrency(this.state.fromAmount)} onChange={this.handleSourceChange}/> */}
+                  onKeyUp={this.handleSourceChange}/>
               </div>
               <div className="destination-container">
                 <p>Recipient gets</p>
@@ -238,12 +254,12 @@ class OrderAmount extends React.Component {
                   thousandSeparator={true}
                   decimalScale={2}
                   value={this.state.toAmount}
-                  onValueChange={values => this.handleDestinationChange(values.value)}/>
-                {/* <input id="money-to" type="text" value={this.toCurrency(this.state.toAmount)} onChange={this.handleDestinationChange}/> */}
+                  onKeyUp={this.handleDestinationChange}/>
               </div>
             </div>
             <div className="row rate">
-              <span className="rate-desc">{this.state.fromCurrency.toUpperCase()}/{this.state.toCurrency.toUpperCase()} Conversion rate</span> <span className="rate-value"><span className="live-rate"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={4} value={this.props.rate} /> {this.state.toCurrency.toUpperCase()}</span></span>
+              <span className="rate-desc">Currency rate {this.state.fromCurrency.toUpperCase()}/{this.state.toCurrency.toUpperCase()}</span>
+              <span className="rate-value"><span className="live-rate"><NumberFormat displayType={'text'} thousandSeparator={true} value={this.props.rate} /></span></span>
             </div>
             <div className="row note">
               <p>Your transfer will be processed immediately.

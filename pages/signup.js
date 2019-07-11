@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import { connect } from 'react-redux';
 import AuthLayout from '../components/AuthLayout';
-import authActions from '../redux/actions';
+import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 
 class Signup extends React.Component {
@@ -32,6 +32,9 @@ class Signup extends React.Component {
     return (
       <AuthLayout>
         <h1>Create an account</h1>
+        <div className={"error-container "+(this.props.errorMessage != '' && this.props.errorMessage != undefined ? "error-show" : "") }>
+          {this.props.errorMessage}
+        </div>
         <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
           <label htmlFor="fullname">Full name</label><br/>
           <input
@@ -112,13 +115,31 @@ class Signup extends React.Component {
             color: #469DDD;
             text-decoration: none;
           }
+
+          .error-container {
+            width: 400px;
+            height: auto;
+            padding: 20px;
+            margin-bottom: 30px;
+            background-color: #FF3A43;
+            color: #FFF;
+            border-radius: 8px;
+            display: none;
+          }
+
+          .error-show {
+            display: block;
+          }
         `}</style>
       </AuthLayout>
     );
   }
 }
 
-export default connect(
-  state => state,
-  authActions
-)(Signup);
+const mapStateToProps = (state) => {
+  return {
+    errorMessage: state.authentication.errorMessage,
+  }
+};
+
+export default connect(mapStateToProps,actions)(Signup);

@@ -51,7 +51,7 @@ const Pay = () => (
       }
 
       li {
-        font-family: "Campton-Book", sans-serif;
+
       }
 
       // Progress Bar

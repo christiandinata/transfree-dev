@@ -3,7 +3,7 @@ import Menu from '../components/menu';
 import Link from 'next/link';
 import DatePicker from "react-datepicker";
 import { connect } from 'react-redux';
-import idActions from '../redux/actions';
+import actions from '../redux/actions';
 
 class IdVerification extends React.Component {
   constructor({ props }) {
@@ -42,7 +42,7 @@ class IdVerification extends React.Component {
         <Menu />
         <div className="container-fluid">
           <h1>ID verification</h1>
-          <p>According to the regulation from Bank Indonesia, we have to verify your indentity.</p>
+          <p>According to the regulation from Bank Indonesia, we have to verify your indentity. Please provide your identity details below.</p>
           <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
             <label htmlFor="id-type">ID Type</label><br/>
             <select
@@ -204,5 +204,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  idActions
+  actions
 )(IdVerification);

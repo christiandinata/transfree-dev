@@ -1,54 +1,163 @@
 import Link from 'next/link';
 import NumberFormat from 'react-number-format';
 
+function BankOption(props) {
+  return (
+    <div>
+      <p className="instruction">Please select the bank below:</p>
+      <ul>
+        <li onClick={() => props.generateVA('bni')}><img src="../static/images/bank_logos/bni.png"/> <span>Bank BNI</span></li>
+        <li onClick={() => props.generateVA('mandiri')}><img src="../static/images/bank_logos/mandiri.png"/> <span>Bank Mandiri</span></li>
+        <li onClick={() => props.generateVA('maybank')}><img src="../static/images/bank_logos/maybank.png"/> <span>Maybank</span></li>
+        <li onClick={() => props.generateVA('permata')}><img src="../static/images/bank_logos/permata.png"/> <span>Permata Bank</span></li>
+        <li onClick={() => props.generateVA('sinarmas')}><img src="../static/images/bank_logos/sinarmas.png"/> <span>Bank Sinarmas</span></li>
+      </ul>
+      <style jsx>{`
+        p {
+          text-align: center;
+        }
+        ul {
+          padding: 0;
+          list-style: none;
+        }
+
+        ul li img {
+          max-width: 80px;
+          margin-bottom: -3px;
+          margin-right: 15px;
+        }
+
+        ul li {
+          display: flex;
+          align-items: center;
+          border-bottom: 1px solid #eaeaea;
+          padding: 15px;
+          transition: all 0.2s ease;
+
+        }
+
+        ul li:hover {
+          cursor: pointer;
+          background-color: #F6F8FB;
+        }
+
+        ul li a {
+          color: #15233C;
+        }
+
+        `}</style>
+    </div>
+  )
+}
+
+function VAGenerated(props) {
+  return (
+    <div>
+      <p className="instruction">Please make a payment to this following Virtual Account number:</p>
+      <div className="payment-details">
+        <div className="list-item">
+          <span className="left">Virtual Account number:</span>
+          <span className="right">{props.vaNumber}</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 class Pay extends React.Component {
+  constructor(props) {
+    super(props);
+    this.generateVA = this.generateVA.bind(this);
+  }
   saveAndContinue = (e) => {
     e.preventDefault();
+    this.props.addOrder(
+      {
+        uid: this.props.data.uid,
+        rate: this.props.data.rate,
+        fromCurrency: this.props.data.fromCurrency,
+        toCurrency: this.props.data.toCurrency,
+        fromAmount: this.props.data.fromAmount,
+        toAmount: this.props.data.toAmount,
+        email: this.props.data.email,
+        name: this.props.data.name,
+        bankName: this.props.data.bankName,
+        bankAccountNumber: this.props.data.bankAccountNumber,
+        accountNumber: this.props.data.accountNumber,
+        sortcode: this.props.data.sortcode,
+        iban: this.props.data.iban,
+        swift: this.props.data.swift
+      },
+      'addOrder'
+    );
     this.props.nextStep();
   }
 
+  generateVA(bankName) {
+    // console.log(bankName);
+    this.props.generateVA(bankName);
+  }
+
   render() {
+    const isVAgenerated = this.props.isVAgenerated;
+    let content;
+
+    if (isVAgenerated) {
+      content = <VAGenerated vaNumber={this.props.vaNumber}/>;
+    } else {
+      content = <BankOption generateVA={this.generateVA}/>
+    }
     return (
       <div>
         <h1>Payment</h1>
         <form className="form-container">
-          <p className="instruction">Please make a payment of the following amount</p>
+          <p className="instruction">Payment amount</p>
           <h2><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value={this.props.data.fromAmount} /> {this.props.data.fromCurrency.toUpperCase()}</h2>
-          <p className="instruction">Transfer to this account:</p>
-          <div className="payment-details">
-            <div className="list-item">
-              <span className="left">Bank name</span>
-              <span className="right">Lloyds Bank</span>
+          {content}
+          {/*
+            <div className="payment-details">
+              <div className="list-item">
+                <span className="left">Bank name</span>
+                <span className="right">Lloyds Bank</span>
+              </div>
+
+              <div className="list-item">
+                <span className="left">Sort code</span>
+                <span className="right">12-34-56</span>
+              </div>
+
+              <div className="list-item">
+                <span className="left">Account number</span>
+                <span className="right">987654321</span>
+              </div>
+
+              <div className="list-item">
+                <span className="left">Account name</span>
+                <span className="right">Transfree</span>
+              </div>
             </div>
 
-            <div className="list-item">
-              <span className="left">Sort code</span>
-              <span className="right">12-34-56</span>
-            </div>
+            <p>Please check all of the details above are correct to speed up the process.
+            Once you have made a payment, please confirm by clicking the button below.
+            We will notify you via email and WhatsApp once your payment has been confirmed.</p>
 
-            <div className="list-item">
-              <span className="left">Account number</span>
-              <span className="right">987654321</span>
-            </div>
-
-            <div className="list-item">
-              <span className="left">Account name</span>
-              <span className="right">Transfree</span>
-            </div>
-          </div>
-
-          <p>Please check all of the details above are correct to speed up the process.
-          Once you have made a payment, please confirm by clicking the button below.
-          We will notify you via email and WhatsApp once your payment has been confirmed.</p>
-
-          <Link href="">
-            <a className="btn-primary" onClick={this.saveAndContinue}>I have made a transfer</a>
-          </Link>
-          <Link href="/">
-            <a className="btn-danger">Cancel this transaction</a>
-          </Link>
+            <Link href="">
+              <a className="btn-primary" onClick={this.saveAndContinue}>I have made a transfer</a>
+            </Link>
+            <Link href="/">
+              <a className="btn-danger">Cancel this transaction</a>
+            </Link>
+            */}
         </form>
         <style jsx>{`
+          .div-show {
+            display: block;
+          }
+
+          .div-hide {
+            display: none;
+          }
+
           .container-fluid {
             display: flex;
             flex-direction: column;
@@ -72,6 +181,16 @@ class Pay extends React.Component {
 
           li {
             font-family: "Campton-Book", sans-serif;
+          }
+
+          .form-container {
+            width: 500px;
+            height: auto;
+            padding: 30px;
+            margin: 30px auto;
+            background: #FFFFFF;
+            box-shadow: 0 10px 30px 0 rgba(0,0,0,0.10);
+            border-radius: 8px;
           }
 
           // Progress Bar
@@ -229,7 +348,6 @@ class Pay extends React.Component {
           .btn-danger:hover {
             transform: translateY(-1px);
           }
-
 
         `}</style>
       </div>

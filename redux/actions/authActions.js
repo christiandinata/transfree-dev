@@ -3,8 +3,9 @@ import axios from 'axios';
 import {
   REGISTER,
   AUTHENTICATE,
+  AUTHENTICATE_ERROR,
   DEAUTHENTICATE,
-  USER_DATA
+  USER_DATA,
 } from '../types';
 import { API } from '../../config';
 import { setCookie, removeCookie } from '../../utils/cookie';
@@ -19,27 +20,30 @@ const register = ({ fullname, email, password }, type) => {
       .then((response) => {
         setCookie('token', response.data.token);
         const userData = JSON.parse(response.data.user_data);
-        setCookie('uid', userData.id)
+        setCookie('_id', userData._id)
         Router.push('/phone');
         // const userData = JSON.stringify()
         dispatch({type: REGISTER, payload: response.data.token});
         dispatch({type: USER_DATA, payload: response.data.user_data});
       })
       .catch((error) => {
+        let errorMessage = '';
         switch (error.response.status) {
           case 422:
-          alert(error.response.data.message);
+            errorMessage = 'Email has been registered. Please choose different email address.';
             break;
-          case 401:
-          alert(error.response.data.message);
+          case 420:
+            errorMessage = 'Email and password must be provided.';
             break;
           case 500:
-          alert('Interval server error! Try again!');
+            errorMessage = 'Interval server error! Try again!';
             break;
           default:
-          alert(error.response.data.message);
+            errorMessage = 'Zzzzz. Something is wrong.';
             break;
         }
+
+        dispatch({type: AUTHENTICATE_ERROR, payload: errorMessage});
       });
   };
 };
@@ -53,7 +57,7 @@ const authenticate = ({ email, password }, type) => {
       .then((response) => {
         setCookie('token', response.data.token);
         const userData = JSON.parse(response.data.user_data);
-        setCookie('uid', userData.id)
+        setCookie('_id', userData._id)
         if (userData.isApproved) {
           Router.push('/account');
         } else {
@@ -76,20 +80,18 @@ const authenticate = ({ email, password }, type) => {
       .catch((error) => {
         let errorMessage = '';
         switch (error.response.status) {
-          case 422:
-            errorMessage = 'Email has been registered. Please choose different email.';
-            break;
           case 401:
             errorMessage = 'Incorrect password. Please try again or you can reset your password.';
-            alert('Invalid password! Try again.');
             break;
           case 500:
-            alert('Interval server error! Try again!');
+            errorMessage = 'Interval server error! Try again!';
             break;
           default:
             errorMessage = 'Zzzzz. Something is wrong.';
             break;
         }
+
+        dispatch({type: AUTHENTICATE_ERROR, payload: errorMessage});
 
 
       });

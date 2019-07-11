@@ -61,7 +61,6 @@ const Footer = () => (
         li {
           display: block;
           margin: 6px 0;
-          font-family: 'Campton-Book', sans-serif;
           color: #469DDD;
         }
 

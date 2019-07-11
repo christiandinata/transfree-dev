@@ -5,8 +5,7 @@ import AccountLayout from '../components/AccountLayout';
 import NumberFormat from 'react-number-format';
 import { connect } from 'react-redux';
 import initialize from '../utils/initialize';
-import userActions from '../redux/actions';
-import orderActions from '../redux/actions';
+import actions from '../redux/actions';
 import { getCookie } from '../utils/cookie';
 import moment from 'moment';
 
@@ -197,7 +196,6 @@ class OrderItem extends React.Component {
               }
 
               li {
-                font-family: 'Campton-Book', sans-serif;
                 list-style: none;
                 line-height: 1px;
               }
@@ -244,7 +242,7 @@ class OrderItem extends React.Component {
               }
 
               .bold {
-                font-family: "Campton-Bold", sans-serif;
+                font-weight: 700;
               }
 
               hr {
@@ -265,7 +263,6 @@ class OrderItem extends React.Component {
                 font-size: 14px;
                 padding: 8px 8px 8px 30px;
                 border-bottom: 1px solid #eaeaea;
-                font-family: "Campton-Book", sans-serif;
                 background-color: #EAEDF2;
                 border-radius: 8px;
                 transition: all 0.4s ease-in-out;
@@ -357,7 +354,6 @@ const OrderLayout = ({ordersList}) => {
           font-size: 14px;
           padding: 8px 8px 8px 30px;
           border-bottom: 1px solid #eaeaea;
-          font-family: "Campton-Book", sans-serif;
           background-color: #EAEDF2;
           border-radius: 8px;
           transition: all 0.4s ease-in-out;
@@ -394,8 +390,8 @@ class Account extends React.Component {
 
   static async getInitialProps(ctx) {
     initialize(ctx);
-    await ctx.store.dispatch(userActions.getUser(getCookie('uid', ctx.req),'user'));
-    await ctx.store.dispatch(orderActions.getOrderByUid(getCookie('uid', ctx.req),'getOrderByUid'));
+    await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
+    await ctx.store.dispatch(actions.getOrderByUid(getCookie('_id', ctx.req),'getOrderByUid'));
   };
 
   renderContent() {
@@ -429,11 +425,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    userActions,
-    orderActions
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Account);
+export default connect(mapStateToProps, actions)(Account);

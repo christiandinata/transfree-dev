@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import AuthLayout from '../components/AuthLayout';
 import { connect } from 'react-redux';
-import authActions from '../redux/actions';
+import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 
 class Login extends React.Component {
@@ -29,8 +29,8 @@ class Login extends React.Component {
     return (
       <AuthLayout>
         <h1>Log in</h1>
-        <div className="error-container">
-          Sorry, we can't find an account with this email address. Please try again.
+        <div className={"error-container "+(this.props.errorMessage != '' && this.props.errorMessage != undefined ? "error-show" : "") }>
+          {this.props.errorMessage}
         </div>
         <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
           <label htmlFor="email">Email address</label><br/>
@@ -109,13 +109,16 @@ class Login extends React.Component {
           .error-container {
             width: 400px;
             height: auto;
-            padding: 30px;
+            padding: 20px;
             margin-bottom: 30px;
             background-color: #FF3A43;
             color: #FFF;
             border-radius: 8px;
-            transition: all 0.2s ease;
             display: none;
+          }
+
+          .error-show {
+            display: block;
           }
 
         `}</style>
@@ -124,7 +127,10 @@ class Login extends React.Component {
   }
 }
 
-export default connect(
-  state => state,
-  authActions
-)(Login);
+const mapStateToProps = (state) => {
+  return {
+    errorMessage: state.authentication.errorMessage,
+  }
+};
+
+export default connect(mapStateToProps,actions)(Login);

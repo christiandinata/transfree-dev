@@ -79,7 +79,7 @@ const PhotoVerification = () => (
         font-size: 16px;
         padding: 15px 0;
         border-bottom: 1px solid #eaeaea;
-        font-family: "Campton-Book", sans-serif;
+
       }
 
       .form-container input:focus {

@@ -43,6 +43,10 @@ const Header = () => (
         text-decoration: none;
       }
 
+      button:hover {
+        cursor: pointer;
+      }
+
       .container {
         width: 1124px;
         margin: 0 auto;
@@ -226,6 +230,30 @@ const Header = () => (
 
       .svg-inline--fa.caret {
         margin-left: 30px;
+      }
+
+      .form-container label {
+        font-size: 14px;
+        text-transform: uppercase;
+      }
+
+      .form-container input {
+        width: 100%;
+        margin-bottom: 30px;
+        border: none;
+        font-size: 16px;
+        padding: 15px 0;
+        border-bottom: 1px solid #eaeaea;
+        font-family: "Campton-Book", sans-serif;
+      }
+
+      .form-container input:focus {
+        outline: none;
+        border-bottom: 1px solid #469DDD;
+      }
+
+      .form-container input.error {
+        border-bottom: 1px solid red;
       }
     `}</style>
   </div>

@@ -14,7 +14,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
         </div>
         <div className="header-menu">
           <ul>
-            {!isAuthenticated && <li><Link href="/"><a>About</a></Link></li>}
+            {!isAuthenticated && <li><Link href="/about"><a>About</a></Link></li>}
             {!isAuthenticated && <li><Link href="/"><a>Help</a></Link></li>}
             {!isAuthenticated && <li><Link href="/"><a>How it works</a></Link></li>}
             {isAuthenticated && isApproved && <li><Link href="/order"><a>Send money</a></Link></li>}

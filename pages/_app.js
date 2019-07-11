@@ -6,7 +6,7 @@ import '../utils/fontawesome';
 import 'react-phone-number-input/style.css';
 import "react-datepicker/dist/react-datepicker.css";
 
-export default withRedux(initStore, { debug: true })(
+export default withRedux(initStore, { debug: false })(
   class MyApp extends App {
     static async getInitialProps({ Component, ctx }) {
       return {

@@ -5,6 +5,7 @@ import userReducer from './userReducer';
 import idReducer from  './idReducer';
 import rateReducer from './rateReducer';
 import orderReducer from './orderReducer';
+import vaReducer from './vaReducer';
 
 const rootReducer = combineReducers({
   authentication: authReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   user: userReducer,
   id: idReducer,
   rate: rateReducer,
-  order: orderReducer
+  order: orderReducer,
+  va: vaReducer
 });
 
 export default rootReducer;

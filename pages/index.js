@@ -4,8 +4,8 @@ import Footer from '../components/footer.js';
 import Link from 'next/link';
 import React from 'react';
 import { connect } from 'react-redux';
-import rateActions from '../redux/actions';
-import userActions from '../redux/actions';
+import { bindActionCreators } from 'redux';
+import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { getCookie } from '../utils/cookie';
 import NumberFormat from 'react-number-format';
@@ -32,10 +32,10 @@ class Index extends React.Component {
 
   static async getInitialProps(ctx) {
     initialize(ctx);
-    await ctx.store.dispatch(rateActions.getRates('GBP','IDR'));
+    await ctx.store.dispatch(actions.getRates('GBP','IDR'));
     if (ctx.isServer) {
       if(ctx.req.headers.cookie) {
-        await ctx.store.dispatch(userActions.getUser(getCookie('uid', ctx.req),'user'));
+        await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
       }
     }
 
@@ -484,7 +484,6 @@ class Index extends React.Component {
             display: flex;
             align-items: center;
             font-size: 20px;
-            font-family: 'Campton-Bold', sans-serif;
             color: #FFF;
           }
 
@@ -492,7 +491,6 @@ class Index extends React.Component {
             margin-top: 20px;
             width: 100%;
             font-size: 22px;
-            font-family: 'Campton-Bold', sans-serif;
             color: #15233C;
             border: none;
             padding: 12px;
@@ -528,7 +526,7 @@ class Index extends React.Component {
           .rate-value {
             flex-basis: 50%;
             text-align: right;
-            font-family: 'Campton-Bold', sans-serif;
+            font-weight: 700;
             color: #FFF;
           }
 
@@ -537,7 +535,6 @@ class Index extends React.Component {
           }
 
           .received-on {
-            font-family: 'Campton-Bold', sans-serif;
             color: #FFF;
           }
 
@@ -806,11 +803,4 @@ const mapStateToProps = (state) => {
 
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    userActions,
-    rateActions
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Index);
+export default connect(mapStateToProps, actions)(Index);

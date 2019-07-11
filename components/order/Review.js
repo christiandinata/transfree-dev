@@ -6,21 +6,6 @@ import orderActions from '../../redux/actions';
 class Review extends React.Component {
   saveAndContinue = (e) => {
     e.preventDefault();
-    this.props.addOrder(
-      {
-        uid: this.props.data.uid,
-        rate: this.props.data.rate,
-        fromCurrency: this.props.data.fromCurrency,
-        toCurrency: this.props.data.toCurrency,
-        fromAmount: this.props.data.fromAmount,
-        toAmount: this.props.data.toAmount,
-        email: this.props.data.email,
-        name: this.props.data.name,
-        bankName: this.props.data.bankName,
-        bankAccount: this.props.data.bankAccount
-      },
-      'addOrder'
-    );
     this.props.nextStep();
   }
 
@@ -41,7 +26,7 @@ class Review extends React.Component {
 
           <div className="list-item">
             <span className="left">{this.props.data.fromCurrency.toUpperCase()}/{this.props.data.toCurrency.toUpperCase()} Conversion rates</span>
-            <span className="right"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={4} value={this.props.data.rate} /></span>
+            <span className="right"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={8} value={this.props.data.rate} /></span>
           </div>
 
           <div className="list-item">
@@ -76,9 +61,29 @@ class Review extends React.Component {
             <span className="right">{this.props.data.bankName}</span>
           </div>
 
-          <div className="list-item">
+          <div className={this.props.data.toCurrency == 'idr' ? 'list-item' : 'div-hide'}>
             <span className="left">Account number</span>
-            <span className="right">{this.props.data.bankAccount}</span>
+            <span className="right">{this.props.data.bankAccountNumber}</span>
+          </div>
+
+          <div className={this.props.data.toCurrency == 'gbp' ? 'list-item' : 'div-hide'}>
+            <span className="left">Sort code</span>
+            <span className="right">{this.props.data.sortcode}</span>
+          </div>
+
+          <div className={this.props.data.toCurrency == 'gbp' ? 'list-item' : 'div-hide'}>
+            <span className="left">Account number</span>
+            <span className="right">{this.props.data.accountNumber}</span>
+          </div>
+
+          <div className={this.props.data.toCurrency == 'eur' || this.props.data.toCurrency == 'usd' || this.props.data.toCurrency == 'aud' ? 'list-item' : 'div-hide'}>
+            <span className="left">IBAN</span>
+            <span className="right">{this.props.data.iban}</span>
+          </div>
+
+          <div className={this.props.data.toCurrency == 'eur' || this.props.data.toCurrency == 'usd' || this.props.data.toCurrency == 'aud' ? 'list-item' : 'div-hide'}>
+            <span className="left">SWIFT</span>
+            <span className="right">{this.props.data.swift}</span>
           </div>
 
           <Link href="">
@@ -86,6 +91,10 @@ class Review extends React.Component {
           </Link>
         </form>
         <style jsx>{`
+          .div-hide {
+            display: none;
+          }
+
           .container-fluid {
             display: flex;
             flex-direction: column;
@@ -188,7 +197,7 @@ class Review extends React.Component {
           }
 
           .form-container {
-            width: 400px;
+            width: 500px;
             height: auto;
             padding: 30px;
             margin: 30px auto;

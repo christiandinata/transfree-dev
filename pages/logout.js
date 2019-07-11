@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import authActions from '../redux/actions';
+import actions from '../redux/actions';
 import React from 'react';
 
 class Logout extends React.Component {
@@ -14,5 +14,5 @@ class Logout extends React.Component {
 
 export default connect(
   state => state,
-  authActions
+  actions
 )(Logout);
