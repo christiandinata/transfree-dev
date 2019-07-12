@@ -17,11 +17,13 @@ const Footer = () => (
         <div className="footer-item">
           <h3>About Transfree</h3>
           <ul>
-            <li>Who we are</li>
-            <li>How it works</li>
-            <li>Pricing</li>
-            <li>Help</li>
-            <li>FAQ</li>
+            <li><Link href="/about"><a>Who we are</a></Link></li>
+            {/*
+              <li>How it works</li>
+              <li>Pricing</li>
+              <li>Help</li>
+            */}
+            <li><Link href="/faq"><a>FAQ</a></Link></li>
             <li>Privacy policy</li>
             <li>Terms & conditions</li>
           </ul>
@@ -80,6 +82,10 @@ const Footer = () => (
         .copyright {
           color: #A6AEBB;
           text-align: center;
+        }
+
+        a {
+          font-family: 'Campton-Book', sans-serif;
         }
 
       `}</style>

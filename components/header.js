@@ -255,6 +255,19 @@ const Header = () => (
       .form-container input.error {
         border-bottom: 1px solid red;
       }
+
+      .accordion__button {
+        width: auto;
+        background-color: #EDF0F3;
+      }
+
+      .accordion__button:focus {
+        outline: none;
+      }
+
+      .accordion__button:hover {
+        background-color: #E0E4E8;
+      }
     `}</style>
   </div>
 )

@@ -338,20 +338,17 @@ class Index extends React.Component {
             <div className="row">
               <div className="left-feature-container"></div>
               <div className="right-feature-container">
-                <h2>Best rate for transfer, cheaper than competitors</h2>
-                <p>Curabitur lobortis id lorem id bibendum. Ut id consectetur magna.
-                Quisque volutpat augue enim, pulvinar lobortis nibh lacinia at.
-                Vestibulum nec erat ut mi sollicitudin porttitor id sit amet risus.
-                Nam tempus vel odio vitae aliquam.</p>
+                <h2>Better rate for transfer</h2>
+                <p>Have you ever thought that the cost of international money
+                transfers is so big but gives you a smaller amount? Get more from
+                your money by using our services so you can use it for other needs with little effort.</p>
               </div>
             </div>
             <div className="row">
               <div className="left-feature-container">
-                <h2>Best rate for transfer, cheaper than competitors</h2>
-                <p>Curabitur lobortis id lorem id bibendum. Ut id consectetur magna.
-                Quisque volutpat augue enim, pulvinar lobortis nibh lacinia at.
-                Vestibulum nec erat ut mi sollicitudin porttitor id sit amet risus.
-                Nam tempus vel odio vitae aliquam.</p>
+                <h2>Tired of waiting for your money to arrive? </h2>
+                <p>Does your family need it for an emergency? And when you use a cheaper
+                 option, it sometimes takes longer for your money to arrive. Don't worry, we are here now.</p>
               </div>
               <div className="right-feature-container">
               </div>
@@ -359,11 +356,10 @@ class Index extends React.Component {
             <div className="row">
               <div className="left-feature-container"></div>
               <div className="right-feature-container">
-                <h2>Best rate for transfer, cheaper than competitors</h2>
-                <p>Curabitur lobortis id lorem id bibendum. Ut id consectetur magna.
-                Quisque volutpat augue enim, pulvinar lobortis nibh lacinia at.
-                Vestibulum nec erat ut mi sollicitudin porttitor id sit amet risus.
-                Nam tempus vel odio vitae aliquam.</p>
+                <h2>We don't charge any fees for your transfer</h2>
+                <p>Too good to be true? But this is happening now.
+                Yes, we do not charge you any fees. And we have competitive rates as
+                compared to other services. So why not try using our services?</p>
               </div>
             </div>
 
