@@ -28,6 +28,8 @@ class Index extends React.Component {
     this.hideSource = this.hideSource.bind(this);
     this.toggleDestination = this.toggleDestination.bind(this);
     this.hideDestination = this.hideDestination.bind(this);
+    this.handleSourceChange = this.handleSourceChange.bind(this);
+    this.handleDestinationChange = this.handleDestinationChange.bind(this);
   }
 
   static async getInitialProps(ctx) {
@@ -79,9 +81,11 @@ class Index extends React.Component {
 
   selectSource(country) {
     this.props.getRates(country,this.state.toCurrency).then(() => {
-      this.setState({
-        fromCurrency: country,
-        toAmount: this.state.fromAmount * this.props.rate
+      this.setState((state) => {
+        return {
+          fromCurrency: country,
+          toAmount: this.state.fromAmount * this.props.rate
+        }
       });
       this.hideSource();
     });
@@ -89,29 +93,115 @@ class Index extends React.Component {
 
   selectDestination(country) {
     this.props.getRates(this.state.fromCurrency,country).then(() => {
-      this.setState({
-        toCurrency: country,
-        toAmount: this.state.fromAmount * this.props.rate
+      this.setState((state) => {
+        return {
+          toCurrency: country,
+          toAmount: this.state.fromAmount * this.props.rate
+        }
       });
       this.hideDestination();
     });
   }
 
-  handleSourceChange = (value) => {
-    this.setState({
-      fromAmount: value,
-      toAmount: value * this.props.rate
-    })
-
+  handleSourceChange(e) {
+    const fromAmount = e.target.value.replace(/,/g, '');
+    if (this.state.fromCurrency == 'idr') {
+      if (fromAmount < 100000) {
+        this.setState((state) => {
+          return {
+            fromAmount: fromAmount,
+            toAmount: 0
+          }
+        })
+      } else {
+        this.setState((state) => {
+          return {
+            fromAmount: fromAmount,
+            toAmount: fromAmount * this.props.rate
+          }
+        })
+      }
+    } else {
+      this.setState((state) => {
+        return {
+          fromAmount: fromAmount,
+          toAmount: fromAmount * this.props.rate
+        }
+      })
+    }
   }
 
-  handleDestinationChange = (value) => {
+  handleDestinationChange(e) {
+    const toAmount = e.target.value.replace(/,/g, '');
     this.setState({
-      fromAmount: value / this.props.rate,
-      toAmount: value
+      fromAmount: toAmount / this.props.rate,
+      toAmount: toAmount
     })
-
   }
+
+  // toggleSource() {
+  //   this.setState({
+  //     isSourceActive: !this.state.isSourceActive
+  //   });
+  //   if(this.state.isDestinationActive)
+  //     this.hideDestination();
+  // }
+  //
+  // hideSource() {
+  //   this.setState({
+  //     isSourceActive: false
+  //   });
+  // }
+  //
+  // toggleDestination() {
+  //   this.setState({
+  //     isDestinationActive: !this.state.isDestinationActive
+  //   });
+  //   if(this.state.isSourceActive)
+  //     this.hideSource();
+  // }
+  //
+  // hideDestination() {
+  //   this.setState({
+  //     isDestinationActive: false
+  //   });
+  // }
+  //
+  // selectSource(country) {
+  //   this.props.getRates(country,this.state.toCurrency).then(() => {
+  //     this.setState({
+  //       fromCurrency: country,
+  //       toAmount: this.state.fromAmount * this.props.rate
+  //     });
+  //     this.hideSource();
+  //   });
+  // }
+  //
+  // selectDestination(country) {
+  //   this.props.getRates(this.state.fromCurrency,country).then(() => {
+  //     this.setState({
+  //       toCurrency: country,
+  //       toAmount: this.state.fromAmount * this.props.rate
+  //     });
+  //     this.hideDestination();
+  //   });
+  // }
+  //
+  // handleSourceChange = (value) => {
+  //   this.setState({
+  //     fromAmount: value,
+  //     toAmount: value * this.props.rate
+  //   })
+  //
+  // }
+  //
+  // handleDestinationChange = (value) => {
+  //   this.setState({
+  //     fromAmount: value / this.props.rate,
+  //     toAmount: value
+  //   })
+  //
+  // }
 
   render() {
     return (
@@ -198,7 +288,7 @@ class Index extends React.Component {
                       thousandSeparator={true}
                       decimalScale={2}
                       value={this.state.fromAmount}
-                      onValueChange={values => this.handleSourceChange(values.value)}/>
+                      onKeyUp={this.handleSourceChange}/>
                     {/* <input id="money-from" type="text" value={this.toCurrency(this.state.fromAmount)} onChange={this.handleSourceChange}/> */}
                   </div>
                   <div className="destination-container">
@@ -257,7 +347,7 @@ class Index extends React.Component {
                       thousandSeparator={true}
                       decimalScale={2}
                       value={this.state.toAmount}
-                      onValueChange={values => this.handleDestinationChange(values.value)}/>
+                      onKeyUp={this.handleDestinationChange}/>
                     {/* <input id="money-to" type="text" value={this.toCurrency(this.state.toAmount)} onChange={this.handleDestinationChange}/> */}
                   </div>
                 </div>
