@@ -12,7 +12,7 @@ import initialize from '../utils/initialize';
 import { getCookie } from '../utils/cookie';
 import NumberFormat from 'react-number-format';
 import orderid from 'order-id';
-import uuidv4 from 'uuid/v4';
+import shortid from 'shortid';
 
 class Order extends React.Component {
 
@@ -134,7 +134,7 @@ class Order extends React.Component {
         break;
       }
     }
-    this.props.getToken(merchantId, uuidv4(), secretWord, this.state.name, this.state.fromAmount);
+    this.props.generateVA(merchantId, shortid.generate(), secretWord, this.state.name, this.state.email, this.state.fromAmount);
   }
 
 
