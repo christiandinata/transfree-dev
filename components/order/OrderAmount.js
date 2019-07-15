@@ -148,17 +148,17 @@ class OrderAmount extends React.Component {
                 </button>
                 <div className={this.state.isSourceActive ? 'dropdown-menu show' : 'dropdown-menu'}>
                   <ul>
-                    <li onClick={this.selectDestination.bind(this,'idr')}>
+                    <li onClick={this.selectSource.bind(this,'idr')}>
                       <a className="dropdown-item">
                         <span className="flag-icon flag-icon-id flag-icon-squared"></span> IDR
                       </a>
                     </li>
-                    <li onClick={this.selectDestination.bind(this,'gbp')}>
+                    <li onClick={this.selectSource.bind(this,'gbp')}>
                       <a className="dropdown-item">
                         <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP
                       </a>
                     </li>
-                    <li onClick={this.selectDestination.bind(this,'usd')}>
+                    <li onClick={this.selectSource.bind(this,'usd')}>
                       <a className="dropdown-item">
                         <span className="flag-icon flag-icon-us flag-icon-squared"></span> USD
                       </a>
@@ -173,54 +173,40 @@ class OrderAmount extends React.Component {
                   value={this.state.fromAmount}
                   onKeyUp={this.handleSourceChange}/>
               </div>
-              <div className="destination-container">
-                <p>Recipient gets</p>
-                <button className="currency-from dropdown-button" onClick={this.toggleDestination}>
-                  <span className={'flag-icon flag-icon-'+this.state.toCurrency.substring(0,2)+' flag-icon-squared'}></span> {this.state.toCurrency}
-                  <FontAwesomeIcon className="caret" icon="caret-down"/>
-                </button>
-                <div className={this.state.isDestinationActive ? 'dropdown-menu show' : 'dropdown-menu'}>
-                  <ul>
-                    <li onClick={this.selectSource.bind(this,'myr')}>
-                      <a className="dropdown-item">
-                        <span className="flag-icon flag-icon-my flag-icon-squared"></span> MYR
-                      </a>
-                    </li>
-                    <li onClick={this.selectSource.bind(this,'krw')}>
-                      <a className="dropdown-item">
-                        <span className="flag-icon flag-icon-kr flag-icon-squared"></span> KRW
-                      </a>
-                    </li>
-                    <li onClick={this.selectSource.bind(this,'gbp')}>
-                      <a className="dropdown-item">
-                        <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP
-                      </a>
-                    </li>
-                    <li onClick={this.selectSource.bind(this,'usd')}>
-                      <a className="dropdown-item">
-                        <span className="flag-icon flag-icon-us flag-icon-squared"></span> USD
-                      </a>
-                    </li>
-                    <li onClick={this.selectSource.bind(this,'eur')}>
-                      <a className="dropdown-item">
-                        <span className="flag-icon flag-icon-eu flag-icon-squared"></span> EUR
-                      </a>
-                    </li>
+              <div className={this.state.isDestinationActive ? 'dropdown-menu show' : 'dropdown-menu'}>
+                <ul>
+                  <li onClick={this.selectDestination.bind(this,'myr')}>
+                    <a className="dropdown-item">
+                      <span className="flag-icon flag-icon-my flag-icon-squared"></span> MYR
+                    </a>
+                  </li>
+                  <li onClick={this.selectDestination.bind(this,'krw')}>
+                    <a className="dropdown-item">
+                      <span className="flag-icon flag-icon-kr flag-icon-squared"></span> KRW
+                    </a>
+                  </li>
+                  <li onClick={this.selectDestination.bind(this,'gbp')}>
+                    <a className="dropdown-item">
+                      <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP
+                    </a>
+                  </li>
+                  <li onClick={this.selectDestination.bind(this,'usd')}>
+                    <a className="dropdown-item">
+                      <span className="flag-icon flag-icon-us flag-icon-squared"></span> USD
+                    </a>
+                  </li>
+                  <li onClick={this.selectDestination.bind(this,'eur')}>
+                    <a className="dropdown-item">
+                      <span className="flag-icon flag-icon-eu flag-icon-squared"></span> EUR
+                    </a>
+                  </li>
 
-                    <li onClick={this.selectSource.bind(this,'hkd')}>
-                      <a className="dropdown-item">
-                        <span className="flag-icon flag-icon-hk flag-icon-squared"></span> HKD
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <NumberFormat
-                  id="money-to"
-                  type="text"
-                  thousandSeparator={true}
-                  decimalScale={2}
-                  value={this.state.toAmount}
-                  onKeyUp={this.handleDestinationChange}/>
+                  <li onClick={this.selectDestination.bind(this,'hkd')}>
+                    <a className="dropdown-item">
+                      <span className="flag-icon flag-icon-hk flag-icon-squared"></span> HKD
+                    </a>
+                  </li>
+                </ul>
               </div>
             </div>
             <div className="row rate">
