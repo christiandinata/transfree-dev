@@ -36,7 +36,7 @@ class Order extends React.Component {
       iban: '',
       swift: '',
       isVAgenerated: false,
-      vaNumber: 12345678
+      vaNumber: 0
     };
 
     this.nextStep = this.nextStep.bind(this);
@@ -55,6 +55,15 @@ class Order extends React.Component {
     this.setState({
       uid: this.props.userData._id
     })
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.vaNumber != prevProps.vaNumber) {
+      this.setState({
+        isVAgenerated: true,
+        vaNumber: this.props.vaNumber
+      });
+    }
   }
 
   renderContent(step) {
@@ -244,6 +253,7 @@ const mapStateToProps = (state) => {
   return {
     userData: userData,
     rate: state.rate.rates,
+    vaNumber: state.va.vaNumber
   }
 }
 

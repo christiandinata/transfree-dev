@@ -1,7 +1,7 @@
 import Router from 'next/router';
 import axios from 'axios';
 import {
-  GENERATE_VA_TOKEN
+  GENERATE_VA_NUMBER
 } from '../types';
 import { API } from '../../config';
 
@@ -15,8 +15,10 @@ const generateVA = (merchantId, merchantRefCode, secretWord, custName, custEmail
       'custEmail': custEmail,
       'totalAmount': totalAmount
     }).then((response) => {
-        console.log(response);
-        //dispatch({type: USER_DATA, payload: response.data.user_data});
+        //console.log(response);
+        if(response.status == 200) {
+            dispatch({type: GENERATE_VA_NUMBER, payload: response.data.vaNumber});
+        }
       })
       .catch((error) => {
         console.log(error);

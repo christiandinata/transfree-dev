@@ -13,7 +13,7 @@ class OrderAmount extends React.Component {
       isDestinationActive: false,
       fromCurrency: 'gbp',
       toCurrency: 'idr',
-      fromAmount: 1000,
+      fromAmount: 1000.00,
       toAmount: 0
     };
 

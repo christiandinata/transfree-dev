@@ -260,7 +260,10 @@ class Recipient extends React.Component {
 
           </div>
 
-          <div className={this.state.toCurrency == 'idr' ? 'div-show' : 'div-hide'}>
+          <div className={this.state.toCurrency == 'idr'
+                            || this.state.toCurrency == 'myr'
+                            || this.state.toCurrency == 'krw'
+                            || this.state.toCurrency == 'hkd'? 'div-show' : 'div-hide'}>
             <label htmlFor="account">Account Number</label><br/>
             <input
               type="tel"

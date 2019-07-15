@@ -15,4 +15,4 @@ export const REGISTRATION_STEP = 'registration_step';
 export const EXCHANGE_RATE = 'exchange_rate';
 export const ORDER_DATA = 'order_data';
 export const ORDER_DATA_ARRAY = 'order_data_array';
-export const GENERATE_VA_TOKEN = 'generate_va_token';
+export const GENERATE_VA_NUMBER = 'generate_va_number';

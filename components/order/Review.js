@@ -61,7 +61,10 @@ class Review extends React.Component {
             <span className="right">{this.props.data.bankName}</span>
           </div>
 
-          <div className={this.props.data.toCurrency == 'idr' ? 'list-item' : 'div-hide'}>
+          <div className={this.state.toCurrency == 'idr'
+                            || this.state.toCurrency == 'myr'
+                            || this.state.toCurrency == 'krw'
+                            || this.state.toCurrency == 'hkd'? 'list-item' : 'div-hide'}>
             <span className="left">Account number</span>
             <span className="right">{this.props.data.bankAccountNumber}</span>
           </div>
@@ -76,12 +79,16 @@ class Review extends React.Component {
             <span className="right">{this.props.data.accountNumber}</span>
           </div>
 
-          <div className={this.props.data.toCurrency == 'eur' || this.props.data.toCurrency == 'usd' || this.props.data.toCurrency == 'aud' ? 'list-item' : 'div-hide'}>
+          <div className={this.props.data.toCurrency == 'eur'
+                            || this.props.data.toCurrency == 'usd'
+                            || this.props.data.toCurrency == 'aud' ? 'list-item' : 'div-hide'}>
             <span className="left">IBAN</span>
             <span className="right">{this.props.data.iban}</span>
           </div>
 
-          <div className={this.props.data.toCurrency == 'eur' || this.props.data.toCurrency == 'usd' || this.props.data.toCurrency == 'aud' ? 'list-item' : 'div-hide'}>
+          <div className={this.props.data.toCurrency == 'eur'
+                            || this.props.data.toCurrency == 'usd'
+                            || this.props.data.toCurrency == 'aud' ? 'list-item' : 'div-hide'}>
             <span className="left">SWIFT</span>
             <span className="right">{this.props.data.swift}</span>
           </div>
