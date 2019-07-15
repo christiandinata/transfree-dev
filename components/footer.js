@@ -24,8 +24,8 @@ const Footer = () => (
               <li>Help</li>
             */}
             <li><Link href="/faq"><a>FAQ</a></Link></li>
+            <li><Link href="/terms"><a>Terms & conditions</a></Link></li>
             <li>Privacy policy</li>
-            <li>Terms & conditions</li>
           </ul>
         </div>
         <div className="footer-item">
