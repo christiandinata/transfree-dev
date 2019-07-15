@@ -36,7 +36,7 @@ class Review extends React.Component {
 
           <div className="list-item">
             <span className="left">Arrive in</span>
-            <span className="right">3 hours</span>
+            <span className="right">24 hours</span>
           </div>
 
           <hr/>
