@@ -61,10 +61,10 @@ class Review extends React.Component {
             <span className="right">{this.props.data.bankName}</span>
           </div>
 
-          <div className={this.state.toCurrency == 'idr'
-                            || this.state.toCurrency == 'myr'
-                            || this.state.toCurrency == 'krw'
-                            || this.state.toCurrency == 'hkd'? 'list-item' : 'div-hide'}>
+          <div className={this.props.data.toCurrency == 'idr'
+                            || this.props.data.toCurrency == 'myr'
+                            || this.props.data.toCurrency == 'krw'
+                            || this.props.data.toCurrency == 'hkd'? 'list-item' : 'div-hide'}>
             <span className="left">Account number</span>
             <span className="right">{this.props.data.bankAccountNumber}</span>
           </div>
