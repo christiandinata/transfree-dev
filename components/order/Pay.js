@@ -58,9 +58,9 @@ function VAGenerated(props) {
         <div className="list-item">
           <span className="left">VA Number:</span>
           <span className="right bold">{props.vaNumber}</span>
-          <p>Please follow instruction on how to transfer money into virtual account according to your bank.</p>
         </div>
       </div>
+      <p>Please follow the instruction of your bank to transfer money into virtual account number.</p>
       <style jsx>{`
         .list-item {
           display: flex;
@@ -190,10 +190,181 @@ class Pay extends React.Component {
             */}
         </form>
         <style jsx>{`
+          .div-show {
+            display: block;
+          }
+
+          .div-hide {
+            display: none;
+          }
+
+          .container-fluid {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+          }
+
+          .logo img {
+            height: 28px;
+            margin: 50px auto;
+          }
+
+          p {
+            max-width: 500px;
+          }
+
+          h1 {
+            margin: 0;
+            text-align: center;
+          }
+
+          li {
+            font-family: "Campton-Book", sans-serif;
+          }
+
+          .form-container {
+            width: 500px;
+            height: auto;
+            padding: 30px;
+            margin: 30px auto;
+            background: #FFFFFF;
+            box-shadow: 0 10px 30px 0 rgba(0,0,0,0.10);
+            border-radius: 8px;
+          }
+
+          // Progress Bar
+          .header-progress-container {
+            width: 550px;
+            padding: 30px 10px 0;
+            margin: 50px auto;
+          }
+
+          .header-progress-list {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+          }
+
+          .header-progress-item {
+            position: relative;
+            display: inline-block;
+            width: 135px;
+            text-align: center;
+            line-height: 3em;
+          }
+            //Lines
+          .header-progress-item:after {
+            position: absolute;
+            display: block;
+            z-index: 1;
+            top: -2px;
+            left: -65px;
+            height: 2px;
+            width: 135px;
+            content: "";
+            background-color: #469DDD;
+          }
+
+          // Bullets/Balls
+          .header-progress-item:before {
+            position: absolute;
+            z-index: 2;
+            top: -6px;
+            left: 65px;
+            height: 10px;
+            width: 10px;
+            border-radius: 1.2em;
+            border: none;
+            line-height: 1.2em;
+            content: " ";
+            background-color: #469DDD;
+          }
+
+          .header-progress-item:first-child:after {
+            display: none;
+          }
+
+          .header-progress-item.done {
+            color: #469DDD;
+          }
+
+          .header-progress-item.todo {
+            color: #DDDADD;
+          }
+
+          //Lines
+          .header-progress-item.todo:after {
+            background: #F1F1F1;
+          }
+
+          // Bullets/Balls
+          .header-progress-item.todo:before {
+            background-color: #DADADA;
+          }
+
+          .btn-primary {
+            width: 100%;
+            padding: 15px 0;
+            margin-top: 30px;
+          }
+
+          .form-container {
+            width: 400px;
+            height: auto;
+            padding: 30px;
+            margin: 30px auto;
+            background: #FFFFFF;
+            box-shadow: 0 10px 30px 0 rgba(0,0,0,0.10);
+            border-radius: 8px;
+          }
+
+          .list-item {
+            display: flex;
+            width: 100%;
+            margin: 10px 0;
+          }
+
+          .list-item span {
+            flex-basis: 50%;
+          }
+
+          .list-item .right {
+            text-align: right;
+            color: #15233C;
+          }
+
+
+
+          hr {
+            display: block;
+            height: 1px;
+            border: 0;
+            border-top: 1px solid #eaeaea;
+            margin: 30px 0;
+            padding: 0;
+          }
+
+          .list-item .left {
+            opacity: 0.7;
+          }
+
           .instruction {
             text-align: center;
             max-width: 60%;
             margin: 0 auto;
+          }
+
+          h2 {
+            width: 100%;
+            text-align: center;
+          }
+
+          .payment-details {
+            background-color: #EBF6FB;
+            padding: 10px 20px;
+            margin: 30px 0;
+            border-radius: 8px;
           }
 
           .btn-danger {
