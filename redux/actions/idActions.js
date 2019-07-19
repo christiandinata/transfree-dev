@@ -13,7 +13,7 @@ const verifyId = ({ idType, idNumber, idName, dob, address, email }, type) => {
   return (dispatch) => {
     axios.post(`${API}/${type}`, {idType, idNumber, idName, dob, address, email})
       .then((response) => {
-        Router.push('/account');
+        Router.push('/photo-verification');
         dispatch({type: USER_DATA, payload: response.data.user_data});
       })
       .catch((error) => {

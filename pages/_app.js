@@ -4,9 +4,10 @@ import withRedux from 'next-redux-wrapper';
 import { initStore } from '../redux';
 import '../utils/fontawesome';
 import 'react-phone-number-input/style.css';
-import "react-datepicker/dist/react-datepicker.css";
+import 'react-datepicker/dist/react-datepicker.css';
+import 'react-accessible-accordion/dist/fancy-example.css';
 
-export default withRedux(initStore, { debug: false })(
+export default withRedux(initStore, { debug: true })(
   class MyApp extends App {
     static async getInitialProps({ Component, ctx }) {
       return {

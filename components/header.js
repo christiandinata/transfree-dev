@@ -239,7 +239,6 @@ const Header = () => (
 
       .form-container input {
         width: 100%;
-        margin-bottom: 30px;
         border: none;
         font-size: 16px;
         padding: 15px 0;

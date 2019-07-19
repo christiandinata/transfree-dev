@@ -40,6 +40,7 @@ class Phone extends React.Component {
   }
 
   render() {
+    console.log(this.props.errorMessage);
     return (
       <div>
         <Header />
@@ -47,6 +48,9 @@ class Phone extends React.Component {
         <div className="container-fluid">
           <h1>Phone verification</h1>
           <p>We need to verify your mobile phone number. This number will be used to send important updates.</p>
+          <div className={"error-container "+(this.props.errorMessage != '' && this.props.errorMessage != undefined ? "error-show" : "") }>
+            {this.props.errorMessage}
+          </div>
           <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
             <label htmlFor="phone">Phone number</label><br/>
             <PhoneInput
@@ -114,6 +118,20 @@ class Phone extends React.Component {
             width: 100%;
             padding: 15px 0;
           }
+
+          .error-container {
+            width: 400px;
+            height: auto;
+            padding: 20px;
+            background-color: #FF3A43;
+            color: #FFF;
+            border-radius: 8px;
+            display: none;
+          }
+
+          .error-show {
+            display: block;
+          }
         `}</style>
       </div>
     )
@@ -124,7 +142,8 @@ const mapStateToProps = (state) => {
   const userData = JSON.parse(state.user.user_data);
   return {
     email: userData.email,
-    isAuthenticated: !!state.authentication.token
+    isAuthenticated: !!state.authentication.token,
+    errorMessage: state.verify.errorMessage,
   }
 };
 

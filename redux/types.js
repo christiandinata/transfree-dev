@@ -7,6 +7,7 @@ export const ERROR_MESSAGE = 'error_message';
 export const VERIFY_PHONE = 'verify_phone';
 export const VERIFY_PHONE_NUMBER = 'verify_phone_number';
 export const VERIFY_PHONE_CHECK = 'verify_phone_check';
+export const VERIFY_PHONE_ERROR = 'verify_phone_error';
 export const USER_EMAIL = 'user_email';
 export const USER_STATUS = 'user_status';
 export const USER_DATA = 'user_data';

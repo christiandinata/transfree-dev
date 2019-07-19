@@ -69,6 +69,9 @@ const authenticate = ({ email, password }, type) => {
               Router.push('/id-verification');
               break;
             case 3:
+              Router.push('/photo-verification');
+              break;
+            case 4:
               Router.push('/account');
               break;
           }

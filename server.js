@@ -69,6 +69,14 @@ app.prepare()
       }
     });
 
+    server.get('/photo-verification', (req, res) => {
+      if(!req.cookies.token) {
+        res.redirect('/login');
+      } else {
+        return app.render(req, res, '/photo-verification', req.query);
+      }
+    });
+
     server.get('/logout', (req, res) => {
       if(!req.cookies.token) {
         res.redirect('/login');

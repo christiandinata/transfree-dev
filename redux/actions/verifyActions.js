@@ -3,6 +3,7 @@ import axios from 'axios';
 import {
   VERIFY_PHONE,
   VERIFY_PHONE_CHECK,
+  VERIFY_PHONE_ERROR,
   USER_DATA
 } from '../types';
 import { API } from '../../config';
@@ -20,7 +21,16 @@ const verify = ({ phone, email }, type) => {
         dispatch({type: USER_DATA, payload: response.data.user_data});
       })
       .catch((error) => {
-        throw new Error(error);
+        let errorMessage = '';
+        switch (error.response.status) {
+          case 422:
+            errorMessage = 'Phone number has been used. Please choose different number.';
+            break;
+          default:
+            errorMessage = 'Zzzzz. Something is wrong.';
+            break;
+        }
+        dispatch({type: VERIFY_PHONE_ERROR, payload: errorMessage});
       });
   };
 };
