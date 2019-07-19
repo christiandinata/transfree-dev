@@ -5,6 +5,7 @@ import rateActions from './rateActions';
 import orderActions from './orderActions';
 import userActions from './userActions';
 import vaActions from './vaActions';
+import photoActions from './photoActions';
 export default {
   ...authActions,
   ...verifyActions,
@@ -12,5 +13,6 @@ export default {
   ...rateActions,
   ...orderActions,
   ...userActions,
-  ...vaActions
+  ...vaActions,
+  ...photoActions
 }

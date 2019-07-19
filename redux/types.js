@@ -17,3 +17,5 @@ export const EXCHANGE_RATE = 'exchange_rate';
 export const ORDER_DATA = 'order_data';
 export const ORDER_DATA_ARRAY = 'order_data_array';
 export const GENERATE_VA_NUMBER = 'generate_va_number';
+export const PHOTO_UPLOAD_SUCCESS = 'photo_upload_success';
+export const PHOTO_UPLOAD_ERROR = 'photo_upload_error';

@@ -96,6 +96,20 @@ const Header = () => (
         transition: all 0.2s ease;
       }
 
+      .btn-disabled {
+        background-color: #DADADA;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 4px;
+        transition: all 0.2s ease-in-out;
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
+      }
+
       .btn-primary:hover,
       .btn-secondary:hover,
       .btn-tertiary:hover {

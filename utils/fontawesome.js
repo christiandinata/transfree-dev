@@ -3,11 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBell,
   faCaretDown,
+  faFileImage
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
   faBell,
-  faCaretDown
+  faCaretDown,
+  faFileImage
 );
 
 config.autoAddCss = false;
