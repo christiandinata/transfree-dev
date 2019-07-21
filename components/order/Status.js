@@ -1,6 +1,10 @@
 import Link from 'next/link';
 
 class Status extends React.Component {
+  componentWillMount() {
+    this.props.addOrder();
+  }
+  
   render() {
     return (
       <div>

@@ -11,6 +11,7 @@ function BankOption(props) {
         <li onClick={() => props.generateVA('maybank')}><img src="../static/images/bank_logos/maybank.png"/> <span>Maybank</span></li>
         <li onClick={() => props.generateVA('permata')}><img src="../static/images/bank_logos/permata.png"/> <span>Permata Bank</span></li>
         <li onClick={() => props.generateVA('sinarmas')}><img src="../static/images/bank_logos/sinarmas.png"/> <span>Bank Sinarmas</span></li>
+        <li onClick={() => props.transferBank('bca')}><img src="../static/images/bank_logos/bca.png"/> <span>Bank BCA</span></li>
       </ul>
       <style jsx>{`
         p {
@@ -50,6 +51,54 @@ function BankOption(props) {
   )
 }
 
+function EmailInstruction(props) {
+  return (
+    <div>
+      <p className="instruction">Please check your email below:</p>
+      <div className="payment-details">
+        <div className="list-item">
+          <span className="left">Email:</span>
+          <span className="right bold">{props.data.email}</span>
+        </div>
+      </div>
+      <p>We will send payment instruction to your email. Confirm by clicking the button below</p>
+      <span className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_email')}>Send payment instruction to email</span>
+      <style jsx>{`
+        .list-item {
+          display: flex;
+          width: 100%;
+          margin: 10px 0;
+        }
+
+        .list-item span {
+          flex-basis: 50%;
+        }
+
+        .list-item .right {
+          text-align: right;
+          color: #15233C;
+        }
+
+        .payment-details {
+          background-color: #EBF6FB;
+          padding: 10px 20px;
+          margin: 30px 0;
+          border-radius: 8px;
+        }
+
+        .bold {
+          font-family: "Campton-Bold", sans-serif;
+        }
+
+        .btn-primary {
+          width: 100%;
+          padding: 15px 0;
+        }
+        `}</style>
+    </div>
+  )
+}
+
 function VAGenerated(props) {
   return (
     <div>
@@ -61,6 +110,7 @@ function VAGenerated(props) {
         </div>
       </div>
       <p>Please follow the instruction of your bank to transfer money into virtual account number.</p>
+      <span className="btn-primary" onClick={() => props.addOrder('virtual_account')}>Continue</span>
       <style jsx>{`
         .list-item {
           display: flex;
@@ -92,37 +142,107 @@ function VAGenerated(props) {
   )
 }
 
+function TransferBank(props) {
+  return (
+    <div>
+      <div className="payment-details">
+        <div className="list-item">
+          <span className="left">Bank name</span>
+          <span className="right">BCA</span>
+        </div>
+
+        <div className="list-item">
+          <span className="left">Account Name</span>
+          <span className="right">Pelita Transfer Nusantara</span>
+        </div>
+
+        <div className="list-item">
+          <span className="left">Account number</span>
+          <span className="right">206 37 555 67</span>
+        </div>
+      </div>
+
+      <p>Please check all of the details above are correct to speed up the process.
+      We also email you the instruction. We will notify you via email once your payment has been confirmed.</p>
+
+      <span className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_bank')}>Continue</span>
+      <style jsx>{`
+        .list-item {
+          display: flex;
+          width: 100%;
+          margin: 10px 0;
+        }
+
+        .list-item span {
+          flex-basis: 50%;
+        }
+
+        .list-item .right {
+          text-align: right;
+          color: #15233C;
+        }
+
+        .list-item .left {
+          opacity: 0.7;
+        }
+
+        .instruction {
+          text-align: center;
+          max-width: 60%;
+          margin: 0 auto;
+        }
+
+        h2 {
+          width: 100%;
+          text-align: center;
+        }
+
+        .payment-details {
+          background-color: #EBF6FB;
+          padding: 10px 20px;
+          margin: 30px 0;
+          border-radius: 8px;
+        }
+
+        .btn-primary {
+          width: 100%;
+          padding: 15px 0;
+        }
+        .btn-danger {
+          background: transparent;
+          border: 2px solid #DC2020;
+          color: #DC2020;
+          padding: 8px 18px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          border-radius: 4px;
+          transition: 0.2s;
+          width: 100%;
+          padding: 15px 0;
+          margin-top: 15px;
+        }
+
+        .btn-danger:hover {
+          transform: translateY(-1px);
+        }
+      `}</style>
+    </div>
+  )
+}
+
 class Pay extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isVAgenerated: false
+      isVAgenerated: false,
+      isTransfer: false
     };
 
     this.generateVA = this.generateVA.bind(this);
-  }
-  saveAndContinue = (e) => {
-    e.preventDefault();
-    this.props.addOrder(
-      {
-        uid: this.props.data.uid,
-        rate: this.props.data.rate,
-        fromCurrency: this.props.data.fromCurrency,
-        toCurrency: this.props.data.toCurrency,
-        fromAmount: this.props.data.fromAmount,
-        toAmount: this.props.data.toAmount,
-        email: this.props.data.email,
-        name: this.props.data.name,
-        bankName: this.props.data.bankName,
-        bankAccountNumber: this.props.data.bankAccountNumber,
-        accountNumber: this.props.data.accountNumber,
-        sortcode: this.props.data.sortcode,
-        iban: this.props.data.iban,
-        swift: this.props.data.swift
-      },
-      'addOrder'
-    );
-    this.props.nextStep();
+    this.transferBank = this.transferBank.bind(this);
+    this.addOrder = this.addOrder.bind(this);
   }
 
   generateVA(bankName) {
@@ -130,8 +250,13 @@ class Pay extends React.Component {
     this.props.generateVA(bankName);
   }
 
+  transferBank(bankName) {
+    this.setState({
+      isTransfer: true
+    })
+  }
+
   componentDidUpdate(prevProps) {
-    console.log(this.props.data.vaNumber)
     if (this.props.data.vaNumber != prevProps.data.vaNumber) {
       this.setState({
         isVAgenerated: true
@@ -139,13 +264,26 @@ class Pay extends React.Component {
     }
   }
 
+  addOrder(method) {
+    this.props.saveValues({paymentMethod: method});
+    this.props.nextStep();
+  }
+
   render() {
     let content;
 
-    if (this.state.isVAgenerated) {
-      content = <VAGenerated vaNumber={this.props.data.vaNumber}/>;
+    if (this.props.data.fromCurrency != 'idr') {
+      content = <EmailInstruction data={this.props.data} addOrder={this.addOrder}/>;
     } else {
-      content = <BankOption generateVA={this.generateVA}/>
+      if (this.state.isVAgenerated) {
+        content = <VAGenerated vaNumber={this.props.data.vaNumber} addOrder={this.addOrder}/>;
+      } else {
+        if(this.state.isTransfer) {
+          content = <TransferBank addOrder={this.addOrder}/>;
+        } else {
+          content = <BankOption generateVA={this.generateVA} transferBank={this.transferBank} />
+        }
+      }
     }
     return (
       <div>
@@ -154,40 +292,6 @@ class Pay extends React.Component {
           <p className="instruction">Payment amount</p>
           <h2><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value={this.props.data.fromAmount} /> {this.props.data.fromCurrency.toUpperCase()}</h2>
           {content}
-          {/*
-            <div className="payment-details">
-              <div className="list-item">
-                <span className="left">Bank name</span>
-                <span className="right">Lloyds Bank</span>
-              </div>
-
-              <div className="list-item">
-                <span className="left">Sort code</span>
-                <span className="right">12-34-56</span>
-              </div>
-
-              <div className="list-item">
-                <span className="left">Account number</span>
-                <span className="right">987654321</span>
-              </div>
-
-              <div className="list-item">
-                <span className="left">Account name</span>
-                <span className="right">Transfree</span>
-              </div>
-            </div>
-
-            <p>Please check all of the details above are correct to speed up the process.
-            Once you have made a payment, please confirm by clicking the button below.
-            We will notify you via email and WhatsApp once your payment has been confirmed.</p>
-
-            <Link href="">
-              <a className="btn-primary" onClick={this.saveAndContinue}>I have made a transfer</a>
-            </Link>
-            <Link href="/">
-              <a className="btn-danger">Cancel this transaction</a>
-            </Link>
-            */}
         </form>
         <style jsx>{`
           .div-show {

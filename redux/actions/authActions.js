@@ -21,7 +21,11 @@ const register = ({ fullname, email, password }, type) => {
         setCookie('token', response.data.token);
         const userData = JSON.parse(response.data.user_data);
         setCookie('_id', userData._id)
-        Router.push('/phone');
+        if (userData.role == 'admin') {
+          Router.push('/dashboard/home')
+        } else {
+          Router.push('/phone');
+        }
         // const userData = JSON.stringify()
         dispatch({type: REGISTER, payload: response.data.token});
         dispatch({type: USER_DATA, payload: response.data.user_data});
@@ -58,22 +62,26 @@ const authenticate = ({ email, password }, type) => {
         setCookie('token', response.data.token);
         const userData = JSON.parse(response.data.user_data);
         setCookie('_id', userData._id)
-        if (userData.isApproved) {
-          Router.push('/account');
+        if (userData.role == 'admin') {
+          Router.push('/dashboard/home')
         } else {
-          switch(userData.registrationStep) {
-            case 1:
-              Router.push('/phone');
-              break;
-            case 2:
-              Router.push('/id-verification');
-              break;
-            case 3:
-              Router.push('/photo-verification');
-              break;
-            case 4:
-              Router.push('/account');
-              break;
+          if (userData.isApproved) {
+            Router.push('/account');
+          } else {
+            switch(userData.registrationStep) {
+              case 1:
+                Router.push('/phone');
+                break;
+              case 2:
+                Router.push('/id-verification');
+                break;
+              case 3:
+                Router.push('/photo-verification');
+                break;
+              case 4:
+                Router.push('/account');
+                break;
+            }
           }
         }
 

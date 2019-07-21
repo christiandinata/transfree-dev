@@ -93,6 +93,30 @@ app.prepare()
       }
     });
 
+    server.get('/dashboard/home', (req, res) => {
+      if(!req.cookies.token) {
+        res.redirect('/dashboard/login');
+      } else {
+        return app.render(req, res, '/dashboard/home', req.query);
+      }
+    });
+
+    server.get('/dashboard/users', (req, res) => {
+      if(!req.cookies.token) {
+        res.redirect('/dashboard/login');
+      } else {
+        return app.render(req, res, '/dashboard/users', req.query);
+      }
+    });
+
+    server.get('/dashboard/orders', (req, res) => {
+      if(!req.cookies.token) {
+        res.redirect('/dashboard/login');
+      } else {
+        return app.render(req, res, '/dashboard/orders', req.query);
+      }
+    });
+
     server.get('*', (req, res) => {
       return handle(req, res);
     });

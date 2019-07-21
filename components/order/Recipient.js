@@ -40,6 +40,7 @@ class Recipient extends React.Component {
   componentDidMount() {
     this.setState({toCurrency: this.props.data.toCurrency});
   }
+  
   saveAndContinue = (e) => {
     e.preventDefault();
     var data = {

@@ -31,8 +31,7 @@ const Footer = () => (
         <div className="footer-item">
           <h3>Contact us</h3>
           <ul>
-            <li>Jalan Damai No. 123, <br/>Jakarta 554433<br/>Indonesia</li>
-            <li>contact@transfree.id</li>
+            <li style={{fontSize: '14px'}}>Innovation Room - Mezanine Floor. Kementerian Ketenegakerjaan RI. Jl. Gatot Subroto No.Kav. 51, Jakarta Selatan, 12950 Indonesia</li>
           </ul>
         </div>
       </div>

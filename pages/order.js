@@ -15,13 +15,13 @@ import orderid from 'order-id';
 import shortid from 'shortid';
 
 class Order extends React.Component {
-
-
   constructor({ props }) {
     super(props);
     this.state = {
       step: 1,
       uid: 0,
+      senderName: '',
+      senderEmail: '',
       rate: 0,
       fromCurrency: 'GBP',
       toCurrency: 'IDR',
@@ -36,13 +36,15 @@ class Order extends React.Component {
       iban: '',
       swift: '',
       isVAgenerated: false,
-      vaNumber: 0
+      vaNumber: 0,
+      paymentMethod: ''
     };
 
     this.nextStep = this.nextStep.bind(this);
     this.previousStep = this.previousStep.bind(this);
     this.saveValues = this.saveValues.bind(this);
     this.generateVA = this.generateVA.bind(this);
+    this.addOrder = this.addOrder.bind(this);
   }
 
   static async getInitialProps(ctx) {
@@ -53,7 +55,9 @@ class Order extends React.Component {
 
   componentDidMount() {
     this.setState({
-      uid: this.props.userData._id
+      uid: this.props.userData._id,
+      senderName: this.props.userData.fullname,
+      senderEmail: this.props.userData.email
     })
   }
 
@@ -64,6 +68,31 @@ class Order extends React.Component {
         vaNumber: this.props.vaNumber
       });
     }
+  }
+
+  addOrder() {
+    this.props.addOrder(
+      {
+        uid: this.state.uid,
+        senderName: this.state.senderName,
+        senderEmail: this.state.senderEmail,
+        rate: this.state.rate,
+        fromCurrency: this.state.fromCurrency,
+        toCurrency: this.state.toCurrency,
+        fromAmount: this.state.fromAmount,
+        toAmount: this.state.toAmount,
+        email: this.state.email,
+        name: this.state.name,
+        bankName: this.state.bankName,
+        bankAccountNumber: this.state.bankAccountNumber,
+        accountNumber: this.state.accountNumber,
+        sortcode: this.state.sortcode,
+        iban: this.state.iban,
+        swift: this.state.swift,
+        paymentMethod: this.state.paymentMethod
+      },
+      'addOrder'
+    );
   }
 
   renderContent(step) {
@@ -86,10 +115,12 @@ class Order extends React.Component {
       case 4:
         return <Pay
                   nextStep={this.nextStep}
+                  saveValues={this.saveValues}
                   data={this.state}
-                  generateVA={this.generateVA} />
+                  generateVA={this.generateVA}/>
       case 5:
         return <Status
+                  addOrder={this.addOrder}
                   data={this.state}/>
     }
   }
@@ -145,7 +176,6 @@ class Order extends React.Component {
     }
     this.props.generateVA(merchantId, shortid.generate(), secretWord, this.state.name, this.state.email, this.state.fromAmount);
   }
-
 
   render() {
     return (

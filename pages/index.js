@@ -391,8 +391,8 @@ class Index extends React.Component {
         </div>
         <div className="row features">
           <div className="container">
-            <div className="row">
-              <div className="left-feature-container"></div>
+            <div className="feature">
+              <div className="left-feature-container"><img src="../static/images/artboard_1.svg"/></div>
               <div className="right-feature-container">
                 <h2>Better rate for transfer</h2>
                 <p>Have you ever thought that the cost of international money
@@ -400,17 +400,18 @@ class Index extends React.Component {
                 your money by using our services so you can use it for other needs with little effort.</p>
               </div>
             </div>
-            <div className="row">
+            <div className="feature">
               <div className="left-feature-container">
                 <h2>Tired of waiting for your money to arrive? </h2>
                 <p>Does your family need it for an emergency? And when you use a cheaper
                  option, it sometimes takes longer for your money to arrive. Don't worry, we are here now.</p>
               </div>
               <div className="right-feature-container">
+                <img src="../static/images/artboard_2.svg"/>
               </div>
             </div>
-            <div className="row">
-              <div className="left-feature-container"></div>
+            <div className="feature">
+              <div className="left-feature-container"><img src="../static/images/artboard_3.svg"/></div>
               <div className="right-feature-container">
                 <h2>We don't charge any fees for your transfer</h2>
                 <p>Too good to be true? But this is happening now.
@@ -426,19 +427,19 @@ class Index extends React.Component {
             <h1>Why using Transfree?</h1>
             <div className="features-container">
               <div className="feature-item">
-                <img src="../static/images/benefit-1.svg"/>
+                <img src="../static/images/benefit-3.svg"/>
                 <h2>Cheaper & faster</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 In lobortis libero ac neque vehicula, in bibendum metus mollis.</p>
               </div>
               <div className="feature-item">
-                <img src="../static/images/benefit-2.svg"/>
+                <img src="../static/images/benefit-4.svg"/>
                 <h2>Rp 18 Billion+ transactions</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 In lobortis libero ac neque vehicula, in bibendum metus mollis.</p>
               </div>
               <div className="feature-item">
-                <img src="../static/images/benefit-1.svg"/>
+                <img src="../static/images/benefit-5.svg"/>
                 <h2>750+ customers</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 In lobortis libero ac neque vehicula, in bibendum metus mollis.</p>
@@ -833,6 +834,12 @@ class Index extends React.Component {
 
           a.dropdown-item {
             transition: none;
+          }
+
+          .feature {
+            display: flex;
+            align-items: center;
+            margin: 0;
           }
 
         `}</style>

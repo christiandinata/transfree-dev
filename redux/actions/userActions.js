@@ -1,7 +1,8 @@
 import Router from 'next/router';
 import axios from 'axios';
 import {
-  USER_DATA
+  USER_DATA,
+  USER_DATA_ARRAY
 } from '../types';
 import { API } from '../../config';
 
@@ -20,6 +21,39 @@ const getUser = (uid, type) => {
   };
 };
 
+const getAllUsers = ({} , type) => {
+  if (type !== 'getAllUsers') {
+    throw new Error('Wrong API call!');
+  }
+  return async (dispatch) => {
+    await axios.get(`${API}/${type}`)
+      .then((response) => {
+        dispatch({type: USER_DATA_ARRAY, payload: response.data.user_data_array});
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  };
+};
+
+const approveUser = ({uid} , type) => {
+  if (type !== 'approveUser') {
+    throw new Error('Wrong API call!');
+  }
+  return async (dispatch) => {
+    await axios.post(`${API}/${type}`, {uid})
+      .then((response) => {
+        console.log(response);
+        //dispatch({type: USER_DATA_ARRAY, payload: response.data.user_data_array});
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  };
+};
+
 export default {
   getUser,
+  getAllUsers,
+  approveUser
 };

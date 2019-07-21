@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Head from 'next/head';
 import Header from '../components/header.js';
 
 const AuthLayout = ({ children }) => (

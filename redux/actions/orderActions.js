@@ -6,17 +6,18 @@ import {
 } from '../types';
 import { API } from '../../config';
 
-const addOrder = ({ uid, rate, fromCurrency, toCurrency, fromAmount, toAmount, email, name, bankName, bankAccount }, type) => {
+const addOrder = ({ uid, senderName, senderEmail, rate, fromCurrency, toCurrency, fromAmount, toAmount,
+  email, name, bankName, bankAccountNumber, accountNumber, sortcode, iban, swift, paymentMethod }, type) => {
   if (type !== 'addOrder') {
     throw new Error('Wrong API call!');
   }
   return (dispatch) => {
-    axios.post(`${API}/${type}`, {uid, rate, fromCurrency, toCurrency, fromAmount, toAmount, email, name, bankName, bankAccount})
+    axios.post(`${API}/${type}`, {uid, senderName, senderEmail, rate, fromCurrency, toCurrency, fromAmount, toAmount,
+      email, name, bankName, bankAccountNumber, accountNumber, sortcode, iban, swift, paymentMethod})
       .then((response) => {
         dispatch({type: ORDER_DATA, payload: response.data.order_data});
       })
       .catch((error) => {
-        conosel.log(error);
         throw new Error(error);
       });
   };
@@ -52,8 +53,24 @@ const getOrderByUid = (uid , type) => {
   };
 };
 
+const getAllOrders = (type) => {
+  if (type !== 'getAllOrders') {
+    throw new Error('Wrong API call!');
+  }
+  return async (dispatch) => {
+    await axios.get(`${API}/${type}`)
+      .then((response) => {
+        dispatch({type: ORDER_DATA_ARRAY, payload: response.data.order_data_array});
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  };
+};
+
 export default {
   addOrder,
   getOrderById,
   getOrderByUid,
+  getAllOrders
 };

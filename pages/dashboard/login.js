@@ -1,65 +1,62 @@
-import Header from '../components/header';
-import Menu from '../components/menu';
 import Link from 'next/link';
-import Router from 'next/router';
+import Header from '../../components/header.js';
+import Menu from '../../components/menu';
 import { connect } from 'react-redux';
-import initialize from '../utils/initialize';
-import actions from '../redux/actions';
-import { getCookie } from '../utils/cookie';
-import PhoneInput from 'react-phone-number-input';
+import actions from '../../redux/actions';
+import initialize from '../../utils/initialize';
 
-class Phone extends React.Component {
+class Login extends React.Component {
   constructor({ props }) {
     super(props);
     this.state = {
-      phone: '+44',
+      email: '',
+      password: '',
     };
   }
 
-  static async getInitialProps(ctx) {
+  static getInitialProps(ctx) {
     initialize(ctx);
-    if (ctx.isServer) {
-      if(ctx.req.headers.cookie) {
-        await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
-      }
-    }
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.verify({
-      phone: this.state.phone,
-      email: this.props.email
-    },
-      'verify'
+    this.props.authenticate(
+      { email: this.state.email, password: this.state.password },
+      'login'
     );
   }
 
-  handleChange = (value) => {
-    this.setState({phone: value});
-  }
-
   render() {
-    //console.log(this.props.errorMessage);
     return (
       <div>
         <Header />
-        <Menu />
         <div className="container-fluid">
-          <h1>Phone verification</h1>
-          <p>We need to verify your mobile phone number. This number will be used to send important updates.</p>
+        <h1>Log in to access dashboard</h1>
           <div className={"error-container "+(this.props.errorMessage != '' && this.props.errorMessage != undefined ? "error-show" : "") }>
             {this.props.errorMessage}
           </div>
           <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
-            <label htmlFor="phone">Phone number</label><br/>
-            <PhoneInput
-              placeholder="Enter phone number"
-              country="GB"
-              value={ this.state.phone }
-              onChange={ phone => this.setState({ phone }) }/>
+            <label htmlFor="email">Email address</label><br/>
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter your email address"
+              required
+              value={this.state.email}
+              onChange={e => this.setState({ email: e.target.value })}
+            />
 
-            <button type="submit" className="btn-primary">Continue</button>
+            <label htmlFor="password">Password</label><br/>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter a secure password"
+              required
+              value={this.state.password}
+              onChange={e => this.setState({ password: e.target.value })}
+            />
+
+            <button type="submit" className="btn-primary">Log in</button>
 
           </form>
         </div>
@@ -132,6 +129,7 @@ class Phone extends React.Component {
           .error-show {
             display: block;
           }
+
         `}</style>
       </div>
     )
@@ -139,15 +137,9 @@ class Phone extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const userData = JSON.parse(state.user.user_data);
   return {
-    email: userData.email,
-    isAuthenticated: !!state.authentication.token,
-    errorMessage: state.verify.errorMessage,
+    errorMessage: state.authentication.errorMessage,
   }
 };
 
-export default connect(
-  mapStateToProps,
-  actions
-)(Phone);
+export default connect(mapStateToProps,actions)(Login);

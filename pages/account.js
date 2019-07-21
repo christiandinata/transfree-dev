@@ -417,7 +417,7 @@ class Account extends React.Component {
 
 const mapStateToProps = (state) => {
   const userData = JSON.parse(state.user.user_data);
-  const orderArray = state.order.orders;
+  const orderArray = JSON.parse(state.order.orders);
   return {
     isApproved: !!userData.isApproved,
     userData: userData,
