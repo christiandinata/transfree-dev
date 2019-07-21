@@ -43,6 +43,7 @@ const approveUser = ({uid} , type) => {
   return async (dispatch) => {
     await axios.post(`${API}/${type}`, {uid})
       .then((response) => {
+        Router.push('/dashboard/users');
         console.log(response);
         //dispatch({type: USER_DATA_ARRAY, payload: response.data.user_data_array});
       })

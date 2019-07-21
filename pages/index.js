@@ -337,16 +337,18 @@ class Index extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className="promo">
-                <div className="promo-desc">
-                Let's lighten their burden: <b>Banjir Bandang Papua</b>
-                </div>
-                <div className="promo-cta">
-                  <Link href="">
-                    <a className="btn-primary">Donate now</a>
-                  </Link>
-                </div>
-              </div>
+              {
+              // <div className="promo">
+              //   <div className="promo-desc">
+              //   Let's lighten their burden: <b>Banjir Bandang Papua</b>
+              //   </div>
+              //   <div className="promo-cta">
+              //     <Link href="">
+              //       <a className="btn-primary">Donate now</a>
+              //     </Link>
+              //   </div>
+              // </div>
+              }
             </div>
           </div>
         </div>

@@ -14,9 +14,11 @@ const MenuAdmin = ({deauthenticate}) => (
         <div className="header-menu">
           <ul>
             <li><Link href="/dashboard/users"><a>Users</a></Link></li>
-            <li><Link href="/"><a>Orders</a></Link></li>
-            <li><Link href="/"><a>Donations</a></Link></li>
-            <li><Link href="/"><a>Pages</a></Link></li>
+            <li><Link href="/dashboard/orders"><a>Orders</a></Link></li>
+            {
+            // <li><Link href="/"><a>Donations</a></Link></li>
+            // <li><Link href="/"><a>Pages</a></Link></li>
+            }
           </ul>
         </div>
         <div className="header-cta">

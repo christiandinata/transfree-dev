@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Header from '../../components/header.js';
 import MenuAdmin from '../../components/menuAdmin.js';
-import Router from 'next/router';
 import { connect } from 'react-redux';
 import initialize from '../../utils/initialize';
 import actions from '../../redux/actions';
@@ -42,12 +41,12 @@ class UserItem extends React.Component {
             <div className="idType">{user.idType}</div>
             <div className="idNumber">{user.idNumber}</div>
             <div className="photoId">
-              <a href="#photoId"><img src={user.photoId} className="thumbnail"/></a>
-              <a href="#_" className="lightbox" id="photoId"><img src={user.photoId}/></a>
+              <a href={"#photoId"+key}><img src={user.photoId} className="thumbnail"/></a>
+              <a href="#_" className="lightbox" id={"photoId"+key}><img src={user.photoId}/></a>
             </div>
             <div className="photoFace">
-              <a href="#photoFace"><img src={user.photoFace} className="thumbnail"/></a>
-              <a href="#_" className="lightbox" id="photoFace"><img src={user.photoFace}/></a>
+              <a href={"#photoFace"+key}><img src={user.photoFace} className="thumbnail"/></a>
+              <a href="#_" className="lightbox" id={"photoFace"+key}><img src={user.photoFace}/></a>
             </div>
             <div className="action">
               {user.isApproved ?
@@ -167,7 +166,6 @@ class Users extends React.Component {
 
   approveUser(uid) {
     this.props.approveUser({uid: uid}, 'approveUser');
-    Router.push('/dashboard/users');
   }
 
   render() {
