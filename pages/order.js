@@ -22,6 +22,7 @@ class Order extends React.Component {
       uid: 0,
       senderName: '',
       senderEmail: '',
+      senderPhone: '',
       rate: 0,
       fromCurrency: 'GBP',
       toCurrency: 'IDR',
@@ -57,7 +58,8 @@ class Order extends React.Component {
     this.setState({
       uid: this.props.userData._id,
       senderName: this.props.userData.fullname,
-      senderEmail: this.props.userData.email
+      senderEmail: this.props.userData.email,
+      senderPhone: this.props.userData.phone
     })
   }
 
@@ -76,6 +78,7 @@ class Order extends React.Component {
         uid: this.state.uid,
         senderName: this.state.senderName,
         senderEmail: this.state.senderEmail,
+        senderPhone: this.state.senderPhone,
         rate: this.state.rate,
         fromCurrency: this.state.fromCurrency,
         toCurrency: this.state.toCurrency,
@@ -271,6 +274,24 @@ class Order extends React.Component {
           // Bullets/Balls
           .header-progress-item.todo:before {
             background-color: #DADADA;
+          }
+
+          @media only screen and (max-width: 375px) {
+            .header-progress-container {
+              width: 375px;
+              font-size: 12px;
+            }
+            .header-progress-item {
+              width: 80px;
+              left: 20px;
+            }
+            .header-progress-item:before {
+              left: 40px;
+            }
+            .header-progress-item:after {
+              width: 80px;
+              left: -40px;
+            }
           }
         `}</style>
       </div>

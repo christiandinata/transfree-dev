@@ -2,6 +2,7 @@ import Router from 'next/router';
 import axios from 'axios';
 import {
   VERIFY_PHONE,
+  VERIFY_PHONE_PROGRESS,
   VERIFY_PHONE_CHECK,
   VERIFY_PHONE_ERROR,
   USER_DATA
@@ -14,6 +15,7 @@ const verify = ({ phone, email }, type) => {
     throw new Error('Wrong API call!');
   }
   return (dispatch) => {
+    dispatch({type: VERIFY_PHONE_PROGRESS, payload: true});
     axios.post(`${API}/${type}`, {phone, email})
       .then((response) => {
         Router.push('/phone-verification');
@@ -41,6 +43,7 @@ const check = ({ serviceSid, phone, code, email }, type) => {
     throw new Error('Wrong API call!');
   }
   return (dispatch) => {
+    dispatch({type: VERIFY_PHONE_PROGRESS, payload: true});
     axios.post(`${API}/${type}`, {serviceSid, phone, code, email})
       .then((response) => {
         if(response.data.status == 'approved') {

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import {useDropzone} from 'react-dropzone';
+import { getCookie } from '../utils/cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Webcam from 'react-webcam';
 
@@ -140,6 +141,15 @@ class PhotoVerification extends React.Component {
 
     this.setPhotoIdSrc = this.setPhotoIdSrc.bind(this);
     this.setPhotoFaceSrc = this.setPhotoFaceSrc.bind(this);
+  }
+
+  static async getInitialProps(ctx) {
+    initialize(ctx);
+    if (ctx.isServer) {
+      if(ctx.req.headers.cookie) {
+        await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
+      }
+    }
   }
 
   setPhotoIdSrc = src => {
@@ -298,63 +308,15 @@ class PhotoVerification extends React.Component {
             }
 
             <div className="cta-submit">
-              <button type="submit" className={((this.state.uploadPhotoIdSrc == null && this.state.webcamPhotoIdSrc == null) || (this.state.uploadPhotoFaceSrc == null && this.state.webcamPhotoFaceSrc == null)) ? 'btn-disabled' : 'btn-primary'} >Continue</button>
+              <button type="submit" className={((this.state.uploadPhotoIdSrc == null && this.state.webcamPhotoIdSrc == null) || (this.state.uploadPhotoFaceSrc == null && this.state.webcamPhotoFaceSrc == null)) ? 'btn-disabled' : 'btn-primary'}>{this.props.inProgress ? (
+                <FontAwesomeIcon icon="sync-alt" spin/>
+              ) : 'Continue'}</button>
             </div>
           </form>
         </div>
         <style jsx>{`
           .no-show {
             display: none
-          }
-
-          .container-fluid {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            align-items: center;
-          }
-
-          .logo img {
-            height: 28px;
-            margin: 50px auto;
-          }
-
-          h1 {
-            margin: 0;
-          }
-
-          .form-container {
-            width: 400px;
-            height: auto;
-            padding: 30px;
-            margin: 30px auto;
-            background: #FFFFFF;
-            box-shadow: 0 10px 30px 0 rgba(0,0,0,0.10);
-            border-radius: 8px;
-          }
-
-          .form-container label {
-            font-size: 14px;
-            text-transform: uppercase;
-          }
-
-          .form-container input {
-            width: 100%;
-            margin-bottom: 30px;
-            border: none;
-            font-size: 16px;
-            padding: 15px 0;
-            border-bottom: 1px solid #eaeaea;
-
-          }
-
-          .form-container input:focus {
-            outline: none;
-            border-bottom: 1px solid #469DDD;
-          }
-
-          ::placeholder {
-            color: #CACACA;
           }
 
           .btn-primary,
@@ -401,6 +363,7 @@ const mapStateToProps = (state) => {
   const userData = JSON.parse(state.user.user_data);
   return {
     email: userData.email,
+    inProgress: state.photo.inProgress,
   }
 };
 

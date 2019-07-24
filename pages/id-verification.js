@@ -4,6 +4,9 @@ import Link from 'next/link';
 import DatePicker from "react-datepicker";
 import { connect } from 'react-redux';
 import actions from '../redux/actions';
+import initialize from '../utils/initialize';
+import { getCookie } from '../utils/cookie';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class IdVerification extends React.Component {
   constructor({ props }) {
@@ -14,7 +17,18 @@ class IdVerification extends React.Component {
       idName: '',
       dob: '',
       address: '',
+      pob: '',
+      gender: '',
     };
+  }
+
+  static async getInitialProps(ctx) {
+    initialize(ctx);
+    if (ctx.isServer) {
+      if(ctx.req.headers.cookie) {
+        await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
+      }
+    }
   }
 
   handleChange = (value) => {
@@ -29,6 +43,8 @@ class IdVerification extends React.Component {
         idName: this.state.idName,
         dob: this.state.dob,
         address: this.state.address,
+        pob: this.state.pob,
+        gender: this.state.gender,
         email: this.props.email
       },
       'verifyId'
@@ -39,10 +55,12 @@ class IdVerification extends React.Component {
     return (
       <div>
         <Header />
-        <Menu />
+        <div className="logo">
+          <img src="../static/images/transfree-logo.png"/>
+        </div>
         <div className="container-fluid">
           <h1>ID verification</h1>
-          <p>According to the regulation from Bank Indonesia, we have to verify your indentity. Please provide your identity details below.</p>
+          <p>According to the regulation from Bank Indonesia, we have to verify your identity. Please provide your identity details below.</p>
           <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
             <label htmlFor="id-type">ID Type</label><br/>
             <select
@@ -71,6 +89,32 @@ class IdVerification extends React.Component {
               value={this.state.idName}
               onChange={e => this.setState({ idName: e.target.value })}/>
 
+            <div style={{marginBottom: "15px"}}>GENDER</div>
+            <input
+              type="radio"
+              id="male"
+              name="gender"
+              value="male"
+              onChange={e => this.setState({ gender: e.target.value })}/>
+            <label htmlFor="male">Male</label><br/>
+
+            <input
+              type="radio"
+              id="female"
+              name="gender"
+              value="female"
+              onChange={e => this.setState({ gender: e.target.value })}/>
+            <label htmlFor="female">Female</label><br/>
+
+
+            <label htmlFor="pob">Place of Birth</label><br/>
+            <input
+              type="text"
+              id="pob"
+              placeholder="Enter the city (e.g. Jakarta)"
+              value={this.state.pob}
+              onChange={e => this.setState({ pob: e.target.value })}/>
+
             <label htmlFor="dob">Date of birth</label><br/>
             <DatePicker
               placeholderText="DD/MM/YYYY"
@@ -89,72 +133,12 @@ class IdVerification extends React.Component {
               value={this.state.address}
               onChange={e => this.setState({ address: e.target.value })}/>
 
-            <button type="submit" className="btn-primary">Continue</button>
+            <button type="submit" className="btn-primary">{this.props.inProgress ? (
+              <FontAwesomeIcon icon="sync-alt" spin/>
+            ) : 'Continue'}</button>
           </form>
         </div>
         <style jsx>{`
-          .container-fluid {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            align-items: center;
-          }
-
-          p {
-            max-width: 500px;
-            text-align: center;
-          }
-
-          h1 {
-            margin: 100px auto 0;
-          }
-
-          .form-container {
-            width: 400px;
-            height: auto;
-            padding: 30px;
-            margin: 30px auto;
-            background: #FFFFFF;
-            box-shadow: 0 10px 30px 0 rgba(0,0,0,0.10);
-            border-radius: 8px;
-          }
-
-          .form-container label {
-            font-size: 14px;
-            text-transform: uppercase;
-          }
-
-          .form-container input,
-          .form-container textarea {
-            width: 100%;
-            margin-bottom: 30px;
-            border: none;
-            font-size: 16px;
-            padding: 15px 0;
-            border-bottom: 1px solid #eaeaea;
-            font-family: "Campton-Book", sans-serif;
-          }
-
-          .form-container input:focus,
-          .form-container textarea:focus {
-            outline: none;
-            border-bottom: 1px solid #469DDD;
-          }
-
-          ::placeholder {
-            color: #CACACA;
-          }
-
-          .btn-primary {
-            width: 100%;
-            padding: 15px 0;
-          }
-
-          .link {
-            color: #469DDD;
-            text-decoration: none;
-          }
-
           .select-css {
             width: 100%;
             margin-bottom: 30px;
@@ -188,7 +172,11 @@ class IdVerification extends React.Component {
           .select-css option {
             font-weight:normal;
           }
-          .
+
+          .form-container input[type="radio"] {
+            width: 20px;
+          }
+
         `}</style>
       </div>
     )
@@ -198,7 +186,8 @@ class IdVerification extends React.Component {
 const mapStateToProps = (state) => {
   const userData = JSON.parse(state.user.user_data);
   return {
-    email: userData.email,
+    inProgress: state.id.inProgress,
+    email: userData.email
   }
 };
 

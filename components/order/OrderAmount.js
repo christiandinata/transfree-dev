@@ -141,7 +141,7 @@ class OrderAmount extends React.Component {
           <div className="converter-container-order">
             <div className="row exchange-container">
               <div className="source-container">
-                <p>You send</p>
+                <p style={{textAlign: "left"}}>You send</p>
                 <button className="currency-from dropdown-button" onClick={this.toggleSource}>
                   <span className={'flag-icon flag-icon-'+this.state.fromCurrency.substring(0,2)+' flag-icon-squared'}></span> {this.state.fromCurrency}
                   <FontAwesomeIcon className="caret" icon="caret-down"/>
@@ -174,7 +174,7 @@ class OrderAmount extends React.Component {
                   onKeyUp={this.handleSourceChange}/>
               </div>
               <div className="destination-container">
-                <p>Recipient gets</p>
+                <p style={{textAlign: "left"}}>Recipient gets</p>
                 <button className="currency-from dropdown-button" onClick={this.toggleDestination}>
                   <span className={'flag-icon flag-icon-'+this.state.toCurrency.substring(0,2)+' flag-icon-squared'}></span> {this.state.toCurrency}
                   <FontAwesomeIcon className="caret" icon="caret-down"/>
@@ -407,6 +407,17 @@ class OrderAmount extends React.Component {
 
           a.dropdown-item {
             transition: none;
+          }
+
+          @media only screen and (max-width: 375px) {
+            .converter-container-order {
+              width: 305px;
+              flex-direction: column;
+            }
+            .container-fluid p {
+              text-align: left;
+            }
+
           }
         `}</style>
       </div>

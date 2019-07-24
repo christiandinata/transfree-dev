@@ -4,6 +4,7 @@ import Menu from '../../components/menu';
 import { connect } from 'react-redux';
 import actions from '../../redux/actions';
 import initialize from '../../utils/initialize';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Login extends React.Component {
   constructor({ props }) {
@@ -56,8 +57,9 @@ class Login extends React.Component {
               onChange={e => this.setState({ password: e.target.value })}
             />
 
-            <button type="submit" className="btn-primary">Log in</button>
-
+            <button type="submit" className="btn-primary">{this.props.inProgress ? (
+              <FontAwesomeIcon icon="sync-alt" spin/>
+            ) : 'Log in'}</button>
           </form>
         </div>
         <style jsx>{`
@@ -138,7 +140,8 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    errorMessage: state.authentication.errorMessage,
+    inProgress: state.authentication.inProgress,
+    errorMessage: state.authentication.errorMessage
   }
 };
 
