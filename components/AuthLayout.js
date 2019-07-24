@@ -42,6 +42,12 @@ const AuthLayout = ({ children }) => (
         justify-content: center;
         align-items: center;
       }
+
+      @media only screen and (max-width: 411px) {
+        .left {
+          display: none;
+        }
+      }
     `}</style>
   </div>
 );

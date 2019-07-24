@@ -1,6 +1,7 @@
 import Router from 'next/router';
 import axios from 'axios';
 import {
+  PHOTO_UPLOAD_PROGRESS,
   PHOTO_UPLOAD_SUCCESS,
   PHOTO_UPLOAD_ERROR,
   USER_DATA
@@ -14,6 +15,7 @@ const uploadPhoto = ({ photoId, photoFace, email }, type) => {
     throw new Error('Wrong API call!');
   }
   return (dispatch) => {
+    dispatch({type: PHOTO_UPLOAD_PROGRESS, payload: true});
     axios.post(`${API}/${type}`, {photoId, photoFace, email})
       .then((response) => {
         Router.push('/account');

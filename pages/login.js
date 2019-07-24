@@ -3,6 +3,7 @@ import AuthLayout from '../components/AuthLayout';
 import { connect } from 'react-redux';
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Login extends React.Component {
   constructor({ props }) {
@@ -28,6 +29,9 @@ class Login extends React.Component {
   render() {
     return (
       <AuthLayout>
+        <div className="logo">
+          <img src="../static/images/transfree-logo.png"/>
+        </div>
         <h1>Log in</h1>
         <div className={"error-container "+(this.props.errorMessage != '' && this.props.errorMessage != undefined ? "error-show" : "") }>
           {this.props.errorMessage}
@@ -54,74 +58,12 @@ class Login extends React.Component {
           />
 
 
-          <button type="submit" className="btn-primary">Log in</button>
+          <button type="submit" className="btn-primary">{this.props.inProgress ? (
+            <FontAwesomeIcon icon="sync-alt" spin/>
+          ) : 'Log in'}</button>
 
         </form>
         <p>Don't have an account? <Link href="/signup"><a className="link">Sign up</a></Link></p>
-        <style jsx>{`
-          .form-container {
-            width: 400px;
-            height: auto;
-            padding: 30px;
-            background: #FFFFFF;
-            box-shadow: 0 10px 30px 0 rgba(0,0,0,0.10);
-            border-radius: 8px;
-          }
-
-          .form-container label {
-            font-size: 14px;
-            text-transform: uppercase;
-          }
-
-          .form-container input {
-            width: 100%;
-            margin-bottom: 30px;
-            border: none;
-            font-size: 16px;
-            padding: 15px 0;
-            border-bottom: 1px solid #eaeaea;
-            font-family: "Campton-Book", sans-serif;
-          }
-
-          .form-container input:focus {
-            outline: none;
-            border-bottom: 1px solid #469DDD;
-          }
-
-          ::placeholder {
-            color: #CACACA;
-          }
-
-          .btn-primary {
-            width: 100%;
-            padding: 15px 0;
-          }
-
-          .right p {
-            margin: 30px 0;
-          }
-
-          .right .link {
-            color: #469DDD;
-            text-decoration: none;
-          }
-
-          .error-container {
-            width: 400px;
-            height: auto;
-            padding: 20px;
-            margin-bottom: 30px;
-            background-color: #FF3A43;
-            color: #FFF;
-            border-radius: 8px;
-            display: none;
-          }
-
-          .error-show {
-            display: block;
-          }
-
-        `}</style>
       </AuthLayout>
     )
   }
@@ -129,7 +71,8 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    errorMessage: state.authentication.errorMessage,
+    inProgress: state.authentication.inProgress,
+    errorMessage: state.authentication.errorMessage
   }
 };
 

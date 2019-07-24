@@ -6,12 +6,15 @@ function BankOption(props) {
     <div>
       <p className="instruction">Please select the bank below:</p>
       <ul>
-        <li onClick={() => props.generateVA('bni')}><img src="../static/images/bank_logos/bni.png"/> <span>Bank BNI</span></li>
-        <li onClick={() => props.generateVA('mandiri')}><img src="../static/images/bank_logos/mandiri.png"/> <span>Bank Mandiri</span></li>
-        <li onClick={() => props.generateVA('maybank')}><img src="../static/images/bank_logos/maybank.png"/> <span>Maybank</span></li>
-        <li onClick={() => props.generateVA('permata')}><img src="../static/images/bank_logos/permata.png"/> <span>Permata Bank</span></li>
-        <li onClick={() => props.generateVA('sinarmas')}><img src="../static/images/bank_logos/sinarmas.png"/> <span>Bank Sinarmas</span></li>
-        <li onClick={() => props.transferBank('bca')}><img src="../static/images/bank_logos/bca.png"/> <span>Bank BCA</span></li>
+        {
+        // <li onClick={() => props.generateVA('bni')}><img src="../static/images/bank_logos/bni.png"/> <span>Bank BNI</span></li>
+        // <li onClick={() => props.generateVA('mandiri')}><img src="../static/images/bank_logos/mandiri.png"/> <span>Bank Mandiri</span></li>
+        // <li onClick={() => props.generateVA('maybank')}><img src="../static/images/bank_logos/maybank.png"/> <span>Maybank</span></li>
+        // <li onClick={() => props.generateVA('permata')}><img src="../static/images/bank_logos/permata.png"/> <span>Permata Bank</span></li>
+        // <li onClick={() => props.generateVA('sinarmas')}><img src="../static/images/bank_logos/sinarmas.png"/> <span>Bank Sinarmas</span></li>
+        }
+        <li onClick={() => props.transferBankBNI('bni')}><img src="../static/images/bank_logos/bni.png"/> <span>Bank BNI</span></li>
+        <li onClick={() => props.transferBankBCA('bca')}><img src="../static/images/bank_logos/bca.png"/> <span>Bank BCA</span></li>
       </ul>
       <style jsx>{`
         p {
@@ -142,7 +145,7 @@ function VAGenerated(props) {
   )
 }
 
-function TransferBank(props) {
+function TransferBankBCA(props) {
   return (
     <div>
       <div className="payment-details">
@@ -165,7 +168,97 @@ function TransferBank(props) {
       <p>Please check all of the details above are correct to speed up the process.
       We also email you the instruction. We will notify you via email once your payment has been confirmed.</p>
 
-      <span className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_bank')}>Continue</span>
+      <span className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_bca')}>Continue</span>
+      <style jsx>{`
+        .list-item {
+          display: flex;
+          width: 100%;
+          margin: 10px 0;
+        }
+
+        .list-item span {
+          flex-basis: 50%;
+        }
+
+        .list-item .right {
+          text-align: right;
+          color: #15233C;
+        }
+
+        .list-item .left {
+          opacity: 0.7;
+        }
+
+        .instruction {
+          text-align: center;
+          max-width: 60%;
+          margin: 0 auto;
+        }
+
+        h2 {
+          width: 100%;
+          text-align: center;
+        }
+
+        .payment-details {
+          background-color: #EBF6FB;
+          padding: 10px 20px;
+          margin: 30px 0;
+          border-radius: 8px;
+        }
+
+        .btn-primary {
+          width: 100%;
+          padding: 15px 0;
+        }
+        .btn-danger {
+          background: transparent;
+          border: 2px solid #DC2020;
+          color: #DC2020;
+          padding: 8px 18px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          border-radius: 4px;
+          transition: 0.2s;
+          width: 100%;
+          padding: 15px 0;
+          margin-top: 15px;
+        }
+
+        .btn-danger:hover {
+          transform: translateY(-1px);
+        }
+      `}</style>
+    </div>
+  )
+}
+
+function TransferBankBNI(props) {
+  return (
+    <div>
+      <div className="payment-details">
+        <div className="list-item">
+          <span className="left">Bank name</span>
+          <span className="right">BNI</span>
+        </div>
+
+        <div className="list-item">
+          <span className="left">Account Name</span>
+          <span className="right">Pelita Transfer Nusantara</span>
+        </div>
+
+        <div className="list-item">
+          <span className="left">Account number</span>
+          <span className="right">07 5555 4711</span>
+        </div>
+      </div>
+
+      <p>Please check all of the details above are correct to speed up the process.
+      We also email you the instruction. We will notify you via email once your payment has been confirmed.</p>
+
+      <span className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_bni')}>Continue</span>
       <style jsx>{`
         .list-item {
           display: flex;
@@ -237,11 +330,13 @@ class Pay extends React.Component {
     super(props);
     this.state = {
       isVAgenerated: false,
-      isTransfer: false
+      isTransferBCA: false,
+      isTransferBNI: false
     };
 
     this.generateVA = this.generateVA.bind(this);
-    this.transferBank = this.transferBank.bind(this);
+    this.transferBankBNI = this.transferBankBNI.bind(this);
+    this.transferBankBCA = this.transferBankBCA.bind(this);
     this.addOrder = this.addOrder.bind(this);
   }
 
@@ -250,9 +345,15 @@ class Pay extends React.Component {
     this.props.generateVA(bankName);
   }
 
-  transferBank(bankName) {
+  transferBankBCA(bankName) {
     this.setState({
-      isTransfer: true
+      isTransferBCA: true
+    })
+  }
+
+  transferBankBNI(bankName) {
+    this.setState({
+      isTransferBNI: true
     })
   }
 
@@ -278,16 +379,18 @@ class Pay extends React.Component {
       if (this.state.isVAgenerated) {
         content = <VAGenerated vaNumber={this.props.data.vaNumber} addOrder={this.addOrder}/>;
       } else {
-        if(this.state.isTransfer) {
-          content = <TransferBank addOrder={this.addOrder}/>;
+        if(this.state.isTransferBCA) {
+          content = <TransferBankBCA addOrder={this.addOrder}/>;
+        } else if(this.state.isTransferBNI) {
+          content = <TransferBankBNI addOrder={this.addOrder}/>;
         } else {
-          content = <BankOption generateVA={this.generateVA} transferBank={this.transferBank} />
+          content = <BankOption generateVA={this.generateVA} transferBankBNI={this.transferBankBNI} transferBankBCA={this.transferBankBCA} />
         }
       }
     }
     return (
       <div>
-        <h1>Payment</h1>
+        <h1 style={{textAlign: "center"}}>Payment</h1>
         <form className="form-container">
           <p className="instruction">Payment amount</p>
           <h2><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value={this.props.data.fromAmount} /> {this.props.data.fromCurrency.toUpperCase()}</h2>
@@ -300,127 +403,6 @@ class Pay extends React.Component {
 
           .div-hide {
             display: none;
-          }
-
-          .container-fluid {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            align-items: center;
-          }
-
-          .logo img {
-            height: 28px;
-            margin: 50px auto;
-          }
-
-          p {
-            max-width: 500px;
-          }
-
-          h1 {
-            margin: 0;
-            text-align: center;
-          }
-
-          li {
-            font-family: "Campton-Book", sans-serif;
-          }
-
-          .form-container {
-            width: 500px;
-            height: auto;
-            padding: 30px;
-            margin: 30px auto;
-            background: #FFFFFF;
-            box-shadow: 0 10px 30px 0 rgba(0,0,0,0.10);
-            border-radius: 8px;
-          }
-
-          // Progress Bar
-          .header-progress-container {
-            width: 550px;
-            padding: 30px 10px 0;
-            margin: 50px auto;
-          }
-
-          .header-progress-list {
-            margin: 0;
-            padding: 0;
-            list-style-type: none;
-          }
-
-          .header-progress-item {
-            position: relative;
-            display: inline-block;
-            width: 135px;
-            text-align: center;
-            line-height: 3em;
-          }
-            //Lines
-          .header-progress-item:after {
-            position: absolute;
-            display: block;
-            z-index: 1;
-            top: -2px;
-            left: -65px;
-            height: 2px;
-            width: 135px;
-            content: "";
-            background-color: #469DDD;
-          }
-
-          // Bullets/Balls
-          .header-progress-item:before {
-            position: absolute;
-            z-index: 2;
-            top: -6px;
-            left: 65px;
-            height: 10px;
-            width: 10px;
-            border-radius: 1.2em;
-            border: none;
-            line-height: 1.2em;
-            content: " ";
-            background-color: #469DDD;
-          }
-
-          .header-progress-item:first-child:after {
-            display: none;
-          }
-
-          .header-progress-item.done {
-            color: #469DDD;
-          }
-
-          .header-progress-item.todo {
-            color: #DDDADD;
-          }
-
-          //Lines
-          .header-progress-item.todo:after {
-            background: #F1F1F1;
-          }
-
-          // Bullets/Balls
-          .header-progress-item.todo:before {
-            background-color: #DADADA;
-          }
-
-          .btn-primary {
-            width: 100%;
-            padding: 15px 0;
-            margin-top: 30px;
-          }
-
-          .form-container {
-            width: 400px;
-            height: auto;
-            padding: 30px;
-            margin: 30px auto;
-            background: #FFFFFF;
-            box-shadow: 0 10px 30px 0 rgba(0,0,0,0.10);
-            border-radius: 8px;
           }
 
           .list-item {

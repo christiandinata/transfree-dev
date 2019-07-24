@@ -4,10 +4,6 @@ const IndexLayout = () => {
     <div className="content">
       <h1>Admin dashboard</h1>
       <p>Admin dashboard menu goes here</p>
-
-      <Link href="/order">
-        <a className="btn-primary">Send money now</a>
-      </Link>
       <style jsx>{`
         .logo {
           width: 100%;

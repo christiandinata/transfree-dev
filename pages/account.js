@@ -137,13 +137,13 @@ class OrderItem extends React.Component {
 
             <div className={'detail '+ (this.state.key == key ? 'open' : '')}>
             <ul className="progress">
-              <li><div className="node blue"></div><p>You created a transfer on {moment(order.createdAt).format("DD MMM YYYY H:mm")}</p></li>
+              <li><div className="node blue"></div><p>Created on {moment(order.createdAt).format("DD/MM/YYYY HH:mm")}</p></li>
               <li><div className={'divider '+ (order.receivedAt == 0.0 ? 'grey' : 'blue')}></div></li>
-              <li><div className={'node '+ (order.receivedAt == 0.0 ? 'grey' : 'blue')}></div><p>{order.receivedAt == 0.0 ? ('We are waiting your '+order.fromCurrency.toUpperCase()+' transfer') :  ('We received your '+order.fromCurrency.toUpperCase()+' on '+moment(order.receivedAt).format("DD MMM YYYY H:mm"))}  </p></li>
+              <li><div className={'node '+ (order.receivedAt == 0.0 ? 'grey' : 'blue')}></div><p>{order.receivedAt == 0.0 ? ('We are waiting your '+order.fromCurrency.toUpperCase()+' transfer') :  ('Received on '+order.fromCurrency.toUpperCase()+' on '+moment(order.receivedAt).format("DD/MM/YYYY HH:mm"))}  </p></li>
               <li><div className={'divider '+ (order.transferredAt == 0.0 ? 'grey' : 'blue')}></div></li>
-              <li><div className={'node '+ (order.transferredAt == 0.0 ? 'grey' : 'blue')}></div><p>{order.transferredAt == 0.0 ? ('We will transfer your '+order.toCurrency.toUpperCase()) :  ('We transferred your '+order.toCurrency.toUpperCase()+' on '+moment(order.transferredAt).format("DD MMM YYYY H:mm"))}</p></li>
+              <li><div className={'node '+ (order.transferredAt == 0.0 ? 'grey' : 'blue')}></div><p>{order.transferredAt == 0.0 ? ('We will transfer your '+order.toCurrency.toUpperCase()) :  ('Transferred on '+order.toCurrency.toUpperCase()+' on '+moment(order.transferredAt).format("DD/MM/YYYY HH:mm"))}</p></li>
               <li><div className={'divider '+ (order.completedAt == 0.0 ? 'grey' : 'blue')}></div></li>
-              <li><div className={'node '+ (order.completedAt == 0.0 ? 'grey' : 'blue')}></div><p>{order.completedAt == 0.0 ? ('We will complete your transfer') :  ('Your transfer is completed on '+moment(order.completedAt).format("DD MMM YYYY H:mm"))}</p></li>
+              <li><div className={'node '+ (order.completedAt == 0.0 ? 'grey' : 'blue')}></div><p>{order.completedAt == 0.0 ? ('We will complete your transfer') :  ('Completed on '+moment(order.completedAt).format("DD/MM/YYYY HH:mm"))}</p></li>
             </ul>
             </div>
             <style jsx>{`
@@ -282,6 +282,12 @@ class OrderItem extends React.Component {
               ::placeholder {
                 color: #CACACA;
               }
+
+              @media only screen and (max-width: 411px) {
+                .progress {
+                  margin: 30px 0;
+                }
+              }
             `}</style>
           </div>
         )
@@ -303,10 +309,10 @@ const OrderLayout = ({ordersList}) => {
         </div>
         <form className="form-container">
           <OrderItem ordersList={ordersList} />
-          <Link href="#">
-            <a className="btn-tertiary">Load more</a>
-          </Link>
         </form>
+        <Link href="/order">
+          <a className="btn-primary">Send money</a>
+        </Link>
       </div>
       <style jsx>{`
         .container-fixed {
@@ -378,6 +384,22 @@ const OrderLayout = ({ordersList}) => {
           margin: 20px auto;
         }
 
+        @media only screen and (max-width: 411px) {
+          .container-fixed {
+            max-width: 355px;
+          }
+
+          .form-container {
+            width: 345px;
+            padding: 0;
+          }
+          .list-header {
+            flex-direction: column;
+          }
+          .list-header .right {
+            display: none;
+          }
+        }
       `}</style>
     </div>
   )

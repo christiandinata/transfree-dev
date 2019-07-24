@@ -494,7 +494,7 @@ class Index extends React.Component {
           }
 
           h1 {
-            font-size: 42px;
+            font-size: 2rem;
           }
 
           .benefits {
@@ -842,6 +842,16 @@ class Index extends React.Component {
             display: flex;
             align-items: center;
             margin: 0;
+          }
+
+          hr {
+            border-color: 1px solid #eaeaea;
+          }
+
+          @media only screen and (max-width: 411px) {
+            .left-container {
+              margin-top: 40px;
+            }
           }
 
         `}</style>

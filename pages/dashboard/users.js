@@ -25,6 +25,7 @@ class UserItem extends React.Component {
         <div className="container-item container-header">
           <div className="fullname">Name</div>
           <div className="email">Email</div>
+          <div className="dob">Gender</div>
           <div className="dob">Date of Birth</div>
           <div className="idType">ID Type</div>
           <div className="idNumber">ID Number</div>
@@ -37,7 +38,8 @@ class UserItem extends React.Component {
           <div key={key} className="container-item">
             <div className="fullname">{user.fullname}</div>
             <div className="email">{user.email}</div>
-            <div className="dob">{moment(user.dob).format("DD MMM YYYY")}</div>
+            <div className="idNumber">{user.gender}</div>
+            <div className="dob">{user.pob}, {moment(user.dob).format("DD MMM YYYY")}</div>
             <div className="idType">{user.idType}</div>
             <div className="idNumber">{user.idNumber}</div>
             <div className="photoId">

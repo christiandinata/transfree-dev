@@ -7,6 +7,7 @@ import initialize from '../utils/initialize';
 import actions from '../redux/actions';
 import { getCookie } from '../utils/cookie';
 import PhoneInput from 'react-phone-number-input';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Phone extends React.Component {
   constructor({ props }) {
@@ -44,7 +45,9 @@ class Phone extends React.Component {
     return (
       <div>
         <Header />
-        <Menu />
+        <div className="logo">
+          <img src="../static/images/transfree-logo.png"/>
+        </div>
         <div className="container-fluid">
           <h1>Phone verification</h1>
           <p>We need to verify your mobile phone number. This number will be used to send important updates.</p>
@@ -59,80 +62,12 @@ class Phone extends React.Component {
               value={ this.state.phone }
               onChange={ phone => this.setState({ phone }) }/>
 
-            <button type="submit" className="btn-primary">Continue</button>
+            <button type="submit" className="btn-primary">{this.props.inProgress ? (
+              <FontAwesomeIcon icon="sync-alt" spin/>
+            ) : 'Continue'}</button>
 
           </form>
         </div>
-        <style jsx>{`
-          .container-fluid {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            align-items: center;
-          }
-
-          p {
-            max-width: 500px;
-            text-align: center;
-          }
-
-          h1 {
-            margin: 100px auto 0;
-          }
-
-          .form-container {
-            width: 400px;
-            height: auto;
-            padding: 30px;
-            margin: 30px auto;
-            background: #FFFFFF;
-            box-shadow: 0 10px 30px 0 rgba(0,0,0,0.10);
-            border-radius: 8px;
-          }
-
-          .form-container label {
-            font-size: 14px;
-            text-transform: uppercase;
-          }
-
-          .form-container input {
-            width: 100%;
-            margin-bottom: 30px;
-            border: none;
-            font-size: 16px;
-            padding: 15px 0;
-            border-bottom: 1px solid #eaeaea;
-
-          }
-
-          .form-container input:focus {
-            outline: none;
-            border-bottom: 1px solid #469DDD;
-          }
-
-          ::placeholder {
-            color: #CACACA;
-          }
-
-          .btn-primary {
-            width: 100%;
-            padding: 15px 0;
-          }
-
-          .error-container {
-            width: 400px;
-            height: auto;
-            padding: 20px;
-            background-color: #FF3A43;
-            color: #FFF;
-            border-radius: 8px;
-            display: none;
-          }
-
-          .error-show {
-            display: block;
-          }
-        `}</style>
       </div>
     )
   }
@@ -143,7 +78,9 @@ const mapStateToProps = (state) => {
   return {
     email: userData.email,
     isAuthenticated: !!state.authentication.token,
-    errorMessage: state.verify.errorMessage,
+    inProgress: state.verify.inProgress,
+    errorMessage: state.verify.errorMessage
+
   }
 };
 

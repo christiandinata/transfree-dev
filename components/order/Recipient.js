@@ -40,7 +40,7 @@ class Recipient extends React.Component {
   componentDidMount() {
     this.setState({toCurrency: this.props.data.toCurrency});
   }
-  
+
   saveAndContinue = (e) => {
     e.preventDefault();
     var data = {
@@ -59,10 +59,10 @@ class Recipient extends React.Component {
       return;
     }
 
-    if (this.email.current.value == '') {
-      this.setState({isEmailValid: false});
-      return;
-    }
+    // if (this.email.current.value == '') {
+    //   this.setState({isEmailValid: false});
+    //   return;
+    // }
 
     if (this.bankName.current.value == '') {
       this.setState({isBankNameValid: false});
@@ -204,12 +204,21 @@ class Recipient extends React.Component {
           <input
             type="email"
             id="email"
-            className={this.state.isEmailValid ? '' : 'error'}
             placeholder="name@example.com"
             ref={this.email}
-            defaultValue={this.props.data.email}
-            onBlur={this.checkEmail}/>
+            defaultValue={this.props.data.email}/>
           <span className={this.state.isEmailValid ? 'error-label-hidden' : 'error-label'}>Email address is not valid.</span>
+          {
+          // <input
+          //   type="email"
+          //   id="email"
+          //   className={this.state.isEmailValid ? '' : 'error'}
+          //   placeholder="name@example.com"
+          //   ref={this.email}
+          //   defaultValue={this.props.data.email}
+          //   onBlur={this.checkEmail}/>
+          // <span className={this.state.isEmailValid ? 'error-label-hidden' : 'error-label'}>Email address is not valid.</span>
+          }
 
           <label htmlFor="bank">Recipient's Bank Name</label><br/>
           <input
@@ -312,97 +321,8 @@ class Recipient extends React.Component {
             display: none;
           }
 
-          p {
-            max-width: 500px;
-          }
-
           h1 {
-            margin: 0;
-            text-align: center;
-          }
-
-          li {
-            font-family: "Campton-Book", sans-serif;
-          }
-
-          .form-container {
-            width: 500px;
-            height: auto;
-            padding: 30px;
-            margin: 30px auto;
-            background: #FFFFFF;
-            box-shadow: 0 10px 30px 0 rgba(0,0,0,0.10);
-            border-radius: 8px;
-          }
-
-          // Progress Bar
-          .header-progress-container {
-            width: 550px;
-            padding: 30px 10px 0;
-            margin: 50px auto;
-          }
-
-          .header-progress-list {
-            margin: 0;
-            padding: 0;
-            list-style-type: none;
-          }
-
-          .header-progress-item {
-            position: relative;
-            display: inline-block;
-            width: 135px;
-            text-align: center;
-            line-height: 3em;
-          }
-            //Lines
-          .header-progress-item:after {
-            position: absolute;
-            display: block;
-            z-index: 1;
-            top: -2px;
-            left: -65px;
-            height: 2px;
-            width: 135px;
-            content: "";
-            background-color: #469DDD;
-          }
-
-          // Bullets/Balls
-          .header-progress-item:before {
-            position: absolute;
-            z-index: 2;
-            top: -6px;
-            left: 65px;
-            height: 10px;
-            width: 10px;
-            border-radius: 1.2em;
-            border: none;
-            line-height: 1.2em;
-            content: " ";
-            background-color: #469DDD;
-          }
-
-          .header-progress-item:first-child:after {
-            display: none;
-          }
-
-          .header-progress-item.done {
-            color: #469DDD;
-          }
-
-          .header-progress-item.todo {
-            color: #DDDADD;
-          }
-
-          //Lines
-          .header-progress-item.todo:after {
-            background: #F1F1F1;
-          }
-
-          // Bullets/Balls
-          .header-progress-item.todo:before {
-            background-color: #DADADA;
+            text-align:center;
           }
 
           .error-label {

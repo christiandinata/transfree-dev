@@ -2,7 +2,9 @@ import Router from 'next/router';
 import axios from 'axios';
 import {
   REGISTER,
+  REGISTER_PROGRESS,
   AUTHENTICATE,
+  AUTHENTICATE_PROGRESS,
   AUTHENTICATE_ERROR,
   DEAUTHENTICATE,
   USER_DATA,
@@ -16,13 +18,14 @@ const register = ({ fullname, email, password }, type) => {
     throw new Error('Wrong API call!');
   }
   return (dispatch) => {
+    dispatch({type: REGISTER_PROGRESS, payload: true});
     axios.post(`${API}/${type}`, {fullname, email, password})
       .then((response) => {
         setCookie('token', response.data.token);
         const userData = JSON.parse(response.data.user_data);
         setCookie('_id', userData._id)
         if (userData.role == 'admin') {
-          Router.push('/dashboard/home')
+          Router.push('/dashboard/users')
         } else {
           Router.push('/phone');
         }
@@ -57,13 +60,14 @@ const authenticate = ({ email, password }, type) => {
     throw new Error('Wrong API call!');
   }
   return (dispatch) => {
+    dispatch({type: AUTHENTICATE_PROGRESS, payload: true});
     axios.post(`${API}/${type}`, { email, password })
       .then((response) => {
         setCookie('token', response.data.token);
         const userData = JSON.parse(response.data.user_data);
         setCookie('_id', userData._id)
         if (userData.role == 'admin') {
-          Router.push('/dashboard/home')
+          Router.push('/dashboard/users')
         } else {
           if (userData.isApproved) {
             Router.push('/account');
