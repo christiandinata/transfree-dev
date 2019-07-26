@@ -117,6 +117,11 @@ app.prepare()
       }
     });
 
+    server.get('/reset_password', (req, res) => {
+      return app.render(req, res, '/reset_password', req.query.token);
+    });
+
+
     server.get('*', (req, res) => {
       return handle(req, res);
     });

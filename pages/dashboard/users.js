@@ -23,37 +23,37 @@ class UserItem extends React.Component {
     return (
       <div>
         <div className="container-item container-header">
-          <div className="fullname">Name</div>
-          <div className="email">Email</div>
-          <div className="dob">Gender</div>
-          <div className="dob">Date of Birth</div>
-          <div className="idType">ID Type</div>
-          <div className="idNumber">ID Number</div>
-          <div className="photoId">Photo of ID</div>
-          <div className="photoFace">Photo of Face</div>
-          <div className="action">Status</div>
+          <div className="column">Name</div>
+          <div className="column">Email</div>
+          <div className="column">Gender</div>
+          <div className="column">Date of Birth</div>
+          <div className="column">ID Type</div>
+          <div className="column">ID Number</div>
+          <div className="column">Photo of ID</div>
+          <div className="column">Photo of Face</div>
+          <div className="column">Status</div>
         </div>
       {this.props.users.map((user, key) => {
         return (
           <div key={key} className="container-item">
-            <div className="fullname">{user.fullname}</div>
-            <div className="email">{user.email}</div>
-            <div className="idNumber">{user.gender}</div>
-            <div className="dob">{user.pob}, {moment(user.dob).format("DD MMM YYYY")}</div>
-            <div className="idType">{user.idType}</div>
-            <div className="idNumber">{user.idNumber}</div>
-            <div className="photoId">
+            <div className="column">{user.fullname}</div>
+            <div className="column">{user.email}</div>
+            <div className="column">{user.gender}</div>
+            <div className="column">{user.pob}, {moment(user.dob).format("DD MMM YYYY")}</div>
+            <div className="column">{user.idType}</div>
+            <div className="column">{user.idNumber}</div>
+            <div className="column">
               <a href={"#photoId"+key}><img src={user.photoId} className="thumbnail"/></a>
               <a href="#_" className="lightbox" id={"photoId"+key}><img src={user.photoId}/></a>
             </div>
-            <div className="photoFace">
+            <div className="column">
               <a href={"#photoFace"+key}><img src={user.photoFace} className="thumbnail"/></a>
               <a href="#_" className="lightbox" id={"photoFace"+key}><img src={user.photoFace}/></a>
             </div>
-            <div className="action">
+            <div className="column action">
               {user.isApproved ?
-                (<span className="status approved">approved</span>) :
-                (<div><span className="status pending">pending</span><span onClick={() => this.approve(user._id )} className="btn-primary btn-small">Approve</span></div>)}
+                (<div className="status approved">approved</div>) :
+                (<div><div className="status pending">pending</div><div onClick={() => this.approve(user._id )} className="btn-primary btn-small">Approve</div></div>)}
             </div>
           </div>
         )
@@ -61,9 +61,9 @@ class UserItem extends React.Component {
       })}
       <style jsx>{`
         .container-item {
+          width; 100%;
           display: flex;
           border-bottom: 1px solid #eaeaea;
-          padding: 10px;
           text-align: left;
           font-size: 14px;
         }
@@ -76,21 +76,20 @@ class UserItem extends React.Component {
           border-radius: 4px 4px 0 0;
         }
 
-        .fullname,
-        .email,
-        .dob,
-        .idType,
-        .idNumber,
-        .photoId,
-        .photoFace,
-        .action {
-          width: 160px;
+        .column {
+          flex: 1;
           overflow-wrap: break-word;
+          margin: 10px;
         }
 
         .thumbnail {
           max-width: 40%;
           margin: 0 auto;
+        }
+
+        .action {
+          display: flex;
+          flex-direction: column;
         }
 
         /** LIGHTBOX MARKUP **/
@@ -139,7 +138,7 @@ class UserItem extends React.Component {
         }
 
         .btn-small {
-          margin-left: 20px;
+          width: auto;
           padding: 8px;
           font-size: 12px;
         }
@@ -189,6 +188,10 @@ class Users extends React.Component {
           </div>
         </div>
         <style jsx>{`
+          .container-fluid {
+            align-items: flex-start;
+            height; auto;
+          }
           .container-fixed {
             max-width: 1280px;
             margin: 50px auto;

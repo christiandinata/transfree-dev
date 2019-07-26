@@ -139,9 +139,9 @@ class OrderItem extends React.Component {
             <ul className="progress">
               <li><div className="node blue"></div><p>Created on {moment(order.createdAt).format("DD/MM/YYYY HH:mm")}</p></li>
               <li><div className={'divider '+ (order.receivedAt == 0.0 ? 'grey' : 'blue')}></div></li>
-              <li><div className={'node '+ (order.receivedAt == 0.0 ? 'grey' : 'blue')}></div><p>{order.receivedAt == 0.0 ? ('We are waiting your '+order.fromCurrency.toUpperCase()+' transfer') :  ('Received on '+order.fromCurrency.toUpperCase()+' on '+moment(order.receivedAt).format("DD/MM/YYYY HH:mm"))}  </p></li>
+              <li><div className={'node '+ (order.receivedAt == 0.0 ? 'grey' : 'blue')}></div><p>{order.receivedAt == 0.0 ? ('We are waiting your '+order.fromCurrency.toUpperCase()+' transfer') :  ('Received on '+moment(order.receivedAt).format("DD/MM/YYYY HH:mm"))}  </p></li>
               <li><div className={'divider '+ (order.transferredAt == 0.0 ? 'grey' : 'blue')}></div></li>
-              <li><div className={'node '+ (order.transferredAt == 0.0 ? 'grey' : 'blue')}></div><p>{order.transferredAt == 0.0 ? ('We will transfer your '+order.toCurrency.toUpperCase()) :  ('Transferred on '+order.toCurrency.toUpperCase()+' on '+moment(order.transferredAt).format("DD/MM/YYYY HH:mm"))}</p></li>
+              <li><div className={'node '+ (order.transferredAt == 0.0 ? 'grey' : 'blue')}></div><p>{order.transferredAt == 0.0 ? ('We will transfer your '+order.toCurrency.toUpperCase()) :  ('Transferred on '+moment(order.transferredAt).format("DD/MM/YYYY HH:mm"))}</p></li>
               <li><div className={'divider '+ (order.completedAt == 0.0 ? 'grey' : 'blue')}></div></li>
               <li><div className={'node '+ (order.completedAt == 0.0 ? 'grey' : 'blue')}></div><p>{order.completedAt == 0.0 ? ('We will complete your transfer') :  ('Completed on '+moment(order.completedAt).format("DD/MM/YYYY HH:mm"))}</p></li>
             </ul>
@@ -283,7 +283,7 @@ class OrderItem extends React.Component {
                 color: #CACACA;
               }
 
-              @media only screen and (max-width: 411px) {
+              @media only screen and (max-width: 414px) {
                 .progress {
                   margin: 30px 0;
                 }
@@ -384,7 +384,7 @@ const OrderLayout = ({ordersList}) => {
           margin: 20px auto;
         }
 
-        @media only screen and (max-width: 411px) {
+        @media only screen and (max-width: 414px) {
           .container-fixed {
             max-width: 355px;
           }

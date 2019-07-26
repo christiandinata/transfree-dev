@@ -45,10 +45,10 @@ class Phone extends React.Component {
     return (
       <div>
         <Header />
-        <div className="logo">
-          <img src="../static/images/transfree-logo.png"/>
-        </div>
         <div className="container-fluid">
+          <div className="logo">
+            <img src="../static/images/transfree-logo.png"/>
+          </div>
           <h1>Phone verification</h1>
           <p>We need to verify your mobile phone number. This number will be used to send important updates.</p>
           <div className={"error-container "+(this.props.errorMessage != '' && this.props.errorMessage != undefined ? "error-show" : "") }>
@@ -68,6 +68,11 @@ class Phone extends React.Component {
 
           </form>
         </div>
+        <style jsx>{`
+          .container-fluid {
+            flex-direction: column;
+          }
+          `}</style>
       </div>
     )
   }

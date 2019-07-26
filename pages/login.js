@@ -30,7 +30,7 @@ class Login extends React.Component {
     return (
       <AuthLayout>
         <div className="logo">
-          <img src="../static/images/transfree-logo.png"/>
+          <Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>
         </div>
         <h1>Log in</h1>
         <div className={"error-container "+(this.props.errorMessage != '' && this.props.errorMessage != undefined ? "error-show" : "") }>
@@ -63,6 +63,7 @@ class Login extends React.Component {
           ) : 'Log in'}</button>
 
         </form>
+        <p><Link href="/forgot"><a className="link">Forgot password?</a></Link></p>
         <p>Don't have an account? <Link href="/signup"><a className="link">Sign up</a></Link></p>
       </AuthLayout>
     )

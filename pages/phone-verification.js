@@ -41,10 +41,10 @@ class PhoneVerification extends React.Component {
     return (
       <div>
         <Header />
-        <div className="logo">
-          <img src="../static/images/transfree-logo.png"/>
-        </div>
         <div className="container-fluid">
+          <div className="logo">
+            <img src="../static/images/transfree-logo.png"/>
+          </div>
           <h1>Phone verification</h1>
           <p>Enter 6 digits verification code that we sent to your number {this.props.phone}.</p>
           <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
@@ -64,6 +64,12 @@ class PhoneVerification extends React.Component {
           }
           <p>Wrong phone number? <Link href="/phone"><a className="link">Enter again.</a></Link></p>
         </div>
+        <style jsx>{`
+          .container-fluid {
+            flex-direction: column;
+          }
+          `}
+        </style>
       </div>
     )
   }

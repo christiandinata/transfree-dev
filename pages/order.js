@@ -211,7 +211,7 @@ class Order extends React.Component {
           }
 
           .header-progress-list {
-            margin: 0;
+            margin: 0 auto;
             padding: 0;
             list-style-type: none;
           }
@@ -276,10 +276,11 @@ class Order extends React.Component {
             background-color: #DADADA;
           }
 
-          @media only screen and (max-width: 375px) {
+          @media only screen and (max-width: 414px) {
             .header-progress-container {
-              width: 375px;
+              width: 414px;
               font-size: 12px;
+              margin: 20px 0 10px;
             }
             .header-progress-item {
               width: 80px;

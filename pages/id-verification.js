@@ -55,10 +55,10 @@ class IdVerification extends React.Component {
     return (
       <div>
         <Header />
-        <div className="logo">
-          <img src="../static/images/transfree-logo.png"/>
-        </div>
         <div className="container-fluid">
+          <div className="logo">
+            <img src="../static/images/transfree-logo.png"/>
+          </div>
           <h1>ID verification</h1>
           <p>According to the regulation from Bank Indonesia, we have to verify your identity. Please provide your identity details below.</p>
           <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
@@ -139,6 +139,9 @@ class IdVerification extends React.Component {
           </form>
         </div>
         <style jsx>{`
+          .container-fluid {
+            flex-direction: column;
+          }
           .select-css {
             width: 100%;
             margin-bottom: 30px;

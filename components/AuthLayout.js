@@ -6,9 +6,6 @@ const AuthLayout = ({ children }) => (
     <Header />
     <div className="container-fluid">
       <div className="left">
-        <Link href="/">
-          <a><img src="../static/images/transfree-logo.png"/></a>
-        </Link>
       </div>
       <div className="right">
         {children}
@@ -29,6 +26,7 @@ const AuthLayout = ({ children }) => (
         background-image: url('../static/images/people.jpg');
         background-size: cover;
         text-align: center;
+        height: 100vh;
       }
 
       .left img {
@@ -43,7 +41,7 @@ const AuthLayout = ({ children }) => (
         align-items: center;
       }
 
-      @media only screen and (max-width: 411px) {
+      @media only screen and (max-width: 414px) {
         .left {
           display: none;
         }

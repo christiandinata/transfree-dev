@@ -8,6 +8,10 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
   <div className="row">
     <div className="container">
       <div id="menuToggle">
+        <div className="main-cta">
+          {!isAuthenticated && <Link href="/login"><a className="btn-secondary">Log in</a></Link>}
+          {isAuthenticated && <li><Link href="/logout"><a>Logout</a></Link></li>}
+        </div>
         <input type="checkbox" />
 
         <span></span>
@@ -15,15 +19,15 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
         <span></span>
 
         <ul id="menu">
-        {!isAuthenticated && <li><Link href="/about"><a>About</a></Link></li>}
-        {!isAuthenticated && <li><Link href="/faq"><a>FAQ</a></Link></li>}
-        {/* !isAuthenticated && <li><Link href="/"><a>How it works</a></Link></li> */}
-        {isAuthenticated && isApproved && <li><Link href="/order"><a>Send money</a></Link></li>}
-        {isAuthenticated && isApproved && <li><Link href="/account"><a>Transactions</a></Link></li>}
-        <hr/>
-        {!isAuthenticated && <li><Link href="/login"><a>Log in</a></Link></li>}
-        {!isAuthenticated && <li><Link href="/signup"><a>Signup</a></Link></li>}
-        {isAuthenticated && <li><Link href="/logout"><a>Logout</a></Link></li>}
+          {!isAuthenticated && <li><Link href="/about"><a>About</a></Link></li>}
+          {!isAuthenticated && <li><Link href="/faq"><a>FAQ</a></Link></li>}
+          {/* !isAuthenticated && <li><Link href="/"><a>How it works</a></Link></li> */}
+          {isAuthenticated && isApproved && <li><Link href="/order"><a>Send money</a></Link></li>}
+          {isAuthenticated && isApproved && <li><Link href="/account"><a>Transactions</a></Link></li>}
+          <hr/>
+          {!isAuthenticated && <li><Link href="/login"><a>Log in</a></Link></li>}
+          {!isAuthenticated && <li><Link href="/signup"><a>Signup</a></Link></li>}
+          {isAuthenticated && <li><Link href="/logout"><a>Logout</a></Link></li>}
         </ul>
       </div>
       <div className="header-container">
@@ -73,13 +77,18 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
         .header-menu {
           display: flex;
           justify-content: center;
-          flex-grow: 8;
+          flex-grow: 1;
         }
 
         .header-cta {
           display: flex;
           justify-content: flex-end;
           flex-grow: 1;
+        }
+
+        .btn-primary {
+          width: auto;
+          padding: 10px 20px;
         }
 
         ul {
@@ -95,6 +104,10 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
 
         .header-cta a {
           margin: 0 5px;
+        }
+
+        hr {
+          border: 1px solid #eaeaea;
         }
 
         // MENU Start
@@ -226,8 +239,18 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
         {
           transform: none;
         }
+
+        #menuToggle .main-cta {
+          position: absolute;
+          right: 0;
+        }
+
+        #menuToggle {
+          padding-bottom: 30px;
+          border-bottom: 1px solid #eaeaea;
+        }
         // MENU End
-        @media only screen and (max-width: 411px) {
+        @media only screen and (max-width: 414px) {
           #menuToggle {
             display: block;
           }
@@ -239,6 +262,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           }
           #menu {
             height: 100vh;
+            width: 100%;
             background-color: #F6F8FB;
           }
           .row {
@@ -246,7 +270,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           }
           #menuToggle {
             top: 20px;
-            left: 20px;
+            left: 0;
           }
         }
 

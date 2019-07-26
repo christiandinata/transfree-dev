@@ -27,6 +27,7 @@ class OrderItem extends React.Component {
           <div className="column currency">From</div>
           <div className="column currency">To</div>
           <div className="column currency">Payment Method</div>
+          <div className="column">Action</div>
         </div>
       {this.props.orders.map((order, key) => {
         return (
@@ -34,9 +35,17 @@ class OrderItem extends React.Component {
             <div className="column">{moment(order.createdAt).format("DD MMM YYYY, HH:mm")}</div>
             <div className="column">{order.senderEmail}</div>
             <div className="column">{order.senderPhone}</div>
-            <div className="column currency"><NumberFormat value={order.fromAmount} displayType={'text'} thousandSeparator={true} decimalScale={2}/> {order.fromCurrency.toUpperCase()}</div>
+            <div className="column currency"><strong><NumberFormat value={order.fromAmount} displayType={'text'} thousandSeparator={true} decimalScale={2}/> {order.fromCurrency.toUpperCase()}</strong></div>
             <div className="column currency"><NumberFormat value={order.toAmount} displayType={'text'} thousandSeparator={true} decimalScale={2}/> {order.toCurrency.toUpperCase()}</div>
-            <div className="column">{order.paymentMethod}</div>
+            <div className="column payment">
+              {order.paymentMethod == 'direct_transfer_via_bni' ? (<img src="../static/images/bank_logos/bni.png"/>) : null}
+              {order.paymentMethod == 'direct_transfer_via_bca' ? (<img src="../static/images/bank_logos/bca.png"/>) : null}
+            </div>
+            <div className="column">
+              {order.completedAt > 0 ? (<div className="status approved">completed</div>) : null}
+              {order.receivedAt == 0 ? (<div onClick={() => this.props.paymentReceived(order._id )} className="btn-primary btn-small">Payment Received</div>) : null}
+              {order.completedAt == 0 ? (<div onClick={() => this.props.transferCompleted(order._id )} className="btn-primary btn-small">Transfer Completed</div>) : null}
+            </div>
           </div>
         )
 
@@ -61,7 +70,13 @@ class OrderItem extends React.Component {
 
         .column {
           width: 160px;
+          padding: 10px;
           overflow-wrap: break-word;
+        }
+
+        .column img {
+          margin: 0 auto;
+          height: 30px;
         }
 
         .thumbnail {
@@ -83,7 +98,7 @@ class OrderItem extends React.Component {
         }
 
         .btn-small {
-          margin-left: 20px;
+          margin-bottom: 20px;
           padding: 8px;
           font-size: 12px;
         }
@@ -107,12 +122,23 @@ class Orders extends React.Component {
   constructor(props) {
     super(props);
 
+    this.paymentReceived = this.paymentReceived.bind(this);
+    this.transferCompleted = this.transferCompleted.bind(this);
   }
 
   static async getInitialProps(ctx) {
     initialize(ctx);
     await ctx.store.dispatch(actions.getAllOrders('getAllOrders'));
   };
+
+  paymentReceived(_id) {
+    console.log(_id);
+    this.props.paymentReceived({_id: _id}, 'paymentReceived');
+  }
+
+  transferCompleted(_id) {
+    this.props.transferCompleted({_id: _id}, 'transferCompleted');
+  }
 
   render() {
     return (
@@ -128,11 +154,15 @@ class Orders extends React.Component {
               </div>
             </div>
             <form className="form-container">
-              <OrderItem orders={this.props.orders}/>
+              <OrderItem orders={this.props.orders} paymentReceived={this.paymentReceived} transferCompleted={this.transferCompleted}/>
             </form>
           </div>
         </div>
         <style jsx>{`
+          .container-fluid {
+            align-items: flex-start;
+            height; auto;
+          }
           .container-fixed {
             max-width: 1280px;
             margin: 50px auto;

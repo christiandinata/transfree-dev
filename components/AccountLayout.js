@@ -9,6 +9,11 @@ const AccountLayout = ({children, isApproved}) => (
     <div className="container-fluid">
       {children}
     </div>
+    <style jsx>{`
+      .container-fluid {
+        flex-direction: column;
+      }
+      `}</style>
   </div>
 );
 
