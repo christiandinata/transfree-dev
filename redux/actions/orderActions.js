@@ -6,13 +6,13 @@ import {
 } from '../types';
 import { API } from '../../config';
 
-const addOrder = ({ uid, senderName, senderEmail, rate, fromCurrency, toCurrency, fromAmount, toAmount,
+const addOrder = ({ uid, senderName, senderEmail, senderPhone, rate, fromCurrency, toCurrency, fromAmount, toAmount,
   email, name, bankName, bankAccountNumber, accountNumber, sortcode, iban, swift, paymentMethod }, type) => {
   if (type !== 'addOrder') {
     throw new Error('Wrong API call!');
   }
   return (dispatch) => {
-    axios.post(`${API}/${type}`, {uid, senderName, senderEmail, rate, fromCurrency, toCurrency, fromAmount, toAmount,
+    axios.post(`${API}/${type}`, {uid, senderName, senderEmail, senderPhone, rate, fromCurrency, toCurrency, fromAmount, toAmount,
       email, name, bankName, bankAccountNumber, accountNumber, sortcode, iban, swift, paymentMethod})
       .then((response) => {
         dispatch({type: ORDER_DATA, payload: response.data.order_data});
@@ -68,9 +68,45 @@ const getAllOrders = (type) => {
   };
 };
 
+const paymentReceived = ({_id} , type) => {
+  if (type !== 'paymentReceived') {
+    throw new Error('Wrong API call!');
+  }
+  return async (dispatch) => {
+    await axios.post(`${API}/${type}`, {_id})
+      .then((response) => {
+        Router.push('/dashboard/orders');
+        console.log(response);
+        //dispatch({type: USER_DATA_ARRAY, payload: response.data.user_data_array});
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  };
+};
+
+const transferCompleted = ({_id} , type) => {
+  if (type !== 'transferCompleted') {
+    throw new Error('Wrong API call!');
+  }
+  return async (dispatch) => {
+    await axios.post(`${API}/${type}`, {_id})
+      .then((response) => {
+        Router.push('/dashboard/orders');
+        console.log(response);
+        //dispatch({type: USER_DATA_ARRAY, payload: response.data.user_data_array});
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  };
+};
+
 export default {
   addOrder,
   getOrderById,
   getOrderByUid,
-  getAllOrders
+  getAllOrders,
+  paymentReceived,
+  transferCompleted
 };

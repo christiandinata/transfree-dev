@@ -141,109 +141,233 @@ class OrderAmount extends React.Component {
           <div className="converter-container-order">
             <div className="row exchange-container">
               <div className="source-container">
-                <p style={{textAlign: "left"}}>You send</p>
-                <button className="currency-from dropdown-button" onClick={this.toggleSource}>
-                  <span className={'flag-icon flag-icon-'+this.state.fromCurrency.substring(0,2)+' flag-icon-squared'}></span> {this.state.fromCurrency}
-                  <FontAwesomeIcon className="caret" icon="caret-down"/>
-                </button>
-                <div className={this.state.isSourceActive ? 'dropdown-menu show' : 'dropdown-menu'}>
-                  <ul>
-                    <li onClick={this.selectSource.bind(this,'idr')}>
-                      <a className="dropdown-item">
-                        <span className="flag-icon flag-icon-id flag-icon-squared"></span> IDR
-                      </a>
-                    </li>
-                    <li onClick={this.selectSource.bind(this,'gbp')}>
-                      <a className="dropdown-item">
-                        <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP
-                      </a>
-                    </li>
-                    <li onClick={this.selectSource.bind(this,'usd')}>
-                      <a className="dropdown-item">
-                        <span className="flag-icon flag-icon-us flag-icon-squared"></span> USD
-                      </a>
-                    </li>
-                  </ul>
+                <div className="money-input-container">
+                  <div className="money-input">
+                    <span>You send</span>
+                    <NumberFormat
+                      id="money-from"
+                      type="text"
+                      thousandSeparator={true}
+                      decimalScale={2}
+                      value={this.state.fromAmount}
+                      onKeyUp={this.handleSourceChange}/>
+                  </div>
+                  <div className="currency-change">
+                    <button className="currency-from dropdown-button" onClick={this.toggleSource}>
+                      <span className={'flag-icon flag-icon-'+this.state.fromCurrency.substring(0,2)+' flag-icon-squared'}></span> {this.state.fromCurrency}
+                      <FontAwesomeIcon className="caret" icon="caret-down"/>
+                    </button>
+                    <div className={this.state.isSourceActive ? 'dropdown-menu show' : 'dropdown-menu'}>
+                      <ul>
+                        <li onClick={this.selectSource.bind(this,'idr')}>
+                          <a className="dropdown-item">
+                            <span className="flag-icon flag-icon-id flag-icon-squared"></span> IDR (Indonesian Rupiah)
+                          </a>
+                        </li>
+                        <li onClick={this.selectSource.bind(this,'gbp')}>
+                          <a className="dropdown-item">
+                            <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP (British Poundsterling)
+                          </a>
+                        </li>
+                        <li onClick={this.selectSource.bind(this,'usd')}>
+                          <a className="dropdown-item">
+                            <span className="flag-icon flag-icon-us flag-icon-squared"></span> USD (US Dollar)
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-                <NumberFormat
-                  id="money-from"
-                  type="text"
-                  thousandSeparator={true}
-                  decimalScale={2}
-                  value={this.state.fromAmount}
-                  onKeyUp={this.handleSourceChange}/>
+
+                {/* <input id="money-from" type="text" value={this.toCurrency(this.state.fromAmount)} onChange={this.handleSourceChange}/> */}
               </div>
               <div className="destination-container">
-                <p style={{textAlign: "left"}}>Recipient gets</p>
-                <button className="currency-from dropdown-button" onClick={this.toggleDestination}>
-                  <span className={'flag-icon flag-icon-'+this.state.toCurrency.substring(0,2)+' flag-icon-squared'}></span> {this.state.toCurrency}
-                  <FontAwesomeIcon className="caret" icon="caret-down"/>
-                </button>
-                <div className={this.state.isDestinationActive ? 'dropdown-menu show' : 'dropdown-menu'}>
-                  <ul>
-                    <li onClick={this.selectDestination.bind(this,'myr')}>
-                      <a className="dropdown-item">
-                        <span className="flag-icon flag-icon-my flag-icon-squared"></span> MYR
-                      </a>
-                    </li>
-                    <li onClick={this.selectDestination.bind(this,'krw')}>
-                      <a className="dropdown-item">
-                        <span className="flag-icon flag-icon-kr flag-icon-squared"></span> KRW
-                      </a>
-                    </li>
-                    <li onClick={this.selectDestination.bind(this,'gbp')}>
-                      <a className="dropdown-item">
-                        <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP
-                      </a>
-                    </li>
-                    <li onClick={this.selectDestination.bind(this,'usd')}>
-                      <a className="dropdown-item">
-                        <span className="flag-icon flag-icon-us flag-icon-squared"></span> USD
-                      </a>
-                    </li>
-                    <li onClick={this.selectDestination.bind(this,'eur')}>
-                      <a className="dropdown-item">
-                        <span className="flag-icon flag-icon-eu flag-icon-squared"></span> EUR
-                      </a>
-                    </li>
+                <div className="money-input-container">
+                  <div className="money-input">
+                    <span>Recipient gets</span>
+                    <NumberFormat
+                      id="money-to"
+                      type="text"
+                      thousandSeparator={true}
+                      decimalScale={2}
+                      value={this.state.toAmount}
+                      onKeyUp={this.handleDestinationChange}/>
+                  </div>
+                  <div className="currency-change">
+                    <button className="currency-from dropdown-button" onClick={this.toggleDestination}>
+                      <span className={'flag-icon flag-icon-'+this.state.toCurrency.substring(0,2)+' flag-icon-squared'}></span> {this.state.toCurrency}
+                      <FontAwesomeIcon className="caret" icon="caret-down"/>
+                    </button>
+                    <div className={this.state.isDestinationActive ? 'dropdown-menu show' : 'dropdown-menu'}>
+                      <ul>
+                        <li onClick={this.selectDestination.bind(this,'myr')}>
+                          <a className="dropdown-item">
+                            <span className="flag-icon flag-icon-my flag-icon-squared"></span> MYR (Malaysian Ringgit)
+                          </a>
+                        </li>
+                        <li onClick={this.selectDestination.bind(this,'krw')}>
+                          <a className="dropdown-item">
+                            <span className="flag-icon flag-icon-kr flag-icon-squared"></span> KRW (Korean Won)
+                          </a>
+                        </li>
+                        <li onClick={this.selectDestination.bind(this,'gbp')}>
+                          <a className="dropdown-item">
+                            <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP (British Poundsterling)
+                          </a>
+                        </li>
+                        <li onClick={this.selectDestination.bind(this,'usd')}>
+                          <a className="dropdown-item">
+                            <span className="flag-icon flag-icon-us flag-icon-squared"></span> USD (US Dollar)
+                          </a>
+                        </li>
+                        <li onClick={this.selectDestination.bind(this,'eur')}>
+                          <a className="dropdown-item">
+                            <span className="flag-icon flag-icon-eu flag-icon-squared"></span> EUR (European Euro)
+                          </a>
+                        </li>
 
-                    <li onClick={this.selectDestination.bind(this,'hkd')}>
-                      <a className="dropdown-item">
-                        <span className="flag-icon flag-icon-hk flag-icon-squared"></span> HKD
-                      </a>
-                    </li>
-                  </ul>
+                        <li onClick={this.selectDestination.bind(this,'hkd')}>
+                          <a className="dropdown-item">
+                            <span className="flag-icon flag-icon-hk flag-icon-squared"></span> HKD (Hongkong Dollar)
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-                <NumberFormat
-                  id="money-to"
-                  type="text"
-                  thousandSeparator={true}
-                  decimalScale={2}
-                  value={this.state.toAmount}
-                  onKeyUp={this.handleDestinationChange}/>
+                {/* <input id="money-to" type="text" value={this.toCurrency(this.state.toAmount)} onChange={this.handleDestinationChange}/> */}
               </div>
             </div>
             <div className="row rate">
-              <span className="rate-desc">Currency rate {this.state.fromCurrency.toUpperCase()}/{this.state.toCurrency.toUpperCase()}</span>
-              <span className="rate-value"><span className="live-rate"><NumberFormat displayType={'text'} thousandSeparator={true} value={this.props.rate} /></span></span>
+              <span className="rate-desc">{this.state.fromCurrency.toUpperCase()}/{this.state.toCurrency.toUpperCase()} Conversion rate</span> <span className="rate-value"><span className="live-rate"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={4} value={this.props.rate} /> {this.state.toCurrency.toUpperCase()}</span></span>
             </div>
             <div className="row note">
-              <p>Your transfer will be processed immediately.
+              <p style={{maxWidth: "100%", marginBottom: "0"}}>Your transfer will be processed immediately.
               The recipient will get the money in less than <span className="received-on">24 hours.</span>.</p>
             </div>
             <div className="row converter-cta">
-              <div className="cta-secondary">
-                <Link href="">
-                  <a className="btn-secondary">Compare price</a>
-                </Link>
-              </div>
+            {
+              // <div className="cta-secondary">
+              //   <Link href="">
+              //     <a className="btn-secondary">Compare price</a>
+              //   </Link>
+              // </div>
+            }
               <div className="cta-primary">
-                <Link href="">
+                <Link href="/order">
                   <a className="btn-primary" onClick={this.saveAndContinue}>Continue</a>
                 </Link>
               </div>
             </div>
           </div>
+          {
+          // <div className="converter-container-order">
+          //   <div className="row exchange-container">
+          //     <div className="source-container">
+          //       <p style={{textAlign: "left"}}>You send</p>
+          //       <button className="currency-from dropdown-button" onClick={this.toggleSource}>
+          //         <span className={'flag-icon flag-icon-'+this.state.fromCurrency.substring(0,2)+' flag-icon-squared'}></span> {this.state.fromCurrency}
+          //         <FontAwesomeIcon className="caret" icon="caret-down"/>
+          //       </button>
+          //       <div className={this.state.isSourceActive ? 'dropdown-menu show' : 'dropdown-menu'}>
+          //         <ul>
+          //           <li onClick={this.selectSource.bind(this,'idr')}>
+          //             <a className="dropdown-item">
+          //               <span className="flag-icon flag-icon-id flag-icon-squared"></span> IDR
+          //             </a>
+          //           </li>
+          //           <li onClick={this.selectSource.bind(this,'gbp')}>
+          //             <a className="dropdown-item">
+          //               <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP
+          //             </a>
+          //           </li>
+          //           <li onClick={this.selectSource.bind(this,'usd')}>
+          //             <a className="dropdown-item">
+          //               <span className="flag-icon flag-icon-us flag-icon-squared"></span> USD
+          //             </a>
+          //           </li>
+          //         </ul>
+          //       </div>
+          //       <NumberFormat
+          //         id="money-from"
+          //         type="text"
+          //         thousandSeparator={true}
+          //         decimalScale={2}
+          //         value={this.state.fromAmount}
+          //         onKeyUp={this.handleSourceChange}/>
+          //     </div>
+          //     <div className="destination-container">
+          //       <p style={{textAlign: "left"}}>Recipient gets</p>
+          //       <button className="currency-from dropdown-button" onClick={this.toggleDestination}>
+          //         <span className={'flag-icon flag-icon-'+this.state.toCurrency.substring(0,2)+' flag-icon-squared'}></span> {this.state.toCurrency}
+          //         <FontAwesomeIcon className="caret" icon="caret-down"/>
+          //       </button>
+          //       <div className={this.state.isDestinationActive ? 'dropdown-menu show' : 'dropdown-menu'}>
+          //         <ul>
+          //           <li onClick={this.selectDestination.bind(this,'myr')}>
+          //             <a className="dropdown-item">
+          //               <span className="flag-icon flag-icon-my flag-icon-squared"></span> MYR
+          //             </a>
+          //           </li>
+          //           <li onClick={this.selectDestination.bind(this,'krw')}>
+          //             <a className="dropdown-item">
+          //               <span className="flag-icon flag-icon-kr flag-icon-squared"></span> KRW
+          //             </a>
+          //           </li>
+          //           <li onClick={this.selectDestination.bind(this,'gbp')}>
+          //             <a className="dropdown-item">
+          //               <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP
+          //             </a>
+          //           </li>
+          //           <li onClick={this.selectDestination.bind(this,'usd')}>
+          //             <a className="dropdown-item">
+          //               <span className="flag-icon flag-icon-us flag-icon-squared"></span> USD
+          //             </a>
+          //           </li>
+          //           <li onClick={this.selectDestination.bind(this,'eur')}>
+          //             <a className="dropdown-item">
+          //               <span className="flag-icon flag-icon-eu flag-icon-squared"></span> EUR
+          //             </a>
+          //           </li>
+          //
+          //           <li onClick={this.selectDestination.bind(this,'hkd')}>
+          //             <a className="dropdown-item">
+          //               <span className="flag-icon flag-icon-hk flag-icon-squared"></span> HKD
+          //             </a>
+          //           </li>
+          //         </ul>
+          //       </div>
+          //       <NumberFormat
+          //         id="money-to"
+          //         type="text"
+          //         thousandSeparator={true}
+          //         decimalScale={2}
+          //         value={this.state.toAmount}
+          //         onKeyUp={this.handleDestinationChange}/>
+          //     </div>
+          //   </div>
+          //   <div className="row rate">
+          //     <span className="rate-desc">Currency rate {this.state.fromCurrency.toUpperCase()}/{this.state.toCurrency.toUpperCase()}</span>
+          //     <span className="rate-value"><span className="live-rate"><NumberFormat displayType={'text'} thousandSeparator={true} value={this.props.rate} /></span></span>
+          //   </div>
+          //   <div className="row note">
+          //     <p>Your transfer will be processed immediately.
+          //     The recipient will get the money in less than <span className="received-on">24 hours.</span>.</p>
+          //   </div>
+          //   <div className="row converter-cta">
+          //     <div className="cta-secondary">
+          //       <Link href="">
+          //         <a className="btn-secondary">Compare price</a>
+          //       </Link>
+          //     </div>
+          //     <div className="cta-primary">
+          //       <Link href="">
+          //         <a className="btn-primary" onClick={this.saveAndContinue}>Continue</a>
+          //       </Link>
+          //     </div>
+          //   </div>
+          // </div>
+          }
         <style jsx>{`
           .container-fluid {
             display: flex;
@@ -282,16 +406,54 @@ class OrderAmount extends React.Component {
 
           .exchange-container {
             display: flex;
+            flex-direction: column;
+          }
+
+          .money-input-container {
+            display: flex;
+            background-color: #FFFFFF;
+            border-radius: 4px;
+
+          }
+
+          .money-input {
+            display: flex;
+            flex-basis: 65%;
+            flex-direction: column;
+          }
+
+          .money-input span {
+            margin: 5px 0 0 10px;
+          }
+
+          .money-input-container {
+            display: flex;
+            background-color: #ECECEE;
+            border-radius: 4px;
+
+          }
+
+          .currency-change {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-basis: 35%;
+            width: 35%;
+            background-color: #1F345A;
+            border-radius: 0 4px 4px 0;
+            transition: 1s auto;
+            -webkit-transition: all .15s ease-in-out;
+            -o-transition: all .15s ease-in-out;
+            transition: all .15s ease-in-out;
+          }
+
+          .currency-change:hover {
+            border: 1px solid #eaeaea;
           }
 
           .source-container {
-            flex-basis: 50%;
+            margin-bottom: 30px;
           }
-
-          .destination-container {
-            flex-basis: 50%;
-          }
-
 
           .currency-from {
             display: flex;
@@ -398,6 +560,7 @@ class OrderAmount extends React.Component {
             background: none;
             border: none;
             text-transform: uppercase;
+            color: #fff;
           }
 
           .dropdown-button:active,
@@ -409,13 +572,28 @@ class OrderAmount extends React.Component {
             transition: none;
           }
 
-          @media only screen and (max-width: 375px) {
+
+          @media only screen and (max-width: 414px) {
             .converter-container-order {
               width: 305px;
               flex-direction: column;
             }
             .container-fluid p {
               text-align: left;
+            }
+            .dropdown-button .flag-icon {
+              display: none;
+            }
+            .dropdown-menu {
+              position: absolute;
+              left: 0;
+              bottom: 0;
+              height: 50vh;
+              width: 100%;
+            }
+
+            .dropdown-menu ul {
+              max-height: 50vh;
             }
 
           }

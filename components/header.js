@@ -185,13 +185,12 @@ const Header = () => (
       }
 
       .converter-container input {
-        margin-top: 20px;
         width: 100%;
         font-family: 'Campton-Book', sans-serif;
         font-size: 22px;
         color: #15233C;
         border: none;
-        padding: 12px;
+        padding: 0 10px 10px;
         box-sizing: border-box;
       }
 
@@ -199,23 +198,18 @@ const Header = () => (
         outline: none;
       }
 
-      .converter-container .source-container input {
-        border-radius: 4px 0 0 4px;
-        border-right: 2px solid #15233C;
-      }
-
+      .converter-container .source-container input,
       .converter-container .destination-container input {
-        border-radius: 0 4px 4px 0;
+        border-radius: 4px 0 0 4px;
       }
 
       .converter-container-order input {
-        margin-top: 20px;
         width: 100%;
         font-family: 'Campton-Book', sans-serif;
         font-size: 22px;
         color: #15233C;
         border: none;
-        padding: 12px;
+        padding: 0 10px 10px;
         box-sizing: border-box;
         background-color: #ECECEE;
       }
@@ -243,7 +237,7 @@ const Header = () => (
       }
 
       .svg-inline--fa.caret {
-        margin-left: 30px;
+        margin-left: 10px;
       }
 
       .accordion__button {
@@ -273,20 +267,22 @@ const Header = () => (
         text-transform: uppercase;
       }
 
-      .form-container input {
-        width: 100%;
-        margin-bottom: 30px;
-        border: none;
-        font-size: 16px;
-        padding: 15px 0;
-        border-bottom: 1px solid #eaeaea;
-        font-family: "Campton-Book", sans-serif;
-      }
+      .form-container input,
+       .form-container textarea {
+         width: 100%;
+         margin-bottom: 30px;
+         border: none;
+         font-size: 16px;
+         padding: 15px 0;
+         border-bottom: 1px solid #eaeaea;
+         font-family: "Campton-Book", sans-serif;
+       }
 
-      .form-container input:focus {
-        outline: none;
-        border-bottom: 1px solid #469DDD;
-      }
+       .form-container input:focus,
+       .form-container textarea:focus {
+         outline: none;
+         border-bottom: 1px solid #469DDD;
+       }
 
       ::placeholder {
         color: #CACACA;
@@ -317,14 +313,25 @@ const Header = () => (
         display: none;
       }
 
-      .error-show {
+      .success-container {
+        width: 400px;
+        height: auto;
+        padding: 20px;
+        margin-bottom: 30px;
+        background-color: #4BB543;
+        color: #FFF;
+        border-radius: 8px;
+        display: none;
+      }
+
+      .error-show,
+      .success-show {
         display: block;
       }
 
       .container-fluid {
         display: flex;
-        flex-direction: column;
-        min-height: 100vh;
+        height: 100vh;
         align-items: center;
       }
 
@@ -334,7 +341,7 @@ const Header = () => (
       }
 
       .container-fluid h1 {
-        margin: 100px auto 0;
+        margin: 10px auto;
       }
 
       .logo img {
@@ -342,7 +349,7 @@ const Header = () => (
         margin: 50px auto;
       }
 
-      @media only screen and (max-width: 411px) {
+      @media only screen and (max-width: 414px) {
         h1 {
           font-size: 1.5rem;
         }
@@ -360,22 +367,25 @@ const Header = () => (
           flex-direction: column;
           flex-basis: 0;
         }
-        .rate {
-          flex-direction: column;
-        }
         .converter-cta {
           flex-direction: column;
         }
         .features-container {
           flex-direction: column;
         }
-
         .container-fluid h1 {
-          margin: 30px auto;
+          margin: 15px auto;
         }
-
+        .right p {
+          margin: 15px auto;
+        }
         .form-container {
           width: 305px;
+          padding: 15px;
+        }
+        .error-container,
+        .success-container {
+          width: auto;
         }
       }
     `}</style>

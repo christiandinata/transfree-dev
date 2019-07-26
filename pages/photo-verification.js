@@ -315,6 +315,9 @@ class PhotoVerification extends React.Component {
           </form>
         </div>
         <style jsx>{`
+          .container-fluid {
+            flex-direction: column;
+          }
           .no-show {
             display: none
           }

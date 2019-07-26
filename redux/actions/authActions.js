@@ -8,6 +8,12 @@ import {
   AUTHENTICATE_ERROR,
   DEAUTHENTICATE,
   USER_DATA,
+  FORGOT_PROGRESS,
+  FORGOT_SUCCESS,
+  FORGOT_ERROR,
+  RESET_PASSWORD_PROGRESS,
+  RESET_PASSWORD_SUCCESS,
+  RESET_PASSWORD_ERROR
 } from '../types';
 import { API } from '../../config';
 import { setCookie, removeCookie } from '../../utils/cookie';
@@ -129,9 +135,51 @@ export const deauthenticate = () => {
   };
 };
 
+export const forgot = ({ email }, type) => {
+  if (type !== 'forgot') {
+    throw new Error('Wrong API call!');
+  }
+  return (dispatch) => {
+    dispatch({type: FORGOT_PROGRESS, payload: true});
+    axios.post(`${API}/${type}`, { email })
+      .then((response) => {
+        if (response.status == 200)
+        dispatch({type: FORGOT_SUCCESS, payload: response.data.message});
+      })
+      .catch((error) => {
+        const errorMessage = error.response.data.message;
+        dispatch({type: FORGOT_ERROR, payload: errorMessage});
+
+
+      });
+  };
+};
+
+export const resetPassword = ({ newPassword, verifyPassword, token }, type) => {
+  if (type !== 'resetPassword') {
+    throw new Error('Wrong API call!');
+  }
+  return (dispatch) => {
+    dispatch({type: RESET_PASSWORD_PROGRESS, payload: true});
+    axios.post(`${API}/${type}`, { newPassword, verifyPassword, token })
+      .then((response) => {
+        if (response.status == 200)
+        dispatch({type: RESET_PASSWORD_SUCCESS, payload: response.data.message});
+      })
+      .catch((error) => {
+        const errorMessage = error.response.data.message;
+        dispatch({type: RESET_PASSWORD_ERROR, payload: errorMessage});
+
+
+      });
+  };
+};
+
 export default {
   register,
   authenticate,
   reauthenticate,
   deauthenticate,
+  forgot,
+  resetPassword
 };

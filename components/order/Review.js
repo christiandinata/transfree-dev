@@ -171,12 +171,6 @@ class Review extends React.Component {
           .list-item .left {
             opacity: 0.7;
           }
-
-          @media only screen and (max-width: 375px) {
-            .container-left {
-              display: block;
-            }
-          }
         `}</style>
       </div>
     )
