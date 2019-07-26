@@ -10,5 +10,5 @@ Follow this step-by-step to deploy the app
 > npm run dev
 5. To test it, open http://localhost:3000/ on your browser
 6. To build into production, run these two commands
-> npm run build
+> npm run build;
 > npm start
