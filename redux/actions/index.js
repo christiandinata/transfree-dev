@@ -6,6 +6,7 @@ import orderActions from './orderActions';
 import userActions from './userActions';
 import vaActions from './vaActions';
 import photoActions from './photoActions';
+import fxMarginActions from './fxMarginActions';
 export default {
   ...authActions,
   ...verifyActions,
@@ -14,5 +15,6 @@ export default {
   ...orderActions,
   ...userActions,
   ...vaActions,
-  ...photoActions
+  ...photoActions,
+  ...fxMarginActions
 }

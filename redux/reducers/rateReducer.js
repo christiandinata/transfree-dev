@@ -1,5 +1,5 @@
 import {
-  EXCHANGE_RATE,
+  EXCHANGE_RATE
 } from '../types';
 
 const initialState = {
