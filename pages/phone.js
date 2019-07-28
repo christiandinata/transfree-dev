@@ -72,7 +72,8 @@ class Phone extends React.Component {
           .container-fluid {
             flex-direction: column;
           }
-          `}</style>
+          `}
+        </style>
       </div>
     )
   }

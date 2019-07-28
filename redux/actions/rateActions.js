@@ -1,7 +1,8 @@
 import axios from 'axios';
 import {
-  EXCHANGE_RATE,
+  EXCHANGE_RATE
 } from '../types';
+import { API } from '../../config';
 
 const getRates = (from, to) => {
   return async (dispatch) => {
@@ -15,6 +16,25 @@ const getRates = (from, to) => {
   };
 };
 
+const getMultipleRates = (idr,myr, krw, gbp, usd, eur, hkd) => {
+  return async (dispatch) => {
+    await axios.get('https://data.fixer.io/latest?access_key=1c2c1df7d16f7d0e30bb25aebd730a22&base='+
+                                                      idr.toUpperCase()+'&symbols='+myr.toUpperCase()+
+                                                      ','+krw.toUpperCase()+
+                                                      ','+gbp.toUpperCase()+
+                                                      ','+usd.toUpperCase()+
+                                                      ','+eur.toUpperCase()+
+                                                      ','+hkd.toUpperCase())
+      .then((response) => {
+        let rates = response.data.rates;
+        dispatch({type: EXCHANGE_RATE, payload: rates});
+      }).catch((err) => {
+        throw new Error(err);
+      });
+  };
+};
+
 export default {
-  getRates
+  getRates,
+  getMultipleRates
 };

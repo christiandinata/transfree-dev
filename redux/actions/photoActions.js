@@ -10,7 +10,6 @@ import { API } from '../../config';
 
 // upload photos to server
 const uploadPhoto = ({ photoId, photoFace, email }, type) => {
-  console.log(email);
   if (type !== 'uploadPhoto') {
     throw new Error('Wrong API call!');
   }
