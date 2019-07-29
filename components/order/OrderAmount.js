@@ -200,6 +200,11 @@ class OrderAmount extends React.Component {
                     </button>
                     <div className={this.state.isDestinationActive ? 'dropdown-menu show' : 'dropdown-menu'}>
                       <ul>
+                        <li onClick={this.selectDestination.bind(this,'idr')}>
+                          <a className="dropdown-item">
+                            <span className="flag-icon flag-icon-id flag-icon-squared"></span> IDR (Indonesian Rupiah)
+                          </a>
+                        </li>
                         <li onClick={this.selectDestination.bind(this,'myr')}>
                           <a className="dropdown-item">
                             <span className="flag-icon flag-icon-my flag-icon-squared"></span> MYR (Malaysian Ringgit)
