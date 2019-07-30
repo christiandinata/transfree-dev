@@ -149,9 +149,6 @@ class Index extends React.Component {
             <div className="left-container">
               <h1>International money transfer feels like local transfer</h1>
               <div className="desktop">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pretium
-                pretium tempor. Ut eget imperdiet neque. In volutpat ante semper diam
-                molestie, et aliquam erat </p>
                 <Link href="">
                   <a className="btn-secondary">See how it works</a>
                 </Link>
