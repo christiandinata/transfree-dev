@@ -83,7 +83,7 @@ class IdVerification extends React.Component {
 
             <label htmlFor="fullname">Full name</label><br/>
             <input
-              type="tel"
+              type="text"
               id="fullname"
               placeholder="Enter your full name (should match your ID)"
               value={this.state.idName}
