@@ -20,8 +20,8 @@ To fix bugs or test new features, please create a new branch and push to remote 
 
 1. Pull latest commit from development
 2. Checkout to new branch
-> git checkout -b <new-branch-name>
+> git checkout -b 'new-branch-name'
 3. Make the necessary changes/addition. One it's done, push to the branch to remote repository
-> git add <files here>
-> git commit -m <new commit message>
-> git push origin <new-branch>
+> git add 'files here'\
+> git commit -m 'new commit message'\
+> git push origin 'new-branch'\
