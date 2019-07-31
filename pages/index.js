@@ -292,6 +292,14 @@ class Index extends React.Component {
                   </div>
                 </div>
               </div>
+              <div className="right-bottom-container">
+                <h1>International money transfer feels like local transfer</h1>
+                <center>
+                  <Link href="">
+                    <a className="btn-secondary">See how it works</a>
+                  </Link>
+                </center>
+              </div>
               {
               // <div className="promo">
               //   <div className="promo-desc">
@@ -452,6 +460,9 @@ class Index extends React.Component {
             flex-basis: 40%;
             margin-top: 120px;
             z-index: 2;
+          }
+          .right-bottom-container{
+            display: none;
           }
 
           h1 {
