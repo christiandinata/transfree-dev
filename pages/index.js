@@ -386,21 +386,22 @@ class Index extends React.Component {
               <div className="feature-item">
                 <img src="../static/images/benefit-3.svg"/>
                 <h2>Cheaper & faster</h2>
-                <p>The future is today. By simplifying your transfer process,
-                 our services make international money transfer 
-                 feels like local transfer.</p>
+                <p>The future is today. Send and Receive currency at the real exchange rate. 
+                5x cheaper and 3x faster than a banks. Make international money transfer 
+                feels like local transfer.</p>
               </div>
               <div className="feature-item">
                 <img src="../static/images/benefit-4.svg"/>
                 <h2>Rp 18 Billion+ transactions</h2>
-                <p>Through our convenient services, we have secured International 
-                Transfers amounting to 18 Billion Rupiah.</p>
+                <p>Through our convenient services, Over Rp. 18 billion 
+                worth of transaction has been safely handled by Transfree.</p>
               </div>
               <div className="feature-item">
                 <img src="../static/images/benefit-5.svg"/>
                 <h2>1000+ customers</h2>
-                <p>Trust is build with consistency. More than 1000 customers
-                 trust their international transactions by using our services.</p>
+                <p>Trust is build with consistency. More than 1000 customers 
+                have saved their money. Trust their international transactions 
+                by using our services.</p>
               </div>
             </div>
             <div className="testimonials-wrapper">
