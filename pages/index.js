@@ -386,20 +386,21 @@ class Index extends React.Component {
               <div className="feature-item">
                 <img src="../static/images/benefit-3.svg"/>
                 <h2>Cheaper & faster</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                In lobortis libero ac neque vehicula, in bibendum metus mollis.</p>
+                <p>The future is today. By simplifying your transfer process,
+                 our services make international money transfer 
+                 feels like local transfer.</p>
               </div>
               <div className="feature-item">
                 <img src="../static/images/benefit-4.svg"/>
                 <h2>Rp 18 Billion+ transactions</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                In lobortis libero ac neque vehicula, in bibendum metus mollis.</p>
+                <p>Through our convenient services, we have secured International 
+                Transfers amounting to 18 Billion Rupiah.</p>
               </div>
               <div className="feature-item">
                 <img src="../static/images/benefit-5.svg"/>
-                <h2>750+ customers</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                In lobortis libero ac neque vehicula, in bibendum metus mollis.</p>
+                <h2>1000+ customers</h2>
+                <p>Trust is build with consistency. More than 1000 customers
+                 trust their international transactions by using our services.</p>
               </div>
             </div>
             <div className="testimonials-wrapper">
