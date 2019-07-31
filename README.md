@@ -12,3 +12,16 @@ Follow this step-by-step to deploy the app
 6. To build into production, run these two commands
 > npm run build;
 > npm start
+
+
+# Bugs fixing and testing new features
+
+To fix bugs or test new features, please create a new branch and push to remote directory. Once updated, I will merge into development branch to test. If there's no problem, I will merge to master and deploy into production. Step-by-step guide:
+
+1. Pull latest commit from development
+2. Checkout to new branch
+> git checkout -b <new-branch-name>
+3. Make the necessary changes/addition. One it's done, push to the branch to remote repository
+> git add <files here>
+> git commit -m <new commit message>
+> git push origin <new-branch>
