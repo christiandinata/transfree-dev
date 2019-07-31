@@ -149,9 +149,6 @@ class Index extends React.Component {
             <div className="left-container">
               <h1>International money transfer feels like local transfer</h1>
               <div className="desktop">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pretium
-                pretium tempor. Ut eget imperdiet neque. In volutpat ante semper diam
-                molestie, et aliquam erat </p>
                 <Link href="">
                   <a className="btn-secondary">See how it works</a>
                 </Link>
@@ -295,6 +292,14 @@ class Index extends React.Component {
                   </div>
                 </div>
               </div>
+              <div className="right-bottom-container">
+                <h1>International money transfer feels like local transfer</h1>
+                <center>
+                  <Link href="">
+                    <a className="btn-secondary">See how it works</a>
+                  </Link>
+                </center>
+              </div>
               {
               // <div className="promo">
               //   <div className="promo-desc">
@@ -389,20 +394,22 @@ class Index extends React.Component {
               <div className="feature-item">
                 <img src="../static/images/benefit-3.svg"/>
                 <h2>Cheaper & faster</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                In lobortis libero ac neque vehicula, in bibendum metus mollis.</p>
+                <p>The future is today. Send and Receive currency at the real exchange rate. 
+                5x cheaper and 3x faster than a banks. Make international money transfer 
+                feels like local transfer.</p>
               </div>
               <div className="feature-item">
                 <img src="../static/images/benefit-4.svg"/>
                 <h2>Rp 18 Billion+ transactions</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                In lobortis libero ac neque vehicula, in bibendum metus mollis.</p>
+                <p>Through our convenient services, Over Rp. 18 billion 
+                worth of transaction has been safely handled by Transfree.</p>
               </div>
               <div className="feature-item">
                 <img src="../static/images/benefit-5.svg"/>
-                <h2>750+ customers</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                In lobortis libero ac neque vehicula, in bibendum metus mollis.</p>
+                <h2>1000+ customers</h2>
+                <p>Trust is build with consistency. More than 1000 customers 
+                have saved their money. Trust their international transactions 
+                by using our services.</p>
               </div>
             </div>
             <div className="testimonials-wrapper">
@@ -453,6 +460,9 @@ class Index extends React.Component {
             flex-basis: 40%;
             margin-top: 120px;
             z-index: 2;
+          }
+          .right-bottom-container{
+            display: none;
           }
 
           h1 {
