@@ -6,6 +6,7 @@ const Header = () => (
       <title>Transfree - International Transfer Made Fast and Free</title>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta charSet="utf-8" />
+      <link rel="icon" href="../static/images/icon-logo.png"/>
       <link href="../static/misc/flag-icon-css/css/flag-icon.min.css" rel="stylesheet"/>
     </Head>
     <style jsx global>{`
