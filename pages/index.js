@@ -147,8 +147,13 @@ class Index extends React.Component {
         <div className="row hero">
           <div className="container">
             <div className="left-container">
-              <h1>International money transfer feels like local transfer</h1>
+              <div className="logo">
+                <img src="../static/images/transfree-logo.png"/>
+              </div>
+              <h1>International money transfer feels</h1>
+              <h1 className="h1-bawah">like local</h1>
               <div className="desktop">
+
                 <Link href="">
                   <a className="btn-secondary">See how it works</a>
                 </Link>
@@ -207,7 +212,10 @@ class Index extends React.Component {
                     </div>
 
                     {/* <input id="money-from" type="text" value={this.toCurrency(this.state.fromAmount)} onChange={this.handleSourceChange}/> */}
+                  
+
                   </div>
+
                   <div className="destination-container">
                     <div className="money-input-container">
                       <div className="money-input">
@@ -269,6 +277,7 @@ class Index extends React.Component {
                     </div>
                     {/* <input id="money-to" type="text" value={this.toCurrency(this.state.toAmount)} onChange={this.handleDestinationChange}/> */}
                   </div>
+
                 </div>
                 <div className="row rate">
                   <span className="rate-desc">{this.state.fromCurrency.toUpperCase()}/{this.state.toCurrency.toUpperCase()} Conversion rate</span> <span className="rate-value"><span className="live-rate"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={4} value={this.props.rate} /> {this.state.toCurrency.toUpperCase()}</span></span>
@@ -292,14 +301,14 @@ class Index extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className="right-bottom-container">
-                <h1>International money transfer feels like local transfer</h1>
-                <center>
-                  <Link href="">
-                    <a className="btn-secondary">See how it works</a>
-                  </Link>
-                </center>
-              </div>
+            <div className="right-bottom-container">
+              <h1>International money transfer feels like local</h1>
+              <center>
+                <Link href="">
+                  <a className="btn-secondary">See how it works</a>
+                </Link>
+              </center>
+            </div>
               {
               // <div className="promo">
               //   <div className="promo-desc">
@@ -318,6 +327,7 @@ class Index extends React.Component {
         <div className="row">
           <img className="curve" src="../static/images/curve-bg.svg"/>
         </div>
+
         <div className="row partners">
           <h1>Our partners</h1>
           <div className="container partners-wrapper">
@@ -334,26 +344,72 @@ class Index extends React.Component {
               <div className="partner-item">
                 <img src="../static/images/partners/ppi-liverpool.png"/>
               </div>
-              <div className="partner-item">
+              <div className="partner-item-small">
                 <img src="../static/images/partners/ppi-rotterdam.png"/>
               </div>
             </div>
+
             <div className="row partners-container">
-              <div className="partner-item">
+              <div className="partner-item-small">
                 <img src="../static/images/partners/ppi-delft.png"/>
               </div>
-              <div className="partner-item">
+              <div className="partner-item-small">
                 <img src="../static/images/partners/ppi-gm.png"/>
               </div>
-              <div className="partner-item">
+              <div className="partner-item-small">
                 <img src="../static/images/partners/ppi-newcastle.png"/>
               </div>
               <div className="partner-item">
                 <img src="../static/images/partners/ppi-amsterdam.png"/>
               </div>
             </div>
+            
           </div>
         </div>
+
+
+        <div className="row partners-mobile">
+          <h1>Our partners</h1>
+          <div className="container partners-wrapper-mobile">
+            <div className="row partners-container-mobile">
+              <div className="partner-item-mobile">
+                <img src="../static/images/partners/ppi-mib.png"/>
+              </div>
+              <div className="partner-item-mobile">
+                <img src="../static/images/partners/ppi-london.png"/>
+              </div>
+              <div className="partner-item-mobile">
+                <img src="../static/images/partners/ppi-denhaag.png"/>
+              </div>
+            </div>
+
+            <div className="row partners-container-mobile">
+              <div className="partner-item-mobile">
+                <img src="../static/images/partners/ppi-liverpool.png"/>
+              </div>
+              <div className="partner-item-mobile">
+                <img src="../static/images/partners/ppi-rotterdam.png"/>
+              </div>
+              <div className="partner-item-mobile">
+                <img src="../static/images/partners/ppi-amsterdam.png"/>
+              </div>
+            </div>
+
+             <div className="row partners-container-mobile">
+              <div className="partner-item-mobile-small">
+                <img src="../static/images/partners/ppi-delft.png"/>
+              </div>
+              <div className="partner-item-mobile-small">
+                <img src="../static/images/partners/ppi-newcastle.png"/>
+              </div>
+              <div className="partner-item-mobile-small">
+                <img src="../static/images/partners/ppi-gm.png"/>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
         <div className="row features">
           <div className="container">
             <div className="feature">
@@ -384,9 +440,43 @@ class Index extends React.Component {
                 compared to other services. So why not try using our services?</p>
               </div>
             </div>
-
           </div>
         </div>
+
+
+        <div className="row features-mobile">
+          <div className="container-mobile">
+            <div className="feature-mobile">
+              <div className="left-feature-container-mobile"><img src="../static/images/artboard_1.svg"/></div>
+              <div className="right-feature-container-mobile">
+                <h2>Better rate for transfer</h2>
+                <p>Have you ever thought that the cost of international money
+                transfers is so big but gives you a smaller amount? Get more from
+                your money by using our services so you can use it for other needs with little effort.</p>
+              </div>
+            </div>
+
+            <div className="feature-mobile">
+              <div className="left-feature-container-mobile"><img src="../static/images/artboard_2.svg"/></div>
+              <div className="right-feature-container-mobile">
+                <h2>Tired of waiting for your money to arrive?</h2>
+                <p>Does your family need it for an emergency? And when you use a cheaper
+                 option, it sometimes takes longer for your money to arrive. Don't worry, we are here now.</p>
+              </div>
+            </div>
+
+            <div className="feature-mobile">
+              <div className="left-feature-container-mobile"><img src="../static/images/artboard_3.svg"/></div>
+              <div className="right-feature-container-mobile">
+                <h2>We don't charge any fees for your transfer</h2>
+                <p>Too good to be true? But this is happening now.
+                Yes, we do not charge you any fees. And we have competitive rates as
+                compared to other services. So why not try using our services?</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="row testimonials">
           <div className="container">
             <h1>Why using Transfree?</h1>
@@ -394,22 +484,20 @@ class Index extends React.Component {
               <div className="feature-item">
                 <img src="../static/images/benefit-3.svg"/>
                 <h2>Cheaper & faster</h2>
-                <p>The future is today. Send and Receive currency at the real exchange rate. 
-                5x cheaper and 3x faster than a banks. Make international money transfer 
-                feels like local transfer.</p>
+                <p>The future is today. Send and Receive currency at the real exchange rate. 5x cheaper and 3x faster than a banks. 
+                Make international money transfer feels like local transfer.</p>
               </div>
               <div className="feature-item">
                 <img src="../static/images/benefit-4.svg"/>
                 <h2>Rp 18 Billion+ transactions</h2>
-                <p>Through our convenient services, Over Rp. 18 billion 
-                worth of transaction has been safely handled by Transfree.</p>
+                <p>Through our convenient services, Over 
+                Rp. 18 billion worth of transaction has been safely handled by Transfree.</p>
               </div>
               <div className="feature-item">
                 <img src="../static/images/benefit-5.svg"/>
                 <h2>1000+ customers</h2>
-                <p>Trust is build with consistency. More than 1000 customers 
-                have saved their money. Trust their international transactions 
-                by using our services.</p>
+                <p>Trust is build with consistency. 
+                More than 1000 customers have saved their money. Trust their international transactions by using our services.</p>
               </div>
             </div>
             <div className="testimonials-wrapper">
@@ -435,7 +523,15 @@ class Index extends React.Component {
         </div>
         <style jsx>{`
           .desktop {
+            margin-top:40px;
             display: block;
+          }
+
+          .h1-bawah{
+            margin-top:0px !important;
+          }
+          .left-container h1{
+            margin-bottom:0px !important;
           }
 
           .container {
@@ -451,6 +547,11 @@ class Index extends React.Component {
             margin-top: 100px;
           }
 
+          .left-container h1{
+
+          }
+
+          
           .left-container p {
             max-width: 80%;
             margin-bottom: 30px;
@@ -462,6 +563,10 @@ class Index extends React.Component {
             z-index: 2;
           }
           .right-bottom-container{
+            margin-top:20px !important;
+            display: none;
+          }
+          .logo{
             display: none;
           }
 
@@ -638,20 +743,27 @@ class Index extends React.Component {
           }
 
           .curve {
+            display: flex;
             width: 100%;
             height: auto;
+          }
+
+          .partners-mobile{
+            display: none;
           }
 
           .partners {
             margin-top: -7px;
             padding-top: 50px;
             background-color: #FFF;
+            text-align: center;
           }
 
           .partners h1 {
             text-align: center;
             margin-bottom: 50px;
           }
+
 
           .partners-wrapper {
             flex-direction: column;
@@ -663,12 +775,23 @@ class Index extends React.Component {
           }
 
           .partner-item {
-            flex-basis: 20%;
+            flex-basis:20%;
             align-self: center;
           }
 
           .partner-item img {
             max-width: 60%;
+          }
+
+          .partner-item-small {
+            flex-basis:20%;
+            padding:0px 20px;
+
+            align-self: center;
+          }
+
+          .partner-item-small img{
+            max-width:90%;
           }
 
           .features {
@@ -689,6 +812,10 @@ class Index extends React.Component {
           .features .container .row {
             display: flex;
             margin: 100px 0;
+          }
+
+          .features-mobile{
+            display: none;
           }
 
           .testimonials {
@@ -713,6 +840,7 @@ class Index extends React.Component {
 
           .features-container {
             display: flex;
+            text-align: center;
           }
 
           .feature-item {
@@ -850,16 +978,27 @@ class Index extends React.Component {
             flex-basis: 100%;
           }
 
-          @media only screen and (max-width: 414px) {
+            @media only screen and (max-width: 414px) {
+
+            .logo{
+              text-align: left;
+              padding-left: 20px;
+              display: block;
+
+            }
+            .logo img {
+              width :50%;
+              height :50%;
+              margin-top: 20px !important;
+              margin-bottom: 20px !important;
+            }
             .left-container {
               margin-top: 0;
+              padding-bottom:0px !important;
             }
-            .desktop {
-              display: none;
-            }
-            .right-container {
-              margin-top: 0;
-            }
+
+
+           
             h1 {
               font-size: 1.8rem;
               line-height: 1.5;
@@ -879,6 +1018,132 @@ class Index extends React.Component {
             .dropdown-menu ul {
               height: 50vh;
             }
+
+            .partners{
+              display:none;
+            }
+
+            .partners-mobile {
+            margin-top: -7px;
+            padding-top: 50px;
+            background-color: #FFF;
+            width:100%;
+            text-align: center;
+            display: block;
+          }
+
+          .partners-mobile h1 {
+            text-align: center;
+            margin-bottom: 30px;
+          }
+
+
+          .partners-wrapper-mobile {
+            flex-direction: column;
+          }
+
+          .partners-container-mobile {
+            display: flex;
+            justify-content: center;
+          }
+
+          .partner-item-mobile {
+            flex-basis:20%;
+            align-self: center;
+            padding:0px 20px;
+          }
+
+          .partner-item-mobile img {
+            max-width: 80%;
+            padding-bottom: 25px;
+          }
+
+          .partner-item-mobile-small {
+            flex-basis:20%;
+            align-self: center;
+            padding:0px 20px;
+          }
+
+          .partner-item-mobile-small img{
+            max-width:100%;
+          }
+          .desktop{
+            display:none;
+          }
+          .left-container h1{
+            display:none;
+          }
+
+          .right-container {
+            margin-top: 0px ;
+          }
+
+          .right-bottom-container{
+            display: inline-block;
+          }
+
+          .hero{
+            padding-bottom: 20px;
+          }
+
+          .features{
+            display: none;
+          }
+
+          .features-mobile {
+            display: inline-block;
+            padding: 100px 0;
+            background-color: #FFF;
+            text-align: center;
+          }
+
+          .left-feature-container-mobile,
+          .right-feature-container {
+            flex-basis: 50%;
+          }
+
+          .features-mobile .container-mobile {
+            display: flex;
+            flex-direction: column;
+          }
+
+          .features-mobile .container-mobile .row {
+            display: flex;
+            margin: 100px 0;
+          }
+
+          .left-feature-container-mobile img{
+            width: 80%;
+          }
+          .right-feature-container-mobile h2{
+            margin-top:0px !important;
+
+            padding: 0px 20px;
+          }
+          .right-feature-container-mobile p{
+            padding: 0px 10px;
+            margin-bottom: 40px !important;
+          }
+          .testimonials h1 {
+            text-align: center;
+            margin: 20px 0px !important;
+            margin-bottom: 40px !important; 
+          } 
+
+          .feature-item p{
+            margin-bottom: 40px !important;
+          }
+
+          .testimonials-wrapper{
+            padding-top:50px !important;
+          }
+
+          .user {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+          }
           }
 
         `}</style>
