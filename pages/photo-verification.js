@@ -307,6 +307,8 @@ class PhotoVerification extends React.Component {
             // </div>
             }
 
+            <p className="description"> * We will not, in any circumstances, share your personal information irresponsibly.</p>
+
             <div className="cta-submit">
               <button type="submit" className={((this.state.uploadPhotoIdSrc == null && this.state.webcamPhotoIdSrc == null) || (this.state.uploadPhotoFaceSrc == null && this.state.webcamPhotoFaceSrc == null)) ? 'btn-disabled' : 'btn-primary'}>{this.props.inProgress ? (
                 <FontAwesomeIcon icon="sync-alt" spin/>
@@ -355,7 +357,11 @@ class PhotoVerification extends React.Component {
             margin-top: 50px;
           }
 
-
+           .description{
+            color:#e79635;
+            font-size: 14px;
+            margin: 40px 0px 0px 0px !important;
+          }
         `}</style>
       </div>
     )
