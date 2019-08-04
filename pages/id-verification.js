@@ -133,6 +133,8 @@ class IdVerification extends React.Component {
               value={this.state.address}
               onChange={e => this.setState({ address: e.target.value })}/>
 
+            <p className="description"> * We will not, in any circumstances, share your personal information irresponsibly.</p>
+
             <button type="submit" className="btn-primary">{this.props.inProgress ? (
               <FontAwesomeIcon icon="sync-alt" spin/>
             ) : 'Continue'}</button>
@@ -178,6 +180,11 @@ class IdVerification extends React.Component {
 
           .form-container input[type="radio"] {
             width: 20px;
+          }
+          .description{
+            color:#e79635;
+            font-size: 14px;
+            margin: 0px 0px 20px 0px !important;
           }
 
         `}</style>

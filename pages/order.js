@@ -43,6 +43,7 @@ class Order extends React.Component {
 
     this.nextStep = this.nextStep.bind(this);
     this.previousStep = this.previousStep.bind(this);
+    this.backToAmount = this.backToAmount.bind(this);
     this.saveValues = this.saveValues.bind(this);
     this.generateVA = this.generateVA.bind(this);
     this.addOrder = this.addOrder.bind(this);
@@ -115,6 +116,7 @@ class Order extends React.Component {
                   nextStep={this.nextStep}
                   previousStep={this.previousStep}
                   saveValues={this.saveValues}
+                  backToAmount={this.backToAmount}
                   data={this.state} />
       case 4:
         return <Pay
@@ -140,7 +142,11 @@ class Order extends React.Component {
       return {step: state.step - 1}
     })
   }
-
+  backToAmount() {
+    this.setState((state) => {
+      return {step: state.step - 2}
+    })
+  }
   saveValues(data) {
     Object.entries(data).map(([key,value])=>{
       this.setState({

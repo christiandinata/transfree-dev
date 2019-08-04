@@ -16,7 +16,7 @@ class Review extends React.Component {
         <form className="form-container">
           <div className="list-header">
             <span className="left">Transfer Details</span>
-            <span className="right"><Link href="/order"><a className="link">Change</a></Link></span>
+            <span className="right"><Link href=""><a className="link" onClick={this.props.backToAmount}>Change</a></Link></span>
           </div>
 
           <div className="list-item">
