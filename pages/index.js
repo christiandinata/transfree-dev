@@ -34,6 +34,7 @@ class Index extends React.Component {
 
   static async getInitialProps(ctx) {
     initialize(ctx);
+    await ctx.store.dispatch(actions.getAdjustedRates('IDR','getAdjustedRates'));
     await ctx.store.dispatch(actions.getRates('GBP','IDR'));
     if (ctx.isServer) {
       if(ctx.req.headers.cookie) {
@@ -45,10 +46,9 @@ class Index extends React.Component {
 
   componentDidMount() {
     this.setState({
-      rate: this.props.rate,
-      toAmount: this.state.fromAmount * this.props.rate
+      rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
+      toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100 ))
     })
-
   }
 
   toggleSource() {
@@ -81,24 +81,38 @@ class Index extends React.Component {
 
   selectSource(country) {
     this.props.getRates(country,this.state.toCurrency).then(() => {
-      this.setState((state) => {
-        return {
+      if (country == 'idr') {
+        this.setState({
+          rate: this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100),
+          fromCurrency: country,
+          toAmount: this.state.fromAmount * (this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100))
+        });
+      } else {
+        this.setState({
+          rate: this.props.rate,
           fromCurrency: country,
           toAmount: this.state.fromAmount * this.props.rate
-        }
-      });
+        });
+      }
       this.hideSource();
     });
   }
 
   selectDestination(country) {
     this.props.getRates(this.state.fromCurrency,country).then(() => {
-      this.setState((state) => {
-        return {
+      if (country == 'idr') {
+        this.setState({
+          rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
+          toCurrency: country,
+          toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
+        });
+      } else {
+        this.setState({
+          rate: this.props.rate,
           toCurrency: country,
           toAmount: this.state.fromAmount * this.props.rate
-        }
-      });
+        });
+      }
       this.hideDestination();
     });
   }
@@ -107,26 +121,20 @@ class Index extends React.Component {
     const fromAmount = e.target.value.replace(/,/g, '');
     if (this.state.fromCurrency == 'idr') {
       if (fromAmount < 100000) {
-        this.setState((state) => {
-          return {
-            fromAmount: fromAmount,
-            toAmount: 0
-          }
+        this.setState({
+          fromAmount: fromAmount,
+          toAmount: 0
         })
       } else {
-        this.setState((state) => {
-          return {
-            fromAmount: fromAmount,
-            toAmount: fromAmount * this.props.rate
-          }
+        this.setState({
+          fromAmount: fromAmount,
+          toAmount: fromAmount * this.state.rate
         })
       }
     } else {
-      this.setState((state) => {
-        return {
-          fromAmount: fromAmount,
-          toAmount: fromAmount * this.props.rate
-        }
+      this.setState({
+        fromAmount: fromAmount,
+        toAmount: fromAmount * this.state.rate
       })
     }
   }
@@ -134,7 +142,7 @@ class Index extends React.Component {
   handleDestinationChange(e) {
     const toAmount = e.target.value.replace(/,/g, '');
     this.setState({
-      fromAmount: toAmount / this.props.rate,
+      fromAmount: toAmount / this.state.rate,
       toAmount: toAmount
     })
   }
@@ -271,7 +279,7 @@ class Index extends React.Component {
                   </div>
                 </div>
                 <div className="row rate">
-                  <span className="rate-desc">{this.state.fromCurrency.toUpperCase()}/{this.state.toCurrency.toUpperCase()} Conversion rate</span> <span className="rate-value"><span className="live-rate"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={4} value={this.props.rate} /> {this.state.toCurrency.toUpperCase()}</span></span>
+                  <span className="rate-desc">{this.state.fromCurrency.toUpperCase()}/{this.state.toCurrency.toUpperCase()} Conversion rate</span> <span className="rate-value"><span className="live-rate"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={4} value={this.state.rate} /> {this.state.toCurrency.toUpperCase()}</span></span>
                 </div>
                 <div className="row note">
                   <p style={{maxWidth: "100%", marginBottom: "0"}}>Your transfer will be processed immediately.
@@ -394,21 +402,21 @@ class Index extends React.Component {
               <div className="feature-item">
                 <img src="../static/images/benefit-3.svg"/>
                 <h2>Cheaper & faster</h2>
-                <p>The future is today. Send and Receive currency at the real exchange rate. 
-                5x cheaper and 3x faster than a banks. Make international money transfer 
+                <p>The future is today. Send and Receive currency at the real exchange rate.
+                5x cheaper and 3x faster than a banks. Make international money transfer
                 feels like local transfer.</p>
               </div>
               <div className="feature-item">
                 <img src="../static/images/benefit-4.svg"/>
                 <h2>Rp 18 Billion+ transactions</h2>
-                <p>Through our convenient services, Over Rp. 18 billion 
+                <p>Through our convenient services, Over Rp. 18 billion
                 worth of transaction has been safely handled by Transfree.</p>
               </div>
               <div className="feature-item">
                 <img src="../static/images/benefit-5.svg"/>
                 <h2>1000+ customers</h2>
-                <p>Trust is build with consistency. More than 1000 customers 
-                have saved their money. Trust their international transactions 
+                <p>Trust is build with consistency. More than 1000 customers
+                have saved their money. Trust their international transactions
                 by using our services.</p>
               </div>
             </div>
@@ -891,6 +899,7 @@ class Index extends React.Component {
 const mapStateToProps = (state) => {
   return {
     rate: state.rate.rates,
+    adjustedRates: state.fx.adjustedRates
   }
   if (state.user.user_data) {
     const userData = JSON.parse(state.user.user_data);

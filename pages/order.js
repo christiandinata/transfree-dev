@@ -50,6 +50,7 @@ class Order extends React.Component {
 
   static async getInitialProps(ctx) {
     initialize(ctx);
+    await ctx.store.dispatch(actions.getAdjustedRates('IDR','getAdjustedRates'));
     await ctx.store.dispatch(actions.getRates('GBP','IDR'));
     await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
   };
@@ -305,7 +306,8 @@ const mapStateToProps = (state) => {
   return {
     userData: userData,
     rate: state.rate.rates,
-    vaNumber: state.va.vaNumber
+    vaNumber: state.va.vaNumber,
+    adjustedRates: state.fx.adjustedRates
   }
 }
 

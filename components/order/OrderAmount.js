@@ -27,8 +27,8 @@ class OrderAmount extends React.Component {
 
   componentDidMount() {
     this.setState({
-      rate: this.props.rate,
-      toAmount: this.state.fromAmount * this.props.rate
+      rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
+      toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100 ))
     })
   }
 
@@ -62,24 +62,38 @@ class OrderAmount extends React.Component {
 
   selectSource(country) {
     this.props.getRates(country,this.state.toCurrency).then(() => {
-      this.setState((state) => {
-        return {
+      if (country == 'idr') {
+        this.setState({
+          rate: this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100),
+          fromCurrency: country,
+          toAmount: this.state.fromAmount * (this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100))
+        });
+      } else {
+        this.setState({
+          rate: this.props.rate,
           fromCurrency: country,
           toAmount: this.state.fromAmount * this.props.rate
-        }
-      });
+        });
+      }
       this.hideSource();
     });
   }
 
   selectDestination(country) {
     this.props.getRates(this.state.fromCurrency,country).then(() => {
-      this.setState((state) => {
-        return {
+      if (country == 'idr') {
+        this.setState({
+          rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
+          toCurrency: country,
+          toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
+        });
+      } else {
+        this.setState({
+          rate: this.props.rate,
           toCurrency: country,
           toAmount: this.state.fromAmount * this.props.rate
-        }
-      });
+        });
+      }
       this.hideDestination();
     });
   }
@@ -88,26 +102,20 @@ class OrderAmount extends React.Component {
     const fromAmount = e.target.value.replace(/,/g, '');
     if (this.state.fromCurrency == 'idr') {
       if (fromAmount < 100000) {
-        this.setState((state) => {
-          return {
-            fromAmount: fromAmount,
-            toAmount: 0
-          }
+        this.setState({
+          fromAmount: fromAmount,
+          toAmount: 0
         })
       } else {
-        this.setState((state) => {
-          return {
-            fromAmount: fromAmount,
-            toAmount: fromAmount * this.props.rate
-          }
+        this.setState({
+          fromAmount: fromAmount,
+          toAmount: fromAmount * this.state.rate
         })
       }
     } else {
-      this.setState((state) => {
-        return {
-          fromAmount: fromAmount,
-          toAmount: fromAmount * this.props.rate
-        }
+      this.setState({
+        fromAmount: fromAmount,
+        toAmount: fromAmount * this.state.rate
       })
     }
   }
@@ -115,7 +123,7 @@ class OrderAmount extends React.Component {
   handleDestinationChange(e) {
     const toAmount = e.target.value.replace(/,/g, '');
     this.setState({
-      fromAmount: toAmount / this.props.rate,
+      fromAmount: toAmount / this.state.rate,
       toAmount: toAmount
     })
   }
@@ -123,7 +131,7 @@ class OrderAmount extends React.Component {
   saveAndContinue = (e) => {
     e.preventDefault();
     var data = {
-      rate: this.props.rate,
+      rate: this.state.rate,
       fromCurrency: this.state.fromCurrency,
       toCurrency: this.state.toCurrency,
       fromAmount: this.state.fromAmount,
@@ -178,8 +186,6 @@ class OrderAmount extends React.Component {
                     </div>
                   </div>
                 </div>
-
-                {/* <input id="money-from" type="text" value={this.toCurrency(this.state.fromAmount)} onChange={this.handleSourceChange}/> */}
               </div>
               <div className="destination-container">
                 <div className="money-input-container">
@@ -240,24 +246,16 @@ class OrderAmount extends React.Component {
                     </div>
                   </div>
                 </div>
-                {/* <input id="money-to" type="text" value={this.toCurrency(this.state.toAmount)} onChange={this.handleDestinationChange}/> */}
               </div>
             </div>
             <div className="row rate">
-              <span className="rate-desc">{this.state.fromCurrency.toUpperCase()}/{this.state.toCurrency.toUpperCase()} Conversion rate</span> <span className="rate-value"><span className="live-rate"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={4} value={this.props.rate} /> {this.state.toCurrency.toUpperCase()}</span></span>
+              <span className="rate-desc">{this.state.fromCurrency.toUpperCase()}/{this.state.toCurrency.toUpperCase()} Conversion rate</span> <span className="rate-value"><span className="live-rate"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={4} value={this.state.rate} /> {this.state.toCurrency.toUpperCase()}</span></span>
             </div>
             <div className="row note">
               <p style={{maxWidth: "100%", marginBottom: "0"}}>Your transfer will be processed immediately.
               The recipient will get the money in less than <span className="received-on">24 hours.</span>.</p>
             </div>
             <div className="row converter-cta">
-            {
-              // <div className="cta-secondary">
-              //   <Link href="">
-              //     <a className="btn-secondary">Compare price</a>
-              //   </Link>
-              // </div>
-            }
               <div className="cta-primary">
                 <Link href="/order">
                   <a className="btn-primary" onClick={this.saveAndContinue}>Continue</a>
@@ -265,114 +263,6 @@ class OrderAmount extends React.Component {
               </div>
             </div>
           </div>
-          {
-          // <div className="converter-container-order">
-          //   <div className="row exchange-container">
-          //     <div className="source-container">
-          //       <p style={{textAlign: "left"}}>You send</p>
-          //       <button className="currency-from dropdown-button" onClick={this.toggleSource}>
-          //         <span className={'flag-icon flag-icon-'+this.state.fromCurrency.substring(0,2)+' flag-icon-squared'}></span> {this.state.fromCurrency}
-          //         <FontAwesomeIcon className="caret" icon="caret-down"/>
-          //       </button>
-          //       <div className={this.state.isSourceActive ? 'dropdown-menu show' : 'dropdown-menu'}>
-          //         <ul>
-          //           <li onClick={this.selectSource.bind(this,'idr')}>
-          //             <a className="dropdown-item">
-          //               <span className="flag-icon flag-icon-id flag-icon-squared"></span> IDR
-          //             </a>
-          //           </li>
-          //           <li onClick={this.selectSource.bind(this,'gbp')}>
-          //             <a className="dropdown-item">
-          //               <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP
-          //             </a>
-          //           </li>
-          //           <li onClick={this.selectSource.bind(this,'usd')}>
-          //             <a className="dropdown-item">
-          //               <span className="flag-icon flag-icon-us flag-icon-squared"></span> USD
-          //             </a>
-          //           </li>
-          //         </ul>
-          //       </div>
-          //       <NumberFormat
-          //         id="money-from"
-          //         type="text"
-          //         thousandSeparator={true}
-          //         decimalScale={2}
-          //         value={this.state.fromAmount}
-          //         onKeyUp={this.handleSourceChange}/>
-          //     </div>
-          //     <div className="destination-container">
-          //       <p style={{textAlign: "left"}}>Recipient gets</p>
-          //       <button className="currency-from dropdown-button" onClick={this.toggleDestination}>
-          //         <span className={'flag-icon flag-icon-'+this.state.toCurrency.substring(0,2)+' flag-icon-squared'}></span> {this.state.toCurrency}
-          //         <FontAwesomeIcon className="caret" icon="caret-down"/>
-          //       </button>
-          //       <div className={this.state.isDestinationActive ? 'dropdown-menu show' : 'dropdown-menu'}>
-          //         <ul>
-          //           <li onClick={this.selectDestination.bind(this,'myr')}>
-          //             <a className="dropdown-item">
-          //               <span className="flag-icon flag-icon-my flag-icon-squared"></span> MYR
-          //             </a>
-          //           </li>
-          //           <li onClick={this.selectDestination.bind(this,'krw')}>
-          //             <a className="dropdown-item">
-          //               <span className="flag-icon flag-icon-kr flag-icon-squared"></span> KRW
-          //             </a>
-          //           </li>
-          //           <li onClick={this.selectDestination.bind(this,'gbp')}>
-          //             <a className="dropdown-item">
-          //               <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP
-          //             </a>
-          //           </li>
-          //           <li onClick={this.selectDestination.bind(this,'usd')}>
-          //             <a className="dropdown-item">
-          //               <span className="flag-icon flag-icon-us flag-icon-squared"></span> USD
-          //             </a>
-          //           </li>
-          //           <li onClick={this.selectDestination.bind(this,'eur')}>
-          //             <a className="dropdown-item">
-          //               <span className="flag-icon flag-icon-eu flag-icon-squared"></span> EUR
-          //             </a>
-          //           </li>
-          //
-          //           <li onClick={this.selectDestination.bind(this,'hkd')}>
-          //             <a className="dropdown-item">
-          //               <span className="flag-icon flag-icon-hk flag-icon-squared"></span> HKD
-          //             </a>
-          //           </li>
-          //         </ul>
-          //       </div>
-          //       <NumberFormat
-          //         id="money-to"
-          //         type="text"
-          //         thousandSeparator={true}
-          //         decimalScale={2}
-          //         value={this.state.toAmount}
-          //         onKeyUp={this.handleDestinationChange}/>
-          //     </div>
-          //   </div>
-          //   <div className="row rate">
-          //     <span className="rate-desc">Currency rate {this.state.fromCurrency.toUpperCase()}/{this.state.toCurrency.toUpperCase()}</span>
-          //     <span className="rate-value"><span className="live-rate"><NumberFormat displayType={'text'} thousandSeparator={true} value={this.props.rate} /></span></span>
-          //   </div>
-          //   <div className="row note">
-          //     <p>Your transfer will be processed immediately.
-          //     The recipient will get the money in less than <span className="received-on">24 hours.</span>.</p>
-          //   </div>
-          //   <div className="row converter-cta">
-          //     <div className="cta-secondary">
-          //       <Link href="">
-          //         <a className="btn-secondary">Compare price</a>
-          //       </Link>
-          //     </div>
-          //     <div className="cta-primary">
-          //       <Link href="">
-          //         <a className="btn-primary" onClick={this.saveAndContinue}>Continue</a>
-          //       </Link>
-          //     </div>
-          //   </div>
-          // </div>
-          }
         <style jsx>{`
           .container-fluid {
             display: flex;
@@ -496,7 +386,7 @@ class OrderAmount extends React.Component {
 
           .cta-secondary,
           .cta-primary {
-            flex-basis: 50%;
+            flex-basis: 100%;
             padding: 5px;
           }
 
@@ -577,6 +467,10 @@ class OrderAmount extends React.Component {
             transition: none;
           }
 
+          .btn-primary {
+            width: 100%;
+          }
+
 
           @media only screen and (max-width: 414px) {
             .converter-container-order {
@@ -610,6 +504,7 @@ class OrderAmount extends React.Component {
 
 const mapStateToProps = (state) => ({
   rate: state.rate.rates,
+  adjustedRates: state.fx.adjustedRates
 });
 
 export default connect(mapStateToProps, rateActions)(OrderAmount);
