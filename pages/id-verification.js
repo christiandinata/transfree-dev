@@ -133,7 +133,8 @@ class IdVerification extends React.Component {
               value={this.state.address}
               onChange={e => this.setState({ address: e.target.value })}/>
 
-            <p className="description"> * We will not, in any circumstances, share your personal information irresponsibly.</p>
+            <p className="description"> * We will not, in any circumstances, share your personal information irresponsibly.
+            <a  href="/privacy-policy"  target="_blank" className="more-privacy" > More about Privacy Policy </a></p>
 
             <button type="submit" className="btn-primary">{this.props.inProgress ? (
               <FontAwesomeIcon icon="sync-alt" spin/>
@@ -186,7 +187,9 @@ class IdVerification extends React.Component {
             font-size: 14px;
             margin: 0px 0px 20px 0px !important;
           }
-
+          .more-privacy{
+            color:#e79635;
+          }
         `}</style>
       </div>
     )
