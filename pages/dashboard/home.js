@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import DashboardLayout from '../../components/DashboardLayout';
-import IndexLayout from '../../components/dashboard/IndexLayout';
+import Header from '../../components/header.js';
+import MenuAdmin from '../../components/menuAdmin.js';
 import { connect } from 'react-redux';
 import initialize from '../../utils/initialize';
 import actions from '../../redux/actions';
@@ -15,16 +15,22 @@ class Home extends React.Component {
     initialize(ctx);
   };
 
-  renderContent() {
-    return <IndexLayout />
-  }
-
   render() {
     return (
-      <DashboardLayout>
-        {this.renderContent()}
-      </DashboardLayout>
-    );
+      <div>
+        <Header />
+        <MenuAdmin/>
+        <div className="container-fluid">
+          <h1>Dashboard admin</h1>
+        </div>
+        <style jsx>{`
+          .container-fluid {
+            align-items: flex-start;
+            height; auto;
+          }
+        `}</style>
+      </div>
+    )
   }
 }
 

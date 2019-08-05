@@ -31,9 +31,9 @@ const register = ({ fullname, email, password }, type) => {
         const userData = JSON.parse(response.data.user_data);
         setCookie('_id', userData._id)
         if (userData.role == 'admin') {
-          Router.push('/dashboard/users')
+          Router.replace('/dashboard/home')
         } else {
-          Router.push('/phone');
+          Router.replace('/phone');
         }
         // const userData = JSON.stringify()
         dispatch({type: REGISTER, payload: response.data.token});
@@ -73,23 +73,23 @@ const authenticate = ({ email, password }, type) => {
         const userData = JSON.parse(response.data.user_data);
         setCookie('_id', userData._id)
         if (userData.role == 'admin') {
-          Router.push('/dashboard/users')
+          Router.replace('/dashboard/home')
         } else {
           if (userData.isApproved) {
-            Router.push('/account');
+            Router.replace('/account');
           } else {
             switch(userData.registrationStep) {
               case 1:
-                Router.push('/phone');
+                Router.replace('/phone');
                 break;
               case 2:
-                Router.push('/id-verification');
+                Router.replace('/id-verification');
                 break;
               case 3:
-                Router.push('/photo-verification');
+                Router.replace('/photo-verification');
                 break;
               case 4:
-                Router.push('/account');
+                Router.replace('/account');
                 break;
             }
           }
@@ -130,7 +130,7 @@ export const reauthenticate = (token) => {
 export const deauthenticate = () => {
   return (dispatch) => {
     removeCookie('token');
-    Router.push('/');
+    Router.replace('/');
     dispatch({type: DEAUTHENTICATE});
   };
 };

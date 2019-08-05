@@ -1196,14 +1196,17 @@ class Index extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    rate: state.rate.rates,
-    adjustedRates: state.fx.adjustedRates
-  }
-  if (state.user.user_data) {
+  if (state.user.user_data != null) {
     const userData = JSON.parse(state.user.user_data);
     return {
       isApproved: !!userData.isApproved,
+      rate: state.rate.rates,
+      adjustedRates: state.fx.adjustedRates
+    }
+  } else {
+    return {
+      rate: state.rate.rates,
+      adjustedRates: state.fx.adjustedRates
     }
   }
 
