@@ -130,7 +130,6 @@ class OrderAmount extends React.Component {
     });
   }
 
-
   handleSourceChange(e) {
     const fromAmount = e.target.value.replace(/,/g, '');
     if (this.state.fromCurrency == 'idr') {
@@ -142,13 +141,13 @@ class OrderAmount extends React.Component {
       } else {
         this.setState({
           fromAmount: fromAmount,
-          toAmount: fromAmount * this.state.rate
+          toAmount: fromAmount / this.state.rate
         })
       }
     } else {
       this.setState({
         fromAmount: fromAmount,
-        toAmount: fromAmount * this.state.rate
+        toAmount: fromAmount / this.state.rate
       })
     }
   }
@@ -156,7 +155,7 @@ class OrderAmount extends React.Component {
   handleDestinationChange(e) {
     const toAmount = e.target.value.replace(/,/g, '');
     this.setState({
-      fromAmount: toAmount / this.state.rate,
+      fromAmount: toAmount * this.state.rate,
       toAmount: toAmount
     })
   }
