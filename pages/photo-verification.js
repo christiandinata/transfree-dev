@@ -306,8 +306,8 @@ class PhotoVerification extends React.Component {
             //   <label htmlFor="photo-face">Upload</label><br/>
             // </div>
             }
-
-            <p className="description"> * We will not, in any circumstances, share your personal information irresponsibly.</p>
+            <p className="description"> * We will not, in any circumstances, share your personal information irresponsibly.
+            <a className="more-privacy" href="/privacy-policy" target="_blank"> More about Privacy Policy </a></p>
 
             <div className="cta-submit">
               <button type="submit" className={((this.state.uploadPhotoIdSrc == null && this.state.webcamPhotoIdSrc == null) || (this.state.uploadPhotoFaceSrc == null && this.state.webcamPhotoFaceSrc == null)) ? 'btn-disabled' : 'btn-primary'}>{this.props.inProgress ? (
@@ -354,7 +354,7 @@ class PhotoVerification extends React.Component {
           }
 
           .cta-submit {
-            margin-top: 50px;
+            margin-top: 20px;
           }
 
            .description{
@@ -362,6 +362,10 @@ class PhotoVerification extends React.Component {
             font-size: 14px;
             margin: 40px 0px 0px 0px !important;
           }
+          .more-privacy{
+            color:#e79635;
+          }
+
         `}</style>
       </div>
     )
