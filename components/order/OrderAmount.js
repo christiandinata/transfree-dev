@@ -69,11 +69,19 @@ class OrderAmount extends React.Component {
           toAmount: this.state.fromAmount * (this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100))
         });
       } else {
-        this.setState({
-          rate: this.props.rate,
-          fromCurrency: country,
-          toAmount: this.state.fromAmount * this.props.rate
-        });
+        if (this.state.toCurrency == 'idr') {
+          this.setState({
+            rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
+            fromCurrency: country,
+            toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
+          })
+        } else {
+          this.setState({
+            rate: this.props.rate,
+            fromCurrency: country,
+            toAmount: this.state.fromAmount * this.props.rate
+          });
+        }
       }
       this.hideSource();
     });
@@ -88,11 +96,19 @@ class OrderAmount extends React.Component {
           toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
         });
       } else {
-        this.setState({
-          rate: this.props.rate,
-          toCurrency: country,
-          toAmount: this.state.fromAmount * this.props.rate
-        });
+        if (this.state.fromCurrency == 'idr') {
+          this.setState({
+            rate: this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100),
+            toCurrency: country,
+            toAmount: this.state.fromAmount * (this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100))
+          });
+        } else {
+          this.setState({
+            rate: this.props.rate,
+            toCurrency: country,
+            toAmount: this.state.fromAmount * this.props.rate
+          });
+        }
       }
       this.hideDestination();
     });
