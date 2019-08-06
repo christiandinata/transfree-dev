@@ -324,6 +324,7 @@ const OrderLayout = ({ordersList}) => {
           width: 768px;
           height: auto;
           margin: 30px auto;
+          padding: 0;
           background: #FFFFFF;
           box-shadow: 0 10px 30px 0 rgba(0,0,0,0.10);
           border-radius: 8px;
@@ -438,12 +439,10 @@ class Account extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const userData = JSON.parse(state.user.user_data);
-  const orderArray = JSON.parse(state.order.orders);
   return {
-    isApproved: !!userData.isApproved,
-    userData: userData,
-    orderArray: orderArray
+    isApproved: !!state.user.user_data.isApproved,
+    userData: state.user.user_data,
+    orderArray: state.order.orders
   }
 }
 

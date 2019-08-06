@@ -76,11 +76,10 @@ class PhoneVerification extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const userData = JSON.parse(state.user.user_data);
   return {
     serviceSid: state.verify.serviceSid,
-    phone: userData.phone,
-    email: userData.email,
+    phone: state.user.user_data.phone,
+    email: state.user.user_data.email,
     inProgress: state.verify.inProgress,
   }
 };

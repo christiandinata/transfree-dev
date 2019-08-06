@@ -373,9 +373,8 @@ class PhotoVerification extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const userData = JSON.parse(state.user.user_data);
   return {
-    email: userData.email,
+    email: state.user.user_data.email,
     inProgress: state.photo.inProgress,
   }
 };

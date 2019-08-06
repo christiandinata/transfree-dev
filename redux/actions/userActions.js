@@ -2,7 +2,8 @@ import Router from 'next/router';
 import axios from 'axios';
 import {
   USER_DATA,
-  USER_DATA_ARRAY
+  USER_DATA_ARRAY,
+  USER_DATA_ARRAY_IN_PROGRESS
 } from '../types';
 import { API } from '../../config';
 
@@ -26,6 +27,7 @@ const getAllUsers = (page, type) => {
     throw new Error('Wrong API call!');
   }
   return async (dispatch) => {
+    dispatch({type: USER_DATA_ARRAY_IN_PROGRESS, payload: true});
     await axios.get(`${API}/${type}?page=`+page)
       .then((response) => {
         dispatch({type: USER_DATA_ARRAY, payload: response.data.user_data_array});

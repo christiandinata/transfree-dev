@@ -8,6 +8,8 @@ import actions from '../../redux/actions';
 import { getCookie } from '../../utils/cookie';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
+import Pagination from "react-js-pagination";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class OrderItem extends React.Component {
   constructor(props) {
@@ -121,14 +123,18 @@ class OrderItem extends React.Component {
 class Orders extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      activePage: 1
+    }
 
     this.paymentReceived = this.paymentReceived.bind(this);
     this.transferCompleted = this.transferCompleted.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
   }
 
   static async getInitialProps(ctx) {
     initialize(ctx);
-    await ctx.store.dispatch(actions.getAllOrders('getAllOrders'));
+    await ctx.store.dispatch(actions.getAllOrders(1,'getAllOrders'));
   };
 
   paymentReceived(_id) {
@@ -138,6 +144,11 @@ class Orders extends React.Component {
 
   transferCompleted(_id) {
     this.props.transferCompleted({_id: _id}, 'transferCompleted');
+  }
+
+  handlePageChange(pageNumber) {
+    this.setState({activePage: pageNumber});
+    this.props.getAllOrders(pageNumber, 'getAllOrders');
   }
 
   render() {
@@ -153,12 +164,56 @@ class Orders extends React.Component {
                 <input type="text" placeholder="Search user"/>
               </div>
             </div>
-            <form className="form-container">
-              <OrderItem orders={this.props.orders} paymentReceived={this.paymentReceived} transferCompleted={this.transferCompleted}/>
-            </form>
+            { this.props.inProgress ? (
+              <div className="overlay">
+                <div className="overlay-content">
+                  <FontAwesomeIcon icon="sync-alt" color="white" size="4x" spin/>
+                  <p>Getting list of orders from database...</p>
+                </div>
+              </div>
+            ) : (
+              <form className="form-container">
+                <OrderItem orders={this.props.orders} paymentReceived={this.paymentReceived} transferCompleted={this.transferCompleted}/>
+                <div className="pagination-container">
+                  <Pagination
+                    activePage={this.state.activePage}
+                    itemsCountPerPage={10}
+                    totalItemsCount={this.props.totalDocs}
+                    pageRangeDisplayed={5}
+                    onChange={this.handlePageChange}
+                  />
+                </div>
+              </form>
+            )}
           </div>
         </div>
         <style jsx>{`
+          .overlay {
+            display: block;
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0, 0.9);
+            transition: 0.3s;
+            color: #fff;
+          }
+
+          .overlay-content {
+            position: relative;
+            top: 30%;
+            width: 100%;
+            text-align: center;
+            margin-top: 30px;
+          }
+
+          .pagination-container {
+            padding: 30px 0;
+          }
+
           .container-fluid {
             align-items: flex-start;
             height; auto;
@@ -239,9 +294,15 @@ class Orders extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const orderArray = JSON.parse(state.order.orders);
-  return {
-    orders: orderArray
+  if (state.order.orders != null) {
+    return {
+      orders: state.order.orders.docs,
+      totalDocs: state.order.orders.totalDocs
+    }
+  } else {
+    return {
+      inProgress: state.user.inProgress
+    }
   }
 }
 

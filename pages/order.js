@@ -308,9 +308,8 @@ class Order extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const userData = JSON.parse(state.user.user_data);
   return {
-    userData: userData,
+    userData: state.user.user_data,
     rate: state.rate.rates,
     vaNumber: state.va.vaNumber,
     adjustedRates: state.fx.adjustedRates

@@ -28,14 +28,13 @@ const register = ({ fullname, email, password }, type) => {
     axios.post(`${API}/${type}`, {fullname, email, password})
       .then((response) => {
         setCookie('token', response.data.token);
-        const userData = JSON.parse(response.data.user_data);
+        const userData = response.data.user_data;
         setCookie('_id', userData._id)
         if (userData.role == 'admin') {
           Router.replace('/dashboard/home')
         } else {
           Router.replace('/phone');
         }
-        // const userData = JSON.stringify()
         dispatch({type: REGISTER, payload: response.data.token});
         dispatch({type: USER_DATA, payload: response.data.user_data});
       })
@@ -70,7 +69,7 @@ const authenticate = ({ email, password }, type) => {
     axios.post(`${API}/${type}`, { email, password })
       .then((response) => {
         setCookie('token', response.data.token);
-        const userData = JSON.parse(response.data.user_data);
+        const userData = response.data.user_data;
         setCookie('_id', userData._id)
         if (userData.role == 'admin') {
           Router.replace('/dashboard/home')

@@ -2,7 +2,8 @@ import Router from 'next/router';
 import axios from 'axios';
 import {
   ORDER_DATA,
-  ORDER_DATA_ARRAY
+  ORDER_DATA_ARRAY,
+  ORDER_DATA_ARRAY_IN_PROGRESS
 } from '../types';
 import { API } from '../../config';
 
@@ -53,12 +54,13 @@ const getOrderByUid = (uid , type) => {
   };
 };
 
-const getAllOrders = (type) => {
+const getAllOrders = (page,type) => {
   if (type !== 'getAllOrders') {
     throw new Error('Wrong API call!');
   }
   return async (dispatch) => {
-    await axios.get(`${API}/${type}`)
+    dispatch({type: ORDER_DATA_ARRAY_IN_PROGRESS, payload: true});
+    await axios.get(`${API}/${type}?page=`+page)
       .then((response) => {
         dispatch({type: ORDER_DATA_ARRAY, payload: response.data.order_data_array});
       })

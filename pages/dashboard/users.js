@@ -7,6 +7,7 @@ import actions from '../../redux/actions';
 import { getCookie } from '../../utils/cookie';
 import moment from 'moment';
 import Pagination from "react-js-pagination";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class UserItem extends React.Component {
   constructor(props) {
@@ -225,25 +226,65 @@ class Users extends React.Component {
                 <input type="text" placeholder="Search user"/>
               </div>
             </div>
-            <form className="form-container">
-              <UserItem users={this.props.users} approveUser={this.approveUser} totalDocs={this.props.totalDocs}/>
-              <div className="pagination-container">
-                <Pagination
-                  activePage={this.state.activePage}
-                  itemsCountPerPage={10}
-                  totalItemsCount={this.props.totalDocs}
-                  pageRangeDisplayed={5}
-                  onChange={this.handlePageChange}
-                />
+            { this.props.inProgress ? (
+              <div className="overlay">
+                <div className="overlay-content">
+                  <FontAwesomeIcon icon="sync-alt" color="white" size="4x" spin/>
+                  <p>Getting list of users from database...</p>
+                </div>
               </div>
-            </form>
+            ) : (
+              <form className="form-container">
+                <UserItem users={this.props.users} approveUser={this.approveUser} totalDocs={this.props.totalDocs}/>
+                <div className="pagination-container">
+                  <Pagination
+                    activePage={this.state.activePage}
+                    itemsCountPerPage={10}
+                    totalItemsCount={this.props.totalDocs}
+                    pageRangeDisplayed={5}
+                    onChange={this.handlePageChange}
+                  />
+                </div>
+              </form>
+            )}
           </div>
         </div>
         <style jsx>{`
+          .overlay {
+            display: block;
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0, 0.9);
+            transition: 0.3s;
+            color: #fff;
+          }
+
+          .overlay-content {
+            position: relative;
+            top: 30%;
+            width: 100%;
+            text-align: center;
+            margin-top: 30px;
+          }
+
+          .overlay-show {
+            display; block;
+          }
+
+          .overlay-content p {
+            margin: 30px auto;
+          }
+
           .container-fluid {
             align-items: flex-start;
             height; auto;
           }
+
           .container-fixed {
             max-width: 1280px;
             margin: 50px auto;
@@ -324,9 +365,15 @@ class Users extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    users: state.user.user_data_array.docs,
-    totalDocs: state.user.user_data_array.totalDocs
+  if (state.user.user_data_array != null) {
+    return {
+      users: state.user.user_data_array.docs,
+      totalDocs: state.user.user_data_array.totalDocs
+    }
+  } else {
+    return {
+      inProgress: state.user.inProgress
+    }
   }
 }
 

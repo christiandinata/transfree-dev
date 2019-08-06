@@ -1197,9 +1197,8 @@ class Index extends React.Component {
 
 const mapStateToProps = (state) => {
   if (state.user.user_data != null) {
-    const userData = JSON.parse(state.user.user_data);
     return {
-      isApproved: !!userData.isApproved,
+      isApproved: !!state.user.user_data.isApproved,
       rate: state.rate.rates,
       adjustedRates: state.fx.adjustedRates
     }

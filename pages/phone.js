@@ -80,9 +80,8 @@ class Phone extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const userData = JSON.parse(state.user.user_data);
   return {
-    email: userData.email,
+    email: state.user.user_data.email,
     isAuthenticated: !!state.authentication.token,
     inProgress: state.verify.inProgress,
     errorMessage: state.verify.errorMessage

@@ -197,10 +197,9 @@ class IdVerification extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const userData = JSON.parse(state.user.user_data);
   return {
     inProgress: state.id.inProgress,
-    email: userData.email
+    email: state.user.user_data.email
   }
 };
 
