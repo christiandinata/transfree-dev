@@ -21,12 +21,12 @@ const getUser = (uid, type) => {
   };
 };
 
-const getAllUsers = ({} , type) => {
+const getAllUsers = (page, type) => {
   if (type !== 'getAllUsers') {
     throw new Error('Wrong API call!');
   }
   return async (dispatch) => {
-    await axios.get(`${API}/${type}`)
+    await axios.get(`${API}/${type}?page=`+page)
       .then((response) => {
         dispatch({type: USER_DATA_ARRAY, payload: response.data.user_data_array});
       })

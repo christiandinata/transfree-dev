@@ -351,6 +351,29 @@ const Header = () => (
         margin: 50px auto;
       }
 
+      ul.pagination {
+        list-style-type: none;
+      }
+
+      ul.pagination  li {
+        display: inline-block;
+      }
+
+      ul.pagination li a {
+        padding: 8px 16px;
+      }
+
+      ul.pagination li.active a {
+        background-color: #469DDD;
+        border-radius: 2px;
+        color: white;
+      }
+
+      ul.pagination li a:hover {
+        background-color: #eaeaea;
+        border-radius: 2px;
+      }
+
       @media only screen and (max-width: 414px) {
         h1 {
           font-size: 1.5rem;
