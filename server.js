@@ -81,7 +81,7 @@ app.prepare()
       if(!req.cookies.token) {
         res.redirect('/login');
       } else {
-        return app.render(req, res, '/id-verification', req.query);
+        return app.render(req, res, '/', req.query);
       }
     });
 
