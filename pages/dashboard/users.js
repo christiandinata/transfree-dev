@@ -272,10 +272,6 @@ class Users extends React.Component {
             margin-top: 30px;
           }
 
-          .overlay-show {
-            display; block;
-          }
-
           .overlay-content p {
             margin: 30px auto;
           }

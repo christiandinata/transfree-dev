@@ -152,6 +152,7 @@ class Orders extends React.Component {
   }
 
   render() {
+    console.log(this.props.orders);
     return (
       <div>
         <Header />
@@ -208,6 +209,10 @@ class Orders extends React.Component {
             width: 100%;
             text-align: center;
             margin-top: 30px;
+          }
+
+          .overlay-content p {
+            margin: 30px auto;
           }
 
           .pagination-container {
@@ -301,7 +306,7 @@ const mapStateToProps = (state) => {
     }
   } else {
     return {
-      inProgress: state.user.inProgress
+      inProgress: state.order.inProgress
     }
   }
 }
