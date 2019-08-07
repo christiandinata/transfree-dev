@@ -32,7 +32,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
       </div>
       <div className="header-container">
         <div className="logo">
-            {(isAuthenticated && (<Link href="/account"><a><img src="../static/images/transfree-logo.png"/></a></Link>)) ||
+            {(isAuthenticated && (<Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>)) ||
              (<Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>)}
         </div>
         <div className="header-menu">
