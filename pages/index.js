@@ -194,9 +194,16 @@ class Index extends React.Component {
               <h1 className="h1-bawah">like local</h1>
               <div className="desktop">
 
-                <Link href="">
-                  <a className="btn-secondary">See how it works</a>
-                </Link>
+
+                <div className="external-link">
+                  <div className="external-link-left">
+                    <a href="" className="btn-secondary">See how it works</a>
+                  </div>
+                 <div className="external-link-right">
+                        <a style={{paddingRight: "35px",paddingLeft: "35px",paddingTop: "9.5px",paddingBottom: "9.5px"}} className="btn-primary"  href="https://www.transfree.co.uk/" target="_blank">Sell and Buy Money</a>
+                  </div>
+                </div>
+
                 <div className="benefits">
                   <div className="benefit-item">
                     <img src="../static/images/benefit-1.svg"/>
@@ -338,6 +345,9 @@ class Index extends React.Component {
                     <Link href="/order">
                       <a className="btn-primary">Get started</a>
                     </Link>
+                    <div className="mobile-sell-buy">
+                        <a style={{marginTop: "20px"}} href="https://www.transfree.co.uk/" target="_blank" className="btn-secondary sell-buy">Sell & Buy Money Online</a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -564,11 +574,28 @@ class Index extends React.Component {
           </div>
         </div>
         <style jsx>{`
+
+
           .desktop {
             margin-top:40px;
             display: block;
           }
-
+          .sell-buy {
+            color: white;
+            background-color: none;
+            border-color: #5a9cd8
+          }
+          .external-link{
+            display: flex;
+            margin-top: 50px; 
+          }
+          .external-link-right {
+            lex-basis: 40%;
+            margin-left : 20px;
+          }
+          .mobile-sell-buy{
+            display: none;
+          }
           .h1-bawah{
             margin-top:0px !important;
           }
@@ -1028,6 +1055,7 @@ class Index extends React.Component {
               display: block;
 
             }
+
             .logo img {
               width :50%;
               height :50%;
