@@ -1066,9 +1066,9 @@ class Index extends React.Component {
               margin-top: 0;
               padding-bottom:0px !important;
             }
-
-
-
+            .mobile-sell-buy{
+              display: block;
+            }
             h1 {
               font-size: 1.8rem;
               line-height: 1.5;
