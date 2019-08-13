@@ -196,12 +196,19 @@ class Index extends React.Component {
 
 
                 <div className="external-link">
+      
                   <div className="external-link-left">
-                    <a href="" className="btn-secondary">See how it works</a>
+                    <a href={"#video-transfree"} className="btn-secondary">See how it works</a>
+                    <a href="#_" className="lightbox" id={"video-transfree"}>
+                    <iframe src="https://www.youtube.com/embed/8RzCs_sQ8Ak" frameborder="0" allow="accelerometer; 
+                     autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </a>                 
                   </div>
-                 <div className="external-link-right">
+      
+                  <div className="external-link-right">
                         <a style={{paddingRight: "35px",paddingLeft: "35px",paddingTop: "9.5px",paddingBottom: "9.5px"}} className="btn-primary"  href="https://www.transfree.co.uk/" target="_blank">Sell and Buy Money</a>
                   </div>
+      
                 </div>
 
                 <div className="benefits">
@@ -354,8 +361,8 @@ class Index extends React.Component {
             <div className="right-bottom-container">
               <h1>International money transfer feels like local</h1>
               <center>
-                <Link href="">
-                  <a className="btn-secondary">See how it works</a>
+                <Link>
+                  <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-secondary">See how it works</a>
                 </Link>
               </center>
             </div>
@@ -575,6 +582,36 @@ class Index extends React.Component {
         </div>
         <style jsx>{`
 
+        /** LIGHTBOX MARKUP **/
+        .lightbox {
+          /** Default lightbox to hidden */
+          display: none;
+
+          /** Position and style */
+          position: fixed;
+          z-index: 999;
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          top: 0;
+          left: 0;
+          background: rgba(0,0,0,0.8);
+        }
+
+        .lightbox iframe {
+          /** Pad the lightbox image */
+          min-width: 55%;
+          min-height: 60%;
+          margin-top: 10%;
+        }
+
+        .lightbox:target {
+          /** Remove default browser outline */
+          outline: none;
+
+          /** Unhide lightbox **/
+          display: block;
+        }
 
           .desktop {
             margin-top:40px;
