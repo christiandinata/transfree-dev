@@ -309,11 +309,18 @@ class PhotoVerification extends React.Component {
             <p className="description"> * We will not, in any circumstances, share your personal information irresponsibly.
             <a className="more-privacy" href="/privacy-policy" target="_blank"> More about Privacy Policy </a></p>
 
-            <div className="cta-submit">
-              <button type="submit" className={((this.state.uploadPhotoIdSrc == null && this.state.webcamPhotoIdSrc == null) || (this.state.uploadPhotoFaceSrc == null && this.state.webcamPhotoFaceSrc == null)) ? 'btn-disabled' : 'btn-primary'}>{this.props.inProgress ? (
-                <FontAwesomeIcon icon="sync-alt" spin/>
-              ) : 'Continue'}</button>
-            </div>
+            {(this.state.uploadPhotoIdSrc != null && this.state.uploadPhotoFaceSrc != null)?
+              (
+              <div className="cta-submit">
+                <button type="submit" className={'btn-primary'}>{this.props.inProgress ? (
+                  <FontAwesomeIcon icon="sync-alt" spin/>
+                ) : 'Continue'}</button>
+              </div>
+              ) : 
+              <div className="cta-submit">
+                <button disabled={"disabled"} className={'btn-disabled'}>Continue</button>
+              </div>
+            }
           </form>
         </div>
         <style jsx>{`
