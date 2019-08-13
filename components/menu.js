@@ -21,6 +21,8 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
         <ul id="menu">
           {!isAuthenticated && <li><Link href="/about"><a>About</a></Link></li>}
           {!isAuthenticated && <li><Link href="/faq"><a>FAQ</a></Link></li>}
+          {!isAuthenticated && <li><Link><a href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree" target="_blank">Chat With Us</a></Link></li>}
+
           {/* !isAuthenticated && <li><Link href="/"><a>How it works</a></Link></li> */}
           {isAuthenticated && isApproved && <li><Link href="/order"><a>Send money</a></Link></li>}
           {isAuthenticated && isApproved && <li><Link href="/account"><a>Transactions</a></Link></li>}
@@ -32,13 +34,15 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
       </div>
       <div className="header-container">
         <div className="logo">
-            {(isAuthenticated && (<Link href="/account"><a><img src="../static/images/transfree-logo.png"/></a></Link>)) ||
+            {(isAuthenticated && (<Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>)) ||
              (<Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>)}
         </div>
         <div className="header-menu">
           <ul>
             {!isAuthenticated && <li><Link href="/about"><a>About</a></Link></li>}
             {!isAuthenticated && <li><Link href="/faq"><a>FAQ</a></Link></li>}
+            {!isAuthenticated && <li><Link><a href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree" target="_blank">Chat With Us</a></Link></li>}
+
             {/* !isAuthenticated && <li><Link href="/"><a>How it works</a></Link></li> */}
             {isAuthenticated && isApproved && <li><Link href="/order"><a>Send money</a></Link></li>}
             {isAuthenticated && isApproved && <li><Link href="/account"><a>Transactions</a></Link></li>}

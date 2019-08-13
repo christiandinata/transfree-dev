@@ -207,9 +207,23 @@ class Index extends React.Component {
               <h1 className="h1-bawah">like local</h1>
               <div className="desktop">
 
-                <Link href="">
-                  <a className="btn-secondary">See how it works</a>
-                </Link>
+
+                <div className="external-link">
+      
+                  <div className="external-link-left">
+                    <a href={"#video-transfree"} className="btn-secondary">See how it works</a>
+                    <a href="#_" className="lightbox" id={"video-transfree"}>
+                    <iframe src="https://www.youtube.com/embed/8RzCs_sQ8Ak" frameborder="0" allow="accelerometer; 
+                     autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </a>                 
+                  </div>
+      
+                  <div className="external-link-right">
+                        <a style={{paddingRight: "35px",paddingLeft: "35px",paddingTop: "9.5px",paddingBottom: "9.5px"}} className="btn-primary"  href="https://www.transfree.co.uk/" target="_blank">Sell and Buy Money</a>
+                  </div>
+      
+                </div>
+
                 <div className="benefits">
                   <div className="benefit-item">
                     <img src="../static/images/benefit-1.svg"/>
@@ -351,14 +365,17 @@ class Index extends React.Component {
                     <Link href="/order">
                       <a className="btn-primary">Get started</a>
                     </Link>
+                    <div className="mobile-sell-buy">
+                        <a style={{marginTop: "20px"}} href="https://www.transfree.co.uk/" target="_blank" className="btn-secondary sell-buy">Sell & Buy Money Online</a>
+                    </div>
                   </div>
                 </div>
               </div>
             <div className="right-bottom-container">
               <h1>International money transfer feels like local</h1>
               <center>
-                <Link href="">
-                  <a className="btn-secondary">See how it works</a>
+                <Link>
+                  <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-secondary">See how it works</a>
                 </Link>
               </center>
             </div>
@@ -577,11 +594,58 @@ class Index extends React.Component {
           </div>
         </div>
         <style jsx>{`
+
+        /** LIGHTBOX MARKUP **/
+        .lightbox {
+          /** Default lightbox to hidden */
+          display: none;
+
+          /** Position and style */
+          position: fixed;
+          z-index: 999;
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          top: 0;
+          left: 0;
+          background: rgba(0,0,0,0.8);
+        }
+
+        .lightbox iframe {
+          /** Pad the lightbox image */
+          min-width: 55%;
+          min-height: 60%;
+          margin-top: 10%;
+        }
+
+        .lightbox:target {
+          /** Remove default browser outline */
+          outline: none;
+
+          /** Unhide lightbox **/
+          display: block;
+        }
+
           .desktop {
             margin-top:40px;
             display: block;
           }
-
+          .sell-buy {
+            color: white;
+            background-color: none;
+            border-color: #5a9cd8
+          }
+          .external-link{
+            display: flex;
+            margin-top: 50px; 
+          }
+          .external-link-right {
+            lex-basis: 40%;
+            margin-left : 20px;
+          }
+          .mobile-sell-buy{
+            display: none;
+          }
           .h1-bawah{
             margin-top:0px !important;
           }
@@ -1041,6 +1105,7 @@ class Index extends React.Component {
               display: block;
 
             }
+
             .logo img {
               width :50%;
               height :50%;
@@ -1051,9 +1116,9 @@ class Index extends React.Component {
               margin-top: 0;
               padding-bottom:0px !important;
             }
-
-
-
+            .mobile-sell-buy{
+              display: block;
+            }
             h1 {
               font-size: 1.8rem;
               line-height: 1.5;
