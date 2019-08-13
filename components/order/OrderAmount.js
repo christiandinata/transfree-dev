@@ -61,8 +61,8 @@ class OrderAmount extends React.Component {
   }
 
   selectSource(country) {
-    this.props.getRates(this.state.toCurrency, country).then(() => {
-      if (country == 'idr') {
+    if (country == 'idr') {
+      this.props.getRates(this.state.toCurrency, country).then(() => {
         if (this.state.toCurrency == 'idr') {
           this.setState({
             rate: 1,
@@ -76,7 +76,9 @@ class OrderAmount extends React.Component {
             toAmount: this.state.fromAmount / (this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100))
           });
         }
-      } else {
+      });
+    } else {
+      this.props.getRates(country, this.state.toCurrency).then(() => {
         if (this.state.toCurrency == 'idr') {
           this.setState({
             rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
@@ -90,14 +92,14 @@ class OrderAmount extends React.Component {
             toAmount: this.state.fromAmount / this.props.rate
           });
         }
-      }
-      this.hideSource();
-    });
+      });
+    }
+    this.hideSource();
   }
 
   selectDestination(country) {
-    this.props.getRates(country,this.state.fromCurrency).then(() => {
-      if (country == 'idr') {
+    if (country == 'idr') {
+      this.props.getRates(this.state.fromCurrency, country).then(() => {
         if (this.state.fromCurrency == 'idr') {
           this.setState({
             rate: 1,
@@ -108,26 +110,30 @@ class OrderAmount extends React.Component {
           this.setState({
             rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
             toCurrency: country,
-            toAmount: this.state.fromAmount / (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
+            toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
           });
         }
-      } else {
-        if (this.state.fromCurrency == 'idr') {
+      });
+    } else {
+      if (this.state.fromCurrency == 'idr') {
+        this.props.getRates(country, this.state.fromCurrency).then(() => {
           this.setState({
             rate: this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100),
             toCurrency: country,
             toAmount: this.state.fromAmount / (this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100))
           });
-        } else {
+        });
+      } else {
+        this.props.getRates(this.state.fromCurrency, country).then(() => {
           this.setState({
             rate: this.props.rate,
             toCurrency: country,
-            toAmount: this.state.fromAmount / this.props.rate
+            toAmount: this.state.fromAmount * this.props.rate
           });
-        }
+        });
       }
-      this.hideDestination();
-    });
+    }
+    this.hideDestination();
   }
 
   handleSourceChange(e) {
@@ -141,23 +147,30 @@ class OrderAmount extends React.Component {
       } else {
         this.setState({
           fromAmount: fromAmount,
-          toAmount: fromAmount / this.state.rate
+          toAmount: fromAmount * this.state.rate
         })
       }
     } else {
       this.setState({
         fromAmount: fromAmount,
-        toAmount: fromAmount / this.state.rate
+        toAmount: fromAmount * this.state.rate
       })
     }
   }
 
   handleDestinationChange(e) {
     const toAmount = e.target.value.replace(/,/g, '');
-    this.setState({
-      fromAmount: toAmount * this.state.rate,
-      toAmount: toAmount
-    })
+    if (this.state.fromCurrency == 'idr') {
+      this.setState({
+        fromAmount: toAmount * this.state.rate,
+        toAmount: toAmount
+      })
+    } else {
+      this.setState({
+        fromAmount: toAmount / this.state.rate,
+        toAmount: toAmount
+      })
+    }
   }
 
   saveAndContinue = (e) => {
