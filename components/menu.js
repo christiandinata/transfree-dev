@@ -41,7 +41,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           <ul>
             {!isAuthenticated && <li><Link href="/about"><a>About</a></Link></li>}
             {!isAuthenticated && <li><Link href="/faq"><a>FAQ</a></Link></li>}
-            {!isAuthenticated && <li><Link><a href="https://api.whatsapp.com/send?phone=447985497391&text=Hello%20Transfree" target="_blank">Chat With Us</a></Link></li>}
+            {!isAuthenticated && <li><Link><a href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree" target="_blank">Chat With Us</a></Link></li>}
 
             {/* !isAuthenticated && <li><Link href="/"><a>How it works</a></Link></li> */}
             {isAuthenticated && isApproved && <li><Link href="/order"><a>Send money</a></Link></li>}
