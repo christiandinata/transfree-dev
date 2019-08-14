@@ -129,6 +129,14 @@ app.prepare()
       return app.render(req, res, '/reset_password', req.query.token);
     });
 
+    server.get('/receipt', (req, res) => {
+      if(!req.cookies.token) {
+        res.redirect('/login');
+      } else {
+        return app.render(req, res, '/receipt', req.query.oid);
+      }
+    });
+
 
     server.get('*', (req, res) => {
       return handle(req, res);

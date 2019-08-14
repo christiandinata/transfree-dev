@@ -24,12 +24,12 @@ const addOrder = ({ uid, senderName, senderEmail, senderPhone, rate, fromCurrenc
   };
 };
 
-const getOrderById = ({ id }, type) => {
+const getOrderById = (oid, type) => {
   if (type !== 'getOrderById') {
     throw new Error('Wrong API call!');
   }
-  return (dispatch) => {
-    axios.get(`${API}/${type}`, {id})
+  return async (dispatch) => {
+    await axios.get(`${API}/${type}?oid=`+oid)
       .then((response) => {
         dispatch({type: ORDER_DATA, payload: response.data.order_data});
       })
