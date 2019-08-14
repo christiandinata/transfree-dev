@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import Header from '../components/header';
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
-import pdfHelper from '../utils/pdfHelper';
 import NumberFormat from 'react-number-format';
-import { renderToStaticMarkup } from 'react-dom/server';
 
 const ReceiptLayout = (props) => {
   return (
