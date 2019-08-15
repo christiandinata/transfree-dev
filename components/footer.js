@@ -66,6 +66,7 @@ const Footer = () => (
   
     <div className="row copyright">
       <p>Transfree © Copyright 2019. All rights reserved.</p>
+      <p>Transfree is a trademark of PT. Pelita Transfer Nusantara. Registered in the Directorate General of Intellectual Property of the United Kingdom</p>
     </div>
     <style jsx>{`
 
