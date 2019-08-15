@@ -206,6 +206,11 @@ class Index extends React.Component {
               <h1>International money transfer feels</h1>
               <h1 className="h1-bawah">like local</h1>
               <div className="desktop">
+                <div className="fixed-btn">
+                  <a href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree" target="_blank">
+
+                  <img style={{width: "50%", marginTop: "25%"}} src="../static/images/wa-logo.png"/></a>
+                </div>
 
 
                 <div className="external-link">
@@ -372,6 +377,10 @@ class Index extends React.Component {
                 </div>
               </div>
             <div className="right-bottom-container">
+              <div className="fixed-btn">
+                <a href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree" target="_blank">
+                <img style={{width: "50%", marginTop: "25%"}} src="../static/images/wa-logo.png"/></a>
+              </div>
               <h1>International money transfer feels like local</h1>
               <center>
                 <Link>
@@ -595,6 +604,26 @@ class Index extends React.Component {
         </div>
         <style jsx>{`
 
+         .fixed-btn{
+           position: fixed;
+           background: #00a82d;
+
+           width: 90px;
+           height: 90px;
+           line-height: 45px;
+
+           bottom: 4%;
+           right: 3%;
+           border-radius: 50%;
+           text-align: center;
+
+           box-shadow: 0 10px 30px 0 rgba(0,0,0,0.30);
+           cursor: pointer;
+
+        }
+        .fixed-btn:active{
+          box-shadow: 0 0;
+        }
         /** LIGHTBOX MARKUP **/
         .lightbox {
           /** Default lightbox to hidden */
@@ -1098,6 +1127,16 @@ class Index extends React.Component {
           }
 
             @media only screen and (max-width: 414px) {
+
+            .fixed-btn{
+
+
+             width: 70px !important;
+             height: 70px !important;
+             line-height: 45px !imoprant;
+
+             bottom: 3%;
+             right: 6.5%;
 
             .logo{
               text-align: left;
