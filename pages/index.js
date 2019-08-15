@@ -1137,7 +1137,7 @@ class Index extends React.Component {
 
              bottom: 3%;
              right: 6.5%;
-
+              }
             .logo{
               text-align: left;
               padding-left: 20px;
