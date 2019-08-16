@@ -195,8 +195,11 @@ class PhotoVerification extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let photoId, photoFace = '';
 
+    let photoId, photoFace = '';
+    if(this.state.submitViaWhatsapp == true){
+          window.open('https://api.whatsapp.com/send?phone=447490090659&text=Please%20upload%20your%20ID%20photos%20to%20this%20Whatsapp%20%3A%0A1.%20Upload%20or%20Take%20a%20photo%20of%20your%20ID%20Card%0A2.%20Upload%20or%20Take%20a%20photo%20of%20your%20face%20while%20holding%20the%20ID%20Card', "_blank")
+    }
     if (this.state.uploadPhotoIdSrc != null)
       photoId = this.state.uploadPhotoIdSrc;
     else
@@ -239,25 +242,11 @@ class PhotoVerification extends React.Component {
             {this.state.submitViaWhatsapp == true ? 
 
                 <div className="cta-submit">
-                  <div style={{marginTop: "-15px",verticalAlign:"middle"}}>       
+                  <div style={{marginTop: "-15px"}}>       
 
-                    <a
-                      href="https://api.whatsapp.com/send?phone=447490090659&text=Please%20upload%20these%20photos%20to%20this%20Whatsapp%20%3A%0A1.%20Upload%20or%20Take%20a%20photo%20of%20your%20ID%20Card%0A2.%20Upload%20or%20Take%20a%20photo%20of%20your%20face%20while%20holding%20the%20ID%20Card" 
-                      target="_blank" 
-                      className={'btn-primary'}
-
-                      >
-                    {/*
-                      <span>
-                          <img style={{width: "7%"}} src={"../static/images/waLogo.png"} />
-                      </span>
-                      Upload Photos Via Whatsapp
-                    */}
-
-                    <span style={{paddingRight: "7px"}} ><i class="fa fa-whatsapp"  style={{fontSize: "22px"}}  aria-hidden="true"></i></span> Upload Photos Via Whatsapp
-
-
-                     </a>
+                    <button type="submit" className="btn-primary" >           
+                      <span style={{paddingRight: "7px"}} ><i class="fa fa-whatsapp"  style={{fontSize: "22px"}}  aria-hidden="true"></i></span> Upload Photos Via Whatsapp
+                    </button>
 
                   </div>
 
