@@ -275,7 +275,7 @@ class Index extends React.Component {
                             </li>
                             <li onClick={this.selectSource.bind(this,'usd')}>
                               <a className="dropdown-item">
-                                <span className="flag-icon flag-icon-es flag-icon-squared"></span> USD (US Dollar)
+                                <span className="flag-icon flag-icon-us flag-icon-squared"></span> USD (US Dollar)
                               </a>
                             </li>
                             <li onClick={this.selectSource.bind(this,'aud')}>
