@@ -342,7 +342,7 @@ class Index extends React.Component {
                                 <span className="flag-icon flag-icon-eu flag-icon-squared"></span> EUR (European Euro)
                               </a>
                             </li>
-                            <li onClick={this.selectSource.bind(this,'aud')}>
+                            <li onClick={this.selectDestination.bind(this,'aud')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-au flag-icon-squared"></span> AUD (Australlian Dollar)
                               </a>
