@@ -147,7 +147,7 @@ class OrderAmount extends React.Component {
       } else {
         this.setState({
           fromAmount: fromAmount,
-          toAmount: fromAmount * this.state.rate
+          toAmount: fromAmount / this.state.rate
         })
       }
     } else {
