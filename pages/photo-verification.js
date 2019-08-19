@@ -136,7 +136,8 @@ class PhotoVerification extends React.Component {
       webcamPhotoIdSrc: null,
       webcamPhotoFaceSrc: null,
       photoIdMode: null,
-      photoFaceMode: null
+      photoFaceMode: null,
+      submitViaWhatsapp: true
     }
 
     this.setPhotoIdSrc = this.setPhotoIdSrc.bind(this);
@@ -151,7 +152,9 @@ class PhotoVerification extends React.Component {
       }
     }
   }
-
+  setSubmitViaWhatsapp = src => {
+    this.setState({submitViaWhatsapp: src})
+  }
   setPhotoIdSrc = src => {
     this.setState({uploadPhotoIdSrc: src})
   }
@@ -192,8 +195,11 @@ class PhotoVerification extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let photoId, photoFace = '';
 
+    let photoId, photoFace = '';
+    if(this.state.submitViaWhatsapp == true){
+          window.open('https://api.whatsapp.com/send?phone=447490090659&text=Please%20upload%20your%20ID%20photos%20to%20this%20Whatsapp%20%3A%0A1.%20Upload%20or%20Take%20a%20photo%20of%20your%20ID%20Card%0A2.%20Upload%20or%20Take%20a%20photo%20of%20your%20face%20while%20holding%20the%20ID%20Card', "_blank")
+    }
     if (this.state.uploadPhotoIdSrc != null)
       photoId = this.state.uploadPhotoIdSrc;
     else
@@ -232,95 +238,116 @@ class PhotoVerification extends React.Component {
           <h1>Photo ID verification</h1>
           <p>Last step, upload photos according to the intruction below to verify your identity.</p>
           <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
-            <p>1. Upload or take a photo  of your ID Card</p>
-            <div className="cta">
-              <Link href=""><a className="btn-primary btn-small" onClick={() => this.setPhotoIdMode('upload')}>Upload photo</a></Link>
-              <Link href=""><a className="btn-primary btn-small" onClick={() => this.setPhotoIdMode('camera')}>Take photo</a></Link>
-            </div>
 
-            {this.state.photoIdMode == 'upload' ? <StyledDropzone docType={'photoId'} setPhotoIdSrc={this.setPhotoIdSrc}/> : null}
+            {this.state.submitViaWhatsapp == true ? 
 
-            {this.state.webcamPhotoIdSrc != null ? (
-              <div>
-                <img src={this.state.webcamPhotoIdSrc} />
-                <Link href=""><button className="btn-secondary" onClick={this.retakePhotoId}>Retake photo</button></Link>
-              </div>
-            ) : null}
-            {this.state.photoIdMode == 'camera' ?
-              (
-                <div>
-                  <Webcam
-                    audio={false}
-                    height={400}
-                    ref={this.setRef}
-                    screenshotFormat="image/jpeg"
-                    width={400}
-                    videoConstraints={videoConstraints}
-                    style={this.state.photoIdMode == 'camera' ? null : hideWebcam}
-                  />
-                  <Link href=""><button className="btn-primary" onClick={this.capturePhotoId}>Capture photo</button></Link>
+                <div className="cta-submit">
+                  <div style={{marginTop: "-15px"}}>       
+
+                    <button type="submit" className="btn-primary" >           
+                      <span style={{paddingRight: "7px"}} ><i class="fa fa-whatsapp"  style={{fontSize: "22px"}}  aria-hidden="true"></i></span> Upload Photos Via Whatsapp
+                    </button>
+
+                  </div>
+
+
+
+                <h3 style={{textAlign: "center"}}>OR</h3>
+
+                  <div style={{marginTop: "10px"}}>                
+                    <button 
+                      onClick={() => this.setSubmitViaWhatsapp(false)}
+                      type="submit" className={'btn-primary'}>
+                      Upload Photos Here
+                      </button>
                 </div>
-              ) : (null)
-            }
-            <div className="divider"></div>
-            <p>2. Upload or take a photo of your face while holding the ID card</p>
-            <div className="cta">
-              <Link href=""><a className="btn-primary btn-small" onClick={() => this.setPhotoFaceMode('upload')}>Upload photo</a></Link>
-              <Link href=""><a className="btn-primary btn-small" onClick={() => this.setPhotoFaceMode('camera')}>Take photo</a></Link>
-            </div>
 
-            {this.state.photoFaceMode == 'upload' ? <StyledDropzone docType={'photoFace'} setPhotoFaceSrc={this.setPhotoFaceSrc}/> : null}
+              </div>             
 
-            {this.state.webcamPhotoFaceSrc != null ? (
+              : 
+
+
               <div>
-                <img src={this.state.webcamPhotoFaceSrc} />
-                <Link href=""><button className="btn-secondary" onClick={this.retakePhotoFace}>Retake photo</button></Link>
-              </div>
-            ) : null}
-            {this.state.photoFaceMode == 'camera' ?
-              (
-                <div>
-                  <Webcam
-                    audio={false}
-                    height={400}
-                    ref={this.setRef}
-                    screenshotFormat="image/jpeg"
-                    width={400}
-                    videoConstraints={videoConstraints}
-                    style={this.state.photoFaceMode == 'camera' ? null : hideWebcam}
-                  />
-                  <Link href=""><button className="btn-secondary" onClick={this.capturePhotoFace}>Capture photo</button></Link>
+                <p>1. Upload or take a photo  of your ID Card</p>
+                <div className="cta">
+                  <Link href=""><a className="btn-primary btn-small" onClick={() => this.setPhotoIdMode('upload')}>Upload photo</a></Link>
+                  <Link href=""><a className="btn-primary btn-small" onClick={() => this.setPhotoIdMode('camera')}>Take photo</a></Link>
                 </div>
-              ) : (null)
-            }
-            {
-            // <div className="photo-file">
-            //   <span>1) Upload or take a photo of your ID Card</span>
-            //   <input type="file" onChange={this.onPhotoIdChangeHandler} className="inputfile"/>
-            //   <label htmlFor="photo-face">Upload</label><br/>
-            // </div>
-            //
-            // <div className="photo-file">
-            //   <span>2) Upload or take a photo of your face while holding the ID card</span>
-            //   <input type="file" onChange={this.onPhotoFaceChangeHandler} className="inputfile"/>
-            //   <label htmlFor="photo-face">Upload</label><br/>
-            // </div>
-            }
-            <p className="description"> * We will not, in any circumstances, share your personal information irresponsibly.
-            <a className="more-privacy" href="/privacy-policy" target="_blank"> More about Privacy Policy </a></p>
+                {this.state.photoIdMode == 'upload' ? <StyledDropzone docType={'photoId'} setPhotoIdSrc={this.setPhotoIdSrc}/> : null}
 
-            {(this.state.uploadPhotoIdSrc != null && this.state.uploadPhotoFaceSrc != null)?
-              (
-              <div className="cta-submit">
-                <button type="submit" className={'btn-primary'}>{this.props.inProgress ? (
-                  <FontAwesomeIcon icon="sync-alt" spin/>
-                ) : 'Continue'}</button>
-              </div>
-              ) : 
-              <div className="cta-submit">
-                <button disabled={"disabled"} className={'btn-disabled'}>Continue</button>
-              </div>
-            }
+
+                {this.state.webcamPhotoIdSrc != null ? (
+                  <div>
+                    <img src={this.state.webcamPhotoIdSrc} />
+                    <Link href=""><button className="btn-secondary" onClick={this.retakePhotoId}>Retake photo</button></Link>
+                  </div>
+                ) : null}
+
+                <div className="divider"></div>
+                <p>2. Upload or take a photo of your face while holding the ID card</p>
+                <div className="cta">
+                  <Link href=""><a className="btn-primary btn-small" onClick={() => this.setPhotoFaceMode('upload')}>Upload photo</a></Link>
+                  <Link href=""><a className="btn-primary btn-small" onClick={() => this.setPhotoFaceMode('camera')}>Take photo</a></Link>
+                </div>
+
+                {this.state.photoFaceMode == 'upload' ? <StyledDropzone docType={'photoFace'} setPhotoFaceSrc={this.setPhotoFaceSrc}/> : null}
+
+                {this.state.webcamPhotoFaceSrc != null ? (
+                  <div>
+                    <img src={this.state.webcamPhotoFaceSrc} />
+                    <Link href=""><button className="btn-secondary" onClick={this.retakePhotoFace}>Retake photo</button></Link>
+                  </div>
+                ) : null}
+                {this.state.photoFaceMode == 'camera' ?
+                  (
+                    <div>
+                      <Webcam
+                        audio={false}
+                        height={400}
+                        ref={this.setRef}
+                        screenshotFormat="image/jpeg"
+                        width={400}
+                        videoConstraints={videoConstraints}
+                        style={this.state.photoFaceMode == 'camera' ? null : hideWebcam}
+                      />
+                      <Link href=""><button className="btn-secondary" onClick={this.capturePhotoFace}>Capture photo</button></Link>
+                    </div>
+                  ) : (null)
+                }
+                {
+                // <div className="photo-file">
+                //   <span>1) Upload or take a photo of your ID Card</span>
+                //   <input type="file" onChange={this.onPhotoIdChangeHandler} className="inputfile"/>
+                //   <label htmlFor="photo-face">Upload</label><br/>
+                // </div>
+                //
+                // <div className="photo-file">
+                //   <span>2) Upload or take a photo of your face while holding the ID card</span>
+                //   <input type="file" onChange={this.onPhotoFaceChangeHandler} className="inputfile"/>
+                //   <label htmlFor="photo-face">Upload</label><br/>
+                // </div>
+                }
+                <p className="description"> * We will not, in any circumstances, share your personal information irresponsibly.
+                <a className="more-privacy" href="/privacy-policy" target="_blank"> More about Privacy Policy </a></p>
+
+                {(this.state.uploadPhotoIdSrc != null && this.state.uploadPhotoFaceSrc != null)?
+                  (
+                  <div className="cta-submit">
+                    <button type="submit" className={'btn-primary'}>{this.props.inProgress ? (
+                      <FontAwesomeIcon icon="sync-alt" spin/>
+                    ) : 'Continue'}</button>
+                  </div>
+                  ) : 
+                  <div className="cta-submit">
+                    <button disabled={"disabled"} className={'btn-disabled'}>Continue</button>
+                  </div>
+                }
+
+                  </div>
+
+
+                }
+
           </form>
         </div>
         <style jsx>{`
