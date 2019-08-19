@@ -166,7 +166,7 @@ class Index extends React.Component {
       } else {
         this.setState({
           fromAmount: fromAmount,
-          toAmount: fromAmount * this.state.rate
+          toAmount: fromAmount / this.state.rate
         })
       }
     } else {
@@ -214,19 +214,19 @@ class Index extends React.Component {
 
 
                 <div className="external-link">
-      
+
                   <div className="external-link-left">
                     <a href={"#video-transfree"} className="btn-secondary">See how it works</a>
                     <a href="#_" className="lightbox" id={"video-transfree"}>
-                    <iframe src="https://www.youtube.com/embed/8RzCs_sQ8Ak" frameborder="0" allow="accelerometer; 
+                    <iframe src="https://www.youtube.com/embed/8RzCs_sQ8Ak" frameborder="0" allow="accelerometer;
                      autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </a>                 
+                    </a>
                   </div>
-      
+
                   <div className="external-link-right">
                         <a style={{paddingRight: "35px",paddingLeft: "35px",paddingTop: "9.5px",paddingBottom: "9.5px"}} className="btn-primary"  href="https://www.transfree.co.uk/" target="_blank">Sell and Buy Money</a>
                   </div>
-      
+
                 </div>
 
                 <div className="benefits">
@@ -348,7 +348,6 @@ class Index extends React.Component {
                                 <span className="flag-icon flag-icon-au flag-icon-squared"></span> AUD (Australian Dollar)
                               </a>
                             </li>                            
-
                             <li onClick={this.selectDestination.bind(this,'hkd')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-hk flag-icon-squared"></span> HKD (Hongkong Dollar)
@@ -677,7 +676,7 @@ class Index extends React.Component {
           }
           .external-link{
             display: flex;
-            margin-top: 50px; 
+            margin-top: 50px;
           }
           .external-link-right {
             lex-basis: 40%;
