@@ -232,6 +232,11 @@ class OrderAmount extends React.Component {
                             <span className="flag-icon flag-icon-au flag-icon-squared"></span> AUD (Australian Dollar)
                           </a>
                         </li>
+                        <li onClick={this.selectSource.bind(this,'eur')}>
+                          <a className="dropdown-item">
+                            <span className="flag-icon flag-icon-eu flag-icon-squared"></span> EUR (European Euro)
+                          </a>
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -291,7 +296,6 @@ class OrderAmount extends React.Component {
                             <span className="flag-icon flag-icon-eu flag-icon-squared"></span> EUR (European Euro)
                           </a>
                         </li>
-
                         <li onClick={this.selectDestination.bind(this,'hkd')}>
                           <a className="dropdown-item">
                             <span className="flag-icon flag-icon-hk flag-icon-squared"></span> HKD (Hongkong Dollar)
