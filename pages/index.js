@@ -273,9 +273,9 @@ class Index extends React.Component {
                                 <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP (British Poundsterling)
                               </a>
                             </li>
-                            <li onClick={this.selectSource.bind(this,'eur')}>
+                            <li onClick={this.selectSource.bind(this,'usd')}>
                               <a className="dropdown-item">
-                                <span className="flag-icon flag-icon-eu flag-icon-squared"></span> EUR (European Euro)
+                                <span className="flag-icon flag-icon-es flag-icon-squared"></span> USD (US Dollar)
                               </a>
                             </li>
                             <li onClick={this.selectSource.bind(this,'aud')}>
@@ -341,7 +341,11 @@ class Index extends React.Component {
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-eu flag-icon-squared"></span> EUR (European Euro)
                               </a>
-
+                            <li onClick={this.selectDestination.bind(this,'aud')}>
+                              <a className="dropdown-item">
+                                <span className="flag-icon flag-icon-au flag-icon-squared"></span> AUD (Australlian Dollar)
+                              </a>
+                            </li>
                             <li onClick={this.selectDestination.bind(this,'hkd')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-hk flag-icon-squared"></span> HKD (Hongkong Dollar)
