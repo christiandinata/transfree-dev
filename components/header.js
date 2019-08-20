@@ -4,9 +4,7 @@ const Header = () => (
   <div>
     <Head>
       <title>Transfree - International Transfer Made Fast and Free</title>
-      <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
-      <meta http-equiv="expires" content="0" />
-      <meta http-equiv="pragma" content="no-cache" />
+      <meta http-equiv="expires" content="Fri, 16 Aug 2019 1:00:00 GMT"/>    
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta charSet="utf-8" />
       <link rel="icon" href="../static/images/icon-logo.png"/>
