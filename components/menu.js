@@ -23,8 +23,8 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           {!isAuthenticated && <li><Link href="/faq"><a>FAQ</a></Link></li>}
 
           {/* !isAuthenticated && <li><Link href="/"><a>How it works</a></Link></li> */}
-          {isAuthenticated && isApproved && <li><Link href="/order"><a>Send money</a></Link></li>}
-          {isAuthenticated && isApproved && <li><Link href="/account"><a>Transactions</a></Link></li>}
+          {isAuthenticated && <li><Link href="/order"><a>Send money</a></Link></li>}
+          {isAuthenticated && <li><Link href="/account"><a>Transactions</a></Link></li>}
           <hr/>
           {!isAuthenticated && <li><Link href="/login"><a>Log in</a></Link></li>}
           {!isAuthenticated && <li><Link href="/signup"><a>Signup</a></Link></li>}
@@ -42,8 +42,8 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
             {!isAuthenticated && <li><Link href="/faq"><a>FAQ</a></Link></li>}
 
             {/* !isAuthenticated && <li><Link href="/"><a>How it works</a></Link></li> */}
-            {isAuthenticated && isApproved && <li><Link href="/order"><a>Send money</a></Link></li>}
-            {isAuthenticated && isApproved && <li><Link href="/account"><a>Transactions</a></Link></li>}
+            {isAuthenticated && <li><Link href="/order"><a>Send money</a></Link></li>}
+            {isAuthenticated && <li><Link href="/account"><a>Transactions</a></Link></li>}
           </ul>
         </div>
         <div className="header-cta">
