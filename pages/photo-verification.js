@@ -258,7 +258,7 @@ class PhotoVerification extends React.Component {
                     <button 
                       onClick={() => this.setSubmitViaWhatsapp(false)}
                       type="submit" className={'btn-primary'}>
-                      Upload later, start Transfer Now !
+                      Upload later, Start Transfer Now !
                       </button>
                 </div>
 
