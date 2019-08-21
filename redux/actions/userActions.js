@@ -55,8 +55,26 @@ const approveUser = ({uid} , type) => {
   };
 };
 
+const deleteUser = ({uid} , type) => {
+  if (type !== 'deleteUser') {
+    throw new Error('Wrong API call!');
+  }
+  return async (dispatch) => {
+    await axios.post(`${API}/${type}`, {uid})
+      .then((response) => {
+        Router.push('/dashboard/users');
+        console.log(response);
+        //dispatch({type: USER_DATA_ARRAY, payload: response.data.user_data_array});
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  };
+};
+
 export default {
   getUser,
   getAllUsers,
-  approveUser
+  approveUser,
+  deleteUser
 };

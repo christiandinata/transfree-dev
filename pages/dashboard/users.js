@@ -21,6 +21,10 @@ class UserItem extends React.Component {
     this.props.approveUser(uid);
   }
 
+  delete(uid) {
+    this.props.deleteUser(uid);
+  }
+
   render() {
     return (
       <div>
@@ -57,7 +61,9 @@ class UserItem extends React.Component {
                 <td className="column action">
                   {user.isApproved ?
                     (<div className="status approved">approved</div>) :
-                    (<div><div className="status pending">pending</div><div onClick={() => this.approve(user._id )} className="btn-primary btn-small">Approve</div></div>)}
+                    (<div><div className="status pending">pending</div><div onClick={() => this.approve(user._id )} className="btn-primary btn-small">Approve</div></div>)
+                  }
+                  <div onClick={() => this.delete(user._id)} className="btn-danger btn-small">Delete</div>
                 </td>
               </tr>
             )
@@ -196,6 +202,7 @@ class Users extends React.Component {
       activePage: 1
     }
     this.approveUser = this.approveUser.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
   }
 
@@ -206,6 +213,10 @@ class Users extends React.Component {
 
   approveUser(uid) {
     this.props.approveUser({uid: uid}, 'approveUser');
+  }
+
+  deleteUser(uid) {
+    this.props.deleteUser({uid: uid}, 'deleteUser');
   }
 
   handlePageChange(pageNumber) {
@@ -235,7 +246,7 @@ class Users extends React.Component {
               </div>
             ) : (
               <form className="form-container">
-                <UserItem users={this.props.users} approveUser={this.approveUser} totalDocs={this.props.totalDocs}/>
+                <UserItem users={this.props.users} approveUser={this.approveUser} deleteUser={this.deleteUser} totalDocs={this.props.totalDocs}/>
                 <div className="pagination-container">
                   <Pagination
                     activePage={this.state.activePage}

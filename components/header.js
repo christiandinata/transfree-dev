@@ -10,7 +10,7 @@ const Header = () => (
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta charSet="utf-8" />
       <link rel="icon" href="../static/images/icon-logo.png"/>
-      <link href="../static/misc/flag-icon-css/css/flag-icon.min.css" rel="stylesheet"/>      
+      <link href="../static/misc/flag-icon-css/css/flag-icon.min.css" rel="stylesheet"/>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
     </Head>
@@ -129,6 +129,20 @@ const Header = () => (
       .btn-secondary:hover {
         border: 2px solid #5FB4F3;
         color: #5FB4F3;
+      }
+      .btn-danger {
+        background: #DC2020;
+        color: #FFF;
+        padding: 8px 18px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 4px;
+        transition: 0.2s;
+        width: 100%;
+        padding: 15px 0;
+        margin-top: 15px;
       }
 
       .row:after {
