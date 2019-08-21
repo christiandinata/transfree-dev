@@ -58,18 +58,22 @@ const PendingLayout = () => {
   return (
     <div className="content">
       <div className="big-icon">
-        <img src="../static/images/document.svg"/>
+        <img src="../static/images/happy.svg"/>
       </div>
-      <h1>Awaiting confirmation</h1>
-      <p>We are now reviewing your account details. We will send you an email & WhatsApp message once the verification process is completed.</p>
+      <h1>No transactions</h1>
+      <p>You haven’t sent money using Transfree. Get started now and enjoy fast and cheap international money transfer. </p>
+
+      <Link href="/order">
+        <a className="btn-primary">Send money now</a>
+      </Link>
       <style jsx>{`
         .logo {
           width: 100%;
           text-align: center;
         }
-
         .big-icon img {
-          margin: 50px auto;
+          height: 300px;
+          margin: -80px auto 50px;
         }
 
         p {
@@ -418,15 +422,12 @@ class Account extends React.Component {
   };
 
   renderContent() {
-    if(this.props.isApproved) {
-      if(this.props.orderArray.length > 0) {
+     if(this.props.orderArray.length > 0) {
         return <OrderLayout ordersList={this.props.orderArray}/>
       } else {
         return <ApprovedLayout />
       }
-    } else {
-      return <PendingLayout />
-    }
+
   }
 
   render() {

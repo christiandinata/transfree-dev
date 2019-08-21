@@ -236,7 +236,7 @@ class PhotoVerification extends React.Component {
             <img src="../static/images/transfree-logo.png"/>
           </div>
           <h1>Photo ID verification</h1>
-          <p>Last step, upload photos according to the intruction below to verify your identity.</p>
+          <p>Last step, upload photos of your ID ( KTP , Passport or SIM ) according to the intruction below to verify your identity.</p>
           <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
 
             {this.state.submitViaWhatsapp == true ? 
@@ -349,6 +349,9 @@ class PhotoVerification extends React.Component {
                 }
 
           </form>
+          <div style={{marginTop: "10px"}}>                
+              <p> Submit Later,<Link href="/account"><a>  Start Transfer Now ! </a></Link></p> 
+          </div>
         </div>
         <style jsx>{`
           .container-fluid {
