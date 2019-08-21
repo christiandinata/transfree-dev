@@ -239,7 +239,7 @@ class PhotoVerification extends React.Component {
           <p>Last step, upload photos of your ID ( KTP , Passport or SIM ) according to the intruction below to verify your identity.</p>
           <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
 
-            {this.state.submitViaWhatsapp == true ? 
+            {/* {this.state.submitViaWhatsapp == true ?  */}
 
                 <div className="cta-submit">
                   <div style={{marginTop: "-15px"}}>       
@@ -258,11 +258,12 @@ class PhotoVerification extends React.Component {
                     <button 
                       onClick={() => this.setSubmitViaWhatsapp(false)}
                       type="submit" className={'btn-primary'}>
-                      Upload Photos Here
+                      Upload later, start Transfer Now !
                       </button>
                 </div>
 
               </div>             
+{/*
 
               : 
 
@@ -347,11 +348,9 @@ class PhotoVerification extends React.Component {
 
 
                 }
-
+*/}
           </form>
-          <div style={{marginTop: "10px"}}>                
-              <p> Submit Later,<Link href="/account"><a>  Start Transfer Now ! </a></Link></p> 
-          </div>
+
         </div>
         <style jsx>{`
           .container-fluid {
