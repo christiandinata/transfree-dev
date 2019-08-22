@@ -143,9 +143,11 @@ class OrderItem extends React.Component {
             <ul className="progress">
               <li><div className="node blue"></div><p>Created on {moment(order.createdAt).format("DD/MM/YYYY HH:mm")}</p></li>
               <li><div className={'divider '+ (order.receivedAt == 0.0 ? 'grey' : 'blue')}></div></li>
-              <li><div className={'node '+ (order.receivedAt == 0.0 ? 'grey' : 'blue')}></div><p>{order.receivedAt == 0.0 ? ('We are waiting your '+order.fromCurrency.toUpperCase()+' transfer') :  ('Received on '+moment(order.receivedAt).format("DD/MM/YYYY HH:mm"))}  </p></li>
+              <li><div className={'node '+ (order.receivedAt == 0.0 ? 'grey' : 'blue')}></div><p>{order.receivedAt == 0.0 ? ('We are waiting your '+order.fromCurrency.toUpperCase()+' transfer') :  ('Received on ' + moment(order.receivedAt).format("DD/MM/YYYY HH:mm") + ', and we are now processing your ' +order.toCurrency.toUpperCase())}  </p></li>
+              {/*
               <li><div className={'divider '+ (order.transferredAt == 0.0 ? 'grey' : 'blue')}></div></li>
               <li><div className={'node '+ (order.transferredAt == 0.0 ? 'grey' : 'blue')}></div><p>{order.transferredAt == 0.0 ? ('We will transfer your '+order.toCurrency.toUpperCase()) :  ('Transferred on '+moment(order.transferredAt).format("DD/MM/YYYY HH:mm"))}</p></li>
+              */}
               <li><div className={'divider '+ (order.completedAt == 0.0 ? 'grey' : 'blue')}></div></li>
               <li><div className={'node '+ (order.completedAt == 0.0 ? 'grey' : 'blue')}></div><p>{order.completedAt == 0.0 ? ('We will complete your transfer') :  ('Completed on '+moment(order.completedAt).format("DD/MM/YYYY HH:mm"))}</p></li>
             </ul>
