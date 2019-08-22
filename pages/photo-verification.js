@@ -261,7 +261,8 @@ class PhotoVerification extends React.Component {
                       Upload later, Start Transfer Now !
                       </button>
                 </div>
-
+                <p className="description"> * We will not, in any circumstances, share your personal information irresponsibly.
+                <a className="more-privacy" href="/privacy-policy" target="_blank"> More about Privacy Policy </a></p>
               </div>             
 {/*
 
