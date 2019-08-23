@@ -316,6 +316,10 @@ class OrderAmount extends React.Component {
             </div>
             <div className="row converter-cta">
               <div className="cta-primary">
+                <Link href="/order">
+                    <a className="btn-primary" onClick={this.saveAndContinue}>Continue</a>
+                 </Link>
+                {/*
                 {this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' ? 
                   <Link href="/order">
                     <a className="btn-disabled">Out Of Stock</a>
@@ -325,6 +329,7 @@ class OrderAmount extends React.Component {
                     <a className="btn-primary" onClick={this.saveAndContinue}>Continue</a>
                   </Link>  
                 }
+                */}
 
               </div>
             </div>
