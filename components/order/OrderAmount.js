@@ -14,7 +14,9 @@ class OrderAmount extends React.Component {
       fromCurrency: 'gbp',
       toCurrency: 'idr',
       fromAmount: 1000.00,
-      toAmount: 0
+      toAmount: 0,
+      currentDay: new Date()
+
     };
 
     this.toggleSource = this.toggleSource.bind(this);
@@ -28,7 +30,9 @@ class OrderAmount extends React.Component {
   componentDidMount() {
     this.setState({
       rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
-      toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100 ))
+      toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100 )),
+      currentDay : this.state.currentDay
+
     })
   }
 
@@ -311,12 +315,48 @@ class OrderAmount extends React.Component {
               <span className="rate-desc">Conversion rate</span> <span className="rate-value"><span className="live-rate"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={4} value={this.state.rate} /></span></span>
             </div>
             <div className="row note">
-              {(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur') ||(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr')  ? 
+              { 
+                (
+                this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur' &&
+                this.state.currentDay.getDay() == '5' &&
+                this.state.currentDay.getHours() >= '14'
+                ) 
+                || 
+                (
+                this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr' && 
+                this.state.currentDay.getDay() == '5' &&
+                this.state.currentDay.getHours() >= '14'
+                )
+                || 
+                (
+                this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr' && 
+                this.state.currentDay.getDay() == '6'
+                )
+                || 
+                (
+                this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur' && 
+                this.state.currentDay.getDay() == '6' 
+                )
+                || 
+                (
+                this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr' && 
+                this.state.currentDay.getDay() == '7'
+                )
+                || 
+                (
+                this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur' && 
+                this.state.currentDay.getDay() == '7' 
+                )
+
+                ? 
+
               <p style={{maxWidth: "100%", marginBottom: "0"}}>Your transfer will be processed immediately.
-              The recipient will get the money in less than <span className="received-on">24 hours</span> , except for the weekend</p>
+                The recipient will get the money on the <span className="received-on-weekend">next Working Day</span></p>
+
+
               :
               <p style={{maxWidth: "100%", marginBottom: "0"}}>Your transfer will be processed immediately.
-              The recipient will get the money in less than <span className="received-on">24 hours.</span></p>              
+              The recipient will{this.state.currentDay.getHours()} get the money in less than <span className="received-on">24 hours.</span></p>
               }
             </div>
             <div className="row converter-cta">
@@ -454,6 +494,10 @@ class OrderAmount extends React.Component {
 
           .received-on {
             font-family: 'Campton-Bold', sans-serif;
+          }
+          .received-on-weekend {
+            font-family: 'Campton-Bold', sans-serif;
+            color: #e79635
           }
 
           .converter-cta {
