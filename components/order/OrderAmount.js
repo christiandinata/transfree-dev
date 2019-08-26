@@ -311,8 +311,13 @@ class OrderAmount extends React.Component {
               <span className="rate-desc">Conversion rate</span> <span className="rate-value"><span className="live-rate"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={4} value={this.state.rate} /></span></span>
             </div>
             <div className="row note">
+              {(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur') ||(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr')  ? 
               <p style={{maxWidth: "100%", marginBottom: "0"}}>Your transfer will be processed immediately.
-              The recipient will get the money in less than <span className="received-on">24 hours.</span>, except for the weekend.</p>
+              The recipient will get the money in less than <span className="received-on">24 hours</span> , except for the weekend</p>
+              :
+              <p style={{maxWidth: "100%", marginBottom: "0"}}>Your transfer will be processed immediately.
+              The recipient will get the money in less than <span className="received-on">24 hours.</span></p>              
+              }
             </div>
             <div className="row converter-cta">
               <div className="cta-primary">
