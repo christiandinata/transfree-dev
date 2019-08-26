@@ -220,11 +220,11 @@ class Recipient extends React.Component {
           // <span className={this.state.isEmailValid ? 'error-label-hidden' : 'error-label'}>Email address is not valid.</span>
           }
 
-          <label htmlFor="bank">Recipient's Bank Name</label><br/>
+          <label htmlFor="bank">Bank Name</label><br/>
           <input
             type="text"
             id="bank"
-            placeholder="Enter recipient's bank name"
+            placeholder={this.state.toCurrency == 'idr' ? "Enter recipient's bank name ( E.g. : BCA )" : "Enter recipient's bank name"}
             ref={this.bankName}
             defaultValue={this.props.data.bankName}
             onBlur={this.checkBankName}/>
