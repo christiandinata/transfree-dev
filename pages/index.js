@@ -252,7 +252,7 @@ class Index extends React.Component {
                           id="money-from"
                           type="text"
                           thousandSeparator={true}
-                          decimalScale={2}
+                          decimalScale={false}
                           value={this.state.fromAmount}
                           onKeyUp={this.handleSourceChange}/>
                       </div>
@@ -306,7 +306,7 @@ class Index extends React.Component {
                           id="money-to"
                           type="text"
                           thousandSeparator={true}
-                          decimalScale={2}
+                          decimalScale={false}
                           value={this.state.toAmount}
                           onKeyUp={this.handleDestinationChange}/>
                       </div>
