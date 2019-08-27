@@ -35,7 +35,7 @@ class OrderItem extends React.Component {
         return (
           <div key={key} className="container-item">
             <div className="column">{moment(order.createdAt).format("DD MMM YYYY, HH:mm")}</div>
-            <div className="column">{order.senderEmail}</div>
+            <div className="column">{order.senderName}</div>
             <div className="column">{order.senderPhone}</div>
             <div className="column currency"><strong><NumberFormat value={order.fromAmount} displayType={'text'} thousandSeparator={true} decimalScale={2}/> {order.fromCurrency.toUpperCase()}</strong></div>
             <div className="column currency"><NumberFormat value={order.toAmount} displayType={'text'} thousandSeparator={true} decimalScale={2}/> {order.toCurrency.toUpperCase()}</div>
