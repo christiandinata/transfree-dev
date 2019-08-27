@@ -30,7 +30,6 @@ class Index extends React.Component {
     this.hideDestination = this.hideDestination.bind(this);
     this.handleSourceChange = this.handleSourceChange.bind(this);
     this.handleDestinationChange = this.handleDestinationChange.bind(this);
-    {/*this.reverse = this.reverse.bind(this);*/}
   }
 
   static async getInitialProps(ctx) {
@@ -51,16 +50,7 @@ class Index extends React.Component {
       toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100 ))
     })
   }
-  {/*
-  reverse(){
-    this.setState({
-        fromAmount: this.state.toAmount,
-        toAmount: this.state.fromAmount,
-        fromCurrency : this.state.toCurrency,
-        toCurrency : this.state.fromCurrency
-    })  
-  }
-  */}
+
   toggleSource() {
     this.setState({
       isSourceActive: !this.state.isSourceActive
@@ -307,9 +297,7 @@ class Index extends React.Component {
 
 
                   </div>
-{/*
-                  <button style={{textAlign:"right",marginTop:"-20px",marginBottom:"10px"}} className="currency-from dropdown-button" onClick={this.reverse}><span ><img id={"reverse-img"} style={{width:"4%",paddingRight:"3%"}} src="../static/images/reverse.png" alt="" /></span></button>
-*/}
+
                   <div className="destination-container">
                     <div className="money-input-container">
                       <div className="money-input">
@@ -1169,12 +1157,7 @@ class Index extends React.Component {
           }
 
             @media only screen and (max-width: 414px) {
-{/*
-            #reverse-img{
-              width : 5% !important;
-              padding-right: 6% !important
-            }
-*/}
+
             .fixed-btn{
 
 
