@@ -356,7 +356,7 @@ class OrderAmount extends React.Component {
 
               :
               <p style={{maxWidth: "100%", marginBottom: "0"}}>Your transfer will be processed immediately.
-              The recipient will{this.state.currentDay.getHours()} get the money in less than <span className="received-on">24 hours.</span></p>
+              The recipient will get the money in less than <span className="received-on">24 hours.</span></p>
               }
             </div>
             <div className="row converter-cta">
