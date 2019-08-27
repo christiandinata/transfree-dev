@@ -57,12 +57,22 @@ function BankOption(props) {
 function EmailInstruction(props) {
   return (
     <div>
+    {/*
       <p className="instruction">Please check your email below:</p>
       <div className="payment-details">
         <div className="list-item">
           <span className="left">Email:</span>
           <span className="right bold">{props.data.email}</span>
         </div>
+      </div>
+      */}
+      <div className="payment-details">
+        <p style={{margin:"0px !important"}}>Transfer Reference 
+      <br/>
+      "Your last name + Today's date" (E.g. Adi22)
+      <br/>
+       Note: Please state the reference number that allows us to identify you.
+      </p>
       </div>
       <p>We will send payment instruction to your email. Confirm by clicking the button below</p>
       <span className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_email')}>Send payment instruction to email</span>
