@@ -174,7 +174,14 @@ function TransferBankBCA(props) {
           <span className="right">206 37 555 67</span>
         </div>
       </div>
-
+      <div className="payment-details">
+        <p style={{margin:"0px !important"}}>Transfer Reference 
+      <br/>
+      "Your last name + Today's date" (E.g. Adi22)
+      <br/>
+       Note: Please state the reference number that allows us to identify you.
+      </p>
+      </div>
       <p>Please check all of the details above are correct to speed up the process.
       We also email you the instruction. We will notify you via email once your payment has been confirmed.</p>
 
