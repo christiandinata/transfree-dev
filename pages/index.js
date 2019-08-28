@@ -507,6 +507,38 @@ class Index extends React.Component {
               </div>
             </div>
           </div>
+
+        <div className="row features-mobile">
+          <div className="container-mobile">
+            <div className="feature-mobile">
+              <div className="left-feature-container-mobile"><img src="../static/images/artboard_1.svg"/></div>
+              <div className="right-feature-container-mobile">
+                <h2>Better rate for transfer</h2>
+                <p>Have you ever thought that the cost of international money
+                transfers is so big but gives you a smaller amount? Get more from
+                your money by using our services so you can use it for other needs with little effort.</p>
+              </div>
+            </div>
+
+            <div className="feature-mobile">
+              <div className="left-feature-container-mobile"><img src="../static/images/artboard_2.svg"/></div>
+              <div className="right-feature-container-mobile">
+                <h2>Tired of waiting for your money to arrive?</h2>
+                <p>Does your family need it for an emergency? And when you use a cheaper
+                 option, it sometimes takes longer for your money to arrive. Don't worry, we are here now.</p>
+              </div>
+            </div>
+
+            <div className="feature-mobile">
+              <div className="left-feature-container-mobile"><img src="../static/images/artboard_3.svg"/></div>
+              <div className="right-feature-container-mobile">
+                <h2>We don't charge any fees for your transfer</h2>
+                <p>Too good to be true? But this is happening now.
+                Yes, we do not charge you any fees. And we have competitive rates as
+                compared to other services. So why not try using our services?</p>
+              </div>
+            </div>
+          </div>
                 
           <div className="row partners-mobile">
             <h1>Our partners</h1>
@@ -551,38 +583,6 @@ class Index extends React.Component {
         </div>
         </div>
 
-
-        <div className="row features-mobile">
-          <div className="container-mobile">
-            <div className="feature-mobile">
-              <div className="left-feature-container-mobile"><img src="../static/images/artboard_1.svg"/></div>
-              <div className="right-feature-container-mobile">
-                <h2>Better rate for transfer</h2>
-                <p>Have you ever thought that the cost of international money
-                transfers is so big but gives you a smaller amount? Get more from
-                your money by using our services so you can use it for other needs with little effort.</p>
-              </div>
-            </div>
-
-            <div className="feature-mobile">
-              <div className="left-feature-container-mobile"><img src="../static/images/artboard_2.svg"/></div>
-              <div className="right-feature-container-mobile">
-                <h2>Tired of waiting for your money to arrive?</h2>
-                <p>Does your family need it for an emergency? And when you use a cheaper
-                 option, it sometimes takes longer for your money to arrive. Don't worry, we are here now.</p>
-              </div>
-            </div>
-
-            <div className="feature-mobile">
-              <div className="left-feature-container-mobile"><img src="../static/images/artboard_3.svg"/></div>
-              <div className="right-feature-container-mobile">
-                <h2>We don't charge any fees for your transfer</h2>
-                <p>Too good to be true? But this is happening now.
-                Yes, we do not charge you any fees. And we have competitive rates as
-                compared to other services. So why not try using our services?</p>
-              </div>
-            </div>
-          </div>
         </div>
 
         <div className="row testimonials">
