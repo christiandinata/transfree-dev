@@ -507,7 +507,8 @@ class Index extends React.Component {
               </div>
             </div>
           </div>
-
+        </div>
+                
         <div className="row features-mobile">
           <div className="container-mobile">
             <div className="feature-mobile">
@@ -581,8 +582,6 @@ class Index extends React.Component {
 
           </div>
         </div>
-        </div>
-
         </div>
 
         <div className="row testimonials">
