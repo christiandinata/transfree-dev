@@ -476,49 +476,6 @@ class Index extends React.Component {
           </div>
         </div>
 
-
-        <div className="row partners-mobile">
-          <h1>Our partners</h1>
-          <div className="container partners-wrapper-mobile">
-            <div className="row partners-container-mobile">
-              <div className="partner-item-mobile">
-                <img src="../static/images/partners/ppi-mib.png"/>
-              </div>
-              <div className="partner-item-mobile">
-                <img src="../static/images/partners/ppi-london.png"/>
-              </div>
-              <div className="partner-item-mobile">
-                <img src="../static/images/partners/ppi-denhaag.png"/>
-              </div>
-            </div>
-
-            <div className="row partners-container-mobile">
-              <div className="partner-item-mobile">
-                <img src="../static/images/partners/ppi-liverpool.png"/>
-              </div>
-              <div className="partner-item-mobile">
-                <img src="../static/images/partners/ppi-rotterdam.png"/>
-              </div>
-              <div className="partner-item-mobile">
-                <img src="../static/images/partners/ppi-amsterdam.png"/>
-              </div>
-            </div>
-
-             <div className="row partners-container-mobile">
-              <div className="partner-item-mobile-small">
-                <img src="../static/images/partners/ppi-delft.png"/>
-              </div>
-              <div className="partner-item-mobile-small">
-                <img src="../static/images/partners/ppi-newcastle.png"/>
-              </div>
-              <div className="partner-item-mobile-small">
-                <img src="../static/images/partners/ppi-gm.png"/>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
         <div className="row features">
           <div className="container">
             <div className="feature">
@@ -550,6 +507,48 @@ class Index extends React.Component {
               </div>
             </div>
           </div>
+                
+          <div className="row partners-mobile">
+            <h1>Our partners</h1>
+            <div className="container partners-wrapper-mobile">
+              <div className="row partners-container-mobile">
+                <div className="partner-item-mobile">
+                  <img src="../static/images/partners/ppi-mib.png"/>
+                </div>
+                <div className="partner-item-mobile">
+                  <img src="../static/images/partners/ppi-london.png"/>
+                </div>
+                <div className="partner-item-mobile">
+                  <img src="../static/images/partners/ppi-denhaag.png"/>
+                </div>
+            </div>
+
+            <div className="row partners-container-mobile">
+              <div className="partner-item-mobile">
+                <img src="../static/images/partners/ppi-liverpool.png"/>
+              </div>
+              <div className="partner-item-mobile">
+                <img src="../static/images/partners/ppi-rotterdam.png"/>
+              </div>
+              <div className="partner-item-mobile">
+                <img src="../static/images/partners/ppi-amsterdam.png"/>
+              </div>
+            </div>
+
+             <div className="row partners-container-mobile">
+              <div className="partner-item-mobile-small">
+                <img src="../static/images/partners/ppi-delft.png"/>
+              </div>
+              <div className="partner-item-mobile-small">
+                <img src="../static/images/partners/ppi-newcastle.png"/>
+              </div>
+              <div className="partner-item-mobile-small">
+                <img src="../static/images/partners/ppi-gm.png"/>
+              </div>
+            </div>
+
+          </div>
+        </div>
         </div>
 
 
