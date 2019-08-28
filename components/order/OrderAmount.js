@@ -11,9 +11,9 @@ class OrderAmount extends React.Component {
     this.state = {
       isSourceActive: false,
       isDestinationActive: false,
-      fromCurrency: 'idr',
-      toCurrency: 'gbp',
-      fromAmount: 1000.00,
+      fromCurrency: 'gbp',
+      toCurrency: 'idr',
+      fromAmount: 1000,
       toAmount: 0,
       currentDay: new Date()
 
