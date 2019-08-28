@@ -18,8 +18,8 @@ class Index extends React.Component {
     this.state = {
       isSourceActive: false,
       isDestinationActive: false,
-      fromCurrency: 'idr',
-      toCurrency: 'gbp',
+      fromCurrency: 'gbp',
+      toCurrency: 'idr',
       fromAmount: 1000,
       toAmount: 0
     };
