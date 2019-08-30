@@ -385,10 +385,11 @@ class Index extends React.Component {
                 }
 
                   <div className="cta-primary">
+                    {/*
                     <Link href="/order">
                       <a className="btn-primary">Get started</a>
                     </Link>
-                  {/*
+                  */}
                     {this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' ? 
                      <Link href="/">
                       <a className="btn-disabled">Out Of Stock</a>
@@ -398,7 +399,6 @@ class Index extends React.Component {
                       <a className="btn-primary">Get started</a>
                      </Link>
                     }
-                 */}
 
                     <div className="mobile-sell-buy">
                         <a style={{marginTop: "20px"}} href="https://www.transfree.co.uk/" target="_blank" className="btn-secondary sell-buy">Sell & Buy Money Online</a>
