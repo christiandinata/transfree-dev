@@ -370,7 +370,7 @@ class Index extends React.Component {
                 </div>
                 <div className="row rate"style={{marginTop:"-20px"}} >
                   <span className="rate-desc" >Transfer fee </span> <span className="rate-value" style={{textAlign:"right",marginLeft:"5px"}}><span ><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={6} value="0" /></span></span>
-                </div
+                </div>
 
                 {this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' ?
                   <Link href="/">
