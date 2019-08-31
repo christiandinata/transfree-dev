@@ -370,11 +370,32 @@ class Index extends React.Component {
                 </div>
                 <div className="row rate"style={{marginTop:"-20px"}} >
                   <span className="rate-desc" >Transfer fee </span> <span className="rate-value" style={{textAlign:"right",marginLeft:"5px"}}><span ><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={6} value="0" /></span></span>
-                </div>
+                </div
+
+                {this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' ?
+                  <Link href="/">
+                  <a classname="row note">
+                   <p style={{maxWidth: "100%", marginBottom: "0", color: "darkgrey"}}>Your transfer will be processed immediately.
+                    <span style={{maxWidth: "100%", marginBottom: "0", color: "orange"}}> But your money will arrived on Monday or in the next working day.</span>
+                   </p>
+                  </a>
+                  </Link>
+                  :
+                  <Link href="/">
+                  <a classname="row note">
+                   <p style={{maxWidth: "100%", marginBottom: "0", color: "darkgrey"}}>Your transfer will be processed immediately.
+                   The recipient will get the money in less than <span className="received-on">24 hours</span>.</p>
+                  </a>
+                  </Link>
+                }
+                
+                {/*
                 <div className="row note">
                   <p style={{maxWidth: "100%", marginBottom: "0"}}>Your transfer will be processed immediately.
                   The recipient will get the money in less than <span className="received-on">24 hours</span>.</p>
                 </div>
+                */}
+
                 <div className="row converter-cta">
                 {
                   // <div className="cta-secondary">
