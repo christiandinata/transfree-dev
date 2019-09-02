@@ -372,13 +372,13 @@ class Index extends React.Component {
                   <span className="rate-desc" >Transfer fee </span> <span className="rate-value" style={{textAlign:"right",marginLeft:"5px"}}><span ><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={6} value="0" /></span></span>
                 </div>
 
-                {this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' ?
+                {/*{this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' ?
                   <Link href="/">
-                  <a classname="row note">
+                  <div classname="row note">
                    <p style={{maxWidth: "100%", marginBottom: "0", color: "darkgrey"}}>Your transfer will be processed immediately.
                     <span style={{maxWidth: "100%", marginBottom: "0", color: "orange"}}> But your money will arrived on Monday or in the next working day.</span>
                    </p>
-                  </a>
+                  </div>
                   </Link>
                   :
                   <Link href="/">
@@ -387,14 +387,14 @@ class Index extends React.Component {
                    The recipient will get the money in less than <span className="received-on">24 hours</span>.</p>
                   </a>
                   </Link>
-                }
+                }*/}
                 
-                {/*
+   
                 <div className="row note">
                   <p style={{maxWidth: "100%", marginBottom: "0"}}>Your transfer will be processed immediately.
                   The recipient will get the money in less than <span className="received-on">24 hours</span>.</p>
                 </div>
-                */}
+      
 
                 <div className="row converter-cta">
                 {
@@ -406,12 +406,12 @@ class Index extends React.Component {
                 }
 
                   <div className="cta-primary">
-                    {/*
-                    <Link href="/order">
-                      <a className="btn-primary">Get started</a>
-                    </Link>
-                  */}
-                    {this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' ? 
+                   
+                  <Link href="/order">
+                    <a className="btn-primary">Get started</a>
+                  </Link>
+                  
+                  {/*{this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' ? 
                      <Link href="/">
                       <a className="btn-disabled">Out Of Stock</a>
                      </Link>
@@ -419,7 +419,7 @@ class Index extends React.Component {
                      <Link href="/order">
                       <a className="btn-primary">Get started</a>
                      </Link>
-                    }
+                    }*/}
 
                     <div className="mobile-sell-buy">
                         <a style={{marginTop: "20px"}} href="https://www.transfree.co.uk/" target="_blank" className="btn-secondary sell-buy">Sell & Buy Money Online</a>
