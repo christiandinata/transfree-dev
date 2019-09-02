@@ -25,9 +25,17 @@ class OrderAmount extends React.Component {
     this.hideDestination = this.hideDestination.bind(this);
     this.handleSourceChange = this.handleSourceChange.bind(this);
     this.handleDestinationChange = this.handleDestinationChange.bind(this);
+    this.reverse = this.reverse.bind(this);
+  }
+  reverse() {
+    this.setState({
+      fromCurrency : this.state.toCurrency,
+      toCurrency : this.state.fromCurrency,
+      fromAmount : 0,
+      toAmount : 0
+    });
 
   }
-
   componentDidMount() {
     this.setState({
       rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
@@ -247,7 +255,9 @@ class OrderAmount extends React.Component {
                   </div>
                 </div>
               </div>
-
+              <div style={{textAlign:"right"}}>
+                <img onClick={this.reverse} className="reverse-img" style={{width: "4%",paddingBottom:"10px",marginTop:"-15px",paddingRight:"25px"}} src="../static/images/reverse.png"/>
+              </div>
               <div className="destination-container">
                 <div className="money-input-container">
                   <div className="money-input">
@@ -599,7 +609,10 @@ class OrderAmount extends React.Component {
 
 
           @media only screen and (max-width: 414px) {
-
+            .reverse-img{
+              padding-right : 15px !important;
+              width : 6% !important
+            }
             .converter-container-order {
               width: 305px;
               flex-direction: column;
