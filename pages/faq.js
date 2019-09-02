@@ -300,18 +300,6 @@ const FAQ = () => {
               <AccordionItem>
                   <AccordionItemHeading>
                       <AccordionItemButton>
-                          I think I entered wrong account number, what happens now?
-                      </AccordionItemButton>
-                  </AccordionItemHeading>
-                  <AccordionItemPanel>
-                      <p>
-                          Please contact our Customer Service by email or WhatsApp
-                      </p>
-                  </AccordionItemPanel>
-              </AccordionItem>
-              <AccordionItem>
-                  <AccordionItemHeading>
-                      <AccordionItemButton>
                           Why I can't send money to particular country?
                       </AccordionItemButton>
                   </AccordionItemHeading>
