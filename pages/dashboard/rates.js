@@ -56,14 +56,13 @@ class Rates extends React.Component {
             <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
               <div className="left">
                 <h3>Live FX rates</h3>
-                <p>1 IDR equals</p>
                 <ul>
-                  <li><FormattedNumber value={1/this.props.rates.MYR} /> MYR</li>
-                  <li><FormattedNumber value={1/this.props.rates.KRW} /> KRW</li>
-                  <li><FormattedNumber value={1/this.props.rates.GBP} /> GBP</li>
-                  <li><FormattedNumber value={1/this.props.rates.USD} /> USD</li>
-                  <li><FormattedNumber value={1/this.props.rates.EUR} /> EUR</li>
-                  <li><FormattedNumber value={1/this.props.rates.HKD} /> HKD</li>
+                  <li>1 MYR equals <FormattedNumber value={1/this.props.rates.MYR} /> IDR</li>
+                  <li>1 KRW equals <FormattedNumber value={1/this.props.rates.KRW} /> IDR</li>
+                  <li>1 GBP equals <FormattedNumber value={1/this.props.rates.GBP} /> IDR</li>
+                  <li>1 USD equals <FormattedNumber value={1/this.props.rates.USD} /> IDR</li>
+                  <li>1 EUR equals <FormattedNumber value={1/this.props.rates.EUR} /> IDR</li>
+                  <li>1 HKD equals <FormattedNumber value={1/this.props.rates.HKD} /> IDR</li>
                 </ul>
               </div>
               <div className="right">
