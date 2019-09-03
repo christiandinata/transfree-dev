@@ -306,9 +306,11 @@ class Index extends React.Component {
 
 
                   </div>
+                  {/*
                   <div style={{textAlign:"right"}}>
                     <img onClick={this.reverse} className="reverse-img" style={{width: "4.5%",paddingBottom:"10px",marginTop:"-15px",paddingRight:"17px"}} src="../static/images/reverse.png"/>
                   </div>
+                  */}
                   <div className="destination-container">
                     <div className="money-input-container">
                       <div className="money-input">
