@@ -255,9 +255,11 @@ class OrderAmount extends React.Component {
                   </div>
                 </div>
               </div>
+              {/*
               <div style={{textAlign:"right"}}>
                 <img onClick={this.reverse} className="reverse-img" style={{width: "4%",paddingBottom:"10px",marginTop:"-15px",paddingRight:"25px"}} src="../static/images/reverse.png"/>
               </div>
+              */}
               <div className="destination-container">
                 <div className="money-input-container">
                   <div className="money-input">
