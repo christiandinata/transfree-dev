@@ -51,13 +51,44 @@ class Index extends React.Component {
       toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100 ))
     })
   }
-  reverse() {
-    this.setState({
-      fromCurrency : this.state.toCurrency,
-      toCurrency : this.state.fromCurrency,
-      fromAmount : 0,
-      toAmount : 0
+  reverse(country,country2) {
+	this.setState({
+            
+    fromCurrency: country2,            
+    toCurrency: country,
+    toAmount :0,
+    fromAmount :0
+
     });
+  if (country == 'idr') {
+    this.props.getRates(country2, country).then(() => {
+      if (this.state.fromCurrency == 'idr') {
+        this.setState({
+          rate: 1,
+
+        });
+      } else {
+        this.setState({
+          rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
+        });
+      }
+    });
+  } else {
+    if (country2 == 'idr') {
+      this.props.getRates(country, country2).then(() => {
+        this.setState({
+          rate: this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100),
+        });
+      });
+    } else {
+      this.props.getRates(country2,country).then(() => {
+        this.setState({
+          rate: this.props.rate,
+
+        });
+      });
+    }
+  }
 
   }
   toggleSource() {
@@ -306,11 +337,169 @@ class Index extends React.Component {
 
 
                   </div>
-                  {/*
+                 
                   <div style={{textAlign:"right"}}>
-                    <img onClick={this.reverse} className="reverse-img" style={{width: "4.5%",paddingBottom:"10px",marginTop:"-15px",paddingRight:"17px"}} src="../static/images/reverse.png"/>
+                    <img onClick={
+                    	
+                    	(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr' ) ? 
+						this.reverse.bind(this,'gbp' , 'idr')						
+                    	:
+                    	(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' ) ? 
+						this.reverse.bind(this,'idr' , 'gbp')						
+						:
+						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur' ) ? 
+						this.reverse.bind(this,'idr' , 'eur')						
+						:
+						(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr' ) ? 
+						this.reverse.bind(this,'eur' , 'idr')						
+						:
+						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'myr' ) ? 
+						this.reverse.bind(this,'idr' , 'myr')						
+						:
+						(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'idr' ) ? 
+						this.reverse.bind(this,'myr' , 'idr')						
+						:
+						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'krw' ) ? 
+						this.reverse.bind(this,'idr' , 'krw')						
+						:
+						(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'idr' ) ? 
+						this.reverse.bind(this,'krw' , 'idr')						
+						:
+						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'usd' ) ? 
+						this.reverse.bind(this,'idr' , 'usd')						
+						:
+						(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'idr' ) ? 
+						this.reverse.bind(this,'usd' , 'idr')						
+						:
+						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'aud' ) ? 
+						this.reverse.bind(this,'idr' , 'aud')						
+						:
+						(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'idr' ) ? 
+						this.reverse.bind(this,'aud' , 'idr')						
+						:
+						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'hkd' ) ? 
+						this.reverse.bind(this,'idr' , 'hkd')						
+						:
+						(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'idr' ) ? 
+						this.reverse.bind(this,'hkd' , 'idr')						
+						:
+						(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'myr' ) ? 
+						this.reverse.bind(this,'gbp' , 'myr')						
+						:
+						(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'gbp' ) ? 
+						this.reverse.bind(this,'myr' , 'gbp')						
+						:
+						(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'krw' ) ? 
+						this.reverse.bind(this,'gbp' , 'krw')						
+						:
+						(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'gbp' ) ? 
+						this.reverse.bind(this,'krw' , 'gbp')						
+						:
+						(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'usd' ) ? 
+						this.reverse.bind(this,'gbp' , 'usd')						
+						:
+						(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'gbp' ) ? 
+						this.reverse.bind(this,'usd' , 'gbp')						
+						:
+						(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'eur' ) ? 
+						this.reverse.bind(this,'gbp' , 'eur')						
+						:
+						(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'gbp' ) ? 
+						this.reverse.bind(this,'eur' , 'gbp')						
+						:
+						(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'aud' ) ? 
+						this.reverse.bind(this,'gbp' , 'aud')						
+						:
+						(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'gbp' ) ? 
+						this.reverse.bind(this,'aud' , 'gbp')						
+						:
+						(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'hkd' ) ? 
+						this.reverse.bind(this,'gbk' , 'hkd')						
+						:
+						(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'gbp' ) ? 
+						this.reverse.bind(this,'hkd' , 'gbp')						
+						:
+
+						(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'myr' ) ? 
+						this.reverse.bind(this,'usd' , 'myr')						
+						:
+						(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'usd' ) ? 
+						this.reverse.bind(this,'myr' , 'usd')						
+						:
+						(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'krw' ) ? 
+						this.reverse.bind(this,'usd' , 'krw')						
+						:
+						(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'usd' ) ? 
+						this.reverse.bind(this,'krw' , 'usd')						
+						:
+						(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'eur' ) ? 
+						this.reverse.bind(this,'usd' , 'eur')						
+						:
+						(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'usd' ) ? 
+						this.reverse.bind(this,'eur' , 'usd')						
+						:
+						(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'aud' ) ? 
+						this.reverse.bind(this,'usd' , 'aud')						
+						:
+						(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'usd' ) ? 
+						this.reverse.bind(this,'aud' , 'usd')						
+						:
+						(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'hkd' ) ? 
+						this.reverse.bind(this,'usd' , 'hkd')						
+						:
+						(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'usd' ) ? 
+						this.reverse.bind(this,'hkd' , 'usd')						
+						:
+						
+						(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'myr' ) ? 
+						this.reverse.bind(this,'aud' , 'myr')						
+						:
+						(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'aud' ) ? 
+						this.reverse.bind(this,'myr' , 'aud')						
+						:
+						(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'krw' ) ? 
+						this.reverse.bind(this,'aud' , 'krw')						
+						:
+						(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'aud' ) ? 
+						this.reverse.bind(this,'krw' , 'aud')						
+						:
+						(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'eur' ) ? 
+						this.reverse.bind(this,'aud' , 'eur')						
+						:
+						(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'aud' ) ? 
+						this.reverse.bind(this,'eur' , 'aud')						
+						:
+						(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'hkd' ) ? 
+						this.reverse.bind(this,'aud' , 'hkd')						
+						:
+						(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'aud' ) ? 
+						this.reverse.bind(this,'hkd' , 'aud')						
+						:
+
+						(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'myr' ) ? 
+						this.reverse.bind(this,'eur' , 'myr')						
+						:
+						(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'eur' ) ? 
+						this.reverse.bind(this,'myr' , 'eur')						
+						:
+						(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'krw' ) ? 
+						this.reverse.bind(this,'eur' , 'krw')						
+						:
+						(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'eur' ) ? 
+						this.reverse.bind(this,'krw' , 'eur')						
+						:
+						(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'hkd' ) ? 
+						this.reverse.bind(this,'eur' , 'hkd')						
+						:
+						(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'eur' ) ? 
+						this.reverse.bind(this,'hkd' , 'eur')						
+						:
+						null
+                    }   
+
+            className="reverse-img" style={{width: "4.5%",paddingBottom:"10px",marginTop:"-15px",paddingRight:"17px"}} src="../static/images/reverse.png"/>
                   </div>
-                  */}
+                  
                   <div className="destination-container">
                     <div className="money-input-container">
                       <div className="money-input">
