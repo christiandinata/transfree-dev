@@ -587,7 +587,7 @@ class OrderAmount extends React.Component {
                 */}
                 {this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr' ? 
                   <Link href="/order">
-                    <a className="btn-disabled">Out Of Stock</a>
+                    <a className="btn-primary" onClick={this.on}>Continue</a>
                   </Link>
                  :
                   <Link href="/order">
