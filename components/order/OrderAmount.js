@@ -230,7 +230,9 @@ class OrderAmount extends React.Component {
     this.props.saveValues(data);
     this.props.nextStep();
   }
-
+  on() {
+  document.getElementById("overlay").style.visibility = "visible";
+  }
   render() {
     return (
       <div>
@@ -519,6 +521,19 @@ class OrderAmount extends React.Component {
                   <span className="rate-desc" >Transfer fee </span> <span className="rate-value" style={{textAlign:"right",marginLeft:"5px"}}><span ><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={6} value="0" /></span></span>
               </div>
             <div className="row note">
+		<div className="overlays" id={"overlay"}>
+		<div className="popup">
+		  <h2>WE ARE OUT OF STOCK</h2>
+		  <h3>WE ARE OUT OF STOCK</h3>
+		  <a className="close" href="/order">&times;</a>
+		<div className="content" >
+		  <p > But don't worry, we got you. If you still want your GBP to IDR transfer,<b> we will happily buy your GBP </b> with our IDR , of course <b> with Special Price </b>   . <br/><br/> <b> Click the button below to Sell Your GBP</b> </p>
+		  <Link >
+		    <a href="https://www.transfree.co.uk/currency-seller-to-idr" target="_blank" className="btn-primary">Sell My GBP</a>
+		  </Link>
+		</div>
+		</div>
+              	</div>
               { 
                 (
                 this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur' &&
@@ -585,6 +600,66 @@ class OrderAmount extends React.Component {
             </div>
           </div>
         <style jsx>{`
+	  /** POP UP OOS MARKUP **/
+
+            .overlays{
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            transition: opacity 500ms;
+            visibility: hidden;
+
+            }
+
+          .overlays:target {
+            visibility: visible;
+            opacity: 1;
+          }
+
+          .popup {
+            margin: 0 auto!important;
+            margin-top: 17%!important;
+
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            width: 30%;
+            position: relative;
+            transition: all 5s ease-in-out;
+          }
+
+          .popup h2 {
+            margin-top: 1%;
+            color: #333;
+            font-family: 1px !important
+
+          }
+          .popup h3{
+            display: none;
+          }
+          .popup .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            transition: all 200ms;
+            font-size: 30px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #333;
+
+          }
+          .popup .close:hover {
+            color: #5a9cd8;
+          }
+          .popup .content {
+            max-height: 30%;
+            overflow: auto;
+          }
+
+          /** END OF POP UP OOS MARKTUP **/
           .container-fluid {
             display: flex;
             flex-direction: column;
@@ -798,6 +873,18 @@ class OrderAmount extends React.Component {
 
 
           @media only screen and (max-width: 414px) {
+	    .popup h2 {
+            display : none
+            }
+            .popup h3{
+            margin-top: 3%;
+            font-size: 20px ;
+            display: block
+            }
+            .popup {
+            margin-top: 40%!important;
+            width: 70%;
+            }
             .reverse-img{
               padding-right : 15px !important;
               width : 6% !important
