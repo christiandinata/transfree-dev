@@ -882,7 +882,8 @@ class OrderAmount extends React.Component {
             display: block
             }
 	    .popup p{
-	    font-size: 13px
+	    font-size: 13px !important;
+	    }
             .popup {
             margin-top: 40%!important;
             width: 70%;
