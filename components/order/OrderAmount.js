@@ -878,7 +878,7 @@ class OrderAmount extends React.Component {
             }
             .popup h3{
             margin-top: 3%;
-            font-size: 20px ;
+            font-size: 16px ;
             display: block
             }
             .popup {
