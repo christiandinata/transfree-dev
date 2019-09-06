@@ -1560,7 +1560,9 @@ class Index extends React.Component {
           }
 
         `}</style>
-        <Footer />
+        <div id={"row-footer"}>
+	<Footer />
+	</div>
       </div>
     );
   }
