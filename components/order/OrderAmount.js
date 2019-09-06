@@ -538,13 +538,19 @@ class OrderAmount extends React.Component {
                 (
                 this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur' &&
                 this.state.currentDay.getDay() == '5' &&
-                this.state.currentDay.getHours() >= '14'
+                this.state.currentDay.getHours() >= '12'
                 ) 
                 || 
                 (
                 this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr' && 
                 this.state.currentDay.getDay() == '5' &&
-                this.state.currentDay.getHours() >= '14'
+                this.state.currentDay.getHours() >= '12'
+                )
+		|| 
+                (
+                this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' && 
+                this.state.currentDay.getDay() == '5' &&
+                this.state.currentDay.getHours() >= '12'
                 )
                 || 
                 (
@@ -556,6 +562,11 @@ class OrderAmount extends React.Component {
                 this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur' && 
                 this.state.currentDay.getDay() == '6' 
                 )
+		|| 
+                (
+                this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' && 
+                this.state.currentDay.getDay() == '6' 
+                )
                 || 
                 (
                 this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr' && 
@@ -564,6 +575,11 @@ class OrderAmount extends React.Component {
                 || 
                 (
                 this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur' && 
+                this.state.currentDay.getDay() == '7' 
+                )
+		|| 
+                (
+                this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' && 
                 this.state.currentDay.getDay() == '7' 
                 )
 
