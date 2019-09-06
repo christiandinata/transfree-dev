@@ -8,6 +8,7 @@ class Recipient extends React.Component {
       isNameValid: true,
       isEmailValid: true,
       isBankNameValid: true,
+      isBankNameVirtual: true,
       isBankAccountNumberValid: true,
       isAccountNumberValid: true,
       isSortCodeValid: true,
@@ -63,7 +64,25 @@ class Recipient extends React.Component {
     //   this.setState({isEmailValid: false});
     //   return;
     // }
-
+    if(
+      (this.bankName.current.value.toLowerCase() == 'monzo') ||
+      (this.bankName.current.value.toLowerCase() == 'monese') ||
+      (this.bankName.current.value.toLowerCase() == 'starling') ||
+      (this.bankName.current.value.toLowerCase() == 'revolut') ||
+      (this.bankName.current.value.toLowerCase() == 'n26') ||
+      (this.bankName.current.value.toLowerCase() == 'neat') ||
+      (this.bankName.current.value.toLowerCase() == 'chime') ||
+      (this.bankName.current.value.toLowerCase() == 'starling bank') ||
+      (this.bankName.current.value.toLowerCase() == 'tangerine') ||
+      (this.bankName.current.value.toLowerCase() == 'up') ||
+      (this.bankName.current.value.toLowerCase() == 'nubank') ||
+      (this.bankName.current.value.toLowerCase() == 'doconomy') ||
+      (this.bankName.current.value.toLowerCase() == 'paypal') 
+      )
+    {
+      this.setState({isBankNameVirtual: false});
+      return;
+    } 
     if (this.bankName.current.value == '') {
       this.setState({isBankNameValid: false});
       return;
@@ -229,7 +248,8 @@ class Recipient extends React.Component {
             defaultValue={this.props.data.bankName}
             onBlur={this.checkBankName}/>
           <span className={this.state.isBankNameValid ? 'error-label-hidden' : 'error-label'}>Bank name may not be empty.</span>
-
+          <span className={this.state.isBankNameVirtual ? 'error-label-hidden' : 'error-label'}>We can not send money to Digital Bank Account.</span>
+    
           <div className={this.state.toCurrency == 'gbp' ? 'div-show' : 'div-hide'}>
             <label htmlFor="sortcode">Sort code</label><br/>
             <NumberFormat
