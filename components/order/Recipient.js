@@ -12,6 +12,7 @@ class Recipient extends React.Component {
       isBankAccountNumberValid: true,
       isAccountNumberValid: true,
       isSortCodeValid: true,
+      isSortCodeVirtual: true,
       isIBANValid: true,
       isSWIFTValid: true,
       toCurrency: '',
@@ -91,6 +92,11 @@ class Recipient extends React.Component {
     if (this.state.toCurrency == 'gbp') {
       if (this.state.sortcode == '') {
         this.setState({isSortCodeValid: false});
+        return;
+      }
+      else if(this.state.sortcode == '77 49 26'){
+        this.setState(
+          {isSortCodeVirtual: false});
         return;
       }
 
@@ -212,7 +218,7 @@ class Recipient extends React.Component {
           <input
             type="text"
             id="fullname"
-            className={this.state.isNameValid ? '' : 'error'}
+            className={this.state.isName# '' : 'error'}
             placeholder="Enter recipient's full name"
             ref={this.name}
             defaultValue={this.props.data.name}
@@ -262,6 +268,8 @@ class Recipient extends React.Component {
               onBlur={this.checkSortCodeValid}
               onValueChange={this.updateSortcode} />
             <span className={this.state.isSortCodeValid ? 'error-label-hidden' : 'error-label'}>Sort code may not be empty.</span>
+            <span className={this.state.isSortCodeVirtual ? 'error-label-hidden' : 'error-label'}>Sorry we cannot identify this sort code.</span>
+
             {/*
               <input
                 type="tel"
