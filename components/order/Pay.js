@@ -1,5 +1,13 @@
 import Link from 'next/link';
 import NumberFormat from 'react-number-format';
+import {
+    Accordion,
+    AccordionItem,
+    AccordionItemHeading,
+    AccordionItemButton,
+    AccordionItemPanel,
+} from 'react-accessible-accordion';
+import 'react-accessible-accordion/dist/fancy-example.css';
 
 function BankOption(props) {
   return (
@@ -75,7 +83,22 @@ function EmailInstruction(props) {
       </p>
       </div>
       <p>We will send payment instruction to your email. Confirm by clicking the button below</p>
-      <span className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_email')}>Send payment instruction to email</span>
+      <Accordion>   
+        <AccordionItem>
+            <AccordionItemHeading>
+                <AccordionItemButton>
+                    Is it safe to use Transfree service?
+                </AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel id={"isItSafe"}>
+                <p>
+                  Yes, you are in a trusted company. We are legally incorporated as PT Pelita Transfer Nusantara, office at Innovation Room Kemnaker RI. We are the official partner of Indonesian Community in several countries and collaborating with the governement.
+                  <a href="../index#row-footer" target="_blank"> See our Partners & Collaboratos </a>
+                </p>
+            </AccordionItemPanel>
+        </AccordionItem>   
+      </Accordion>
+      <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_email')}>Send payment instruction to email</span>
       <style jsx>{`
         .list-item {
           display: flex;
@@ -123,7 +146,22 @@ function VAGenerated(props) {
         </div>
       </div>
       <p>Please follow the instruction of your bank to transfer money into virtual account number.</p>
-      <span className="btn-primary" onClick={() => props.addOrder('virtual_account')}>Continue</span>
+      <Accordion>
+        <AccordionItem>
+            <AccordionItemHeading>
+                <AccordionItemButton>
+                    Is it safe to use Transfree service?
+                </AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel id={"isItSafe"}>
+                <p>
+                  Yes, you are in a trusted company. We are legally incorporated as PT Pelita Transfer Nusantara, office at Innovation Room Kemnaker RI. We are the official partner of Indonesian Community in several countries and collaborating with the governement. 
+                  <a href="../index#row-footer" target="_blank"> See our Partners & Collaboratos </a>
+                </p>
+            </AccordionItemPanel>
+        </AccordionItem>
+      </Accordion>
+      <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('virtual_account')}>Continue</span>
       <style jsx>{`
         .list-item {
           display: flex;
@@ -185,7 +223,22 @@ function TransferBankBCA(props) {
       <p>Please check all of the details above are correct to speed up the process.
       We also email you the instruction. We will notify you via email once your payment has been confirmed.</p>
 
-      <span className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_bca')}>Continue</span>
+      <Accordion>
+        <AccordionItem>
+            <AccordionItemHeading>
+                <AccordionItemButton>
+                    Is it safe to use Transfree service?
+                </AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel id={"isItSafe"}>
+                <p>
+                  Yes, you are in a trusted company. We are legally incorporated as PT Pelita Transfer Nusantara, office at Innovation Room Kemnaker RI. We are the official partner of Indonesian Community in several countries and collaborating with the governement.
+                  <a href="../index#row-footer" target="_blank"> See our Partners & Collaboratos </a>
+                </p>
+            </AccordionItemPanel>
+        </AccordionItem>
+      </Accordion>
+      <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_bca')}>Continue</span>
       <style jsx>{`
         .list-item {
           display: flex;
@@ -282,7 +335,22 @@ function TransferBankBNI(props) {
       <p>Please check all of the details above are correct to speed up the process.
       We also email you the instruction. We will notify you via email once your payment has been confirmed.</p>
 
-      <span className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_bni')}>Continue</span>
+      <Accordion>
+        <AccordionItem>
+            <AccordionItemHeading>
+                <AccordionItemButton>
+                    Is it safe to use Transfree service?
+                </AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel id={"isItSafe"}>
+                <p>
+                  Yes, you are in a trusted company. We are legally incorporated as PT Pelita Transfer Nusantara, office at Innovation Room Kemnaker RI. We are the official partner of Indonesian Community in several countries and collaborating with the governement.
+                  <a href="../index#row-footer" target="_blank"> See our Partners & Collaboratos </a>
+                </p>
+            </AccordionItemPanel>
+        </AccordionItem>
+      </Accordion>    
+      <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_bni')}>Continue</span>
       <style jsx>{`
         .list-item {
           display: flex;
