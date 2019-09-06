@@ -218,7 +218,7 @@ class Recipient extends React.Component {
           <input
             type="text"
             id="fullname"
-            className={this.state.isName# '' : 'error'}
+            className={this.state.isNameValid ? '' : 'error'}
             placeholder="Enter recipient's full name"
             ref={this.name}
             defaultValue={this.props.data.name}
