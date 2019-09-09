@@ -602,7 +602,7 @@ class OrderAmount extends React.Component {
                  </Link>
                 */}
                 {this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr' ? 
-                  <Link href="/order">
+                  <Link>
                     <a className="btn-primary" href={"#oos"}>Continue</a>
                   </Link>
                  :
@@ -902,12 +902,13 @@ class OrderAmount extends React.Component {
             display : none
             }
             .popup h3{
-            margin-top: 3%;
-            font-size: 17px ;
+	    text-align: left !important;
+            margin-top: 4%;
+            font-size: 20px ;
             display: block
             }
 	    .popup p{
-	    font-size: 13px !important;
+	    font-size: 15px !important;
 	    }
             .popup {
             margin-top: 40%!important;
