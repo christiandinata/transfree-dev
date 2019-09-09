@@ -130,7 +130,7 @@ class OrderItem extends React.Component {
           <div key={key} >
             <div className={'list-item '+ (this.state.key == key ? 'open' : '')} onClick={() => this.toggleDetail(key)} >
               <div className="left">
-                <div className="date">{order.completedAt == 0.0 ? 'Processing' : 'Completed on '+order.createdAt}</div>
+                <div className="date">{order.completedAt == 0.0 ? 'Processing' : 'Completed on '+moment(order.completedAt).format("DD/MM/YYYY HH:mm")}</div>
                 <div className="recipient">Transfer to <b>{order.name}</b></div>
               </div>
               <div className="right">
@@ -142,16 +142,32 @@ class OrderItem extends React.Component {
             <div className={'detail '+ (this.state.key == key ? 'open' : '')}>
             <ul className="progress">
               <li><div className="node blue"></div><p>Created on {moment(order.createdAt).format("DD/MM/YYYY HH:mm")}</p></li>
-              <li><div className={'divider '+ (order.receivedAt == 0.0 ? 'grey' : 'blue')}></div></li>
+              <li><div className={'divider '+ ((moment(moment().format("DD/MM/YYYY HH:mm")).isAfter(moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm"))) || order.receivedAt != 0.0 ? 'blue' : 'grey')}></div></li>
               <li>
-              <div className={'node '+ (order.receivedAt == 0.0 ? 'grey' : 'blue')}>
+              <div className={'node '+ (moment(moment().format("DD/MM/YYYY HH:mm")).isAfter(moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) || order.receivedAt != 0.0 ? 'blue' : 'grey')}>
               </div>
               <p style={{lineHeight:"25px"}}>
-              {order.receivedAt == 0.0 ? ('We are waiting your '+order.fromCurrency.toUpperCase()+' transfer') :  ('Received on ' + moment(order.receivedAt).format("DD/MM/YYYY HH:mm") + ',')}  
+              {(moment(moment().format("DD/MM/YYYY HH:mm"))
+              .isAfter
+              (moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) )
+              ||
+              (order.receivedAt != 0.0)
+              ?  
+              ('We are processing your ' + order.toCurrency.toUpperCase() +' booking')
+               :  
+               ('We are waiting to process your ') }  
               </p>
               <br/>
-              <p style={{paddingLeft:"10px !important"}}>
-              {order.receivedAt == 0.0 ? ('') :  ('and we are now processing your ' +order.toCurrency.toUpperCase())}
+              <p style={{marginLeft:"35px",marginTop:"4px"}}>
+              {(moment(moment().format("DD/MM/YYYY HH:mm"))
+               .isAfter
+               (moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) )
+               ||
+               (order.receivedAt != 0.0)
+               ?
+               ('') 
+               :  
+               (order.toCurrency.toUpperCase() +' booking') }
               </p>
               </li>
               {/*
