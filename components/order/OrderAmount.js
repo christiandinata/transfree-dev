@@ -521,19 +521,19 @@ class OrderAmount extends React.Component {
                   <span className="rate-desc" >Transfer fee </span> <span className="rate-value" style={{textAlign:"right",marginLeft:"5px"}}><span ><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={6} value="0" /></span></span>
               </div>
             <div className="row note">
-		<div className="overlays" id={"overlay"}>
-		<div className="popup">
-		  <h2>WE ARE OUT OF STOCK</h2>
-		  <h3>WE ARE OUT OF STOCK</h3>
-		  <a className="close" href="/order">&times;</a>
-		<div className="content" >
-		  <p > But don't worry, we got you. If you still want your GBP to IDR transfer,<b> we will happily buy your GBP </b> with our IDR , of course <b> with Special Price </b>   . <br/><br/> <b> Click the button below to Sell Your GBP</b> </p>
-		  <Link >
-		    <a href="https://www.transfree.co.uk/currency-seller-to-idr" target="_blank" className="btn-primary">Sell My GBP</a>
-		  </Link>
-		</div>
-		</div>
-              	</div>
+		<div className="lightbox" id={"oos"}>
+                <div className="popup">
+                  <h2>WE ARE OUT OF STOCK</h2>
+                  <h3>WE ARE OUT OF STOCK</h3>
+                  <a className="close" href="#">&times;</a>
+                  <div className="content" >
+                    <p> But don't worry, we got you. If you still want your GBP to IDR transfer,<b> we will happily buy your GBP </b> with our IDR , of course <b> with Special Price </b>   . <br/><br/> <b> Click the button below to Sell Your GBP</b> </p>
+                    <Link>
+                      <a href="https://www.transfree.co.uk/currency-seller-to-idr" target="_blank" className="btn-primary">Sell My GBP</a>
+                    </Link>
+                  </div>
+                </div>
+              </div>
               { 
                 (
                 this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur' &&
@@ -603,7 +603,7 @@ class OrderAmount extends React.Component {
                 */}
                 {this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr' ? 
                   <Link href="/order">
-                    <a className="btn-primary" onClick={this.on}>Continue</a>
+                    <a className="btn-primary" href={"#oos"}>Continue</a>
                   </Link>
                  :
                   <Link href="/order">
@@ -616,25 +616,7 @@ class OrderAmount extends React.Component {
             </div>
           </div>
         <style jsx>{`
-	  /** POP UP OOS MARKUP **/
-
-            .overlays{
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.7);
-            transition: opacity 500ms;
-            visibility: hidden;
-
-            }
-
-          .overlays:target {
-            visibility: visible;
-            opacity: 1;
-          }
-
+	   /** POP UP OOS MARKUP **/
           .popup {
             margin: 0 auto!important;
             margin-top: 17%!important;
@@ -648,9 +630,9 @@ class OrderAmount extends React.Component {
           }
 
           .popup h2 {
+
             margin-top: 1%;
             color: #333;
-            font-family: 1px !important
 
           }
           .popup h3{
@@ -674,8 +656,35 @@ class OrderAmount extends React.Component {
             max-height: 30%;
             overflow: auto;
           }
+          .popup .content p{
+            color: GREY;
+          }
 
           /** END OF POP UP OOS MARKTUP **/
+	  /** LIGHTBOX MARKUP **/
+	.lightbox {
+	  /** Default lightbox to hidden */
+	  display: none;
+
+	  /** Position and style */
+	  position: fixed;
+	  z-index: 999;
+	  width: 100%;
+	  height: 100%;
+	  text-align: center;
+	  top: 0;
+	  left: 0;
+	  background: rgba(0,0,0,0.8);
+	}
+
+	.lightbox:target {
+	  /** Remove default browser outline */
+	  outline: none;
+
+	  /** Unhide lightbox **/
+	  display: block;
+	}
+	/** END LIGHTBOX MARKUP **/
           .container-fluid {
             display: flex;
             flex-direction: column;
