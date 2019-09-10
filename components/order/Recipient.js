@@ -78,7 +78,20 @@ class Recipient extends React.Component {
       (this.bankName.current.value.toLowerCase() == 'up') ||
       (this.bankName.current.value.toLowerCase() == 'nubank') ||
       (this.bankName.current.value.toLowerCase() == 'doconomy') ||
-      (this.bankName.current.value.toLowerCase() == 'paypal') 
+      (this.bankName.current.value.toLowerCase() == 'paypal') ||
+      
+      (this.bankName.current.value.toLowerCase() == 'monzo bank') ||
+      (this.bankName.current.value.toLowerCase() == 'monese bank') ||
+      (this.bankName.current.value.toLowerCase() == 'starling bank') ||
+      (this.bankName.current.value.toLowerCase() == 'revolut bank') ||
+      (this.bankName.current.value.toLowerCase() == 'n26 bank') ||
+      (this.bankName.current.value.toLowerCase() == 'neat bank') ||
+      (this.bankName.current.value.toLowerCase() == 'chime bank') ||
+      (this.bankName.current.value.toLowerCase() == 'tangerine bank') ||
+      (this.bankName.current.value.toLowerCase() == 'up bank') ||
+      (this.bankName.current.value.toLowerCase() == 'nubank bank') ||
+      (this.bankName.current.value.toLowerCase() == 'doconomy bank') ||
+      (this.bankName.current.value.toLowerCase() == 'paypal bank') 
       )
     {
       this.setState({isBankNameVirtual: false});
