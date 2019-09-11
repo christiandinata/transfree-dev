@@ -223,8 +223,8 @@ class OrderAmount extends React.Component {
       rate: this.state.rate,
       fromCurrency: this.state.fromCurrency,
       toCurrency: this.state.toCurrency,
-      fromAmount: this.state.fromAmount,
-      toAmount: this.state.toAmount
+      fromAmount: Math.round(this.state.fromAmount),
+      toAmount: Math.round(this.state.toAmount)
     }
 
     this.props.saveValues(data);
