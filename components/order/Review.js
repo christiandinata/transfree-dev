@@ -47,7 +47,7 @@ class Review extends React.Component {
           </div>
 
           <div className="list-item">
-            <span className="left">Email address</span>
+            <span className="left">Purpose Of Transfer</span>
             <span className="right">{this.props.data.email}</span>
           </div>
 
