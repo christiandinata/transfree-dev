@@ -590,6 +590,14 @@ class OrderAmount extends React.Component {
 
 
               :
+              (this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr' )
+              ||
+              (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur' )
+              ?
+              <p style={{maxWidth: "100%", marginBottom: "0"}}>Your transfer will be processed immediately.
+              The recipient will get the money in less than <span className="received-on">24 hours</span>, 
+              but kindly note, there is a chance that the money will arrive in more than <span className="received-on">36 hours</span>.</p>
+              :
               <p style={{maxWidth: "100%", marginBottom: "0"}}>Your transfer will be processed immediately.
               The recipient will get the money in less than <span className="received-on">24 hours.</span></p>
               }
