@@ -238,7 +238,7 @@ class Recipient extends React.Component {
             onBlur={this.checkName}/>
           <span className={this.state.isNameValid ? 'error-label-hidden' : 'error-label'}>Recipient's full name may not be empty.</span>
 
-          <label htmlFor="email">( Optional )Purpose Of Transfer</label><br/>
+          <label htmlFor="email">Purpose Of Transfer</label><br/>
           <select
               type="email"
               id="email"
