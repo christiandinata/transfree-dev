@@ -606,6 +606,19 @@ class OrderAmount extends React.Component {
                     <a className="btn-primary" href={"#oos"}>Continue</a>
                   </Link>
                  :
+		 (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' && this.props.adjustedRates.idrToGbpOos == 'true')
+                  ||
+                  (this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr' && this.props.adjustedRates.gbpToIdrOos == 'true')
+                  ||
+                  (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur' && this.props.adjustedRates.idrToEurOos == 'true')
+                  ||
+                  (this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr' && this.props.adjustedRates.eurToIdrOos == 'true')
+
+                  ?
+                  <Link href="/order">
+                    <a className="btn-disabled">Out Of Stock</a>
+                  </Link>
+                  :
                   <Link href="/order">
                     <a className="btn-primary" onClick={this.saveAndContinue}>Continue</a>
                   </Link>  
