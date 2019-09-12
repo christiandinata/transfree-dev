@@ -19,10 +19,10 @@ class Rates extends React.Component {
     this.state = {
       upperMargin: 0,
       lowerMargin: 0,
-      idrToGbpOos: 0,
-      gbpToIdrOos: 0,
-      idrToEurOos: 0,
-      eurToIdrOos: 0
+      idrToGbpOos: 'false',
+      gbpToIdrOos: 'false',
+      idrToEurOos: 'false',
+      eurToIdrOos: 'false'
     }
   }
 
