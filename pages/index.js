@@ -303,27 +303,27 @@ class Index extends React.Component {
                         </button>
                         <div className={this.state.isSourceActive ? 'dropdown-menu show' : 'dropdown-menu'}>
                           <ul>
-                            <li onClick={this.selectSource.bind(this,'idr')}>
+                            <li onClick={this.state.toCurrency == 'idr' ? '' : this.selectSource.bind(this,'idr')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-id flag-icon-squared"></span> IDR (Indonesian Rupiah)
                               </a>
                             </li>
-                            <li onClick={this.selectSource.bind(this,'gbp')}>
+                            <li onClick={this.state.toCurrency == 'gbp' ? '' : this.selectSource.bind(this,'gbp')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP (British Poundsterling)
                               </a>
                             </li>
-                            <li onClick={this.selectSource.bind(this,'usd')}>
+                            <li onClick={this.state.toCurrency == 'usd' ? '' : this.selectSource.bind(this,'usd')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-us flag-icon-squared"></span> USD (US Dollar)
                               </a>
                             </li>
-                  			    <li onClick={this.selectSource.bind(this,'aud')}>
-                  			      <a className="dropdown-item">
-                  				      <span className="flag-icon flag-icon-au flag-icon-squared"></span> AUD (Australian Dollar)
-                  			      </a>
-                  			    </li>
-                            <li onClick={this.selectSource.bind(this,'eur')}>
+                  	    <li onClick={this.state.toCurrency == 'aud' ? '' : this.selectSource.bind(this,'aud')}>
+                  	      <a className="dropdown-item">
+                  		<span className="flag-icon flag-icon-au flag-icon-squared"></span> AUD (Australian Dollar)
+                  	      </a>
+                  	    </li>
+                            <li onClick={this.state.toCurrency == 'eur' ? '' : this.selectSource.bind(this,'eur')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-eu flag-icon-squared"></span> EUR (European Euro)
                               </a>
@@ -519,7 +519,7 @@ class Index extends React.Component {
                         </button>
                         <div className={this.state.isDestinationActive ? 'dropdown-menu show' : 'dropdown-menu'}>
                           <ul>
-                            <li onClick={this.selectDestination.bind(this,'idr')}>
+                            <li onClick={this.state.fromCurrency == 'idr' ? '' : this.selectDestination.bind(this,'idr')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-id flag-icon-squared"></span> IDR (Indonesian Rupiah)
                               </a>
@@ -534,22 +534,22 @@ class Index extends React.Component {
                                 <span className="flag-icon flag-icon-kr flag-icon-squared"></span> KRW (Korean Won)
                               </a>
                             </li>
-                            <li onClick={this.selectDestination.bind(this,'gbp')}>
+                            <li onClick={this.state.fromCurrency == 'gbp' ? '' : this.selectDestination.bind(this,'gbp')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP (British Poundsterling)
                               </a>
                             </li>
-                            <li onClick={this.selectDestination.bind(this,'usd')}>
+                            <li onClick={this.state.fromCurrency == 'usd' ? '' : this.selectDestination.bind(this,'usd')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-us flag-icon-squared"></span> USD (US Dollar)
                               </a>
                             </li>
-                  		      <li onClick={this.selectDestination.bind(this,'aud')}>
+                  	    <li onClick={this.state.fromCurrency == 'aud' ? '' : this.selectDestination.bind(this,'aud')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-au flag-icon-squared"></span> AUD (Australian Dollar)
                               </a>
                             </li>
-                            <li onClick={this.selectDestination.bind(this,'eur')}>
+                            <li onClick={this.state.fromCurrency == 'eur' ? '' : this.selectDestination.bind(this,'eur')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-eu flag-icon-squared"></span> EUR (European Euro)
                               </a>
