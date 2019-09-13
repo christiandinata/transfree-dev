@@ -57,6 +57,15 @@ const ApprovedLayout = () => {
 const PendingLayout = () => {
   return (
     <div className="content">
+    {/* OLD PENDING LAYOUT
+
+        <div className="big-icon">
+          <img src="../static/images/document.svg"/>
+        </div>
+        <h1>Awaiting confirmation</h1>
+        <p>We are now reviewing your account details. We will send you an email & WhatsApp message once the verification process is completed.</p>
+
+      END OF OLD PENDING LAYOUT */}
       <div className="big-icon">
         <img src="../static/images/happy.svg"/>
       </div>
