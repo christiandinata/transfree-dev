@@ -280,6 +280,7 @@ class Recipient extends React.Component {
           }
 
           <label htmlFor="bank">Bank Name</label><br/>
+      {/*
           <input
             type="text"
             id="bank"
@@ -289,6 +290,25 @@ class Recipient extends React.Component {
             onBlur={this.checkBankName}/>
           <span className={this.state.isBankNameValid ? 'error-label-hidden' : 'error-label'}>Bank name may not be empty.</span>
           <span className={this.state.isBankNameVirtual ? 'error-label-hidden' : 'error-label'}>We can not send money to Digital Bank Account.</span>
+      */}
+             <select
+              type="text"
+              id="bank"
+              className="select-css"
+              ref={this.bankName}
+              defaultValue={this.props.data.bankName}>
+              <option value="Bank Central Asia (BCA)">Bank Central Asia (BCA)</option>
+              <option value="Bank Negara Indonesia (BNI)">Bank Negara Indonesia (BNI)</option>
+              <option value="Bank Rakyat Indonesia (BRI)">Bank Rakyat Indonesia (BRI)</option>
+              <option value="Bank Tabungan Negara (BTN)">Bank Tabungan Negara (BTN)</option>
+              <option value="Bank BTPN (Jenius)">Bank BTPN (Jenius)</option>
+              <option value="Bank Mandiri">Bank Mandiri</option>
+              <option value="Bank Danamon">Bank Danamon</option>
+              <option value="BNI Syariah">BNI Syariah</option>
+              <option value="BRI Syariah">BRI Syariah</option>
+              <option value="Bank Syariah Mandiri">Bank Syariah Mandiri</option>
+              <option value="others">Others</option>
+            </select>
     
           <div className={this.state.toCurrency == 'gbp' ? 'div-show' : 'div-hide'}>
             <label htmlFor="sortcode">Sort code</label><br/>
