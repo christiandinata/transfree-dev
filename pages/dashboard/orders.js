@@ -44,15 +44,160 @@ class OrderItem extends React.Component {
               {order.paymentMethod == 'direct_transfer_via_bca' ? (<img src="../static/images/bank_logos/bca.png"/>) : null}
             </div>
             <div className="column">
+              {/*
               {order.completedAt > 0 ? (<div className="status approved">completed</div>) : null}
               {order.receivedAt == 0 ? (<div onClick={() => this.props.paymentReceived(order._id )} className="btn-primary btn-small">Payment Received</div>) : null}
               {order.completedAt == 0 ? (<div onClick={() => this.props.transferCompleted(order._id )} className="btn-primary btn-small">Transfer Completed</div>) : null}
+              */}
+    {order.completedAt > 0 ? (<div className="status approved">completed</div>) : null}
+              {order.receivedAt == 0 ?
+              order.fromCurrency == 'idr' ?
+              (<Link>
+                <a href={"#received_idr_to_valas"} className="btn-primary btn-small">Payment Received</a>
+              </Link>) 
+              :
+              (<Link>
+                <a href={"#received_valas_to_idr"} className="btn-primary btn-small">Payment Received</a>
+              </Link>) 
+              :
+              null
+
+              }
+
+          {/*
+            {order.receivedAt == 0 ? 
+            (<Link>
+              <a href={"#received_idr_to_valas"} className="btn-primary btn-small">Payment Received</a>
+            </Link>) 
+            : 
+            null}
+          */}
+
+            {order.completedAt == 0 ? 
+            (<Link>
+              <a href={"#transfer_completed"} className="btn-primary btn-small">Transfer Completed</a>
+            </Link>) 
+            : null}
+            
+            <div className="lightbox" id={"received_valas_to_idr"}>
+              <div className="popup">
+                <a className="close" href="#">&times;</a>
+                <div className="content" >
+                <h1>Phone verification</h1>
+                  <form>
+                  <input
+                    type="tel"
+                    id="code"
+                    placeholder="Enter 6-digit verification code"
+                    value={this.state.code}
+                    onChange={e => this.setState({ code: e.target.value })}/>
+
+                  <button type="submit" className="btn-primary">{this.props.inProgress ? (
+                    <FontAwesomeIcon icon="sync-alt" spin/>
+                  ) : 'Continue'}</button>
+                </form>
+                </div>
+              </div>
+            </div>
+
+            <div className="lightbox" id={"received_idr_to_valas"}>
+              <div className="popup">
+                <a className="close" href="#">&times;</a>
+                <div className="content" >
+                <h2>ARE YOU SURE ? </h2>
+                  <a href="orders" onClick={() => this.props.paymentReceived(order._id )} className="btn-primary btn-small">YES</a>
+                  <a href="#"  className="btn-primary btn-small">NO</a>
+                </div>
+              </div>
+            </div>
+
+            <div className="lightbox" id={"transfer_completed"}>
+              <div className="popup">
+                <a className="close" href="#">&times;</a>
+                <div className="content" >
+                <h2>ARE YOU SURE ?</h2>
+                  
+                    <a href="orders" onClick={() => this.props.transferCompleted(order._id )} className="btn-primary btn-small">YES</a>
+                    <a href="#" className="btn-primary btn-small">NO</a>
+                             
+                </div>
+              </div>
+            </div>
             </div>
           </div>
         )
 
       })}
       <style jsx>{`
+      /** POP UP OOS MARKUP **/
+          .popup {
+            margin: 0 auto!important;
+            margin-top: 17%!important;
+
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            width: 30%;
+            position: relative;
+            transition: all 5s ease-in-out;
+          }
+
+          .popup h2 {
+
+            margin-top: 1%;
+            color: #333;
+
+          }
+          .popup h3{
+            display: none;
+          }
+          .popup .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            transition: all 200ms;
+            font-size: 30px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #333;
+
+          }
+          .popup .close:hover {
+            color: #5a9cd8;
+          }
+          .popup .content {
+            max-height: 30%;
+            overflow: auto;
+          }
+          .popup .content p{
+            color: GREY;
+          }
+
+          /** END OF POP UP OOS MARKTUP **/
+    /** LIGHTBOX MARKUP **/
+  .lightbox {
+    /** Default lightbox to hidden */
+    display: none;
+
+    /** Position and style */
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+  }
+
+  .lightbox:target {
+    /** Remove default browser outline */
+    outline: none;
+
+    /** Unhide lightbox **/
+    display: block;
+  }
+  /** END LIGHTBOX MARKUP **/
         .container-item {
           display: flex;
           justify-content: space-between;
