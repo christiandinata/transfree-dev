@@ -594,7 +594,8 @@ class Index extends React.Component {
    
                 <div className="row note">
                   <p style={{maxWidth: "100%", marginBottom: "0"}}>Your transfer will be processed immediately.
-                  The recipient will get the money in less than <span className="received-on">24 hours</span>.</p>
+                  The recipient will get the money in next working day. </p>
+		  {/*<span className="received-on">24 hours</span>*/}
                 </div>
       
 
