@@ -44,12 +44,15 @@ class OrderItem extends React.Component {
               {order.paymentMethod == 'direct_transfer_via_bca' ? (<img src="../static/images/bank_logos/bca.png"/>) : null}
             </div>
             <div className="column">
-              {/*
               {order.completedAt > 0 ? (<div className="status approved">completed</div>) : null}
               {order.receivedAt == 0 ? (<div onClick={() => this.props.paymentReceived(order._id )} className="btn-primary btn-small">Payment Received</div>) : null}
               {order.completedAt == 0 ? (<div onClick={() => this.props.transferCompleted(order._id )} className="btn-primary btn-small">Transfer Completed</div>) : null}
-              */}
-    {order.completedAt > 0 ? (<div className="status approved">completed</div>) : null}
+            </div>
+          </div>
+              )
+              
+              {/*
+              {order.completedAt > 0 ? (<div className="status approved">completed</div>) : null}
               {order.receivedAt == 0 ?
               order.fromCurrency == 'idr' ?
               (<Link>
@@ -64,14 +67,12 @@ class OrderItem extends React.Component {
 
               }
 
-          {/*
             {order.receivedAt == 0 ? 
             (<Link>
               <a href={"#received_idr_to_valas"} className="btn-primary btn-small">Payment Received</a>
             </Link>) 
             : 
             null}
-          */}
 
             {order.completedAt == 0 ? 
             (<Link>
@@ -126,78 +127,10 @@ class OrderItem extends React.Component {
             </div>
           </div>
         )
+        */}
 
       })}
       <style jsx>{`
-      /** POP UP OOS MARKUP **/
-          .popup {
-            margin: 0 auto!important;
-            margin-top: 17%!important;
-
-            padding: 20px;
-            background: #fff;
-            border-radius: 5px;
-            width: 30%;
-            position: relative;
-            transition: all 5s ease-in-out;
-          }
-
-          .popup h2 {
-
-            margin-top: 1%;
-            color: #333;
-
-          }
-          .popup h3{
-            display: none;
-          }
-          .popup .close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            transition: all 200ms;
-            font-size: 30px;
-            font-weight: bold;
-            text-decoration: none;
-            color: #333;
-
-          }
-          .popup .close:hover {
-            color: #5a9cd8;
-          }
-          .popup .content {
-            max-height: 30%;
-            overflow: auto;
-          }
-          .popup .content p{
-            color: GREY;
-          }
-
-          /** END OF POP UP OOS MARKTUP **/
-    /** LIGHTBOX MARKUP **/
-  .lightbox {
-    /** Default lightbox to hidden */
-    display: none;
-
-    /** Position and style */
-    position: fixed;
-    z-index: 999;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    top: 0;
-    left: 0;
-    background: rgba(0,0,0,0.8);
-  }
-
-  .lightbox:target {
-    /** Remove default browser outline */
-    outline: none;
-
-    /** Unhide lightbox **/
-    display: block;
-  }
-  /** END LIGHTBOX MARKUP **/
         .container-item {
           display: flex;
           justify-content: space-between;
