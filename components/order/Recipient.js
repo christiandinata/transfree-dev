@@ -280,7 +280,6 @@ class Recipient extends React.Component {
           }
 
           <label htmlFor="bank">Bank Name</label><br/>
-      {/*
           <input
             type="text"
             id="bank"
@@ -290,7 +289,7 @@ class Recipient extends React.Component {
             onBlur={this.checkBankName}/>
           <span className={this.state.isBankNameValid ? 'error-label-hidden' : 'error-label'}>Bank name may not be empty.</span>
           <span className={this.state.isBankNameVirtual ? 'error-label-hidden' : 'error-label'}>We can not send money to Digital Bank Account.</span>
-      */}
+      {/*
              <select
               type="text"
               id="bank"
@@ -309,6 +308,7 @@ class Recipient extends React.Component {
               <option value="Bank Syariah Mandiri">Bank Syariah Mandiri</option>
               <option value="others">Others</option>
             </select>
+       */}
     
           <div className={this.state.toCurrency == 'gbp' ? 'div-show' : 'div-hide'}>
             <label htmlFor="sortcode">Sort code</label><br/>
