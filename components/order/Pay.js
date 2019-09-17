@@ -12,8 +12,9 @@ import 'react-accessible-accordion/dist/fancy-example.css';
 function BankOption(props) {
   return (
     <div>
-       <a style={{paddingTop: "9.5px",paddingBottom: "9.5px"}} className="btn-primary"  href="https://www.transfree.co.uk/" target="_blank">Pay your transfer</a>
       {/*
+       <a style={{paddingTop: "9.5px",paddingBottom: "9.5px"}} className="btn-primary"  href="https://www.transfree.co.uk/" target="_blank">Pay your transfer</a>
+      */}
       <p className="instruction">Please select the bank below:</p>
       <ul>
         {
@@ -26,7 +27,7 @@ function BankOption(props) {
         <li onClick={() => props.transferBankBNI('bni')}><img src="../static/images/bank_logos/bni.png"/> <span>Bank BNI</span></li>
         <li onClick={() => props.transferBankBCA('bca')}><img src="../static/images/bank_logos/bca.png"/> <span>Bank BCA</span></li>
       </ul>
-      */}
+
       <style jsx>{`
         p {
           text-align: center;
