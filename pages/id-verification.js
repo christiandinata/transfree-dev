@@ -25,6 +25,11 @@ class IdVerification extends React.Component {
       pob: '',
       gender: '',
     };
+    this.checkIdnumber = this.checkIdnumber.bind(this);
+    this.checkFullname = this.checkFullname.bind(this);
+    this.checkPob = this.checkPob.bind(this);
+    this.checkDob = this.checkDob.bind(this);
+    this.checkAddress = this.checkAddress.bind(this);
   }
 
   static async getInitialProps(ctx) {
