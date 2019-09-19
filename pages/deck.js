@@ -10,20 +10,20 @@ const Terms = () => (
     <Menu/>
     <div className="row">
       <div className="slide">
-      <div className="margin"><img src="../static/ppt/slide1.png"/></div>
-      <div className="margin"><img src="../static/ppt/slide2.png"/></div>
-      <div className="margin"><img src="../static/ppt/slide3.png"/></div>
-      <div className="margin"><img src="../static/ppt/slide4.png"/></div>
-      <div className="margin"><img src="../static/ppt/slide5.png"/></div>
-      <div className="margin"><img src="../static/ppt/slide6.png"/></div>
-      <div className="margin"><img src="../static/ppt/slide7.png"/></div>
-      <div className="margin"><img src="../static/ppt/slide8.png"/></div>
-      <div className="margin"><img src="../static/ppt/slide9.png"/></div>
-      <div className="margin"><img src="../static/ppt/slide10.png"/></div>
-      <div className="margin"><img src="../static/ppt/slide11.png"/></div>
-      <div className="margin"><img src="../static/ppt/slide12.png"/></div>
-      <div className="margin"><img src="../static/ppt/slide13.png"/></div>
-      <div className="margin"><img src="../static/ppt/slide14.png"/></div>
+      <div className="margin"><img src="../static/ppt/slide1.PNG"/></div>
+      <div className="margin"><img src="../static/ppt/slide2.PNG"/></div>
+      <div className="margin"><img src="../static/ppt/slide3.PNG"/></div>
+      <div className="margin"><img src="../static/ppt/slide4.PNG"/></div>
+      <div className="margin"><img src="../static/ppt/slide5.PNG"/></div>
+      <div className="margin"><img src="../static/ppt/slide6.PNG"/></div>
+      <div className="margin"><img src="../static/ppt/slide7.PNG"/></div>
+      <div className="margin"><img src="../static/ppt/slide8.PNG"/></div>
+      <div className="margin"><img src="../static/ppt/slide9.PNG"/></div>
+      <div className="margin"><img src="../static/ppt/slide10.PNG"/></div>
+      <div className="margin"><img src="../static/ppt/slide11.PNG"/></div>
+      <div className="margin"><img src="../static/ppt/slide12.PNG"/></div>
+      <div className="margin"><img src="../static/ppt/slide13.PNG"/></div>
+      <div className="margin"><img src="../static/ppt/slide14.PNG"/></div>
       </div>>
     </div>
     <style jsx>{`
