@@ -252,7 +252,7 @@ const FAQ = () => {
               <AccordionItem>
                   <AccordionItemHeading>
                       <AccordionItemButton>
-                          What are your supported currecies?
+                          What are your supported currencies?
                       </AccordionItemButton>
                   </AccordionItemHeading>
                   <AccordionItemPanel>
