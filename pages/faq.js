@@ -81,7 +81,7 @@ const FAQ = () => {
                   </AccordionItemHeading>
                   <AccordionItemPanel>
                       <p>
-                          Your money will arrive in maximum 24 hour, however it is possible that it will take longer due to time differences or other issues.
+                          You money will be processed in 24 hours at working day and in the weekend or public holiday you will receive the money in the next working day. However please bear in mind that in certain condition it will need more than 24 hours to processed your transfer if there is security or due diligence compliance issue happen. If it happens to you, we will notify you through email or whatsapp.
                       </p>
                   </AccordionItemPanel>
               </AccordionItem>
