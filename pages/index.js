@@ -661,7 +661,7 @@ class Index extends React.Component {
         <div className="row">
           <img className="curve" src="../static/images/curve-bg.svg"/>
         </div>
-
+{/*
         <div className="row partners">
           <h1>Our partners</h1>
           <div className="container partners-wrapper">
@@ -697,9 +697,9 @@ class Index extends React.Component {
                 <img src="../static/images/partners/ppi-amsterdam.png"/>
               </div>
             </div>
-
           </div>
         </div>
+	*/}
 
         <div className="row features">
           <div className="container">
@@ -765,7 +765,7 @@ class Index extends React.Component {
               </div>
             </div>
           </div>
-                
+		{/*        
           <div className="row partners-mobile">
             <h1>Our partners</h1>
             <div className="container partners-wrapper-mobile">
@@ -804,9 +804,9 @@ class Index extends React.Component {
                 <img src="../static/images/partners/ppi-gm.png"/>
               </div>
             </div>
-
           </div>
         </div>
+	*/}
         </div>
 
         <div className="row testimonials">
