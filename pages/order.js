@@ -13,6 +13,17 @@ import { getCookie } from '../utils/cookie';
 import NumberFormat from 'react-number-format';
 import orderid from 'order-id';
 import shortid from 'shortid';
+import ReactGA from 'react-ga';
+
+export const initGA = () => {
+  console.log('GA init')
+  ReactGA.initialize('UA-152856412-1'); //tracking id Google Analytics
+  
+}
+export const logPageView = () =>{
+  ReactGA.set({page: window.location.pathname})
+  ReactGA.pageview(window.location.pathname)
+}
 
 class Order extends React.Component {
   constructor({ props }) {
@@ -63,6 +74,8 @@ class Order extends React.Component {
       senderEmail: this.props.userData.email,
       senderPhone: this.props.userData.phone
     })
+    initGA()
+    logPageView()
   }
 
   componentDidUpdate(prevProps) {

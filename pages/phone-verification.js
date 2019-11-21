@@ -6,6 +6,17 @@ import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { getCookie } from '../utils/cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ReactGA from 'react-ga';
+
+export const initGA = () => {
+  console.log('GA init')
+  ReactGA.initialize('UA-152856412-1'); //tracking id Google Analytics
+  
+}
+export const logPageView = () =>{
+  ReactGA.set({page: window.location.pathname})
+  ReactGA.pageview(window.location.pathname)
+}
 
 class PhoneVerification extends React.Component {
   constructor({ props }) {
@@ -14,6 +25,11 @@ class PhoneVerification extends React.Component {
       service_sid: '',
       code: ''
     };
+  }
+
+  componentDidMount(){
+    initGA()
+    logPageView()
   }
 
   static async getInitialProps(ctx) {

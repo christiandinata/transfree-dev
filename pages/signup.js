@@ -5,6 +5,17 @@ import AuthLayout from '../components/AuthLayout';
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ReactGA from 'react-ga';
+
+export const initGA = () => {
+  console.log('GA init')
+  ReactGA.initialize('UA-152856412-1'); //tracking id Google Analytics
+  
+}
+export const logPageView = () =>{
+  ReactGA.set({page: window.location.pathname})
+  ReactGA.pageview(window.location.pathname)
+}
 
 class Signup extends React.Component {
 
@@ -15,6 +26,11 @@ class Signup extends React.Component {
       email: '',
       password: '',
     };
+  }
+
+  componentDidMount(){
+    initGA()
+    logPageView()
   }
 
   static getInitialProps(ctx) {

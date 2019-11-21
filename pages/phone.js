@@ -8,6 +8,17 @@ import actions from '../redux/actions';
 import { getCookie } from '../utils/cookie';
 import PhoneInput from 'react-phone-number-input';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ReactGA from 'react-ga';
+
+export const initGA = () => {
+  console.log('GA init')
+  ReactGA.initialize('UA-152856412-1'); //tracking id Google Analytics
+  
+}
+export const logPageView = () =>{
+  ReactGA.set({page: window.location.pathname})
+  ReactGA.pageview(window.location.pathname)
+}
 
 class Phone extends React.Component {
   constructor({ props }) {
@@ -24,6 +35,11 @@ class Phone extends React.Component {
         await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
       }
     }
+  }
+
+  componentDidMount(){
+    initGA()
+    logPageView()
   }
 
   handleSubmit(e) {
