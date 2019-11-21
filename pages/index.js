@@ -874,8 +874,8 @@ class Index extends React.Component {
            position: fixed;
            background: #00a82d;
 
-           width: 90px;
-           height: 90px;
+           width: 65px;
+           height: 65px;
            line-height: 45px;
 
            bottom: 4%;
