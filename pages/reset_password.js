@@ -4,17 +4,7 @@ import { connect } from 'react-redux';
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ReactGA from 'react-ga';
 
-export const initGA = () => {
-  console.log('GA init')
-  ReactGA.initialize('UA-152856412-1'); //tracking id Google Analytics
-  
-}
-export const logPageView = () =>{
-  ReactGA.set({page: window.location.pathname})
-  ReactGA.pageview(window.location.pathname)
-}
 
 class ResetPassword extends React.Component {
   constructor({ props }) {
@@ -32,8 +22,6 @@ class ResetPassword extends React.Component {
   }
 
   componentDidMount() {
-    initGA()
-    logPageView()
     this.setState({token: this.props.token});
   }
 

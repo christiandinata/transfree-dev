@@ -8,17 +8,7 @@ import {useDropzone} from 'react-dropzone';
 import { getCookie } from '../utils/cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Webcam from 'react-webcam';
-import ReactGA from 'react-ga';
 
-export const initGA = () => {
-  console.log('GA init')
-  ReactGA.initialize('UA-152856412-1'); //tracking id Google Analytics
-  
-}
-export const logPageView = () =>{
-  ReactGA.set({page: window.location.pathname})
-  ReactGA.pageview(window.location.pathname)
-}
 
 const thumbsContainer = {
   display: 'flex',
@@ -164,10 +154,7 @@ class PhotoVerification extends React.Component {
     }
   }
 
-  componentDidMount(){
-    initGA()
-    logPageView()
-  }
+
   setSubmitViaWhatsapp = src => {
     this.setState({submitViaWhatsapp: src})
   }
