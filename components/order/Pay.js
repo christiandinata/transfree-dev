@@ -26,6 +26,7 @@ function BankOption(props) {
         }
         <li onClick={() => props.transferBankBNI('bni')}><img src="../static/images/bank_logos/bni.png"/> <span>Bank BNI</span></li>
         <li onClick={() => props.transferBankBCA('bca')}><img src="../static/images/bank_logos/bca.png"/> <span>Bank BCA</span></li>
+        <li onClick={() => props.transferBankMandiri('mandiri')}><img src="../static/images/bank_logos/mandiri.png"/> <span>Bank Mandiri</span></li>
       </ul>
 
       <style jsx>{`
@@ -421,18 +422,149 @@ function TransferBankBNI(props) {
   )
 }
 
+function TransferBankMandiri(props) {
+  return(
+    <div>
+    <div className="payment-details">
+      <div className="list-item">
+        <span className="left">Bank name</span>
+        <span className="right">Mandiri</span>
+      </div>
+
+      <div className="list-item">
+        <span className="left">Account Name</span>
+        <span className="right">Pelita Transfer Nusantara</span>
+      </div>
+
+      <div className="list-item">
+          <span className="left">Account number</span>
+          <span className="right">122 00 1025188 5</span>
+        </div>
+    </div>
+    <div className="payment-details">
+    <p style={{margin:"0px !important"}}>Transfer Reference 
+      <br/>
+      "Your last name + Today's date" (E.g. Adi22)
+      <br/>
+      Note: Please state the reference number that allows us to identify you.
+      </p>
+      </div>
+      <p>Please check all of the details above are correct to speed up the process.
+      We also email you the instruction. We will notify you via email once your payment has been confirmed.</p>
+
+      
+      {/**
+      <p>Please check all of the details above are correct to speed up the process.
+      We also email you the instruction. We will notify you via email once your payment has been confirmed.</p>
+       */}
+
+    <Accordion>  
+      <AccordionItem>
+        <AccordionItemHeading>
+            <AccordionItemButton>
+            Is it safe to use Transfree service?
+            </AccordionItemButton>
+        </AccordionItemHeading>
+        <AccordionItemPanel id={"isItSafe"}>
+                <p>
+                  Yes, you are in a trusted company. We are legally incorporated as PT Pelita Transfer Nusantara, office at Innovation Room Kemnaker RI. We are the official partner of Indonesian Community in several countries and collaborating with the governement.
+                  <a href="../index#row-footer" target="_blank"> See our Partners & Collaboratos </a>
+                </p>
+            </AccordionItemPanel>
+    </AccordionItem>
+</Accordion>
+      <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_mandiri')}>Continue</span>
+      <style jsx>{`
+        .list-item {
+          display: flex;
+          width: 100%;
+          margin: 10px 0;
+        }
+
+        .list-item span {
+          flex-basis: 50%;
+        }
+
+        .list-item .right {
+          text-align: right;
+          color: #15233C;
+        }
+
+        .list-item .left {
+          opacity: 0.7;
+        }
+
+        .instruction {
+          text-align: center;
+          max-width: 60%;
+          margin: 0 auto;
+        }
+
+        h2 {
+          width: 100%;
+          text-align: center;
+        }
+
+        .payment-details {
+          background-color: #EBF6FB;
+          padding: 10px 20px;
+          margin: 30px 0;
+          border-radius: 8px;
+        }
+    
+        .check{
+          text-align:center;
+          background-color:  #EBF6FB;
+          padding: 10px 10px;
+          margin-top: 30px;
+          border-radius: 8px;
+        
+        }
+
+        .btn-primary {
+          width: 100%;
+          padding: 15px 0;
+        }
+        .btn-danger {
+          background: transparent;
+          border: 2px solid #DC2020;
+          color: #DC2020;
+          padding: 8px 18px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          border-radius: 4px;
+          transition: 0.2s;
+          width: 100%;
+          padding: 15px 0;
+          margin-top: 15px;
+        }
+
+        .btn-danger:hover {
+          transform: translateY(-1px);
+        }
+    
+        }
+      `}</style>
+    </div>
+  )
+}
+
 class Pay extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isVAgenerated: false,
       isTransferBCA: false,
-      isTransferBNI: false
+      isTransferBNI: false,
+      isTransferMandiri: false
     };
 
     this.generateVA = this.generateVA.bind(this);
     this.transferBankBNI = this.transferBankBNI.bind(this);
     this.transferBankBCA = this.transferBankBCA.bind(this);
+    this.transferBankMandiri = this.transferBankMandiri.bind(this);
     this.addOrder = this.addOrder.bind(this);
   }
 
@@ -450,6 +582,12 @@ class Pay extends React.Component {
   transferBankBNI(bankName) {
     this.setState({
       isTransferBNI: true
+    })
+  }
+
+  transferBankMandiri(bankName){
+    this.setState({
+      isTransferMandiri: true
     })
   }
 
@@ -475,12 +613,14 @@ class Pay extends React.Component {
       if (this.state.isVAgenerated) {
         content = <VAGenerated vaNumber={this.props.data.vaNumber} addOrder={this.addOrder}/>;
       } else {
-        if(this.state.isTransferBCA) {
+        if(this.state.isTransferMandiri){
+          content = <TransferBankMandiri addOrder={this.addOrder}/>;
+        }else if(this.state.isTransferBCA) {
           content = <TransferBankBCA addOrder={this.addOrder}/>;
         } else if(this.state.isTransferBNI) {
           content = <TransferBankBNI addOrder={this.addOrder}/>;
         } else {
-          content = <BankOption generateVA={this.generateVA} transferBankBNI={this.transferBankBNI} transferBankBCA={this.transferBankBCA} />
+          content = <BankOption generateVA={this.generateVA} transferBankMandiri={this.transferBankMandiri} transferBankBNI={this.transferBankBNI} transferBankBCA={this.transferBankBCA} />
         }
       }
     }
