@@ -11,17 +11,7 @@ import { getCookie } from '../utils/cookie';
 import NumberFormat from 'react-number-format';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-import ReactGA from 'react-ga';
 
-export const initGA = () => {
-  console.log('GA init')
-  ReactGA.initialize('UA-152856412-1'); //tracking id Google Analytics
-  
-}
-export const logPageView = () =>{
-  ReactGA.set({page: window.location.pathname})
-  ReactGA.pageview(window.location.pathname)
-}
 
 class Index extends React.Component {
   constructor({ props }) {
@@ -43,7 +33,6 @@ class Index extends React.Component {
     this.handleDestinationChange = this.handleDestinationChange.bind(this);
     this.reverse = this.reverse.bind(this);
   }
-
   static async getInitialProps(ctx) {
     initialize(ctx);
     await ctx.store.dispatch(actions.getAdjustedRates('IDR','getAdjustedRates'));
@@ -61,8 +50,6 @@ class Index extends React.Component {
       rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
       toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100 ))
     })
-    initGA()
-    logPageView()
   }
   reverse(country,country2) {
 	this.setState({
