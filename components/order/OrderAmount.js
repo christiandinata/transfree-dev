@@ -4,7 +4,17 @@ import rateActions from '../../redux/actions';
 import NumberFormat from 'react-number-format';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '@fortawesome/fontawesome-svg-core/styles.css';
+import ReactGA from 'react-ga';
 
+export const InitGA = ( ) => {
+  console.log('GA init')
+  ReactGA.initialize('UA-152856412-1');
+}
+
+export const logPageView = () => {
+  ReactGA.set({page: window.location.pathname})
+  ReactGA.pageview(window.location.pathname)
+}
 class OrderAmount extends React.Component {
   constructor({ props }) {
     super(props);
@@ -72,8 +82,9 @@ class OrderAmount extends React.Component {
       rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
       toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100 )),
       currentDay : this.state.currentDay
-
     })
+    InitGA()
+    logPageView()
   }
 
   toggleSource() {

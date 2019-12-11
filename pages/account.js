@@ -8,7 +8,17 @@ import initialize from '../utils/initialize';
 import actions from '../redux/actions';
 import { getCookie } from '../utils/cookie';
 import moment from 'moment';
+import ReactGA from 'react-ga';
 
+export const InitGA = ( ) => {
+  console.log('GA init')
+  ReactGA.initialize('UA-152856412-1');
+}
+
+export const logPageView = () => {
+  ReactGA.set({page: window.location.pathname})
+  ReactGA.pageview(window.location.pathname)
+}
 const ApprovedLayout = () => {
   return (
     <div className="content">
@@ -131,6 +141,10 @@ class OrderItem extends React.Component {
 
   }
 
+  componentDidMount(){
+    InitGA()
+    logPageView()
+  }
 
   render() {
     return (

@@ -7,7 +7,17 @@ import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { getCookie } from '../utils/cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ReactGA from 'react-ga';
 
+export const InitGA = ( ) => {
+  console.log('GA init')
+  ReactGA.initialize('UA-152856412-1');
+}
+
+export const logPageView = () => {
+  ReactGA.set({page: window.location.pathname})
+  ReactGA.pageview(window.location.pathname)
+}
 class IdVerification extends React.Component {
   constructor({ props }) {
     super(props);
@@ -39,6 +49,11 @@ class IdVerification extends React.Component {
         await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
       }
     }
+  }
+
+  componentDidMount(){
+    InitGA()
+    logPageView()
   }
 
   handleChange = (value) => {

@@ -1,10 +1,24 @@
 import Link from 'next/link';
+import ReactGA from 'react-ga';
+
+export const InitGA = ( ) => {
+  console.log('GA init')
+  ReactGA.initialize('UA-152856412-1');
+}
+
+export const logPageView = () => {
+  ReactGA.set({page: window.location.pathname})
+  ReactGA.pageview(window.location.pathname)
+}
 
 class Status extends React.Component {
   componentWillMount() {
     this.props.addOrder();
   }
-  
+  componentDidMount(){
+    InitGA()
+    logPageView()
+  }
   render() {
     return (
       <div>

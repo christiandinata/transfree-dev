@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-/**import ReactGA from 'react-ga';
+import ReactGA from 'react-ga';
+import { InitGA } from './photo-verification';
 
 export const initGA = () => {
   console.log('GA init')
@@ -14,7 +15,7 @@ export const initGA = () => {
 export const logPageView = () =>{
   ReactGA.set({page: window.location.pathname})
   ReactGA.pageview(window.location.pathname)
-}*/
+}
 
 class Forgot extends React.Component {
   constructor({ props }) {
@@ -26,6 +27,11 @@ class Forgot extends React.Component {
   
   static getInitialProps(ctx) {
     initialize(ctx);
+  }
+
+  componentDidMount(){
+    InitGA()
+    logPageView()
   }
 
   handleSubmit(e) {

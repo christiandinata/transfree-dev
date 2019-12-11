@@ -1,6 +1,16 @@
 import Link from 'next/link';
 import NumberFormat from 'react-number-format';
+import ReactGA from 'react-ga';
 
+export const InitGA = ( ) => {
+  console.log('GA init')
+  ReactGA.initialize('UA-152856412-1');
+}
+
+export const logPageView = () => {
+  ReactGA.set({page: window.location.pathname})
+  ReactGA.pageview(window.location.pathname)
+}
 class Recipient extends React.Component {
   constructor(props) {
     super(props);
@@ -41,6 +51,8 @@ class Recipient extends React.Component {
 
   componentDidMount() {
     this.setState({toCurrency: this.props.data.toCurrency});
+    InitGA()
+    logPageView()
   }
 
   saveAndContinue = (e) => {
