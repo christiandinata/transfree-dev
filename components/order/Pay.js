@@ -8,17 +8,7 @@ import {
     AccordionItemPanel,
 } from 'react-accessible-accordion';
 import 'react-accessible-accordion/dist/fancy-example.css';
-import ReactGA from 'react-ga';
 
-export const InitGA = ( ) => {
-  console.log('GA init')
-  ReactGA.initialize('UA-152856412-1');
-}
-
-export const logPageView = () => {
-  ReactGA.set({page: window.location.pathname})
-  ReactGA.pageview(window.location.pathname)
-}
 function BankOption(props) {
   return (
     <div>
@@ -599,11 +589,6 @@ class Pay extends React.Component {
     this.setState({
       isTransferMandiri: true
     })
-  }
-
-  componentDidMount(){
-    InitGA()
-    logPageView()
   }
 
   componentDidUpdate(prevProps) {

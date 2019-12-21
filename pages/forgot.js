@@ -4,18 +4,7 @@ import { connect } from 'react-redux';
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ReactGA from 'react-ga';
-import { InitGA } from './photo-verification';
-
-export const initGA = () => {
-  console.log('GA init')
-  ReactGA.initialize('UA-152856412-1'); //tracking id Google Analytics
-  
-}
-export const logPageView = () =>{
-  ReactGA.set({page: window.location.pathname})
-  ReactGA.pageview(window.location.pathname)
-}
+import {InitGA, logPageView} from '../utils/analytics';
 
 class Forgot extends React.Component {
   constructor({ props }) {

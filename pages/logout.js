@@ -1,17 +1,7 @@
 import { connect } from 'react-redux';
 import actions from '../redux/actions';
+import {InitGA, logPageView} from '../utils/analytics';
 import React from 'react';
-import ReactGA from 'react-ga';
-
-export const InitGA = ( ) => {
-  console.log('GA init')
-  ReactGA.initialize('UA-152856412-1');
-}
-
-export const logPageView = () => {
-  ReactGA.set({page: window.location.pathname})
-  ReactGA.pageview(window.location.pathname)
-}
 
 class Logout extends React.Component {
   componentDidMount() {

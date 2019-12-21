@@ -2,26 +2,12 @@ import Link from 'next/link';
 import NumberFormat from 'react-number-format';
 import { connect } from 'react-redux';
 import orderActions from '../../redux/actions';
-import ReactGA from 'react-ga';
 
-export const InitGA = ( ) => {
-  console.log('GA init')
-  ReactGA.initialize('UA-152856412-1');
-}
 
-export const logPageView = () => {
-  ReactGA.set({page: window.location.pathname})
-  ReactGA.pageview(window.location.pathname)
-}
 class Review extends React.Component {
   saveAndContinue = (e) => {
     e.preventDefault();
     this.props.nextStep();
-  }
-
-  componentDidMount(){
-    InitGA()
-    logPageView()
   }
 
   render() {
