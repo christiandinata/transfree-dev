@@ -10,7 +10,6 @@ import { connect } from 'react-redux';
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { getCookie } from '../utils/cookie';
-import {InitGA, logPageView} from '../utils/analytics';
 import NumberFormat from 'react-number-format';
 import orderid from 'order-id';
 import shortid from 'shortid';

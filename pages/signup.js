@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import AuthLayout from '../components/AuthLayout';
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
-import {InitGA, logPageView} from '../utils/analytics';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Signup extends React.Component {
@@ -18,10 +17,7 @@ class Signup extends React.Component {
     };
   }
 
-  componentDidMount(){
-    InitGA()
-    logPageView()
-  }
+
   static getInitialProps(ctx) {
     initialize(ctx);
   }

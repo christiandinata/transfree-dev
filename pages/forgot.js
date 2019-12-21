@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {InitGA, logPageView} from '../utils/analytics';
 
 class Forgot extends React.Component {
   constructor({ props }) {
@@ -18,10 +17,6 @@ class Forgot extends React.Component {
     initialize(ctx);
   }
 
-  componentDidMount(){
-    InitGA()
-    logPageView()
-  }
 
   handleSubmit(e) {
     e.preventDefault();

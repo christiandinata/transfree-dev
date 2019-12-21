@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import initialize from '../utils/initialize';
 import actions from '../redux/actions';
 import { getCookie } from '../utils/cookie';
-import {InitGA, logPageView} from '../utils/analytics';
 import PhoneInput from 'react-phone-number-input';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -27,10 +26,6 @@ class Phone extends React.Component {
     }
   }
 
-  componentDidMount(){
-    InitGA()
-    logPageView()
-  }
 
   handleSubmit(e) {
     e.preventDefault();

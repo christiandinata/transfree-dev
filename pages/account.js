@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import initialize from '../utils/initialize';
 import actions from '../redux/actions';
 import { getCookie } from '../utils/cookie';
-import {InitGA,logPageView} from '../utils/analytics';
 import moment from 'moment';
 
 const ApprovedLayout = () => {
@@ -132,10 +131,6 @@ class OrderItem extends React.Component {
 
   }
 
-  componentDidMount(){
-    InitGA()
-    logPageView()
-  }
 
   render() {
     return (

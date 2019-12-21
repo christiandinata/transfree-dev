@@ -3,9 +3,7 @@ import AuthLayout from '../components/AuthLayout';
 import { connect } from 'react-redux';
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
-import {InitGA, logPageView} from '../utils/analytics';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ReactGA from 'react-ga';
 
 class ResetPassword extends React.Component {
   constructor({ props }) {
@@ -24,8 +22,6 @@ class ResetPassword extends React.Component {
 
   componentDidMount() {
     this.setState({token: this.props.token});
-    InitGA()
-    logPageView()
   }
 
   handleSubmit(e) {

@@ -3,7 +3,6 @@ import AuthLayout from '../components/AuthLayout';
 import { connect } from 'react-redux';
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
-import {InitGA, logPageView} from '../utils/analytics';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Login extends React.Component {
@@ -28,10 +27,7 @@ class Login extends React.Component {
     );
   }
 
-  componentDidMount(){
-    InitGA()
-    logPageView()
-  }
+
 
   render() {
     return (

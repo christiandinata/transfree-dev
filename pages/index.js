@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
-import {InitGA,logPageView} from '../utils/analytics';
 import { getCookie } from '../utils/cookie';
 import NumberFormat from 'react-number-format';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -51,8 +50,6 @@ class Index extends React.Component {
       rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
       toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100 ))
     })
-    InitGA()
-    logPageView()
   }
   reverse(country,country2) {
 	this.setState({

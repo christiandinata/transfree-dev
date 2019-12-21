@@ -6,7 +6,6 @@ import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import {useDropzone} from 'react-dropzone';
 import { getCookie } from '../utils/cookie';
-import {InitGA, logPageView} from '../utils/analytics';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Webcam from 'react-webcam';
 
@@ -154,10 +153,6 @@ class PhotoVerification extends React.Component {
     }
   }
 
-  componentDidMount() {
-    InitGA()
-    logPageView()
-  }
   setSubmitViaWhatsapp = src => {
     this.setState({submitViaWhatsapp: src})
   }

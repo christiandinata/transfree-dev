@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { getCookie } from '../utils/cookie';
-import {InitGA, logPageView} from '../utils/analytics';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class IdVerification extends React.Component {
@@ -42,10 +41,6 @@ class IdVerification extends React.Component {
     }
   }
 
-  componentDidMount(){
-    InitGA()
-    logPageView()
-  }
 
   handleChange = (value) => {
     this.setState({dob: value});
