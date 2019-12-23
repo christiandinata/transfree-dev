@@ -359,12 +359,12 @@ class Index extends React.Component {
 						(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'idr' ) ? 
 						this.reverse.bind(this,'myr' , 'idr')						
 						:
-						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'krw' ) ? 
+						/**(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'krw' ) ? 
 						this.reverse.bind(this,'idr' , 'krw')						
 						:
 						(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'idr' ) ? 
 						this.reverse.bind(this,'krw' , 'idr')						
-						:
+						:*/
 						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'usd' ) ? 
 						this.reverse.bind(this,'idr' , 'usd')						
 						:
@@ -389,12 +389,13 @@ class Index extends React.Component {
 						(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'gbp' ) ? 
 						this.reverse.bind(this,'myr' , 'gbp')						
 						:
-						(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'krw' ) ? 
+					/**	(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'krw' ) ? 
 						this.reverse.bind(this,'gbp' , 'krw')						
 						:
 						(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'gbp' ) ? 
 						this.reverse.bind(this,'krw' , 'gbp')						
-						:
+            :
+            */
 						(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'usd' ) ? 
 						this.reverse.bind(this,'gbp' , 'usd')						
 						:
@@ -426,12 +427,13 @@ class Index extends React.Component {
 						(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'usd' ) ? 
 						this.reverse.bind(this,'myr' , 'usd')						
 						:
-						(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'krw' ) ? 
+					/** 	(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'krw' ) ? 
 						this.reverse.bind(this,'usd' , 'krw')						
 						:
 						(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'usd' ) ? 
 						this.reverse.bind(this,'krw' , 'usd')						
-						:
+            :
+            */
 						(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'eur' ) ? 
 						this.reverse.bind(this,'usd' , 'eur')						
 						:
@@ -457,12 +459,14 @@ class Index extends React.Component {
 						(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'aud' ) ? 
 						this.reverse.bind(this,'myr' , 'aud')						
 						:
-						(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'krw' ) ? 
+						/**
+            (this.state.fromCurrency == 'aud' && this.state.toCurrency == 'krw' ) ? 
 						this.reverse.bind(this,'aud' , 'krw')						
 						:
 						(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'aud' ) ? 
 						this.reverse.bind(this,'krw' , 'aud')						
-						:
+            :
+            */
 						(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'eur' ) ? 
 						this.reverse.bind(this,'aud' , 'eur')						
 						:
@@ -482,13 +486,15 @@ class Index extends React.Component {
 						(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'eur' ) ? 
 						this.reverse.bind(this,'myr' , 'eur')						
 						:
-						(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'krw' ) ? 
+						/**
+            (this.state.fromCurrency == 'eur' && this.state.toCurrency == 'krw' ) ? 
 						this.reverse.bind(this,'eur' , 'krw')						
 						:
 						(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'eur' ) ? 
 						this.reverse.bind(this,'krw' , 'eur')						
 						:
-						(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'hkd' ) ? 
+            */
+            (this.state.fromCurrency == 'eur' && this.state.toCurrency == 'hkd' ) ? 
 						this.reverse.bind(this,'eur' , 'hkd')						
 						:
 						(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'eur' ) ? 
@@ -529,11 +535,12 @@ class Index extends React.Component {
                                 <span className="flag-icon flag-icon-my flag-icon-squared"></span> MYR (Malaysian Ringgit)
                               </a>
                             </li>
-                            <li onClick={this.selectDestination.bind(this,'krw')}>
+                            {/**<li onClick={this.selectDestination.bind(this,'krw')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-kr flag-icon-squared"></span> KRW (Korean Won)
                               </a>
                             </li>
+                            */}
                             <li onClick={this.selectDestination.bind(this,'gbp')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP (British Poundsterling)
