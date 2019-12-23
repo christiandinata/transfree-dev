@@ -63,8 +63,6 @@ class Order extends React.Component {
       senderEmail: this.props.userData.email,
       senderPhone: this.props.userData.phone
     })
-    InitGA()
-    logPageView()
   }
 
   componentDidUpdate(prevProps) {
