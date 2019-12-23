@@ -36,6 +36,8 @@ class Order extends React.Component {
       sortcode: '',
       iban: '',
       swift: '',
+      routingNumber: '',
+      bsbCode: '',
       isVAgenerated: false,
       vaNumber: 0,
       paymentMethod: ''
@@ -63,8 +65,8 @@ class Order extends React.Component {
       senderEmail: this.props.userData.email,
       senderPhone: this.props.userData.phone
     })
-    InitGA()
-    logPageView()
+    // InitGA()
+    // logPageView()
   }
 
   componentDidUpdate(prevProps) {
@@ -96,6 +98,8 @@ class Order extends React.Component {
         sortcode: this.state.sortcode,
         iban: this.state.iban,
         swift: this.state.swift,
+        routingNumber: this.state.routingNumber,
+        bsbCode: this.state.bsbCode,
         paymentMethod: this.state.paymentMethod
       },
       'addOrder'
