@@ -664,6 +664,10 @@ class Index extends React.Component {
               }
             </div>
           </div>
+          <div className="play">
+            <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
+            <img style={{width: "30%", marginTop: "1" ,marginLeft: "18%"}} src="../static/images/playstore.png"/></a>
+            </div> 
         </div>
         <div className="row">
           <img className="curve" src="../static/images/curve-bg.svg"/>
@@ -863,7 +867,9 @@ class Index extends React.Component {
           </div>
         </div>
         <style jsx>{`
-
+        .play{
+          float: right;
+        }
          .fixed-btn{
            position: fixed;
            background: #00a82d;

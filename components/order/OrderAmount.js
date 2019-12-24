@@ -607,9 +607,11 @@ class OrderAmount extends React.Component {
               but kindly note, there is a chance that the money will arrive in more than <span className="received-on">36 hours</span>.</p>
               :
               <p style={{maxWidth: "100%", marginBottom: "0"}}>Your transfer will be processed immediately.
-              The recipient will get the money in less than <span className="received-on">24 hours.</span></p>
+              The recipient will get the money in less than <span className="received-on">24 hours.</span></p> 
               }
             </div>
+            <p className="Pesan" style={{maxWidth: "100%", marginBottom:"10px" }}>We are open during the holidays. But as you aware many banks are close,
+              or stop procesing. This means our transfers may take longer than usual.</p>
             <div className="row converter-cta">
               <div className="cta-primary">
 		      {/*
@@ -687,6 +689,14 @@ class OrderAmount extends React.Component {
           }
           .popup .content p{
             color: GREY;
+          }
+          .Cpesan{
+            justify-content: center;
+          }
+          .Pesan {
+            text-align: center;
+            color: #3E495E;
+            font-family: 'Campton-Bold';
           }
 
           /** END OF POP UP OOS MARKTUP **/
