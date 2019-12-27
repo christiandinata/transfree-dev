@@ -242,6 +242,11 @@ class Index extends React.Component {
             <div className="left-container">
               <div className="logo">
                 <img src="../static/images/transfree-logo.png"/>
+                </div>
+              <div className="store">
+                  <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
+                  <img style={{width: "170px"}} src="../static/images/playstore.png"/></a>
+                  <img style={{width:"150px"}} src="../static/images/appstore.png"/>
               </div>
               <h1>International money transfer feels</h1>
               <h1 className="h1-bawah">like local</h1>
@@ -259,7 +264,7 @@ class Index extends React.Component {
                     <a href={"#video-transfree"} className="btn-secondary">See how it works</a>
                     <a href="#_" className="lightbox" id={"video-transfree"}>
                     <iframe src="https://www.youtube.com/embed/8RzCs_sQ8Ak" frameBorder="0" allow="accelerometer;
-                     autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                    autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                     </a>
                   </div>
 
@@ -664,10 +669,7 @@ class Index extends React.Component {
               }
             </div>
           </div>
-          <div className="play">
-            <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
-            <img style={{width: "30%", marginTop: "1" ,marginLeft: "18%"}} src="../static/images/playstore.png"/></a>
-            </div> 
+        
         </div>
         <div className="row">
           <img className="curve" src="../static/images/curve-bg.svg"/>
@@ -867,9 +869,7 @@ class Index extends React.Component {
           </div>
         </div>
         <style jsx>{`
-        .play{
-          float: right;
-        }
+
          .fixed-btn{
            position: fixed;
            background: #00a82d;
@@ -932,7 +932,7 @@ class Index extends React.Component {
           }
           .external-link{
             display: flex;
-            margin-top: 50px;
+            margin-top: 30px;
           }
           .external-link-right {
             lex-basis: 40%;
@@ -979,6 +979,10 @@ class Index extends React.Component {
           .right-bottom-container{
             margin-top:20px !important;
             display: none;
+          }
+          .Gplay{
+            width: 50%
+            height: 50%
           }
           .logo{
             display: none;
@@ -1406,6 +1410,16 @@ class Index extends React.Component {
              bottom: 3%;
              right: 6.5%;
               }
+
+            .store{
+              display: block;
+            }
+          
+            .store img{
+              width: 50%;
+              height: 50%;
+            }
+
             .logo{
               text-align: left;
               padding-left: 20px;
@@ -1417,7 +1431,7 @@ class Index extends React.Component {
               width :50%;
               height :50%;
               margin-top: 20px !important;
-              margin-bottom: 20px !important;
+              margin-bottom: 2px !important;
             }
             .left-container {
               margin-top: 0;
