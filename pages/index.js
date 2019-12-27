@@ -245,8 +245,8 @@ class Index extends React.Component {
                 </div>
               <div className="store">
                   <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
-                  <img style={{width: "170px"}} src="../static/images/playstore.png"/></a>
-                  <img style={{width:"150px"}} src="../static/images/appstore.png"/>
+                  <img style={{width: "180px"}} src="../static/images/playstore.png"/></a>
+                  <img style={{width:"170px"}} src="../static/images/appstore.png"/>
               </div>
               <h1>International money transfer feels</h1>
               <h1 className="h1-bawah">like local</h1>
