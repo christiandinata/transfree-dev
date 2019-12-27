@@ -243,11 +243,6 @@ class Index extends React.Component {
               <div className="logo">
                 <img src="../static/images/transfree-logo.png"/>
                 </div>
-              <div className="store">
-                  <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
-                  <img style={{width: "180px"}} src="../static/images/playstore.png"/></a>
-                  <img style={{width:"170px"}} src="../static/images/appstore.png"/>
-              </div>
               <h1>International money transfer feels</h1>
               <h1 className="h1-bawah">like local</h1>
               <div className="desktop">
@@ -667,6 +662,11 @@ class Index extends React.Component {
               //   </div>
               // </div>
               }
+              <div className="store">
+            <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
+            <img style={{width: "180px"}} src="../static/images/playstore.png"/></a>
+            <img style={{width:"170px"}} src="../static/images/appstore.png"/>
+          </div>
             </div>
           </div>
         
@@ -980,7 +980,7 @@ class Index extends React.Component {
             margin-top:20px !important;
             display: none;
           }
-          .Gplay{
+          .store{
             width: 50%
             height: 50%
           }
@@ -1431,7 +1431,7 @@ class Index extends React.Component {
               width :50%;
               height :50%;
               margin-top: 20px !important;
-              margin-bottom: 2px !important;
+              margin-bottom: 20px !important;
             }
             .left-container {
               margin-top: 0;
