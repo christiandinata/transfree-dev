@@ -3,18 +3,20 @@ import axios from 'axios';
 import {
   ORDER_DATA,
   ORDER_DATA_ARRAY,
-  ORDER_DATA_ARRAY_IN_PROGRESS
+  ORDER_DATA_ARRAY_IN_PROGRESS,
+  RECIPIENT_DATA
 } from '../types';
 import { API } from '../../config';
 
+
 const addOrder = ({ uid, senderName, senderEmail, senderPhone, rate, fromCurrency, toCurrency, fromAmount, toAmount,
-  email, name, bankName, bankAccountNumber, accountNumber, sortcode, iban, swift, paymentMethod }, type) => {
+  email, name, bankName, bankAccountNumber, accountNumber, sortcode, iban, swift, routingNumber, bsbCode, paymentMethod }, type) => {
   if (type !== 'addOrder') {
     throw new Error('Wrong API call!');
   }
   return (dispatch) => {
     axios.post(`${API}/${type}`, {uid, senderName, senderEmail, senderPhone, rate, fromCurrency, toCurrency, fromAmount, toAmount,
-      email, name, bankName, bankAccountNumber, accountNumber, sortcode, iban, swift, paymentMethod})
+      email, name, bankName, bankAccountNumber, accountNumber, sortcode, iban, swift, routingNumber, bsbCode, paymentMethod})
       .then((response) => {
         dispatch({type: ORDER_DATA, payload: response.data.order_data});
       })
