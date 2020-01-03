@@ -663,10 +663,10 @@ class Index extends React.Component {
               // </div>
               }
               <div className="store">
-            <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
-            <img style={{width: "180px"}} src="../static/images/playstore.png"/></a>
+              <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
+            <img style={{width: "180px"}} src="../static/images/playstore.png"/></a> 
             <img style={{width:"170px"}} src="../static/images/appstore.png"/>
-          </div>
+            </div>
             </div>
           </div>
         
@@ -958,7 +958,7 @@ class Index extends React.Component {
 
           .left-container {
             flex-basis: 60%;
-            margin-top: 100px;
+            margin-top: 0px;
           }
 
           .left-container h1{
@@ -973,7 +973,7 @@ class Index extends React.Component {
 
           .right-container {
             flex-basis: 40%;
-            margin-top: 120px;
+            margin-top: 30px;
             z-index: 2;
           }
           .right-bottom-container{
