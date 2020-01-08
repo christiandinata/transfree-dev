@@ -76,6 +76,11 @@ class Recipient extends React.Component {
 
   componentDidMount() {
     this.setState({toCurrency: this.props.data.toCurrency});
+
+    this.sortcode.current.value = this.props.data.sortcode
+    this.accountNumber.current.value = this.props.data.accountNumber
+    this.bsbCode.current.value = this.props.data.bsbCode
+    this.routingNumber.current.value = this.props.data.routingNumber
   }
 
   saveAndContinue = (e) => {
@@ -486,7 +491,7 @@ class Recipient extends React.Component {
           <TabPanel>
             <form className="form-container">
               { 
-                this.state.recipients.docs ? 
+                this.state.recipients.docs == [] ? 
                   this.state.recipients.docs.map((data, key) => {
                     return (
                       <div className={'list-item ' + (this.state.selectedRecipient == key ? 'list-item--selected' : '')} key={key} onClick={()=>this.selectExisting(data, key)}>
@@ -506,15 +511,12 @@ class Recipient extends React.Component {
                       <div className="left">  
                         tidak ada
                       </div>
-                      <div className="right">
-                        tidak ada
-                      </div>
                     </div>
                   )
                   
               }
               {
-                this.state.recipients.docs ? 
+                this.state.recipients.docs == [] ?
                   <div style={{marginTop:'20px'}}>
                     <span className={this.state.isRecipientSelected ? 'error-label-hidden' : 'error-label'}>Select recipient first.</span>
                     <label htmlFor="email">Purpose Of Transfer</label><br/>
