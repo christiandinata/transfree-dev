@@ -7,10 +7,11 @@ import {
   RECIPIENT_DATA
 } from '../types';
 import { API } from '../../config';
+import { getCookie } from '../../utils/cookie';
 
 
 const addOrder = ({ uid, senderName, senderEmail, senderPhone, rate, fromCurrency, toCurrency, fromAmount, toAmount,
-  email, name, bankName, bankAccountNumber, accountNumber, sortcode, iban, swift, routingNumber, bsbCode, paymentMethod }, type) => {
+  email, name, bankName, bankAccountNumber, accountNumber, sortcode, iban, swift, routingNumber, bsbCode, paymentMethod, isSaveRecipient }, type) => {
   if (type !== 'addOrder') {
     throw new Error('Wrong API call!');
   }
@@ -19,6 +20,32 @@ const addOrder = ({ uid, senderName, senderEmail, senderPhone, rate, fromCurrenc
       email, name, bankName, bankAccountNumber, accountNumber, sortcode, iban, swift, routingNumber, bsbCode, paymentMethod})
       .then((response) => {
         dispatch({type: ORDER_DATA, payload: response.data.order_data});
+
+        if (isSaveRecipient) {
+          axios.post(`${API}/recipient`, {
+            uid: getCookie('_id'),
+            email: email,
+            name: name,
+            bankName: bankName,
+            bankAccountNumber: bankAccountNumber,
+            sortcode: sortcode ? sortcode : null,
+            accountNumber: accountNumber ? accountNumber : null,
+            routingNumber: routingNumber ? routingNumber : null,
+            bsbCode: bsbCode ? bsbCode : null,
+            iban: iban ? iban : null,
+            currency: toCurrency.toUpperCase()
+          }, {
+            headers: {
+              'Authorization': 'Bearer ' + getCookie('token') 
+            }
+          })
+          .then((response) => {
+            //
+          })
+          .catch((error) => {
+            throw new Error(error);
+          });
+        }
       })
       .catch((error) => {
         throw new Error(error);

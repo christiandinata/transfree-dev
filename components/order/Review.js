@@ -49,7 +49,7 @@ class Review extends React.Component {
 
           <div className="list-item">
             <span className="left">Purpose Of Transfer</span>
-            <span className="right">{this.props.data.email}</span>
+            <span className="right">{this.props.data.purposeTransfer}</span>
           </div>
 
           <div className="list-item">
@@ -65,9 +65,11 @@ class Review extends React.Component {
           <div className={this.props.data.toCurrency == 'idr'
                             || this.props.data.toCurrency == 'myr'
                             || this.props.data.toCurrency == 'krw'
-                            || this.props.data.toCurrency == 'hkd'? 'list-item' : 'div-hide'}>
+                            || this.props.data.toCurrency == 'hkd'
+                            || this.props.data.toCurrency == 'usd'
+                            || this.props.data.toCurrency == 'gbp' ? 'list-item' : 'div-hide'}>
             <span className="left">Account number</span>
-            <span className="right">{this.props.data.bankAccountNumber}</span>
+            <span className="right">{this.props.data.accountNumber}</span>
           </div>
 
           <div className={this.props.data.toCurrency == 'gbp' ? 'list-item' : 'div-hide'}>
@@ -75,23 +77,19 @@ class Review extends React.Component {
             <span className="right">{this.props.data.sortcode}</span>
           </div>
 
-          <div className={this.props.data.toCurrency == 'gbp' ? 'list-item' : 'div-hide'}>
-            <span className="left">Account number</span>
-            <span className="right">{this.props.data.accountNumber}</span>
-          </div>
-
-          <div className={this.props.data.toCurrency == 'eur'
-                            || this.props.data.toCurrency == 'usd'
-                            || this.props.data.toCurrency == 'aud' ? 'list-item' : 'div-hide'}>
+          <div className={this.props.data.toCurrency == 'eur' ? 'list-item' : 'div-hide'}>
             <span className="left">IBAN</span>
             <span className="right">{this.props.data.iban}</span>
           </div>
 
-          <div className={this.props.data.toCurrency == 'eur'
-                            || this.props.data.toCurrency == 'usd'
-                            || this.props.data.toCurrency == 'aud' ? 'list-item' : 'div-hide'}>
-            <span className="left">SWIFT</span>
-            <span className="right">{this.props.data.swift}</span>
+          <div className={this.props.data.toCurrency == 'usd' ? 'list-item' : 'div-hide'}>
+            <span className="left">Routing Number</span>
+            <span className="right">{this.props.data.routingNumber}</span>
+          </div>
+
+          <div className={this.props.data.toCurrency == 'aud' ? 'list-item' : 'div-hide'}>
+            <span className="left">BSB Code</span>
+            <span className="right">{this.props.data.bsbCode}</span>
           </div>
 
           <Link href="">

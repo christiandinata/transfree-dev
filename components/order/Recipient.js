@@ -21,12 +21,11 @@ class Recipient extends React.Component {
       isSortCodeValid: true,
       isSortCodeVirtual: true,
       isIBANValid: true,
-      isSWIFTValid: true,
       isRecipientSelected: true,
       isPurposeTransferSelected: true,
+      isRoutingNumberValid: true,
+      isBsbCodeValid: true,
       toCurrency: '',
-      sortcode: '',
-      accountNumber: '',
       recipientType: 0, // 0 = new, 1 = existing
       recipients: {
         docs: [
@@ -35,7 +34,8 @@ class Recipient extends React.Component {
           }
         ]
       },
-      selectedRecipient: null
+      selectedRecipient: null,
+      isSaveRecipient: false
     };
 
     this.name = React.createRef();
@@ -43,7 +43,11 @@ class Recipient extends React.Component {
     this.bankName = React.createRef();
     this.bankAccountNumber = React.createRef();
     this.iban = React.createRef();
-    this.swift = React.createRef();
+    this.sortcode = React.createRef();
+    this.accountNumber = React.createRef();
+    this.bsbCode = React.createRef();
+    this.routingNumber = React.createRef();
+    this.purposeTransfer = React.createRef();
 
     this.checkName = this.checkName.bind(this);
     this.checkEmail = this.checkEmail.bind(this);
@@ -52,9 +56,10 @@ class Recipient extends React.Component {
     this.checkAccountNumber = this.checkAccountNumber.bind(this);
     this.checkSortCodeValid = this.checkSortCodeValid.bind(this);
     this.checkIBAN = this.checkIBAN.bind(this);
-    this.checkSWIFT = this.checkSWIFT.bind(this);
     this.updateSortcode = this.updateSortcode.bind(this);
     this.updateAccountNumber = this.updateAccountNumber.bind(this);
+    this.updateBsbCode = this.updateBsbCode.bind(this);
+    this.updateRoutingNumber = this.updateRoutingNumber.bind(this);
 
     axios.get(`${API}/recipient?uid=${getCookie('_id')}&currency=${this.props.data.toCurrency.toUpperCase()}`, {
       headers: {
@@ -79,25 +84,24 @@ class Recipient extends React.Component {
     if (this.state.recipientType == 0) {
 
       var data = {
-        email: this.email.current.value,
+        email: this.email.current.value ? this.email.current.value : null,
         name: this.name.current.value,
         bankName: this.bankName.current.value,
         bankAccountNumber: this.bankAccountNumber.current.value,
-        sortcode: this.state.sortcode,
-        accountNumber: this.state.accountNumber,
-        iban: this.iban.current.value,
-        swift: this.swift.current.value
+        sortcode: this.sortcode.current.value ? this.sortcode.current.value : null,
+        accountNumber: this.accountNumber.current.value ? this.accountNumber.current.value : null,
+        iban: this.iban.current.value ? this.iban.current.value : null,
+        bsbCode: this.bsbCode.current.value ?  this.bsbCode.current.value : null,
+        routingNumber: this.routingNumber.current.value ?  this.routingNumber.current.value : null,
+        purposeTransfer: this.purposeTransfer.current.value ? this.purposeTransfer.current.value : null,
+        isSaveRecipient: this.state.isSaveRecipient
       }
   
       if (this.name.current.value == '') {
         this.setState({isNameValid: false});
         return;
       }
-  
-      // if (this.email.current.value == '') {
-      //   this.setState({isEmailValid: false});
-      //   return;
-      // }
+
       if(
         (this.bankName.current.value.toLowerCase() == 'monzo') ||
         (this.bankName.current.value.toLowerCase() == 'monese') ||
@@ -130,46 +134,57 @@ class Recipient extends React.Component {
         this.setState({isBankNameVirtual: false});
         return;
       } 
-      if (this.bankName.current.value == '') {
+      if (!this.bankName.current.value) {
         this.setState({isBankNameValid: false});
         return;
       }
-  
-      if (this.state.toCurrency == 'gbp') {
-        if (this.state.sortcode == '') {
-          this.setState({isSortCodeValid: false});
-          return;
-        }
-        else if(this.state.sortcode == '77 49 26'){
-          this.setState(
-            {isSortCodeVirtual: false});
-          return;
-        }
-  
-        if (this.state.accountNumber == '') {
+
+      if (!this.bankAccountNumber.current.value) {
+        this.setState({isBankAccountNumberValid: false});
+        return;
+      }
+
+      if (!this.accountNumber.current.value) {
+        if (['gbp', 'usd', 'idr', 'myr', 'krw', 'hkd'].includes(this.state.toCurrency)) {
           this.setState({isAccountNumberValid: false});
           return;
         }
       }
   
-      if (this.state.toCurrency == 'idr') {
-        if (this.bankAccountNumber.current.value == '') {
-          this.setState({isBankAccountNumberValid: false});
+      if (this.state.toCurrency == 'gbp') {
+        if (!this.sortcode.current.value) {
+          this.setState({isSortCodeValid: false});
+          return;
+        }
+        else if(this.sortcode.current.value == '77 49 26'){
+          this.setState(
+            {isSortCodeVirtual: false});
           return;
         }
       }
   
-      if (this.state.toCurrency == 'eur' || this.state.toCurrency == 'usd' || this.state.toCurrency == 'aud') {
-        if (this.iban.current.value == '') {
+      if (this.state.toCurrency == 'eur') {
+        if (!this.iban.current.value) {
           this.setState({isIBANValid: false});
           return;
         }
-  
-        if (this.swift.current.value == '') {
-          this.setState({isSWIFTValid: false});
+      }
+
+      if (this.state.toCurrency == 'usd') {
+        if (!this.routingNumber.current.value) {
+          this.setState({isRoutingNumberValid: false});
           return;
         }
       }
+
+      if (this.state.toCurrency == 'aud') {
+        if (!this.bsbCode.current.value) {
+          this.setState({isBsbCodeValid: false});
+          return;
+        }
+      }
+  
+  
   
       this.props.saveValues(data);
     } else {
@@ -183,11 +198,19 @@ class Recipient extends React.Component {
   }
 
   updateSortcode(value) {
-    this.setState({sortcode: value.formattedValue});
+    this.sortcode.current.value = value.formattedValue
   }
 
   updateAccountNumber(value) {
-    this.setState({accountNumber: value.formattedValue});
+    this.accountNumber.current.value = value.formattedValue
+  }
+
+  updateBsbCode(value) {
+    this.bsbCode.current.value = value.formattedValue
+  }
+
+  updateRoutingNumber(value) {
+    this.routingNumber.current.value = value.formattedValue
   }
 
   checkName(e) {
@@ -250,14 +273,6 @@ class Recipient extends React.Component {
     }
   }
 
-  checkSWIFT(e) {
-    if (e.target.value == '') {
-      this.setState({isSWIFTValid: false})
-    } else {
-      this.setState({isSWIFTValid: true})
-    }
-  }
-
   validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
@@ -274,7 +289,7 @@ class Recipient extends React.Component {
       routingNumber: data.routingNumber ? data.routingNumber : null,
       bsbCode: data.bsbCode ? data.bsbCode : null,
       iban: data.iban ? data.iban : null,
-      swift: data.swift ? data.swift : null,
+      purposeTransfer: data.purposeTransfer ? data.purposeTransfer : null
     }
 
     this.props.saveValues(data);
@@ -288,6 +303,10 @@ class Recipient extends React.Component {
         selectedRecipient: key
       });
     }
+  }
+
+  checkSaveRecipient = () => {
+    this.setState({isSaveRecipient : !this.state.isSaveRecipient})
   }
 
   render() {
@@ -312,13 +331,13 @@ class Recipient extends React.Component {
                 onBlur={this.checkName}/>
               <span className={this.state.isNameValid ? 'error-label-hidden' : 'error-label'}>Recipient's full name may not be empty.</span>
 
-              <label htmlFor="email">Purpose Of Transfer</label><br/>
+              <label htmlFor="purposeTransfer">Purpose Of Transfer</label><br/>
               <select
-                  type="email"
-                  id="email"
+                  type="purposeTransfer"
+                  id="purposeTransfer"
                   className="select-css"
-                  ref={this.email}
-                  defaultValue={this.props.data.email}>
+                  ref={this.purposeTransfer}
+                  defaultValue={this.props.data.purposeTransfer}>
                   <option value="Buying Overseas Property">Buying Overseas Property</option>
                   <option value="Paying for Overseas Tuition Fees">Paying for Overseas Tuition Fees</option>
                   <option value="Overseas Investments">Overseas Investments</option>
@@ -331,27 +350,18 @@ class Recipient extends React.Component {
                   <option value="Paying For Bills Overseas">Paying For Bills Overseas</option>
                   <option value="others">Others</option>
                 </select>
-        {/*
+          
+              <label htmlFor="bank">Email</label><br/>
               <input
                 type="email"
                 id="email"
+                className={this.state.isEmailValid ? '' : 'error'}
                 placeholder="name@example.com"
                 ref={this.email}
-                defaultValue={this.props.data.email}/>
-                */}
-        
-              {/*<span className={this.state.isEmailValid ? 'error-label-hidden' : 'error-label'}>Email address is not valid.</span>*/}
-              {
-              // <input
-              //   type="email"
-              //   id="email"
-              //   className={this.state.isEmailValid ? '' : 'error'}
-              //   placeholder="name@example.com"
-              //   ref={this.email}
-              //   defaultValue={this.props.data.email}
-              //   onBlur={this.checkEmail}/>
-              // <span className={this.state.isEmailValid ? 'error-label-hidden' : 'error-label'}>Email address is not valid.</span>
-              }
+                defaultValue={this.props.data.email}
+                onBlur={this.checkEmail}/>
+              <span className={this.state.isEmailValid ? 'error-label-hidden' : 'error-label'}>Email address is not valid.</span>
+          
 
               <label htmlFor="bank">Bank Name</label><br/>
               <input
@@ -363,6 +373,16 @@ class Recipient extends React.Component {
                 onBlur={this.checkBankName}/>
               <span className={this.state.isBankNameValid ? 'error-label-hidden' : 'error-label'}>Bank name may not be empty.</span>
               <span className={this.state.isBankNameVirtual ? 'error-label-hidden' : 'error-label'}>We can not send money to Digital Bank Account.</span>
+
+              <label htmlFor="bank">Bank Account Name</label><br/>
+              <input
+                type="text"
+                id="bank"
+                placeholder={this.state.toCurrency == 'idr' ? "Enter recipient's bank account name ( E.g. : BCA )" : "Enter recipient's bank account name"}
+                ref={this.bankAccountNumber}
+                defaultValue={this.props.data.bankAccountNumber}
+                onBlur={this.checkBankAccountNumber}/>
+              <span className={this.state.isBankAccountNumberValid ? 'error-label-hidden' : 'error-label'}>Bank account name may not be empty.</span>
           {/*
                 <select
                   type="text"
@@ -391,57 +411,33 @@ class Recipient extends React.Component {
                   id="sortcode"
                   placeholder="00 00 00"
                   ref={this.sortcode}
-                  defaultValue={this.props.data.accountNumber}
+                  defaultValue={this.props.data.sortcode}
                   format="## ## ##"
                   onBlur={this.checkSortCodeValid}
                   onValueChange={this.updateSortcode} />
                 <span className={this.state.isSortCodeValid ? 'error-label-hidden' : 'error-label'}>Sort code may not be empty.</span>
-                <span className={this.state.isSortCodeVirtual ? 'error-label-hidden' : 'error-label'}>Sorry we cannot identify this sort code.</span>
-
-                {/*
-                  <input
-                    type="tel"
-                    id="sortcode"
-                    placeholder="000000"
-                    ref={this.sortCode}
-                    defaultValue={this.props.data.accountNumber}/>
-                  */}
-
-
-                <label htmlFor="account">Account Number</label><br/>
-                <NumberFormat
-                  type="tel"
-                  id="account"
-                  placeholder="00000000"
-                  ref={this.accountNumber}
-                  defaultValue={this.props.data.accountNumber}
-                  format="########"
-                  onBlur={this.checkAccountNumber}
-                  onValueChange={this.updateAccountNumber}  />
-                <span className={this.state.isAccountNumberValid ? 'error-label-hidden' : 'error-label'}>Account number may not be empty.</span>
-                {/*
-                  <input
-                    />
-                  */}
-
+                <span className={this.state.isSortCodeVirtual ? 'error-label-hidden' : 'error-label'}>Sorry we cannot identify this sort code.</span>            
               </div>
 
               <div className={this.state.toCurrency == 'idr'
                                 || this.state.toCurrency == 'myr'
                                 || this.state.toCurrency == 'krw'
-                                || this.state.toCurrency == 'hkd'? 'div-show' : 'div-hide'}>
-                <label htmlFor="account">Account Number</label><br/>
-                <input
+                                || this.state.toCurrency == 'hkd' 
+                                || this.state.toCurrency == 'gbp' 
+                                || this.state.toCurrency == 'usd' ? 'div-show' : 'div-hide'}>
+              <label htmlFor="account">Bank Account Number</label><br/>
+                <NumberFormat
                   type="tel"
                   id="account"
-                  placeholder="Enter account number"
-                  ref={this.bankAccountNumber}
-                  defaultValue={this.props.data.bankAccountNumber}
-                  onBlur={this.checkBankAccountNumber}/>
-                <span className={this.state.isBankAccountNumberValid ? 'error-label-hidden' : 'error-label'}>Account number may not be empty.</span>
+                  placeholder="Enter bank account number"
+                  ref={this.accountNumber}
+                  defaultValue={this.props.data.accountNumber}
+                  onBlur={this.checkAccountNumber}
+                  onValueChange={this.updateAccountNumber}  />
+                <span className={this.state.isAccountNumberValid ? 'error-label-hidden' : 'error-label'}>Bank account number may not be empty.Account number may not be empty.</span>
               </div>
 
-              <div className={this.state.toCurrency == 'eur' || this.state.toCurrency == 'usd' || this.state.toCurrency == 'aud' ? 'div-show' : 'div-hide'}>
+              <div className={this.state.toCurrency == 'eur' ? 'div-show' : 'div-hide'}>
                 <label htmlFor="iban">IBAN</label><br/>
                 <input
                   type="text"
@@ -451,17 +447,36 @@ class Recipient extends React.Component {
                   defaultValue={this.props.data.iban}
                   onBlur={this.checkIBAN}/>
                 <span className={this.state.isIBANValid ? 'error-label-hidden' : 'error-label'}>IBAN may not be empty.</span>
-
-                <label htmlFor="iban">SWIFT</label><br/>
-                <input
-                  type="text"
-                  id="swift"
-                  placeholder="Enter SWIFT"
-                  ref={this.swift}
-                  defaultValue={this.props.data.swift}
-                  onBlur={this.checkIBAN}/>
-                <span className={this.state.isSWIFTValid ? 'error-label-hidden' : 'error-label'}>SWIFT may not be empty.</span>
               </div>
+              <div className={this.state.toCurrency == 'aud' ? 'div-show' : 'div-hide'}>
+              <label htmlFor="account">BSB Code</label><br/>
+                <NumberFormat
+                  type="tel"
+                  id="bsbCode"
+                  placeholder="Enter bsb code"
+                  ref={this.bsbCode}
+                  defaultValue={this.props.data.bsbCode}
+                  onBlur={this.checkBsbCode}
+                  onValueChange={this.updateBsbCode}  />
+                <span className={this.state.isBsbCodeValid ? 'error-label-hidden' : 'error-label'}>BSB Code may not be empty.</span>
+              </div>
+              <div className={this.state.toCurrency == 'usd' ? 'div-show' : 'div-hide'}>
+                <label htmlFor="account">Routing Number</label><br/>
+                <NumberFormat
+                  type="tel"
+                  id="routingNumber"
+                  placeholder="Enter routing number"
+                  ref={this.routingNumber}
+                  defaultValue={this.props.data.routingNumber}
+                  onBlur={this.checkRoutingNumber}
+                  onValueChange={this.updateRoutingNumber}  />
+                <span className={this.state.isRoutingNumberValid ? 'error-label-hidden' : 'error-label'}>Routing number may not be empty.</span>
+              </div>
+              <input
+                type="checkbox"
+                id="isSaveRecipient"
+                onChange={this.checkSaveRecipient} />
+              Save recipient
 
               <Link href="">
                 <a className="btn-primary" onClick={this.saveAndContinue}>Continue</a>
@@ -507,8 +522,8 @@ class Recipient extends React.Component {
                       type=""
                       id="purposeTransfer"
                       className="select-css"
-                      ref={this.email}
-                      defaultValue={this.props.data.email}>
+                      ref={this.purposeTransfer}
+                      defaultValue={this.props.data.purposeTransfer}>
                       <option value="Buying Overseas Property">Buying Overseas Property</option>
                       <option value="Paying for Overseas Tuition Fees">Paying for Overseas Tuition Fees</option>
                       <option value="Overseas Investments">Overseas Investments</option>
@@ -644,6 +659,10 @@ class Recipient extends React.Component {
             display: inline-block;
             color: #f49200;
             margin-left: 10px;
+          }
+
+          .form-container input[type="checkbox"] {
+            width: 20px;
           }
         `}</style>
       </div>

@@ -40,7 +40,9 @@ class Order extends React.Component {
       bsbCode: '',
       isVAgenerated: false,
       vaNumber: 0,
-      paymentMethod: ''
+      paymentMethod: '',
+      purposeTransfer: '',
+      isSaveRecipient: false
     };
 
     this.nextStep = this.nextStep.bind(this);
@@ -98,7 +100,8 @@ class Order extends React.Component {
         swift: this.state.swift,
         routingNumber: this.state.routingNumber,
         bsbCode: this.state.bsbCode,
-        paymentMethod: this.state.paymentMethod
+        paymentMethod: this.state.paymentMethod,
+        isSaveRecipient: this.state.isSaveRecipient
       },
       'addOrder'
     );
