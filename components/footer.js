@@ -33,7 +33,7 @@ const Footer = () => (
           <h3>Follow Us On</h3>
           <ul>
             <li><a href="https://www.instagram.com/transfree_id/?hl=en" target="blank"><img className="img" src="../static/images/instagram.png"></img> </a></li>
-            <li><a href="#" target="blank"><img className="img" src="../static/images/facebook.png"></img></a></li>
+            <li><a href="https://www.facebook.com/transfree.id.9" target="blank"><img className="img" src="../static/images/facebook.png"></img></a></li>
             <li><a href="https://www.youtube.com/channel/UCGZ9uWFrBSAKwh6YE4q2hyA/videos" target="_blank"><img className="img" src="../static/images/youtube.png"></img></a></li>
             {/**
             <li><Link ><a href="https://www.instagram.com/transfree_id/?hl=en" target="_blank">Instagram</a></Link></li>

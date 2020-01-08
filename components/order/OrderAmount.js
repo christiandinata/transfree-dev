@@ -610,8 +610,9 @@ class OrderAmount extends React.Component {
               The recipient will get the money in less than <span className="received-on">24 hours.</span></p> 
               }
             </div>
-            <p className="Pesan" style={{maxWidth: "100%", marginBottom:"10px" }}>We are open during the holidays. But as you aware many banks are close,
-              or stop procesing. This means our transfers may take longer than usual.</p>
+            {/* <p className="Pesan" style={{maxWidth: "100%", marginBottom:"10px" }}>We are open during the holidays. But as you aware many banks are close, 
+              or stop procesing. This means our transfers may take longer than usual.</p>*/}
+              
             <div className="row converter-cta">
               <div className="cta-primary">
 		      {/*
