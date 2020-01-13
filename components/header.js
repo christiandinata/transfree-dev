@@ -74,6 +74,18 @@ const Header = () => (
         box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
       }
 
+      .btn-secondary-login {
+        background: transparent;
+        border: 2px solid #469DDD;
+        color: #469DDD;
+        padding: 8px 18px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+      }
+
       .btn-secondary {
         background: transparent;
         border: 2px solid #469DDD;

@@ -9,7 +9,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
     <div className="container">
       <div id="menuToggle">
         <div className="main-cta">
-          {!isAuthenticated && <Link href="/login"><a className="btn-secondary">Log in</a></Link>}
+          {!isAuthenticated && <Link href="/login"><a className="btn-secondary-login">Log in</a></Link>}
           {isAuthenticated && <li><Link href="/logout"><a>Logout</a></Link></li>}
         </div>
         <input type="checkbox" />
@@ -248,7 +248,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
         }
 
         #menuToggle {
-          padding-bottom: 30px;
+          padding-bottom: 15px;
           border-bottom: 1px solid #eaeaea;
         }
         // MENU End
@@ -271,7 +271,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
             border: none;
           }
           #menuToggle {
-            top: 20px;
+            top: 10px;
             left: 0;
           }
         }

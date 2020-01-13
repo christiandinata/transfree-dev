@@ -620,6 +620,11 @@ class Index extends React.Component {
                   <Link href="/order">
                     <a className="btn-primary">Get started</a>
                   </Link>
+                  <div className="store">
+                    <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
+                    <img style={{width: "47%", paddingRight:"9px"}} src="../static/images/playstore.png"/></a> 
+                    <img style={{width:"47%", paddingLeft:"9px"}} src="../static/images/appstore.png"/>
+                  </div>
             
 		  {/*
                   {this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr' ? 
@@ -632,9 +637,6 @@ class Index extends React.Component {
                      </Link>
                     }*/}
 
-                    <div className="mobile-sell-buy">
-                        <a style={{marginTop: "20px"}} href="https://www.transfree.co.uk/" target="_blank" className="btn-secondary sell-buy">Sell & Buy Money Online</a>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -647,6 +649,9 @@ class Index extends React.Component {
               <center>
                 <Link>
                   <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-secondary">See how it works</a>
+                </Link>
+                <Link>
+                  <a style={{marginTop: "20px"}} href="https://www.transfree.co.uk/" target="_blank" className="btn-secondary sell-buy">Sell & Buy Money Online</a>
                 </Link>
               </center>
             </div>
@@ -662,11 +667,7 @@ class Index extends React.Component {
               //   </div>
               // </div>
               }
-              <div className="store">
-              <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
-            <img style={{width: "180px"}} src="../static/images/playstore.png"/></a> 
-            <img style={{width:"170px"}} src="../static/images/appstore.png"/>
-            </div>
+              
             </div>
           </div>
         
@@ -927,7 +928,7 @@ class Index extends React.Component {
           }
           .sell-buy {
             color: white;
-            background-color: none;
+            background-color: #469DDD; //none
             border-color: #5a9cd8
           }
           .external-link{
@@ -939,7 +940,9 @@ class Index extends React.Component {
             margin-left : 20px;
           }
           .mobile-sell-buy{
-            display: none;
+            background-color: none;
+            border-color: #5a9cd8;
+            display: block;
           }
           .h1-bawah{
             margin-top:0px !important;
@@ -953,12 +956,12 @@ class Index extends React.Component {
           }
 
           .hero {
-            padding-bottom: 100px;
+            padding-bottom: 50px; //100
           }
 
           .left-container {
             flex-basis: 60%;
-            margin-top: 0px;
+            margin-top: 35px;
           }
 
           .left-container h1{
@@ -973,7 +976,7 @@ class Index extends React.Component {
 
           .right-container {
             flex-basis: 40%;
-            margin-top: 30px;
+            margin-top: 55px;
             z-index: 2;
           }
           .right-bottom-container{
@@ -981,6 +984,7 @@ class Index extends React.Component {
             display: none;
           }
           .store{
+            margin-top: 15px;
             width: 50%
             height: 50%
           }
@@ -1422,7 +1426,7 @@ class Index extends React.Component {
 
             .logo{
               text-align: left;
-              padding-left: 20px;
+              padding-left: 10px;
               display: block;
 
             }
@@ -1430,8 +1434,8 @@ class Index extends React.Component {
             .logo img {
               width :50%;
               height :50%;
-              margin-top: 20px !important;
-              margin-bottom: 20px !important;
+              margin-top: 10px !important;
+              margin-bottom: 10px !important;
             }
             .left-container {
               margin-top: 0;
