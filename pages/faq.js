@@ -357,7 +357,8 @@ const FAQ = () => {
                   </AccordionItemHeading>
                   <AccordionItemPanel>
                       <p>
-                          We will contact you if you want to refund your cancelled transactions. Or you can get in touch with our Customer Service. Please save your transaction information so we can verify your refund.
+                        First thing first before you considered eligible to refund the money is to make sure that the booking you made is less than 4 hours ago. After 4 hours of booking duration we are unable to help you to refund the money. 
+                        For a refund process you can reach us on email admin@transfree.id or whatsapp +447985497391 and the process will take at maximum 2 working days.
                       </p>
                   </AccordionItemPanel>
               </AccordionItem>
