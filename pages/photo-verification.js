@@ -252,7 +252,7 @@ class PhotoVerification extends React.Component {
                   </div>
 
 
-
+              {/** 
                 <h3 style={{textAlign: "center"}}>OR</h3>
 
                   <div style={{marginTop: "10px"}}>                
@@ -262,6 +262,8 @@ class PhotoVerification extends React.Component {
                       Upload later, Start Transfer Now !
                       </button>
                 </div>
+                */}
+                
                 <p className="description"> * We will not, in any circumstances, share your personal information irresponsibly.
                 <a className="more-privacy" href="/privacy-policy" target="_blank"> More about Privacy Policy </a></p>
               </div>             
@@ -398,7 +400,7 @@ class PhotoVerification extends React.Component {
            .description{
             color:#e79635;
             font-size: 14px;
-            margin: 40px 0px 0px 0px !important;
+            margin: 30px 0px 0px 0px !important; //40px
           }
           .more-privacy{
             color:#e79635;
