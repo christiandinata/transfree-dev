@@ -199,6 +199,10 @@ class PhotoVerification extends React.Component {
 
     let photoId, photoFace = '';
     if(this.state.submitViaWhatsapp == true){
+          this.props.uploadPhoto(
+            { photoId: '', photoFace: '', email: this.props.email },
+            'uploadPhoto'
+          );
           window.open('https://api.whatsapp.com/send?phone=447490090659&text=Please%20upload%20your%20ID%20photos%20to%20this%20Whatsapp%20%3A%0A1.%20Upload%20or%20Take%20a%20photo%20of%20your%20ID%20Card%0A2.%20Upload%20or%20Take%20a%20photo%20of%20your%20face%20while%20holding%20the%20ID%20Card', "_blank")
     }
     if (this.state.uploadPhotoIdSrc != null)
@@ -243,33 +247,33 @@ class PhotoVerification extends React.Component {
             {/* {this.state.submitViaWhatsapp == true ?  */}
 
                 <div className="cta-submit">
-                  <div style={{marginTop: "-15px"}}>       
+                  <div style={{marginTop: "-15px"}}>
 
-                    <button type="submit" className="btn-primary" >           
+                    <button type="submit" className="btn-primary" >
                       <span style={{paddingRight: "7px"}} ><i class="fa fa-whatsapp"  style={{fontSize: "22px"}}  aria-hidden="true"></i></span> Upload Photos Via Whatsapp
                     </button>
 
                   </div>
 
 
-              {/** 
+              {/**
                 <h3 style={{textAlign: "center"}}>OR</h3>
 
-                  <div style={{marginTop: "10px"}}>                
-                    <button 
+                  <div style={{marginTop: "10px"}}>
+                    <button
                       onClick={() => this.setSubmitViaWhatsapp(false)}
                       type="submit" className={'btn-primary'}>
                       Upload later, Start Transfer Now !
                       </button>
                 </div>
                 */}
-                
+
                 <p className="description"> * We will not, in any circumstances, share your personal information irresponsibly.
                 <a className="more-privacy" href="/privacy-policy" target="_blank"> More about Privacy Policy </a></p>
-              </div>             
+              </div>
 {/*
 
-              : 
+              :
 
 
               <div>
@@ -342,7 +346,7 @@ class PhotoVerification extends React.Component {
                       <FontAwesomeIcon icon="sync-alt" spin/>
                     ) : 'Continue'}</button>
                   </div>
-                  ) : 
+                  ) :
                   <div className="cta-submit">
                     <button disabled={"disabled"} className={'btn-disabled'}>Continue</button>
                   </div>
