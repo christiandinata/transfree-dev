@@ -37,8 +37,6 @@ class UserItem extends React.Component {
               <th className="column dob">Date of Birth</th>
               <th className="column idType">ID Type</th>
               <th className="column idNumber">ID Number</th>
-              <th className="column photoId">Photo of ID</th>
-              <th className="column photoFace">Photo of Face</th>
               <th className="column status">Status</th>
             </tr>
           {this.props.users.map((user, key) => {
@@ -50,20 +48,12 @@ class UserItem extends React.Component {
                 <td className="column">{user.pob}, {moment(user.dob).format("DD MMM YYYY")}</td>
                 <td className="column">{user.idType}</td>
                 <td className="column">{user.idNumber}</td>
-                <td className="column">
-                  <a href={"#photoId"+key}><img src={user.photoId} className="thumbnail"/></a>
-                  <a href="#_" className="lightbox" id={"photoId"+key}><img src={user.photoId}/></a>
-                </td>
-                <td className="column">
-                  <a href={"#photoFace"+key}><img src={user.photoFace} className="thumbnail"/></a>
-                  <a href="#_" className="lightbox" id={"photoFace"+key}><img src={user.photoFace}/></a>
-                </td>
                 <td className="column action">
                   {user.isApproved ?
                     (<div className="status approved">approved</div>) :
                     (<div><div className="status pending">pending</div><div onClick={() => this.approve(user._id )} className="btn-primary btn-small">Approve</div></div>)
                   }
-                  <div onClick={() => this.delete(user._id)} className="btn-danger btn-small">Delete</div>
+                  <div onClick={() => { if (window.confirm('Are you sure you want to delete this user?')) this.delete(user._id) } } className="btn-danger btn-small">Delete</div>
                 </td>
               </tr>
             )

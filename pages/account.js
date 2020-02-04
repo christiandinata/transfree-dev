@@ -57,44 +57,27 @@ const ApprovedLayout = () => {
 const PendingLayout = () => {
   return (
     <div className="content">
-    {/* OLD PENDING LAYOUT
-
-        <div className="big-icon">
-          <img src="../static/images/document.svg"/>
-        </div>
-        <h1>Awaiting confirmation</h1>
-        <p>We are now reviewing your account details. We will send you an email & WhatsApp message once the verification process is completed.</p>
-
-      END OF OLD PENDING LAYOUT */}
       <div className="big-icon">
-        <img src="../static/images/happy.svg"/>
+        <img src="../static/images/document.svg"/>
       </div>
-      <h1>No transactions</h1>
-      <p>You haven’t sent money using Transfree. Get started now and enjoy fast and cheap international money transfer. </p>
-
-      <Link href="/order">
-        <a className="btn-primary">Send money now</a>
-      </Link>
+      <h1>Awaiting confirmation</h1>
+      <p>We are now reviewing your account details. We will send you an email & WhatsApp message once the verification process is completed.</p>
       <style jsx>{`
         .logo {
           width: 100%;
           text-align: center;
         }
         .big-icon img {
-          height: 300px;
-          margin: -80px auto 50px;
+          margin: 50px auto;
         }
-
         p {
           max-width: 600px;
           text-align: center;
           margin-bottom: 50px;
         }
-
         h1 {
           margin: 0;
         }
-
         .content {
           display: flex;
           flex-direction: column;
@@ -161,10 +144,10 @@ class OrderItem extends React.Component {
               (moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) )
               ||
               (order.receivedAt != 0.0)
-              ?  
+              ?
               ('We are processing your ' + order.toCurrency.toUpperCase() +' booking')
-               :  
-               ('We are waiting to process your ') }  
+               :
+               ('We are waiting to process your ') }
               </p>
               <br/>
               <p style={{marginLeft:"35px",marginTop:"4px"}}>
@@ -174,8 +157,8 @@ class OrderItem extends React.Component {
                ||
                (order.receivedAt != 0.0)
                ?
-               ('') 
-               :  
+               ('')
+               :
                (order.toCurrency.toUpperCase() +' booking') }
               </p>
               </li>
@@ -459,12 +442,15 @@ class Account extends React.Component {
   };
 
   renderContent() {
-     if(this.props.orderArray.length > 0) {
+    if(this.props.isApproved) {
+      if(this.props.orderArray.length > 0) {
         return <OrderLayout ordersList={this.props.orderArray}/>
       } else {
         return <ApprovedLayout />
       }
-
+    } else {
+      return <PendingLayout />
+    }
   }
 
   render() {
