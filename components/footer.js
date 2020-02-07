@@ -26,6 +26,11 @@ const Footer = () => (
           <ul>
             <li>Phone/WhatsApp: <br/>+44 7985 497391 </li>
             <li>Email: <br/>admin@transfree.id </li>
+            <li><Link href="/complaint_feedback"><a>Complaint and Feedback</a></Link></li>
+            {/*
+            <li>Phone/WhatsApp: <br/>+44 7985 497391 </li>
+            <li>Email: <br/>admin@transfree.id </li>
+             */}
           </ul>
         </div>
 
