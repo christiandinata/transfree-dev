@@ -457,7 +457,7 @@ const FAQ = () => {
                   </AccordionItemHeading>
                   <AccordionItemPanel>
                       <p>
-                      You can go to the home page, and scroll down to the bottom of the page. In the footer section click "Complaint and Feedback" and fill the form. We will give you response in maximum 1 working day.
+                      You can directly contact us by email (admin@transfree.id) or WhatsApp (+44 7490 090659) for any complaint or other issue that happen during your transaction. We will get back to you in maximum 1 working days, and for some urgent issue that need immediate action we will do reasonable effort to solve the issue.
                       </p>
                   </AccordionItemPanel>
               </AccordionItem>
