@@ -8,18 +8,8 @@ const About = () => (
     <Menu/>
     <div className="row">
       <div className="container">
-        <h1>About Transfree</h1>
-        <p>
-          Transfree is an Indonesian based company focussing its
-          service in cross border money transfer, with a vision to
-          make international money transfer feels like local bank
-          transfer.       
-        </p>
-
-        <p>
-          We charge no transaction fee with a competitive
-          exchange rate.
-        </p>
+        <h1>Complaint and Feedback</h1>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeyDe7OeU3wYT-xKC-kZOMuLDQsvlxUbXHsDu4st67atvCRdw/viewform?embedded=true" width="640" height="1050" frameborder="0" marginheight="0" marginwidth="0">Memuat…</iframe>
       </div>
     </div>
     <style jsx>{`
@@ -35,7 +25,6 @@ const About = () => (
         margin: 0 auto;
         display: flex;
         flex-direction: column;
-        text-align:Justify;
       }
 
       h1 {
