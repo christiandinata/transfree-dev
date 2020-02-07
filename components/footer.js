@@ -10,7 +10,7 @@ const Footer = () => (
         <div className="footer-item">
           <h3>About Transfree</h3>
           <ul>
-            <li><Link href="/about"><a>About Us</a></Link></li>
+            <li><Link href="/about"><a>Who we are</a></Link></li>
             {/*
               <li>How it works</li>
               <li>Pricing</li>
@@ -26,11 +26,6 @@ const Footer = () => (
           <ul>
             <li>Phone/WhatsApp: <br/>+44 7985 497391 </li>
             <li>Email: <br/>admin@transfree.id </li>
-            <li><Link href="/complaint_feedback"><a>Complaint and Feedback</a></Link></li>
-            {/*
-            <li>Phone/WhatsApp: <br/>+44 7985 497391 </li>
-            <li>Email: <br/>admin@transfree.id </li>
-             */}
           </ul>
         </div>
 

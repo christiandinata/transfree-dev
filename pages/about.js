@@ -8,17 +8,23 @@ const About = () => (
     <Menu/>
     <div className="row">
       <div className="container">
-        <h1>About Transfree</h1>
+        <h1>About Us</h1>
         <p>
-          Transfree is an Indonesian based company focussing its
-          service in cross border money transfer, with a vision to
-          make international money transfer feels like local bank
-          transfer.       
+          There are a lot of difficulties when you sending or receiving money from Indonesia.
+          Starting from the total transfer time, the complexity of the procedure, to the limitations of existing regulations.
+          Some also being scammed and lost their money. These are the problem that often arise in systems that already exist.
+          We feels the same way when living abroad. From students who receive money from home or workers who send money to their families.
         </p>
 
         <p>
-          We charge no transaction fee with a competitive
-          exchange rate.
+          Because of that, we try to find a new way to eliminate the problems with a more efficient way yet secure and reliable.
+          Transfree make the process of international money transfer feels like local transfer.
+          We understand your problem and will simplify your process to transfer money.
+          Till today, we are improving our service to be better.
+        </p>
+
+        <p>
+          Now that you know our story, let’s give it a try using our service to feel the difference.
         </p>
       </div>
     </div>
@@ -35,7 +41,6 @@ const About = () => (
         margin: 0 auto;
         display: flex;
         flex-direction: column;
-        text-align:Justify;
       }
 
       h1 {
