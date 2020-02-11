@@ -71,18 +71,7 @@ const FAQ = () => {
 
           <h3>Managing your account	</h3>
           <Accordion allowMultipleExpanded={true}>
-              <AccordionItem>
-                  <AccordionItemHeading>
-                      <AccordionItemButton>
-                      How can I change my password ?
-                      </AccordionItemButton>
-                  </AccordionItemHeading>
-                  <AccordionItemPanel>
-                      <p>
-                      
-                      </p>
-                  </AccordionItemPanel>
-              </AccordionItem>
+              
               <AccordionItem>
                   <AccordionItemHeading>
                       <AccordionItemButton>
