@@ -41,7 +41,6 @@ const About = () => (
         margin: 0 auto;
         display: flex;
         flex-direction: column;
-        text-align:Justify;
       }
 
       h1 {
