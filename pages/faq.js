@@ -53,7 +53,62 @@ const FAQ = () => {
                   </AccordionItemHeading>
                   <AccordionItemPanel>
                       <p>
+<<<<<<< HEAD
                           For new user, please sign up and fill required information. Then login, go into account information and verify your account. Then fill transaction information form in Transfer page.
+=======
+                            You can check our short video here
+                            or follow the steps below; 
+                       <ol>
+                       <li>For new user, please sign up and fill required information.  </li>
+                       <li>Login, go into account information and verify your account. </li>
+                       <li>Fill the transaction information form in transfer page and choose the amount you want to send.</li> 
+                       <li>Review your transaction detail before submitting and make sure that your data is right. Then submit your transaction detail to us.</li>
+                       <li>Receive notification email about the transaction detail and payment instruction. Please contact us as soon as possible if there is something wrong with your transaction data.</li> 
+                       <li>You can track the transaction status in your dashboad.</li>
+                       <li>Upon completed, we will send you notification email together with the receipt.</li>
+                       </ol>                       
+                      </p>
+                  </AccordionItemPanel>
+              </AccordionItem>
+          </Accordion>
+
+          <h3>Managing your account	</h3>
+          <Accordion allowMultipleExpanded={true}>
+              
+              <AccordionItem>
+                  <AccordionItemHeading>
+                      <AccordionItemButton>
+                      How do I add or delete recipients?
+                      </AccordionItemButton>
+                  </AccordionItemHeading>
+                  <AccordionItemPanel>
+                      <p>
+                      For every new transfer you do, you can save the recipient detail by ticking the box 'save account' in the form transaction section. If you want to delete your recipient, open Recipient List tab, choose your recipient that you want to delete, and click on Delete button.
+                      </p>
+                  </AccordionItemPanel>
+              </AccordionItem>
+              <AccordionItem>
+                  <AccordionItemHeading>
+                      <AccordionItemButton>
+                         What if I've forgotten my password ?
+                      </AccordionItemButton>
+                  </AccordionItemHeading>
+                  <AccordionItemPanel>
+                      <p>
+                      You can click on forget password in our website or apps. We will send you an email to reset your password.
+                      </p>
+                  </AccordionItemPanel>
+              </AccordionItem>
+              <AccordionItem>
+                  <AccordionItemHeading>
+                      <AccordionItemButton>
+                      What if I didn't get the email to reset my password?
+                      </AccordionItemButton>
+                  </AccordionItemHeading>
+                  <AccordionItemPanel>
+                      <p>
+                      Contact our customer support (email to admin@transfree.id or WhatsApp +44 7490 090659) to let us know and resolve this issue. We will contact you in maximum 48 hours.
+>>>>>>> 43fa82ce167302a6e7d90edf75790b0f43007c21
                       </p>
                   </AccordionItemPanel>
               </AccordionItem>
@@ -305,7 +360,95 @@ const FAQ = () => {
                   </AccordionItemHeading>
                   <AccordionItemPanel>
                       <p>
+<<<<<<< HEAD
                           We can't transfer money to some country that we see as high-risk country.
+=======
+                      We can't transfer money to some country that we see as high-risk country. Until we get a safe channel to high-risk country, we will not process any transfer to some countries.
+                      </p>
+                  </AccordionItemPanel>
+              </AccordionItem>
+          </Accordion>
+
+          <h3>Operational Hours</h3>
+          <Accordion allowMultipleExpanded={true}>
+              <AccordionItem>
+                  <AccordionItemHeading>
+                      <AccordionItemButton>
+                      Does Transfree operate 24/7?
+                      </AccordionItemButton>
+                  </AccordionItemHeading>
+                  <AccordionItemPanel>
+                      <p>
+                      No. Our operational hour is Monday - Friday : 10.00 - 18.00 WIB
+                      </p>
+                  </AccordionItemPanel>
+              </AccordionItem>
+              <AccordionItem>
+                  <AccordionItemHeading>
+                      <AccordionItemButton>
+                      Does The Customer Service Officer stanby 24/7?
+                      </AccordionItemButton>
+                  </AccordionItemHeading>
+                  <AccordionItemPanel>
+                      <p>
+                      No at the moment. But we will do a reasonable effort to response for every inquirie out of operational hour subject to the urgency and importance of the issue
+                      </p>
+                  </AccordionItemPanel>
+              </AccordionItem>
+          </Accordion>
+
+          <h3>Cut Off Time</h3>
+          <Accordion allowMultipleExpanded={true}>
+              <AccordionItem>
+                  <AccordionItemHeading>
+                      <AccordionItemButton>
+                      What is cut off time?
+                      </AccordionItemButton>
+                  </AccordionItemHeading>
+                  <AccordionItemPanel>
+                      <p>
+                      Cut off time is the time at which we stop sending the money in that particular day. It means that transaction made before cut off time will be processed in the same day and most likely will arrive in the same day also. Transaction made after the cut off time will arrive in the next working day.
+                      </p>
+                  </AccordionItemPanel>
+              </AccordionItem>
+              <AccordionItem>
+                  <AccordionItemHeading>
+                      <AccordionItemButton>
+                      Is there any specific cut off time for transfree?
+                      </AccordionItemButton>
+                  </AccordionItemHeading>
+                  <AccordionItemPanel>
+                      <p>
+                      Yes, our cut off time is 12.30 UTC+7
+                      </p>
+                  </AccordionItemPanel>
+              </AccordionItem>
+          </Accordion>
+
+          <h3>Complaint and Other Inquiries</h3>
+          <Accordion allowMultipleExpanded={true}>
+              <AccordionItem>
+                  <AccordionItemHeading>
+                      <AccordionItemButton>
+                      I have a problem with my transaction and would like to raise a complaint. How can I do that?
+                      </AccordionItemButton>
+                  </AccordionItemHeading>
+                  <AccordionItemPanel>
+                      <p>
+                      You can directly contact us by email (admin@transfree.id) or WhatsApp (+44 7490 090659) for any complaint or other issue that happen during your transaction. We will get back to you in maximum 1 working days, and for some urgent issue that need immediate action we will do reasonable effort to solve the issue.
+                      </p>
+                  </AccordionItemPanel>
+              </AccordionItem>
+              <AccordionItem>
+                  <AccordionItemHeading>
+                      <AccordionItemButton>
+                      Can I pay for my transaction order on behalf of other's bank account?
+                      </AccordionItemButton>
+                  </AccordionItemHeading>
+                  <AccordionItemPanel>
+                      <p>
+                      No. Each time a customer want to make a transaction order, it is a mandatory for the customer (sender) to send the money from their own bank account. If in any condition we receive the money from a different name or different person, Transfree will do a refund and ask for the customer to re-transfer the money again from their account.
+>>>>>>> 43fa82ce167302a6e7d90edf75790b0f43007c21
                       </p>
                   </AccordionItemPanel>
               </AccordionItem>

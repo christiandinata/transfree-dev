@@ -10,7 +10,7 @@ const Footer = () => (
         <div className="footer-item">
           <h3>About Transfree</h3>
           <ul>
-            <li><Link href="/about"><a>Who we are</a></Link></li>
+            <li><Link href="/about"><a>About Us</a></Link></li>
             {/*
               <li>How it works</li>
               <li>Pricing</li>
