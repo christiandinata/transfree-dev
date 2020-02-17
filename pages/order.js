@@ -14,6 +14,44 @@ import NumberFormat from 'react-number-format';
 import orderid from 'order-id';
 import shortid from 'shortid';
 
+const PendingLayout = () => {
+  return (
+    <div className="content">
+      <div className="big-icon">
+        <img src="../static/images/document.svg"/>
+      </div>
+      <h1>Awaiting confirmation</h1>
+      <p>We are now reviewing your account details. We will send you an email & WhatsApp message once the verification process is completed.</p>
+      <p>Please contact us by email (admin@transfree.id) or WhatsApp (+44 7490 090659) for faster process.</p>
+      <style jsx>{`
+        .logo {
+          width: 100%;
+          text-align: center;
+        }
+        .big-icon img {
+          margin: 50px auto;
+        }
+        p {
+          max-width: 600px;
+          text-align: justify;
+          margin-bottom: 20px;
+        }
+        h1 {
+          margin: 0;
+        }
+        .content {
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+          align-items: center;
+          justify-content: justify;
+        }
+      `}</style>
+    </div>
+  )
+
+}
+
 class Order extends React.Component {
   constructor({ props }) {
     super(props);
@@ -108,34 +146,34 @@ class Order extends React.Component {
   }
 
   renderContent(step) {
-    switch(step) {
-      case 1:
-        return <OrderAmount
-                  nextStep={this.nextStep}
-                  saveValues={this.saveValues} />;
-      case 2:
-        return <Recipient
-                  nextStep={this.nextStep}
-                  saveValues={this.saveValues}
-                  data={this.state} />
-      case 3:
-        return <Review
-                  nextStep={this.nextStep}
-                  previousStep={this.previousStep}
-                  saveValues={this.saveValues}
-                  backToAmount={this.backToAmount}
-                  data={this.state} />
-      case 4:
-        return <Pay
-                  nextStep={this.nextStep}
-                  saveValues={this.saveValues}
-                  data={this.state}
-                  generateVA={this.generateVA}/>
-      case 5:
-        return <Status
-                  addOrder={this.addOrder}
-                  data={this.state}/>
-    }
+      switch(step) {
+        case 1:
+          return <OrderAmount
+                    nextStep={this.nextStep}
+                    saveValues={this.saveValues} />;
+        case 2:
+          return <Recipient
+                    nextStep={this.nextStep}
+                    saveValues={this.saveValues}
+                    data={this.state} />
+        case 3:
+          return <Review
+                    nextStep={this.nextStep}
+                    previousStep={this.previousStep}
+                    saveValues={this.saveValues}
+                    backToAmount={this.backToAmount}
+                    data={this.state} />
+        case 4:
+          return <Pay
+                    nextStep={this.nextStep}
+                    saveValues={this.saveValues}
+                    data={this.state}
+                    generateVA={this.generateVA}/>
+        case 5:
+          return <Status
+                    addOrder={this.addOrder}
+                    data={this.state}/>
+      } 
   }
 
   nextStep() {
@@ -195,6 +233,7 @@ class Order extends React.Component {
   }
 
   render() {
+    if (this.props.isApproved){
     return (
       <div>
         <Header />
@@ -310,12 +349,21 @@ class Order extends React.Component {
           }
         `}</style>
       </div>
-    )
-  }
+    )} else {
+      return (
+        <div>
+          <Header />
+          <Menu />
+          <PendingLayout />
+        </div>
+      )
+    }
+  } 
 }
 
 const mapStateToProps = (state) => {
   return {
+    isApproved: !!state.user.user_data.isApproved,
     userData: state.user.user_data,
     rate: state.rate.rates,
     vaNumber: state.va.vaNumber,
@@ -323,7 +371,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  actions
-)(Order);
+export default connect(mapStateToProps, actions)(Order);

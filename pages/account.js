@@ -62,6 +62,7 @@ const PendingLayout = () => {
       </div>
       <h1>Awaiting confirmation</h1>
       <p>We are now reviewing your account details. We will send you an email & WhatsApp message once the verification process is completed.</p>
+      <p>Please contact us by email (admin@transfree.id) or WhatsApp (+44 7490 090659) for faster process.</p>
       <style jsx>{`
         .logo {
           width: 100%;
@@ -72,8 +73,8 @@ const PendingLayout = () => {
         }
         p {
           max-width: 600px;
-          text-align: center;
-          margin-bottom: 50px;
+          text-align: justify;
+          margin-bottom: 10px;
         }
         h1 {
           margin: 0;
@@ -81,7 +82,6 @@ const PendingLayout = () => {
         .content {
           display: flex;
           flex-direction: column;
-          min-height: 100vh;
           align-items: center;
           justify-content: center;
         }

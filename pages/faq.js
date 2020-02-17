@@ -53,9 +53,6 @@ const FAQ = () => {
                   </AccordionItemHeading>
                   <AccordionItemPanel>
                       <p>
-<<<<<<< HEAD
-                          For new user, please sign up and fill required information. Then login, go into account information and verify your account. Then fill transaction information form in Transfer page.
-=======
                             You can check our short video here
                             or follow the steps below; 
                        <ol>
@@ -108,7 +105,6 @@ const FAQ = () => {
                   <AccordionItemPanel>
                       <p>
                       Contact our customer support (email to admin@transfree.id or WhatsApp +44 7490 090659) to let us know and resolve this issue. We will contact you in maximum 48 hours.
->>>>>>> 43fa82ce167302a6e7d90edf75790b0f43007c21
                       </p>
                   </AccordionItemPanel>
               </AccordionItem>
@@ -360,9 +356,6 @@ const FAQ = () => {
                   </AccordionItemHeading>
                   <AccordionItemPanel>
                       <p>
-<<<<<<< HEAD
-                          We can't transfer money to some country that we see as high-risk country.
-=======
                       We can't transfer money to some country that we see as high-risk country. Until we get a safe channel to high-risk country, we will not process any transfer to some countries.
                       </p>
                   </AccordionItemPanel>
@@ -448,7 +441,6 @@ const FAQ = () => {
                   <AccordionItemPanel>
                       <p>
                       No. Each time a customer want to make a transaction order, it is a mandatory for the customer (sender) to send the money from their own bank account. If in any condition we receive the money from a different name or different person, Transfree will do a refund and ask for the customer to re-transfer the money again from their account.
->>>>>>> 43fa82ce167302a6e7d90edf75790b0f43007c21
                       </p>
                   </AccordionItemPanel>
               </AccordionItem>
