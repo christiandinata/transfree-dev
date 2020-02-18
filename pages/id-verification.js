@@ -106,9 +106,19 @@ class IdVerification extends React.Component {
           <div className="logo">
             <img src="../static/images/transfree-logo.png"/>
           </div>
-          <h1>ID verification</h1>
+          <h1>More Detail</h1>
           <p>According to the regulation from Bank Indonesia, we have to verify your identity. Please provide your identity details below.</p>
           <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
+          <label htmlFor="fullname">Full name</label><br/>
+            <input
+              type="text"
+              id="fullname"
+              placeholder="Enter your full name (should match your ID)"
+              value={this.state.idName}
+              onChange={e => this.setState({ idName: e.target.value })}
+              onBlur={this.checkFullname}/>
+            <span className={this.state.isFullnamevalid ? 'error-label-hidden' : 'error-label'}>Your Full Name may not be empty.</span>
+            
             <label htmlFor="id-type">ID Type</label><br/>
             <select
               id="id-type"
@@ -130,15 +140,7 @@ class IdVerification extends React.Component {
               onBlur={this.checkIdnumber}/>
             <span className={this.state.isIdnumbervalid ? 'error-label-hidden' : 'error-label'}>You must input your ID Number (KTP/Passport/SIM).</span>
 
-            <label htmlFor="fullname">Full name</label><br/>
-            <input
-              type="text"
-              id="fullname"
-              placeholder="Enter your full name (should match your ID)"
-              value={this.state.idName}
-              onChange={e => this.setState({ idName: e.target.value })}
-              onBlur={this.checkFullname}/>
-            <span className={this.state.isFullnamevalid ? 'error-label-hidden' : 'error-label'}>Your Full Name may not be empty.</span>
+           
 
             <div style={{marginBottom: "15px"}}>GENDER</div>
             <input

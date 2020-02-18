@@ -46,10 +46,10 @@ class PhoneVerification extends React.Component {
           <div className="logo">
             <img src="../static/images/transfree-logo.png"/>
           </div>
-          <h1>Phone verification</h1>
+          <h1>Code Verification</h1>
           <p>Enter 6 digits verification code that we sent to your number {this.props.phone}.</p>
           <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
-            <label htmlFor="code">Verification code</label><br/>
+            <label htmlFor="code">Verification Code</label><br/>
             <input
               type="tel"
               id="code"

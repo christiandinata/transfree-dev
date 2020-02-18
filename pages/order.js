@@ -146,34 +146,34 @@ class Order extends React.Component {
   }
 
   renderContent(step) {
-      switch(step) {
-        case 1:
-          return <OrderAmount
-                    nextStep={this.nextStep}
-                    saveValues={this.saveValues} />;
-        case 2:
-          return <Recipient
-                    nextStep={this.nextStep}
-                    saveValues={this.saveValues}
-                    data={this.state} />
-        case 3:
-          return <Review
-                    nextStep={this.nextStep}
-                    previousStep={this.previousStep}
-                    saveValues={this.saveValues}
-                    backToAmount={this.backToAmount}
-                    data={this.state} />
-        case 4:
-          return <Pay
-                    nextStep={this.nextStep}
-                    saveValues={this.saveValues}
-                    data={this.state}
-                    generateVA={this.generateVA}/>
-        case 5:
-          return <Status
-                    addOrder={this.addOrder}
-                    data={this.state}/>
-      } 
+    switch(step) {
+      case 1:
+        return <OrderAmount
+                  nextStep={this.nextStep}
+                  saveValues={this.saveValues} />;
+      case 2:
+        return <Recipient
+                  nextStep={this.nextStep}
+                  saveValues={this.saveValues}
+                  data={this.state} />
+      case 3:
+        return <Review
+                  nextStep={this.nextStep}
+                  previousStep={this.previousStep}
+                  saveValues={this.saveValues}
+                  backToAmount={this.backToAmount}
+                  data={this.state} />
+      case 4:
+        return <Pay
+                  nextStep={this.nextStep}
+                  saveValues={this.saveValues}
+                  data={this.state}
+                  generateVA={this.generateVA}/>
+      case 5:
+        return <Status
+                  addOrder={this.addOrder}
+                  data={this.state}/>
+    }
   }
 
   nextStep() {

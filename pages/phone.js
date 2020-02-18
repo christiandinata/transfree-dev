@@ -56,7 +56,7 @@ class Phone extends React.Component {
             {this.props.errorMessage}
           </div>
           <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
-            <label htmlFor="phone">Phone number</label><br/>
+            <label htmlFor="phone">Phone Number</label><br/>
             <PhoneInput
               placeholder="Enter phone number"
               country="GB"

@@ -320,43 +320,12 @@ class Recipient extends React.Component {
         <h1>Recipient details</h1>
         <Tabs onSelect={tabIndex => this.setState({recipientType: tabIndex})}>
           <TabList style={{margin: 0}}>
-            <Tab>Create new</Tab>
-            <Tab>Use existing</Tab>
+            <Tab>Add Recipient</Tab>
+            <Tab>Recipient List</Tab>
           </TabList>
           <TabPanel>
             <form className="form-container">
-              <label htmlFor="fullname">Recipient's name</label><br/>
-              <input
-                type="text"
-                id="fullname"
-                className={this.state.isNameValid ? '' : 'error'}
-                placeholder="Enter recipient's full name"
-                ref={this.name}
-                defaultValue={this.props.data.name}
-                onBlur={this.checkName}/>
-              <span className={this.state.isNameValid ? 'error-label-hidden' : 'error-label'}>Recipient's full name may not be empty.</span>
-
-              <label htmlFor="purposeTransfer">Purpose Of Transfer</label><br/>
-              <select
-                  type="purposeTransfer"
-                  id="purposeTransfer"
-                  className="select-css"
-                  ref={this.purposeTransfer}
-                  defaultValue={this.props.data.purposeTransfer}>
-                  <option value="Buying Overseas Property">Buying Overseas Property</option>
-                  <option value="Paying for Overseas Tuition Fees">Paying for Overseas Tuition Fees</option>
-                  <option value="Overseas Investments">Overseas Investments</option>
-                  <option value="Sending Money to Friends or Family">Sending Money to Friends or Family</option>
-                  <option value="Paying for Living Cost">Paying for Living Cost</option>
-                  <option value="Supporting a Family Member Who is Travelling Overseas">Supporting a Family Member Who is Travelling Overseas</option>
-                  <option value="Paying for Wedding Abroad">Paying for Wedding Abroad</option>
-                  <option value="Overseas Mortgage Payments">Overseas Mortgage Payments</option>
-                  <option value="Paying For Work to be Completed Overseas">Paying For Work to be Completed Overseas</option>
-                  <option value="Paying For Bills Overseas">Paying For Bills Overseas</option>
-                  <option value="others">Others</option>
-                </select>
-          
-              <label htmlFor="bank">Email</label><br/>
+            <label htmlFor="bank">Email</label><br/>
               <input
                 type="email"
                 id="email"
@@ -366,7 +335,6 @@ class Recipient extends React.Component {
                 defaultValue={this.props.data.email}
                 onBlur={this.checkEmail}/>
               <span className={this.state.isEmailValid ? 'error-label-hidden' : 'error-label'}>Email address is not valid.</span>
-          
 
               <label htmlFor="bank">Bank Name</label><br/>
               <input
@@ -388,6 +356,33 @@ class Recipient extends React.Component {
                 defaultValue={this.props.data.bankAccountNumber}
                 onBlur={this.checkBankAccountNumber}/>
               <span className={this.state.isBankAccountNumberValid ? 'error-label-hidden' : 'error-label'}>Bank account name may not be empty.</span>
+          
+              <label htmlFor="fullname">Recipient's name</label><br/>
+              <input
+                type="text"
+                id="fullname"
+                className={this.state.isNameValid ? '' : 'error'}
+                placeholder="Enter recipient's full name"
+                ref={this.name}
+                defaultValue={this.props.data.name}
+                onBlur={this.checkName}/>
+              <span className={this.state.isNameValid ? 'error-label-hidden' : 'error-label'}>Recipient's full name may not be empty.</span>
+
+              <div className={this.state.toCurrency == 'gbp' ? 'div-show' : 'div-hide'}>
+                <label htmlFor="sortcode">Sort code</label><br/>
+                <NumberFormat
+                  type="tel"
+                  id="sortcode"
+                  placeholder="00 00 00"
+                  ref={this.sortcode}
+                  defaultValue={this.props.data.sortcode}
+                  format="## ## ##"
+                  onBlur={this.checkSortCodeValid}
+                  onValueChange={this.updateSortcode} />
+                <span className={this.state.isSortCodeValid ? 'error-label-hidden' : 'error-label'}>Sort code may not be empty.</span>
+                <span className={this.state.isSortCodeVirtual ? 'error-label-hidden' : 'error-label'}>Sorry we cannot identify this sort code.</span>            
+              </div>
+
           {/*
                 <select
                   type="text"
@@ -409,20 +404,7 @@ class Recipient extends React.Component {
                 </select>
           */}
         
-              <div className={this.state.toCurrency == 'gbp' ? 'div-show' : 'div-hide'}>
-                <label htmlFor="sortcode">Sort code</label><br/>
-                <NumberFormat
-                  type="tel"
-                  id="sortcode"
-                  placeholder="00 00 00"
-                  ref={this.sortcode}
-                  defaultValue={this.props.data.sortcode}
-                  format="## ## ##"
-                  onBlur={this.checkSortCodeValid}
-                  onValueChange={this.updateSortcode} />
-                <span className={this.state.isSortCodeValid ? 'error-label-hidden' : 'error-label'}>Sort code may not be empty.</span>
-                <span className={this.state.isSortCodeVirtual ? 'error-label-hidden' : 'error-label'}>Sorry we cannot identify this sort code.</span>            
-              </div>
+             
 
               <div className={this.state.toCurrency == 'idr'
                                 || this.state.toCurrency == 'myr'
@@ -477,6 +459,25 @@ class Recipient extends React.Component {
                   onValueChange={this.updateRoutingNumber}  />
                 <span className={this.state.isRoutingNumberValid ? 'error-label-hidden' : 'error-label'}>Routing number may not be empty.</span>
               </div>
+              <label htmlFor="purposeTransfer">Purpose Of Transfer</label><br/>
+              <select
+                  type="purposeTransfer"
+                  id="purposeTransfer"
+                  className="select-css"
+                  ref={this.purposeTransfer}
+                  defaultValue={this.props.data.purposeTransfer}>
+                  <option value="Buying Overseas Property">Buying Overseas Property</option>
+                  <option value="Paying for Overseas Tuition Fees">Paying for Overseas Tuition Fees</option>
+                  <option value="Overseas Investments">Overseas Investments</option>
+                  <option value="Sending Money to Friends or Family">Sending Money to Friends or Family</option>
+                  <option value="Paying for Living Cost">Paying for Living Cost</option>
+                  <option value="Supporting a Family Member Who is Travelling Overseas">Supporting a Family Member Who is Travelling Overseas</option>
+                  <option value="Paying for Wedding Abroad">Paying for Wedding Abroad</option>
+                  <option value="Overseas Mortgage Payments">Overseas Mortgage Payments</option>
+                  <option value="Paying For Work to be Completed Overseas">Paying For Work to be Completed Overseas</option>
+                  <option value="Paying For Bills Overseas">Paying For Bills Overseas</option>
+                  <option value="others">Others</option>
+                </select>
               <input
                 type="checkbox"
                 id="isSaveRecipient"

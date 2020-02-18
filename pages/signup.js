@@ -36,21 +36,12 @@ class Signup extends React.Component {
         <div className="logo">
           <Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>
         </div>
-        <h1>Create an account</h1>
+        <h1>Register</h1>
         <div className={"error-container "+(this.props.errorMessage != '' && this.props.errorMessage != undefined ? "error-show" : "") }>
           {this.props.errorMessage}
         </div>
         <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
-          <label htmlFor="fullname">Full name</label><br/>
-          <input
-            type="text"
-            id="fullname"
-            placeholder="Enter your full name"
-            value={this.state.fullname}
-            onChange={e => this.setState({ fullname: e.target.value })}
-          />
-
-          <label htmlFor="email">Email address</label><br/>
+        <label htmlFor="email">Email address</label><br/>
           <input
             type="email"
             id="email"
@@ -58,6 +49,14 @@ class Signup extends React.Component {
             autoComplete="username"
             value={this.state.email}
             onChange={e => this.setState({ email: e.target.value })}
+            />
+          <label htmlFor="fullname">Full Name</label><br/>
+          <input
+            type="text"
+            id="fullname"
+            placeholder="Enter your full name"
+            value={this.state.fullname}
+            onChange={e => this.setState({ fullname: e.target.value })}
           />
 
           <label htmlFor="password">Password</label><br/>
