@@ -41,7 +41,7 @@ const FAQ = () => {
                   </AccordionItemHeading>   
                   <AccordionItemPanel>
                         <p>
-                            <base target="_blank"/>You can check our short video <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak&t=32s">here</a> <base target="_blank"/>
+                            You can check our short video <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak&t=32s">here</a>
                         </p>
                         <p>Or follow the steps below
                         <ol>
