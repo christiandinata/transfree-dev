@@ -29,7 +29,6 @@ const FAQ = () => {
                   </AccordionItemHeading>
                   <AccordionItemPanel>
                       <p>
-                          Transfree is a remittance service where our customer send money abroad.
                       Transfree is a remittance service where our customer send money abroad and get paid in other currencies into their account or beneficiary account.     
                       </p>
                   </AccordionItemPanel>
@@ -476,7 +475,7 @@ const FAQ = () => {
                   </AccordionItemHeading>
                   <AccordionItemPanel>
                       <p>
-                      Read about how Transfree works here.
+                      Read about how Transfree works <a href="#top">here</a>
                       </p>
                   </AccordionItemPanel>
               </AccordionItem>
