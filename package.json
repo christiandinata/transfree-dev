@@ -35,7 +35,7 @@
     "moment": "^2.24.0",
     "next": "^8.1.0",
     "next-redux-wrapper": "^3.0.0-alpha.3",
-    "npm": "^6.10.1",
+    "npm": "^6.13.7",
     "order-id": "^1.1.0",
     "react": "^16.8.6",
     "react-accessible-accordion": "^3.0.0",
