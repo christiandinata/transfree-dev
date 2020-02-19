@@ -17,7 +17,7 @@ const FAQ = () => {
       <Menu/>
       <div className="row">
         <div className="container">
-          <h1>FAQss</h1>
+          <h1>FAQs</h1>
 
           <h3>About Transfree</h3>
           <Accordion allowMultipleExpanded={true}>
