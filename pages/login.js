@@ -35,7 +35,7 @@ class Login extends React.Component {
         <div className="logo">
           <Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>
         </div>
-        <h1>Test Login Error</h1>
+        <h1>Log in</h1>
         <div className={"error-container "+(this.props.errorMessage != '' && this.props.errorMessage != undefined ? "error-show" : "") }>
           {this.props.errorMessage}
         </div>
