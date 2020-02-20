@@ -16,7 +16,7 @@ const Footer = () => (
               <li>Pricing</li>
               <li>Help</li>
             */}
-            <li><Link href="/faq"><a>FAQ</a></Link></li>
+            <li><Link href="/faq"><a>FAQs</a></Link></li>
             <li><Link href="/terms"><a>Terms & conditions</a></Link></li>
             <li><Link href="/privacy-policy"><a>Privacy Policy</a></Link></li>
           </ul>
