@@ -331,9 +331,9 @@ class Order extends React.Component {
 
           @media only screen and (max-width: 414px) {
             .header-progress-container {
-              width: 414px;
-              font-size: 12px;
-              margin: 20px 0 10px;
+              width: 375px;
+              font-size: 10px;
+              margin: 14px 0 10px;
             }
             .header-progress-item {
               width: 80px;

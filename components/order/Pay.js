@@ -79,14 +79,14 @@ function EmailInstruction(props) {
         </div>
       </div>
       */}
-      <div className="payment-details">
+      {/* <div className="payment-details">
         <p style={{margin:"0px !important"}}>Transfer Reference 
       <br/>
       "Your last name + Today's date" (E.g. Adi22)
       <br/>
        Note: Please state the reference number that allows us to identify you.
       </p>
-      </div>
+      </div> */}
       <p>We will send payment instruction to your email. Confirm by clicking the button below</p>
       <Accordion>   
         <AccordionItem>
@@ -150,6 +150,7 @@ function VAGenerated(props) {
           <span className="right bold">{props.vaNumber}</span>
         </div>
       </div>
+      <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('virtual_account')}>Continue</span>
       <p>Please follow the instruction of your bank to transfer money into virtual account number.</p>
       <Accordion>
         <AccordionItem>
@@ -166,7 +167,7 @@ function VAGenerated(props) {
             </AccordionItemPanel>
         </AccordionItem>
       </Accordion>
-      <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('virtual_account')}>Continue</span>
+      
       <style jsx>{`
         .list-item {
           display: flex;
@@ -217,17 +218,20 @@ function TransferBankBCA(props) {
           <span className="right">206 37 555 67</span>
         </div>
       </div>
-      <div className="payment-details">
+      {/* <div className="payment-details">
         <p style={{margin:"0px !important"}}>Transfer Reference 
       <br/>
       "Your last name + Today's date" (E.g. Adi22)
       <br/>
        Note: Please state the reference number that allows us to identify you.
       </p>
-      </div>
-      <p>Please check all of the details above are correct to speed up the process.
-      We also email you the instruction. We will notify you via email once your payment has been confirmed.</p>
+      </div> */}
+      <p>Please check all of the details above are correct to speed up the process. We also email you the instruction. Once completed we will send you the confirmation through email.</p>
 
+      <p><span className="received-on-weekend" >Please pay with your own bank account. If you are paying from different account, your payment is considered invalid</span></p>
+
+      <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_bca')}>Continue</span>
+      
       <Accordion>
         <AccordionItem>
             <AccordionItemHeading>
@@ -243,9 +247,7 @@ function TransferBankBCA(props) {
             </AccordionItemPanel>
         </AccordionItem>
       </Accordion>
-      <p><span className="received-on-weekend" >Please pay with your own bank account. If you are paying from different account, your payment is considered invalid</span></p>
 
-      <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_bca')}>Continue</span>
       <style jsx>{`
       .received-on-weekend {
         font-family: 'Campton-Bold', sans-serif;
@@ -291,6 +293,7 @@ function TransferBankBCA(props) {
         .btn-primary {
           width: 100%;
           padding: 15px 0;
+          margin : 20px 2;
         }
         .btn-danger {
           background: transparent;
@@ -335,17 +338,21 @@ function TransferBankBNI(props) {
           <span className="right">07 5555 4711</span>
         </div>
       </div>
-      <div className="payment-details">
+      {/* <div className="payment-details">
         <p style={{margin:"0px !important"}}>Transfer Reference 
       <br/>
       "Your last name + Today's date" (E.g. Adi22)
       <br/>
        Note: Please state the reference number that allows us to identify you.
       </p>
-      </div>
-      <p>Please check all of the details above are correct to speed up the process.
-      We also email you the instruction. We will notify you via email once your payment has been confirmed.</p>
+      </div> */}
+      <p>Please check all of the details above are correct to speed up the process. We also email you the instruction. Once completed we will send you the confirmation through email.</p>
 
+     
+
+      <p><span className="received-on-weekend" >Please pay with your own bank account. If you are paying from different account, your payment is considered invalid</span></p>
+
+      <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_bni')}>Continue</span>
       <Accordion>
         <AccordionItem>
             <AccordionItemHeading>
@@ -361,11 +368,11 @@ function TransferBankBNI(props) {
             </AccordionItemPanel>
         </AccordionItem>
       </Accordion>  
-
-      <p><span className="received-on-weekend" >Please pay with your own bank account. If you are paying from different account, your payment is considered invalid</span></p>
-
-      <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_bni')}>Continue</span>
       <style jsx>{`
+      .received-on-weekend {
+        font-family: 'Campton-Bold', sans-serif;
+        color: #e79635
+      }
         .list-item {
           display: flex;
           width: 100%;
@@ -406,6 +413,7 @@ function TransferBankBNI(props) {
         .btn-primary {
           width: 100%;
           padding: 15px 0;
+          margin: 20px 2;
         }
         .btn-danger {
           background: transparent;
@@ -450,16 +458,15 @@ function TransferBankMandiri(props) {
           <span className="right">122 00 1025188 5</span>
         </div>
     </div>
-    <div className="payment-details">
+    {/* <div className="payment-details">
     <p style={{margin:"0px !important"}}>Transfer Reference 
       <br/>
       "Your last name + Today's date" (E.g. Adi22)
       <br/>
       Note: Please state the reference number that allows us to identify you.
       </p>
-      </div>
-      <p>Please check all of the details above are correct to speed up the process.
-      We also email you the instruction. We will notify you via email once your payment has been confirmed.</p>
+      </div> */}
+      <p>Please check all of the details above are correct to speed up the process. We also email you the instruction. Once completed we will send you the confirmation through email.</p>
 
       
       {/**
@@ -467,7 +474,11 @@ function TransferBankMandiri(props) {
       We also email you the instruction. We will notify you via email once your payment has been confirmed.</p>
        */}
 
-    <Accordion>  
+  
+      <p><span className="received-on-weekend" >Please pay with your own bank account. If you are paying from different account, your payment is considered invalid</span></p>
+      
+      <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_mandiri')}>Continue</span>
+      <Accordion>  
       <AccordionItem>
         <AccordionItemHeading>
             <AccordionItemButton>
@@ -482,10 +493,11 @@ function TransferBankMandiri(props) {
             </AccordionItemPanel>
     </AccordionItem>
 </Accordion>
-<p><span className="received-on-weekend" >Please pay with your own bank account. If you are paying from different account, your payment is considered invalid</span></p>
-  
-      <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_mandiri')}>Continue</span>
       <style jsx>{`
+      .received-on-weekend {
+        font-family: 'Campton-Bold', sans-serif;
+        color: #e79635
+      }
         .list-item {
           display: flex;
           width: 100%;
@@ -535,6 +547,7 @@ function TransferBankMandiri(props) {
         .btn-primary {
           width: 100%;
           padding: 15px 0;
+          margin: 20px 2;
         }
         .btn-danger {
           background: transparent;

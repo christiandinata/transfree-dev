@@ -271,7 +271,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
             border: none;
           }
           #menuToggle {
-            top: 10px;
+            top: 5px;
             left: 0;
           }
         }

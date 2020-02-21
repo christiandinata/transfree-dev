@@ -753,8 +753,8 @@ class OrderAmount extends React.Component {
           .converter-container-order {
             width: 500px;
             height: auto;
-            padding: 30px;
-            margin: 30px auto;
+            padding: 15px;
+            margin: 11px;
             background: #FFFFFF;
             box-shadow: 0 10px 30px 0 rgba(0,0,0,0.10);
             border-radius: 8px;
@@ -938,11 +938,11 @@ class OrderAmount extends React.Component {
 
 
           @media only screen and (max-width: 414px) {
-	    .popup h2 {
+	        .popup h2 {
             display : none
             }
             .popup h3{
-	    text-align: left !important;
+	          text-align: left !important;
             margin-top: 4%;
             font-size: 20px ;
             display: block
@@ -959,7 +959,7 @@ class OrderAmount extends React.Component {
               width : 6% !important
             }
             .converter-container-order {
-              width: 305px;
+              width: 317px;
               flex-direction: column;
             }
             .container-fluid p {
