@@ -243,8 +243,14 @@ function TransferBankBCA(props) {
             </AccordionItemPanel>
         </AccordionItem>
       </Accordion>
+      <p><span className="received-on-weekend" >Please pay with your own bank account. If you are paying from different account, your payment is considered invalid</span></p>
+
       <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_bca')}>Continue</span>
       <style jsx>{`
+      .received-on-weekend {
+        font-family: 'Campton-Bold', sans-serif;
+        color: #e79635
+      }
         .list-item {
           display: flex;
           width: 100%;
@@ -354,7 +360,10 @@ function TransferBankBNI(props) {
                 </p>
             </AccordionItemPanel>
         </AccordionItem>
-      </Accordion>    
+      </Accordion>  
+
+      <p><span className="received-on-weekend" >Please pay with your own bank account. If you are paying from different account, your payment is considered invalid</span></p>
+
       <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_bni')}>Continue</span>
       <style jsx>{`
         .list-item {
@@ -473,6 +482,8 @@ function TransferBankMandiri(props) {
             </AccordionItemPanel>
     </AccordionItem>
 </Accordion>
+<p><span className="received-on-weekend" >Please pay with your own bank account. If you are paying from different account, your payment is considered invalid</span></p>
+  
       <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_mandiri')}>Continue</span>
       <style jsx>{`
         .list-item {
