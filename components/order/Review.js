@@ -22,17 +22,17 @@ class Review extends React.Component {
 
           <div className="list-item">
             <span className="left">You send</span>
-            <span className="right bold"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value={this.props.data.fromAmount} /> {this.props.data.fromCurrency.toUpperCase()}</span>
+            <span className="right bold"><NumberFormat displayType={'text'} decimalScale={2} thousandSeparator={true} value={this.props.data.fromAmount} /> {this.props.data.fromCurrency.toUpperCase()}</span>
           </div>
 
           <div className="list-item">
             <span className="left">{this.props.data.fromCurrency.toUpperCase()}/{this.props.data.toCurrency.toUpperCase()} Conversion rates</span>
-            <span className="right"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={8} value={this.props.data.rate} /></span>
+            <span className="right"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={4} value={this.props.data.rate}  /></span>
           </div>
 
           <div className="list-item">
             <span className="left">Recipient gets</span>
-            <span className="right bold"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value={this.props.data.toAmount} /> {this.props.data.toCurrency.toUpperCase()}</span>
+            <span className="right bold"><NumberFormat  displayType={'text'} decimalScale={2} thousandSeparator={true} value={this.props.data.toAmount} /> {this.props.data.toCurrency.toUpperCase()}</span>
           </div>
 
           <div className="list-item">
