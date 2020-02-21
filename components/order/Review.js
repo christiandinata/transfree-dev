@@ -27,7 +27,7 @@ class Review extends React.Component {
 
           <div className="list-item">
             <span className="left">{this.props.data.fromCurrency.toUpperCase()}/{this.props.data.toCurrency.toUpperCase()} Conversion rates</span>
-            <span className="right"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={4} value={this.props.data.rate}  /></span>
+            <span className="right"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={5} value={this.props.data.rate}  /></span>
           </div>
 
           <div className="list-item">
