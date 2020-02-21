@@ -222,8 +222,8 @@ class OrderAmount extends React.Component {
       rate: this.state.rate,
       fromCurrency: this.state.fromCurrency,
       toCurrency: this.state.toCurrency,
-      fromAmount: Math.round(this.state.fromAmount),
-      toAmount: Math.round(this.state.toAmount)
+      fromAmount: this.state.fromAmount,
+      toAmount: this.state.toAmount
     }
 
     this.props.saveValues(data);
@@ -523,10 +523,10 @@ class OrderAmount extends React.Component {
               </div>
             </div>
             <div className="row rate">
-              <span className="rate-desc">Conversion rate</span> <span className="rate-value"><span className="live-rate"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={6} value={this.state.rate} /></span></span>
+              <span className="rate-desc">Conversion rate</span> <span className="rate-value"><span className="live-rate"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={4} value={this.state.rate} /></span></span>
             </div>
             <div className="row rate"style={{marginTop:"-20px"}} >
-                  <span className="rate-desc" >Transfer fee </span> <span className="rate-value" style={{textAlign:"right",marginLeft:"5px"}}><span ><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={6} value="0" /></span></span>
+                  <span className="rate-desc" >Transfer fee </span> <span className="rate-value" style={{textAlign:"right",marginLeft:"5px"}}><span ><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={4} value="0" /></span></span>
               </div>
             <div className="row note">
 		<div className="lightbox" id={"oos"}>
