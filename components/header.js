@@ -321,6 +321,7 @@ const Header = () => (
       .btn-primary {
         width: 100%;
         padding: 15px 0;
+        margin: 19px 1px;
       }
 
       .right p {
@@ -404,7 +405,7 @@ const Header = () => (
 
       @media only screen and (max-width: 414px) {
         h1 {
-          font-size: 1.5rem;
+          font-size: 18.5px;
         }
         .container,
         .container-fluid {

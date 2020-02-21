@@ -251,10 +251,7 @@ class Index extends React.Component {
 
                   <img style={{width: "50%", marginTop: "25%"}} src="../static/images/wa-logo.png"/></a>
                 </div>
-
-
                 <div className="external-link">
-
                   <div className="external-link-left">
                     <a href={"#video-transfree"} className="btn-secondary">See how it works</a>
                     <a href="#_" className="lightbox" id={"video-transfree"}>
@@ -870,7 +867,6 @@ class Index extends React.Component {
           </div>
         </div>
         <style jsx>{`
-
          .fixed-btn{
            position: fixed;
            background: #00a82d;
