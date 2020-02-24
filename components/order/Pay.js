@@ -226,7 +226,7 @@ function TransferBankBCA(props) {
        Note: Please state the reference number that allows us to identify you.
       </p>
       </div> */}
-      <p>Please check all of the details above are correct to speed up the process. We also email you the instruction. Once completed we will send you the confirmation through email.</p>
+      <p>Please check all of the details above are correct and check your email for the notification</p>
 
       <p><span className="received-on-weekend" >Please pay with your own bank account. If you are paying from different account, your payment is considered invalid</span></p>
 
@@ -346,10 +346,7 @@ function TransferBankBNI(props) {
        Note: Please state the reference number that allows us to identify you.
       </p>
       </div> */}
-      <p>Please check all of the details above are correct to speed up the process. We also email you the instruction. Once completed we will send you the confirmation through email.</p>
-
-     
-
+      <p>Please check all of the details above are correct and check your email for the notification</p>
       <p><span className="received-on-weekend" >Please pay with your own bank account. If you are paying from different account, your payment is considered invalid</span></p>
 
       <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_bni')}>Continue</span>
@@ -466,9 +463,7 @@ function TransferBankMandiri(props) {
       Note: Please state the reference number that allows us to identify you.
       </p>
       </div> */}
-      <p>Please check all of the details above are correct to speed up the process. We also email you the instruction. Once completed we will send you the confirmation through email.</p>
-
-      
+      <p>Please check all of the details above are correct and check your email for the notification</p>
       {/**
       <p>Please check all of the details above are correct to speed up the process.
       We also email you the instruction. We will notify you via email once your payment has been confirmed.</p>
