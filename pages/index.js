@@ -853,7 +853,7 @@ class Index extends React.Component {
                   come out with the best solution ever. First time I use it when
                   I was in Indonesia to pay for my flat deposit and rent.
                   And now I'm still use Transfree to transfer money from the UK to Indonesia.
-                  It gives me a fair rate and many times, the rate is better than transferwise.”
+                  It gives me a fair rate ”
                 </div>
                 <div className="user">
                   <img src="../static/images/dummy-photo.png"/>
@@ -864,9 +864,21 @@ class Index extends React.Component {
                 </div>
               </div>
             </div>
+            <div className="testimoni">
+              <Link>
+              <i><ins><a href="/testimoni" >more testimoni</a></ins></i>
+              </Link>
+            </div>
           </div>
         </div>
         <style jsx>{`
+          
+        .testimoni{
+          margin-left: 590px;
+          margin-top: 0px;
+          font-size: 15px;
+
+        }
          .fixed-btn{
            position: fixed;
            background: #00a82d;
