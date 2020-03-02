@@ -946,6 +946,7 @@ class Index extends React.Component {
           .external-link-right {
             lex-basis: 40%;
             margin-left : 20px;
+            margin-top: -19px;
           }
           .mobile-sell-buy{
             background-color: none;
