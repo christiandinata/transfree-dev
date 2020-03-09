@@ -823,9 +823,9 @@ class Index extends React.Component {
 
         <div className="row testimonials">
           <div className="container">
-            <h1>Why using Transfree?</h1>
+            {/* <h1>Why using Transfree?</h1> */}
             <div className="features-container">
-              <div className="feature-item">
+              {/* <div className="feature-item">
                 <img src="../static/images/benefit-3.svg"/>
                 <h2>Cheaper & faster</h2>
                 <p>The future is today. Send and Receive currency at the real exchange rate.
@@ -844,7 +844,7 @@ class Index extends React.Component {
                 <p>Trust is build with consistency. More than 1000 customers
                 have saved their money. Trust their international transactions
                 by using our services.</p>
-              </div>
+              </div> */}
             </div>
             <div className="testimonials-wrapper">
               <h1>What our customers say</h1>
