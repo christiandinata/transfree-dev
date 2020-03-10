@@ -45,9 +45,9 @@ class OrderItem extends React.Component {
               {order.paymentMethod == 'direct_transfer_via_mandiri' ? (<img src="../static/images/bank_logos/mandiri.png"/>) : null}
             </div>
             <div className="column">
-              {order.completedAt > 0 ? (<div className="status approved">completed</div>) : null}
-              {order.receivedAt == 0 ? (<div onClick={() => this.props.paymentReceived(order._id )} className="btn-primary btn-small">Payment Received</div>) : null}
-              {order.completedAt == 0 ? (<div onClick={() => this.props.transferCompleted(order._id )} className="btn-primary btn-small">Transfer Completed</div>) : null}
+              {order.completedAt > 0 ? (<div className="status approved">completed </div>) : null}
+              {order.receivedAt == 0 ? (<div onClick={() => { if (window.confirm('are you sure want to payment received this '+order.senderName))this.props.paymentReceived(order._id)}} className="btn-primary btn-small">Payment Received </div>) : null}
+              {order.completedAt == 0 ? (<div onClick={() => {if (window.confirm('Are you sure want to transfer completed this user '+order.senderName))this.props.transferCompleted(order._id)}} className="btn-primary btn-small">Transfer Completed</div>) : null}
             </div>
           </div>
               )

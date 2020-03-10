@@ -51,9 +51,9 @@ class UserItem extends React.Component {
                 <td className="column action">
                   {user.isApproved ?
                     (<div className="status approved">approved</div>) :
-                    (<div><div className="status pending">pending</div><div onClick={() => this.approve(user._id )} className="btn-primary btn-small">Approve</div></div>)
+                    (<div><div className="status pending">pending</div><div onClick={() => { if(window.confirm('Are you sure want to approve this '+user.fullname)) this.approve(user._id )}} className="btn-primary btn-small">Approve</div></div>)
                   }
-                  <div onClick={() => { if (window.confirm('Are you sure you want to delete this user?')) this.delete(user._id) } } className="btn-danger btn-small">Delete</div>
+                  <div onClick={() => { if (window.confirm('Are you sure you want to delete this '+user.fullname)) this.delete(user._id) } } className="btn-danger btn-small">Delete</div>
                 </td>
               </tr>
             )
