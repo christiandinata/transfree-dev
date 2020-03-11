@@ -129,6 +129,7 @@ export const reauthenticate = (token) => {
 export const deauthenticate = () => {
   return (dispatch) => {
     removeCookie('token');
+    removeCookie('_id');
     Router.replace('/');
     dispatch({type: DEAUTHENTICATE});
   };
