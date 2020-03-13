@@ -452,6 +452,7 @@ class Recipient extends React.Component {
                 <NumberFormat
                   type="tel"
                   id="routingNumber"
+                  format="##########"
                   placeholder="Enter routing number"
                   ref={this.routingNumber}
                   defaultValue={this.props.data.routingNumber}
