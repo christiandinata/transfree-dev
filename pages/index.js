@@ -37,12 +37,6 @@ class Index extends React.Component {
     initialize(ctx);
     await ctx.store.dispatch(actions.getAdjustedRates('IDR','getAdjustedRates'));
     await ctx.store.dispatch(actions.getRates('GBP','IDR'));
-    if (ctx.isServer) {
-      if(ctx.req.headers.cookie) {
-        await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
-      }
-    }
-
   };
 
   componentDidMount() {
