@@ -617,6 +617,9 @@ class Index extends React.Component {
                   <Link href="/order">
                     <a className="btn-primary">Get started</a>
                   </Link>
+                  <Link href="/donation">
+                    <a className="btn-primary-2">Donation For Corona</a>
+                  </Link>
                   <div className="store">
                     <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
                     <img style={{width: "47%", paddingRight:"9px"}} src="../static/images/playstore.png"/></a>
@@ -873,7 +876,19 @@ class Index extends React.Component {
           </div>
         </div>
         <style jsx>{`
-          
+        .btn-primary-2 {
+          background-color: #32cd32d4;
+          border: none;
+          color: white;
+          padding: 10px 20px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          border-radius: 4px;
+          transition: all 0.2s ease-in-out;
+          box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
+        }
         .testimoni{
           margin-left: 590px;
           margin-top: 0px;

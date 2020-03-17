@@ -8,7 +8,7 @@ import orderReducer from './orderReducer';
 import vaReducer from './vaReducer';
 import photoReducer from './photoReducer';
 import fxMarginReducer from './fxMarginReducer';
-
+import checkReducer from './checkReducer';
 const rootReducer = combineReducers({
   authentication: authReducer,
   verify: verifyReducer,
@@ -18,7 +18,8 @@ const rootReducer = combineReducers({
   order: orderReducer,
   va: vaReducer,
   photo: photoReducer,
-  fx: fxMarginReducer
+  fx: fxMarginReducer,
+  ck: checkReducer,
 });
 
 export default rootReducer;

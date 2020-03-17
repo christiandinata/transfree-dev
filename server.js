@@ -124,6 +124,13 @@ app.prepare()
         return app.render(req, res, '/dashboard/rates', req.query);
       }
     });
+    server.get('/dashboard/check', (req, res) => {
+      if(!req.cookies.token) {
+        res.redirect('/dashboard/login');
+      } else {
+        return app.render(req, res, '/dashboard/check', req.query);
+      }
+    });
 
     server.get('/reset_password', (req, res) => {
       return app.render(req, res, '/reset_password', req.query.token);

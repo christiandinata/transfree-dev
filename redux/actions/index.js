@@ -7,6 +7,7 @@ import userActions from './userActions';
 import vaActions from './vaActions';
 import photoActions from './photoActions';
 import fxMarginActions from './fxMarginActions';
+import checkActions from './checkActions';
 export default {
   ...authActions,
   ...verifyActions,
@@ -16,5 +17,6 @@ export default {
   ...userActions,
   ...vaActions,
   ...photoActions,
-  ...fxMarginActions
+  ...fxMarginActions,
+  ...checkActions
 }
