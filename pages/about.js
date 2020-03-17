@@ -8,7 +8,7 @@ const About = () => (
     <Menu/>
     <div className="row">
       <div className="container">
-        <h1>About Us</h1>
+        <h1>About Us123</h1>
         <p>
           There are a lot of difficulties when you sending or receiving money from Indonesia.
           Starting from the total transfer time, the complexity of the procedure, to the limitations of existing regulations.
