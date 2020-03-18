@@ -844,7 +844,7 @@ class Index extends React.Component {
               </div> */}
             </div>
             <div className="testimonials-wrapper">
-              <h1>What our customers say</h1>
+              {/* <h1>What our customers say</h1> */}
               <div className="testimonials-items">
                 <div className="message">
                   “It is very difficult to send money from IDR to GBP and Transfree
