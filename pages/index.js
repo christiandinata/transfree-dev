@@ -611,7 +611,7 @@ class Index extends React.Component {
                   <Link href="/order">
                     <a className="btn-primary">Get started</a>
                   </Link>
-                  <Link href="/donation">
+                  <Link href="/information_donation">
                     <a className="btn-primary-2">Donation For Corona</a>
                   </Link>
                   <div className="store">
