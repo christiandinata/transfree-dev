@@ -267,7 +267,7 @@ class OrderAmount extends React.Component {
                             <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP (British Poundsterling)
                           </a>
                         </li>
-                        <li onClick={this.selectSource.bind(this,'usd')}>
+                        {/* <li onClick={this.selectSource.bind(this,'usd')}>
                           <a className="dropdown-item">
                             <span className="flag-icon flag-icon-us flag-icon-squared"></span> USD (US Dollar)
                           </a>
@@ -276,7 +276,7 @@ class OrderAmount extends React.Component {
                           <a className="dropdown-item">
                             <span className="flag-icon flag-icon-au flag-icon-squared"></span> AUD (Australian Dollar)
                           </a>
-                        </li>
+                        </li> */}
                         <li onClick={this.selectSource.bind(this,'eur')}>
                           <a className="dropdown-item">
                             <span className="flag-icon flag-icon-eu flag-icon-squared"></span> EUR (European Euro)
@@ -319,15 +319,15 @@ class OrderAmount extends React.Component {
 						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'usd' ) ? 
 						this.reverse.bind(this,'idr' , 'usd')						
 						:
-						(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'idr' ) ? 
-						this.reverse.bind(this,'usd' , 'idr')						
-						:
+						// (this.state.fromCurrency == 'usd' && this.state.toCurrency == 'idr' ) ? 
+						// this.reverse.bind(this,'usd' , 'idr')						
+						// :
 						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'aud' ) ? 
 						this.reverse.bind(this,'idr' , 'aud')						
 						:
-						(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'idr' ) ? 
-						this.reverse.bind(this,'aud' , 'idr')						
-						:
+						// (this.state.fromCurrency == 'aud' && this.state.toCurrency == 'idr' ) ? 
+						// this.reverse.bind(this,'aud' , 'idr')						
+						// :
 						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'hkd' ) ? 
 						this.reverse.bind(this,'idr' , 'hkd')						
 						:
