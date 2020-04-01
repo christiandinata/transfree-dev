@@ -255,7 +255,7 @@ class Index extends React.Component {
                   </div>
 
                   <div className="external-link-right">
-                        <a style={{paddingRight: "35px",paddingLeft: "35px",paddingTop: "9.5px",paddingBottom: "9.5px"}} className="btn-primary-3"  href="/information_send" target="_blank">Send for Living</a>
+                        <a style={{paddingRight: "35px",paddingLeft: "35px",paddingTop: "9.5px",paddingBottom: "9.5px"}} className="btn-primary-3"  href="/send" target="_blank">Send for Living</a>
                   </div>
 
                 </div>
