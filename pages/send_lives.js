@@ -8,8 +8,8 @@ const About = () => (
     <Menu/>
     <div className="row">
       <div className="container">
-        <h1>Donation For Corona</h1>
-        <iframe src="https://forms.gle/hkUSUWg4ZME1Ryc27" width="640" height="1050" frameborder="0" marginheight="0" marginwidth="0">Memuat…</iframe>
+        <h1>Send for Lives</h1>
+        <iframe src="https://forms.gle/cZhkrdBPziDZBmfz6" width="640" height="1050" frameborder="0" marginheight="0" marginwidth="0">Memuat…</iframe>
       </div>
     </div>
     <style jsx>{`

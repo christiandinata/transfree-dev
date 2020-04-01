@@ -255,7 +255,7 @@ class Index extends React.Component {
                   </div>
 
                   <div className="external-link-right">
-                        <a style={{paddingRight: "35px",paddingLeft: "35px",paddingTop: "9.5px",paddingBottom: "9.5px"}} className="btn-primary"  href="https://www.transfree.co.uk/" target="_blank">Sell and Buy Money</a>
+                        <a style={{paddingRight: "35px",paddingLeft: "35px",paddingTop: "9.5px",paddingBottom: "9.5px"}} className="btn-primary-3"  href="/information_send" target="_blank">Send for Living</a>
                   </div>
 
                 </div>
@@ -646,7 +646,7 @@ class Index extends React.Component {
                   <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-secondary">See how it works</a>
                 </Link>
                 <Link>
-                  <a style={{marginTop: "20px"}} href="https://www.transfree.co.uk/" target="_blank" className="btn-secondary sell-buy">Sell & Buy Money Online</a>
+                  <a style={{marginTop: "20px"}} href="https://www.transfree.co.uk/" target="_blank" className="btn-secondary sell-buy">Send for Lives</a>
                 </Link>
               </center>
             </div>
@@ -870,6 +870,20 @@ class Index extends React.Component {
           </div>
         </div>
         <style jsx>{`
+        .btn-primary-3{
+          background-color: #d2222f;
+          border: none;
+          color: white;
+          padding: 10px 20px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          border-radius: 4px;
+          transition: all 0.2s ease-in-out;
+          box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
+          width:222px;
+        }
         .btn-primary-2 {
           background-color: #32cd32d4;
           border: none;
@@ -956,7 +970,7 @@ class Index extends React.Component {
           .external-link-right {
             lex-basis: 40%;
             margin-left : 20px;
-            margin-top: -19px;
+            margin-top: 0px;
           }
           .mobile-sell-buy{
             background-color: none;
