@@ -10,10 +10,13 @@ const About = () => (
       <div className="container">
         {/* <h1>Information Donation</h1> */}
         <div className="external-link">
+        
             <div className="external-link-right">
+            
             <Link href="/send_lives">
-                <a style={{paddingRight: "35px",paddingLeft: "35px",paddingTop: "9.5px",paddingBottom: "9.5px"}} className="btn-secondary-3">I'm Interested</a>
+                <a style={{paddingRight: "35px",paddingLeft: "35px",paddingTop: "9.5px",paddingBottom: "9.5px"}} className="btn-secondary-3" >I'm Interested</a>
             </Link>
+            
             </div>
         </div>
         
@@ -38,7 +41,10 @@ const About = () => (
       </div>
     </div>
     <style jsx>{`
-        
+        #menuToggle .main-cta {
+          position: absolute;
+          right: 0;
+        }
         .btn-secondary-3 {
             background: #32cd32d4;
             border: none;
@@ -51,8 +57,6 @@ const About = () => (
             border-radius: 4px;
             transition: all 0.2s ease-in-out;
             box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
-            margin-left: 453px;
-            
           }
       .row {
         padding: 50px 0 100px;

@@ -255,7 +255,7 @@ class Index extends React.Component {
                   </div>
 
                   <div className="external-link-right">
-                        <a style={{paddingRight: "35px",paddingLeft: "35px",paddingTop: "9.5px",paddingBottom: "9.5px"}} className="btn-primary-3"  href="/send" target="_blank">Send for Living</a>
+                        <a style={{paddingRight: "35px",paddingLeft: "35px",paddingTop: "9.5px",paddingBottom: "9.5px"}} className="btn-primary-3"  href="/send">Send for Living</a>
                   </div>
 
                 </div>
@@ -646,7 +646,7 @@ class Index extends React.Component {
                   <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-secondary">See how it works</a>
                 </Link>
                 <Link>
-                  <a style={{marginTop: "20px"}} href="https://www.transfree.co.uk/" target="_blank" className="btn-secondary sell-buy">Send for Lives</a>
+                  <a style={{marginTop: "20px"}} href="/send" className="btn-secondary sell-buy">Send for Living</a>
                 </Link>
               </center>
             </div>
@@ -960,8 +960,8 @@ class Index extends React.Component {
           }
           .sell-buy {
             color: white;
-            background-color: #469DDD; //none
-            border-color: #5a9cd8
+            background-color: #d2222f; //none
+            border-color: #d2222f
           }
           .external-link{
             display: flex;
@@ -1434,6 +1434,30 @@ class Index extends React.Component {
           }
 
             @media only screen and (max-width: 414px) {
+              #menuToggle .main-cta {
+                position: absolute;
+                right: 0;
+              }
+              .external-link-right {
+                lex-basis: 40%;
+                margin-left : 20px;
+                margin-top: 0px;
+              }
+              .btn-secondary-2 {
+                background: #32cd32d4;
+                border: none;
+                color: white;
+                padding: 8px 18px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                border-radius: 4px;
+                transition: all 0.2s ease-in-out;
+                box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
+                margin-left: 414px;
+                
+              }
             .reverse-img{
               padding-right : 23px !important;
               width : 6% !important

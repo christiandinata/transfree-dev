@@ -17,7 +17,7 @@ const About = () => (
             </div>
         </div>
         <br></br>
-        <img src="../static/images/info-donation.jpeg" height="600" width="600"/>
+        <img src="../static/images/info-donation.jpeg" className="img"/>
         
         <p>
             BERSAMA TANGGAP CORONA
@@ -54,7 +54,10 @@ const About = () => (
       </div>
     </div>
     <style jsx>{`
-        
+        .img{
+          height: 450px; 
+          width : 450px;
+        }
         .btn-secondary-2 {
             background: #32cd32d4;
             border: none;
@@ -67,8 +70,6 @@ const About = () => (
             border-radius: 4px;
             transition: all 0.2s ease-in-out;
             box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
-            margin-left: 414px;
-            
           }
       .row {
         padding: 50px 0 100px;
