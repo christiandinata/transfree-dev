@@ -611,8 +611,8 @@ class Index extends React.Component {
                   <Link href="/order">
                     <a className="btn-primary">Get started</a>
                   </Link>
-                  <Link href="/information_donation">
-                    <a className="btn-primary-2">Donation For Corona</a>
+                  <Link href="/fxroom">
+                    <a className="btn-primary-2">FX Room</a>
                   </Link>
                   <div className="store">
                     <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
