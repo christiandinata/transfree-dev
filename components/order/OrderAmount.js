@@ -316,9 +316,9 @@ class OrderAmount extends React.Component {
 						this.reverse.bind(this,'krw' , 'idr')						
             :
             */
-						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'usd' ) ? 
-						this.reverse.bind(this,'idr' , 'usd')						
-						:
+						// (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'usd' ) ? 
+						// this.reverse.bind(this,'idr' , 'usd')						
+						// :
 						// (this.state.fromCurrency == 'usd' && this.state.toCurrency == 'idr' ) ? 
 						// this.reverse.bind(this,'usd' , 'idr')						
 						// :
@@ -348,12 +348,12 @@ class OrderAmount extends React.Component {
 						this.reverse.bind(this,'krw' , 'gbp')						
             :
             */
-						(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'usd' ) ? 
-						this.reverse.bind(this,'gbp' , 'usd')						
-						:
-						(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'gbp' ) ? 
-						this.reverse.bind(this,'usd' , 'gbp')						
-						:
+						// (this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'usd' ) ? 
+						// this.reverse.bind(this,'gbp' , 'usd')						
+						// :
+						// (this.state.fromCurrency == 'usd' && this.state.toCurrency == 'gbp' ) ? 
+						// this.reverse.bind(this,'usd' , 'gbp')						
+						// :
 						(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'eur' ) ? 
 						this.reverse.bind(this,'gbp' , 'eur')						
 						:
@@ -373,12 +373,12 @@ class OrderAmount extends React.Component {
 						this.reverse.bind(this,'hkd' , 'gbp')						
 						:
 
-						(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'myr' ) ? 
-						this.reverse.bind(this,'usd' , 'myr')						
-						:
-						(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'usd' ) ? 
-						this.reverse.bind(this,'myr' , 'usd')						
-						:
+						// (this.state.fromCurrency == 'usd' && this.state.toCurrency == 'myr' ) ? 
+						// this.reverse.bind(this,'usd' , 'myr')						
+						// :
+						// (this.state.fromCurrency == 'myr' && this.state.toCurrency == 'usd' ) ? 
+						// this.reverse.bind(this,'myr' , 'usd')						
+						// :
 						/**
             (this.state.fromCurrency == 'usd' && this.state.toCurrency == 'krw' ) ? 
 						this.reverse.bind(this,'usd' , 'krw')						
@@ -387,6 +387,7 @@ class OrderAmount extends React.Component {
 						this.reverse.bind(this,'krw' , 'usd')						
             :
             */
+            /**
 						(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'eur' ) ? 
 						this.reverse.bind(this,'usd' , 'eur')						
 						:
@@ -405,7 +406,7 @@ class OrderAmount extends React.Component {
 						(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'usd' ) ? 
 						this.reverse.bind(this,'hkd' , 'usd')						
 						:
-						
+						*/
 						(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'myr' ) ? 
 						this.reverse.bind(this,'aud' , 'myr')						
 						:
@@ -496,11 +497,11 @@ class OrderAmount extends React.Component {
                             <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP (British Poundsterling)
                           </a>
                         </li>
-                        <li onClick={this.selectDestination.bind(this,'usd')}>
+                        {/* <li onClick={this.selectDestination.bind(this,'usd')}>
                           <a className="dropdown-item">
                             <span className="flag-icon flag-icon-us flag-icon-squared"></span> USD (US Dollar)
                           </a>
-                        </li>
+                        </li> */}
                         <li onClick={this.selectDestination.bind(this,'aud')}>
                           <a className="dropdown-item">
                             <span className="flag-icon flag-icon-au flag-icon-squared"></span> AUD (Australian Dollar)
