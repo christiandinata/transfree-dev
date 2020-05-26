@@ -15,11 +15,30 @@ class OrderItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      key: null
+      key: null,
+      newPaidOutRate: 0
     }
+    
+  }
+
+  changePaidOutRate = (event) => {
+    event.preventDefault();
+    this.setState({
+      [event.target.name] : event.target.value
+    });
+  }
+
+  handlePaidOutRate = (event) => {
+    event.preventDefault();
+    
+    const submitPaidOutRate = 
+
+    console.log(submitPaidOutRate + " " + orderId);
   }
 
   render() {
+    let {newPaidOutRate} = this.state;
+    console.log(newPaidOutRate);
     return (
       <div>
         <div className="container-item container-header">
@@ -29,9 +48,11 @@ class OrderItem extends React.Component {
           <div className="column currency">From</div>
           <div className="column currency">To</div>
           <div className="column currency">Payment Method</div>
+          <div className="column">Paid Out Rate</div>
           <div className="column">Action</div>
         </div>
       {this.props.orders.map((order, key) => {
+        // console.log(order);
         return (
           <div key={key} className="container-item">
             <div className="column">{moment(order.createdAt).format("DD MMM YYYY, HH:mm")}</div>
@@ -43,6 +64,10 @@ class OrderItem extends React.Component {
               {order.paymentMethod == 'direct_transfer_via_bni' ? (<img src="../static/images/bank_logos/bni.png"/>) : null}
               {order.paymentMethod == 'direct_transfer_via_bca' ? (<img src="../static/images/bank_logos/bca.png"/>) : null}
               {order.paymentMethod == 'direct_transfer_via_mandiri' ? (<img src="../static/images/bank_logos/mandiri.png"/>) : null}
+            </div>
+            <div className="column">
+              <input name='paidOutRate' type='text' onChange={this.changePaidOutRate} value={newPaidOutRate} placeholder={order.paidOutRate} />
+              <div className="btn-primary btn-small" onClick={() => {if (window.confirm('Are you sure want to change the paid out rate from '+ order.paidOutRate + ' to ' + newPaidOutRate))this.props.changePaidOutRate(order._id, newPaidOutRate)}}>Set</div>
             </div>
             <div className="column">
               {order.completedAt > 0 ? (<div className="status approved">completed </div>) : null}
@@ -178,6 +203,17 @@ class OrderItem extends React.Component {
           color: #CC0000;
         }
 
+        .btn-very-small{
+          margin-bottom: 20px;
+          padding: 8px;
+          font-size:12px;
+          margin-right: 10px;
+        }
+
+        .btn-very-small:hover{
+          cursor: pointer;
+        }
+
         .btn-small {
           margin-bottom: 20px;
           padding: 8px;
@@ -209,6 +245,7 @@ class Orders extends React.Component {
     this.paymentReceived = this.paymentReceived.bind(this);
     this.transferCompleted = this.transferCompleted.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
+    this.changePaidOutRate = this.changePaidOutRate.bind(this);
   }
 
   static async getInitialProps(ctx) {
@@ -223,6 +260,10 @@ class Orders extends React.Component {
 
   transferCompleted(_id) {
     this.props.transferCompleted({_id: _id}, 'transferCompleted');
+  }
+
+  changePaidOutRate(_id, paidOutRate){
+    this.props.changePaidOutRate({_id: _id, paidOutRate: paidOutRate}, 'paidOutRate');
   }
 
   handlePageChange(pageNumber) {
