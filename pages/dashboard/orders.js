@@ -29,6 +29,7 @@ class OrderItem extends React.Component {
           <div className="column currency">From</div>
           <div className="column currency">To</div>
           <div className="column currency">Payment Method</div>
+          <div className="column">DTTOT Check Status (Recipient)</div>
           <div className="column">Action</div>
         </div>
       {this.props.orders.map((order, key) => {
@@ -44,6 +45,10 @@ class OrderItem extends React.Component {
               {order.paymentMethod == 'direct_transfer_via_bca' ? (<img src="../static/images/bank_logos/bca.png"/>) : null}
               {order.paymentMethod == 'direct_transfer_via_mandiri' ? (<img src="../static/images/bank_logos/mandiri.png"/>) : null}
             </div>
+            {order.isDttotWarningFlagRaised ?
+              <div className="column dttotWarningRaised">{`${order.dttotWarningRecipient.totalMatchFound} match${order.dttotWarningRecipient.totalMatchFound>1 ? 'es' : ''} found!`}</div> :
+              <div className="column">No match found!</div>
+            }
             <div className="column">
               {order.completedAt > 0 ? (<div className="status approved">completed </div>) : null}
               {order.receivedAt == 0 ? (<div onClick={() => { if (window.confirm('are you sure want to payment received this '+order.senderName))this.props.paymentReceived(order._id)}} className="btn-primary btn-small">Payment Received </div>) : null}
@@ -192,7 +197,9 @@ class OrderItem extends React.Component {
           text-align: right;
         }
 
-
+        .dttotWarningRaised {
+          color: #CC0000;
+        }
       `}</style>
       </div>
     )
