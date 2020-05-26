@@ -29,7 +29,7 @@ class OrderItem extends React.Component {
           <div className="column currency">From</div>
           <div className="column currency">To</div>
           <div className="column currency">Payment Method</div>
-          <div className="column">DTTOT Check Status (Recipient)</div>
+          <div className="column">DTTOT Check Status Beneficiary</div>
           <div className="column">Action</div>
         </div>
       {this.props.orders.map((order, key) => {
