@@ -133,11 +133,29 @@ const transferCompleted = ({_id} , type) => {
   };
 };
 
+const changePaidOutRate = ({_id, paidOutRate}, type) => {
+  if (type !== 'changePaidOutRate') {
+    throw new Error('Wrong API call!');
+  }
+  return async(dispatch) => {
+    await axios.post(`${API}/${type}`, {_id, paidOutRate})
+      .then((response) => {
+        Router.push('/dashboard/orders');
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+        throw new Error(error);
+      });
+  }
+}
+
 export default {
   addOrder,
   getOrderById,
   getOrderByUid,
   getAllOrders,
   paymentReceived,
-  transferCompleted
+  transferCompleted,
+  changePaidOutRate
 };

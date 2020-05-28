@@ -21,19 +21,11 @@ class OrderItem extends React.Component {
     
   }
 
-  changePaidOutRate = (event) => {
+  setNewPaidOutRate = (event) => {
     event.preventDefault();
     this.setState({
       [event.target.name] : event.target.value
     });
-  }
-
-  handlePaidOutRate = (event) => {
-    event.preventDefault();
-    
-    const submitPaidOutRate = 
-
-    console.log(submitPaidOutRate + " " + orderId);
   }
 
   render() {
@@ -66,7 +58,8 @@ class OrderItem extends React.Component {
               {order.paymentMethod == 'direct_transfer_via_mandiri' ? (<img src="../static/images/bank_logos/mandiri.png"/>) : null}
             </div>
             <div className="column">
-              <input name='paidOutRate' type='text' onChange={this.changePaidOutRate} value={newPaidOutRate} placeholder={order.paidOutRate} />
+              <div className="text-plain">Paid Out Rate : {order.paidOutRate}</div>
+              <input name='newPaidOutRate' type='text' onChange={this.setNewPaidOutRate} placeholder={order.paidOutRate} />
               <div className="btn-primary btn-small" onClick={() => {if (window.confirm('Are you sure want to change the paid out rate from '+ order.paidOutRate + ' to ' + newPaidOutRate))this.props.changePaidOutRate(order._id, newPaidOutRate)}}>Set</div>
             </div>
             <div className="column">
@@ -263,7 +256,7 @@ class Orders extends React.Component {
   }
 
   changePaidOutRate(_id, paidOutRate){
-    this.props.changePaidOutRate({_id: _id, paidOutRate: paidOutRate}, 'paidOutRate');
+    this.props.changePaidOutRate({_id: _id, paidOutRate: paidOutRate}, 'changePaidOutRate');
   }
 
   handlePageChange(pageNumber) {
@@ -294,7 +287,7 @@ class Orders extends React.Component {
               </div>
             ) : (
               <form className="form-container">
-                <OrderItem orders={this.props.orders} paymentReceived={this.paymentReceived} transferCompleted={this.transferCompleted}/>
+                <OrderItem orders={this.props.orders} changePaidOutRate={this.changePaidOutRate} paymentReceived={this.paymentReceived} transferCompleted={this.transferCompleted}/>
                 <div className="pagination-container">
                   <Pagination
                     activePage={this.state.activePage}
