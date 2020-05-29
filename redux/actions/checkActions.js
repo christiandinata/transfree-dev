@@ -4,7 +4,9 @@ import {
   ORDER_DATA,
   ORDER_DATA_ARRAY,
   ORDER_DATA_ARRAY_IN_PROGRESS,
-  RECIPIENT_DATA
+  RECIPIENT_DATA,
+  SUMMARY_DATA_ARRAY,
+  SUMMARY_DATA_ARRAY_IN_PROGRESS
 } from '../types';
 import { API } from '../../config';
 import { getCookie } from '../../utils/cookie';
@@ -99,6 +101,22 @@ const getAllOrders = (page,type) => {
   };
 };
 
+const getCustomerSummary = (name, fromDate, toDate, type) => {
+  if (type !== 'getOrderSummary') {
+    throw new Error('Wrong API call!');
+  }
+  return async (dispatch) => {
+    dispatch({type: SUMMARY_DATA_ARRAY_IN_PROGRESS, payload: true});
+    await axios.get(`${API}/${type}?name=`+ name + "&from=" + fromDate + "&to=" + toDate)
+      .then((response) => {
+        dispatch({type: SUMMARY_DATA_ARRAY, payload: response.data.summary});
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  };
+};
+
 const paymentReceived = ({_id} , type) => {
   if (type !== 'paymentReceived') {
     throw new Error('Wrong API call!');
@@ -138,6 +156,7 @@ export default {
   getOrderById,
   getOrderByUid,
   getAllOrders,
+  getCustomerSummary,
   paymentReceived,
   transferCompleted
 };
