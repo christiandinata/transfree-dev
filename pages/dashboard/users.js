@@ -37,6 +37,7 @@ class UserItem extends React.Component {
               <th className="column dob">Date of Birth</th>
               <th className="column idType">ID Type</th>
               <th className="column idNumber">ID Number</th>
+              <th className="column dttotCheckStatus">DTTOT Check Status</th>
               <th className="column status">Status</th>
             </tr>
           {this.props.users.map((user, key) => {
@@ -48,6 +49,10 @@ class UserItem extends React.Component {
                 <td className="column">{user.pob}, {moment(user.dob).format("DD MMM YYYY")}</td>
                 <td className="column">{user.idType}</td>
                 <td className="column">{user.idNumber}</td>
+                {user.isDttotWarningFlagRaised ?
+                  <td className="column dttotWarningRaised">{`${user.dttotWarning.totalMatchFound} match${user.dttotWarning.totalMatchFound>1 ? 'es' : ''} found!`}</td> :
+                  <td className="column">No match found!</td>
+                }
                 <td className="column action">
                   {user.isApproved ?
                     (<div className="status approved">approved</div>) :
@@ -116,6 +121,14 @@ class UserItem extends React.Component {
 
         .status {
           width: 100px;
+        }
+
+        .dttotCheckStatus {
+          width: 100px;
+        }
+
+        .dttotWarningRaised {
+          color: #CC0000;
         }
 
         .thumbnail {

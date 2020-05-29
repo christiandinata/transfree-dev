@@ -41,6 +41,7 @@ class OrderItem extends React.Component {
           <div className="column currency">To</div>
           <div className="column currency">Payment Method</div>
           <div className="column">Paid Out Rate</div>
+          <div className="column">DTTOT Check Beneficiary</div>
           <div className="column">Action</div>
           <div className="column">Transaction Details</div>
         </div>
@@ -58,6 +59,10 @@ class OrderItem extends React.Component {
               {order.paymentMethod == 'direct_transfer_via_bca' ? (<img src="../static/images/bank_logos/bca.png"/>) : null}
               {order.paymentMethod == 'direct_transfer_via_mandiri' ? (<img src="../static/images/bank_logos/mandiri.png"/>) : null}
             </div>
+            {order.isDttotWarningFlagRaised ?
+              <div className="column dttotWarningRaised">{`${order.dttotWarningRecipient.totalMatchFound} match${order.dttotWarningRecipient.totalMatchFound>1 ? 'es' : ''} found!`}</div> :
+              <div className="column">No match found!</div>
+            }
             <div className="column">
               <div className="text-plain">Paid Out Rate : {order.paidOutRate}</div>
               <input name='newPaidOutRate' type='text' onChange={this.setNewPaidOutRate} placeholder={order.paidOutRate} />
@@ -225,7 +230,9 @@ class OrderItem extends React.Component {
           text-align: right;
         }
 
-
+        .dttotWarningRaised {
+          color: #CC0000;
+        }
       `}</style>
       </div>
     )
