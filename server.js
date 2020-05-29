@@ -81,7 +81,7 @@ app.prepare()
       if(!req.cookies.token) {
         res.redirect('/login');
       } else {
-        return app.render(req, res, '/id-verification', req.query);
+        return app.render(req, res, '/', req.query);
       }
     });
 
@@ -117,8 +117,31 @@ app.prepare()
       }
     });
 
+    server.get('/dashboard/rates', (req, res) => {
+      if(!req.cookies.token) {
+        res.redirect('/dashboard/login');
+      } else {
+        return app.render(req, res, '/dashboard/rates', req.query);
+      }
+    });
+    server.get('/dashboard/check', (req, res) => {
+      if(!req.cookies.token) {
+        res.redirect('/dashboard/login');
+      } else {
+        return app.render(req, res, '/dashboard/check', req.query);
+      }
+    });
+
     server.get('/reset_password', (req, res) => {
       return app.render(req, res, '/reset_password', req.query.token);
+    });
+
+    server.get('/receipt', (req, res) => {
+      if(!req.cookies.token) {
+        res.redirect('/login');
+      } else {
+        return app.render(req, res, '/receipt', req.query.oid);
+      }
     });
 
 

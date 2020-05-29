@@ -16,6 +16,7 @@ class PhoneVerification extends React.Component {
     };
   }
 
+
   static async getInitialProps(ctx) {
     initialize(ctx);
     if (ctx.isServer) {
@@ -45,10 +46,10 @@ class PhoneVerification extends React.Component {
           <div className="logo">
             <img src="../static/images/transfree-logo.png"/>
           </div>
-          <h1>Phone verification</h1>
+          <h1>Code Verification</h1>
           <p>Enter 6 digits verification code that we sent to your number {this.props.phone}.</p>
           <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
-            <label htmlFor="code">Verification code</label><br/>
+            <label htmlFor="code">Verification Code</label><br/>
             <input
               type="tel"
               id="code"
@@ -76,11 +77,10 @@ class PhoneVerification extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const userData = JSON.parse(state.user.user_data);
   return {
     serviceSid: state.verify.serviceSid,
-    phone: userData.phone,
-    email: userData.email,
+    phone: state.user.user_data.phone,
+    email: state.user.user_data.email,
     inProgress: state.verify.inProgress,
   }
 };

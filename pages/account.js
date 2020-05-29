@@ -62,30 +62,27 @@ const PendingLayout = () => {
       </div>
       <h1>Awaiting confirmation</h1>
       <p>We are now reviewing your account details. We will send you an email & WhatsApp message once the verification process is completed.</p>
+      <p>Please contact us by email (admin@transfree.id) or WhatsApp (+44 7490 090659) for faster process.</p>
       <style jsx>{`
         .logo {
           width: 100%;
           text-align: center;
         }
-
         .big-icon img {
           margin: 50px auto;
         }
-
         p {
           max-width: 600px;
-          text-align: center;
-          margin-bottom: 50px;
+          text-align: justify;
+          margin-bottom: 10px;
         }
-
         h1 {
           margin: 0;
         }
-
         .content {
           display: flex;
           flex-direction: column;
-          min-height: 100vh;
+          min-height: 70vh;
           align-items: center;
           justify-content: center;
         }
@@ -126,7 +123,7 @@ class OrderItem extends React.Component {
           <div key={key} >
             <div className={'list-item '+ (this.state.key == key ? 'open' : '')} onClick={() => this.toggleDetail(key)} >
               <div className="left">
-                <div className="date">{order.completedAt == 0.0 ? 'Processing' : 'Completed on '+order.createdAt}</div>
+                <div className="date">{order.completedAt == 0.0 ? 'Processing' : 'Completed on '+moment(order.completedAt).format("DD/MM/YYYY HH:mm")}</div>
                 <div className="recipient">Transfer to <b>{order.name}</b></div>
               </div>
               <div className="right">
@@ -138,10 +135,38 @@ class OrderItem extends React.Component {
             <div className={'detail '+ (this.state.key == key ? 'open' : '')}>
             <ul className="progress">
               <li><div className="node blue"></div><p>Created on {moment(order.createdAt).format("DD/MM/YYYY HH:mm")}</p></li>
-              <li><div className={'divider '+ (order.receivedAt == 0.0 ? 'grey' : 'blue')}></div></li>
-              <li><div className={'node '+ (order.receivedAt == 0.0 ? 'grey' : 'blue')}></div><p>{order.receivedAt == 0.0 ? ('We are waiting your '+order.fromCurrency.toUpperCase()+' transfer') :  ('Received on '+moment(order.receivedAt).format("DD/MM/YYYY HH:mm"))}  </p></li>
+              <li><div className={'divider '+ ((moment(moment().format("DD/MM/YYYY HH:mm")).isAfter(moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm"))) || order.receivedAt != 0.0 ? 'blue' : 'grey')}></div></li>
+              <li>
+              <div className={'node '+ (moment(moment().format("DD/MM/YYYY HH:mm")).isAfter(moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) || order.receivedAt != 0.0 ? 'blue' : 'grey')}>
+              </div>
+              <p style={{lineHeight:"25px"}}>
+              {(moment(moment().format("DD/MM/YYYY HH:mm"))
+              .isAfter
+              (moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) )
+              ||
+              (order.receivedAt != 0.0)
+              ?
+              ('We are processing your ' + order.toCurrency.toUpperCase() +' booking')
+               :
+               ('We are waiting to process your ') }
+              </p>
+              <br/>
+              <p style={{marginLeft:"35px",marginTop:"4px"}}>
+              {(moment(moment().format("DD/MM/YYYY HH:mm"))
+               .isAfter
+               (moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) )
+               ||
+               (order.receivedAt != 0.0)
+               ?
+               ('')
+               :
+               (order.toCurrency.toUpperCase() +' booking') }
+              </p>
+              </li>
+              {/*
               <li><div className={'divider '+ (order.transferredAt == 0.0 ? 'grey' : 'blue')}></div></li>
               <li><div className={'node '+ (order.transferredAt == 0.0 ? 'grey' : 'blue')}></div><p>{order.transferredAt == 0.0 ? ('We will transfer your '+order.toCurrency.toUpperCase()) :  ('Transferred on '+moment(order.transferredAt).format("DD/MM/YYYY HH:mm"))}</p></li>
+              */}
               <li><div className={'divider '+ (order.completedAt == 0.0 ? 'grey' : 'blue')}></div></li>
               <li><div className={'node '+ (order.completedAt == 0.0 ? 'grey' : 'blue')}></div><p>{order.completedAt == 0.0 ? ('We will complete your transfer') :  ('Completed on '+moment(order.completedAt).format("DD/MM/YYYY HH:mm"))}</p></li>
             </ul>
@@ -324,6 +349,7 @@ const OrderLayout = ({ordersList}) => {
           width: 708px;
           height: auto;
           margin: 30px auto;
+          padding: 0;
           background: #FFFFFF;
           box-shadow: 0 10px 30px 0 rgba(0,0,0,0.10);
           border-radius: 8px;
@@ -438,12 +464,10 @@ class Account extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const userData = JSON.parse(state.user.user_data);
-  const orderArray = JSON.parse(state.order.orders);
   return {
-    isApproved: !!userData.isApproved,
-    userData: userData,
-    orderArray: orderArray
+    isApproved: !!state.user.user_data.isApproved,
+    userData: state.user.user_data,
+    orderArray: state.order.orders
   }
 }
 

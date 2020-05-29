@@ -6,6 +6,7 @@ import '../utils/fontawesome';
 import 'react-phone-number-input/style.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-accessible-accordion/dist/fancy-example.css';
+import {InitGA, logPageView} from '../utils/analytics';
 
 export default withRedux(initStore, { debug: false })(
   class MyApp extends App {
@@ -17,6 +18,11 @@ export default withRedux(initStore, { debug: false })(
             : {})
         }
       };
+    }
+
+    componentDidMount(){
+      InitGA()
+      logPageView()
     }
 
     render() {

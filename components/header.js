@@ -4,9 +4,13 @@ const Header = () => (
   <div>
     <Head>
       <title>Transfree - International Transfer Made Fast and Free</title>
+      <meta httpEquiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=4" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta charSet="utf-8" />
+      <link rel="icon" href="../static/images/icon-logo.png"/>
       <link href="../static/misc/flag-icon-css/css/flag-icon.min.css" rel="stylesheet"/>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
     </Head>
     <style jsx global>{`
       @font-face {
@@ -70,6 +74,18 @@ const Header = () => (
         box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
       }
 
+      .btn-secondary-login {
+        background: transparent;
+        border: 2px solid #469DDD;
+        color: #469DDD;
+        padding: 8px 18px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+      }
+
       .btn-secondary {
         background: transparent;
         border: 2px solid #469DDD;
@@ -123,6 +139,20 @@ const Header = () => (
       .btn-secondary:hover {
         border: 2px solid #5FB4F3;
         color: #5FB4F3;
+      }
+      .btn-danger {
+        background: #DC2020;
+        color: #FFF;
+        padding: 8px 18px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 4px;
+        transition: 0.2s;
+        width: 100%;
+        padding: 15px 0;
+        margin-top: 15px;
       }
 
       .row:after {
@@ -291,6 +321,7 @@ const Header = () => (
       .btn-primary {
         width: 100%;
         padding: 15px 0;
+        margin: 19px 1px;
       }
 
       .right p {
@@ -349,9 +380,32 @@ const Header = () => (
         margin: 50px auto;
       }
 
+      ul.pagination {
+        list-style-type: none;
+      }
+
+      ul.pagination  li {
+        display: inline-block;
+      }
+
+      ul.pagination li a {
+        padding: 8px 16px;
+      }
+
+      ul.pagination li.active a {
+        background-color: #469DDD;
+        border-radius: 2px;
+        color: white;
+      }
+
+      ul.pagination li a:hover {
+        background-color: #eaeaea;
+        border-radius: 2px;
+      }
+
       @media only screen and (max-width: 414px) {
         h1 {
-          font-size: 1.5rem;
+          font-size: 18.5px;
         }
         .container,
         .container-fluid {

@@ -12,6 +12,11 @@ class IdVerification extends React.Component {
   constructor({ props }) {
     super(props);
     this.state = {
+      isIdnumbervalid:true,
+      isFullnamevalid: true,
+      isPobvalid: true,
+      isDobvalid: true,
+      isAddressvalid: true,
       idType: 'KTP',
       idNumber: '',
       idName: '',
@@ -20,6 +25,11 @@ class IdVerification extends React.Component {
       pob: '',
       gender: '',
     };
+    this.checkIdnumber = this.checkIdnumber.bind(this);
+    this.checkFullname = this.checkFullname.bind(this);
+    this.checkPob = this.checkPob.bind(this);
+    this.checkDob = this.checkDob.bind(this);
+    this.checkAddress = this.checkAddress.bind(this);
   }
 
   static async getInitialProps(ctx) {
@@ -30,6 +40,7 @@ class IdVerification extends React.Component {
       }
     }
   }
+
 
   handleChange = (value) => {
     this.setState({dob: value});
@@ -51,6 +62,42 @@ class IdVerification extends React.Component {
     );
   }
 
+  checkIdnumber(e) {
+    if (e.target.value == '') {
+      this.setState({isIdnumbervalid: false})
+    } else {
+      this.setState({isIdnumbervalid: true})
+    }
+  }
+  checkFullname(e) {
+    if (e.target.value == '') {
+      this.setState({isFullnamevalid: false})
+    } else {
+      this.setState({isFullnamevalid: true})
+    }
+  }
+  checkPob(e) {
+    if (e.target.value == '') {
+      this.setState({isPobvalid: false})
+    } else {
+      this.setState({isPobvalid: true})
+    }
+  }
+  checkDob(e) {
+    if (e.target.value == '') {
+      this.setState({isDobvalid: false})
+    } else {
+      this.setState({isDobvalid: true})
+    }
+  }
+  checkAddress(e) {
+    if (e.target.value == '') {
+      this.setState({isAddressvalid: false})
+    } else {
+      this.setState({isAddressvalid: true})
+    }
+  }
+
   render() {
     return (
       <div>
@@ -59,9 +106,19 @@ class IdVerification extends React.Component {
           <div className="logo">
             <img src="../static/images/transfree-logo.png"/>
           </div>
-          <h1>ID verification</h1>
+          <h1>More Detail</h1>
           <p>According to the regulation from Bank Indonesia, we have to verify your identity. Please provide your identity details below.</p>
           <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
+          <label htmlFor="fullname">Full name</label><br/>
+            <input
+              type="text"
+              id="fullname"
+              placeholder="Enter your full name (should match your ID)"
+              value={this.state.idName}
+              onChange={e => this.setState({ idName: e.target.value })}
+              onBlur={this.checkFullname}/>
+            <span className={this.state.isFullnamevalid ? 'error-label-hidden' : 'error-label'}>Your Full Name may not be empty.</span>
+            
             <label htmlFor="id-type">ID Type</label><br/>
             <select
               id="id-type"
@@ -79,15 +136,11 @@ class IdVerification extends React.Component {
               id="id-number"
               placeholder="Enter ID number"
               value={this.state.idNumber}
-              onChange={e => this.setState({ idNumber: e.target.value })}/>
+              onChange={e => this.setState({ idNumber: e.target.value })}
+              onBlur={this.checkIdnumber}/>
+            <span className={this.state.isIdnumbervalid ? 'error-label-hidden' : 'error-label'}>You must input your ID Number (KTP/Passport/SIM).</span>
 
-            <label htmlFor="fullname">Full name</label><br/>
-            <input
-              type="tel"
-              id="fullname"
-              placeholder="Enter your full name (should match your ID)"
-              value={this.state.idName}
-              onChange={e => this.setState({ idName: e.target.value })}/>
+           
 
             <div style={{marginBottom: "15px"}}>GENDER</div>
             <input
@@ -106,14 +159,15 @@ class IdVerification extends React.Component {
               onChange={e => this.setState({ gender: e.target.value })}/>
             <label htmlFor="female">Female</label><br/>
 
-
             <label htmlFor="pob">Place of Birth</label><br/>
             <input
               type="text"
               id="pob"
               placeholder="Enter the city (e.g. Jakarta)"
               value={this.state.pob}
-              onChange={e => this.setState({ pob: e.target.value })}/>
+              onChange={e => this.setState({ pob: e.target.value })}
+              onBlur={this.checkPob}/>
+            <span className={this.state.isPobvalid ? 'error-label-hidden' : 'error-label'}>Your Place of Birth may not be empty.</span>
 
             <label htmlFor="dob">Date of birth</label><br/>
             <DatePicker
@@ -124,14 +178,24 @@ class IdVerification extends React.Component {
               peekNextMonth
               showMonthDropdown
               showYearDropdown
-              dropdownMode="select"/>
+              dropdownMode="select"
+              onBlur={this.checkDob}/>
+            <span className={this.state.isDobvalid ? 'error-label-hidden' : 'error-label'}>Your Day of Birth may not be empty.</span>
 
             <label htmlFor="address">Address</label><br/>
             <textarea
               id="address"
               placeholder="Enter your full address"
               value={this.state.address}
-              onChange={e => this.setState({ address: e.target.value })}/>
+              onChange={e => this.setState({ address: e.target.value })}
+              onBlur={this.checkAddress}/>
+            <span className={this.state.isAddressvalid ? 'error-label-hidden' : 'error-label'}>Your address may not be empty.</span> 
+
+            <p className="description"><input type="checkbox"/>I agree to the 
+            <a  href="/terms"  target="_blank" className="more-privacy" > Terms and Condition </a></p>
+
+            <p className="description"> * We will not, in any circumstances, share your personal information irresponsibly.
+            <a  href="/privacy-policy"  target="_blank" className="more-privacy" > More about Privacy Policy </a></p>
 
             <button type="submit" className="btn-primary">{this.props.inProgress ? (
               <FontAwesomeIcon icon="sync-alt" spin/>
@@ -175,11 +239,29 @@ class IdVerification extends React.Component {
           .select-css option {
             font-weight:normal;
           }
-
           .form-container input[type="radio"] {
             width: 20px;
           }
-
+          .form-container input[type="checkbox"] {
+            width: 20px;
+          }
+          .description{
+            color:#e79635;
+            font-size: 14px;
+            margin: 0px 0px 20px 0px !important;
+          }
+          .more-privacy{
+            color:#e79635;
+          }
+          .error-label {
+            display: block;
+            font-size: 14px;
+            color: red;
+            margin: -25px 0 30px;
+          }
+          .error-label-hidden {
+            display: none;
+          }
         `}</style>
       </div>
     )
@@ -187,10 +269,9 @@ class IdVerification extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const userData = JSON.parse(state.user.user_data);
   return {
     inProgress: state.id.inProgress,
-    email: userData.email
+    email: state.user.user_data.email
   }
 };
 

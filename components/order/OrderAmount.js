@@ -13,8 +13,10 @@ class OrderAmount extends React.Component {
       isDestinationActive: false,
       fromCurrency: 'gbp',
       toCurrency: 'idr',
-      fromAmount: 1000.00,
-      toAmount: 0
+      fromAmount: 1000,
+      toAmount: 0,
+      currentDay: new Date()
+
     };
 
     this.toggleSource = this.toggleSource.bind(this);
@@ -23,12 +25,53 @@ class OrderAmount extends React.Component {
     this.hideDestination = this.hideDestination.bind(this);
     this.handleSourceChange = this.handleSourceChange.bind(this);
     this.handleDestinationChange = this.handleDestinationChange.bind(this);
+    this.reverse = this.reverse.bind(this);
   }
+  reverse(country,country2) {
+	this.setState({
+            
+    fromCurrency: country2,            
+    toCurrency: country,
+    toAmount :0,
+    fromAmount :0
 
+    });
+    if (country == 'idr') {
+      this.props.getRates(country2, country).then(() => {
+        if (this.state.fromCurrency == 'idr') {
+          this.setState({
+            rate: 1,
+            
+          });
+        } else {
+          this.setState({
+            rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
+          });
+        }
+      });
+    } else {
+      if (country2 == 'idr') {
+        this.props.getRates(country, country2).then(() => {
+          this.setState({
+            rate: this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100),
+          });
+        });
+      } else {
+        this.props.getRates(country2,country).then(() => {
+          this.setState({
+            rate: this.props.rate,
+           
+          });
+        });
+      }
+    }
+
+  }
   componentDidMount() {
     this.setState({
-      rate: this.props.rate,
-      toAmount: this.state.fromAmount * this.props.rate
+      rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
+      toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100 )),
+      currentDay : this.state.currentDay
     })
   }
 
@@ -61,69 +104,122 @@ class OrderAmount extends React.Component {
   }
 
   selectSource(country) {
-    this.props.getRates(country,this.state.toCurrency).then(() => {
-      this.setState((state) => {
-        return {
-          fromCurrency: country,
-          toAmount: this.state.fromAmount * this.props.rate
+    if (country == 'idr') {
+      this.props.getRates(this.state.toCurrency, country).then(() => {
+        if (this.state.toCurrency == 'idr') {
+          this.setState({
+            rate: 1,
+            fromCurrency: country,
+            toAmount: this.state.fromAmount
+          });
+        } else {
+          this.setState({
+            rate: this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100),
+            fromCurrency: country,
+            toAmount: this.state.fromAmount / (this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100))
+          });
         }
       });
-      this.hideSource();
-    });
+    } else {
+      this.props.getRates(country, this.state.toCurrency).then(() => {
+        if (this.state.toCurrency == 'idr') {
+          this.setState({
+            rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
+            fromCurrency: country,
+            toAmount: this.state.fromAmount / (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
+          })
+        } else {
+          this.setState({
+            rate: this.props.rate,
+            fromCurrency: country,
+            toAmount: this.state.fromAmount / this.props.rate
+          });
+        }
+      });
+    }
+    this.hideSource();
   }
 
   selectDestination(country) {
-    this.props.getRates(this.state.fromCurrency,country).then(() => {
-      this.setState((state) => {
-        return {
-          toCurrency: country,
-          toAmount: this.state.fromAmount * this.props.rate
+    if (country == 'idr') {
+      this.props.getRates(this.state.fromCurrency, country).then(() => {
+        if (this.state.fromCurrency == 'idr') {
+          this.setState({
+            rate: 1,
+            toCurrency: country,
+            toAmount: this.state.fromAmount
+          });
+        } else {
+          this.setState({
+            rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
+            toCurrency: country,
+            toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
+          });
         }
       });
-      this.hideDestination();
-    });
+    } else {
+      if (this.state.fromCurrency == 'idr') {
+        this.props.getRates(country, this.state.fromCurrency).then(() => {
+          this.setState({
+            rate: this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100),
+            toCurrency: country,
+            toAmount: this.state.fromAmount / (this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100))
+          });
+        });
+      } else {
+        this.props.getRates(this.state.fromCurrency, country).then(() => {
+          this.setState({
+            rate: this.props.rate,
+            toCurrency: country,
+            toAmount: this.state.fromAmount * this.props.rate
+          });
+        });
+      }
+    }
+    this.hideDestination();
   }
 
   handleSourceChange(e) {
     const fromAmount = e.target.value.replace(/,/g, '');
     if (this.state.fromCurrency == 'idr') {
       if (fromAmount < 100000) {
-        this.setState((state) => {
-          return {
-            fromAmount: fromAmount,
-            toAmount: 0
-          }
+        this.setState({
+          fromAmount: fromAmount,
+          toAmount: 0
         })
       } else {
-        this.setState((state) => {
-          return {
-            fromAmount: fromAmount,
-            toAmount: fromAmount * this.props.rate
-          }
+        this.setState({
+          fromAmount: fromAmount,
+          toAmount: fromAmount / this.state.rate
         })
       }
     } else {
-      this.setState((state) => {
-        return {
-          fromAmount: fromAmount,
-          toAmount: fromAmount * this.props.rate
-        }
+      this.setState({
+        fromAmount: fromAmount,
+        toAmount: fromAmount * this.state.rate
       })
     }
   }
 
   handleDestinationChange(e) {
     const toAmount = e.target.value.replace(/,/g, '');
-    this.setState({
-      fromAmount: toAmount / this.props.rate,
-      toAmount: toAmount
-    })
+    if (this.state.fromCurrency == 'idr') {
+      this.setState({
+        fromAmount: toAmount * this.state.rate,
+        toAmount: toAmount
+      })
+    } else {
+      this.setState({
+        fromAmount: toAmount / this.state.rate,
+        toAmount: toAmount
+      })
+    }
   }
 
   saveAndContinue = (e) => {
     e.preventDefault();
     var data = {
-      rate: this.props.rate,
+      rate: this.state.rate,
       fromCurrency: this.state.fromCurrency,
       toCurrency: this.state.toCurrency,
       fromAmount: this.state.fromAmount,
@@ -133,7 +229,9 @@ class OrderAmount extends React.Component {
     this.props.saveValues(data);
     this.props.nextStep();
   }
-
+  on() {
+  document.getElementById("overlay").style.visibility = "visible";
+  }
   render() {
     return (
       <div>
@@ -169,18 +267,197 @@ class OrderAmount extends React.Component {
                             <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP (British Poundsterling)
                           </a>
                         </li>
-                        <li onClick={this.selectSource.bind(this,'usd')}>
+                        {/* <li onClick={this.selectSource.bind(this,'usd')}>
                           <a className="dropdown-item">
                             <span className="flag-icon flag-icon-us flag-icon-squared"></span> USD (US Dollar)
+                          </a>
+                        </li>
+                        <li onClick={this.selectSource.bind(this,'aud')}>
+                          <a className="dropdown-item">
+                            <span className="flag-icon flag-icon-au flag-icon-squared"></span> AUD (Australian Dollar)
+                          </a>
+                        </li> */}
+                        <li onClick={this.selectSource.bind(this,'eur')}>
+                          <a className="dropdown-item">
+                            <span className="flag-icon flag-icon-eu flag-icon-squared"></span> EUR (European Euro)
                           </a>
                         </li>
                       </ul>
                     </div>
                   </div>
                 </div>
-
-                {/* <input id="money-from" type="text" value={this.toCurrency(this.state.fromAmount)} onChange={this.handleSourceChange}/> */}
               </div>
+              
+              <div style={{textAlign:"right"}}>
+                <img onClick={
+                    	
+                    	(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr' ) ? 
+						this.reverse.bind(this,'gbp' , 'idr')						
+                    	:
+                    	(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' ) ? 
+						this.reverse.bind(this,'idr' , 'gbp')						
+						:
+						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur' ) ? 
+						this.reverse.bind(this,'idr' , 'eur')						
+						:
+						(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr' ) ? 
+						this.reverse.bind(this,'eur' , 'idr')						
+						:
+						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'myr' ) ? 
+						this.reverse.bind(this,'idr' , 'myr')						
+						:
+						(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'idr' ) ? 
+						this.reverse.bind(this,'myr' , 'idr')						
+						:
+						/**(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'krw' ) ? 
+						this.reverse.bind(this,'idr' , 'krw')						
+						:
+						(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'idr' ) ? 
+						this.reverse.bind(this,'krw' , 'idr')						
+            :
+            */
+						// (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'usd' ) ? 
+						// this.reverse.bind(this,'idr' , 'usd')						
+						// :
+						// (this.state.fromCurrency == 'usd' && this.state.toCurrency == 'idr' ) ? 
+						// this.reverse.bind(this,'usd' , 'idr')						
+						// :
+						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'aud' ) ? 
+						this.reverse.bind(this,'idr' , 'aud')						
+						:
+						// (this.state.fromCurrency == 'aud' && this.state.toCurrency == 'idr' ) ? 
+						// this.reverse.bind(this,'aud' , 'idr')						
+						// :
+						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'hkd' ) ? 
+						this.reverse.bind(this,'idr' , 'hkd')						
+						:
+						(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'idr' ) ? 
+						this.reverse.bind(this,'hkd' , 'idr')						
+						:
+						(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'myr' ) ? 
+						this.reverse.bind(this,'gbp' , 'myr')						
+						:
+						(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'gbp' ) ? 
+						this.reverse.bind(this,'myr' , 'gbp')						
+						:
+						/**
+            (this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'krw' ) ? 
+						this.reverse.bind(this,'gbp' , 'krw')						
+						:
+						(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'gbp' ) ? 
+						this.reverse.bind(this,'krw' , 'gbp')						
+            :
+            */
+						// (this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'usd' ) ? 
+						// this.reverse.bind(this,'gbp' , 'usd')						
+						// :
+						// (this.state.fromCurrency == 'usd' && this.state.toCurrency == 'gbp' ) ? 
+						// this.reverse.bind(this,'usd' , 'gbp')						
+						// :
+						(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'eur' ) ? 
+						this.reverse.bind(this,'gbp' , 'eur')						
+						:
+						(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'gbp' ) ? 
+						this.reverse.bind(this,'eur' , 'gbp')						
+						:
+						(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'aud' ) ? 
+						this.reverse.bind(this,'gbp' , 'aud')						
+						:
+						(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'gbp' ) ? 
+						this.reverse.bind(this,'aud' , 'gbp')						
+						:
+						(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'hkd' ) ? 
+						this.reverse.bind(this,'gbk' , 'hkd')						
+						:
+						(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'gbp' ) ? 
+						this.reverse.bind(this,'hkd' , 'gbp')						
+						:
+
+						// (this.state.fromCurrency == 'usd' && this.state.toCurrency == 'myr' ) ? 
+						// this.reverse.bind(this,'usd' , 'myr')						
+						// :
+						// (this.state.fromCurrency == 'myr' && this.state.toCurrency == 'usd' ) ? 
+						// this.reverse.bind(this,'myr' , 'usd')						
+						// :
+						/**
+            (this.state.fromCurrency == 'usd' && this.state.toCurrency == 'krw' ) ? 
+						this.reverse.bind(this,'usd' , 'krw')						
+						:
+						(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'usd' ) ? 
+						this.reverse.bind(this,'krw' , 'usd')						
+            :
+            */
+            /**
+						(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'eur' ) ? 
+						this.reverse.bind(this,'usd' , 'eur')						
+						:
+						(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'usd' ) ? 
+						this.reverse.bind(this,'eur' , 'usd')						
+						:
+						(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'aud' ) ? 
+						this.reverse.bind(this,'usd' , 'aud')						
+						:
+						(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'usd' ) ? 
+						this.reverse.bind(this,'aud' , 'usd')						
+						:
+						(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'hkd' ) ? 
+						this.reverse.bind(this,'usd' , 'hkd')						
+						:
+						(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'usd' ) ? 
+						this.reverse.bind(this,'hkd' , 'usd')						
+						:
+						*/
+						(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'myr' ) ? 
+						this.reverse.bind(this,'aud' , 'myr')						
+						:
+						(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'aud' ) ? 
+						this.reverse.bind(this,'myr' , 'aud')						
+						:
+						/**
+            (this.state.fromCurrency == 'aud' && this.state.toCurrency == 'krw' ) ? 
+						this.reverse.bind(this,'aud' , 'krw')						
+						:
+						(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'aud' ) ? 
+						this.reverse.bind(this,'krw' , 'aud')						
+						:
+            */
+            (this.state.fromCurrency == 'aud' && this.state.toCurrency == 'eur' ) ? 
+						this.reverse.bind(this,'aud' , 'eur')						
+						:
+						(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'aud' ) ? 
+						this.reverse.bind(this,'eur' , 'aud')						
+						:
+						(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'hkd' ) ? 
+						this.reverse.bind(this,'aud' , 'hkd')						
+						:
+						(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'aud' ) ? 
+						this.reverse.bind(this,'hkd' , 'aud')						
+						:
+
+						(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'myr' ) ? 
+						this.reverse.bind(this,'eur' , 'myr')						
+						:
+						(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'eur' ) ? 
+						this.reverse.bind(this,'myr' , 'eur')						
+						:
+						/**
+            (this.state.fromCurrency == 'eur' && this.state.toCurrency == 'krw' ) ? 
+						this.reverse.bind(this,'eur' , 'krw')						
+						:
+						(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'eur' ) ? 
+						this.reverse.bind(this,'krw' , 'eur')						
+						:
+            */
+            (this.state.fromCurrency == 'eur' && this.state.toCurrency == 'hkd' ) ? 
+						this.reverse.bind(this,'eur' , 'hkd')						
+						:
+						(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'eur' ) ? 
+						this.reverse.bind(this,'hkd' , 'eur')						
+						:
+						null
+                    } className="reverse-img" style={{width: "4%",paddingBottom:"10px",marginTop:"-15px",paddingRight:"25px"}} src="../static/images/reverse.png"/>
+              </div>
+             
               <div className="destination-container">
                 <div className="money-input-container">
                   <div className="money-input">
@@ -210,19 +487,24 @@ class OrderAmount extends React.Component {
                             <span className="flag-icon flag-icon-my flag-icon-squared"></span> MYR (Malaysian Ringgit)
                           </a>
                         </li>
-                        <li onClick={this.selectDestination.bind(this,'krw')}>
+                        {/**<li onClick={this.selectDestination.bind(this,'krw')}>
                           <a className="dropdown-item">
                             <span className="flag-icon flag-icon-kr flag-icon-squared"></span> KRW (Korean Won)
                           </a>
-                        </li>
+                        </li>*/}
                         <li onClick={this.selectDestination.bind(this,'gbp')}>
                           <a className="dropdown-item">
                             <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP (British Poundsterling)
                           </a>
                         </li>
-                        <li onClick={this.selectDestination.bind(this,'usd')}>
+                        {/* <li onClick={this.selectDestination.bind(this,'usd')}>
                           <a className="dropdown-item">
                             <span className="flag-icon flag-icon-us flag-icon-squared"></span> USD (US Dollar)
+                          </a>
+                        </li> */}
+                        <li onClick={this.selectDestination.bind(this,'aud')}>
+                          <a className="dropdown-item">
+                            <span className="flag-icon flag-icon-au flag-icon-squared"></span> AUD (Australian Dollar)
                           </a>
                         </li>
                         <li onClick={this.selectDestination.bind(this,'eur')}>
@@ -230,7 +512,6 @@ class OrderAmount extends React.Component {
                             <span className="flag-icon flag-icon-eu flag-icon-squared"></span> EUR (European Euro)
                           </a>
                         </li>
-
                         <li onClick={this.selectDestination.bind(this,'hkd')}>
                           <a className="dropdown-item">
                             <span className="flag-icon flag-icon-hk flag-icon-squared"></span> HKD (Hongkong Dollar)
@@ -240,140 +521,211 @@ class OrderAmount extends React.Component {
                     </div>
                   </div>
                 </div>
-                {/* <input id="money-to" type="text" value={this.toCurrency(this.state.toAmount)} onChange={this.handleDestinationChange}/> */}
               </div>
             </div>
             <div className="row rate">
-              <span className="rate-desc">{this.state.fromCurrency.toUpperCase()}/{this.state.toCurrency.toUpperCase()} Conversion rate</span> <span className="rate-value"><span className="live-rate"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={4} value={this.props.rate} /> {this.state.toCurrency.toUpperCase()}</span></span>
+              <span className="rate-desc">Conversion rate</span> <span className="rate-value"><span className="live-rate"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={5} value={this.state.rate} /></span></span>
             </div>
+            <div className="row rate"style={{marginTop:"-20px"}} >
+                  <span className="rate-desc" >Transfer fee </span> <span className="rate-value" style={{textAlign:"right",marginLeft:"5px"}}><span ><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={4} value="0" /></span></span>
+              </div>
             <div className="row note">
+		<div className="lightbox" id={"oos"}>
+                <div className="popup">
+                  <h2>WE ARE OUT OF STOCK</h2>
+                  <h3>WE ARE OUT OF STOCK</h3>
+                  <a className="close" href="#">&times;</a>
+                  <div className="content" >
+                    <p> But don't worry, we got you. If you still want your GBP to IDR transfer,<b> we will happily buy your GBP </b> with our IDR , of course <b> with Special Price </b>   . <br/><br/> <b> Click the button below to Sell Your GBP</b> </p>
+                    <Link>
+                      <a href="https://www.transfree.co.uk/currency-seller-to-idr" target="_blank" className="btn-primary">Sell My GBP</a>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+              { 
+                (
+                this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur' &&
+                this.state.currentDay.getDay() == '5' &&
+                this.state.currentDay.getHours() >= '12'
+                ) 
+                || 
+                (
+                this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr' && 
+                this.state.currentDay.getDay() == '5' &&
+                this.state.currentDay.getHours() >= '12'
+                )
+		|| 
+                (
+                this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' && 
+                this.state.currentDay.getDay() == '5' &&
+                this.state.currentDay.getHours() >= '12'
+                )
+                || 
+                (
+                this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr' && 
+                this.state.currentDay.getDay() == '6'
+                )
+                || 
+                (
+                this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur' && 
+                this.state.currentDay.getDay() == '6' 
+                )
+		|| 
+                (
+                this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' && 
+                this.state.currentDay.getDay() == '6' 
+                )
+                || 
+                (
+                this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr' && 
+                this.state.currentDay.getDay() == '7'
+                )
+                || 
+                (
+                this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur' && 
+                this.state.currentDay.getDay() == '7' 
+                )
+		|| 
+                (
+                this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' && 
+                this.state.currentDay.getDay() == '7' 
+                )
+
+                ? 
+
               <p style={{maxWidth: "100%", marginBottom: "0"}}>Your transfer will be processed immediately.
-              The recipient will get the money in less than <span className="received-on">24 hours.</span>.</p>
+                The recipient will get the money on the <span className="received-on-weekend">next Working Day</span></p>
+
+
+              :
+              (this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr' )
+              ||
+              (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur' )
+              ?
+              <p style={{maxWidth: "100%", marginBottom: "0"}}>Your transfer will be processed immediately.
+              The recipient will get the money in less than <span className="received-on">24 hours</span>, 
+              but kindly note, there is a chance that the money will arrive in more than <span className="received-on">36 hours</span>.</p>
+              :
+              <p style={{maxWidth: "100%", marginBottom: "0"}}>Your transfer will be processed immediately.
+              The recipient will get the money in less than <span className="received-on">24 hours.</span></p> 
+              }
             </div>
+            {/* <p className="Pesan" style={{maxWidth: "100%", marginBottom:"10px" }}>We are open during the holidays. But as you aware many banks are close, 
+              or stop procesing. This means our transfers may take longer than usual.</p>*/}
+              
             <div className="row converter-cta">
-            {
-              // <div className="cta-secondary">
-              //   <Link href="">
-              //     <a className="btn-secondary">Compare price</a>
-              //   </Link>
-              // </div>
-            }
               <div className="cta-primary">
+		      {/*
                 <Link href="/order">
-                  <a className="btn-primary" onClick={this.saveAndContinue}>Continue</a>
-                </Link>
+                    <a className="btn-primary" onClick={this.saveAndContinue}>Continue</a>
+                 </Link>
+                */}
+                {this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr' ? 
+                  <Link>
+                    <a className="btn-primary" href={"#oos"}>Continue</a>
+                  </Link>
+                 :
+		 (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' && this.props.adjustedRates.idrToGbpOos == 'true')
+                  ||
+                  (this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr' && this.props.adjustedRates.gbpToIdrOos == 'true')
+                  ||
+                  (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur' && this.props.adjustedRates.idrToEurOos == 'true')
+                  ||
+                  (this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr' && this.props.adjustedRates.eurToIdrOos == 'true')
+
+                  ?
+                  <Link href="/order">
+                    <a className="btn-disabled">Out Of Stock</a>
+                  </Link>
+                  :
+                  <Link href="/order">
+                    <a className="btn-primary" onClick={this.saveAndContinue}>Continue</a>
+                  </Link>  
+                }
+               
+
               </div>
             </div>
           </div>
-          {
-          // <div className="converter-container-order">
-          //   <div className="row exchange-container">
-          //     <div className="source-container">
-          //       <p style={{textAlign: "left"}}>You send</p>
-          //       <button className="currency-from dropdown-button" onClick={this.toggleSource}>
-          //         <span className={'flag-icon flag-icon-'+this.state.fromCurrency.substring(0,2)+' flag-icon-squared'}></span> {this.state.fromCurrency}
-          //         <FontAwesomeIcon className="caret" icon="caret-down"/>
-          //       </button>
-          //       <div className={this.state.isSourceActive ? 'dropdown-menu show' : 'dropdown-menu'}>
-          //         <ul>
-          //           <li onClick={this.selectSource.bind(this,'idr')}>
-          //             <a className="dropdown-item">
-          //               <span className="flag-icon flag-icon-id flag-icon-squared"></span> IDR
-          //             </a>
-          //           </li>
-          //           <li onClick={this.selectSource.bind(this,'gbp')}>
-          //             <a className="dropdown-item">
-          //               <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP
-          //             </a>
-          //           </li>
-          //           <li onClick={this.selectSource.bind(this,'usd')}>
-          //             <a className="dropdown-item">
-          //               <span className="flag-icon flag-icon-us flag-icon-squared"></span> USD
-          //             </a>
-          //           </li>
-          //         </ul>
-          //       </div>
-          //       <NumberFormat
-          //         id="money-from"
-          //         type="text"
-          //         thousandSeparator={true}
-          //         decimalScale={2}
-          //         value={this.state.fromAmount}
-          //         onKeyUp={this.handleSourceChange}/>
-          //     </div>
-          //     <div className="destination-container">
-          //       <p style={{textAlign: "left"}}>Recipient gets</p>
-          //       <button className="currency-from dropdown-button" onClick={this.toggleDestination}>
-          //         <span className={'flag-icon flag-icon-'+this.state.toCurrency.substring(0,2)+' flag-icon-squared'}></span> {this.state.toCurrency}
-          //         <FontAwesomeIcon className="caret" icon="caret-down"/>
-          //       </button>
-          //       <div className={this.state.isDestinationActive ? 'dropdown-menu show' : 'dropdown-menu'}>
-          //         <ul>
-          //           <li onClick={this.selectDestination.bind(this,'myr')}>
-          //             <a className="dropdown-item">
-          //               <span className="flag-icon flag-icon-my flag-icon-squared"></span> MYR
-          //             </a>
-          //           </li>
-          //           <li onClick={this.selectDestination.bind(this,'krw')}>
-          //             <a className="dropdown-item">
-          //               <span className="flag-icon flag-icon-kr flag-icon-squared"></span> KRW
-          //             </a>
-          //           </li>
-          //           <li onClick={this.selectDestination.bind(this,'gbp')}>
-          //             <a className="dropdown-item">
-          //               <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP
-          //             </a>
-          //           </li>
-          //           <li onClick={this.selectDestination.bind(this,'usd')}>
-          //             <a className="dropdown-item">
-          //               <span className="flag-icon flag-icon-us flag-icon-squared"></span> USD
-          //             </a>
-          //           </li>
-          //           <li onClick={this.selectDestination.bind(this,'eur')}>
-          //             <a className="dropdown-item">
-          //               <span className="flag-icon flag-icon-eu flag-icon-squared"></span> EUR
-          //             </a>
-          //           </li>
-          //
-          //           <li onClick={this.selectDestination.bind(this,'hkd')}>
-          //             <a className="dropdown-item">
-          //               <span className="flag-icon flag-icon-hk flag-icon-squared"></span> HKD
-          //             </a>
-          //           </li>
-          //         </ul>
-          //       </div>
-          //       <NumberFormat
-          //         id="money-to"
-          //         type="text"
-          //         thousandSeparator={true}
-          //         decimalScale={2}
-          //         value={this.state.toAmount}
-          //         onKeyUp={this.handleDestinationChange}/>
-          //     </div>
-          //   </div>
-          //   <div className="row rate">
-          //     <span className="rate-desc">Currency rate {this.state.fromCurrency.toUpperCase()}/{this.state.toCurrency.toUpperCase()}</span>
-          //     <span className="rate-value"><span className="live-rate"><NumberFormat displayType={'text'} thousandSeparator={true} value={this.props.rate} /></span></span>
-          //   </div>
-          //   <div className="row note">
-          //     <p>Your transfer will be processed immediately.
-          //     The recipient will get the money in less than <span className="received-on">24 hours.</span>.</p>
-          //   </div>
-          //   <div className="row converter-cta">
-          //     <div className="cta-secondary">
-          //       <Link href="">
-          //         <a className="btn-secondary">Compare price</a>
-          //       </Link>
-          //     </div>
-          //     <div className="cta-primary">
-          //       <Link href="">
-          //         <a className="btn-primary" onClick={this.saveAndContinue}>Continue</a>
-          //       </Link>
-          //     </div>
-          //   </div>
-          // </div>
-          }
         <style jsx>{`
+	   /** POP UP OOS MARKUP **/
+          .popup {
+            margin: 0 auto!important;
+            margin-top: 17%!important;
+
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            width: 30%;
+            position: relative;
+            transition: all 5s ease-in-out;
+          }
+
+          .popup h2 {
+
+            margin-top: 1%;
+            color: #333;
+
+          }
+          .popup h3{
+            display: none;
+          }
+          .popup .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            transition: all 200ms;
+            font-size: 30px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #333;
+
+          }
+          .popup .close:hover {
+            color: #5a9cd8;
+          }
+          .popup .content {
+            max-height: 30%;
+            overflow: auto;
+          }
+          .popup .content p{
+            color: GREY;
+          }
+          .Cpesan{
+            justify-content: center;
+          }
+          .Pesan {
+            text-align: center;
+            color: #3E495E;
+            font-family: 'Campton-Bold';
+          }
+
+          /** END OF POP UP OOS MARKTUP **/
+	  /** LIGHTBOX MARKUP **/
+	.lightbox {
+	  /** Default lightbox to hidden */
+	  display: none;
+
+	  /** Position and style */
+	  position: fixed;
+	  z-index: 999;
+	  width: 100%;
+	  height: 100%;
+	  text-align: center;
+	  top: 0;
+	  left: 0;
+	  background: rgba(0,0,0,0.8);
+	}
+
+	.lightbox:target {
+	  /** Remove default browser outline */
+	  outline: none;
+
+	  /** Unhide lightbox **/
+	  display: block;
+	}
+	/** END LIGHTBOX MARKUP **/
           .container-fluid {
             display: flex;
             flex-direction: column;
@@ -402,8 +754,8 @@ class OrderAmount extends React.Component {
           .converter-container-order {
             width: 500px;
             height: auto;
-            padding: 30px;
-            margin: 30px auto;
+            padding: 15px;
+            margin: 11px;
             background: #FFFFFF;
             box-shadow: 0 10px 30px 0 rgba(0,0,0,0.10);
             border-radius: 8px;
@@ -489,6 +841,10 @@ class OrderAmount extends React.Component {
           .received-on {
             font-family: 'Campton-Bold', sans-serif;
           }
+          .received-on-weekend {
+            font-family: 'Campton-Bold', sans-serif;
+            color: #e79635
+          }
 
           .converter-cta {
             display: flex;
@@ -496,7 +852,7 @@ class OrderAmount extends React.Component {
 
           .cta-secondary,
           .cta-primary {
-            flex-basis: 50%;
+            flex-basis: 100%;
             padding: 5px;
           }
 
@@ -577,10 +933,34 @@ class OrderAmount extends React.Component {
             transition: none;
           }
 
+          .btn-primary {
+            width: 100%;
+          }
+
 
           @media only screen and (max-width: 414px) {
+	        .popup h2 {
+            display : none
+            }
+            .popup h3{
+	          text-align: left !important;
+            margin-top: 4%;
+            font-size: 20px ;
+            display: block
+            }
+	    .popup p{
+	    font-size: 15px !important;
+	    }
+            .popup {
+            margin-top: 40%!important;
+            width: 70%;
+            }
+            .reverse-img{
+              padding-right : 15px !important;
+              width : 6% !important
+            }
             .converter-container-order {
-              width: 305px;
+              width: 317px;
               flex-direction: column;
             }
             .container-fluid p {
@@ -610,6 +990,7 @@ class OrderAmount extends React.Component {
 
 const mapStateToProps = (state) => ({
   rate: state.rate.rates,
+  adjustedRates: state.fx.adjustedRates
 });
 
 export default connect(mapStateToProps, rateActions)(OrderAmount);

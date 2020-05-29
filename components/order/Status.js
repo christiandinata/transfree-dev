@@ -4,16 +4,16 @@ class Status extends React.Component {
   componentWillMount() {
     this.props.addOrder();
   }
-  
+
   render() {
     return (
       <div>
         <div className="content">
           <div className="big-icon">
-            <img src="../static/images/document.svg"/>
+            <img src="../static/images/checked.png"/>
           </div>
-          <h1>Awaiting confirmation</h1>
-          <p>We are now reviewing your account details. We will send you an email & WhatsApp message once the verification process is completed.</p>
+          <h1>Awaiting Payment confirmation</h1>
+          <p>Thank you, we are now reviewing your order details. We will send you an email regarding your payment instruction. Please check your email.</p>
 
           <Link href="/account">
             <a className="btn-primary">Back to my account</a>
@@ -28,13 +28,14 @@ class Status extends React.Component {
             align-items: center;
           }
 
-          .logo img {
-            height: 28px;
-            margin: 50px auto;
+          .content img {
+            width: 35%;
+            margin-bottom: 20px !important;
+
           }
 
-          p {
-            max-width: 500px;
+          p{
+            margin : 0px 0px 40px 0px !important;
           }
 
           h1 {
@@ -119,7 +120,6 @@ class Status extends React.Component {
           p {
             max-width: 600px;
             text-align: center;
-            margin-bottom: 50px;
           }
 
           h1 {

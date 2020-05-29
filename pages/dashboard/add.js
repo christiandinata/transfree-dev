@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Header from '../../components/header.js';
-import Menu from '../../components/menu';
 import { connect } from 'react-redux';
 import actions from '../../redux/actions';
 import initialize from '../../utils/initialize';

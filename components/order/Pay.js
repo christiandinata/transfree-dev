@@ -1,9 +1,20 @@
 import Link from 'next/link';
 import NumberFormat from 'react-number-format';
+import {
+    Accordion,
+    AccordionItem,
+    AccordionItemHeading,
+    AccordionItemButton,
+    AccordionItemPanel,
+} from 'react-accessible-accordion';
+import 'react-accessible-accordion/dist/fancy-example.css';
 
 function BankOption(props) {
   return (
     <div>
+      {/*
+       <a style={{paddingTop: "9.5px",paddingBottom: "9.5px"}} className="btn-primary"  href="https://www.transfree.co.uk/" target="_blank">Pay your transfer</a>
+      */}
       <p className="instruction">Please select the bank below:</p>
       <ul>
         {
@@ -15,7 +26,9 @@ function BankOption(props) {
         }
         <li onClick={() => props.transferBankBNI('bni')}><img src="../static/images/bank_logos/bni.png"/> <span>Bank BNI</span></li>
         <li onClick={() => props.transferBankBCA('bca')}><img src="../static/images/bank_logos/bca.png"/> <span>Bank BCA</span></li>
+        <li onClick={() => props.transferBankMandiri('mandiri')}><img src="../static/images/bank_logos/mandiri.png"/> <span>Bank Mandiri</span></li>
       </ul>
+
       <style jsx>{`
         p {
           text-align: center;
@@ -57,6 +70,7 @@ function BankOption(props) {
 function EmailInstruction(props) {
   return (
     <div>
+    {/*
       <p className="instruction">Please check your email below:</p>
       <div className="payment-details">
         <div className="list-item">
@@ -64,8 +78,32 @@ function EmailInstruction(props) {
           <span className="right bold">{props.data.email}</span>
         </div>
       </div>
+      */}
+      {/* <div className="payment-details">
+        <p style={{margin:"0px !important"}}>Transfer Reference 
+      <br/>
+      "Your last name + Today's date" (E.g. Adi22)
+      <br/>
+       Note: Please state the reference number that allows us to identify you.
+      </p>
+      </div> */}
       <p>We will send payment instruction to your email. Confirm by clicking the button below</p>
-      <span className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_email')}>Send payment instruction to email</span>
+      <Accordion>   
+        <AccordionItem>
+            <AccordionItemHeading>
+                <AccordionItemButton>
+                    Is it safe to use Transfree service?
+                </AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel id={"isItSafe"}>
+                <p>
+                  Yes, you are in a trusted company. We are legally incorporated as PT Pelita Transfer Nusantara, office at Innovation Room Kemnaker RI. We are the official partner of Indonesian Community in several countries and collaborating with the governement.
+                  <a href="../index#row-footer" target="_blank"> See our Partners & Collaboratos </a>
+                </p>
+            </AccordionItemPanel>
+        </AccordionItem>   
+      </Accordion>
+      <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_email')}>Send payment instruction to email</span>
       <style jsx>{`
         .list-item {
           display: flex;
@@ -112,8 +150,24 @@ function VAGenerated(props) {
           <span className="right bold">{props.vaNumber}</span>
         </div>
       </div>
+      <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('virtual_account')}>Continue</span>
       <p>Please follow the instruction of your bank to transfer money into virtual account number.</p>
-      <span className="btn-primary" onClick={() => props.addOrder('virtual_account')}>Continue</span>
+      <Accordion>
+        <AccordionItem>
+            <AccordionItemHeading>
+                <AccordionItemButton>
+                    Is it safe to use Transfree service?
+                </AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel id={"isItSafe"}>
+                <p>
+                  Yes, you are in a trusted company. We are legally incorporated as PT Pelita Transfer Nusantara, office at Innovation Room Kemnaker RI. We are the official partner of Indonesian Community in several countries and collaborating with the governement. 
+                  <a href="../index#row-footer" target="_blank"> See our Partners & Collaboratos </a>
+                </p>
+            </AccordionItemPanel>
+        </AccordionItem>
+      </Accordion>
+      
       <style jsx>{`
         .list-item {
           display: flex;
@@ -164,12 +218,41 @@ function TransferBankBCA(props) {
           <span className="right">206 37 555 67</span>
         </div>
       </div>
+      {/* <div className="payment-details">
+        <p style={{margin:"0px !important"}}>Transfer Reference 
+      <br/>
+      "Your last name + Today's date" (E.g. Adi22)
+      <br/>
+       Note: Please state the reference number that allows us to identify you.
+      </p>
+      </div> */}
+      <p>Please check all of the details above are correct and check your email for the notification</p>
 
-      <p>Please check all of the details above are correct to speed up the process.
-      We also email you the instruction. We will notify you via email once your payment has been confirmed.</p>
+      <p><span className="received-on-weekend" >Please pay with your own bank account. If you are paying from different account, your payment is considered invalid</span></p>
 
-      <span className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_bca')}>Continue</span>
+      <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_bca')}>Continue</span>
+      
+      <Accordion>
+        <AccordionItem>
+            <AccordionItemHeading>
+                <AccordionItemButton>
+                    Is it safe to use Transfree service?
+                </AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel id={"isItSafe"}>
+                <p>
+                  Yes, you are in a trusted company. We are legally incorporated as PT Pelita Transfer Nusantara, office at Innovation Room Kemnaker RI. We are the official partner of Indonesian Community in several countries and collaborating with the governement.
+                  <a href="../index#row-footer" target="_blank"> See our Partners & Collaboratos </a>
+                </p>
+            </AccordionItemPanel>
+        </AccordionItem>
+      </Accordion>
+
       <style jsx>{`
+      .received-on-weekend {
+        font-family: 'Campton-Bold', sans-serif;
+        color: #e79635
+      }
         .list-item {
           display: flex;
           width: 100%;
@@ -210,6 +293,7 @@ function TransferBankBCA(props) {
         .btn-primary {
           width: 100%;
           padding: 15px 0;
+          margin : 20px 2;
         }
         .btn-danger {
           background: transparent;
@@ -254,12 +338,38 @@ function TransferBankBNI(props) {
           <span className="right">07 5555 4711</span>
         </div>
       </div>
+      {/* <div className="payment-details">
+        <p style={{margin:"0px !important"}}>Transfer Reference 
+      <br/>
+      "Your last name + Today's date" (E.g. Adi22)
+      <br/>
+       Note: Please state the reference number that allows us to identify you.
+      </p>
+      </div> */}
+      <p>Please check all of the details above are correct and check your email for the notification</p>
+      <p><span className="received-on-weekend" >Please pay with your own bank account. If you are paying from different account, your payment is considered invalid</span></p>
 
-      <p>Please check all of the details above are correct to speed up the process.
-      We also email you the instruction. We will notify you via email once your payment has been confirmed.</p>
-
-      <span className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_bni')}>Continue</span>
+      <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_bni')}>Continue</span>
+      <Accordion>
+        <AccordionItem>
+            <AccordionItemHeading>
+                <AccordionItemButton>
+                    Is it safe to use Transfree service?
+                </AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel id={"isItSafe"}>
+                <p>
+                  Yes, you are in a trusted company. We are legally incorporated as PT Pelita Transfer Nusantara, office at Innovation Room Kemnaker RI. We are the official partner of Indonesian Community in several countries and collaborating with the governement.
+                  <a href="../index#row-footer" target="_blank"> See our Partners & Collaboratos </a>
+                </p>
+            </AccordionItemPanel>
+        </AccordionItem>
+      </Accordion>  
       <style jsx>{`
+      .received-on-weekend {
+        font-family: 'Campton-Bold', sans-serif;
+        color: #e79635
+      }
         .list-item {
           display: flex;
           width: 100%;
@@ -300,6 +410,7 @@ function TransferBankBNI(props) {
         .btn-primary {
           width: 100%;
           padding: 15px 0;
+          margin: 20px 2;
         }
         .btn-danger {
           background: transparent;
@@ -325,18 +436,154 @@ function TransferBankBNI(props) {
   )
 }
 
+function TransferBankMandiri(props) {
+  return(
+    <div>
+    <div className="payment-details">
+      <div className="list-item">
+        <span className="left">Bank name</span>
+        <span className="right">Mandiri</span>
+      </div>
+
+      <div className="list-item">
+        <span className="left">Account Name</span>
+        <span className="right">Pelita Transfer Nusantara</span>
+      </div>
+
+      <div className="list-item">
+          <span className="left">Account number</span>
+          <span className="right">122 00 1025188 5</span>
+        </div>
+    </div>
+    {/* <div className="payment-details">
+    <p style={{margin:"0px !important"}}>Transfer Reference 
+      <br/>
+      "Your last name + Today's date" (E.g. Adi22)
+      <br/>
+      Note: Please state the reference number that allows us to identify you.
+      </p>
+      </div> */}
+      <p>Please check all of the details above are correct and check your email for the notification</p>
+      {/**
+      <p>Please check all of the details above are correct to speed up the process.
+      We also email you the instruction. We will notify you via email once your payment has been confirmed.</p>
+       */}
+
+  
+      <p><span className="received-on-weekend" >Please pay with your own bank account. If you are paying from different account, your payment is considered invalid</span></p>
+      
+      <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_mandiri')}>Continue</span>
+      <Accordion>  
+      <AccordionItem>
+        <AccordionItemHeading>
+            <AccordionItemButton>
+            Is it safe to use Transfree service?
+            </AccordionItemButton>
+        </AccordionItemHeading>
+        <AccordionItemPanel id={"isItSafe"}>
+                <p>
+                  Yes, you are in a trusted company. We are legally incorporated as PT Pelita Transfer Nusantara, office at Innovation Room Kemnaker RI. We are the official partner of Indonesian Community in several countries and collaborating with the governement.
+                  <a href="../index#row-footer" target="_blank"> See our Partners & Collaboratos </a>
+                </p>
+            </AccordionItemPanel>
+    </AccordionItem>
+</Accordion>
+      <style jsx>{`
+      .received-on-weekend {
+        font-family: 'Campton-Bold', sans-serif;
+        color: #e79635
+      }
+        .list-item {
+          display: flex;
+          width: 100%;
+          margin: 10px 0;
+        }
+
+        .list-item span {
+          flex-basis: 50%;
+        }
+
+        .list-item .right {
+          text-align: right;
+          color: #15233C;
+        }
+
+        .list-item .left {
+          opacity: 0.7;
+        }
+
+        .instruction {
+          text-align: center;
+          max-width: 60%;
+          margin: 0 auto;
+        }
+
+        h2 {
+          width: 100%;
+          text-align: center;
+        }
+
+        .payment-details {
+          background-color: #EBF6FB;
+          padding: 10px 20px;
+          margin: 30px 0;
+          border-radius: 8px;
+        }
+    
+        .check{
+          text-align:center;
+          background-color:  #EBF6FB;
+          padding: 10px 10px;
+          margin-top: 30px;
+          border-radius: 8px;
+        
+        }
+
+        .btn-primary {
+          width: 100%;
+          padding: 15px 0;
+          margin: 20px 2;
+        }
+        .btn-danger {
+          background: transparent;
+          border: 2px solid #DC2020;
+          color: #DC2020;
+          padding: 8px 18px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          border-radius: 4px;
+          transition: 0.2s;
+          width: 100%;
+          padding: 15px 0;
+          margin-top: 15px;
+        }
+
+        .btn-danger:hover {
+          transform: translateY(-1px);
+        }
+    
+        }
+      `}</style>
+    </div>
+  )
+}
+
 class Pay extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isVAgenerated: false,
       isTransferBCA: false,
-      isTransferBNI: false
+      isTransferBNI: false,
+      isTransferMandiri: false
     };
 
     this.generateVA = this.generateVA.bind(this);
     this.transferBankBNI = this.transferBankBNI.bind(this);
     this.transferBankBCA = this.transferBankBCA.bind(this);
+    this.transferBankMandiri = this.transferBankMandiri.bind(this);
     this.addOrder = this.addOrder.bind(this);
   }
 
@@ -354,6 +601,12 @@ class Pay extends React.Component {
   transferBankBNI(bankName) {
     this.setState({
       isTransferBNI: true
+    })
+  }
+
+  transferBankMandiri(bankName){
+    this.setState({
+      isTransferMandiri: true
     })
   }
 
@@ -379,12 +632,14 @@ class Pay extends React.Component {
       if (this.state.isVAgenerated) {
         content = <VAGenerated vaNumber={this.props.data.vaNumber} addOrder={this.addOrder}/>;
       } else {
-        if(this.state.isTransferBCA) {
+        if(this.state.isTransferMandiri){
+          content = <TransferBankMandiri addOrder={this.addOrder}/>;
+        }else if(this.state.isTransferBCA) {
           content = <TransferBankBCA addOrder={this.addOrder}/>;
         } else if(this.state.isTransferBNI) {
           content = <TransferBankBNI addOrder={this.addOrder}/>;
         } else {
-          content = <BankOption generateVA={this.generateVA} transferBankBNI={this.transferBankBNI} transferBankBCA={this.transferBankBCA} />
+          content = <BankOption generateVA={this.generateVA} transferBankMandiri={this.transferBankMandiri} transferBankBNI={this.transferBankBNI} transferBankBCA={this.transferBankBCA} />
         }
       }
     }

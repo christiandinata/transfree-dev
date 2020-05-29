@@ -12,10 +12,11 @@ class Forgot extends React.Component {
       email: ''
     };
   }
-
+  
   static getInitialProps(ctx) {
     initialize(ctx);
   }
+
 
   handleSubmit(e) {
     e.preventDefault();

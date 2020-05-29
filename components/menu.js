@@ -9,7 +9,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
     <div className="container">
       <div id="menuToggle">
         <div className="main-cta">
-          {!isAuthenticated && <Link href="/login"><a className="btn-secondary">Log in</a></Link>}
+          {!isAuthenticated && <Link href="/login"><a className="btn-secondary-login">Log in</a></Link>}
           {isAuthenticated && <li><Link href="/logout"><a>Logout</a></Link></li>}
         </div>
         <input type="checkbox" />
@@ -21,6 +21,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
         <ul id="menu">
           {!isAuthenticated && <li><Link href="/about"><a>About</a></Link></li>}
           {!isAuthenticated && <li><Link href="/faq"><a>FAQ</a></Link></li>}
+
           {/* !isAuthenticated && <li><Link href="/"><a>How it works</a></Link></li> */}
           {isAuthenticated && isApproved && <li><Link href="/order"><a>Send money</a></Link></li>}
           {isAuthenticated && isApproved && <li><Link href="/account"><a>Transactions</a></Link></li>}
@@ -32,16 +33,17 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
       </div>
       <div className="header-container">
         <div className="logo">
-            {(isAuthenticated && (<Link href="/account"><a><img src="../static/images/transfree-logo.png"/></a></Link>)) ||
+            {(isAuthenticated && (<Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>)) ||
              (<Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>)}
         </div>
         <div className="header-menu">
           <ul>
             {!isAuthenticated && <li><Link href="/about"><a>About</a></Link></li>}
             {!isAuthenticated && <li><Link href="/faq"><a>FAQ</a></Link></li>}
+
             {/* !isAuthenticated && <li><Link href="/"><a>How it works</a></Link></li> */}
-            {isAuthenticated && isApproved && <li><Link href="/order"><a>Send money</a></Link></li>}
-            {isAuthenticated && isApproved && <li><Link href="/account"><a>Transactions</a></Link></li>}
+            {isAuthenticated && <li><Link href="/order"><a>Send money</a></Link></li>}
+            {isAuthenticated && <li><Link href="/account"><a>Transactions</a></Link></li>}
           </ul>
         </div>
         <div className="header-cta">
@@ -246,7 +248,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
         }
 
         #menuToggle {
-          padding-bottom: 30px;
+          padding-bottom: 15px;
           border-bottom: 1px solid #eaeaea;
         }
         // MENU End
@@ -269,7 +271,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
             border: none;
           }
           #menuToggle {
-            top: 20px;
+            top: 5px;
             left: 0;
           }
         }

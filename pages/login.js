@@ -14,6 +14,7 @@ class Login extends React.Component {
     };
   }
 
+
   static getInitialProps(ctx) {
     initialize(ctx);
   }
@@ -25,6 +26,8 @@ class Login extends React.Component {
       'login'
     );
   }
+
+
 
   render() {
     return (

@@ -3,6 +3,7 @@ import NumberFormat from 'react-number-format';
 import { connect } from 'react-redux';
 import orderActions from '../../redux/actions';
 
+
 class Review extends React.Component {
   saveAndContinue = (e) => {
     e.preventDefault();
@@ -16,22 +17,22 @@ class Review extends React.Component {
         <form className="form-container">
           <div className="list-header">
             <span className="left">Transfer Details</span>
-            <span className="right"><Link href="/order"><a className="link">Change</a></Link></span>
+            <span className="right"><Link href=""><a className="link" onClick={this.props.backToAmount}>Change</a></Link></span>
           </div>
 
           <div className="list-item">
             <span className="left">You send</span>
-            <span className="right bold"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value={this.props.data.fromAmount} /> {this.props.data.fromCurrency.toUpperCase()}</span>
+            <span className="right bold"><NumberFormat displayType={'text'} decimalScale={2} thousandSeparator={true} value={this.props.data.fromAmount} /> {this.props.data.fromCurrency.toUpperCase()}</span>
           </div>
 
           <div className="list-item">
             <span className="left">{this.props.data.fromCurrency.toUpperCase()}/{this.props.data.toCurrency.toUpperCase()} Conversion rates</span>
-            <span className="right"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={8} value={this.props.data.rate} /></span>
+            <span className="right"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={5} value={this.props.data.rate}  /></span>
           </div>
 
           <div className="list-item">
             <span className="left">Recipient gets</span>
-            <span className="right bold"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value={this.props.data.toAmount} /> {this.props.data.toCurrency.toUpperCase()}</span>
+            <span className="right bold"><NumberFormat  displayType={'text'} decimalScale={2} thousandSeparator={true} value={this.props.data.toAmount} /> {this.props.data.toCurrency.toUpperCase()}</span>
           </div>
 
           <div className="list-item">
@@ -47,8 +48,8 @@ class Review extends React.Component {
           </div>
 
           <div className="list-item">
-            <span className="left">Email address</span>
-            <span className="right">{this.props.data.email}</span>
+            <span className="left">Purpose Of Transfer</span>
+            <span className="right">{this.props.data.purposeTransfer}</span>
           </div>
 
           <div className="list-item">
@@ -64,9 +65,11 @@ class Review extends React.Component {
           <div className={this.props.data.toCurrency == 'idr'
                             || this.props.data.toCurrency == 'myr'
                             || this.props.data.toCurrency == 'krw'
-                            || this.props.data.toCurrency == 'hkd'? 'list-item' : 'div-hide'}>
+                            || this.props.data.toCurrency == 'hkd'
+                            || this.props.data.toCurrency == 'usd'
+                            || this.props.data.toCurrency == 'gbp' ? 'list-item' : 'div-hide'}>
             <span className="left">Account number</span>
-            <span className="right">{this.props.data.bankAccountNumber}</span>
+            <span className="right">{this.props.data.accountNumber}</span>
           </div>
 
           <div className={this.props.data.toCurrency == 'gbp' ? 'list-item' : 'div-hide'}>
@@ -74,23 +77,19 @@ class Review extends React.Component {
             <span className="right">{this.props.data.sortcode}</span>
           </div>
 
-          <div className={this.props.data.toCurrency == 'gbp' ? 'list-item' : 'div-hide'}>
-            <span className="left">Account number</span>
-            <span className="right">{this.props.data.accountNumber}</span>
-          </div>
-
-          <div className={this.props.data.toCurrency == 'eur'
-                            || this.props.data.toCurrency == 'usd'
-                            || this.props.data.toCurrency == 'aud' ? 'list-item' : 'div-hide'}>
+          <div className={this.props.data.toCurrency == 'eur' ? 'list-item' : 'div-hide'}>
             <span className="left">IBAN</span>
             <span className="right">{this.props.data.iban}</span>
           </div>
 
-          <div className={this.props.data.toCurrency == 'eur'
-                            || this.props.data.toCurrency == 'usd'
-                            || this.props.data.toCurrency == 'aud' ? 'list-item' : 'div-hide'}>
-            <span className="left">SWIFT</span>
-            <span className="right">{this.props.data.swift}</span>
+          <div className={this.props.data.toCurrency == 'usd' ? 'list-item' : 'div-hide'}>
+            <span className="left">Routing Number</span>
+            <span className="right">{this.props.data.routingNumber}</span>
+          </div>
+
+          <div className={this.props.data.toCurrency == 'aud' ? 'list-item' : 'div-hide'}>
+            <span className="left">BSB Code</span>
+            <span className="right">{this.props.data.bsbCode}</span>
           </div>
 
           <Link href="">

@@ -8,16 +8,29 @@ import actions from '../../redux/actions';
 import { getCookie } from '../../utils/cookie';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
+import Pagination from "react-js-pagination";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class OrderItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      key: null
+      key: null,
+      newPaidOutRate: 0
     }
+    
+  }
+
+  setNewPaidOutRate = (event) => {
+    event.preventDefault();
+    this.setState({
+      [event.target.name] : event.target.value
+    });
   }
 
   render() {
+    let {newPaidOutRate} = this.state;
+    console.log(newPaidOutRate);
     return (
       <div>
         <div className="container-item container-header">
@@ -27,27 +40,113 @@ class OrderItem extends React.Component {
           <div className="column currency">From</div>
           <div className="column currency">To</div>
           <div className="column currency">Payment Method</div>
+          <div className="column">Paid Out Rate</div>
           <div className="column">Action</div>
         </div>
       {this.props.orders.map((order, key) => {
+        // console.log(order);
         return (
           <div key={key} className="container-item">
             <div className="column">{moment(order.createdAt).format("DD MMM YYYY, HH:mm")}</div>
-            <div className="column">{order.senderEmail}</div>
+            <div className="column">{order.senderName}</div>
             <div className="column">{order.senderPhone}</div>
             <div className="column currency"><strong><NumberFormat value={order.fromAmount} displayType={'text'} thousandSeparator={true} decimalScale={2}/> {order.fromCurrency.toUpperCase()}</strong></div>
             <div className="column currency"><NumberFormat value={order.toAmount} displayType={'text'} thousandSeparator={true} decimalScale={2}/> {order.toCurrency.toUpperCase()}</div>
             <div className="column payment">
               {order.paymentMethod == 'direct_transfer_via_bni' ? (<img src="../static/images/bank_logos/bni.png"/>) : null}
               {order.paymentMethod == 'direct_transfer_via_bca' ? (<img src="../static/images/bank_logos/bca.png"/>) : null}
+              {order.paymentMethod == 'direct_transfer_via_mandiri' ? (<img src="../static/images/bank_logos/mandiri.png"/>) : null}
             </div>
             <div className="column">
+              <div className="text-plain">Paid Out Rate : {order.paidOutRate}</div>
+              <input name='newPaidOutRate' type='text' onChange={this.setNewPaidOutRate} placeholder={order.paidOutRate} />
+              <div className="btn-primary btn-small" onClick={() => {if (window.confirm('Are you sure want to change the paid out rate from '+ order.paidOutRate + ' to ' + newPaidOutRate))this.props.changePaidOutRate(order._id, newPaidOutRate)}}>Set</div>
+            </div>
+            <div className="column">
+              {order.completedAt > 0 ? (<div className="status approved">completed </div>) : null}
+              {order.receivedAt == 0 ? (<div onClick={() => { if (window.confirm('are you sure want to payment received this '+order.senderName))this.props.paymentReceived(order._id)}} className="btn-primary btn-small">Payment Received </div>) : null}
+              {order.completedAt == 0 ? (<div onClick={() => {if (window.confirm('Are you sure want to transfer completed this user '+order.senderName))this.props.transferCompleted(order._id)}} className="btn-primary btn-small">Transfer Completed</div>) : null}
+            </div>
+          </div>
+              )
+              
+              {/*
               {order.completedAt > 0 ? (<div className="status approved">completed</div>) : null}
-              {order.receivedAt == 0 ? (<div onClick={() => this.props.paymentReceived(order._id )} className="btn-primary btn-small">Payment Received</div>) : null}
-              {order.completedAt == 0 ? (<div onClick={() => this.props.transferCompleted(order._id )} className="btn-primary btn-small">Transfer Completed</div>) : null}
+              {order.receivedAt == 0 ?
+              order.fromCurrency == 'idr' ?
+              (<Link>
+                <a href={"#received_idr_to_valas"} className="btn-primary btn-small">Payment Received</a>
+              </Link>) 
+              :
+              (<Link>
+                <a href={"#received_valas_to_idr"} className="btn-primary btn-small">Payment Received</a>
+              </Link>) 
+              :
+              null
+
+              }
+
+            {order.receivedAt == 0 ? 
+            (<Link>
+              <a href={"#received_idr_to_valas"} className="btn-primary btn-small">Payment Received</a>
+            </Link>) 
+            : 
+            null}
+
+            {order.completedAt == 0 ? 
+            (<Link>
+              <a href={"#transfer_completed"} className="btn-primary btn-small">Transfer Completed</a>
+            </Link>) 
+            : null}
+            
+            <div className="lightbox" id={"received_valas_to_idr"}>
+              <div className="popup">
+                <a className="close" href="#">&times;</a>
+                <div className="content" >
+                <h1>Phone verification</h1>
+                  <form>
+                  <input
+                    type="tel"
+                    id="code"
+                    placeholder="Enter 6-digit verification code"
+                    value={this.state.code}
+                    onChange={e => this.setState({ code: e.target.value })}/>
+
+                  <button type="submit" className="btn-primary">{this.props.inProgress ? (
+                    <FontAwesomeIcon icon="sync-alt" spin/>
+                  ) : 'Continue'}</button>
+                </form>
+                </div>
+              </div>
+            </div>
+
+            <div className="lightbox" id={"received_idr_to_valas"}>
+              <div className="popup">
+                <a className="close" href="#">&times;</a>
+                <div className="content" >
+                <h2>ARE YOU SURE ? </h2>
+                  <a href="orders" onClick={() => this.props.paymentReceived(order._id )} className="btn-primary btn-small">YES</a>
+                  <a href="#"  className="btn-primary btn-small">NO</a>
+                </div>
+              </div>
+            </div>
+
+            <div className="lightbox" id={"transfer_completed"}>
+              <div className="popup">
+                <a className="close" href="#">&times;</a>
+                <div className="content" >
+                <h2>ARE YOU SURE ?</h2>
+                  
+                    <a href="orders" onClick={() => this.props.transferCompleted(order._id )} className="btn-primary btn-small">YES</a>
+                    <a href="#" className="btn-primary btn-small">NO</a>
+                             
+                </div>
+              </div>
+            </div>
             </div>
           </div>
         )
+        */}
 
       })}
       <style jsx>{`
@@ -97,6 +196,17 @@ class OrderItem extends React.Component {
           color: #CC0000;
         }
 
+        .btn-very-small{
+          margin-bottom: 20px;
+          padding: 8px;
+          font-size:12px;
+          margin-right: 10px;
+        }
+
+        .btn-very-small:hover{
+          cursor: pointer;
+        }
+
         .btn-small {
           margin-bottom: 20px;
           padding: 8px;
@@ -121,14 +231,19 @@ class OrderItem extends React.Component {
 class Orders extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      activePage: 1
+    }
 
     this.paymentReceived = this.paymentReceived.bind(this);
     this.transferCompleted = this.transferCompleted.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
+    this.changePaidOutRate = this.changePaidOutRate.bind(this);
   }
 
   static async getInitialProps(ctx) {
     initialize(ctx);
-    await ctx.store.dispatch(actions.getAllOrders('getAllOrders'));
+    await ctx.store.dispatch(actions.getAllOrders(1,'getAllOrders'));
   };
 
   paymentReceived(_id) {
@@ -140,7 +255,17 @@ class Orders extends React.Component {
     this.props.transferCompleted({_id: _id}, 'transferCompleted');
   }
 
+  changePaidOutRate(_id, paidOutRate){
+    this.props.changePaidOutRate({_id: _id, paidOutRate: paidOutRate}, 'changePaidOutRate');
+  }
+
+  handlePageChange(pageNumber) {
+    this.setState({activePage: pageNumber});
+    this.props.getAllOrders(pageNumber, 'getAllOrders');
+  }
+
   render() {
+    console.log(this.props.orders);
     return (
       <div>
         <Header />
@@ -153,12 +278,60 @@ class Orders extends React.Component {
                 <input type="text" placeholder="Search user"/>
               </div>
             </div>
-            <form className="form-container">
-              <OrderItem orders={this.props.orders} paymentReceived={this.paymentReceived} transferCompleted={this.transferCompleted}/>
-            </form>
+            { this.props.inProgress ? (
+              <div className="overlay">
+                <div className="overlay-content">
+                  <FontAwesomeIcon icon="sync-alt" color="white" size="4x" spin/>
+                  <p>Getting list of orders from database...</p>
+                </div>
+              </div>
+            ) : (
+              <form className="form-container">
+                <OrderItem orders={this.props.orders} changePaidOutRate={this.changePaidOutRate} paymentReceived={this.paymentReceived} transferCompleted={this.transferCompleted}/>
+                <div className="pagination-container">
+                  <Pagination
+                    activePage={this.state.activePage}
+                    itemsCountPerPage={10}
+                    totalItemsCount={this.props.totalDocs}
+                    pageRangeDisplayed={5}
+                    onChange={this.handlePageChange}
+                  />
+                </div>
+              </form>
+            )}
           </div>
         </div>
         <style jsx>{`
+          .overlay {
+            display: block;
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0, 0.9);
+            transition: 0.3s;
+            color: #fff;
+          }
+
+          .overlay-content {
+            position: relative;
+            top: 30%;
+            width: 100%;
+            text-align: center;
+            margin-top: 30px;
+          }
+
+          .overlay-content p {
+            margin: 30px auto;
+          }
+
+          .pagination-container {
+            padding: 30px 0;
+          }
+
           .container-fluid {
             align-items: flex-start;
             height; auto;
@@ -239,9 +412,15 @@ class Orders extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const orderArray = JSON.parse(state.order.orders);
-  return {
-    orders: orderArray
+  if (state.order.orders != null) {
+    return {
+      orders: state.order.orders.docs,
+      totalDocs: state.order.orders.totalDocs
+    }
+  } else {
+    return {
+      inProgress: state.order.inProgress
+    }
   }
 }
 

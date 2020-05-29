@@ -14,6 +14,44 @@ import NumberFormat from 'react-number-format';
 import orderid from 'order-id';
 import shortid from 'shortid';
 
+const PendingLayout = () => {
+  return (
+    <div className="content">
+      <div className="big-icon">
+        <img src="../static/images/document.svg"/>
+      </div>
+      <h1>Awaiting confirmation</h1>
+      <p>We are now reviewing your account details. We will send you an email & WhatsApp message once the verification process is completed.</p>
+      <p>Please contact us by email (admin@transfree.id) or WhatsApp (+44 7490 090659) for faster process.</p>
+      <style jsx>{`
+        .logo {
+          width: 100%;
+          text-align: center;
+        }
+        .big-icon img {
+          margin: 50px auto;
+        }
+        p {
+          max-width: 600px;
+          text-align: justify;
+          margin-bottom: 20px;
+        }
+        h1 {
+          margin: 0;
+        }
+        .content {
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+          align-items: center;
+          justify-content: justify;
+        }
+      `}</style>
+    </div>
+  )
+
+}
+
 class Order extends React.Component {
   constructor({ props }) {
     super(props);
@@ -36,13 +74,18 @@ class Order extends React.Component {
       sortcode: '',
       iban: '',
       swift: '',
+      routingNumber: '',
+      bsbCode: '',
       isVAgenerated: false,
       vaNumber: 0,
-      paymentMethod: ''
+      paymentMethod: '',
+      purposeTransfer: '',
+      isSaveRecipient: false
     };
 
     this.nextStep = this.nextStep.bind(this);
     this.previousStep = this.previousStep.bind(this);
+    this.backToAmount = this.backToAmount.bind(this);
     this.saveValues = this.saveValues.bind(this);
     this.generateVA = this.generateVA.bind(this);
     this.addOrder = this.addOrder.bind(this);
@@ -50,6 +93,7 @@ class Order extends React.Component {
 
   static async getInitialProps(ctx) {
     initialize(ctx);
+    await ctx.store.dispatch(actions.getAdjustedRates('IDR','getAdjustedRates'));
     await ctx.store.dispatch(actions.getRates('GBP','IDR'));
     await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
   };
@@ -92,7 +136,10 @@ class Order extends React.Component {
         sortcode: this.state.sortcode,
         iban: this.state.iban,
         swift: this.state.swift,
-        paymentMethod: this.state.paymentMethod
+        routingNumber: this.state.routingNumber,
+        bsbCode: this.state.bsbCode,
+        paymentMethod: this.state.paymentMethod,
+        isSaveRecipient: this.state.isSaveRecipient
       },
       'addOrder'
     );
@@ -114,6 +161,7 @@ class Order extends React.Component {
                   nextStep={this.nextStep}
                   previousStep={this.previousStep}
                   saveValues={this.saveValues}
+                  backToAmount={this.backToAmount}
                   data={this.state} />
       case 4:
         return <Pay
@@ -139,7 +187,11 @@ class Order extends React.Component {
       return {step: state.step - 1}
     })
   }
-
+  backToAmount() {
+    this.setState((state) => {
+      return {step: state.step - 2}
+    })
+  }
   saveValues(data) {
     Object.entries(data).map(([key,value])=>{
       this.setState({
@@ -181,6 +233,7 @@ class Order extends React.Component {
   }
 
   render() {
+    if (this.props.isApproved){
     return (
       <div>
         <Header />
@@ -278,9 +331,9 @@ class Order extends React.Component {
 
           @media only screen and (max-width: 414px) {
             .header-progress-container {
-              width: 414px;
-              font-size: 12px;
-              margin: 20px 0 10px;
+              width: 375px;
+              font-size: 10px;
+              margin: 14px 0 10px;
             }
             .header-progress-item {
               width: 80px;
@@ -296,20 +349,26 @@ class Order extends React.Component {
           }
         `}</style>
       </div>
-    )
-  }
+    )} else {
+      return (
+        <div>
+          <Header />
+          <Menu />
+          <PendingLayout />
+        </div>
+      )
+    }
+  } 
 }
 
 const mapStateToProps = (state) => {
-  const userData = JSON.parse(state.user.user_data);
   return {
-    userData: userData,
+    isApproved: !!state.user.user_data.isApproved,
+    userData: state.user.user_data,
     rate: state.rate.rates,
-    vaNumber: state.va.vaNumber
+    vaNumber: state.va.vaNumber,
+    adjustedRates: state.fx.adjustedRates
   }
 }
 
-export default connect(
-  mapStateToProps,
-  actions
-)(Order);
+export default connect(mapStateToProps, actions)(Order);

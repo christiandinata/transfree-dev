@@ -16,7 +16,7 @@ class ResetPassword extends React.Component {
   }
 
   static getInitialProps(ctx) {
-    return(ctx.query);
+    return(ctx.req.query);
     initialize(ctx);
   }
 
@@ -45,32 +45,39 @@ class ResetPassword extends React.Component {
         <div className={"success-container "+(this.props.successMessage != '' && this.props.successMessage != undefined ? "success-show" : "") }>
           {this.props.successMessage}
         </div>
-        <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
-          <label htmlFor="newPassword">New password</label><br/>
-          <input
-            type="password"
-            id="newPassword"
-            placeholder="Enter new password"
-            required
-            value={this.state.newPassword}
-            onChange={e => this.setState({ newPassword: e.target.value })}
-          />
+        { this.props.successMessage != '' && this.props.successMessage != undefined ? (
+            <form className="form-container">
+              <Link href="/login"><a className="btn-primary">Log in to my account</a></Link>
+            </form>
+          ) : (
+            <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
+              <label htmlFor="newPassword">New password</label><br/>
+              <input
+                type="password"
+                id="newPassword"
+                placeholder="Enter new password"
+                required
+                value={this.state.newPassword}
+                onChange={e => this.setState({ newPassword: e.target.value })}
+              />
 
-          <label htmlFor="verifyPassword">Confirm new password</label><br/>
-          <input
-            type="password"
-            id="verifyPassword"
-            placeholder="Confirm new password"
-            required
-            value={this.state.verifyPassword}
-            onChange={e => this.setState({ verifyPassword: e.target.value })}
-          />
+              <label htmlFor="verifyPassword">Confirm new password</label><br/>
+              <input
+                type="password"
+                id="verifyPassword"
+                placeholder="Confirm new password"
+                required
+                value={this.state.verifyPassword}
+                onChange={e => this.setState({ verifyPassword: e.target.value })}
+              />
 
-          <button type="submit" className="btn-primary">{this.props.inProgress ? (
-            <FontAwesomeIcon icon="sync-alt" spin/>
-          ) : 'Submit'}</button>
+              <button type="submit" className="btn-primary">{this.props.inProgress ? (
+                <FontAwesomeIcon icon="sync-alt" spin/>
+              ) : 'Submit'}</button>
 
-        </form>
+            </form>
+          )
+        }
       </AuthLayout>
     )
   }

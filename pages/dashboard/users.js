@@ -6,6 +6,8 @@ import initialize from '../../utils/initialize';
 import actions from '../../redux/actions';
 import { getCookie } from '../../utils/cookie';
 import moment from 'moment';
+import Pagination from "react-js-pagination";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class UserItem extends React.Component {
   constructor(props) {
@@ -19,50 +21,58 @@ class UserItem extends React.Component {
     this.props.approveUser(uid);
   }
 
+  delete(uid) {
+    this.props.deleteUser(uid);
+  }
+
   render() {
     return (
       <div>
-        <div className="container-item container-header">
-          <div className="column">Name</div>
-          <div className="column">Email</div>
-          <div className="column">Gender</div>
-          <div className="column">Date of Birth</div>
-          <div className="column">ID Type</div>
-          <div className="column">ID Number</div>
-          <div className="column">Photo of ID</div>
-          <div className="column">Photo of Face</div>
-          <div className="column">Status</div>
-        </div>
-      {this.props.users.map((user, key) => {
-        return (
-          <div key={key} className="container-item">
-            <div className="column">{user.fullname}</div>
-            <div className="column">{user.email}</div>
-            <div className="column">{user.gender}</div>
-            <div className="column">{user.pob}, {moment(user.dob).format("DD MMM YYYY")}</div>
-            <div className="column">{user.idType}</div>
-            <div className="column">{user.idNumber}</div>
-            <div className="column">
-              <a href={"#photoId"+key}><img src={user.photoId} className="thumbnail"/></a>
-              <a href="#_" className="lightbox" id={"photoId"+key}><img src={user.photoId}/></a>
-            </div>
-            <div className="column">
-              <a href={"#photoFace"+key}><img src={user.photoFace} className="thumbnail"/></a>
-              <a href="#_" className="lightbox" id={"photoFace"+key}><img src={user.photoFace}/></a>
-            </div>
-            <div className="column action">
-              {user.isApproved ?
-                (<div className="status approved">approved</div>) :
-                (<div><div className="status pending">pending</div><div onClick={() => this.approve(user._id )} className="btn-primary btn-small">Approve</div></div>)}
-            </div>
-          </div>
-        )
+        <table>
+          <tbody>
+            <tr className="container-item container-header">
+              <th className="column fullname">Name</th>
+              <th className="column email">Email</th>
+              <th className="column gender">Gender</th>
+              <th className="column dob">Date of Birth</th>
+              <th className="column idType">ID Type</th>
+              <th className="column idNumber">ID Number</th>
+              <th className="column status">Status</th>
+            </tr>
+          {this.props.users.map((user, key) => {
+            return (
+              <tr key={key} className="container-item">
+                <td className="column">{user.fullname}</td>
+                <td className="column">{user.email}</td>
+                <td className="column">{user.gender}</td>
+                <td className="column">{user.pob}, {moment(user.dob).format("DD MMM YYYY")}</td>
+                <td className="column">{user.idType}</td>
+                <td className="column">{user.idNumber}</td>
+                <td className="column action">
+                  {user.isApproved ?
+                    (<div className="status approved">approved</div>) :
+                    (<div><div className="status pending">pending</div><div onClick={() => { if(window.confirm('Are you sure want to approve this '+user.fullname)) this.approve(user._id )}} className="btn-primary btn-small">Approve</div></div>)
+                  }
+                  <div onClick={() => { if (window.confirm('Are you sure you want to delete this '+user.fullname)) this.delete(user._id) } } className="btn-danger btn-small">Delete</div>
+                </td>
+              </tr>
+            )
 
-      })}
+          })}
+        </tbody>
+      </table>
       <style jsx>{`
+        table {
+          border-collapse: collapse;
+          min-width: 1280px;
+        }
+
+        td, th {
+          border: 1px solid #eaeaea;
+          border-collapse: collapse;
+        }
         .container-item {
           width; 100%;
-          display: flex;
           border-bottom: 1px solid #eaeaea;
           text-align: left;
           font-size: 14px;
@@ -77,19 +87,40 @@ class UserItem extends React.Component {
         }
 
         .column {
-          flex: 1;
           overflow-wrap: break-word;
-          margin: 10px;
+          padding: 10px;
+        }
+
+        .fullname,
+        .email {
+          width: 200px;
+        }
+
+        .gender {
+          width: 100px;
+        }
+
+        .dob {
+          width: 180px;
+        }
+
+        .idType,
+        .idNumber {
+          width: 100px;
+        }
+
+        .photoId,
+        .photoFace {
+          width: 150px;
+        }
+
+        .status {
+          width: 100px;
         }
 
         .thumbnail {
           max-width: 40%;
           margin: 0 auto;
-        }
-
-        .action {
-          display: flex;
-          flex-direction: column;
         }
 
         /** LIGHTBOX MARKUP **/
@@ -157,16 +188,30 @@ class UserItem extends React.Component {
 class Users extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      activePage: 1
+    }
     this.approveUser = this.approveUser.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
   }
 
   static async getInitialProps(ctx) {
     initialize(ctx);
-    await ctx.store.dispatch(actions.getAllUsers({},'getAllUsers'));
+    await ctx.store.dispatch(actions.getAllUsers(1,'getAllUsers'));
   };
 
   approveUser(uid) {
     this.props.approveUser({uid: uid}, 'approveUser');
+  }
+
+  deleteUser(uid) {
+    this.props.deleteUser({uid: uid}, 'deleteUser');
+  }
+
+  handlePageChange(pageNumber) {
+    this.setState({activePage: pageNumber});
+    this.props.getAllUsers(pageNumber, 'getAllUsers');
   }
 
   render() {
@@ -182,16 +227,61 @@ class Users extends React.Component {
                 <input type="text" placeholder="Search user"/>
               </div>
             </div>
-            <form className="form-container">
-              <UserItem users={this.props.users} approveUser={this.approveUser}/>
-            </form>
+            { this.props.inProgress ? (
+              <div className="overlay">
+                <div className="overlay-content">
+                  <FontAwesomeIcon icon="sync-alt" color="white" size="4x" spin/>
+                  <p>Getting list of users from database...</p>
+                </div>
+              </div>
+            ) : (
+              <form className="form-container">
+                <UserItem users={this.props.users} approveUser={this.approveUser} deleteUser={this.deleteUser} totalDocs={this.props.totalDocs}/>
+                <div className="pagination-container">
+                  <Pagination
+                    activePage={this.state.activePage}
+                    itemsCountPerPage={10}
+                    totalItemsCount={this.props.totalDocs}
+                    pageRangeDisplayed={5}
+                    onChange={this.handlePageChange}
+                  />
+                </div>
+              </form>
+            )}
           </div>
         </div>
         <style jsx>{`
+          .overlay {
+            display: block;
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0, 0.9);
+            transition: 0.3s;
+            color: #fff;
+          }
+
+          .overlay-content {
+            position: relative;
+            top: 30%;
+            width: 100%;
+            text-align: center;
+            margin-top: 30px;
+          }
+
+          .overlay-content p {
+            margin: 30px auto;
+          }
+
           .container-fluid {
             align-items: flex-start;
             height; auto;
           }
+
           .container-fixed {
             max-width: 1280px;
             margin: 50px auto;
@@ -201,6 +291,7 @@ class Users extends React.Component {
             width: 1280px;
             height: auto;
             margin: 30px auto;
+            padding: 0;
             background: #FFFFFF;
             box-shadow: 0 10px 30px 0 rgba(0,0,0,0.10);
             border-radius: 8px;
@@ -261,6 +352,9 @@ class Users extends React.Component {
             margin: 20px auto;
           }
 
+          .pagination-container {
+            padding: 30px 0;
+          }
         `}</style>
       </div>
     )
@@ -268,9 +362,15 @@ class Users extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const users = JSON.parse(state.user.user_data_array);
-  return {
-    users: users
+  if (state.user.user_data_array != null) {
+    return {
+      users: state.user.user_data_array.docs,
+      totalDocs: state.user.user_data_array.totalDocs
+    }
+  } else {
+    return {
+      inProgress: state.user.inProgress
+    }
   }
 }
 

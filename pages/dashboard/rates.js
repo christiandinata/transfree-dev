@@ -18,7 +18,11 @@ class Rates extends React.Component {
     super(props);
     this.state = {
       upperMargin: 0,
-      lowerMargin: 0
+      lowerMargin: 0,
+      idrToGbpOos: 'false',
+      gbpToIdrOos: 'false',
+      idrToEurOos: 'false',
+      eurToIdrOos: 'false'
     }
   }
 
@@ -31,14 +35,25 @@ class Rates extends React.Component {
   componentDidMount() {
     this.setState({
       upperMargin: this.props.adjustedRates.upperMargin,
-      lowerMargin: this.props.adjustedRates.lowerMargin
+      lowerMargin: this.props.adjustedRates.lowerMargin,
+      idrToGbpOos: this.props.adjustedRates.idrToGbpOos,
+      gbpToIdrOos: this.props.adjustedRates.gbpToIdrOos,
+      idrToEurOos: this.props.adjustedRates.idrToEurOos,
+      eurToIdrOos: this.props.adjustedRates.eurToIdrOos
     })
   }
 
   handleSubmit(e) {
     e.preventDefault();
     this.props.updateRates(
-      { base: 'IDR', upperMargin: this.state.upperMargin, lowerMargin: this.state.lowerMargin },
+      { base: 'IDR', 
+       upperMargin: this.state.upperMargin, 
+       lowerMargin: this.state.lowerMargin,
+       idrToGbpOos: this.state.idrToGbpOos, 
+       gbpToIdrOos: this.state.gbpToIdrOos, 
+       idrToEurOos: this.state.idrToEurOos, 
+       eurToIdrOos: this.state.eurToIdrOos
+      },
       'updateRates'
     );
   }
@@ -56,14 +71,13 @@ class Rates extends React.Component {
             <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
               <div className="left">
                 <h3>Live FX rates</h3>
-                <p>1 IDR equals</p>
                 <ul>
-                  <li><FormattedNumber value={1/this.props.rates.MYR} /> MYR</li>
-                  <li><FormattedNumber value={1/this.props.rates.KRW} /> KRW</li>
-                  <li><FormattedNumber value={1/this.props.rates.GBP} /> GBP</li>
-                  <li><FormattedNumber value={1/this.props.rates.USD} /> USD</li>
-                  <li><FormattedNumber value={1/this.props.rates.EUR} /> EUR</li>
-                  <li><FormattedNumber value={1/this.props.rates.HKD} /> HKD</li>
+                  <li>1 MYR equals <FormattedNumber value={1/this.props.rates.MYR} /> IDR</li>
+                  <li>1 KRW equals <FormattedNumber value={1/this.props.rates.KRW} /> IDR</li>
+                  <li>1 GBP equals <FormattedNumber value={1/this.props.rates.GBP} /> IDR</li>
+                  <li>1 USD equals <FormattedNumber value={1/this.props.rates.USD} /> IDR</li>
+                  <li>1 EUR equals <FormattedNumber value={1/this.props.rates.EUR} /> IDR</li>
+                  <li>1 HKD equals <FormattedNumber value={1/this.props.rates.HKD} /> IDR</li>
                 </ul>
               </div>
               <div className="right">
@@ -89,6 +103,50 @@ class Rates extends React.Component {
                   <FontAwesomeIcon icon="sync-alt" spin/>
                 ) : 'Update'}</button>
               </div>
+            </form>
+            <div className="list-header">
+              <h2>Out Of Stock Settings</h2>
+            </div>
+            <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
+             
+              <div className="right">
+
+                <label>IDR to GBP</label><br/>
+                <input
+                  type="tel"
+                  id="idrToGbpOos"
+                  placeholder="100"
+                  value={this.state.idrToGbpOos}
+                  onChange={e => this.setState({ idrToGbpOos: e.target.value })}/>
+                <label>GBP to IDR</label><br/>
+                <input
+                  type="tel"
+                  id="gbpToIdrOos"
+                  placeholder="100"
+                  value={this.state.gbpToIdrOos}
+                  onChange={e => this.setState({ gbpToIdrOos: e.target.value })}/>
+                <label>IDR to EUR</label><br/>
+                <input
+                  type="tel"
+                  id="idrToEurOos"
+                  placeholder="100"
+                  value={this.state.idrToEurOos}
+                  onChange={e => this.setState({ idrToEurOos: e.target.value })}/>
+                <label>EUR to IDR</label><br/>
+                <input
+                  type="tel"
+                  id="eurToIdrOos"
+                  placeholder="100"
+                  value={this.state.eurToIdrOos}
+                  onChange={e => this.setState({ eurToIdrOos: e.target.value })}/>
+
+                
+
+                <button type="submit" className="btn-primary">{this.props.inProgress ? (
+                  <FontAwesomeIcon icon="sync-alt" spin/>
+                ) : 'Update'}</button>
+              </div>
+
             </form>
           </div>
         </div>

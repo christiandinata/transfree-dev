@@ -6,13 +6,13 @@ import {
 } from '../types';
 import { API } from '../../config';
 
-const updateRates = ({base, upperMargin, lowerMargin}, type) => {
+const updateRates = ({base, upperMargin, lowerMargin, idrToGbpOos,gbpToIdrOos,idrToEurOos,eurToIdrOos}, type) => {
   if (type !== 'updateRates') {
     throw new Error('Wrong API call!');
   }
   return (dispatch) => {
     dispatch({type: UPDATE_FX_PROGRESS, payload: true});
-    axios.post(`${API}/${type}`, {base, upperMargin, lowerMargin})
+    axios.post(`${API}/${type}`, {base, upperMargin, lowerMargin, idrToGbpOos,gbpToIdrOos,idrToEurOos,eurToIdrOos})
       .then((response) => {
         dispatch({type: UPDATE_FX_SUCCESS, payload: response.data.adjustedRates})
       })

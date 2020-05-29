@@ -26,6 +26,7 @@ class Phone extends React.Component {
     }
   }
 
+
   handleSubmit(e) {
     e.preventDefault();
     this.props.verify({
@@ -55,7 +56,7 @@ class Phone extends React.Component {
             {this.props.errorMessage}
           </div>
           <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
-            <label htmlFor="phone">Phone number</label><br/>
+            <label htmlFor="phone">Phone Number</label><br/>
             <PhoneInput
               placeholder="Enter phone number"
               country="GB"
@@ -80,9 +81,8 @@ class Phone extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const userData = JSON.parse(state.user.user_data);
   return {
-    email: userData.email,
+    email: state.user.user_data.email,
     isAuthenticated: !!state.authentication.token,
     inProgress: state.verify.inProgress,
     errorMessage: state.verify.errorMessage
