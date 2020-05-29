@@ -42,6 +42,7 @@ class OrderItem extends React.Component {
           <div className="column currency">Payment Method</div>
           <div className="column">Paid Out Rate</div>
           <div className="column">Action</div>
+          <div className="column">Transaction Details</div>
         </div>
       {this.props.orders.map((order, key) => {
         // console.log(order);
@@ -66,6 +67,9 @@ class OrderItem extends React.Component {
               {order.completedAt > 0 ? (<div className="status approved">completed </div>) : null}
               {order.receivedAt == 0 ? (<div onClick={() => { if (window.confirm('are you sure want to payment received this '+order.senderName))this.props.paymentReceived(order._id)}} className="btn-primary btn-small">Payment Received </div>) : null}
               {order.completedAt == 0 ? (<div onClick={() => {if (window.confirm('Are you sure want to transfer completed this user '+order.senderName))this.props.transferCompleted(order._id)}} className="btn-primary btn-small">Transfer Completed</div>) : null}
+            </div>
+            <div className="column">
+              <div className="btn-primary btn-small" onClick={() => {this.props.getDetail(order)} }>Click to see details</div>
             </div>
           </div>
               )
@@ -228,17 +232,102 @@ class OrderItem extends React.Component {
   }
 }
 
+class SamplePopUp extends React.Component{
+  constructor(props){
+    super(props);
+    console.log(props.order.senderName);
+  }
+
+  render(){
+    return(
+      <div className="popup">
+          <div className="popupcontainer">
+              <h2>{this.props.text}</h2>
+              <div className="content">
+                Sender Name &#9; : {this.props.order.senderName} <br></br>
+                Sender Email &#9; : {this.props.order.senderEmail} <br></br>
+                Sender Phone &#9; : {this.props.order.senderPhone} <br></br>
+                From &#9; : {this.props.order.fromCurrency.toUpperCase()} {this.props.order.fromAmount} <br></br>
+                To &#9; : {this.props.order.toCurrency.toUpperCase()} {this.props.order.toAmount} <br></br>
+              </div>
+              <hr></hr>
+              <div className="content">
+                Receiver Name &#9; : {this.props.order.name} <br></br>
+                Receiver Email &#9; : {this.props.order.email} <br></br>
+                Receiver Account &#9; : {this.props.order.accountNumber} <br></br>
+                Receiver Bank &#9; : {this.props.order.bankAccountNumber} <br></br>
+                Paid Out Rate &#9; : {this.props.order.paidOutRate} <br></br>
+              </div>
+              <button className="closebutton" onClick={this.props.closePopUp}>Close</button>
+          </div>
+      
+          <style jsx>{`
+              hr{
+                border : 5px solid gray;
+                border-radius : 0px;
+              }
+
+              .content{
+                text-align : left;
+              }
+
+              .popup{
+                  position: fixed;  
+                  width: 100%;  
+                  height: 100%;  
+                  top: 0;  
+                  left: 0;  
+                  right: 0;  
+                  bottom: 0;  
+                  margin: auto;  
+                  background-color: rgba(0,0,0, 0.5);  
+              }
+
+              .popupcontainer{
+                  position: absolute;  
+                  left: 25%;  
+                  right: 25%;  
+                  top: 10%;  
+                  bottom: 10%;  
+                  margin: auto;  
+                  border-radius: 20px;  
+                  background: white;
+                  padding: 8px;
+              }
+
+              .closebutton{
+                  border: 0px;
+                  background-color: rgb(37,66,95);
+                  color: white;
+                  margin-top: 10px;
+                  padding: 8px;
+                  font-size: 12px;
+              }
+
+              .closebutton:hover{
+                  cursor: pointer;
+              }
+          `}</style>
+      </div>
+    );
+  }
+}
+
 class Orders extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activePage: 1
+      activePage: 1,
+      showPopUp : false,
+      popUpOrder : null
     }
 
     this.paymentReceived = this.paymentReceived.bind(this);
     this.transferCompleted = this.transferCompleted.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
     this.changePaidOutRate = this.changePaidOutRate.bind(this);
+    this.getDetail = this.getDetail.bind(this);
+    this.togglePopUp = this.togglePopUp.bind(this);
   }
 
   static async getInitialProps(ctx) {
@@ -264,8 +353,23 @@ class Orders extends React.Component {
     this.props.getAllOrders(pageNumber, 'getAllOrders');
   }
 
+  togglePopUp(){
+    this.setState({showPopUp : !this.state.showPopUp});
+    console.log(this.state.showPopUp);
+  }
+
+  getDetail(order){
+    //this.props.getOrderById({_id: _id}, 'getOrderById');
+    console.log(order);
+    this.setState({popUpOrder : order});
+    this.togglePopUp();
+  }
+
   render() {
     console.log(this.props.orders);
+    const {showPopUp, popUpOrder} = this.state;
+    console.log(popUpOrder);
+    
     return (
       <div>
         <Header />
@@ -287,7 +391,8 @@ class Orders extends React.Component {
               </div>
             ) : (
               <form className="form-container">
-                <OrderItem orders={this.props.orders} changePaidOutRate={this.changePaidOutRate} paymentReceived={this.paymentReceived} transferCompleted={this.transferCompleted}/>
+                {showPopUp ? <SamplePopUp text='Transaction Details' order={popUpOrder} closePopUp={this.togglePopUp} /> : null}
+                <OrderItem orders={this.props.orders} getDetail={this.getDetail} changePaidOutRate={this.changePaidOutRate} paymentReceived={this.paymentReceived} transferCompleted={this.transferCompleted}/>
                 <div className="pagination-container">
                   <Pagination
                     activePage={this.state.activePage}
