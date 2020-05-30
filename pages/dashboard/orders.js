@@ -40,8 +40,8 @@ class OrderItem extends React.Component {
           <div className="column currency">From</div>
           <div className="column currency">To</div>
           <div className="column currency">Payment Method</div>
-          <div className="column">Paid Out Rate</div>
           <div className="column">DTTOT Check Beneficiary</div>
+          <div className="column">Paid Out Rate</div>
           <div className="column">Action</div>
           <div className="column">Transaction Details</div>
         </div>
