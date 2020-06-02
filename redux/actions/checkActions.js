@@ -117,6 +117,23 @@ const getCustomerSummary = (name, fromDate, toDate, type) => {
   };
 };
 
+const checkPayment = ({_id} , type) => {
+  if (type !== 'checkPayment') {
+    throw new Error('Wrong API call!');
+  }
+  return async (dispatch) => {
+    await axios.post(`${API}/${type}`, {_id})
+      .then((response) => {
+        Router.push('/dashboard/orders');
+        console.log(response);
+        //dispatch({type: USER_DATA_ARRAY, payload: response.data.user_data_array});
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  };
+};
+
 const paymentReceived = ({_id} , type) => {
   if (type !== 'paymentReceived') {
     throw new Error('Wrong API call!');
@@ -174,6 +191,7 @@ export default {
   getOrderByUid,
   getAllOrders,
   getCustomerSummary,
+  checkPayment,
   paymentReceived,
   transferCompleted,
   changePaidOutRate

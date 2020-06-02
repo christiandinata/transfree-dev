@@ -64,14 +64,13 @@ class OrderItem extends React.Component {
               <div className="column">No match found!</div>
             }
             <div className="column">
-              <div className="text-plain">Paid Out Rate : {order.paidOutRate}</div>
-              <input name='newPaidOutRate' type='text' onChange={this.setNewPaidOutRate} placeholder={order.paidOutRate} />
-              <div className="btn-primary btn-small" onClick={() => {if (window.confirm('Are you sure want to change the paid out rate from '+ order.paidOutRate + ' to ' + newPaidOutRate))this.props.changePaidOutRate(order._id, newPaidOutRate)}}>Set</div>
-            </div>
-            <div className="column">
-              {order.completedAt > 0 ? (<div className="status approved">completed </div>) : null}
-              {order.receivedAt == 0 ? (<div onClick={() => { if (window.confirm('are you sure want to payment received this '+order.senderName))this.props.paymentReceived(order._id)}} className="btn-primary btn-small">Payment Received </div>) : null}
-              {order.completedAt == 0 ? (<div onClick={() => {if (window.confirm('Are you sure want to transfer completed this user '+order.senderName))this.props.transferCompleted(order._id)}} className="btn-primary btn-small">Transfer Completed</div>) : null}
+              {((order.checkedAt > 0) && (order.receivedAt == 0)) ? (<div className="status approved">checked at {moment(order.checkedAt).format("DD MMM YYYY, HH:mm")} </div>) : null}
+              {((order.receivedAt > 0) && (order.completedAt == 0)) ? (<div className="status approved">payment received at {moment(order.receivedAt).format("DD MMM YYYY, HH:mm")}</div>) : null}
+              {order.completedAt > 0 ? (<div className="status approved">transfer completed at {moment(order.completedAt).format("DD MMM YYYY, HH:mm")}</div>) : null}
+              {order.checkedAt == 0 ? (<div onClick={() => { if (window.confirm('Are you sure want to mark this transaction as checked from '+order.senderName))this.props.checkPayment(order._id)}} className="btn-primary btn-small">Check Payment </div>) : null}
+              {((order.checkedAt !== 0) && (order.receivedAt == 0)) ? (<div onClick={() => { if (window.confirm('Are you sure want to payment received this '+order.senderName))this.props.paymentReceived(order._id)}} className="btn-primary btn-small">Payment Received </div>) : null}
+              {((order.checkedAt !== 0) && (order.receivedAt !== 0) && (order.completedAt == 0)) ? (<div onClick={() => {if (window.confirm('Are you sure want to transfer completed this user '+order.senderName))this.props.transferCompleted(order._id)}} className="btn-primary btn-small">Transfer Completed</div>) : null}
+
             </div>
             <div className="column">
               <div className="btn-primary btn-small" onClick={() => {this.props.getDetail(order)} }>Click to see details</div>
@@ -239,7 +238,7 @@ class OrderItem extends React.Component {
   }
 }
 
-class SamplePopUp extends React.Component{
+class PopUp extends React.Component{
   constructor(props){
     super(props);
     console.log(props.order.senderName);
@@ -329,6 +328,7 @@ class Orders extends React.Component {
       popUpOrder : null
     }
 
+    this.checkPayment = this.checkPayment.bind(this);
     this.paymentReceived = this.paymentReceived.bind(this);
     this.transferCompleted = this.transferCompleted.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -341,6 +341,11 @@ class Orders extends React.Component {
     initialize(ctx);
     await ctx.store.dispatch(actions.getAllOrders(1,'getAllOrders'));
   };
+
+  checkPayment(_id) {
+    console.log(_id);
+    this.props.checkPayment({_id: _id}, 'checkPayment');
+  }
 
   paymentReceived(_id) {
     console.log(_id);
@@ -362,20 +367,15 @@ class Orders extends React.Component {
 
   togglePopUp(){
     this.setState({showPopUp : !this.state.showPopUp});
-    console.log(this.state.showPopUp);
   }
 
   getDetail(order){
-    //this.props.getOrderById({_id: _id}, 'getOrderById');
-    console.log(order);
     this.setState({popUpOrder : order});
     this.togglePopUp();
   }
 
   render() {
-    console.log(this.props.orders);
     const {showPopUp, popUpOrder} = this.state;
-    console.log(popUpOrder);
     
     return (
       <div>
@@ -398,7 +398,8 @@ class Orders extends React.Component {
               </div>
             ) : (
               <form className="form-container">
-                {showPopUp ? <SamplePopUp text='Transaction Details' order={popUpOrder} closePopUp={this.togglePopUp} /> : null}
+
+                {showPopUp ? <PopUp text='Transaction Details' order={popUpOrder} closePopUp={this.togglePopUp} /> : null}
                 <OrderItem orders={this.props.orders} getDetail={this.getDetail} changePaidOutRate={this.changePaidOutRate} paymentReceived={this.paymentReceived} transferCompleted={this.transferCompleted}/>
                 <div className="pagination-container">
                   <Pagination
