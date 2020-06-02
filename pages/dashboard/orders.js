@@ -30,7 +30,6 @@ class OrderItem extends React.Component {
 
   render() {
     let {newPaidOutRate} = this.state;
-    console.log(newPaidOutRate);
     return (
       <div>
         <div className="container-item container-header">
