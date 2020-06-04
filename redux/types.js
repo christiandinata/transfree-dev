@@ -38,3 +38,7 @@ export const GENERATE_VA_NUMBER = 'generate_va_number';
 export const PHOTO_UPLOAD_PROGRESS = 'photo_upload_progress';
 export const PHOTO_UPLOAD_SUCCESS = 'photo_upload_success';
 export const PHOTO_UPLOAD_ERROR = 'photo_upload_error';
+export const GET_PHOTO_PROGRESS = 'get_photo_progress';
+export const GET_PHOTO_SUCCESS = 'get_photo_success';
+export const GET_PHOTO_ERROR = 'get_photo_error';
+export const PHOTO_DATA = 'photo_data';
