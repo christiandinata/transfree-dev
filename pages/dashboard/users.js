@@ -1,10 +1,9 @@
-import Link from 'next/link';
 import Header from '../../components/header.js';
 import MenuAdmin from '../../components/menuAdmin.js';
+import UserDetailPopUp from '../../components/dashboard/users/UserDetailPopUp';
 import { connect } from 'react-redux';
 import initialize from '../../utils/initialize';
 import actions from '../../redux/actions';
-import { getCookie } from '../../utils/cookie';
 import moment from 'moment';
 import Pagination from "react-js-pagination";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -201,77 +200,6 @@ class UserItem extends React.Component {
   }
 }
 
-class PopUp extends React.Component{
-  constructor(props){
-    super(props);
-  }
-
-  render(){
-    console.log(this.props.user);
-    console.log(this.props.photo);
-    return(
-      <div className="popup" onClick={this.props.closePopUp}>
-          <div className="popupcontainer">
-              <h2>{this.props.text}</h2>
-              <div className="content">
-                ID Name &#9; : {this.props.user.idName} <br></br>
-                ID Number &#9; : {this.props.user.idNumber} <br></br>
-                ID Type &#9; : {this.props.user.idType} <br></br>
-                ID Photo &#9; : {this.props.photo.photoId} <br></br>
-                Face Photo &#9; : {this.props.photo.photoFace} <br></br>
-              </div>
-              <button className="closebutton" onClick={this.props.closePopUp}>Close</button>
-          </div>
-      
-          <style jsx>{`
-              hr{
-                border : 5px solid gray;
-                border-radius : 0px;
-              }
-              .content{
-                text-align : left;
-              }
-              .popup{
-                  position: fixed;  
-                  width: 100%;  
-                  max-height: 100%;  
-                  top: 0;  
-                  left: 0;  
-                  right: 0;  
-                  bottom: 0;  
-                  margin: auto; 
-                  background-color: rgba(0,0,0, 0.5);  
-              }
-              .popupcontainer{
-                  position: absolute;  
-                  left: 25%;  
-                  right: 25%;  
-                  top: 10%;  
-                  bottom: 10%;  
-                  margin: auto;  
-                  border-radius: 20px;
-                  overflow: auto;
-                  max-height: calc(100vh-210px);  
-                  background: white;
-                  padding: 8px;
-              }
-              .closebutton{
-                  border: 0px;
-                  background-color: rgb(37,66,95);
-                  color: white;
-                  margin-top: 10px;
-                  padding: 8px;
-                  font-size: 12px;
-              }
-              .closebutton:hover{
-                  cursor: pointer;
-              }
-          `}</style>
-      </div>
-    );
-  }
-}
-
 class Users extends React.Component {
   constructor(props) {
     super(props);
@@ -285,7 +213,6 @@ class Users extends React.Component {
     this.handlePageChange = this.handlePageChange.bind(this);
     this.togglePopUp = this.togglePopUp.bind(this);
     this.getIdDetail = this.getIdDetail.bind(this);
-    this.getPhoto = this.getPhoto.bind(this);
   }
 
   static async getInitialProps(ctx) {
@@ -312,12 +239,7 @@ class Users extends React.Component {
 
   getIdDetail(user){
     this.setState({popUpUser : user});
-    this.getPhoto(user._id);
     this.togglePopUp();
-  }
-
-  getPhoto(_id){
-    this.props.getPhoto(_id, 'getPhoto');
   }
 
   render() {
@@ -343,19 +265,21 @@ class Users extends React.Component {
                 </div>
               </div>
             ) : (
-              <form className="form-container">
-                {showPopUp ? <PopUp text="User ID Details" photo={this.getPhoto(popUpUser._id)} user={popUpUser} closePopUp={this.togglePopUp} /> : null}
-                <UserItem users={this.props.users} getIdDetail={this.getIdDetail} approveUser={this.approveUser} deleteUser={this.deleteUser} totalDocs={this.props.totalDocs}/>
-                <div className="pagination-container">
-                  <Pagination
-                    activePage={this.state.activePage}
-                    itemsCountPerPage={10}
-                    totalItemsCount={this.props.totalDocs}
-                    pageRangeDisplayed={5}
-                    onChange={this.handlePageChange}
-                  />
-                </div>
-              </form>
+              <div>
+              {showPopUp ? <UserDetailPopUp text="User ID Details" user={popUpUser} closePopUp={this.togglePopUp} /> : ''}
+                <form className="form-container">
+                  <UserItem users={this.props.users} getIdDetail={this.getIdDetail} approveUser={this.approveUser} deleteUser={this.deleteUser} totalDocs={this.props.totalDocs}/>
+                  <div className="pagination-container">
+                    <Pagination
+                      activePage={this.state.activePage}
+                      itemsCountPerPage={10}
+                      totalItemsCount={this.props.totalDocs}
+                      pageRangeDisplayed={5}
+                      onChange={this.handlePageChange}
+                    />
+                  </div>
+                </form>
+              </div>
             )}
           </div>
         </div>

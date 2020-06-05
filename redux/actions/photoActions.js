@@ -44,21 +44,15 @@ const getPhoto = (_id, type) => {
   if(type !== 'getPhoto'){
     throw new Error('Wrong API Call!');
   }
-  return(dispatch) => {
-    console.log('ID : ' + _id);
+  return (dispatch) => {
     dispatch({type: GET_PHOTO_PROGRESS, payload: true});
     axios.get(`${API}/getPhoto/${_id}`)
       .then((response) => {
-        console.log('RESPONSE');
-        console.log(response);
-        Router.push('/dashboard/users');
-        dispatch({type: GET_PHOTO_SUCCESS, payload: successMessage});
-        dispatch({type: PHOTO_DATA, payload: response.data.photoData});
+        dispatch({type: GET_PHOTO_SUCCESS, payload: response.status});
+        dispatch({type: PHOTO_DATA, payload: response.data});
       })
       .catch((error) => {
-        console.log('ERR');
-        console.log(error);
-        dispatch({type: GET_PHOTO_ERROR, payload: errorMessage});
+        dispatch({type: GET_PHOTO_ERROR, payload: error});
       });
   }
 };

@@ -5,13 +5,15 @@ import {
   GET_PHOTO_PROGRESS,
   GET_PHOTO_SUCCESS,
   GET_PHOTO_ERROR,
+  PHOTO_DATA,
 } from '../types';
 
 const initialState = {
   successMessage: '',
   errorMessage: '',
   inProgress: false,
-  getProgress: false
+  getProgress: false,
+  photoData: null
 };
 
 export default (state = initialState, action) => {
@@ -28,6 +30,8 @@ export default (state = initialState, action) => {
       return { successMessage: action.payload};
     case GET_PHOTO_ERROR:
       return { errorMessage : action.payload};
+    case PHOTO_DATA:
+      return { photoData: action.payload};
     default:
       return state;
   }
