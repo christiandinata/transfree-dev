@@ -146,6 +146,7 @@ const paymentReceived = ({_id} , type) => {
         //dispatch({type: USER_DATA_ARRAY, payload: response.data.user_data_array});
       })
       .catch((error) => {
+        console.log(error);
         throw new Error(error);
       });
   };
