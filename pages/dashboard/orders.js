@@ -21,13 +21,6 @@ class OrderItem extends React.Component {
     
   }
 
-  setNewPaidOutRate = (event) => {
-    event.preventDefault();
-    this.setState({
-      [event.target.name] : event.target.value
-    });
-  }
-
   render() {
     let {newPaidOutRate} = this.state;
     return (
@@ -45,7 +38,7 @@ class OrderItem extends React.Component {
           <div className="column">Transaction Details</div>
         </div>
       {this.props.orders.map((order, key) => {
-        // console.log(order);
+  
         return (
           <div key={key} className="container-item">
             <div className="column">{moment(order.createdAt).format("DD MMM YYYY, HH:mm")}</div>
@@ -62,13 +55,16 @@ class OrderItem extends React.Component {
               <div className="column dttotWarningRaised">{`${order.dttotWarningRecipient.totalMatchFound} match${order.dttotWarningRecipient.totalMatchFound>1 ? 'es' : ''} found!`}</div> :
               <div className="column">No match found!</div>
             }
+            <div className="column">{order.paidOutRate}</div>
             <div className="column">
-              {((order.checkedAt > 0) && (order.receivedAt == 0)) ? (<div className="status approved">checked at {moment(order.checkedAt).format("DD MMM YYYY, HH:mm")} </div>) : null}
-              {((order.receivedAt > 0) && (order.completedAt == 0)) ? (<div className="status approved">payment received at {moment(order.receivedAt).format("DD MMM YYYY, HH:mm")}</div>) : null}
+              {((order.checkedAt > 0) && (order.receivedAt == 0)) ? (<div className="status approved">payment received at {moment(order.checkedAt).format("DD MMM YYYY, HH:mm")} </div>) : null}
+              {((order.receivedAt > 0) && (order.transferredAt == 0)) ? (<div className="status approved">payment checked at {moment(order.receivedAt).format("DD MMM YYYY, HH:mm")}</div>) : null}
+              {((order.transferredAt > 0) && (order.completedAt == 0)) ? (<div className="status approved">transfer processed at {moment(order.transferredAt).format("DD MMM YYYY, HH:mm")}</div>) : null}
               {order.completedAt > 0 ? (<div className="status approved">transfer completed at {moment(order.completedAt).format("DD MMM YYYY, HH:mm")}</div>) : null}
-              {order.checkedAt == 0 ? (<div onClick={() => { if (window.confirm('Are you sure want to mark this transaction as checked from '+order.senderName))this.props.checkPayment(order._id)}} className="btn-primary btn-small">Check Payment </div>) : null}
-              {((order.checkedAt !== 0) && (order.receivedAt == 0)) ? (<div onClick={() => { if (window.confirm('Are you sure want to payment received this '+order.senderName))this.props.paymentReceived(order._id)}} className="btn-primary btn-small">Payment Received </div>) : null}
-              {((order.checkedAt !== 0) && (order.receivedAt !== 0) && (order.completedAt == 0)) ? (<div onClick={() => {if (window.confirm('Are you sure want to transfer completed this user '+order.senderName))this.props.transferCompleted(order._id)}} className="btn-primary btn-small">Transfer Completed</div>) : null}
+              {order.receivedAt == 0 ? (<div onClick={() => { if (window.confirm('Are you sure want to mark this transaction as received from '+order.senderName))this.props.paymentReceived(order._id)}} className="btn-primary btn-small">Payment Received</div>) : null}
+              {((order.receivedAt !== 0) && (order.checkedAt == 0)) ? (<div onClick={() => { if (window.confirm('Are you sure want to payment received this '+order.senderName))this.props.checkPayment(order._id)}} className="btn-primary btn-small">Check Payment</div>) : null}
+              {((order.checkedAt !== 0) && (order.receivedAt !== 0) && (order.transferredAt == 0)) ? (<div onClick={() => {this.props.togglePopUpPaidOut(order)}} className="btn-primary btn-small">Process Transfer</div>) : null}
+              {((order.checkedAt !== 0) && (order.receivedAt !== 0) && (order.transferredAt !== 0) && (order.completedAt == 0)) ? (<div onClick={() => {if (window.confirm('Are you sure want to mark this transfer as completed for this user : '+order.senderName))this.props.transferCompleted(order._id)}} className="btn-primary btn-small">Transfer Completed</div>) : null}
 
             </div>
             <div className="column">
@@ -302,7 +298,7 @@ class PopUp extends React.Component{
 
               .closebutton{
                   border: 0px;
-                  background-color: rgb(37,66,95);
+                  background-color: rgb(200,66,95);
                   color: white;
                   margin-top: 10px;
                   padding: 8px;
@@ -312,6 +308,110 @@ class PopUp extends React.Component{
               .closebutton:hover{
                   cursor: pointer;
               }
+
+              
+          `}</style>
+      </div>
+    );
+  }
+}
+
+class PopUpPaidOut extends React.Component{
+  constructor(props){
+    super(props);
+    console.log(props);
+    this.state={
+      paidOutRate : 0,
+      orderId : props.order._id
+    }
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange = (event) => {
+    event.preventDefault();
+    this.setState({
+      [event.target.name] : event.target.value
+    })
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.changePaidOutRate(this.state.orderId, this.state.paidOutRate);
+    this.props.closePopUpPaidOut();
+  }
+
+  render(){
+    let {paidOutRate, orderId} = this.state;
+    console.log(orderId + " " + paidOutRate);
+    return(
+      <div className="popup" >
+          <div className="popupcontainer">
+              <h2>{this.props.text}</h2>
+              <input type="text" name="paidOutRate" onChange={this.handleChange} value={paidOutRate} />
+              <button className="acceptbutton" onClick={this.handleSubmit}>Accept</button>
+              <button className="closebutton" onClick={this.props.closePopUpPaidOut}>Cancel</button>
+          </div>
+      
+          <style jsx>{`
+              hr{
+                border : 5px solid gray;
+                border-radius : 0px;
+              }
+
+              .content{
+                text-align : left;
+              }
+
+              .popup{
+                  position: fixed;  
+                  width: 100%;  
+                  height: 100%;  
+                  top: 0;  
+                  left: 0;  
+                  right: 0;  
+                  bottom: 0;  
+                  margin: auto;  
+                  background-color: rgba(0,0,0, 0.5);  
+              }
+
+              .popupcontainer{
+                  position: absolute;  
+                  left: 25%;  
+                  right: 25%;  
+                  top: 10%;  
+                  bottom: 10%;  
+                  margin: auto;  
+                  border-radius: 20px;  
+                  background: white;
+                  padding: 8px;
+              }
+
+              .closebutton{
+                  border: 0px;
+                  background-color: rgb(200,66,95);
+                  color: white;
+                  margin-top: 10px;
+                  padding: 8px;
+                  font-size: 12px;
+              }
+
+              .closebutton:hover{
+                  cursor: pointer;
+              }
+
+              .acceptbutton{
+                border: 0px;
+                background-color: rgb(37,200,150);
+                color: white;
+                margin-top: 10px;
+                padding: 8px;
+                font-size: 12px;
+            }
+
+            .acceptbutton:hover{
+                cursor: pointer;
+            }
           `}</style>
       </div>
     );
@@ -324,6 +424,7 @@ class Orders extends React.Component {
     this.state = {
       activePage: 1,
       showPopUp : false,
+      showPopUpPaidOut : false,
       popUpOrder : null
     }
 
@@ -334,6 +435,7 @@ class Orders extends React.Component {
     this.changePaidOutRate = this.changePaidOutRate.bind(this);
     this.getDetail = this.getDetail.bind(this);
     this.togglePopUp = this.togglePopUp.bind(this);
+    this.togglePopUpPaidOut = this.togglePopUpPaidOut.bind(this);
   }
 
   static async getInitialProps(ctx) {
@@ -356,6 +458,7 @@ class Orders extends React.Component {
   }
 
   changePaidOutRate(_id, paidOutRate){
+    console.log("SENDING " + _id + " " + paidOutRate);
     this.props.changePaidOutRate({_id: _id, paidOutRate: paidOutRate}, 'changePaidOutRate');
   }
 
@@ -368,13 +471,18 @@ class Orders extends React.Component {
     this.setState({showPopUp : !this.state.showPopUp});
   }
 
+  togglePopUpPaidOut(order){
+    this.setState({popUpOrder : order})
+    this.setState({showPopUpPaidOut : !this.state.showPopUpPaidOut});
+  }
+
   getDetail(order){
     this.setState({popUpOrder : order});
     this.togglePopUp();
   }
 
   render() {
-    const {showPopUp, popUpOrder} = this.state;
+    const {showPopUp, showPopUpPaidOut, popUpOrder} = this.state;
     
     return (
       <div>
@@ -397,9 +505,9 @@ class Orders extends React.Component {
               </div>
             ) : (
               <form className="form-container">
-
+                {showPopUpPaidOut ? <PopUpPaidOut text='Set Paid Out' changePaidOutRate={this.changePaidOutRate} order={popUpOrder} closePopUpPaidOut={this.togglePopUpPaidOut} /> : null}
                 {showPopUp ? <PopUp text='Transaction Details' order={popUpOrder} closePopUp={this.togglePopUp} /> : null}
-                <OrderItem orders={this.props.orders} getDetail={this.getDetail} changePaidOutRate={this.changePaidOutRate} paymentReceived={this.paymentReceived} transferCompleted={this.transferCompleted}/>
+                <OrderItem orders={this.props.orders} getDetail={this.getDetail} togglePopUpPaidOut={this.togglePopUpPaidOut} checkPayment={this.checkPayment} paymentReceived={this.paymentReceived} transferCompleted={this.transferCompleted}/>
                 <div className="pagination-container">
                   <Pagination
                     activePage={this.state.activePage}
