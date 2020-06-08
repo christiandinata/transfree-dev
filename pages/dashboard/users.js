@@ -1,10 +1,9 @@
-import Link from 'next/link';
 import Header from '../../components/header.js';
 import MenuAdmin from '../../components/menuAdmin.js';
+import UserDetailPopUp from '../../components/dashboard/users/UserDetailPopUp';
 import { connect } from 'react-redux';
 import initialize from '../../utils/initialize';
 import actions from '../../redux/actions';
-import { getCookie } from '../../utils/cookie';
 import moment from 'moment';
 import Pagination from "react-js-pagination";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -35,8 +34,7 @@ class UserItem extends React.Component {
               <th className="column email">Email</th>
               <th className="column gender">Gender</th>
               <th className="column dob">Date of Birth</th>
-              <th className="column idType">ID Type</th>
-              <th className="column idNumber">ID Number</th>
+              <th className="column idType">ID Details</th>
               <th className="column dttotCheckStatus">DTTOT Check Status</th>
               <th className="column status">Status</th>
             </tr>
@@ -47,8 +45,12 @@ class UserItem extends React.Component {
                 <td className="column">{user.email}</td>
                 <td className="column">{user.gender}</td>
                 <td className="column">{user.pob}, {moment(user.dob).format("DD MMM YYYY")}</td>
-                <td className="column">{user.idType}</td>
-                <td className="column">{user.idNumber}</td>
+                <td className="column">
+                  {user.idNumber ? 
+                    (<div className="btn-primary btn-small" onClick={() => {this.props.getIdDetail(user)}}>Click to see details</div>) :
+                    (<div className="status pending">No ID inserted</div>)
+                  }
+                </td>
                 {user.isDttotWarningFlagRaised ?
                   <td className="column dttotWarningRaised">{`${user.dttotWarning.totalMatchFound} match${user.dttotWarning.totalMatchFound>1 ? 'es' : ''} found!`}</td> :
                   <td className="column">No match found!</td>
@@ -202,11 +204,15 @@ class Users extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activePage: 1
+      activePage: 1,
+      showPopUp : false,
+      popUpUser : null
     }
     this.approveUser = this.approveUser.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
+    this.togglePopUp = this.togglePopUp.bind(this);
+    this.getIdDetail = this.getIdDetail.bind(this);
   }
 
   static async getInitialProps(ctx) {
@@ -227,7 +233,18 @@ class Users extends React.Component {
     this.props.getAllUsers(pageNumber, 'getAllUsers');
   }
 
+  togglePopUp(){
+    this.setState({showPopUp : !this.state.showPopUp});
+  }
+
+  getIdDetail(user){
+    this.setState({popUpUser : user});
+    this.togglePopUp();
+  }
+
   render() {
+    const {showPopUp, popUpUser} = this.state;
+
     return (
       <div>
         <Header />
@@ -248,18 +265,21 @@ class Users extends React.Component {
                 </div>
               </div>
             ) : (
-              <form className="form-container">
-                <UserItem users={this.props.users} approveUser={this.approveUser} deleteUser={this.deleteUser} totalDocs={this.props.totalDocs}/>
-                <div className="pagination-container">
-                  <Pagination
-                    activePage={this.state.activePage}
-                    itemsCountPerPage={10}
-                    totalItemsCount={this.props.totalDocs}
-                    pageRangeDisplayed={5}
-                    onChange={this.handlePageChange}
-                  />
-                </div>
-              </form>
+              <div>
+              {showPopUp ? <UserDetailPopUp text="User ID Details" user={popUpUser} closePopUp={this.togglePopUp} /> : ''}
+                <form className="form-container">
+                  <UserItem users={this.props.users} getIdDetail={this.getIdDetail} approveUser={this.approveUser} deleteUser={this.deleteUser} totalDocs={this.props.totalDocs}/>
+                  <div className="pagination-container">
+                    <Pagination
+                      activePage={this.state.activePage}
+                      itemsCountPerPage={10}
+                      totalItemsCount={this.props.totalDocs}
+                      pageRangeDisplayed={5}
+                      onChange={this.handlePageChange}
+                    />
+                  </div>
+                </form>
+              </div>
             )}
           </div>
         </div>
