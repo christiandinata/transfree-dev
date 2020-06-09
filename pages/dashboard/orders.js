@@ -38,7 +38,7 @@ class OrderItem extends React.Component {
           <div className="column">Transaction Details</div>
         </div>
       {this.props.orders.map((order, key) => {
-  
+          console.log(order);
         return (
           <div key={key} className="container-item">
             <div className="column">{moment(order.createdAt).format("DD MMM YYYY, HH:mm")}</div>
@@ -57,14 +57,15 @@ class OrderItem extends React.Component {
             }
             <div className="column">{order.paidOutRate}</div>
             <div className="column">
-              {((order.checkedAt > 0) && (order.receivedAt == 0)) ? (<div className="status approved">payment received at {moment(order.checkedAt).format("DD MMM YYYY, HH:mm")} </div>) : null}
-              {((order.receivedAt > 0) && (order.transferredAt == 0)) ? (<div className="status approved">payment checked at {moment(order.receivedAt).format("DD MMM YYYY, HH:mm")}</div>) : null}
+              {((order.receivedAt > 0) && (order.checkedAt == 0)) ? (<div className="status approved">payment received at {moment(order.checkedAt).format("DD MMM YYYY, HH:mm")} </div>) : null}
+              {((order.checkedAt > 0) && (order.transferredAt == 0)) ? (<div className="status approved">payment checked at {moment(order.receivedAt).format("DD MMM YYYY, HH:mm")}</div>) : null}
               {((order.transferredAt > 0) && (order.completedAt == 0)) ? (<div className="status approved">transfer processed at {moment(order.transferredAt).format("DD MMM YYYY, HH:mm")}</div>) : null}
               {order.completedAt > 0 ? (<div className="status approved">transfer completed at {moment(order.completedAt).format("DD MMM YYYY, HH:mm")}</div>) : null}
+              
               {order.receivedAt == 0 ? (<div onClick={() => { if (window.confirm('Are you sure want to mark this transaction as received from '+order.senderName))this.props.paymentReceived(order._id)}} className="btn-primary btn-small">Payment Received</div>) : null}
-              {((order.receivedAt !== 0) && (order.checkedAt == 0)) ? (<div onClick={() => { if (window.confirm('Are you sure want to payment received this '+order.senderName))this.props.checkPayment(order._id)}} className="btn-primary btn-small">Check Payment</div>) : null}
-              {((order.checkedAt !== 0) && (order.receivedAt !== 0) && (order.transferredAt == 0)) ? (<div onClick={() => {this.props.togglePopUpPaidOut(order)}} className="btn-primary btn-small">Process Transfer</div>) : null}
-              {((order.checkedAt !== 0) && (order.receivedAt !== 0) && (order.transferredAt !== 0) && (order.completedAt == 0)) ? (<div onClick={() => {if (window.confirm('Are you sure want to mark this transfer as completed for this user : '+order.senderName))this.props.transferCompleted(order._id)}} className="btn-primary btn-small">Transfer Completed</div>) : null}
+              {((order.receivedAt !== 0) && (order.checkedAt == 0)) ? (<div onClick={() => { if (window.confirm('Are you sure want to mark this payment as checked from '+order.senderName))this.props.checkPayment(order._id)}} className="btn-primary btn-small">Check Payment</div>) : null}
+              {((order.receivedAt !== 0) && (order.checkedAt !== 0) && (order.transferredAt == 0)) ? (<div onClick={() => {this.props.togglePopUpPaidOut(order)}} className="btn-primary btn-small">Process Transfer</div>) : null}
+              {((order.receivedAt !== 0) && (order.checkedAt !== 0) && (order.transferredAt !== 0) && (order.completedAt == 0)) ? (<div onClick={() => {if (window.confirm('Are you sure want to mark this transfer as completed for this user : '+order.senderName))this.props.transferCompleted(order._id)}} className="btn-primary btn-small">Transfer Completed</div>) : null}
 
             </div>
             <div className="column">
