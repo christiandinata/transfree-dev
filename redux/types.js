@@ -42,3 +42,4 @@ export const GET_PHOTO_PROGRESS = 'get_photo_progress';
 export const GET_PHOTO_SUCCESS = 'get_photo_success';
 export const GET_PHOTO_ERROR = 'get_photo_error';
 export const PHOTO_DATA = 'photo_data';
+export const FEEDBACK_SUCCESS = 'feedback_success';

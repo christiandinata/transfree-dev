@@ -9,6 +9,7 @@ import vaReducer from './vaReducer';
 import photoReducer from './photoReducer';
 import fxMarginReducer from './fxMarginReducer';
 import checkReducer from './checkReducer';
+import complaintReducer from './complaintReducer';
 const rootReducer = combineReducers({
   authentication: authReducer,
   verify: verifyReducer,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   photo: photoReducer,
   fx: fxMarginReducer,
   ck: checkReducer,
+  complaint : complaintReducer
 });
 
 export default rootReducer;
