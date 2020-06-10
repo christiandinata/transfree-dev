@@ -167,6 +167,40 @@ const changePaidOutRate = ({_id, paidOutRate}, type) => {
   }
 }
 
+const cancelOrder = ({_id}, type) => {
+  if (type !== 'cancelOrder'){
+    throw new Error('Wrong API call!');
+  }
+  return async(dispatch) => {
+    await axios.post(`${API}/${type}`, {_id})
+      .then((response) => {
+        Router.push('/dashboard/orders');
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+        throw new Error(error);
+      });
+  }
+}
+
+const reOpenOrder = ({_id}, type) => {
+  if (type !== 'reOpenOrder'){
+    throw new Error('Wrong API call!');
+  }
+  return async(dispatch) => {
+    await axios.post(`${API}/${type}`, {_id})
+      .then((response) => {
+        Router.push('/dashboard/orders');
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+        throw new Error(error);
+      });
+  }
+}
+
 export default {
   addOrder,
   getOrderById,
@@ -175,5 +209,7 @@ export default {
   checkPayment,
   paymentReceived,
   transferCompleted,
-  changePaidOutRate
+  changePaidOutRate,
+  cancelOrder,
+  reOpenOrder
 };
