@@ -30,7 +30,7 @@ class Login extends React.Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header/>
         <div className="container-fluid">
         <h1>Log in to access dashboard</h1>
           <div className={"error-container "+(this.props.errorMessage != '' && this.props.errorMessage != undefined ? "error-show" : "") }>

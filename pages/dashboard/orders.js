@@ -87,16 +87,13 @@ class OrderItem extends React.Component {
               </Link>) 
               :
               null
-
               }
-
             {order.receivedAt == 0 ? 
             (<Link>
               <a href={"#received_idr_to_valas"} className="btn-primary btn-small">Payment Received</a>
             </Link>) 
             : 
             null}
-
             {order.completedAt == 0 ? 
             (<Link>
               <a href={"#transfer_completed"} className="btn-primary btn-small">Transfer Completed</a>
@@ -115,7 +112,6 @@ class OrderItem extends React.Component {
                     placeholder="Enter 6-digit verification code"
                     value={this.state.code}
                     onChange={e => this.setState({ code: e.target.value })}/>
-
                   <button type="submit" className="btn-primary">{this.props.inProgress ? (
                     <FontAwesomeIcon icon="sync-alt" spin/>
                   ) : 'Continue'}</button>
@@ -123,7 +119,6 @@ class OrderItem extends React.Component {
                 </div>
               </div>
             </div>
-
             <div className="lightbox" id={"received_idr_to_valas"}>
               <div className="popup">
                 <a className="close" href="#">&times;</a>
@@ -134,7 +129,6 @@ class OrderItem extends React.Component {
                 </div>
               </div>
             </div>
-
             <div className="lightbox" id={"transfer_completed"}>
               <div className="popup">
                 <a className="close" href="#">&times;</a>
@@ -162,7 +156,6 @@ class OrderItem extends React.Component {
           text-align: left;
           font-size: 14px;
         }
-
         .container-header {
           text-transform: uppercase;
           background-color: #F6F8FB;
@@ -170,32 +163,26 @@ class OrderItem extends React.Component {
           color: #666;
           border-radius: 4px 4px 0 0;
         }
-
         .column {
           width: 160px;
           padding: 10px;
           overflow-wrap: break-word;
         }
-
         .column img {
           margin: 0 auto;
           height: 30px;
         }
-
         .thumbnail {
           max-width: 40%;
           margin: 0 auto;
         }
-
         .status {
           text-transform: uppercase;
           font-size: 12px;
         }
-
         .approved {
           color: #32B44B;
         }
-
         .pending {
           color: #CC0000;
         }
@@ -211,20 +198,21 @@ class OrderItem extends React.Component {
           cursor: pointer;
         }
 
+
+        .btn-very-small:hover{
+          cursor: pointer;
+        }
         .btn-small {
           margin-bottom: 20px;
           padding: 8px;
           font-size: 12px;
         }
-
         .btn-small:hover {
           cursor: pointer;
         }
-
         .currency {
           text-align: right;
         }
-
         .dttotWarningRaised {
           color: #CC0000;
         }
@@ -273,6 +261,12 @@ class PopUp extends React.Component{
                 text-align : left;
               }
 
+
+              .content{
+                text-align : left;
+              }
+
+
               .popup{
                   position: fixed;  
                   width: 100%;  
@@ -309,6 +303,12 @@ class PopUp extends React.Component{
               .closebutton:hover{
                   cursor: pointer;
               }
+
+
+              .closebutton:hover{
+                  cursor: pointer;
+              }
+
 
               
           `}</style>
@@ -364,6 +364,12 @@ class PopUpPaidOut extends React.Component{
                 text-align : left;
               }
 
+
+              .content{
+                text-align : left;
+              }
+
+
               .popup{
                   position: fixed;  
                   width: 100%;  
@@ -400,6 +406,12 @@ class PopUpPaidOut extends React.Component{
               .closebutton:hover{
                   cursor: pointer;
               }
+
+
+              .closebutton:hover{
+                  cursor: pointer;
+              }
+
 
               .acceptbutton{
                 border: 0px;
@@ -536,7 +548,6 @@ class Orders extends React.Component {
             transition: 0.3s;
             color: #fff;
           }
-
           .overlay-content {
             position: relative;
             top: 30%;
@@ -544,15 +555,12 @@ class Orders extends React.Component {
             text-align: center;
             margin-top: 30px;
           }
-
           .overlay-content p {
             margin: 30px auto;
           }
-
           .pagination-container {
             padding: 30px 0;
           }
-
           .container-fluid {
             align-items: flex-start;
             height; auto;
@@ -561,7 +569,6 @@ class Orders extends React.Component {
             max-width: 1280px;
             margin: 50px auto;
           }
-
           .form-container {
             width: 1280px;
             height: auto;
@@ -571,32 +578,26 @@ class Orders extends React.Component {
             border-radius: 8px;
             text-align: center;
           }
-
           h2 {
             margin: 0;
           }
-
           .list-header {
             display: flex;
             width: 100%;
             font-size: 14px;
             margin-bottom: 30px;
           }
-
           .list-header div {
             flex-basis: 50%;
           }
-
           .list-header .right {
             text-align: right;
             align-self: flex-end;
           }
-
           .list-header a {
             text-decoration: none;
             color: #469DDD;
           }
-
           input[type=text] {
             border: 1px solid #EAEDF2;
             font-size: 14px;
@@ -610,22 +611,18 @@ class Orders extends React.Component {
             background-position: 8px 8px;
             background-repeat: no-repeat;
           }
-
           input[type=text]:focus {
             outline: none;
             border: 1px solid #469DDD;
             background-color: #ECF3FA;
             width: 300px;
           }
-
           ::placeholder {
             color: #CACACA;
           }
-
           .btn-tertiary {
             margin: 20px auto;
           }
-
         `}</style>
       </div>
     )
