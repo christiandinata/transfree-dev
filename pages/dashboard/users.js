@@ -407,4 +407,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, actions)(Users);
+  export default connect(mapStateToProps, actions)(Users);
+//  export default Users

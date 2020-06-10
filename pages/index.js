@@ -263,7 +263,7 @@ class Index extends React.Component {
                 <div className="benefits">
                   <div className="benefit-item">
                     <img src="../static/images/benefit-1.svg"/>
-                    <p>Official partner Persatuan Pelajar Indonesia</p>
+                    <p>Official partner Persatuan pelajar Indonesia</p>
                   </div>
                   <div className="benefit-item">
                     <img src="../static/images/benefit-2.svg"/>
