@@ -211,6 +211,8 @@ class Users extends React.Component {
     this.approveUser = this.approveUser.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
+    this.handleFirstPage = this.handleFirstPage.bind(this);
+    this.handleLastPage = this.handleLastPage.bind(this);
     this.togglePopUp = this.togglePopUp.bind(this);
     this.getIdDetail = this.getIdDetail.bind(this);
   }
@@ -231,6 +233,16 @@ class Users extends React.Component {
   handlePageChange(pageNumber) {
     this.setState({activePage: pageNumber});
     this.props.getAllUsers(pageNumber, 'getAllUsers');
+  }
+
+  handleFirstPage(pageNumber) {
+    // this.setState({activePage: pageNumber});
+    this.props.getAllUsers(1, 'getAllUsers');
+  }
+
+  handleLastPage(pageNumber) {
+    // this.setState({activePage: pageNumber});
+    this.props.getAllUsers(Math.ceil(this.props.totalDocs/10), 'getAllUsers');
   }
 
   togglePopUp(){
@@ -268,15 +280,11 @@ class Users extends React.Component {
               <div>
               {showPopUp ? <UserDetailPopUp text="User ID Details" user={popUpUser} closePopUp={this.togglePopUp} /> : ''}
                 <form className="form-container">
+                  {/* {this.handlePageChange} */}
                   <UserItem users={this.props.users} getIdDetail={this.getIdDetail} approveUser={this.approveUser} deleteUser={this.deleteUser} totalDocs={this.props.totalDocs}/>
-                  <div className="pagination-container">
-                    <Pagination
-                      activePage={this.state.activePage}
-                      itemsCountPerPage={10}
-                      totalItemsCount={this.props.totalDocs}
-                      pageRangeDisplayed={5}
-                      onChange={this.handlePageChange}
-                    />
+                  <div className="pagination">
+                   <a  onClick={this.handleFirstPage}><span>&laquo;</span> </a>
+                  <a  onClick={this.handleLastPage}><span>&raquo;</span></a>
                   </div>
                 </form>
               </div>
@@ -284,6 +292,22 @@ class Users extends React.Component {
           </div>
         </div>
         <style jsx>{`
+        span {
+          font-family:arial;
+          font-size:40px;
+          
+      }
+      a{
+        margin-left:100px;
+      }
+
+          .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+          }
+
+          .pagination a:hover:not(.active) {background-color: #ddd;}
+
           .overlay {
             display: block;
             height: 100%;
