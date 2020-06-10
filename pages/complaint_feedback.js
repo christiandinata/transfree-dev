@@ -1,6 +1,7 @@
 import Header from '../components/header.js';
 import Menu from '../components/menu.js';
 import Footer from '../components/footer.js';
+import ComplaintForm from '../components/form.js';
 
 const About = () => (
   <div>
@@ -9,7 +10,8 @@ const About = () => (
     <div className="row">
       <div className="container">
         <h1>Complaint and Feedback</h1>
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeyDe7OeU3wYT-xKC-kZOMuLDQsvlxUbXHsDu4st67atvCRdw/viewform?embedded=true" width="640" height="1050" frameborder="0" marginheight="0" marginwidth="0">Memuat…</iframe>
+        <ComplaintForm />
+        {/* <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeyDe7OeU3wYT-xKC-kZOMuLDQsvlxUbXHsDu4st67atvCRdw/viewform?embedded=true" width="640" height="1050" frameborder="0" marginheight="0" marginwidth="0">Memuat…</iframe> */}
       </div>
     </div>
     <style jsx>{`

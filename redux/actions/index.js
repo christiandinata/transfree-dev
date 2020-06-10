@@ -8,6 +8,7 @@ import vaActions from './vaActions';
 import photoActions from './photoActions';
 import fxMarginActions from './fxMarginActions';
 import checkActions from './checkActions';
+import complaintActions from './complaintActions';
 export default {
   ...authActions,
   ...verifyActions,
@@ -18,5 +19,6 @@ export default {
   ...vaActions,
   ...photoActions,
   ...fxMarginActions,
-  ...checkActions
+  ...checkActions,
+  ...complaintActions
 }

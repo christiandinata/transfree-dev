@@ -186,12 +186,19 @@ class OrderItem extends React.Component {
         .pending {
           color: #CC0000;
         }
+
         .btn-very-small{
           margin-bottom: 20px;
           padding: 8px;
           font-size:12px;
           margin-right: 10px;
         }
+
+        .btn-very-small:hover{
+          cursor: pointer;
+        }
+
+
         .btn-very-small:hover{
           cursor: pointer;
         }
@@ -249,9 +256,17 @@ class PopUp extends React.Component{
                 border : 5px solid gray;
                 border-radius : 0px;
               }
+
               .content{
                 text-align : left;
               }
+
+
+              .content{
+                text-align : left;
+              }
+
+
               .popup{
                   position: fixed;  
                   width: 100%;  
@@ -263,6 +278,7 @@ class PopUp extends React.Component{
                   margin: auto;  
                   background-color: rgba(0,0,0, 0.5);  
               }
+
               .popupcontainer{
                   position: absolute;  
                   left: 25%;  
@@ -274,6 +290,7 @@ class PopUp extends React.Component{
                   background: white;
                   padding: 8px;
               }
+
               .closebutton{
                   border: 0px;
                   background-color: rgb(200,66,95);
@@ -282,9 +299,17 @@ class PopUp extends React.Component{
                   padding: 8px;
                   font-size: 12px;
               }
+
               .closebutton:hover{
                   cursor: pointer;
               }
+
+
+              .closebutton:hover{
+                  cursor: pointer;
+              }
+
+
               
           `}</style>
       </div>
@@ -334,9 +359,17 @@ class PopUpPaidOut extends React.Component{
                 border : 5px solid gray;
                 border-radius : 0px;
               }
+
               .content{
                 text-align : left;
               }
+
+
+              .content{
+                text-align : left;
+              }
+
+
               .popup{
                   position: fixed;  
                   width: 100%;  
@@ -348,6 +381,7 @@ class PopUpPaidOut extends React.Component{
                   margin: auto;  
                   background-color: rgba(0,0,0, 0.5);  
               }
+
               .popupcontainer{
                   position: absolute;  
                   left: 25%;  
@@ -359,6 +393,7 @@ class PopUpPaidOut extends React.Component{
                   background: white;
                   padding: 8px;
               }
+
               .closebutton{
                   border: 0px;
                   background-color: rgb(200,66,95);
@@ -367,9 +402,17 @@ class PopUpPaidOut extends React.Component{
                   padding: 8px;
                   font-size: 12px;
               }
+
               .closebutton:hover{
                   cursor: pointer;
               }
+
+
+              .closebutton:hover{
+                  cursor: pointer;
+              }
+
+
               .acceptbutton{
                 border: 0px;
                 background-color: rgb(37,200,150);
@@ -378,6 +421,7 @@ class PopUpPaidOut extends React.Component{
                 padding: 8px;
                 font-size: 12px;
             }
+
             .acceptbutton:hover{
                 cursor: pointer;
             }

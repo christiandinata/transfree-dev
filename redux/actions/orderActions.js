@@ -99,6 +99,23 @@ const getAllOrders = (page,type) => {
   };
 };
 
+const checkPayment = ({_id} , type) => {
+  if (type !== 'checkPayment') {
+    throw new Error('Wrong API call!');
+  }
+  return async (dispatch) => {
+    await axios.post(`${API}/${type}`, {_id})
+      .then((response) => {
+        Router.push('/dashboard/orders');
+        console.log(response);
+        //dispatch({type: USER_DATA_ARRAY, payload: response.data.user_data_array});
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  };
+};
+
 const paymentReceived = ({_id} , type) => {
   if (type !== 'paymentReceived') {
     throw new Error('Wrong API call!');
@@ -133,11 +150,30 @@ const transferCompleted = ({_id} , type) => {
   };
 };
 
+const changePaidOutRate = ({_id, paidOutRate}, type) => {
+  if (type !== 'changePaidOutRate') {
+    throw new Error('Wrong API call!');
+  }
+  return async(dispatch) => {
+    await axios.post(`${API}/${type}`, {_id, paidOutRate})
+      .then((response) => {
+        Router.push('/dashboard/orders');
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+        throw new Error(error);
+      });
+  }
+}
+
 export default {
   addOrder,
   getOrderById,
   getOrderByUid,
   getAllOrders,
+  checkPayment,
   paymentReceived,
-  transferCompleted
+  transferCompleted,
+  changePaidOutRate
 };
