@@ -713,7 +713,7 @@ class Index extends React.Component {
         <div className="row features">
           <div className="container">
             <div className="feature">
-              <div className="left-feature-container"><img src="../static/images/artboard_1.svg"/></div>
+              {/* <div className="left-feature-container"><img src="../static/images/artboard_1.svg"/></div> */}
               <div className="right-feature-container">
                 <h2>Better rate for transfer</h2>
                 <p>Have you ever thought that the cost of international money
@@ -727,12 +727,12 @@ class Index extends React.Component {
                 <p>Does your family need it for an emergency? And when you use a cheaper
                  option, it sometimes takes longer for your money to arrive. Don't worry, we are here now.</p>
               </div>
-              <div className="right-feature-container">
+              {/* <div className="right-feature-container">
                 <img src="../static/images/artboard_2.svg"/>
-              </div>
+              </div> */}
             </div>
             <div className="feature">
-              <div className="left-feature-container"><img src="../static/images/artboard_3.svg"/></div>
+              {/* <div className="left-feature-container"><img src="../static/images/artboard_3.svg"/></div> */}
               <div className="right-feature-container">
                 <h2>We don't charge any fees for your transfer</h2>
                 <p>Too good to be true? But this is happening now.
@@ -1250,7 +1250,7 @@ class Index extends React.Component {
           }
 
           .features {
-            padding: 100px 0;
+            padding: 20px 0;
             background-color: #FFF;
           }
 
@@ -1266,7 +1266,7 @@ class Index extends React.Component {
 
           .features .container .row {
             display: flex;
-            margin: 100px 0;
+            padding: 30px 0;
           }
 
           .features-mobile{
@@ -1279,7 +1279,7 @@ class Index extends React.Component {
             background-repeat: no-repeat;
             background-color: #FFF;
             width: 100%;
-            min-height: 962px;
+            min-height: 632px;
             margin-top: -180px;
             padding-top: 80px;
           }
