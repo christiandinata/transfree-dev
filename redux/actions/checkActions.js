@@ -169,12 +169,12 @@ const transferCompleted = ({_id} , type) => {
   };
 };
 
-const changePaidOutRate = ({_id, paidOutRate}, type) => {
+const changePaidOutRate = ({_id, paidOutRate, partnerPaidOutRate}, type) => {
   if (type !== 'changePaidOutRate') {
     throw new Error('Wrong API call!');
   }
   return async(dispatch) => {
-    await axios.post(`${API}/${type}`, {_id, paidOutRate})
+    await axios.post(`${API}/${type}`, {_id, paidOutRate, partnerPaidOutRate})
       .then((response) => {
         Router.push('/dashboard/orders');
         console.log(response);
