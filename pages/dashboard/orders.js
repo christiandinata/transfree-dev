@@ -15,14 +15,13 @@ class OrderItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      key: null,
-      newPaidOutRate: 0
+      key: null
     }
     
   }
 
   render() {
-    let {newPaidOutRate} = this.state;
+    
     return (
       <div>
         <div className="container-item container-header">
@@ -55,7 +54,10 @@ class OrderItem extends React.Component {
               <div className="column dttotWarningRaised">{`${order.dttotWarningRecipient.totalMatchFound} match${order.dttotWarningRecipient.totalMatchFound>1 ? 'es' : ''} found!`}</div> :
               <div className="column">No match found!</div>
             }
-            <div className="column">{order.paidOutRate}</div>
+            <div className="column">
+              Paid Out Rate : {order.paidOutRate}<br></br>
+              Partner Paid Out Rate : {order.partnerPaidOutRate}
+            </div>
             <div className="column">
               {((!order.isCanceled) && (order.receivedAt > 0) && (order.checkedAt == 0)) ? (<div className="status approved">payment received at {moment(order.checkedAt).format("DD MMM YYYY, HH:mm")} </div>) : null}
               {((!order.isCanceled) && (order.checkedAt > 0) && (order.transferredAt == 0)) ? (<div className="status approved">payment checked at {moment(order.receivedAt).format("DD MMM YYYY, HH:mm")}</div>) : null}
@@ -254,6 +256,7 @@ class PopUp extends React.Component{
                 Receiver Account &#9; : {this.props.order.accountNumber} <br></br>
                 Receiver Bank &#9; : {this.props.order.bankAccountNumber} <br></br>
                 Paid Out Rate &#9; : {this.props.order.paidOutRate} <br></br>
+                Partner Paid Out Rate &#9; : {this.props.order.partnerPaidOutRate} <br></br>
               </div>
               <button className="closebutton" onClick={this.props.closePopUp}>Close</button>
           </div>
@@ -330,6 +333,7 @@ class PopUpPaidOut extends React.Component{
     console.log(props);
     this.state={
       paidOutRate : 0,
+      partnerPaidOutRate : 0,
       orderId : props.order._id
     }
 
@@ -345,18 +349,23 @@ class PopUpPaidOut extends React.Component{
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.changePaidOutRate(this.state.orderId, this.state.paidOutRate);
+    this.props.changePaidOutRate(this.state.orderId, this.state.paidOutRate, this.state.partnerPaidOutRate);
     this.props.closePopUpPaidOut();
   }
 
   render(){
-    let {paidOutRate, orderId} = this.state;
+    let {paidOutRate, partnerPaidOutRate, orderId} = this.state;
     console.log(orderId + " " + paidOutRate);
     return(
       <div className="popup" >
           <div className="popupcontainer">
               <h2>{this.props.text}</h2>
+              <label htmlFor="paidOutRate">Paid Out Rate :</label>
               <input type="text" name="paidOutRate" onChange={this.handleChange} value={paidOutRate} />
+
+              <label htmlFor="partnerPaidOutRate">Partner Paid Out Rate :</label>
+              <input type="text" name="partnerPaidOutRate" onChange={this.handleChange} value={partnerPaidOutRate} />
+
               <button className="acceptbutton" onClick={this.handleSubmit}>Accept</button>
               <button className="closebutton" onClick={this.props.closePopUpPaidOut}>Cancel</button>
           </div>
@@ -479,8 +488,8 @@ class Orders extends React.Component {
     this.props.transferCompleted({_id: _id}, 'transferCompleted');
   }
 
-  changePaidOutRate(_id, paidOutRate){
-    this.props.changePaidOutRate({_id: _id, paidOutRate: paidOutRate}, 'changePaidOutRate');
+  changePaidOutRate(_id, paidOutRate, partnerPaidOutRate){
+    this.props.changePaidOutRate({_id: _id, paidOutRate: paidOutRate, partnerPaidOutRate: partnerPaidOutRate}, 'changePaidOutRate');
   }
 
   cancelOrder(_id){
