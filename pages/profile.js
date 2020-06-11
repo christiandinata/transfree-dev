@@ -18,7 +18,7 @@ class Profile extends React.Component{
       };
 
     render(){
-         const { fullname, email, idType, idNumber, idName, gender, dob, pob, address } = this.props.users // menampung props yang telah diterima
+         const { phone,fullname, email, idType, idNumber, idName, gender, dob, pob, address } = this.props.users // menampung props yang telah diterima
         return(
             <div>
                 <Header/>
@@ -75,6 +75,11 @@ class Profile extends React.Component{
                         <div>
                             <div className = "label">Address</div>
                             <div className = "field">{address?address:'-'}
+                            </div>
+                        </div>
+                        <div>
+                            <div className = "label">Phone Number</div>
+                            <div className = "field">{phone?phone:'-'}
                             </div>
                         </div>
                     </div>

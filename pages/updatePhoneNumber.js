@@ -6,13 +6,26 @@ import actions from '../redux/actions';
 import Footer from '../components/footer.js';
 import initialize from '../utils/initialize';
 import { getCookie } from '../utils/cookie';
+import PhoneInput from 'react-phone-number-input';
+import phone from './phone.js';
 class UpdatePhoneNumber extends React.Component{
     constructor(){
         super()
         this.state={
+            code: ''
         }
     }
 
+    handleSubmit(e) {
+        e.preventDefault();
+        this.props.verify({
+            phone: this.props.phone,
+            code: this.state.code,
+        },
+          'check'
+        );
+      }
+    
       
 
     // Memanggil fungsi getUser untuk mendapatkan informasi user
@@ -22,7 +35,7 @@ class UpdatePhoneNumber extends React.Component{
       };
 
     render(){
-        const { fullname, email, idType, idNumber, idName, gender, dob, pob, address } = this.props.users // menampung props yang telah diterima
+        const { phone,fullname, email, idType, idNumber, idName, gender, dob, pob, address } = this.props.users // menampung props yang telah diterima
         return(
             <div>
                 <Header/>
@@ -31,14 +44,15 @@ class UpdatePhoneNumber extends React.Component{
                     <div className = "form-container">
                         <div>
                             <div className="label">
-                                <label>Change Your Phone Number</label>
+                                <label className="label">Change Your Phone Number</label>
                             </div>
                             <div>
                                 <input className="inputText" 
                                 type="text"
-                                 value={idNumber}
-                                county="GB"
-                                />                               
+                                name="fullname"
+                                value={phone ? phone : '-'}
+                                
+                                /> 
                             </div>
                             <input className="btn-primary" type="submit" value="Update"/>
                         </div>
@@ -77,7 +91,7 @@ class UpdatePhoneNumber extends React.Component{
                         background-color: #45a049;
                     }
                     .label{
-                        padding-bottom : 5px;
+                        padding-bottom : 10px;
                     }
                     .inputText {
                         width: 350px;
@@ -103,6 +117,7 @@ class UpdatePhoneNumber extends React.Component{
 // melakukan konversi state yang diambil dari store kedalam props
 const mapStateToProps = (state) => ({
     users: state.user.user_data,
+    phone: state.user.user_data.phone,
 })
   
 // menghubungkan props dengan Profile
