@@ -144,6 +144,14 @@ app.prepare()
       }
     });
 
+    server.get('/profile', (req, res) => {
+      if(!req.cookies.token) {
+        res.redirect('/login');
+      } else {
+        return app.render(req, res, '/profile', req.query.oid);
+      }
+    });
+
 
     server.get('*', (req, res) => {
       return handle(req, res);

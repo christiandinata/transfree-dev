@@ -49,8 +49,10 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
         <div className="header-cta">
           {!isAuthenticated && <Link href="/login"><a className="btn-secondary">Log in</a></Link>}
           {!isAuthenticated && <Link href="/signup"><a className="btn-primary">Sign up</a></Link>}
-          {isAuthenticated && <li><Link href="/updatePhoneNumber"><a>Update Phone Number</a></Link></li>}
+
+          {isAuthenticated && <li><Link href="/profile"><a>Profile</a></Link></li>}
           {isAuthenticated && <li><Link href="/logout"><a>Logout</a></Link></li>}
+          
         </div>
       </div>
     </div>

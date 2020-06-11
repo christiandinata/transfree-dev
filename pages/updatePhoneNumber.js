@@ -1,25 +1,28 @@
 import React from 'react';
 import Header from '../components/header.js';
 import Menu from '../components/menu.js';
+import { connect } from 'react-redux';
+import actions from '../redux/actions';
 import Footer from '../components/footer.js';
+import initialize from '../utils/initialize';
+import { getCookie } from '../utils/cookie';
 class UpdatePhoneNumber extends React.Component{
-    constructor({ props }) {
-        super(props);
-        this.state = {
-          phone: '+44',
-        };
-      }
+    constructor(){
+        super()
+        this.state={
+        }
+    }
 
       
 
     // Memanggil fungsi getUser untuk mendapatkan informasi user
-    // static async getInitialProps(ctx) {
-    //     initialize(ctx);
-    //     await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
-    //   };
+    static async getInitialProps(ctx) {
+        initialize(ctx);
+        await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
+      };
 
     render(){
-        //  const { fullname, email, idType, idNumber, idName, gender, dob, pob, address } = this.props.users // menampung props yang telah diterima
+        const { fullname, email, idType, idNumber, idName, gender, dob, pob, address } = this.props.users // menampung props yang telah diterima
         return(
             <div>
                 <Header/>
@@ -32,11 +35,10 @@ class UpdatePhoneNumber extends React.Component{
                             </div>
                             <div>
                                 <input className="inputText" 
-                                type="text" value={this.state.phone}
+                                type="text"
+                                 value={idNumber}
                                 county="GB"
-                                onChange={ phone => this.setState({ phone }) }
-                                
-                                />
+                                />                               
                             </div>
                             <input className="btn-primary" type="submit" value="Update"/>
                         </div>
@@ -87,7 +89,7 @@ class UpdatePhoneNumber extends React.Component{
                         box-sizing: border-box;
                     }
                     .inputText:focus {
-                        border: 2px solid green;
+                        border: 2px solid btn-primary;
                     }
                     
                  `}</style>
@@ -105,6 +107,6 @@ const mapStateToProps = (state) => ({
   
 // menghubungkan props dengan Profile
 // export default connect(mapStateToProps)(Profile);
-export default UpdatePhoneNumber;
+export default connect(mapStateToProps)(UpdatePhoneNumber);
   
 

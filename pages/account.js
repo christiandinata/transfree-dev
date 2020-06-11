@@ -346,7 +346,7 @@ const OrderLayout = ({ordersList}) => {
         }
 
         .form-container {
-          width: 768px;
+          width: 708px;
           height: auto;
           margin: 30px auto;
           padding: 0;
