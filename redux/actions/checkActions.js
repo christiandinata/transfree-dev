@@ -225,6 +225,7 @@ export default {
   getOrderById,
   getOrderByUid,
   getAllOrders,
+  getCustomerSummary,
   checkPayment,
   paymentReceived,
   transferCompleted,
