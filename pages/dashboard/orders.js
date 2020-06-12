@@ -246,7 +246,13 @@ class Orders extends React.Component {
         <div className="container-fluid">
           <div className="container-fixed">
             <div className="list-header">
-              <div className="left"><h2>Orders</h2></div>
+            <div className="left">
+              <h2>Orders</h2>
+                 <input type="text" className="date" placeholder="Start Date"></input>
+                <input type="text" className="date" placeholder="End Date"></input>
+                
+              </div>
+              <button className="button">Export</button> 
               <div className="right">
                 <input type="text" placeholder="Search user"/>
               </div>
