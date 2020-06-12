@@ -9,6 +9,7 @@ import { getCookie } from '../../utils/cookie';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import Pagination from "react-js-pagination";
+import download from 'js-file-download';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class OrderItem extends React.Component {
@@ -210,12 +211,15 @@ class Orders extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activePage: 1
+      activePage: 1,
+      startDate: " ",
+      endDate: " ",
     }
 
     this.paymentReceived = this.paymentReceived.bind(this);
     this.transferCompleted = this.transferCompleted.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
+    // this.handleExportOrders = this.handleExportOrders(this);
   }
 
   static async getInitialProps(ctx) {
@@ -237,6 +241,24 @@ class Orders extends React.Component {
     this.props.getAllOrders(pageNumber, 'getAllOrders');
   }
 
+
+  handleExportOrders = () => {
+    this.props.exportOrders(this.state.startDate, this.state.endDate, 'download')
+    this.setState({activePage: 3});
+  }
+
+  handleStartDate = () => {
+    this.setState({
+      startDate:event.target.value
+    })
+  }
+
+  handleEndDate = () => {
+    this.setState({
+      endDate:event.target.value
+    })
+  }
+
   render() {
     console.log(this.props.orders);
     return (
@@ -248,13 +270,13 @@ class Orders extends React.Component {
             <div className="list-header">
             <div className="left">
               <h2>Orders</h2>
-                 <input type="text" className="date" placeholder="Start Date"></input>
-                <input type="text" className="date" placeholder="End Date"></input>
-                
+                  <input type="date" className="date" placeholder="Start Date" name = "start-date" onChange = {this.handleStartDate} ></input>&#10140;
+                  <input type="date" className="date" placeholder="End Date" name= "end-date" onChange = {this.handleEndDate}></input>
+                  <button  className="button" name="export" onClick = {this.handleExportOrders}>Export</button> 
+                {/* </h2>    */}
               </div>
-              <button className="button">Export</button> 
               <div className="right">
-                <input type="text" placeholder="Search user"/>
+                <input type="text" className="search" placeholder="Search user"/>
               </div>
             </div>
             { this.props.inProgress ? (
@@ -281,6 +303,56 @@ class Orders extends React.Component {
           </div>
         </div>
         <style jsx>{`
+         .button {
+          background-color: #4CAF50;
+          border: 1px solid #EAEDF2;
+          border-radius: 8px;
+          color: white;
+          padding: 15px 32px;
+          display: inline;
+          font-size: 14px;
+          height:39px;
+          cursor: pointer;
+          vertical-align: middle;
+          line-height: 0px;
+         margin-left:75%;
+          margin-top:5px;
+          text-align:right;
+          position : relative;
+          
+        }
+
+          input[type=date].date {
+            border: 1px solid #EAEDF2;
+            font-size: 14px;
+            padding: 8px 8px 8px 30px;
+            border-bottom: 1px solid #eaeaea;
+            background-color: #EAEDF2;
+            border-radius: 8px;
+            width: 200px;
+            background-position: 8px 8px;
+            display: inline;
+            margin-left:10px;
+            margin-right:5px;
+           
+          }
+
+          input[type=submit].date {
+            border: 1px solid #EAEDF2;
+            font-size: 14px;
+            padding: 8px 8px 8px 30px;
+            border-bottom: 1px solid #eaeaea;
+            background-color: #EAEDF2;
+            border-radius: 8px;
+            width: 200px;
+            background-position: 8px 8px;
+            display: inline;
+            margin-left:10px;
+           
+          }
+
+
+        
           .overlay {
             display: block;
             height: 100%;
@@ -331,7 +403,8 @@ class Orders extends React.Component {
           }
 
           h2 {
-            margin: 0;
+            margin: auto;
+           display:inline;
           }
 
           .list-header {
@@ -339,6 +412,7 @@ class Orders extends React.Component {
             width: 100%;
             font-size: 14px;
             margin-bottom: 30px;
+            // display: inline;
           }
 
           .list-header div {
@@ -347,7 +421,12 @@ class Orders extends React.Component {
 
           .list-header .right {
             text-align: right;
-            align-self: flex-end;
+            align-self: flex-start;
+          }
+          
+          .list-header .left {
+            text-align: left;
+            
           }
 
           .list-header a {
@@ -355,7 +434,7 @@ class Orders extends React.Component {
             color: #469DDD;
           }
 
-          input[type=text] {
+          input[type=text].search {
             border: 1px solid #EAEDF2;
             font-size: 14px;
             padding: 8px 8px 8px 30px;
@@ -374,6 +453,13 @@ class Orders extends React.Component {
             border: 1px solid #469DDD;
             background-color: #ECF3FA;
             width: 300px;
+          }
+
+          input[type=text]:focus.date {
+            outline: none;
+            border: 1px solid #469DDD;
+            background-color: #ECF3FA;
+            width: 200px;
           }
 
           ::placeholder {
