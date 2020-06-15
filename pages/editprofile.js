@@ -34,7 +34,6 @@ class EditProfile extends React.Component {
                 <Header/>
                 <Menu/>
                 <SideBar/>
-                <p>Haideaddddddddddddddddddd</p>
             </div>
         )
     }
