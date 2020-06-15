@@ -17,6 +17,12 @@ class Profile extends React.Component{
         await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
       };
 
+      handleEditProfile = () => {
+          href('/editprofile')
+      }
+
+    
+
     render(){
          const { fullname, email, idType, idNumber, idName, gender, dob, pob, address } = this.props.users // menampung props yang telah diterima
         return(
@@ -71,9 +77,21 @@ class Profile extends React.Component{
                             <div className = "field">{address?address:'-'}
                             </div>
                         </div>
+                        <a href="/editprofile">
+                            <button style={{width:130,height:30,marginLeft:200,marginTop:80}}>Edit Profile</button>
+                        </a>
                     </div>
                 </div>
                 <style jsx>{`
+
+                    a.button {
+                        -webkit-appearance: button;
+                        -moz-appearance: button;
+                        appearance: button;
+
+                        text-decoration: none;
+                        color: initial;
+                    }
                   
                   .form-container .label{
                     opacity: 0.8;

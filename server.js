@@ -152,6 +152,14 @@ app.prepare()
       }
     });
 
+    server.get('/editprofile', (req, res) => {
+      if(!req.cookies.token) {
+        res.redirect('/login');
+      } else {
+        return app.render(req, res, '/editprofile', req.query.oid);
+      }
+    });
+
 
     server.get('*', (req, res) => {
       return handle(req, res);
