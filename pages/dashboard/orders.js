@@ -244,8 +244,7 @@ class Orders extends React.Component {
 
   handleExportOrders = () => {
     this.props.exportOrders(this.state.startDate, this.state.endDate, 'download')
-    this.setState({activePage: 3});
-  }
+  }  
 
   handleStartDate = () => {
     this.setState({
