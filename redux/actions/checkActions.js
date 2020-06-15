@@ -4,7 +4,9 @@ import {
   ORDER_DATA,
   ORDER_DATA_ARRAY,
   ORDER_DATA_ARRAY_IN_PROGRESS,
-  RECIPIENT_DATA
+  RECIPIENT_DATA,
+  SUMMARY_DATA_ARRAY,
+  SUMMARY_DATA_ARRAY_IN_PROGRESS
 } from '../types';
 import { API } from '../../config';
 import { getCookie } from '../../utils/cookie';
@@ -99,6 +101,39 @@ const getAllOrders = (page,type) => {
   };
 };
 
+const getCustomerSummary = (name, fromDate, toDate, type) => {
+  if (type !== 'getOrderSummary') {
+    throw new Error('Wrong API call!');
+  }
+  return async (dispatch) => {
+    dispatch({type: SUMMARY_DATA_ARRAY_IN_PROGRESS, payload: true});
+    await axios.get(`${API}/${type}?name=`+ name + "&from=" + fromDate + "&to=" + toDate)
+      .then((response) => {
+        dispatch({type: SUMMARY_DATA_ARRAY, payload: response.data.summary});
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  };
+};
+
+const checkPayment = ({_id} , type) => {
+  if (type !== 'checkPayment') {
+    throw new Error('Wrong API call!');
+  }
+  return async (dispatch) => {
+    await axios.post(`${API}/${type}`, {_id})
+      .then((response) => {
+        Router.push('/dashboard/orders');
+        console.log(response);
+        //dispatch({type: USER_DATA_ARRAY, payload: response.data.user_data_array});
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  };
+};
+
 const paymentReceived = ({_id} , type) => {
   if (type !== 'paymentReceived') {
     throw new Error('Wrong API call!');
@@ -111,6 +146,7 @@ const paymentReceived = ({_id} , type) => {
         //dispatch({type: USER_DATA_ARRAY, payload: response.data.user_data_array});
       })
       .catch((error) => {
+        console.log(error);
         throw new Error(error);
       });
   };
@@ -133,11 +169,31 @@ const transferCompleted = ({_id} , type) => {
   };
 };
 
+const changePaidOutRate = ({_id, paidOutRate}, type) => {
+  if (type !== 'changePaidOutRate') {
+    throw new Error('Wrong API call!');
+  }
+  return async(dispatch) => {
+    await axios.post(`${API}/${type}`, {_id, paidOutRate})
+      .then((response) => {
+        Router.push('/dashboard/orders');
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+        throw new Error(error);
+      });
+  }
+}
+
 export default {
   addOrder,
   getOrderById,
   getOrderByUid,
   getAllOrders,
+  getCustomerSummary,
+  checkPayment,
   paymentReceived,
-  transferCompleted
+  transferCompleted,
+  changePaidOutRate
 };
