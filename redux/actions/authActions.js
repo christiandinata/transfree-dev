@@ -175,11 +175,20 @@ export const resetPassword = ({ newPassword, verifyPassword, token }, type) => {
   };
 };
 
+export const onChangeUser = (value) => {
+  return {
+      type: 'user',
+      payload: value
+  }
+}
+
+
 export default {
   register,
   authenticate,
   reauthenticate,
   deauthenticate,
   forgot,
-  resetPassword
+  resetPassword,
+  onChangeUser
 };

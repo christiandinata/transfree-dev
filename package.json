@@ -28,6 +28,7 @@
     "cheerio": "^1.0.0-rc.3",
     "cookie-parser": "^1.4.4",
     "crypto-hash": "^1.2.1",
+    "dateformat": "^3.0.3",
     "express": "^4.17.1",
     "fstream": "^1.0.12",
     "i": "^0.3.6",
