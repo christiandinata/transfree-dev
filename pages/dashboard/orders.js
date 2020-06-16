@@ -691,7 +691,7 @@ class Orders extends React.Component {
           }
 
 
-          input[type=text].search {
+          
 
           input[type=text] {
 
