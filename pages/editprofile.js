@@ -10,7 +10,7 @@ import SideBar from './sidebar'
 import Profile from './profile'
 import ENV from "../config";
 import GlobalFunction from "../utils/globalFunction";
-import {  onChangeUser} from "../redux/actions/AuthActions";
+import { onChangeToken, onChangeUser, onChangeUserEmailLogin, onChangeUserPasswordLogin } from "../redux/actions/authActions";
 import Axios from 'axios';
 
 
@@ -133,40 +133,31 @@ class EditProfile extends React.Component {
         })
       }
 
-    //   updateUser = (e) => {
-    //     // let urlFetch = ENV.API + `/user?uid=${this.props.user._id}`
-    //     let urlFetch = ENV.API + `/${this.props.user._id}/user`
-    //       e.preventDefault();
-    //       const user = {
-    //         fullname: "rfrsfrs",
-    //         email: this.state.emailUser,
-    //         idType: this.state.idType,                     
-    //       }
-    //       Axios.put(urlFetch,user)
-    //         .then(res => console.log(res.data))  
-    //         alert(this.state.fullname)
-          
-    //   }
+
+      handleSubmit = event => {
+        event.preventDefault();
+        let urlFetch = ENV.API + `/${this.props.user._id}/user`
+    
+        const user = {
+          name: this.state.fullname
+        };
+    
+        Axios.put(urlFetch, { user })
+          .then(res => {
+            console.log(res);
+            console.log(res.data);
+          })
+      }
 
 
-
-
-
-      submitUser = (e) => {
-        // if (this.validateData) {
-            // this.setState({ isSpinner: true });
-            // alert(ENV.API + `/${this.props.user._id}/user`)
-            // alert(ENV.API + `/${this.props.user._id}/user`)
-            // let urlFetch = ENV.API + `/${this.props.user._id}/user`
-             let urlFetch = ENV.API_BASE_URL + `/${this.props.user._id}/user`
-             alert(this.state.fullname)
-            // let urlFetch = ENV.API + `/user?uid=${this.props.user._id}`
+      updateUser = (e) => {
+            let urlFetch = ENV.API + `/${this.props.user._id}/user`
             fetch(urlFetch,
                 {
-                    method: 'PUT',
-                    // headers: {
-                    //     "Authorization": `Bearer ${GlobalFunction.token ? GlobalFunction.token : this.props.token}`
-                    // },
+                    method: 'put',
+                    headers: {
+                        "Authorization": `Bearer ${GlobalFunction.token ? GlobalFunction.token : this.props.token}`
+                    },
                     body: JSON.stringify({
                         "fullname": this.state.fullname,
                         "email": this.state.emailUser,
@@ -193,7 +184,7 @@ class EditProfile extends React.Component {
                     user_data.dob = this.state.dob;
                     user_data.pob = this.state.pob;
                     user_data.address = this.state.address;
-                    alert("Daed")
+                    console(user_data)
 
                     
                     //  if (mode == "Registration") {
@@ -249,8 +240,8 @@ class EditProfile extends React.Component {
                     >
 
                 </input>
-                        <h1>{this.state.fullname}</h1>
-                        <button onClick={this.submitUser}>deadaedea</button>
+                        
+                        <button onClick={this.updateUser}>deadaedea</button>
             </div>
         )
     }
@@ -261,7 +252,7 @@ class EditProfile extends React.Component {
 // melakukan konversi state yang diambil dari store kedalam props
 const mapStateToProps = (state) => ({
     // users: state.user.user_data,
-       token: state.user.token,
+       token: state.authentication.token,
        user: state.user.user_data,
     //   token: state.auth.token,
     //   user: state.auth.user,

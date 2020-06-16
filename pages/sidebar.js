@@ -11,13 +11,13 @@ export default class SideBar extends Component{
             <div>
                 {/* <Header />
                 <Menu /> */}
-                <SideNav
+                <SideNav styles={sidebarStyles}
                     onSelect={(selected) => {
                         // Add your code here
                     }}
                 >
-                    <SideNav.Toggle />
-                    <SideNav.Nav defaultSelected="home">
+                    <SideNav.Toggle/>
+                    <SideNav.Nav defaultSelected="home" styles={sidebarStyles} >
                         <NavItem eventKey="home">
                             <NavIcon>
                                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
@@ -38,5 +38,12 @@ export default class SideBar extends Component{
                 </SideNav>
             </div>
         )
+    }
+}
+
+const sidebarStyles = {
+    sidebar: {
+        backgroundColor: 'dodgerblue',
+        width: '300px'
     }
 }
