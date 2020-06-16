@@ -258,6 +258,7 @@ class Index extends React.Component {
                         <a style={{paddingRight: "35px",paddingLeft: "35px",paddingTop: "9.5px",paddingBottom: "9.5px"}} className="btn-primary-3"  href="/send">Send for Living</a>
                   </div>
 
+                  <a href = "/infaq" className="btn-secondary" style={{marginLeft:20}}>Qurban Sekarang</a>
                 </div>
 
                 <div className="benefits">
@@ -882,7 +883,7 @@ class Index extends React.Component {
           border-radius: 4px;
           transition: all 0.2s ease-in-out;
           box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
-          width:222px;
+          width:140px;
         }
         .btn-primary-2 {
           background-color: #32cd32d4;

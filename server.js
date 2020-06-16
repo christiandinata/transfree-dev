@@ -152,6 +152,10 @@ app.prepare()
       }
     });
 
+    server.get('/infaq', (req, res) => {
+      return app.render(req, res, '/infaq', req.query.oid);
+    });
+
 
     server.get('*', (req, res) => {
       return handle(req, res);
