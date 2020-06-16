@@ -505,6 +505,7 @@ class Orders extends React.Component {
     this.setState({
       endDate:event.target.value
     })
+  }
 
   togglePopUp(){
     this.setState({showPopUp : !this.state.showPopUp});
@@ -670,7 +671,7 @@ class Orders extends React.Component {
             width: 100%;
             font-size: 14px;
             margin-bottom: 30px;
-            // display: inline;
+            
           }
           .list-header div {
             flex-basis: 50%;
