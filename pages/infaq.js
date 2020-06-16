@@ -7,7 +7,7 @@ import initialize from '../utils/initialize';
 import { getCookie } from '../utils/cookie';
 import e from 'express';
 
-export default class Infaq extends React.Component{
+class Infaq extends React.Component{
     constructor(){
         super()
         this.state={
@@ -15,6 +15,10 @@ export default class Infaq extends React.Component{
         }
     }
 
+    static async getInitialProps(ctx) {
+        initialize(ctx);
+        await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
+      };
    
 
     render(){
@@ -32,7 +36,6 @@ export default class Infaq extends React.Component{
                             </div>
                             <div className = "paket_list_text">
                                 <div>
-                                    
                                      <span >Domba Tipe A</span>
                                 </div>
                                 <div>
@@ -329,3 +332,12 @@ export default class Infaq extends React.Component{
     }
 
 }
+
+// melakukan konversi state yang diambil dari store kedalam props
+const mapStateToProps = (state) => ({
+    users: state.user.user_data,
+})
+  
+// menghubungkan props dengan Profile
+export default connect(mapStateToProps)(Infaq);
+  
