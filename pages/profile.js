@@ -25,12 +25,12 @@ class Profile extends React.Component{
                 <Menu/>
                 <div className = "container-fluid">
                     <div className = "form-container">
-                        <div>
+                        {/* <div>
                             <div>
                                 <a className="updatePhoneNumber btn-primary" href="/updatePhoneNumber">Update Phone Number</a>
                             </div>
                         </div>
-                        <br></br>
+                        <br></br> */}
                         <div>
                             <div className = "label">Nama</div>
                             <div className = "field">{fullname ? fullname: '-'}
@@ -77,11 +77,11 @@ class Profile extends React.Component{
                             <div className = "field">{address?address:'-'}
                             </div>
                         </div>
-                        <div>
+                        {/* <div>
                             <div className = "label">Phone Number</div>
                             <div className = "field">{phone?phone:'-'}
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <style jsx>{`
