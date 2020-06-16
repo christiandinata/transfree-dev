@@ -133,99 +133,102 @@ class EditProfile extends React.Component {
         })
       }
 
-      updateUser = (e) => {
-        // let urlFetch = ENV.API + `/user?uid=${this.props.user._id}`
-        let urlFetch = ENV.API + `/${this.props.user._id}/user`
-          e.preventDefault();
-          const user = {
-            fullname: this.state.fullname,
-            email: this.state.emailUser,
-            idType: this.state.idType,                     
-          }
-          Axios.post(urlFetch,user)
-            .then(res => console.log(res.data))  
-            alert(this.state.fullname)
+    //   updateUser = (e) => {
+    //     // let urlFetch = ENV.API + `/user?uid=${this.props.user._id}`
+    //     let urlFetch = ENV.API + `/${this.props.user._id}/user`
+    //       e.preventDefault();
+    //       const user = {
+    //         fullname: "rfrsfrs",
+    //         email: this.state.emailUser,
+    //         idType: this.state.idType,                     
+    //       }
+    //       Axios.put(urlFetch,user)
+    //         .then(res => console.log(res.data))  
+    //         alert(this.state.fullname)
           
-      }
+    //   }
 
 
 
 
 
-    //   submitUser = (e) => {
-    //     // if (this.validateData) {
-    //         // this.setState({ isSpinner: true });
-    //         // alert(ENV.API + `/${this.props.user._id}/user`)
-    //         // alert(ENV.API + `/${this.props.user._id}/user`)
-    //         // let urlFetch = ENV.API + `/${this.props.user._id}/user`
-    //         // let urlFetch = ENV.API_BASE_URL + `/${this.props.user._id}/user`
-    //         let urlFetch = ENV.API + `/user?uid=${this.props.user._id}`
-    //         fetch(urlFetch,
-    //             {
-    //                 method: 'PUT',
-    //                 headers: {
-    //                     "Authorization": `Bearer ${GlobalFunction.token ? GlobalFunction.token : this.props.token}`
-    //                 },
-    //                 body: JSON.stringify({
-    //                     "fullname": this.state.fullname,
-    //                     "email": this.state.emailUser,
-    //                     "idType": this.state.idType,
-    //                     "idNumber": this.state.idNumber,
-    //                     "idName": this.state.idName,
-    //                     "gender": this.state.gender,
-    //                     "dob": this.state.dob,
-    //                     "pob": this.state.pob,
-    //                     "address": this.state.address,
-    //                     // "isRegisStep": mode == "Registration" ? true : false
+      submitUser = (e) => {
+        // if (this.validateData) {
+            // this.setState({ isSpinner: true });
+            // alert(ENV.API + `/${this.props.user._id}/user`)
+            // alert(ENV.API + `/${this.props.user._id}/user`)
+            // let urlFetch = ENV.API + `/${this.props.user._id}/user`
+             let urlFetch = ENV.API_BASE_URL + `/${this.props.user._id}/user`
+             alert(this.state.fullname)
+            // let urlFetch = ENV.API + `/user?uid=${this.props.user._id}`
+            fetch(urlFetch,
+                {
+                    method: 'PUT',
+                    // headers: {
+                    //     "Authorization": `Bearer ${GlobalFunction.token ? GlobalFunction.token : this.props.token}`
+                    // },
+                    body: JSON.stringify({
+                        "fullname": this.state.fullname,
+                        "email": this.state.emailUser,
+                        "idType": this.state.idType,
+                        "idNumber": this.state.idNumber,
+                        "idName": this.state.idName,
+                        "gender": this.state.gender,
+                        "dob": this.state.dob,
+                        "pob": this.state.pob,
+                        "address": this.state.address,
+                        // "isRegisStep": mode == "Registration" ? true : false
                         
-    //                 })
+                    })
                     
-    //             }).then((response) => response.json()).then(async (responseJson) => {
-    //                 let user_data = this.props.user
+                }).then((response) => response.json()).then(async (responseJson) => {
+                    let user_data = this.props.user
 
-    //                 user_data.email = this.state.emailUser;
-    //                 user_data.fullname = this.state.fullname;
-    //                 user_data.idType = this.state.idType;
-    //                 user_data.idNumber = this.state.idNumber;
-    //                 user_data.idName = this.state.idName;
-    //                 user_data.gender = this.state.gender;
-    //                 user_data.dob = this.state.dob;
-    //                 user_data.pob = this.state.pob;
-    //                 user_data.address = this.state.address;
-    //                 alert(ENV.API + `/${this.props.user._id}/user`)
-    //                 // if (mode == "Registration") {
-    //                 //     // this.props.navigation.dispatch({
-    //                 //     //     type: 'Navigation/RESET',
-    //                 //     //     index: 0,
-    //                 //     //     actions: [
-    //                 //     //         { type: 'Navigation/NAVIGATE', routeName: 'LandingScreen', },
-    //                 //     //     ]
-    //                 //     // })
-    //                 //     this.props.navigation.navigate('RegisterScreen', { mode: 'Login', step: 4 })
-    //                 // } else {
-    //                 //     this.props.navigation.goBack();
-    //                 // }
+                    user_data.email = this.state.emailUser;
+                    user_data.fullname = this.state.fullname;
+                    user_data.idType = this.state.idType;
+                    user_data.idNumber = this.state.idNumber;
+                    user_data.idName = this.state.idName;
+                    user_data.gender = this.state.gender;
+                    user_data.dob = this.state.dob;
+                    user_data.pob = this.state.pob;
+                    user_data.address = this.state.address;
+                    alert("Daed")
 
-    //                  this.props.onChangeUser(user_data)
-    //                 // this.props.onChangeUserEmailLogin(this.state.emailUser)
-    //                 // this.setState({ isSpinner: false });
-    //             //     Toast.show({
-    //             //         text: 'Submit Success',
-    //             //         position: 'bottom',
-    //             //         buttonText: 'Okay',
-    //             //         type: 'success'
-    //             //     })
-    //             // }).catch((error) => {
-    //             //     Toast.show({
-    //             //         text: error,
-    //             //         position: 'bottom',
-    //             //         buttonText: 'Okay',
-    //             //         type: 'danger'
-    //             //     })
-    //             //     this.setState({ isSpinner: false });
-    //             });
-    //     // }
-    // }
+                    
+                    //  if (mode == "Registration") {
+                    //     this.props.navigation.dispatch({
+                    //         type: 'Navigation/RESET',
+                    //         index: 0,
+                    //         actions: [
+                    //             { type: 'Navigation/NAVIGATE', routeName: 'LandingScreen', },
+                    //         ]
+                    //     })
+                    //     this.props.navigation.navigate('RegisterScreen', { mode: 'Login', step: 4 })
+                    // } else {
+                    //     this.props.navigation.goBack();
+                    // }
+
+                     this.props.onChangeUser(this.user_data)
+                    //  this.props.onChangeUserEmailLogin(this.state.emailUser)
+                     this.setState({ isSpinner: false });
+                    // Toast.show({
+                    //     text: 'Submit Success',
+                    //     position: 'bottom',
+                    //     buttonText: 'Okay',
+                    //     type: 'success'
+                    // })
+                }).catch((error) => {
+                    // Toast.show({
+                    //     text: error,
+                    //     position: 'bottom',
+                    //     buttonText: 'Okay',
+                    //     type: 'danger'
+                    // })
+                    this.setState({ isSpinner: false });
+                });
+         }
+    
 
 
     render() {
@@ -247,7 +250,7 @@ class EditProfile extends React.Component {
 
                 </input>
                         <h1>{this.state.fullname}</h1>
-                        <button onClick={this.updateUser}>deadaedea</button>
+                        <button onClick={this.submitUser}>deadaedea</button>
             </div>
         )
     }

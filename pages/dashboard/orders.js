@@ -411,7 +411,7 @@ class Orders extends React.Component {
             width: 100%;
             font-size: 14px;
             margin-bottom: 30px;
-            // display: inline;
+            
           }
 
           .list-header div {
