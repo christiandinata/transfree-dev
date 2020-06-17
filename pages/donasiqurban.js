@@ -259,6 +259,9 @@ class DonasiQurban extends React.Component{
                 </div>
            </div>
            <style jsx>{` 
+                    input[type=number]::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                    }
 
                     .button {
                         background-color: #4CAF50; /* Green */
