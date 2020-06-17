@@ -25,11 +25,13 @@ class Profile extends React.Component{
                 <Menu/>
                 <div className = "container-fluid">
                     <div className = "form-container">
-                        <div>
-                            <div>
-                                <a className="updatePhoneNumber btn-primary" href="/updatePhoneNumber">Update Phone Number</a>
-                            </div>
+                    <div className="dropdown">
+                    <button className="mainmenubtn btn-primary">Edit</button>
+                        <div className="dropdown-child">
+                            <a href="">Edit Profile</a>
+                            <a href="/updatePhoneNumber">Changes Phone Number</a>
                         </div>
+                    </div>
                         <br></br>
                         <div>
                             <div className = "label">Nama</div>
@@ -116,13 +118,47 @@ class Profile extends React.Component{
                         
                     }
                     .updatePhoneNumber{
-                        width: 70%;
+                        width: 600px;
                         height: auto;
                         float:left;
                         padding:8px;
                         
                     }
-                    
+                    .mainmenubtn {
+                        color: white;
+                        border: none;
+                        cursor: pointer;
+                        padding:10px;
+                        margin-top:10px;
+
+                        
+                    }
+                    .dropdown {
+                        position: relative;
+                        display: inline-block;
+                    }
+                    .dropdown-child {
+                        display: none;
+                        background-color: #f9f9f9;
+                        min-width: 200px;
+                        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                        z-index: 1;
+                    }
+                    .dropdown-child a {
+                        color: #3c3c3c !important;
+                        padding: 15px;
+                        text-decoration: none;
+                        display: block;
+                    }
+                    .dropdown-child a:hover {
+                        color: #232323 !important;
+                        background: #f3f3f3 !important;
+                    }
+                    .dropdown:hover .dropdown-child {
+                        display: block;
+                        
+                    }
+
                  `}</style>
             </div>  
         )
