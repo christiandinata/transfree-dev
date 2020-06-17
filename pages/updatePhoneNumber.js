@@ -9,25 +9,22 @@ import { getCookie } from '../utils/cookie';
 import PhoneInput from 'react-phone-number-input';
 import phone from './phone.js';
 class UpdatePhoneNumber extends React.Component{
-    constructor(){
-        super()
-        this.state={
-            code: ''
-        }
-    }
+ state={
+     phone:'',
+ }
 
-    handleSubmit(e) {
-        e.preventDefault();
-        this.props.verify({
-            phone: this.props.phone,
-            code: this.state.code,
-        },
-          'check'
-        );
-      }
+componentDidMount = () =>{
+   // fetch(api.transfree.id).then(res => res.json()).then(response => console.log(response))
+}
+
+handlerChange= (e) => {
+    this.setState({[e.target.phone] : e.target.value})
+}
+handlerSubmit= () =>{
+    event.preventDefault()
+    console.log(this.state)
+}
     
-      
-
     // Memanggil fungsi getUser untuk mendapatkan informasi user
     static async getInitialProps(ctx) {
         initialize(ctx);
@@ -35,7 +32,6 @@ class UpdatePhoneNumber extends React.Component{
       };
 
     render(){
-        const { phone,fullname, email, idType, idNumber, idName, gender, dob, pob, address } = this.props.users // menampung props yang telah diterima
         return(
             <div>
                 <Header/>
@@ -46,15 +42,12 @@ class UpdatePhoneNumber extends React.Component{
                             <div className="label">
                                 <label className="label">Change Your Phone Number</label>
                             </div>
+                            <form onSubmit={this.handlerSubmit}>
                             <div>
-                                <input className="inputText" 
-                                type="text"
-                                name="fullname"
-                                value={phone ? phone : '-'}
-                                
-                                /> 
+                                <input className="inputText" type="text" name="phone" onChange={this.handlerChange}/> 
                             </div>
                             <input className="btn-primary" type="submit" value="Update"/>
+                            </form>
                         </div>
                     </div>
                 </div>
