@@ -152,13 +152,10 @@ app.prepare()
       }
     });
 
-    server.get('/donasiqurban', (req, res) => {
-      if(!req.cookies.token) {
-        res.redirect('/donasiqurban');
-      } else {
-        return app.render(req, res, '/donasiqurban', req.query.oid);
-      }
-    });
+    // server.get('/donasiqurban', (req, res) => {
+    //     return app.render(req, res, '/donasiqurban', req.query.oid);
+      
+    // });
 
 
     server.get('*', (req, res) => {

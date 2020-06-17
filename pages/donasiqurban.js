@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { getCookie } from '../utils/cookie';
-class DonasiQurban extends React.Component{
+export default class DonasiQurban extends React.Component{
     constructor(){
         super()
         this.state={
@@ -26,10 +26,6 @@ class DonasiQurban extends React.Component{
       
     }
 
-    static async getInitialProps(ctx) {
-        initialize(ctx);
-        await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
-      };
 
     handleTipeA = () => {
        if (event.target.value>= 0) {
@@ -141,6 +137,7 @@ class DonasiQurban extends React.Component{
            //  success:true
         })
     }
+
 
     render(){
         return(
@@ -432,11 +429,4 @@ class DonasiQurban extends React.Component{
 
 }
 
-// melakukan konversi state yang diambil dari store kedalam props
-const mapStateToProps = (state) => ({
-    users: state.user.user_data,
-})
-  
-// menghubungkan props dengan Profile
-export default connect(mapStateToProps)(DonasiQurban);
   
