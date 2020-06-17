@@ -3,6 +3,7 @@ import Menu from '../components/menu.js';
 import { connect } from 'react-redux';
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
+import GlobalFunction from '../utils/globalFunction'
 import { getCookie } from '../utils/cookie';
 export default class DonasiQurban extends React.Component{
     constructor(){
@@ -19,7 +20,7 @@ export default class DonasiQurban extends React.Component{
             totalHargaA1:0,
             totalHargaB1:0,
             totalHarga:0,
-            email:"",
+            emailUser:"",
             namaDonatur:"",
             success: false,
         }
@@ -109,6 +110,12 @@ export default class DonasiQurban extends React.Component{
             this.setState({
                 totalHarga : this.state.totalHargaA+this.state.totalHargaB+this.state.totalHargaC+this.state.totalHargaA1+this.state.totalHargaB1
             })
+     }
+
+     validate = () =>{
+         if (!GlobalFunction.va) {
+             
+         }
      }
 
     
