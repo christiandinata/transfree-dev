@@ -77,9 +77,11 @@ class Profile extends React.Component{
                             <div className = "field">{address?address:'-'}
                             </div>
                         </div>
-                        <a href="/editprofile">
+                        
+                        <a href="/phone-edit">
                             <button style={{width:130,height:30,marginLeft:200,marginTop:80}}>Edit Profile</button>
                         </a>
+                        
                     </div>
                 </div>
                 <style jsx>{`

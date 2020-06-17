@@ -10,7 +10,7 @@ import {
 import { API } from '../../config';
 
 // verify phone number
-const verify = ({ phone, email }, type) => {
+const verify = ({ phone, email }, type,condition) => {
   if (type !== 'verify') {
     throw new Error('Wrong API call!');
   }
@@ -18,7 +18,11 @@ const verify = ({ phone, email }, type) => {
     dispatch({type: VERIFY_PHONE_PROGRESS, payload: true});
     axios.post(`${API}/${type}`, {phone, email})
       .then((response) => {
-        Router.push('/phone-verification');
+        if (condition != "edit") {
+         Router.push('/phone-verification');
+        }else{
+         Router.push('/phone-edit-verification');
+        }
         dispatch({type: VERIFY_PHONE, payload: response.data.serviceSid});
         dispatch({type: USER_DATA, payload: response.data.user_data});
       })
@@ -38,7 +42,7 @@ const verify = ({ phone, email }, type) => {
 };
 
 // check phone number verification
-const check = ({ serviceSid, phone, code, email }, type) => {
+const check = ({ serviceSid, phone, code, email }, type,condition) => {
   if (type !== 'check') {
     throw new Error('Wrong API call!');
   }
@@ -46,8 +50,13 @@ const check = ({ serviceSid, phone, code, email }, type) => {
     dispatch({type: VERIFY_PHONE_PROGRESS, payload: true});
     axios.post(`${API}/${type}`, {serviceSid, phone, code, email})
       .then((response) => {
-        if(response.data.status == 'approved') {
-          Router.push('/id-verification');
+         if(response.data.status == 'approved') {
+           if (condition!='edit') {
+            Router.push('/id-verification');
+           }else{
+             alert("Update Phone Number Success")
+             Router.push('/profile')
+           }
           dispatch({type: VERIFY_PHONE_CHECK, payload: response.data.status});
           dispatch({type: USER_DATA, payload: response.data.user_data});
         } else {
@@ -60,6 +69,7 @@ const check = ({ serviceSid, phone, code, email }, type) => {
       });
   };
 };
+
 
 
 
