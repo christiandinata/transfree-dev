@@ -28,13 +28,13 @@ class Profile extends React.Component{
                     <div className="dropdown">
                     <button className="mainmenubtn btn-primary">Edit</button>
                         <div className="dropdown-child">
-                            <a href="">Edit Profile</a>
+                            <a href="/editProfile">Edit Profile</a>
                             <a href="/updatePhoneNumber">Changes Phone Number</a>
                         </div>
                     </div>
                         <br></br>
                         <div>
-                            <div className = "label">Nama</div>
+                            <div className = "label">Name</div>
                             <div className = "field">{fullname ? fullname: '-'}
                             </div>
                             
