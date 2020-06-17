@@ -204,7 +204,7 @@ export default {
   paymentReceived,
   transferCompleted,
 
-  exportOrders
+  exportOrders,
 
   changePaidOutRate
 
