@@ -11,8 +11,6 @@ import Profile from './profile'
 import ENV from "../config";
 import GlobalFunction from "../utils/globalFunction";
 import { onChangeToken, onChangeUser, onChangeUserEmailLogin, onChangeUserPasswordLogin } from "../redux/actions/authActions";
-import Axios from 'axios';
-import Link from 'next/link';
 import Router from 'next/router';
 
 
