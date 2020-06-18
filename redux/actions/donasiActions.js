@@ -1,7 +1,7 @@
 import Router from 'next/router';
 import axios from 'axios';
 import {
-  FEEDBACK_SUCCESS
+  DONASI_SUCCESS
 } from '../types';
 import { API } from '../../config';
 
@@ -13,7 +13,7 @@ const submitDonation = ({email, donatur, price}, type) => {
     return(dispatch) => {
         axios.post(`${API}/qurban/${type}`, {email, donatur, price})
         .then((response) => {
-            dispatch({type: FEEDBACK_SUCCESS, payload: 'Your transaction has been sent to our email'});
+            dispatch({type: DONASI_SUCCESS, payload: 'Your transaction has been sent to our email'});
             Router.push('/donasiqurban');
         })
         .catch((error) => {
@@ -24,5 +24,5 @@ const submitDonation = ({email, donatur, price}, type) => {
 }
 
 export default {
-  submitFeedback
+  submitDonation
 };
