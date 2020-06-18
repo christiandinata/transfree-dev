@@ -456,9 +456,9 @@ class Orders extends React.Component {
     this.getDetail = this.getDetail.bind(this);
     this.togglePopUp = this.togglePopUp.bind(this);
     this.togglePopUpPaidOut = this.togglePopUpPaidOut.bind(this);
-=======
+
     // this.handleExportOrders = this.handleExportOrders(this);
->>>>>>> update-profile
+
   }
 
   static async getInitialProps(ctx) {
@@ -490,7 +490,6 @@ class Orders extends React.Component {
     this.props.getAllOrders(pageNumber, 'getAllOrders');
   }
 
-<<<<<<< HEAD
   togglePopUp(){
     this.setState({showPopUp : !this.state.showPopUp});
   }
@@ -503,7 +502,7 @@ class Orders extends React.Component {
   getDetail(order){
     this.setState({popUpOrder : order});
     this.togglePopUp();
-=======
+
 
   handleExportOrders = () => {
     this.props.exportOrders(this.state.startDate, this.state.endDate, 'download')
@@ -519,7 +518,6 @@ class Orders extends React.Component {
     this.setState({
       endDate:event.target.value
     })
->>>>>>> update-profile
   }
 
   render() {
@@ -689,12 +687,9 @@ class Orders extends React.Component {
             text-decoration: none;
             color: #469DDD;
           }
-<<<<<<< HEAD
-          input[type=text] {
-=======
+          
 
           input[type=text].search {
->>>>>>> update-profile
             border: 1px solid #EAEDF2;
             font-size: 14px;
             padding: 8px 8px 8px 30px;
@@ -713,8 +708,8 @@ class Orders extends React.Component {
             background-color: #ECF3FA;
             width: 300px;
           }
-<<<<<<< HEAD
-=======
+
+
 
           input[type=text]:focus.date {
             outline: none;
@@ -723,7 +718,6 @@ class Orders extends React.Component {
             width: 200px;
           }
 
->>>>>>> update-profile
           ::placeholder {
             color: #CACACA;
           }

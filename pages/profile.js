@@ -17,12 +17,6 @@ class Profile extends React.Component{
         await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
       };
 
-      handleEditProfile = () => {
-          href('/editprofile')
-      }
-
-    
-
     render(){
          const { phone,fullname, email, idType, idNumber, idName, gender, dob, pob, address } = this.props.users // menampung props yang telah diterima
         return(
@@ -35,7 +29,7 @@ class Profile extends React.Component{
                     <button className="mainmenubtn btn-primary">Edit</button>
                         <div className="dropdown-child">
                             <a href="/editProfile">Edit Profile</a>
-                            <a href="/updatePhoneNumber">Changes Phone Number</a>
+                            <a href="/phone-edit">Changes Phone Number</a>
                         </div>
                     </div>
                         <br></br>
@@ -85,29 +79,14 @@ class Profile extends React.Component{
                             <div className = "field">{address?address:'-'}
                             </div>
                         </div>
-                        
-                        <a href="/phone-edit">
-                            <button style={{width:130,height:30,marginLeft:200,marginTop:80}}>Edit Profile</button>
-                        </a>
-                        
                     </div>
                 </div>
                 <style jsx>{`
-
-                    a.button {
-                        -webkit-appearance: button;
-                        -moz-appearance: button;
-                        appearance: button;
-
-                        text-decoration: none;
-                        color: initial;
-                    }
                   
                   .form-container .label{
                     opacity: 0.8;
                     font-size: 15px;
                   }
-
                   .form-container .field {
                       opacity: 1;
                       margin-bottom:16px;
@@ -124,7 +103,6 @@ class Profile extends React.Component{
                         min-height: 100vh;
                         align-items: center;
                     }
-
                     .form-container {
                         width: 630px;
                         height: auto;
@@ -150,7 +128,6 @@ class Profile extends React.Component{
                         cursor: pointer;
                         padding:10px;
                         margin-top:10px;
-
                         
                     }
                     .dropdown {
@@ -178,7 +155,6 @@ class Profile extends React.Component{
                         display: block;
                         
                     }
-
                  `}</style>
             </div>  
         )
@@ -193,5 +169,3 @@ const mapStateToProps = (state) => ({
   
 // menghubungkan props dengan Profile
 export default connect(mapStateToProps)(Profile);
-  
-
