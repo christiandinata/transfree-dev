@@ -128,23 +128,29 @@ export default class DonasiQurban extends React.Component{
 
      handleSubmit = () => {
         if (this.validateData() == true) {
-            alert("Berhasil")
+            this.props.submitFeedback(
+                {
+                    email : this.state.emailUser,
+                    donatur : this.state.namaDonatur,
+                    price : this.state.totalHarga,
+                },
+                'order'
+            );
         }else{
             alert("Persiksa kembali transaksi")
         }
      }
 
+
      handleName = () => {
          this.setState({
              namaDonatur:event.target.value
-            //  success:true
          })
      }
 
      handleEmail = () => {
         this.setState({
             emailUser:event.target.value
-           //  success:true
         })
     }
 
