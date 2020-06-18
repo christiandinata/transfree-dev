@@ -1,21 +1,21 @@
 import Header from '../components/header';
 import Menu from '../components/menu';
 import Link from 'next/link';
-import Router from 'next/router';
 import { connect } from 'react-redux';
-import initialize from '../utils/initialize';
 import actions from '../redux/actions';
+import initialize from '../utils/initialize';
 import { getCookie } from '../utils/cookie';
-import PhoneInput from 'react-phone-number-input';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-class Phone extends React.Component {
+class PhoneVerification extends React.Component {
   constructor({ props }) {
     super(props);
     this.state = {
-      phone: '+44',
+      service_sid: '',
+      code: ''
     };
   }
+
 
   static async getInitialProps(ctx) {
     initialize(ctx);
@@ -26,23 +26,19 @@ class Phone extends React.Component {
     }
   }
 
-
   handleSubmit(e) {
     e.preventDefault();
-    this.props.verify({
-      phone: this.state.phone,
-      email: this.props.email
-    },
-      'verify','register'
+    this.props.check({
+        serviceSid: this.props.serviceSid,
+        phone: this.props.phone,
+        code: this.state.code,
+        email: this.props.email
+      },
+      'check','edit'
     );
   }
 
-  handleChange = (value) => {
-    this.setState({phone: value});
-  }
-
   render() {
-    //console.log(this.props.errorMessage);
     return (
       <div>
         <Header />
@@ -50,24 +46,24 @@ class Phone extends React.Component {
           <div className="logo">
             <img src="../static/images/transfree-logo.png"/>
           </div>
-          <h1>Phone verification</h1>
-          <p>We need to verify your mobile phone number. This number will be used to send important updates.</p>
-          <div className={"error-container "+(this.props.errorMessage != '' && this.props.errorMessage != undefined ? "error-show" : "") }>
-            {this.props.errorMessage}
-          </div>
+          <h1>Code Verification</h1>
+          <p>Enter 6 digits verification code that we sent to your number {this.props.phone}.</p>
           <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
-            <label htmlFor="phone">Phone Number</label><br/>
-            <PhoneInput
-              placeholder="Enter phone number"
-              country="GB"
-              value={ this.state.phone }
-              onChange={ phone => this.setState({ phone }) }/>
+            <label htmlFor="code">Verification Code</label><br/>
+            <input
+              type="tel"
+              id="code"
+              placeholder="Enter 6-digit verification code"
+              value={this.state.code}
+              onChange={e => this.setState({ code: e.target.value })}/>
 
             <button type="submit" className="btn-primary">{this.props.inProgress ? (
               <FontAwesomeIcon icon="sync-alt" spin/>
             ) : 'Continue'}</button>
-
           </form>
+          {// <p>Haven't received the code? <Link href=""><a className="link">Resend code.</a></Link></p>
+          }
+          <p>Wrong phone number? <Link href="/phone"><a className="link">Enter again.</a></Link></p>
         </div>
         <style jsx>{`
           .container-fluid {
@@ -82,15 +78,14 @@ class Phone extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    serviceSid: state.verify.serviceSid,
+    phone: state.user.user_data.phone,
     email: state.user.user_data.email,
-    isAuthenticated: !!state.authentication.token,
     inProgress: state.verify.inProgress,
-    errorMessage: state.verify.errorMessage
-
   }
 };
 
 export default connect(
   mapStateToProps,
   actions
-)(Phone);
+)(PhoneVerification);

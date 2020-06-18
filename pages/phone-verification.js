@@ -34,7 +34,7 @@ class PhoneVerification extends React.Component {
         code: this.state.code,
         email: this.props.email
       },
-      'check'
+      'check','register'
     );
   }
 
