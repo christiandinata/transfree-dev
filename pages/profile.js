@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { getCookie } from '../utils/cookie';
+import Link from 'next/link';
 class Profile extends React.Component{
     constructor(){
         super()
@@ -28,8 +29,8 @@ class Profile extends React.Component{
                     <div className="dropdown">
                     <button className="mainmenubtn btn-primary">Edit</button>
                         <div className="dropdown-child">
-                            <a href="/editProfile">Edit Profile</a>
-                            <a href="/phone-edit">Changes Phone Number</a>
+                        <a href = "/phone-edit">Changes Phone Number</a>
+                        <a href = "editprofile">Edit Profile</a>
                         </div>
                     </div>
                         <br></br>
@@ -77,6 +78,12 @@ class Profile extends React.Component{
                         <div>
                             <div className = "label">Address</div>
                             <div className = "field">{address?address:'-'}
+                            </div>
+                        </div>
+
+                        <div>
+                            <div className = "label">Phone</div>
+                            <div className = "field">{phone?phone:'-'}
                             </div>
                         </div>
                     </div>

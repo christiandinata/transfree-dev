@@ -12,14 +12,13 @@ import ENV from "../config";
 import GlobalFunction from "../utils/globalFunction";
 import { onChangeToken, onChangeUser, onChangeUserEmailLogin, onChangeUserPasswordLogin } from "../redux/actions/authActions";
 import Axios from 'axios';
+import Link from 'next/link';
+import Router from 'next/router';
 
 
 class EditProfile extends React.Component {
     constructor(props) {
         super(props);
-        // if (Platform.OS === 'android') {
-        //     UIManager.setLayoutAnimationEnabledExperimental(true);
-        // }
         this.state = {
             emailUser: this.props.user.email ? this.props.user.email : "",
             emailUserError: '',
@@ -127,32 +126,19 @@ class EditProfile extends React.Component {
         await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
       };
 
-      handle = () =>{
-        this.setState({
-            fullname:event.target.value
-        })
-      }
-
-
-      handleSubmit = event => {
+      handleChange(event){
         event.preventDefault();
-        let urlFetch = ENV.API + `/${this.props.user._id}/user`
-    
-        const user = {
-          name: this.state.fullname
-        };
-    
-        Axios.put(urlFetch, { user })
-          .then(res => {
-            console.log(res);
-            console.log(res.data);
-          })
-      }
+
+        this.setState({
+            [event.target.name] : event.target.value
+        });
+    }
 
 
       updateUser = (e) => {
-            let urlFetch = ENV.API + `/${this.props.user._id}/user`
-            fetch(urlFetch,
+             if (this.validateData() == true) {
+                let urlFetch = ENV.API + `/${this.props.user._id}/user`
+                fetch(urlFetch,
                 {
                     method: 'put',
                     headers: {
@@ -186,29 +172,11 @@ class EditProfile extends React.Component {
                     user_data.address = this.state.address;
                     console(user_data)
 
-                    
-                    //  if (mode == "Registration") {
-                    //     this.props.navigation.dispatch({
-                    //         type: 'Navigation/RESET',
-                    //         index: 0,
-                    //         actions: [
-                    //             { type: 'Navigation/NAVIGATE', routeName: 'LandingScreen', },
-                    //         ]
-                    //     })
-                    //     this.props.navigation.navigate('RegisterScreen', { mode: 'Login', step: 4 })
-                    // } else {
-                    //     this.props.navigation.goBack();
-                    // }
-
-                     this.props.onChangeUser(this.user_data)
-                    //  this.props.onChangeUserEmailLogin(this.state.emailUser)
-                     this.setState({ isSpinner: false });
-                    // Toast.show({
-                    //     text: 'Submit Success',
-                    //     position: 'bottom',
-                    //     buttonText: 'Okay',
-                    //     type: 'success'
-                    // })
+                    this.props.onChangeUser(this.user_data)
+                    this.props.onChangeUserEmailLogin(this.state.emailUser)
+                    this.setState({ isSpinner: false });
+                    alert("edeade")
+                    Router.push('/profile')
                 }).catch((error) => {
                     // Toast.show({
                     //     text: error,
@@ -218,6 +186,7 @@ class EditProfile extends React.Component {
                     // })
                     this.setState({ isSpinner: false });
                 });
+             }
          }
     
 
@@ -234,11 +203,15 @@ class EditProfile extends React.Component {
                             </div>
                             <h3>Edit Profile</h3>
                             <div class="row">
-                                <form>
+                                
                                 <label>Name</label>
-                                <input type="text" name="name" placeholder="naem" />
+                                <input type="text" name="fullname" 
+                                    value={this.state.fullname} 
+                                    onChange = {this.handleChange.bind(this)} 
+                                
+                                    errorName={this.state.fullnameError}/>
                                 <label>Email</label>
-                                <input type="text" name="email" placeholder="email" />
+                                <input type="text" name="emailUser" value = {this.state.emailUser} onChange ={this.handleChange.bind(this)}  />
                                 <label>Address</label>
                                 <input type="text" name="address" placeholder="address"/>
                                 <label>Gender</label>
@@ -252,10 +225,10 @@ class EditProfile extends React.Component {
                                 <label>Date of Birth</label>
                                 <input type="date" name="dob" placeholder="Date of birth" />
                                 <label><br></br></label>
-    
                                 <a href="/profile" type="button" className="btn btn-secondary">Back</a>
-                                <button type="submit" className="btn-primary btnSubmit ">Save</button>
-                                </form>
+                                
+                                <button type="submit" className="btn-primary btnSubmit " onClick = {this.updateUser}>Save</button>
+                                
                             </div>
                             </div>
                         </div>

@@ -149,8 +149,6 @@ const transferCompleted = ({_id} , type) => {
       });
   };
 };
-
-<<<<<<< HEAD
 const changePaidOutRate = ({_id, paidOutRate}, type) => {
   if (type !== 'changePaidOutRate') {
     throw new Error('Wrong API call!');
@@ -168,7 +166,7 @@ const changePaidOutRate = ({_id, paidOutRate}, type) => {
   }
 }
 
-=======
+
 
 const exportOrders = (startDate,endDate,type) =>{
   if (type !== 'download') {
@@ -195,7 +193,6 @@ const exportOrders = (startDate,endDate,type) =>{
 }
 
 
->>>>>>> update-profile
 export default {
   addOrder,
   getOrderById,
@@ -204,9 +201,7 @@ export default {
   checkPayment,
   paymentReceived,
   transferCompleted,
-<<<<<<< HEAD
-  changePaidOutRate
-=======
+
+  changePaidOutRate,
   exportOrders
->>>>>>> update-profile
 };

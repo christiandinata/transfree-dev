@@ -437,21 +437,20 @@ class Orders extends React.Component {
     super(props);
     this.state = {
       activePage: 1,
-<<<<<<< HEAD
+
       showPopUp : false,
       showPopUpPaidOut : false,
-      popUpOrder : null
-=======
+      popUpOrder : null,
       startDate: " ",
       endDate: " ",
->>>>>>> update-profile
+
     }
 
     this.checkPayment = this.checkPayment.bind(this);
     this.paymentReceived = this.paymentReceived.bind(this);
     this.transferCompleted = this.transferCompleted.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
-<<<<<<< HEAD
+
     this.changePaidOutRate = this.changePaidOutRate.bind(this);
     this.getDetail = this.getDetail.bind(this);
     this.togglePopUp = this.togglePopUp.bind(this);
@@ -502,7 +501,7 @@ class Orders extends React.Component {
   getDetail(order){
     this.setState({popUpOrder : order});
     this.togglePopUp();
-
+  }
 
   handleExportOrders = () => {
     this.props.exportOrders(this.state.startDate, this.state.endDate, 'download')
@@ -717,6 +716,7 @@ class Orders extends React.Component {
             background-color: #ECF3FA;
             width: 200px;
           }
+
 
           ::placeholder {
             color: #CACACA;
