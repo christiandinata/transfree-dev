@@ -22,7 +22,6 @@ export default class DonasiQurban extends React.Component{
             totalHarga:0,
             emailUser:"",
             namaDonatur:"",
-            success: false,
         }
       
     }
@@ -112,23 +111,27 @@ export default class DonasiQurban extends React.Component{
             })
      }
 
-     validate = () =>{
-         if (!GlobalFunction.va) {
-             
+     validateData = () =>{
+        if (!GlobalFunction.validateEmail(this.state.emailUser)) {
+            return false
+        }
+        if(!this.state.namaDonatur){
+             return false;
+         }else if (this.state.totalHarga <= 0) {
+             return false;
+         }else{
+             return true;
          }
      }
 
     
 
      handleSubmit = () => {
-        if (this.state.namaDonatur != "" && this.state.email!= "" && this.state.totalHarga > 0 ) {
-            this.setState({
-                success:true
-            })
+        if (this.validateData() == true) {
+            alert("Berhasil")
         }else{
-            alert("Periksa kembali Transaksi Anda")
+            alert("Persiksa kembali transaksi")
         }
-        
      }
 
      handleName = () => {
@@ -140,7 +143,7 @@ export default class DonasiQurban extends React.Component{
 
      handleEmail = () => {
         this.setState({
-            email:event.target.value
+            emailUser:event.target.value
            //  success:true
         })
     }
@@ -171,7 +174,7 @@ export default class DonasiQurban extends React.Component{
                                 </div>
                                 <div className = "paket_list_text_input">
                                     <input style={{marginLeft:500,width:100}} type = "number"  
-                                    onChange = {this.handleTipeA} ></input>
+                                    onChange = {this.handleTipeA} placeholder ="0"  ></input>
                                 </div>
                             </div>
                         </div>
@@ -191,7 +194,7 @@ export default class DonasiQurban extends React.Component{
                                      <span className = "span-harga">Rp2.020.000</span>
                                 </div>
                                 <div className = "paket_list_text_input">
-                                    <input style={{marginLeft:500,width:100}} type = "number"  onChange = {this.handleTipeB} ></input>
+                                    <input style={{marginLeft:500,width:100}} type = "number"  onChange = {this.handleTipeB} placeholder ="0"></input>
                                 </div>
                             </div>
                         </div>
@@ -210,7 +213,7 @@ export default class DonasiQurban extends React.Component{
                                      <span className = "span-harga">Rp2.220.000</span>
                                 </div>
                                 <div className = "paket_list_text_input">
-                                    <input style={{marginLeft:500,width:100}} type = "number"  onChange = {this.handleTipeC} ></input>
+                                    <input style={{marginLeft:500,width:100}} type = "number"  onChange = {this.handleTipeC} placeholder ="0"></input>
                                 </div>
                             </div>
                         </div>
@@ -229,7 +232,7 @@ export default class DonasiQurban extends React.Component{
                                      <span className = "span-harga">Rp2.620.000</span>
                                 </div>
                                 <div className = "paket_list_text_input">
-                                    <input style={{marginLeft:500,width:100}} type = "number"  onChange = {this.handleTipeA1} ></input>
+                                    <input style={{marginLeft:500,width:100}} type = "number"  onChange = {this.handleTipeA1} placeholder ="0"></input>
                                 </div>
                             </div>
                         </div>
@@ -248,7 +251,7 @@ export default class DonasiQurban extends React.Component{
                                      <span className = "span-harga">Rp3.220.000</span>
                                 </div>
                                 <div className = "paket_list_text_input">
-                                    <input style={{marginLeft:500,width:100}} type = "number"  onChange = {this.handleTipeB1} ></input>
+                                    <input style={{marginLeft:500,width:100}} type = "number"  onChange = {this.handleTipeB1} placeholder ="0"></input>
                                 </div>
                             </div>
                         </div>
