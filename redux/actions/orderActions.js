@@ -150,6 +150,33 @@ const transferCompleted = ({_id} , type) => {
   };
 };
 
+
+
+const exportOrders = (startDate,endDate,type) =>{
+  if (type !== 'download') {
+    throw new Error('Wrong API call!');
+  }
+  return async(dispatch)=>{
+    await axios({
+       url: `${API}/${type}/orders?startDate=${startDate}&endDate=${endDate}`, //your url
+      method: 'GET',
+      responseType: 'blob', // important
+    }).then((response) => {
+       const url = window.URL.createObjectURL(new Blob([response.data]));
+       const link = document.createElement('a');
+       link.href =url;
+       link.setAttribute('download', `orders_${startDate}_${endDate}.xlsx`); //or any other extension
+       document.body.appendChild(link);
+       link.click();
+    }).catch(
+      function (error) {
+        alert("Please check the time range")
+      }
+    )
+  }  
+}
+
+
 const changePaidOutRate = ({_id, paidOutRate}, type) => {
   if (type !== 'changePaidOutRate') {
     throw new Error('Wrong API call!');
@@ -167,6 +194,7 @@ const changePaidOutRate = ({_id, paidOutRate}, type) => {
   }
 }
 
+
 export default {
   addOrder,
   getOrderById,
@@ -175,5 +203,9 @@ export default {
   checkPayment,
   paymentReceived,
   transferCompleted,
+
+  exportOrders,
+
   changePaidOutRate
+
 };
