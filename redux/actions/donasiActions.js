@@ -14,7 +14,8 @@ const submitDonation = ({email, donatur, price}, type) => {
         axios.post(`${API}/qurban/${type}`, {email, donatur, price})
         .then((response) => {
             dispatch({type: DONASI_SUCCESS, payload: 'Your transaction has been sent to our email'});
-            Router.push('/donasiqurban');
+            alert("Transaksi Anda berhasil silahkan cek email Anda")
+            Router.push('/');
         })
         .catch((error) => {
             console.log(error);
@@ -24,5 +25,5 @@ const submitDonation = ({email, donatur, price}, type) => {
 }
 
 export default {
-  submitDonation,
+  submitDonation
 };

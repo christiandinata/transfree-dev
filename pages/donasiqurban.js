@@ -20,9 +20,12 @@ import { getCookie } from '../utils/cookie';
             totalHargaA1:0,
             totalHargaB1:0,
             totalHarga:0,
-            emailUser:"",
-            namaDonatur:"",
+            emailUser: " ",
+            namaDonatur:" ",
+           
+            
         }
+       
       
     }
 
@@ -124,21 +127,6 @@ import { getCookie } from '../utils/cookie';
          }
      }
 
-    //  handleSubmit(event){
-    //     event.preventDefault();
-    //     this.props.submitFeedback(
-    //         {
-    //             name : this.state.fullname,
-    //             service : this.state.otherDetail,
-    //             details : this.state.detail,
-    //             contact : this.state.contact
-    //         },
-    //         'submitFeedback'
-    //     );
-    //  }
-
-    
-
      handleSubmit = (event) => {
         event.preventDefault();
          if (this.validateData() === true) {
@@ -171,7 +159,7 @@ import { getCookie } from '../utils/cookie';
 
     render(){
         return(
-           <div>
+           <div>          
             <Header/>
             <Menu/>
            <div className ="container container-fill container-pad">
@@ -281,7 +269,9 @@ import { getCookie } from '../utils/cookie';
                 <p>Total Harga</p>
                     <input className = "span-harga" type = "detail" value={this.state.totalHarga}>
                     </input>
+                    <p>Email Anda</p>
                     <input type = "detail" placeholder = "Email Anda" onChange = {this.handleEmail} className = "span-detail"></input>
+                    <p>Nama Donatur</p>
                     <input type = "detail" placeholder = "Nama Donatur" onChange = {this.handleName} className = "span-detail"></input>
                     <p>Tambahkan Pesanan</p>
                     <button className="button button1" onClick = {this.handleSubmit}>Lanjutkan</button>
@@ -469,7 +459,7 @@ import { getCookie } from '../utils/cookie';
 }
 const mapStateToProps = (state) => {
     return {
-      successMessage: state.donasi.successMessage
+      successTransaction: state.donasi.successDonasi
     }
   };
 
