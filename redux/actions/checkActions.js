@@ -63,6 +63,10 @@ const getOrderById = (oid, type) => {
     await axios.get(`${API}/${type}?oid=`+oid)
       .then((response) => {
         dispatch({type: ORDER_DATA, payload: response.data.order_data});
+      },{
+        headers:{
+          'Authorization' : 'Bearer' + getCookie('token')
+        }
       })
       .catch((error) => {
         throw new Error(error);
@@ -78,6 +82,10 @@ const getOrderByUid = (uid , type) => {
     await axios.get(`${API}/${type}?uid=`+uid)
       .then((response) => {
         dispatch({type: ORDER_DATA_ARRAY, payload: response.data.order_data_array});
+      },{
+        headers:{
+          'Authorization' : 'Bearer' + getCookie('token')
+        }
       })
       .catch((error) => {
         throw new Error(error);

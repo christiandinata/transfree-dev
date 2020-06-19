@@ -44,38 +44,6 @@ class EditProfile extends React.Component {
 
             address: this.props.user.address ? this.props.user.address : "",
             addressError: '',
-
-            idTypeArray: [
-                {
-                    title: "KTP",
-                    onPress: () => {
-                        this.setState({ idType: "KTP", idTypeError: "" })
-                    }
-                },
-                {
-                    title: "Pasport",
-                    onPress: () => {
-                        this.setState({ idType: "Pasport", idTypeError: "" })
-                    }
-                }
-            ],
-
-            genderArray: [
-                {
-                    title: "Male",
-                    onPress: () => {
-                        this.setState({ gender: "Male", genderError: "" })
-                    }
-                },
-                {
-                    title: "Female",
-                    onPress: () => {
-                        this.setState({ gender: "Female", genderError: "" })
-                    }
-                }
-            ],
-
-            // isSpinner: false,
         };
     }
 
@@ -111,9 +79,6 @@ class EditProfile extends React.Component {
         } else if (!this.state.address) {
             this.setState({ addressError: "Please insert your address !" });
             return false
-        } else if (this.state.step == 3 && !this.state.verificationCode) {
-            this.setState({ verificationCodeError: "Please insert verification code !" });
-            return false
         } else {
             return true
         }
@@ -134,8 +99,9 @@ class EditProfile extends React.Component {
 
 
       updateUser = (e) => {
-             if (this.validateData() == true) {
+              if (this.validateData() == true) {
                 let urlFetch = ENV.API + `/${this.props.user._id}/user`
+                // alert("deadae");
                 fetch(urlFetch,
                 {
                     method: 'put',
@@ -152,7 +118,6 @@ class EditProfile extends React.Component {
                         "dob": this.state.dob,
                         "pob": this.state.pob,
                         "address": this.state.address,
-                        // "isRegisStep": mode == "Registration" ? true : false
                         
                     })
                     
@@ -169,21 +134,20 @@ class EditProfile extends React.Component {
                     user_data.dob = this.state.dob;
                     user_data.pob = this.state.pob;
                     user_data.address = this.state.address;
-                    console(user_data)
+                    console.log(user_data)
 
                     this.props.onChangeUser(this.user_data)
                     this.props.onChangeUserEmailLogin(this.state.emailUser)
-                    this.setState({ isSpinner: false });
+                    
+                    alert("Your update profile is Success");
+                    Router.replace('/profile');
+                    
                 }).catch((error) => {
-                    // Toast.show({
-                    //     text: error,
-                    //     position: 'bottom',
-                    //     buttonText: 'Okay',
-                    //     type: 'danger'
-                    // })
-                    this.setState({ isSpinner: false });
+                     alert("Please check your data");
                 });
-             }
+              }else{
+                alert("Please check your data");
+              }
          }
     
 
@@ -193,8 +157,6 @@ class EditProfile extends React.Component {
                 <div>
                     <Header/>
                     <div className = "container-fluid">
-                    <div className={"error-container "+(this.state.errorMessage != '' && this.state.errorMessage != undefined ? "error-show" : "") }>
-                         {/* {this.props.errorMessage} */}deadead                    </div>
                         <div className = "form-container">
                             <div class="grid">
                             <div className="logo">
@@ -202,37 +164,79 @@ class EditProfile extends React.Component {
                             </div>
                             <h3>Edit Profile</h3>
                             <div class="row">
-                                
+                                <div className="f1">
                                 <label>Name</label>
-                                <input type="text" name="fullname" 
-                                    value={this.state.fullname} 
-                                    onChange = {this.handleChange.bind(this)} 
-                                    errorName={this.state.fullnameError}/>
+                                    <input className="f1" type="text" name="fullname" value={this.state.fullname} onChange={this.handleChange.bind(this)}/>
+                                </div>
+                                
+                                <div className="f1">
                                 <label>Email</label>
-                                <input type="text" name="emailUser" value = {this.state.emailUser} onChange ={this.handleChange.bind(this)}  />
-                                <label>Address</label>
-                                <input type="text" name="address" placeholder="address"/>
+                                    <input className="f1"type="text" name="emailUser"  value={this.state.emailUser} onChange = {this.handleChange.bind(this)}/>
+                                </div>
+
+                                <div className="f1">
+                                    <label>ID Type</label>
+                                    <br></br>
+                                    <select name = "idType" className="idType"  type="text" value = {this.state.idType} onChange = {this.handleChange.bind(this)}>
+                                        <option value = "KTP">KTP</option>
+                                        <option value = "Passport">Passport</option>
+                                    </select>
+                                </div>
+
+                                <div className="f1">
+                                <label>ID Number</label>
+                                    <input name = "idNumber" className="f1"type="text" name="idNumber"  value={this.state.idNumber} onChange = {this.handleChange.bind(this)}/>
+                                </div>
+
+                                <div className="f1">
+                                <label>ID Name</label>
+                                    <input name = "idName" className="f1"type="text" name="idName"  value={this.state.idName} onChange = {this.handleChange.bind(this)}/>
+                                </div>
                                 
-                                <label>Gender</label>
-                                <br></br>
-                                <select name = "gender" className="gender" onChange={this.handleChange.bind(this)} >
-                                    <option value = "Male">Male</option>
-                                    <option value = "Female">Female</option>
-                                </select>
-                                <label>Place of Birth</label>
-                                <input type="text" name="pob" placeholder="place of birth" />
-                                <label>Date of Birth</label>
-                                <input type="date" name="dob" placeholder="Date of birth" defaultValue = {this.state.dob} onChange = {this.handleChange.bind(this)}  />
-                                <label><br></br></label>
-                                <a href="/profile" type="button" className="btn btn-secondary">Back</a>
+                                <div className="f1">
+                                    <label>Gender</label>
+                                    <br></br>
+                                    <select name="gender" className="gender" type="text" value = {this.state.gender} onChange = {this.handleChange.bind(this)}>
+                                        <option value = "Male">Male</option>
+                                        <option value = "Female">Female</option>
+                                    </select>
+                                </div>
+
+                                <div className="f1">
+                                    <label>Date of Birth</label>
+                                    <input className="f1" type="date" name="address" value={this.state.dob} name="dob" onChange = {this.handleChange.bind(this)}/>
+                                </div>
                                 
-                                <button type="submit" className="btn-primary btnSubmit " onClick = {this.updateUser}>Save</button>
+                                <div className="f1">
+                                    <label>Place of Birth</label>
+                                    <input className="f1" type="text" name="pob" value = {this.state.pob} onChange = {this.handleChange.bind(this)}/>
+                                </div>
                                 
+                                {/* <div className="f1">
+                                 <a href="/profile" type="button" className="btn btn-secondary">Back</a>
+                                 <button type="submit" className="btn-primary btnSubmit " onClick = {this.updateUser}>Save</button>
+                                </div> */}
                             </div>
+                            <a href="/profile" type="button" className="btn btn-secondary" style={{marginTop:20,marginLeft:20}}>Back</a>
+                            <button type="submit" className="btn-primary btnSubmit " style={{float:"right",width:120,marginRight:20}} onClick = {this.updateUser}>Save</button>
                             </div>
                         </div>
                     </div>
                         <style jsx>{`
+                        div.f1 {
+                            margin:10px;
+                            margin-left:50px;
+                            float: center;
+                            border-radius: 4px;
+                            box-sizing: border-box;
+                            display: inline-block;
+                            width:260px;
+                            
+                        }
+                        div.f1 f1 {
+                            width: 100px;
+                            height: auto;
+                        }
                       
                       .form-container .label{
                         opacity: 0.8;
@@ -255,7 +259,7 @@ class EditProfile extends React.Component {
                             align-items: center;
                         }
                         .form-container {
-                            width: 630px;
+                            width: 700px;
                             height: auto;
                             padding: 30px;
                             margin: 30px auto;
@@ -263,16 +267,17 @@ class EditProfile extends React.Component {
                             box-shadow: 0 10px 30px 0 rgba(0,0,0,0.10);
                             border-radius: 8px;
                             display:grid;
-                            grid-template-columns: 46% auto;
+                            float:center;
+                            grid-template-columns: 100% auto;
                             
                         }
-                        input, select{
-                            width: 580px;
-                            padding: 6px 25px;
-                        }
+                       
                         .gender{
-                            width:620px;
-                            border:none;    
+                            width:240px;
+                            border:6px;
+                            margin:3px;
+                            padding :13px;
+                            margin-right:40px;
                         }
                         .img{
                             display:block;
@@ -287,19 +292,7 @@ class EditProfile extends React.Component {
                             cursor: pointer;
                             margin-right:5px;
                         }
-                        .error-container {
-                            width: 400px;
-                            height: auto;
-                            padding: 20px;
-                            background-color: #FF3A43;
-                            color: #FFF;
-                            border-radius: 8px;
-                            display: none;
-                          }
-                
-                          .error-show {
-                            display: block;
-                          }
+                        
                      `}</style>
                 </div>  
             )
@@ -310,7 +303,7 @@ class EditProfile extends React.Component {
 // melakukan konversi state yang diambil dari store kedalam props
 const mapStateToProps = (state) => ({
     // users: state.user.user_data,
-       token: state,
+       token: state.authentication.token,
        user: state.user.user_data,
     //   token: state.auth.token,
     //   user: state.auth.user,

@@ -63,7 +63,7 @@ class PhoneVerification extends React.Component {
           </form>
           {// <p>Haven't received the code? <Link href=""><a className="link">Resend code.</a></Link></p>
           }
-          <p>Wrong phone number? <Link href="/phone"><a className="link">Enter again.</a></Link></p>
+          <p>Wrong phone number? <Link href="/phone-edit"><a className="link">Enter again.</a></Link></p>
         </div>
         <style jsx>{`
           .container-fluid {
