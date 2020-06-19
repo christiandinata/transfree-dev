@@ -302,11 +302,8 @@ class EditProfile extends React.Component {
 
 // melakukan konversi state yang diambil dari store kedalam props
 const mapStateToProps = (state) => ({
-    // users: state.user.user_data,
        token: state.authentication.token,
        user: state.user.user_data,
-    //   token: state.auth.token,
-    //   user: state.auth.user,
 })
 
 const mapDispatchToProps = (dispatch) => ({
