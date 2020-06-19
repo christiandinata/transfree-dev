@@ -212,10 +212,7 @@ class EditProfile extends React.Component {
                                     <input className="f1" type="text" name="pob" value = {this.state.pob} onChange = {this.handleChange.bind(this)}/>
                                 </div>
                                 
-                                {/* <div className="f1">
-                                 <a href="/profile" type="button" className="btn btn-secondary">Back</a>
-                                 <button type="submit" className="btn-primary btnSubmit " onClick = {this.updateUser}>Save</button>
-                                </div> */}
+                                
                             </div>
                             <a href="/profile" type="button" className="btn btn-secondary" style={{marginTop:20,marginLeft:20}}>Back</a>
                             <button type="submit" className="btn-primary btnSubmit " style={{float:"right",width:120,marginRight:20}} onClick = {this.updateUser}>Save</button>
