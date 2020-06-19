@@ -23,4 +23,5 @@ export default {
   ...checkActions,
   ...complaintActions,
   ...donasiActions
+  
 }

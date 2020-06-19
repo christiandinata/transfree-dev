@@ -12,6 +12,7 @@ import fxMarginReducer from './fxMarginReducer';
 import checkReducer from './checkReducer';
 import complaintReducer from './complaintReducer';
 import donasiReducer from './donasiReducer';
+
 const rootReducer = combineReducers({
   authentication: authReducer,
   verify: verifyReducer,
@@ -25,7 +26,8 @@ const rootReducer = combineReducers({
   fx: fxMarginReducer,
   ck: checkReducer,
   complaint : complaintReducer,
-  qurban:donasiReducer,
+  donasi: donasiReducer,
+ 
 });
 
 export default rootReducer;

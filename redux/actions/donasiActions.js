@@ -24,5 +24,5 @@ const submitDonation = ({email, donatur, price}, type) => {
 }
 
 export default {
-  submitDonation
+  submitDonation,
 };

@@ -5,9 +5,9 @@ import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import GlobalFunction from '../utils/globalFunction'
 import { getCookie } from '../utils/cookie';
-export default class DonasiQurban extends React.Component{
-    constructor(){
-        super()
+ class DonasiQurban extends React.Component{
+    constructor(props){
+        super(props)
         this.state={
             jumlahTipeA:0,
             jumlahTipeB:0,
@@ -124,10 +124,24 @@ export default class DonasiQurban extends React.Component{
          }
      }
 
+    //  handleSubmit(event){
+    //     event.preventDefault();
+    //     this.props.submitFeedback(
+    //         {
+    //             name : this.state.fullname,
+    //             service : this.state.otherDetail,
+    //             details : this.state.detail,
+    //             contact : this.state.contact
+    //         },
+    //         'submitFeedback'
+    //     );
+    //  }
+
     
 
-     handleSubmit = () => {
-        if (this.validateData() == true) {
+     handleSubmit = (event) => {
+        event.preventDefault();
+         if (this.validateData() === true) {
             this.props.submitDonation(
                 {
                     email : this.state.emailUser,
@@ -135,17 +149,10 @@ export default class DonasiQurban extends React.Component{
                     price : this.state.totalHarga,
                 },
                 'order'
-            ),() => {
-                this.setState()({
-                    emailUser : " ",
-                    totalHarga:" ",
-                    namaDonatur: " "
-                })
-                alert("Persiksa kembali transaksi")
-            };
-        }else{
-            alert("Persiksa kembali transaksi")
-        }
+            );
+         }else{
+            alert("Periksa kembali transaksi anda")
+         }
      }
 
 
@@ -271,9 +278,11 @@ export default class DonasiQurban extends React.Component{
                      </div>
                 
                 </div>
-                    <input type = "detail" value={this.state.totalHarga}></input>
-                    <input type = "detail" placeholder = "Email Anda" onChange = {this.handleEmail}></input>
-                    <input type = "detail" placeholder = "Nama Donatur" onChange = {this.handleName}></input>
+                <p>Total Harga</p>
+                    <input className = "span-harga" type = "detail" value={this.state.totalHarga}>
+                    </input>
+                    <input type = "detail" placeholder = "Email Anda" onChange = {this.handleEmail} className = "span-detail"></input>
+                    <input type = "detail" placeholder = "Nama Donatur" onChange = {this.handleName} className = "span-detail"></input>
                     <p>Tambahkan Pesanan</p>
                     <button className="button button1" onClick = {this.handleSubmit}>Lanjutkan</button>
                 </div>
@@ -444,12 +453,26 @@ export default class DonasiQurban extends React.Component{
                     letter-spacing: -0.3px;
                     color: #339963;
                 }
-
+                .span-detail {
+                    margin: auto 0 0 auto;
+                    font-size: 18px;
+                    font-weight: bold;
+                    line-height: 30px;
+                    letter-spacing: -0.3px;
+                    
+                }
                  `}</style>
            </div>
         )
     }
 
 }
+const mapStateToProps = (state) => {
+    return {
+      successMessage: state.donasi.successMessage
+    }
+  };
+
+export default connect(mapStateToProps,actions)(DonasiQurban);
 
   

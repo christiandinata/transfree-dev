@@ -1,15 +1,15 @@
 import {
-    FEEDBACK_SUCCESS
+    DONASI_SUCCESS
 } from '../types';
 
 const initialState = {
-    successMessage : null
+    successDonasi : null
 };
 
 export default (state = initialState, action) => {
     switch(action.type){
-        case FEEDBACK_SUCCESS :
-            return {successMessage : action.payload};
+        case DONASI_SUCCESS :
+            return {successDonasi : action.payload};
         default :
             return state;
     }
