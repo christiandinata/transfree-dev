@@ -203,7 +203,7 @@ class EditProfile extends React.Component {
                             <h3>Edit Profile</h3>
                             <div class="row">
                                 
-                                <label>Nam</label>
+                                <label>Name</label>
                                 <input type="text" name="fullname" 
                                     value={this.state.fullname} 
                                     onChange = {this.handleChange.bind(this)} 
@@ -310,7 +310,7 @@ class EditProfile extends React.Component {
 // melakukan konversi state yang diambil dari store kedalam props
 const mapStateToProps = (state) => ({
     // users: state.user.user_data,
-       token: state.authentication.token,
+       token: state,
        user: state.user.user_data,
     //   token: state.auth.token,
     //   user: state.auth.user,

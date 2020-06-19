@@ -23,7 +23,8 @@ const rootReducer = combineReducers({
   photo: photoReducer,
   fx: fxMarginReducer,
   ck: checkReducer,
-  complaint : complaintReducer
+  complaint : complaintReducer,
+ 
 });
 
 export default rootReducer;
