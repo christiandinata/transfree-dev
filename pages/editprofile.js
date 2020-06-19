@@ -177,7 +177,7 @@ class EditProfile extends React.Component {
                                 <div className="f1">
                                     <label>ID Type</label>
                                     <br></br>
-                                    <select name = "idType" className="idType"  type="text" value = {this.state.idType} onChange = {this.handleChange.bind(this)}>
+                                    <select name="idType" className="gender" type="text" value = {this.state.idType} onChange = {this.handleChange.bind(this)}>
                                         <option value = "KTP">KTP</option>
                                         <option value = "Passport">Passport</option>
                                     </select>
