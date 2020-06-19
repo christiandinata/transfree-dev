@@ -156,6 +156,7 @@ class EditProfile extends React.Component {
                         
                     })
                     
+                    
                 }).then((response) => response.json()).then(async (responseJson) => {
                     let user_data = this.props.user
 
@@ -173,8 +174,6 @@ class EditProfile extends React.Component {
                     this.props.onChangeUser(this.user_data)
                     this.props.onChangeUserEmailLogin(this.state.emailUser)
                     this.setState({ isSpinner: false });
-                    alert("edeade")
-                    Router.push('/profile')
                 }).catch((error) => {
                     // Toast.show({
                     //     text: error,
@@ -194,6 +193,8 @@ class EditProfile extends React.Component {
                 <div>
                     <Header/>
                     <div className = "container-fluid">
+                    <div className={"error-container "+(this.state.errorMessage != '' && this.state.errorMessage != undefined ? "error-show" : "") }>
+                         {/* {this.props.errorMessage} */}deadead                    </div>
                         <div className = "form-container">
                             <div class="grid">
                             <div className="logo">
@@ -202,26 +203,26 @@ class EditProfile extends React.Component {
                             <h3>Edit Profile</h3>
                             <div class="row">
                                 
-                                <label>Name</label>
+                                <label>Nam</label>
                                 <input type="text" name="fullname" 
                                     value={this.state.fullname} 
                                     onChange = {this.handleChange.bind(this)} 
-                                
                                     errorName={this.state.fullnameError}/>
                                 <label>Email</label>
                                 <input type="text" name="emailUser" value = {this.state.emailUser} onChange ={this.handleChange.bind(this)}  />
                                 <label>Address</label>
                                 <input type="text" name="address" placeholder="address"/>
+                                
                                 <label>Gender</label>
                                 <br></br>
-                                <select className="gender">
-                                    <option>Male</option>
-                                    <option>Female</option>
+                                <select name = "gender" className="gender" onChange={this.handleChange.bind(this)} >
+                                    <option value = "Male">Male</option>
+                                    <option value = "Female">Female</option>
                                 </select>
                                 <label>Place of Birth</label>
                                 <input type="text" name="pob" placeholder="place of birth" />
                                 <label>Date of Birth</label>
-                                <input type="date" name="dob" placeholder="Date of birth" />
+                                <input type="date" name="dob" placeholder="Date of birth" defaultValue = {this.state.dob} onChange = {this.handleChange.bind(this)}  />
                                 <label><br></br></label>
                                 <a href="/profile" type="button" className="btn btn-secondary">Back</a>
                                 
@@ -286,6 +287,19 @@ class EditProfile extends React.Component {
                             cursor: pointer;
                             margin-right:5px;
                         }
+                        .error-container {
+                            width: 400px;
+                            height: auto;
+                            padding: 20px;
+                            background-color: #FF3A43;
+                            color: #FFF;
+                            border-radius: 8px;
+                            display: none;
+                          }
+                
+                          .error-show {
+                            display: block;
+                          }
                      `}</style>
                 </div>  
             )
