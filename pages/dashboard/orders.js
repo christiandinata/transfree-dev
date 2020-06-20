@@ -690,7 +690,6 @@ class Orders extends React.Component {
             color: #469DDD;
           }
 
-
           input[type=text] {
 
             border: 1px solid #EAEDF2;
