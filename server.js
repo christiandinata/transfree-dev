@@ -152,6 +152,11 @@ app.prepare()
       }
     });
 
+    // server.get('/donasiqurban', (req, res) => {
+    //     return app.render(req, res, '/donasiqurban', req.query.oid);
+      
+    // });
+
 
     server.get('*', (req, res) => {
       return handle(req, res);
