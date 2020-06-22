@@ -651,6 +651,10 @@ class Index extends React.Component {
                 <Link>
                   <a style={{marginTop: "20px"}} href="/send" className="btn-secondary sell-buy">Send for Living</a>
                 </Link>
+                <Link>
+                  <a  href="/donasiqurban" className="btn-secondary" style={{marginTop:10}}>Qurban Sekarang</a>
+                </Link>
+                
               </center>
             </div>
               {
