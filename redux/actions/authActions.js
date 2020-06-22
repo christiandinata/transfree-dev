@@ -175,11 +175,51 @@ export const resetPassword = ({ newPassword, verifyPassword, token }, type) => {
   };
 };
 
+export const onChangeToken = (value) => {
+  return {
+      type: 'token',
+      payload: value
+  }
+}
+
+export const onChangeUser = (value) => {
+  return {
+      type: 'user',
+      payload: value
+  }
+}
+
+export const onChangeUserEmailLogin = (value) => {
+  return {
+      type: 'emailUser',
+      payload: value
+  }
+}
+
+export const onChangeUserPasswordLogin = (value) => {
+  return {
+      type: 'passwordUser',
+      payload: value
+  }
+}
+
+export const onLogOut = () => {
+  return {
+      type: 'logout'
+  }
+}
+
+
 export default {
   register,
   authenticate,
   reauthenticate,
   deauthenticate,
   forgot,
-  resetPassword
+  resetPassword,
+  onChangeUser,
+  onChangeToken,
+  onChangeUserEmailLogin,
+  onChangeUserPasswordLogin,
+  onLogOut
 };

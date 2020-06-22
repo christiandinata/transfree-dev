@@ -453,12 +453,18 @@ class Orders extends React.Component {
     super(props);
     this.state = {
       activePage: 1,
+
+      showPopUp : false,
+      showPopUpPaidOut : false,
+      popUpOrder : null,
       startDate: " ",
       endDate: " ",
+
 
       showPopUp : false,
       showPopUpPaidOut : false,
       popUpOrder : null
+
 
     }
 
@@ -467,8 +473,12 @@ class Orders extends React.Component {
     this.transferCompleted = this.transferCompleted.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
 
-    // this.handleExportOrders = this.handleExportOrders(this);
 
+    this.changePaidOutRate = this.changePaidOutRate.bind(this);
+    this.getDetail = this.getDetail.bind(this);
+    this.togglePopUp = this.togglePopUp.bind(this);
+    this.togglePopUpPaidOut = this.togglePopUpPaidOut.bind(this);
+    // this.handleExportOrders = this.handleExportOrders(this);
     this.changePaidOutRate = this.changePaidOutRate.bind(this);
     this.getDetail = this.getDetail.bind(this);
     this.togglePopUp = this.togglePopUp.bind(this);
@@ -513,6 +523,19 @@ class Orders extends React.Component {
     this.props.getAllOrders(pageNumber, 'getAllOrders');
   }
 
+  togglePopUp(){
+    this.setState({showPopUp : !this.state.showPopUp});
+  }
+
+  togglePopUpPaidOut(order){
+    this.setState({popUpOrder : order})
+    this.setState({showPopUpPaidOut : !this.state.showPopUpPaidOut});
+  }
+
+  getDetail(order){
+    this.setState({popUpOrder : order});
+    this.togglePopUp();
+  }
 
 
   handleExportOrders = () => {
@@ -713,6 +736,7 @@ class Orders extends React.Component {
             text-decoration: none;
             color: #469DDD;
           }
+          
 
           input[type=text] {
 

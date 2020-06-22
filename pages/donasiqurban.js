@@ -5,6 +5,7 @@ import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import GlobalFunction from '../utils/globalFunction'
 import { getCookie } from '../utils/cookie';
+import NumberFormat from 'react-number-format';
  class DonasiQurban extends React.Component{
     constructor(props){
         super(props)
@@ -269,8 +270,7 @@ import { getCookie } from '../utils/cookie';
                 
                 </div>
                 <p>Total Harga</p>
-                    <input className = "span-harga" type = "detail" value={this.state.totalHarga}>
-                    </input>
+                    <input className = "span-harga" type = "detail" readOnly value={this.state.totalHarga}></input>
                     <p>Email Anda</p>
                     <input type = "detail" placeholder = "Email Anda" onChange = {this.handleEmail} className = "span-detail"></input>
                     <p>Nama Donatur</p>
@@ -430,8 +430,8 @@ import { getCookie } from '../utils/cookie';
                 }
                 .span-harga{
                     color: #414042;
-                    font-size: 14px
-                    ;font-weight: bold;
+                    font-size: 14px;
+                    font-weight: bold;
                     letter-spacing:-0.23px;
                 }
                 .container {
