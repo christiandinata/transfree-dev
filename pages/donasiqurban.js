@@ -156,7 +156,6 @@ import { getCookie } from '../utils/cookie';
         })
     }
 
-
     render(){
         return(
            <div>          
@@ -180,8 +179,8 @@ import { getCookie } from '../utils/cookie';
                                 <div>
                                      <span className = "span-harga">Rp1.787.500</span>
                                 </div>
-                                <div className = "paket_list_text_input">
-                                    <input style={{marginLeft:500,width:100}} type = "number"  
+                                <div className = "right">
+                                    <input style={{width:100}} type = "number"  
                                     onChange = {this.handleTipeA} placeholder ="0"  ></input>
                                 </div>
                             </div>
@@ -201,8 +200,9 @@ import { getCookie } from '../utils/cookie';
                                 <div>
                                      <span className = "span-harga">Rp2.020.000</span>
                                 </div>
-                                <div className = "paket_list_text_input">
-                                    <input style={{marginLeft:500,width:100}} type = "number"  onChange = {this.handleTipeB} placeholder ="0"></input>
+                                
+                                <div className = "right">
+                                    <input style={{width:100}} type = "number"  onChange = {this.handleTipeB} placeholder ="0"></input>
                                 </div>
                             </div>
                         </div>
@@ -220,9 +220,10 @@ import { getCookie } from '../utils/cookie';
                                 <div>
                                      <span className = "span-harga">Rp2.220.000</span>
                                 </div>
-                                <div className = "paket_list_text_input">
-                                    <input style={{marginLeft:500,width:100}} type = "number"  onChange = {this.handleTipeC} placeholder ="0"></input>
+                                <div className="right">
+                                    <input style={{width:100}} type = "number"  onChange = {this.handleTipeC} placeholder ="0"></input>
                                 </div>
+                               
                             </div>
                         </div>
                         <div className = "paket_list">
@@ -239,9 +240,10 @@ import { getCookie } from '../utils/cookie';
                                 <div>
                                      <span className = "span-harga">Rp2.620.000</span>
                                 </div>
-                                <div className = "paket_list_text_input">
-                                    <input style={{marginLeft:500,width:100}} type = "number"  onChange = {this.handleTipeA1} placeholder ="0"></input>
+                                <div className="right">
+                                    <input style={{width:100}} type = "number"  onChange = {this.handleTipeA1} placeholder ="0"></input>
                                 </div>
+                                
                             </div>
                         </div>
                         <div className = "paket_list">
@@ -258,8 +260,8 @@ import { getCookie } from '../utils/cookie';
                                 <div>
                                      <span className = "span-harga">Rp3.220.000</span>
                                 </div>
-                                <div className = "paket_list_text_input">
-                                    <input style={{marginLeft:500,width:100}} type = "number"  onChange = {this.handleTipeB1} placeholder ="0"></input>
+                                <div className="right">
+                                    <input style={{  width:100}} type = "number"  onChange = {this.handleTipeB1} placeholder ="0"></input>
                                 </div>
                             </div>
                         </div>
@@ -280,6 +282,38 @@ import { getCookie } from '../utils/cookie';
            <style jsx>{` 
                     input[type=number]::-webkit-inner-spin-button {
                         -webkit-appearance: none;
+                    }
+
+                    .right{
+                        text-align:right;
+                        
+                    }
+
+                    @media only screen and (max-width: 414px) {
+                        #menuToggle {
+                          display: block;
+                        }
+                        .header-container {
+                          display: none;
+                        }
+                        li {
+                          display; block;
+                        }
+                        #menu {
+                          height: 100vh;
+                          width: 100%;
+                          background-color: #F6F8FB;
+                        }
+                        .row {
+                          border: none;
+                        }
+                        #menuToggle {
+                          top: 5px;
+                          left: 0;
+                        }
+                        .right{
+                            text-align:left;
+                        }
                     }
 
                     .button {
@@ -410,6 +444,7 @@ import { getCookie } from '../utils/cookie';
                 .paket_list_text_input{
                     display: flex;
                     justify-content: space-between
+                    
                 }
 
                 .input-area {
