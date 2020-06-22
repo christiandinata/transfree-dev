@@ -156,7 +156,6 @@ import { getCookie } from '../utils/cookie';
         })
     }
 
-
     render(){
         return(
            <div>          
