@@ -28,6 +28,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           <hr/>
           {!isAuthenticated && <li><Link href="/login"><a>Log in</a></Link></li>}
           {!isAuthenticated && <li><Link href="/signup"><a>Signup</a></Link></li>}
+          {isAuthenticated && <li><Link href="/profile"><a>Profile</a></Link></li>}
           {isAuthenticated && <li><Link href="/logout"><a>Logout</a></Link></li>}
         </ul>
       </div>
