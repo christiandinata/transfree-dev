@@ -60,7 +60,11 @@ const getOrderById = (oid, type) => {
     throw new Error('Wrong API call!');
   }
   return async (dispatch) => {
-    await axios.get(`${API}/${type}?oid=`+oid)
+    await axios.get(`${API}/${type}?oid=`+oid, {
+      headers: {
+        'Authorization': 'Bearer ' + getCookie('token') 
+      }
+    })
       .then((response) => {
         dispatch({type: ORDER_DATA, payload: response.data.order_data});
       })
@@ -75,7 +79,11 @@ const getOrderByUid = (uid , type) => {
     throw new Error('Wrong API call!');
   }
   return async (dispatch) => {
-    await axios.get(`${API}/${type}?uid=`+uid)
+    await axios.get(`${API}/${type}?uid=`+uid, {
+      headers: {
+        'Authorization': 'Bearer ' + getCookie('token') 
+      }
+    })
       .then((response) => {
         dispatch({type: ORDER_DATA_ARRAY, payload: response.data.order_data_array});
       })
