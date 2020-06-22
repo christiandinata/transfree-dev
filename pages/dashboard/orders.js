@@ -444,6 +444,12 @@ class Orders extends React.Component {
       startDate: " ",
       endDate: " ",
 
+
+      showPopUp : false,
+      showPopUpPaidOut : false,
+      popUpOrder : null
+
+
     }
 
     this.checkPayment = this.checkPayment.bind(this);
@@ -451,12 +457,22 @@ class Orders extends React.Component {
     this.transferCompleted = this.transferCompleted.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
 
+
     this.changePaidOutRate = this.changePaidOutRate.bind(this);
     this.getDetail = this.getDetail.bind(this);
     this.togglePopUp = this.togglePopUp.bind(this);
     this.togglePopUpPaidOut = this.togglePopUpPaidOut.bind(this);
 
     // this.handleExportOrders = this.handleExportOrders(this);
+
+
+    // this.handleExportOrders = this.handleExportOrders(this);
+
+    this.changePaidOutRate = this.changePaidOutRate.bind(this);
+    this.getDetail = this.getDetail.bind(this);
+    this.togglePopUp = this.togglePopUp.bind(this);
+    this.togglePopUpPaidOut = this.togglePopUpPaidOut.bind(this);
+
 
   }
 
@@ -503,6 +519,7 @@ class Orders extends React.Component {
     this.togglePopUp();
   }
 
+
   handleExportOrders = () => {
     this.props.exportOrders(this.state.startDate, this.state.endDate, 'download')
   }  
@@ -517,6 +534,21 @@ class Orders extends React.Component {
     this.setState({
       endDate:event.target.value
     })
+  }
+
+  togglePopUp(){
+    this.setState({showPopUp : !this.state.showPopUp});
+  }
+
+  togglePopUpPaidOut(order){
+    this.setState({popUpOrder : order})
+    this.setState({showPopUpPaidOut : !this.state.showPopUpPaidOut});
+  }
+
+  getDetail(order){
+    this.setState({popUpOrder : order});
+    this.togglePopUp();
+
   }
 
   render() {
@@ -688,7 +720,8 @@ class Orders extends React.Component {
           }
           
 
-          input[type=text].search {
+          input[type=text] {
+
             border: 1px solid #EAEDF2;
             font-size: 14px;
             padding: 8px 8px 8px 30px;
@@ -707,7 +740,6 @@ class Orders extends React.Component {
             background-color: #ECF3FA;
             width: 300px;
           }
-
 
 
           input[type=text]:focus.date {
