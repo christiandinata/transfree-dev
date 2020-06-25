@@ -489,7 +489,7 @@ class Orders extends React.Component {
 
   static async getInitialProps(ctx) {
     initialize(ctx);
-    await ctx.store.dispatch(actions.getAllOrders(1,'getAllOrders'));
+    await ctx.store.dispatch(actions.getAllOrders(1,'getAllOrders',ctx.req));
   };
 
   checkPayment(_id) {

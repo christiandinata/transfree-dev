@@ -5,14 +5,20 @@ import {
   UPDATE_FX_FAIL
 } from '../types';
 import { API } from '../../config';
+import { getCookie } from '../../utils/cookie';
 
-const updateRates = ({base, upperMargin, lowerMargin, idrToGbpOos,gbpToIdrOos,idrToEurOos,eurToIdrOos}, type) => {
+
+const updateRates = ({base, upperMargin, lowerMargin, idrToGbpOos,gbpToIdrOos,idrToEurOos,eurToIdrOos}, type,req) => {
   if (type !== 'updateRates') {
     throw new Error('Wrong API call!');
   }
   return (dispatch) => {
     dispatch({type: UPDATE_FX_PROGRESS, payload: true});
-    axios.post(`${API}/${type}`, {base, upperMargin, lowerMargin, idrToGbpOos,gbpToIdrOos,idrToEurOos,eurToIdrOos})
+    axios.post(`${API}/${type}`, {base, upperMargin, lowerMargin, idrToGbpOos,gbpToIdrOos,idrToEurOos,eurToIdrOos}, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
+    })
       .then((response) => {
         dispatch({type: UPDATE_FX_SUCCESS, payload: response.data.adjustedRates})
       })

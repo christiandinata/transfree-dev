@@ -3,20 +3,25 @@ import {
   EXCHANGE_RATE
 } from '../types';
 import { API } from '../../config';
+import { getCookie } from '../../utils/cookie';
 
-const getRates = (from, to) => {
+const getRates = (from, to, req) => {
   return async (dispatch) => {
     await axios.get('https://data.fixer.io/latest?access_key=1c2c1df7d16f7d0e30bb25aebd730a22&base='+from.toUpperCase()+'&symbols='+to.toUpperCase())
       .then((response) => {
         let rate = response.data.rates[to.toUpperCase()];
         dispatch({type: EXCHANGE_RATE, payload: rate});
+      },{
+        headers: {
+          'Authorization': 'Bearer ' + getCookie('token', req) 
+        }
       }).catch((err) => {
         throw new Error(err);
       });
   };
 };
 
-const getMultipleRates = (idr,myr, krw, gbp, usd, eur, hkd) => {
+const getMultipleRates = (idr,myr, krw, gbp, usd, eur, hkd, req) => {
   return async (dispatch) => {
     await axios.get('https://data.fixer.io/latest?access_key=1c2c1df7d16f7d0e30bb25aebd730a22&base='+
                                                       idr.toUpperCase()+'&symbols='+myr.toUpperCase()+
@@ -28,6 +33,10 @@ const getMultipleRates = (idr,myr, krw, gbp, usd, eur, hkd) => {
       .then((response) => {
         let rates = response.data.rates;
         dispatch({type: EXCHANGE_RATE, payload: rates});
+      },{
+        headers: {
+          'Authorization': 'Bearer ' + getCookie('token',req) 
+        }
       }).catch((err) => {
         throw new Error(err);
       });

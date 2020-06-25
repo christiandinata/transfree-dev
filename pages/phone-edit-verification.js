@@ -21,7 +21,7 @@ class PhoneVerification extends React.Component {
     initialize(ctx);
     if (ctx.isServer) {
       if(ctx.req.headers.cookie) {
-        await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
+        await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
       }
     }
   }

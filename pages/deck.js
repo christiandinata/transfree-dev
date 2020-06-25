@@ -24,7 +24,7 @@ const Terms = () => (
       <div className="margin"><img src="../static/ppt/slide12.PNG"/></div>
       <div className="margin"><img src="../static/ppt/slide13.PNG"/></div>
       <div className="margin"><img src="../static/ppt/slide14.PNG"/></div>
-      </div>>
+      </div>
     </div>
     <style jsx>{`
       .row {

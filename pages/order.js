@@ -94,8 +94,8 @@ class Order extends React.Component {
   static async getInitialProps(ctx) {
     initialize(ctx);
     await ctx.store.dispatch(actions.getAdjustedRates('IDR','getAdjustedRates'));
-    await ctx.store.dispatch(actions.getRates('GBP','IDR'));
-    await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
+    await ctx.store.dispatch(actions.getRates('GBP','IDR',ctx.req));
+    await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
   };
 
   componentDidMount() {
