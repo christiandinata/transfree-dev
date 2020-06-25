@@ -11,10 +11,6 @@ const getRates = (from, to, req) => {
       .then((response) => {
         let rate = response.data.rates[to.toUpperCase()];
         dispatch({type: EXCHANGE_RATE, payload: rate});
-      },{
-        headers: {
-          'Authorization': 'Bearer ' + getCookie('token', req) 
-        }
       }).catch((err) => {
         throw new Error(err);
       });
@@ -33,10 +29,6 @@ const getMultipleRates = (idr,myr, krw, gbp, usd, eur, hkd, req) => {
       .then((response) => {
         let rates = response.data.rates;
         dispatch({type: EXCHANGE_RATE, payload: rates});
-      },{
-        headers: {
-          'Authorization': 'Bearer ' + getCookie('token',req) 
-        }
       }).catch((err) => {
         throw new Error(err);
       });
