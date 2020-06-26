@@ -91,6 +91,22 @@ const getOrderByUid = (uid , type) => {
   };
 };
 
+const getOrderByQuery = ({page, query},type) => {
+  if (type !== 'getAllOrders') {
+    throw new Error('Wrong API call!');
+  }
+  return async (dispatch) => {
+    dispatch({type: ORDER_DATA_ARRAY_IN_PROGRESS, payload: true});
+    await axios.get(`${API}/${type}?page=`+page+`&q=`+query)
+      .then((response) => {
+        dispatch({type: ORDER_DATA_ARRAY, payload: response.data.order_data_array});
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  };
+};
+
 const getAllOrders = (page,type) => {
   if (type !== 'getAllOrders') {
     throw new Error('Wrong API call!');

@@ -206,7 +206,8 @@ class Users extends React.Component {
     this.state = {
       activePage: 1,
       showPopUp : false,
-      popUpUser : null
+      popUpUser : null,
+      searchQuery : ''
     }
     this.approveUser = this.approveUser.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
@@ -215,6 +216,9 @@ class Users extends React.Component {
     // this.handleLastPage = this.handleLastPage.bind(this);
     this.togglePopUp = this.togglePopUp.bind(this);
     this.getIdDetail = this.getIdDetail.bind(this);
+
+    this.handleSearchEnter = this.handleSearchEnter.bind(this);
+    this.handleSearchQuery = this.handleSearchQuery.bind(this);
   }
 
   static async getInitialProps(ctx) {
@@ -254,8 +258,22 @@ class Users extends React.Component {
     this.togglePopUp();
   }
 
+  handleSearchEnter(event){
+    let {activePage, searchQuery} = this.state;
+
+    if(event.key == 'Enter'){
+      this.props.getUsersByQuery(activePage, searchQuery, 'getUsersByQuery');
+    }
+  }
+
+  handleSearchQuery(event){
+    this.setState({
+      searchQuery : event.target.value
+    })
+  }
+
   render() {
-    const {showPopUp, popUpUser} = this.state;
+    const {showPopUp, popUpUser, searchQuery} = this.state;
 
     return (
       <div>
@@ -266,7 +284,7 @@ class Users extends React.Component {
             <div className="list-header">
               <div className="left"><h2>Users</h2></div>
               <div className="right">
-                <input type="text" placeholder="Search user"/>
+                <input type="text" onKeyPress={this.handleSearchEnter} onChange={this.handleSearchQuery} value={searchQuery} placeholder="Search user"/>
               </div>
             </div>
             { this.props.inProgress ? (
