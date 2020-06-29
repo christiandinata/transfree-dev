@@ -11,15 +11,21 @@ import {
   PHOTO_DATA
 } from '../types';
 import { API } from '../../config';
+import { getCookie } from '../../utils/cookie';
+
 
 // upload photos to server
-const uploadPhoto = ({ photoId, photoFace, email }, type) => {
+const uploadPhoto = ({ photoId, photoFace, email }, type,req) => {
   if (type !== 'uploadPhoto') {
     throw new Error('Wrong API call!');
   }
   return (dispatch) => {
     dispatch({type: PHOTO_UPLOAD_PROGRESS, payload: true});
-    axios.post(`${API}/${type}`, {photoId, photoFace, email})
+    axios.post(`${API}/${type}`, {photoId, photoFace, email}, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
+    })
       .then((response) => {
         Router.push('/account');
         dispatch({type: PHOTO_UPLOAD_SUCCESS, payload: response.data.successMessage});
@@ -40,13 +46,17 @@ const uploadPhoto = ({ photoId, photoFace, email }, type) => {
   };
 };
 
-const getPhoto = (_id, type) => {
+const getPhoto = (_id, type,req) => {
   if(type !== 'getPhoto'){
     throw new Error('Wrong API Call!');
   }
   return (dispatch) => {
     dispatch({type: GET_PHOTO_PROGRESS, payload: true});
-    axios.get(`${API}/getPhoto/${_id}`)
+    axios.get(`${API}/getPhoto/${_id}`, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
+    })
       .then((response) => {
         dispatch({type: GET_PHOTO_SUCCESS, payload: response.status});
         dispatch({type: PHOTO_DATA, payload: response.data});

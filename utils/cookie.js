@@ -2,7 +2,6 @@
 // https://github.com/carlos-peru/next-with-api/blob/master/lib/session.js
 
 import cookie from 'js-cookie';
-
 export const setCookie = (key, value) => {
   if (process.browser) {
     cookie.set(key, value, {
@@ -31,6 +30,7 @@ const getCookieFromBrowser = key => {
 };
 
 const getCookieFromServer = (key, req) => {
+  
   if (!req.headers.cookie) {
     return undefined;
   }

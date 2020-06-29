@@ -15,7 +15,7 @@ class Profile extends React.Component{
     // Memanggil fungsi getUser untuk mendapatkan informasi user
     static async getInitialProps(ctx) {
         initialize(ctx);
-        await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
+        await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
       };
 
     render(){

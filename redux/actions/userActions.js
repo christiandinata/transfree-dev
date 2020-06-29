@@ -6,13 +6,18 @@ import {
   USER_DATA_ARRAY_IN_PROGRESS
 } from '../types';
 import { API } from '../../config';
+import { getCookie } from '../../utils/cookie';
 
-const getUser = (uid, type) => {
+const getUser = (uid, type, req) => {
   if (type !== 'user') {
     throw new Error('Wrong API call!');
   }
   return async (dispatch) => {
-    await axios.get(`${API}/${type}?uid=`+uid)
+    await axios.get(`${API}/${type}?uid=`+uid, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token', req)}`
+      }
+    })
       .then((response) => {
         dispatch({type: USER_DATA, payload: response.data.user_data});
       })
@@ -22,13 +27,17 @@ const getUser = (uid, type) => {
   };
 };
 
-const getAllUsers = (page, type) => {
+const getAllUsers = (page, type, req) => {
   if (type !== 'getAllUsers') {
     throw new Error('Wrong API call!');
   }
   return async (dispatch) => {
     dispatch({type: USER_DATA_ARRAY_IN_PROGRESS, payload: true});
-    await axios.get(`${API}/${type}?page=`+page)
+    await axios.get(`${API}/${type}?page=`+page, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
+    })
       .then((response) => {
         dispatch({type: USER_DATA_ARRAY, payload: response.data.user_data_array});
       })
@@ -38,12 +47,16 @@ const getAllUsers = (page, type) => {
   };
 };
 
-const approveUser = ({uid} , type) => {
+const approveUser = ({uid} , type, req) => {
   if (type !== 'approveUser') {
     throw new Error('Wrong API call!');
   }
   return async (dispatch) => {
-    await axios.post(`${API}/${type}`, {uid})
+    await axios.post(`${API}/${type}`, {uid}, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
+    })
       .then((response) => {
         Router.push('/dashboard/users');
         console.log(response);
@@ -55,12 +68,16 @@ const approveUser = ({uid} , type) => {
   };
 };
 
-const deleteUser = ({uid} , type) => {
+const deleteUser = ({uid} , type,req) => {
   if (type !== 'deleteUser') {
     throw new Error('Wrong API call!');
   }
   return async (dispatch) => {
-    await axios.post(`${API}/${type}`, {uid})
+    await axios.post(`${API}/${type}`, {uid}, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
+    })
       .then((response) => {
         Router.push('/dashboard/users');
         console.log(response);
