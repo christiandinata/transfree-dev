@@ -19,7 +19,12 @@ const addOrder = ({ uid, senderName, senderEmail, senderPhone, rate, fromCurrenc
   }
   return (dispatch) => {
     axios.post(`${API}/${type}`, {uid, senderName, senderEmail, senderPhone, rate, fromCurrency, toCurrency, fromAmount, toAmount,
-      email, name, bankName, bankAccountNumber, accountNumber, sortcode, iban, swift, routingNumber, bsbCode, paymentMethod})
+      email, name, bankName, bankAccountNumber, accountNumber, sortcode, iban, swift, routingNumber, bsbCode, paymentMethod
+    }, {
+      headers: {
+        'Authorization': 'Bearer ' + getCookie('token') 
+      }
+    })
       .then((response) => {
         dispatch({type: ORDER_DATA, payload: response.data.order_data});
 
