@@ -15,7 +15,7 @@ import { getCookie } from '../../utils/cookie';
 
 
 // upload photos to server
-const uploadPhoto = ({ photoId, photoFace, email }, type,req) => {
+const uploadPhoto = ({ photoId, photoFace, email }, type) => {
   if (type !== 'uploadPhoto') {
     throw new Error('Wrong API call!');
   }
@@ -23,7 +23,7 @@ const uploadPhoto = ({ photoId, photoFace, email }, type,req) => {
     dispatch({type: PHOTO_UPLOAD_PROGRESS, payload: true});
     axios.post(`${API}/${type}`, {photoId, photoFace, email}, {
       headers: {
-        Authorization: `Bearer ${getCookie('token',req)}`
+        Authorization: `Bearer ${getCookie('token')}`
       }
     })
       .then((response) => {
@@ -46,7 +46,7 @@ const uploadPhoto = ({ photoId, photoFace, email }, type,req) => {
   };
 };
 
-const getPhoto = (_id, type,req) => {
+const getPhoto = (_id, type) => {
   if(type !== 'getPhoto'){
     throw new Error('Wrong API Call!');
   }
@@ -54,7 +54,7 @@ const getPhoto = (_id, type,req) => {
     dispatch({type: GET_PHOTO_PROGRESS, payload: true});
     axios.get(`${API}/getPhoto/${_id}`, {
       headers: {
-        Authorization: `Bearer ${getCookie('token',req)}`
+        Authorization: `Bearer ${getCookie('token')}`
       }
     })
       .then((response) => {
