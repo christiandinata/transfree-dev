@@ -29,16 +29,16 @@ const Header = () => (
         letter-spacing: 0.2px;
         color: #3E495E;
         margin: 0;
-        background-color: #F6F8FB;
+        background-color: #FFFFFF;
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
 
       h1, h2, h3, h4, b, .bold, button {
-        font-family: 'Campton-Bold', sans-serif;
-        font-weight: 700;
-        color: #15233C;
+        font-family: 70px 'Campton-Bold', sans-serif;
+        font-weight: 900;
+        color: #FFFFFF;
       }
 
       a {
@@ -61,8 +61,8 @@ const Header = () => (
       }
 
       .btn-primary {
-        background-color: #469DDD;
-        border: none;
+        background-color: #46B2E0;
+        border:  3px #46B2E0;
         color: white;
         padding: 10px 20px;
         text-align: center;
@@ -84,12 +84,13 @@ const Header = () => (
         font-size: 16px;
         border-radius: 4px;
         transition: all 0.2s ease;
+        margin-left:10px;
       }
 
       .btn-secondary {
-        background: transparent;
-        border: 2px solid #469DDD;
-        color: #469DDD;
+        background:  #FAAF40;
+        border: 3px solid #FAAF40;
+        color: #FFFFFF;
         padding: 8px 18px;
         text-align: center;
         text-decoration: none;
@@ -162,13 +163,16 @@ const Header = () => (
       }
 
       ul > li > a {
-        color: #469DDD;
+        color: #000000;
         text-decoration: none;
         transition: 0.2s ease-in;
+        font-size: 25px;
+        font-family: 'Campton-Bold', sans-serif;
+        font-weight: bold;
       }
 
       ul > li > a:hover {
-        color: #5FB4F3;
+        color: #000000;
       }
 
       .react-phone-number-input__row {

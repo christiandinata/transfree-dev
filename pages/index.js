@@ -11,6 +11,8 @@ import { getCookie } from '../utils/cookie';
 import NumberFormat from 'react-number-format';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '@fortawesome/fontawesome-svg-core/styles.css';
+import { Slide } from 'react-slideshow-image';
+ 
 
 
 class Index extends React.Component {
@@ -226,7 +228,23 @@ class Index extends React.Component {
     }
   }
 
+
+
   render() {
+    const properties = {
+      duration: 5000,
+      transitionDuration: 500,
+      infinite: true,
+      indicators: true,
+      arrows: true,
+      pauseOnHover: true,
+      onChange: (oldIndex, newIndex) => {
+        console.log(`slide transition from ${oldIndex} to ${newIndex}`);
+      }
+    }
+
+
+    
     return (
       <div>
         <Header/>
@@ -234,55 +252,43 @@ class Index extends React.Component {
         <div className="row hero">
           <div className="container">
             <div className="left-container">
-              <div className="logo">
-                <img src="../static/images/transfree-logo.png"/>
-                </div>
-              <h1>International money transfer feels</h1>
-              <h1 className="h1-bawah">like local</h1>
+              <div className="text">
+                    <h1 style={{fontWeight:400}}>Internasional</h1>
+                    <h2 style={{fontWeight:900}}> Money</h2>
+              </div>
+              <div className="text">
+                    <h1 style={{fontWeight:900}}>Transfer</h1>
+                    <h1 style={{fontWeight:400}}> feels like </h1>
+                    <h2 style={{fontWeight:900}}> Local</h2>
+              </div>
+              <h3 style={{marginTop:0}}>Send. Arrives. Pick-up in 5 minutes</h3>
+              <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-primary-start" style={{fontSize:20,width:"auto"}}>Touch in action</a>
+              <div style={{marginTop:40}}>
+               
+
+                <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank">
+                <img src="../static/images/appstore.png"/></a>
+                <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
+                <img src="../static/images/playstore.png" style={{marginLeft:20}}/></a>
+                
+              </div>
               <div className="desktop">
                 <div className="fixed-btn">
                   <a href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree" target="_blank">
-
                   <img style={{width: "50%", marginTop: "25%"}} src="../static/images/wa-logo.png"/></a>
-                </div>
-                <div className="external-link">
-                  <div className="external-link-left">
-                    <a href={"#video-transfree"} className="btn-secondary">See how it works</a>
-                    <a href="#_" className="lightbox" id={"video-transfree"}>
-                    <iframe src="https://www.youtube.com/embed/8RzCs_sQ8Ak" frameBorder="0" allow="accelerometer;
-                    autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-                    </a>
-                  </div>
-
-                  <div className="external-link-right">
-                        <a style={{paddingRight: "35px",paddingLeft: "35px",paddingTop: "9.5px",paddingBottom: "9.5px"}} className="btn-primary-3"  href="/send">Send for Living</a>
-                  </div>
-
-                  <a href="/donasiqurban"><div className = "btn-secondary" style={{marginLeft:20}}>Qurban Sekarang</div></a>
-
-                  
-                </div>
-
-                <div className="benefits">
-                  <div className="benefit-item">
-                    <img src="../static/images/benefit-1.svg"/>
-                    <p>Official partner Persatuan pelajar Indonesia</p>
-                  </div>
-                  <div className="benefit-item">
-                    <img src="../static/images/benefit-2.svg"/>
-                    <p>Winner Entrepreneur Summit LPDP 2018</p>
-                  </div>
                 </div>
               </div>
             </div>
-            <div className="right-container">
-              <div className="converter-container">
+            <div className="right-container" style={{marginLeft:30}}>
+              <div className="converter-container" >
+                <h1 style={{float:"center",textAlign:"center"}}>Transfer With Transfree</h1>
                 <div className="row exchange-container">
                   <div className="source-container">
                     <div className="money-input-container">
                       <div className="money-input">
-                        <span>You send</span>
+                        <span >You send</span>
                         <NumberFormat
+                          style={{fontSize:30,fontWeight:800,marginLeft:10}}
                           id="money-from"
                           type="text"
                           thousandSeparator={true}
@@ -505,6 +511,7 @@ class Index extends React.Component {
                       <div className="money-input">
                         <span>Recipient gets</span>
                         <NumberFormat
+                        style={{fontSize:30,fontWeight:800,marginLeft:10}}
                           id="money-to"
                           type="text"
                           thousandSeparator={true}
@@ -574,33 +581,14 @@ class Index extends React.Component {
                 <div className="row rate"style={{marginTop:"-20px"}} >
                   <span className="rate-desc" >Transfer fee </span> <span className="rate-value" style={{textAlign:"right",marginLeft:"5px"}}><span ><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value="0" /></span></span>
                 </div>
-
-                {/*{this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' ?
-                  <Link href="/">
-                  <div classname="row note">
-                   <p style={{maxWidth: "100%", marginBottom: "0", color: "darkgrey"}}>Your transfer will be processed immediately.
-                    <span style={{maxWidth: "100%", marginBottom: "0", color: "orange"}}> But your money will arrived on Monday or in the next working day.</span>
-                   </p>
-                  </div>
-                  </Link>
-                  :
-                  <Link href="/">
-                  <a classname="row note">
-                   <p style={{maxWidth: "100%", marginBottom: "0", color: "darkgrey"}}>Your transfer will be processed immediately.
-                   The recipient will get the money in less than <span className="received-on">24 hours</span>.</p>
-                  </a>
-                  </Link>
-                }*/}
-
-
-                <div className="row note">
-                  <p style={{maxWidth: "100%", marginBottom: "0"}}>Your transfer will be processed immediately.
+                <div className="row note" style={{width:"75%",float:"center",textAlign:"center",marginLeft:"14%"}}>
+                  <p style={{maxWidth: "100%", marginBottom: "0",color:"#FFFFFF"}}>Your transfer will be processed immediately.
                   The recipient will get the money in next working day. </p>
 		  {/*<span className="received-on">24 hours</span>*/}
                 </div>
 
 
-                <div className="row converter-cta">
+                <div className="row converter-cta" style={{width:"75%",float:"center",textAlign:"center",marginLeft:"14%"}}>
                 {
                   // <div className="cta-secondary">
                   //   <Link href="">
@@ -609,10 +597,10 @@ class Index extends React.Component {
                   // </div>
                 }
 
-                  <div className="cta-primary">
+                  <div className="cta-primary" style={{width:"75%"}}>
 
                   <Link href="/order">
-                    <a className="btn-primary">Get started</a>
+                    <a className="btn-primary-start">Get started</a>
                   </Link>
                   <Link href="/fxroom">
                     <a className="btn-primary-2">FX Room</a>
@@ -657,96 +645,133 @@ class Index extends React.Component {
                 
               </center>
             </div>
-              {
-              // <div className="promo">
-              //   <div className="promo-desc">
-              //   Let's lighten their burden: <b>Banjir Bandang Papua</b>
-              //   </div>
-              //   <div className="promo-cta">
-              //     <Link href="">
-              //       <a className="btn-primary">Donate now</a>
-              //     </Link>
-              //   </div>
-              // </div>
-              }
-
             </div>
           </div>
 
         </div>
-        <div className="row">
-          <img className="curve" src="../static/images/curve-bg.svg"/>
-        </div>
-{/*
-        <div className="row partners">
-          <h1>Our partners</h1>
-          <div className="container partners-wrapper">
-            <div className="row partners-container">
-              <div className="partner-item">
-                <img src="../static/images/partners/ppi-mib.png"/>
-              </div>
-              <div className="partner-item">
-                <img src="../static/images/partners/ppi-london.png"/>
-              </div>
-              <div className="partner-item">
-                <img src="../static/images/partners/ppi-denhaag.png"/>
-              </div>
-              <div className="partner-item">
-                <img src="../static/images/partners/ppi-liverpool.png"/>
-              </div>
-              <div className="partner-item-small">
-                <img src="../static/images/partners/ppi-rotterdam.png"/>
-              </div>
-            </div>
-
-            <div className="row partners-container">
-              <div className="partner-item-small">
-                <img src="../static/images/partners/ppi-delft.png"/>
-              </div>
-              <div className="partner-item-small">
-                <img src="../static/images/partners/ppi-gm.png"/>
-              </div>
-              <div className="partner-item-small">
-                <img src="../static/images/partners/ppi-newcastle.png"/>
-              </div>
-              <div className="partner-item">
-                <img src="../static/images/partners/ppi-amsterdam.png"/>
-              </div>
-            </div>
-          </div>
-        </div>
-	*/}
-
+        
         <div className="row features">
           <div className="container">
-            <div className="feature">
-              {/* <div className="left-feature-container"><img src="../static/images/artboard_1.svg"/></div> */}
-              <div className="right-feature-container">
-                <h2>Better rate for transfer</h2>
-                <p>Have you ever thought that the cost of international money
-                transfers is so big but gives you a smaller amount? Get more from
-                your money by using our services so you can use it for other needs with little effort.</p>
+           
+              <div className="boxWorld">
+              
+                <img src="../static/images/features/Box_World Map.png"></img>
               </div>
-            </div>
-            <div className="feature">
-              <div className="left-feature-container">
-                <h2>Tired of waiting for your money to arrive? </h2>
-                <p>Does your family need it for an emergency? And when you use a cheaper
-                 option, it sometimes takes longer for your money to arrive. Don't worry, we are here now.</p>
+              
+              <div className="background" style={{marginLeft:-1400}}>
+                <img src="../static/images/features/Shadow indonesia.png" style={{width:1800,marginTop:-10}}></img>
               </div>
-              {/* <div className="right-feature-container">
-                <img src="../static/images/artboard_2.svg"/>
-              </div> */}
+              <div style={{marginLeft:-1600}}>
+                <div className="images">
+                  <div className="column">
+                      <img src="../static/images/features/monas.png" style={{marginTop:-22}} alt="monas" name="monas" id="monas" ></img>
+                  </div>
+                  <div className="column">
+                  <img src="../static/images/features/rumah.png" style={{marginLeft:50,marginTop:40}} alt="rumah"  id="rumah" ></img>
+                  </div>
+                  <div className="column">
+                  <img src="../static/images/features/bali.png" style={{marginLeft:50,marginTop:-18}} alt="bali" ></img>
+                  </div>
+                  <div className="column">
+                  <img src="../static/images/features/surabaya.png" style={{marginLeft:50,marginTop:-10}} alt="surabaya" ></img>
+                  </div>
+                  <div className="column">
+                  <img src="../static/images/features/borobudur.png" style={{marginLeft:50,marginTop:10}} alt="borobudur"  ></img>
+                  </div>
+                </div>
+                </div>
+                <div style={{marginLeft:-200,marginTop:100}}>
+                <h1 style={{color:"#000000",width:500}}>Why we should to use Transfree</h1>
+                </div>
+                <div className="benefit">
+                    <div className="column">
+                    <div className ="btn-primary-start" style={{marginLeft:20}}>
+                    <img src="../static/images/features/money.png" style={{float:"center",position:"center"}}></img>
+                    <h1>Better rate for Transfree</h1>
+                </div>
+                <div className ="btn-primary-start">
+                  <img src="../static/images/features/time.png" style={{float:"center",position:"center"}}></img>
+                    <h1>Quickly sent quickly arrived</h1>
+                </div>
+                <div className ="btn-primary-start">
+                  <img src="../static/images/features/search.png" style={{float:"center",position:"center"}}></img>
+                    <h1>Unchargeable for Transfer</h1>
+                </div>
+                    </div>
+                
+                </div>
+
+                <div className="message">
+                      <h3 style={{color:"#000000",textAlign:"center"}}>Does your family need it for an emergency? And when you use a cheaper option,</h3>
+                      <h3 style={{color:"#000000", textAlign:"center",marginTop:-20}}>it sometimes takes longer for your money to arrive</h3>
+                      <h3 style={{color:"#000000",textAlign:"center",marginTop:-20}}>Don't worry, we are here now</h3>
+                </div>
+                
+                
+          </div>
+
+        </div>
+     
+
+        <div className="row application">
+          <div className="container">
+          <div className="left-container">
+            <img src="../static/images/ASSET/Mockup.png" style={{width:500,height:900}}></img>
+          </div>
+
+          <div className="right-container" style={{marginLeft:70,marginTop:350,flexBasis:800}}>
+              <h1>Mobile Application now in</h1>
+
+          <div>
+
+
+          <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank">
+          <img src="../static/images/appstore.png" style={{marginLeft:80}}/></a>
+                    
+            
+          </div>
+          
+            <div>
+            <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
+            <img src="../static/images/playstore.png" style={{marginTop:20,marginLeft:80}}/></a>
+             
             </div>
-            <div className="feature">
-              {/* <div className="left-feature-container"><img src="../static/images/artboard_3.svg"/></div> */}
-              <div className="right-feature-container">
-                <h2>We don't charge any fees for your transfer</h2>
-                <p>Too good to be true? But this is happening now.
-                Yes, we do not charge you any fees. And we have competitive rates as
-                compared to other services. So why not try using our services?</p>
+          </div>
+        
+          </div>
+        </div>
+
+        <div className="row achievement">
+            <div className="container" style={{marginTop:-10}}>
+             <div className="content-achievement">
+                    <h1 style={{textAlign:"center",position:"center",marginLeft:700,marginTop:150}}>What can we achieve</h1>
+             </div>
+            </div>
+        </div>
+
+        <div className="row testimonial">
+          <div className="container">
+              <div className="content-testimonial">
+              <div className="container" style={{position:"absolute",marginTop:90,width:"auto"}} >
+                  <h1 style={{float:"center",marginLeft:650,width:500}} >What our Customer say?</h1>
+                    <div className="profile-testimonial">
+                          <img src="../static/images/testimoni/dummy-photo.png" alt="first slide"></img>
+                          <div className="textTesti">
+                          <h1 style={{marginTop:-10,marginLeft:-40}}>YOLANDA</h1>
+                          <h1 style={{marginTop:-30,width:600,marginLeft:-130}}>Imperial College London</h1>
+                          </div>
+                        </div> 
+                        <div className="message">
+                          <div className="content">
+                          <p >It is very difficult to send money from IDR to GDP and Transfree</p>
+                          <p>come out with the best solution ever. First time I use it when I was in</p>
+                          <p>Indonesia to pay for my flat deposit and rent. And now I'm still use</p>
+                          <p>Transfree to transfer money from the UK to Indonesia. It gives me a fair rate</p>
+                       </div>
+                    </div>
+                 
               </div>
-            </div>
+              </div>
           </div>
         </div>
 
@@ -781,102 +806,279 @@ class Index extends React.Component {
               </div>
             </div>
           </div>
-		{/*
-          <div className="row partners-mobile">
-            <h1>Our partners</h1>
-            <div className="container partners-wrapper-mobile">
-              <div className="row partners-container-mobile">
-                <div className="partner-item-mobile">
-                  <img src="../static/images/partners/ppi-mib.png"/>
-                </div>
-                <div className="partner-item-mobile">
-                  <img src="../static/images/partners/ppi-london.png"/>
-                </div>
-                <div className="partner-item-mobile">
-                  <img src="../static/images/partners/ppi-denhaag.png"/>
-                </div>
-            </div>
-
-            <div className="row partners-container-mobile">
-              <div className="partner-item-mobile">
-                <img src="../static/images/partners/ppi-liverpool.png"/>
-              </div>
-              <div className="partner-item-mobile">
-                <img src="../static/images/partners/ppi-rotterdam.png"/>
-              </div>
-              <div className="partner-item-mobile">
-                <img src="../static/images/partners/ppi-amsterdam.png"/>
-              </div>
-            </div>
-
-             <div className="row partners-container-mobile">
-              <div className="partner-item-mobile-small">
-                <img src="../static/images/partners/ppi-delft.png"/>
-              </div>
-              <div className="partner-item-mobile-small">
-                <img src="../static/images/partners/ppi-newcastle.png"/>
-              </div>
-              <div className="partner-item-mobile-small">
-                <img src="../static/images/partners/ppi-gm.png"/>
-              </div>
-            </div>
-          </div>
-        </div>
-	*/}
-        </div>
-
-        <div className="row testimonials">
-          <div className="container">
-            {/* <h1>Why using Transfree?</h1> */}
-            <div className="features-container">
-              {/* <div className="feature-item">
-                <img src="../static/images/benefit-3.svg"/>
-                <h2>Cheaper & faster</h2>
-                <p>The future is today. Send and Receive currency at the real exchange rate.
-                5x cheaper and 3x faster than a banks. Make international money transfer
-                feels like local transfer.</p>
-              </div>
-              <div className="feature-item">
-                <img src="../static/images/benefit-4.svg"/>
-                <h2>Rp 18 Billion+ transactions</h2>
-                <p>Through our convenient services, Over Rp. 18 billion
-                worth of transaction has been safely handled by Transfree.</p>
-              </div>
-              <div className="feature-item">
-                <img src="../static/images/benefit-5.svg"/>
-                <h2>1000+ customers</h2>
-                <p>Trust is build with consistency. More than 1000 customers
-                have saved their money. Trust their international transactions
-                by using our services.</p>
-              </div> */}
-            </div>
-            <div className="testimonials-wrapper">
-              <h1>What our customers say</h1>
-              <div className="testimonials-items">
-                <div className="message">
-                  “It is very difficult to send money from IDR to GBP and Transfree
-                  come out with the best solution ever. First time I use it when
-                  I was in Indonesia to pay for my flat deposit and rent.
-                  And now I'm still use Transfree to transfer money from the UK to Indonesia.
-                  It gives me a fair rate ”
-                </div>
-                <div className="user">
-                  <img src="../static/images/dummy-photo.png"/>
-                  <div className="user-details">
-                    <h3 className="user-name">Yolanda</h3>
-                    <div className="user-affiliation">Imperial College London</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="testimoni">
-              <Link>
-              <i><ins><a href="/testimoni" >more testimoni</a></ins></i>
-              </Link>
-            </div>
-          </div>
         </div>
         <style jsx>{`
+
+       
+
+      .testimonial .message{
+        position:relative;
+        background-image:url('../static/images/testimoni/box-message.png');
+        background-repeat: no-repeat;
+        background-size: 1400px 290px;
+        width:2000px;
+        float:left;
+        position:left;
+        margin-top:500px;
+        text-align:left;
+        margin-left:-1120px;
+        margin-bottom:-900px;
+        padding:50px 100px 200px 200px;
+       
+      }
+
+      .testimonial .message p{
+        color:#000000;
+        font-size:28px;
+        margin-top:-30px;
+      }
+
+      .testimonial .message .content{
+        text-align:center;
+        margin-left:-900px;
+        margin-top:20px;
+      }
+
+      .box-message{
+        margin-top:500px;
+        width:auto;
+        height:auto;
+      }
+
+      .profile-testimonial{
+        padding:10px;
+        margin-top:120px;
+        width:auto;
+        margin-left:-300px;
+      }
+
+      .profile-testimonial .textTesti{
+        margin-left:-80px;
+        margin-top:10px;
+      }
+
+      .profile-testimonial img{
+        width:200px;
+        height:200px;
+        margin-left:-140px;
+      }
+
+      .text h1,h2{
+        display:inline;
+        font-size:45px;
+      }
+
+      .text{
+        margin-top:0px;
+      }
+
+      .features .images{
+        margin-top:-180px;
+        display:flex;
+      }
+
+
+      .features .btn-primary-start {
+        background-color: #5BB7DE;
+        border: none;
+        width:360px;
+        height:330px;
+        margin-bottom:20px;
+        color: white;
+        
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border-radius: 21px;
+        font-size:29px;
+        margin-right:10px;
+        transition: all 0.2s ease-in-out;
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
+      }
+
+      .features .btn-primary-start:hover {
+        background-color: #FAAF40;
+        border: none;
+        -ms-transform: scale(1);
+        -webkit-transform:scale(1);
+        transform:scale(1.5);
+        margin-bottom:20px;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border-radius: 21px;
+        font-size:29px;
+        margin-right:10px;
+        transition: all 0.2s ease-in-out;
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
+      }
+
+       .btn-primary-start:hover {
+        background-color: #FAAF40;
+        border: none;
+        transform: translateY(2px);
+        margin-bottom:20px;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border-radius: 21px;
+        font-size:29px;
+        margin-right:10px;
+       
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
+      }
+
+      .column {
+        flex :23.35%;
+        
+      }
+
+      .features .benefit{
+        margin-top:200px;
+        margin-left:-90px;
+        position:absolute;
+      }
+
+      .features .message{
+        position:relative;
+        margin-top:700px;
+        margin-left:-800px;
+        background-image:url('../static/images/features/Group 400.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        width:2000px;
+        padding:20px 20px;
+        opacity: 0.6;
+        
+      }
+
+      
+
+      .features .column{
+        flex:30%;
+      }
+
+       .features{
+         margin-top:0px;
+         flex-basis: 80%;
+       }
+
+       .features .background img{
+        height:1000px;
+        width:2000px;
+        margin-left:-480px;
+        margin-top:-100px;
+       }
+
+       .features .boxWorld img{
+        height:1300px;
+        width:2000px;
+        margin-left:-480px;
+        margin-top:-130px;
+       }
+
+       .benefit img{
+         width:150px;
+         height:150px;
+       }
+
+
+       .left-container h1 {
+        font-family: 70px 'Open Sans', sans-serif;
+        font-weight: 700;
+        color: #FFFFFF;
+      }
+
+      .left-container img {
+        height:70px;
+        width:200px;
+      }
+
+      .application img {
+        height:80px;
+        width:250px;
+        margin-top:10px;
+      }
+
+        container{
+          background-color: #d2222f;
+          width:20px;
+        }
+
+        .application{
+          margin-top:10px;
+          padding:25px;
+        }
+
+        .application h1{
+        font-family: 800px ,'Open Sans', sans-serif;
+        font-weight: 900;
+        color: #000000;
+        text-shadow: 1px 1px 1px #000000;
+        
+        }
+
+        .achievement{
+         margin-top:10px;
+        }
+
+        .testimonial {
+          margin-top:0px;
+        }
+
+        .content-testimonial{
+          background:url('../static/images/testimoni/background.png');
+          background-repeat: no-repeat;
+          background-size:1800px 900px;
+          width:2300px;
+          height:900px;
+          margin-top:-140px;
+          z-index:-5;
+          position:relative;
+          margin-right:-1000px;
+          margin-left:-250px;
+        }
+
+
+      
+
+        .title{
+          margin-top:20px;
+        }
+
+        .title h1{
+          display: inline-block;
+        }
+
+       
+
+        .achievement h1{
+          color:#000000;
+          font-size:40px;
+          width:auto;
+          display:flex;
+          text-shadow: 1px 1px 1px #000000;
+
+        }
+
+        .content-achievement{
+          background:url('../static/images/achievment/achievement.png');
+          background-repeat: no-repeat;
+          background-size:1800px 900px;
+          width:1800px;
+          height:900px;
+          margin-right:-800px;
+          margin-left:-300px;
+        }
+
+        .top-right {
+          position:center;
+          left:10px;
+          float:center;
+        }
+        
         .btn-primary-3{
           background-color: #d2222f;
           border: none;
@@ -891,19 +1093,56 @@ class Index extends React.Component {
           box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
           width:140px;
         }
+
+        
+
         .btn-primary-2 {
-          background-color: #32cd32d4;
+          background-color: #5BB7DE;
           border: none;
           color: white;
           padding: 10px 20px;
           text-align: center;
           text-decoration: none;
           display: inline-block;
-          font-size: 16px;
-          border-radius: 4px;
+          border-radius: 12px;
+          font-size:29px;
           transition: all 0.2s ease-in-out;
           box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
         }
+
+        .btn-primary-2:hover {
+          background-color: #5BB7DE;
+          border: none;
+          transform: translateY(2px);
+          margin-bottom:20px;
+          color: white;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          border-radius: 21px;
+          font-size:29px;
+          margin-right:10px;
+         
+          box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
+        }
+
+
+        .btn-primary-start {
+          background-color: #FAAF40;
+          border: none;
+          width:50px;
+          margin-bottom:20px;
+          color: white;
+          padding: 10px 20px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          border-radius: 12px;
+          font-size:29px;
+          transition: all 0.2s ease-in-out;
+          box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
+        }
+
         .testimoni{
           margin-left: 590px;
           margin-top: 0px;
@@ -995,13 +1234,21 @@ class Index extends React.Component {
             display: flex;
           }
 
+
+
           .hero {
-            padding-bottom: 50px; //100
+           
+            background-image:url('../static/images/Asset Web/content/Banner_Web.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: auto;
           }
 
+         
+
           .left-container {
-            flex-basis: 60%;
-            margin-top: 35px;
+            flex-basis: 80%;
+            margin-top: 95px;
           }
 
           .left-container h1{
@@ -1018,6 +1265,7 @@ class Index extends React.Component {
             flex-basis: 40%;
             margin-top: 55px;
             z-index: 2;
+            margin-right:0px;
           }
           .right-bottom-container{
             margin-top:20px !important;
@@ -1029,7 +1277,7 @@ class Index extends React.Component {
             height: 50%
           }
           .logo{
-            display: none;
+            
           }
 
           h1 {
@@ -1056,21 +1304,27 @@ class Index extends React.Component {
 
           .converter-container {
             padding: 20px;
-            background: #15233C;
+            background: #354E7A;
             box-shadow: 0 10px 30px 0 rgba(0,0,0,0.30);
-            border-radius: 8px;
+            border-radius: 30px;
             color: #AAB2C0;
+            margin-left:20px;
           }
 
           .exchange-container {
             display: flex;
             flex-direction: column;
+            
+            
           }
 
           .money-input-container {
             display: flex;
             background-color: #FFFFFF;
-            border-radius: 4px;
+            border-radius:30px;
+            height:112px;
+            width:512px;
+            
 
           }
 
@@ -1081,7 +1335,8 @@ class Index extends React.Component {
           }
 
           .money-input span {
-            margin: 5px 0 0 10px;
+            margin: 5px 0 0 20px;
+            font-size:26px;
           }
 
           .currency-change {
@@ -1091,11 +1346,12 @@ class Index extends React.Component {
             flex-basis: 35%;
             width: 35%;
             background-color: #1F345A;
-            border-radius: 0 4px 4px 0;
+            border-radius: 0 30px 20px 0;
             transition: 1s auto;
             -webkit-transition: all .15s ease-in-out;
             -o-transition: all .15s ease-in-out;
             transition: all .15s ease-in-out;
+            
           }
 
           .currency-change:hover {
@@ -1140,6 +1396,7 @@ class Index extends React.Component {
           .rate-desc {
             flex-basis: 50%;
             width: 50%;
+            color:#FFFFFF;
           }
 
           .rate-value {
@@ -1256,20 +1513,34 @@ class Index extends React.Component {
             max-width:90%;
           }
 
-          .features {
-            padding: 20px 0;
-            background-color: #FFF;
-          }
+         
+
+          
 
           .left-feature-container,
           .right-feature-container {
             flex-basis: 50%;
           }
 
-          .features .container {
-            display: flex;
-            flex-direction: column;
+
+      
+
+          .logo-left{
+            background:url('../static/images/Asset Web/content/Group 296.png'), url('../static/images/Asset Web/content/Rectangle 160.png');
+            background-repeat: no-repeat;
+            flex-basis:100%;
+            background-size:100px 100px,auto;
+            background-position:center,center;
+            padding:100px;
+            display:flex;
+            
           }
+
+          .logo-left h1{
+            display:flex
+            margin-top:300px;
+          }
+
 
           .features .container .row {
             display: flex;
@@ -1281,7 +1552,6 @@ class Index extends React.Component {
           }
 
           .testimonials {
-            background-image: url('../static/images/curve-gradient-bg.svg');
             background-size: contain;
             background-repeat: no-repeat;
             background-color: #FFF;
@@ -1430,6 +1700,7 @@ class Index extends React.Component {
             display: flex;
             align-items: center;
             margin: 0;
+            
           }
 
           hr {
@@ -1438,6 +1709,8 @@ class Index extends React.Component {
 
           .cta-primary {
             flex-basis: 100%;
+            width:500px;
+            
           }
 
             @media only screen and (max-width: 414px) {
@@ -1591,9 +1864,7 @@ class Index extends React.Component {
             display: inline-block;
           }
 
-          .hero{
-            padding-bottom: 20px;
-          }
+         
 
           .features{
             display: none;

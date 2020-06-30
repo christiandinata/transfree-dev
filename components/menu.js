@@ -19,8 +19,8 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
         <span></span>
 
         <ul id="menu">
-          {!isAuthenticated && <li><Link href="/about"><a>About</a></Link></li>}
-          {!isAuthenticated && <li><Link href="/faq"><a>FAQ</a></Link></li>}
+          {!isAuthenticated && <li><Link href="/about"><a>How it works</a></Link></li>}
+          {!isAuthenticated && <li><Link href="/faq"><a>About Us</a></Link></li>}
 
           {/* !isAuthenticated && <li><Link href="/"><a>How it works</a></Link></li> */}
           {isAuthenticated && isApproved && <li><Link href="/order"><a>Send money</a></Link></li>}
@@ -39,8 +39,8 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
         </div>
         <div className="header-menu">
           <ul>
-            {!isAuthenticated && <li><Link href="/about"><a>About</a></Link></li>}
-            {!isAuthenticated && <li><Link href="/faq"><a>FAQ</a></Link></li>}
+            {!isAuthenticated && <li><Link href="/about"><a>How it works</a></Link></li>}
+            {!isAuthenticated && <li><Link href="/faq"><a>About Us</a></Link></li>}
 
             {/* !isAuthenticated && <li><Link href="/"><a>How it works</a></Link></li> */}
             {isAuthenticated && <li><Link href="/order"><a>Send money</a></Link></li>}
@@ -60,6 +60,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
     <style jsx>{`
         .row {
           border-bottom: 1px solid #eaeaea;
+          
         }
 
         .header-container {
@@ -67,7 +68,8 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           justify-content: center;
           align-items: center;
           height: 75px;
-          background-color: #F6F8FB;
+          background-color: #FFFFFF;
+          
         }
 
         .logo {
@@ -82,14 +84,13 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
 
         .header-menu {
           display: flex;
-          justify-content: center;
           flex-grow: 1;
+          justify-content: flex-end;
+          border: 1px #707070;
         }
 
         .header-cta {
           display: flex;
-          justify-content: flex-end;
-          flex-grow: 1;
         }
 
         .btn-primary {
@@ -105,7 +106,8 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
 
         li {
           display: inline;
-          margin: 0 30px;
+          margin: 0 20px;
+          
         }
 
         .header-cta a {
@@ -233,7 +235,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
 
         #menu li
         {
-          padding: 10px 0;
+          padding: 0px 0;
           font-size: 22px;
           display: block;
         }
@@ -269,7 +271,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           #menu {
             height: 100vh;
             width: 100%;
-            background-color: #F6F8FB;
+            background-color: #FFFFFF;
           }
           .row {
             border: none;

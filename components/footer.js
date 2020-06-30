@@ -1,15 +1,16 @@
 import Link from 'next/link';
 
 const Footer = () => (
-  <div>
+ 
+  <div className="row-footer">
     <div className="row menu">
       <div className="container">
         <div className="footer-item logo">
             <img src="../static/images/transfree-logo.png"/>
         </div>
         <div className="footer-item">
-          <h3>About Transfree</h3>
-          <ul>
+          <h3>About Us</h3>
+          <ul >
             <li><Link href="/about"><a>About Us</a></Link></li>
             {/*
               <li>How it works</li>
@@ -21,16 +22,16 @@ const Footer = () => (
             <li><Link href="/privacy-policy"><a>Privacy Policy</a></Link></li>
           </ul>
         </div>
-        <div className="footer-item">
+        <div className="footer-item" style={{marginLeft:120}}>
           <h3>Contact Us</h3>
           <ul>
             <li>Phone/WhatsApp: <br/>+44 7985 497391 </li>
             <li>Email: <br/>admin@transfree.id </li>
-            <li><Link href="/complaint_feedback"><a>Complaint and Feedback</a></Link></li>
+            <li><Link href="/complaint_feedback"><a >Complaint and Feedback</a></Link></li>
           </ul>
         </div>
 
-        <div className="footer-item">
+        <div className="footer-item" style={{marginLeft:120}}>
           <h3>Follow Us On</h3>
           <ul>
             <li><a href="https://www.instagram.com/transfree_id/?hl=en" target="blank"><img className="img" src="../static/images/instagram.png"></img> </a></li>
@@ -50,7 +51,7 @@ const Footer = () => (
       <div className="container">
         <div className="footer-item logo">
         </div>
-        <div className="footer-item-collab">
+        <div >
           <h3>Collaborators and Partners</h3>
           <ul>
             <li><Link ><a href="https://ristekdikti.go.id/" target="_blank">Ministry of Research Technology and Higher Education</a></Link></li>
@@ -60,9 +61,15 @@ const Footer = () => (
 
           </ul>
         </div>
+      </div>
+    </div>
 
-        <div className="footer-item">
-          <h3>Office</h3>
+    <div className="row2 menu2">
+      <div className="container">
+        <div className="footer-item logo">
+        </div>
+        <div className="footer-item-collab">
+        <h3>Office</h3>
           <ul>
             <li style={{fontSize: '14px'}}>Innovation Room - Mezanine Floor. Kementerian Ketenegakerjaan RI. Jl. Gatot Subroto No.Kav. 51, Jakarta Selatan, 12950 Indonesia</li>
           </ul>
@@ -75,29 +82,56 @@ const Footer = () => (
       <p>Transfree is a trademark of PT. Pelita Transfer Nusantara. Registered in the Directorate General of Intellectual Property of the United Kingdom</p>
     </div>
     <style jsx>{`
-
+    .row-footer{
+      background-color:#F6F8FC;
+      width : 1920px 0,36px 0px;
+      height : 1246px 0px 6346,42px
+    }
         .row2 {
           border-bottom: 1px solid #eaeaea;
         }
-
         .container {
           display: flex;
         }
-
         ul {
           list-style-type: none;
           margin: 0;
           padding: 0;
         }
-
         h3 {
-          color: #469DDD;
-        }
+          color: #000000;
+          font-size:30px;
+          margin-top:0px;
 
+        }
         li {
           display: block;
-          margin: 6px 0;
-          color: #469DDD;
+          margin: 16px 0px 6px;
+          color: #000000;
+        }
+
+        ul > li > a{
+          list-style-type: none;
+          display: block;
+          margin: 16px 0px 6px;
+          color: #000000;
+          font-size:16px;
+          font-weight:800px;
+        }
+
+        ul > li > a > img{
+          width:40px;
+          height:40px;
+          margin-right:30px;
+        }
+
+        .menu2  ul > li > a{
+          list-style-type: none;
+          display: block;
+          margin: 16px 0px -10px;
+          color: #000000;
+          font-size:16px;
+          font-weight:100px;
         }
 
         .img{
@@ -107,37 +141,35 @@ const Footer = () => (
           height: 25px;
         }
         .footer-item {
-          flex-basis: 25%;
+          flex-basis: 35%;
         }
-
         .footer-item-collab {
           flex-basis: 50%;
         }
-
         .logo img {
-          height: 37px;
+          width: 1920px 0,36px;
+          height: 1246px, 0px 6346,42px ;
           margin-top: 10px;
         }
-
         .menu2 {
           padding-bottom: 60px;
           padding-top: 20px;
+          margin-left:-350px;
         }
         .menu {
           padding-top: 60px;
         }
-
         .copyright {
           color: #A6AEBB;
           text-align: center;
         }
-
         a {
           font-family: 'Campton-Book', sans-serif;
         }
-
+        h3 {
+        
+        }
       `}</style>
   </div>
 )
-
 export default Footer
