@@ -106,7 +106,7 @@ class Receipt extends React.Component {
 
   static async getInitialProps(ctx) {
     initialize(ctx);
-    await ctx.store.dispatch(actions.getOrderById(ctx.req.query.oid,'getOrderById'));
+    await ctx.store.dispatch(actions.getOrderById(ctx.req.query.oid,'getOrderById',ctx.req));
   }
 
   render() {

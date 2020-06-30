@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { getCookie } from '../utils/cookie';
+import Link from 'next/link';
 class Profile extends React.Component{
     constructor(){
         super()
@@ -14,19 +15,27 @@ class Profile extends React.Component{
     // Memanggil fungsi getUser untuk mendapatkan informasi user
     static async getInitialProps(ctx) {
         initialize(ctx);
-        await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
+        await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
       };
 
     render(){
-         const { fullname, email, idType, idNumber, idName, gender, dob, pob, address } = this.props.users // menampung props yang telah diterima
+         const { phone,fullname, email, idType, idNumber, idName, gender, dob, pob, address } = this.props.users // menampung props yang telah diterima
         return(
             <div>
                 <Header/>
                 <Menu/>
                 <div className = "container-fluid">
                     <div className = "form-container">
+                    <div className="dropdown">
+                    <button className="mainmenubtn btn-primary">Edit</button>
+                        <div className="dropdown-child">
+                        <a href = "/phone-edit">Changes Phone Number</a>
+                        <a href = "/editprofile">Edit Profile</a>
+                        </div>
+                    </div>
+                        <br></br>
                         <div>
-                            <div className = "label">Nama</div>
+                            <div className = "label">Name</div>
                             <div className = "field">{fullname ? fullname: '-'}
                             </div>
                             
@@ -71,6 +80,12 @@ class Profile extends React.Component{
                             <div className = "field">{address?address:'-'}
                             </div>
                         </div>
+
+                        <div>
+                            <div className = "label">Phone</div>
+                            <div className = "field">{phone?phone:'-'}
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <style jsx>{`
@@ -79,7 +94,6 @@ class Profile extends React.Component{
                     opacity: 0.8;
                     font-size: 15px;
                   }
-
                   .form-container .field {
                       opacity: 1;
                       margin-bottom:16px;
@@ -96,7 +110,6 @@ class Profile extends React.Component{
                         min-height: 100vh;
                         align-items: center;
                     }
-
                     .form-container {
                         width: 630px;
                         height: auto;
@@ -109,7 +122,46 @@ class Profile extends React.Component{
                         grid-template-columns: 46% auto;
                         
                     }
-                    
+                    .updatePhoneNumber{
+                        width: 600px;
+                        height: auto;
+                        float:left;
+                        padding:8px;
+                        
+                    }
+                    .mainmenubtn {
+                        color: white;
+                        border: none;
+                        cursor: pointer;
+                        padding:10px;
+                        margin-top:10px;
+                        
+                    }
+                    .dropdown {
+                        position: relative;
+                        display: inline-block;
+                    }
+                    .dropdown-child {
+                        display: none;
+                        background-color: #f9f9f9;
+                        min-width: 200px;
+                        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                        z-index: 1;
+                    }
+                    .dropdown-child a {
+                        color: #3c3c3c !important;
+                        padding: 15px;
+                        text-decoration: none;
+                        display: block;
+                    }
+                    .dropdown-child a:hover {
+                        color: #232323 !important;
+                        background: #f3f3f3 !important;
+                    }
+                    .dropdown:hover .dropdown-child {
+                        display: block;
+                        
+                    }
                  `}</style>
             </div>  
         )
@@ -124,5 +176,3 @@ const mapStateToProps = (state) => ({
   
 // menghubungkan props dengan Profile
 export default connect(mapStateToProps)(Profile);
-  
-

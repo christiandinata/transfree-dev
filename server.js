@@ -152,9 +152,18 @@ app.prepare()
       }
     });
 
+
+    // server.get('/editprofile', (req, res) => {
+    //   if(!req.cookies.token) {
+    //     res.redirect('/login');
+    //   } else {
+    //     return app.render(req, res, '/editprofile', req.query.oid);
+    //   }
+
     // server.get('/donasiqurban', (req, res) => {
     //     return app.render(req, res, '/donasiqurban', req.query.oid);
       
+
     // });
 
 

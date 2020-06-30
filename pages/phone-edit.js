@@ -33,7 +33,7 @@ class Phone extends React.Component {
       phone: this.state.phone,
       email: this.props.email
     },
-      'verify','register'
+      'verify','edit'
     );
   }
 
@@ -50,8 +50,8 @@ class Phone extends React.Component {
           <div className="logo">
             <img src="../static/images/transfree-logo.png"/>
           </div>
-          <h1>Phone verification</h1>
-          <p>We need to verify your mobile phone number. This number will be used to send important updates.</p>
+          <h1>Update Phone Number</h1>
+          <p>Input your new number</p>
           <div className={"error-container "+(this.props.errorMessage != '' && this.props.errorMessage != undefined ? "error-show" : "") }>
             {this.props.errorMessage}
           </div>

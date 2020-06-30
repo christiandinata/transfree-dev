@@ -16,14 +16,13 @@ class OrderItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      key: null,
-      newPaidOutRate: 0
+      key: null
     }
     
   }
 
   render() {
-    let {newPaidOutRate} = this.state;
+    
     return (
       <div>
         <div className="container-item container-header">
@@ -56,18 +55,25 @@ class OrderItem extends React.Component {
               <div className="column dttotWarningRaised">{`${order.dttotWarningRecipient.totalMatchFound} match${order.dttotWarningRecipient.totalMatchFound>1 ? 'es' : ''} found!`}</div> :
               <div className="column">No match found!</div>
             }
-            <div className="column">{order.paidOutRate}</div>
             <div className="column">
-              {((order.receivedAt > 0) && (order.checkedAt == 0)) ? (<div className="status approved">payment received at {moment(order.checkedAt).format("DD MMM YYYY, HH:mm")} </div>) : null}
-              {((order.checkedAt > 0) && (order.transferredAt == 0)) ? (<div className="status approved">payment checked at {moment(order.receivedAt).format("DD MMM YYYY, HH:mm")}</div>) : null}
-              {((order.transferredAt > 0) && (order.completedAt == 0)) ? (<div className="status approved">transfer processed at {moment(order.transferredAt).format("DD MMM YYYY, HH:mm")}</div>) : null}
-              {order.completedAt > 0 ? (<div className="status approved">transfer completed at {moment(order.completedAt).format("DD MMM YYYY, HH:mm")}</div>) : null}
+              Paid Out Rate : {order.paidOutRate}<br></br>
+              Partner Paid Out Rate : {order.partnerPaidOutRate}
+            </div>
+            <div className="column">
+              {((!order.isCanceled) && (order.receivedAt > 0) && (order.checkedAt == 0)) ? (<div className="status approved">payment received at {moment(order.checkedAt).format("DD MMM YYYY, HH:mm")} </div>) : null}
+              {((!order.isCanceled) && (order.checkedAt > 0) && (order.transferredAt == 0)) ? (<div className="status approved">payment checked at {moment(order.receivedAt).format("DD MMM YYYY, HH:mm")}</div>) : null}
+              {((!order.isCanceled) && (order.transferredAt > 0) && (order.completedAt == 0)) ? (<div className="status approved">transfer processed at {moment(order.transferredAt).format("DD MMM YYYY, HH:mm")}</div>) : null}
+              {((!order.isCanceled) && (order.completedAt > 0)) ? (<div className="status approved">transfer completed at {moment(order.completedAt).format("DD MMM YYYY, HH:mm")}</div>) : null}
               
-              {order.receivedAt == 0 ? (<div onClick={() => { if (window.confirm('Are you sure want to mark this transaction as received from '+order.senderName))this.props.paymentReceived(order._id)}} className="btn-primary btn-small">Payment Received</div>) : null}
-              {((order.receivedAt !== 0) && (order.checkedAt == 0)) ? (<div onClick={() => { if (window.confirm('Are you sure want to mark this payment as checked from '+order.senderName))this.props.checkPayment(order._id)}} className="btn-primary btn-small">Check Payment</div>) : null}
-              {((order.receivedAt !== 0) && (order.checkedAt !== 0) && (order.transferredAt == 0)) ? (<div onClick={() => {this.props.togglePopUpPaidOut(order)}} className="btn-primary btn-small">Process Transfer</div>) : null}
-              {((order.receivedAt !== 0) && (order.checkedAt !== 0) && (order.transferredAt !== 0) && (order.completedAt == 0)) ? (<div onClick={() => {if (window.confirm('Are you sure want to mark this transfer as completed for this user : '+order.senderName))this.props.transferCompleted(order._id)}} className="btn-primary btn-small">Transfer Completed</div>) : null}
+              {(order.isCanceled) ? (<div className="status pending">transfer canceled at {moment(order.canceledAt).format("DD MMM YYYY, HH:mm")}</div>) : null}
 
+              {((!order.isCanceled) && (order.receivedAt == 0)) ? (<div onClick={() => { if (window.confirm('Are you sure want to mark this transaction as received from '+order.senderName))this.props.paymentReceived(order._id)}} className="btn-primary btn-small">Payment Received</div>) : null}
+              {((!order.isCanceled) && (order.receivedAt !== 0) && (order.checkedAt == 0)) ? (<div onClick={() => { if (window.confirm('Are you sure want to mark this payment as checked from '+order.senderName))this.props.checkPayment(order._id)}} className="btn-primary btn-small">Check Payment</div>) : null}
+              {((!order.isCanceled) && (order.receivedAt !== 0) && (order.checkedAt !== 0) && (order.transferredAt == 0)) ? (<div onClick={() => {this.props.togglePopUpPaidOut(order)}} className="btn-primary btn-small">Process Transfer</div>) : null}
+              {((!order.isCanceled) && (order.receivedAt !== 0) && (order.checkedAt !== 0) && (order.transferredAt !== 0) && (order.completedAt == 0)) ? (<div onClick={() => {if (window.confirm('Are you sure want to mark this transfer as completed for this user : '+order.senderName))this.props.transferCompleted(order._id)}} className="btn-primary btn-small">Transfer Completed</div>) : null}
+
+              {(!order.isCanceled) ? (<div onClick={() => {if (window.confirm('Are you sure want to mark this transaction as CANCELED for this user : '+order.senderName))this.props.cancelOrder(order._id)}} className="btn-primary btn-small btn-red">Cancel Transaction</div>) : null}
+              {(order.isCanceled) ? (<div onClick={() => {if (window.confirm('Are you sure want to REOPEN this transaction for this user : '+order.senderName))this.props.reOpenOrder(order._id)}} className="btn-primary btn-small btn-red">Re-Open Transaction</div>) : null}
             </div>
             <div className="column">
               <div className="btn-primary btn-small" onClick={() => {this.props.getDetail(order)} }>Click to see details</div>
@@ -211,6 +217,9 @@ class OrderItem extends React.Component {
         .btn-small:hover {
           cursor: pointer;
         }
+        .btn-red{
+          background-color: red;
+        }
         .currency {
           text-align: right;
         }
@@ -248,6 +257,7 @@ class PopUp extends React.Component{
                 Receiver Account &#9; : {this.props.order.accountNumber} <br></br>
                 Receiver Bank &#9; : {this.props.order.bankAccountNumber} <br></br>
                 Paid Out Rate &#9; : {this.props.order.paidOutRate} <br></br>
+                Partner Paid Out Rate &#9; : {this.props.order.partnerPaidOutRate} <br></br>
               </div>
               <button className="closebutton" onClick={this.props.closePopUp}>Close</button>
           </div>
@@ -324,6 +334,7 @@ class PopUpPaidOut extends React.Component{
     console.log(props);
     this.state={
       paidOutRate : 0,
+      partnerPaidOutRate : 0,
       orderId : props.order._id
     }
 
@@ -339,18 +350,23 @@ class PopUpPaidOut extends React.Component{
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.changePaidOutRate(this.state.orderId, this.state.paidOutRate);
+    this.props.changePaidOutRate(this.state.orderId, this.state.paidOutRate, this.state.partnerPaidOutRate);
     this.props.closePopUpPaidOut();
   }
 
   render(){
-    let {paidOutRate, orderId} = this.state;
+    let {paidOutRate, partnerPaidOutRate, orderId} = this.state;
     console.log(orderId + " " + paidOutRate);
     return(
       <div className="popup" >
           <div className="popupcontainer">
               <h2>{this.props.text}</h2>
+              <label htmlFor="paidOutRate">Paid Out Rate :</label>
               <input type="text" name="paidOutRate" onChange={this.handleChange} value={paidOutRate} />
+
+              <label htmlFor="partnerPaidOutRate">Partner Paid Out Rate :</label>
+              <input type="text" name="partnerPaidOutRate" onChange={this.handleChange} value={partnerPaidOutRate} />
+
               <button className="acceptbutton" onClick={this.handleSubmit}>Accept</button>
               <button className="closebutton" onClick={this.props.closePopUpPaidOut}>Cancel</button>
           </div>
@@ -437,12 +453,18 @@ class Orders extends React.Component {
     super(props);
     this.state = {
       activePage: 1,
+
+      showPopUp : false,
+      showPopUpPaidOut : false,
+      popUpOrder : null,
       startDate: " ",
       endDate: " ",
+
 
       showPopUp : false,
       showPopUpPaidOut : false,
       popUpOrder : null
+
 
     }
 
@@ -451,18 +473,23 @@ class Orders extends React.Component {
     this.transferCompleted = this.transferCompleted.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
 
-    // this.handleExportOrders = this.handleExportOrders(this);
 
     this.changePaidOutRate = this.changePaidOutRate.bind(this);
     this.getDetail = this.getDetail.bind(this);
     this.togglePopUp = this.togglePopUp.bind(this);
     this.togglePopUpPaidOut = this.togglePopUpPaidOut.bind(this);
-
+    // this.handleExportOrders = this.handleExportOrders(this);
+    this.changePaidOutRate = this.changePaidOutRate.bind(this);
+    this.getDetail = this.getDetail.bind(this);
+    this.togglePopUp = this.togglePopUp.bind(this);
+    this.togglePopUpPaidOut = this.togglePopUpPaidOut.bind(this);
+    this.cancelOrder = this.cancelOrder.bind(this);
+    this.reOpenOrder = this.reOpenOrder.bind(this);
   }
 
   static async getInitialProps(ctx) {
     initialize(ctx);
-    await ctx.store.dispatch(actions.getAllOrders(1,'getAllOrders'));
+    await ctx.store.dispatch(actions.getAllOrders(1,'getAllOrders',ctx.req));
   };
 
   checkPayment(_id) {
@@ -479,9 +506,16 @@ class Orders extends React.Component {
     this.props.transferCompleted({_id: _id}, 'transferCompleted');
   }
 
-  changePaidOutRate(_id, paidOutRate){
-    console.log("SENDING " + _id + " " + paidOutRate);
-    this.props.changePaidOutRate({_id: _id, paidOutRate: paidOutRate}, 'changePaidOutRate');
+  changePaidOutRate(_id, paidOutRate, partnerPaidOutRate){
+    this.props.changePaidOutRate({_id: _id, paidOutRate: paidOutRate, partnerPaidOutRate: partnerPaidOutRate}, 'changePaidOutRate');
+  }
+
+  cancelOrder(_id){
+    this.props.cancelOrder({_id : _id}, 'cancelOrder');
+  }
+
+  reOpenOrder(_id){
+    this.props.reOpenOrder({_id : _id}, 'reOpenOrder');
   }
 
   handlePageChange(pageNumber) {
@@ -489,6 +523,19 @@ class Orders extends React.Component {
     this.props.getAllOrders(pageNumber, 'getAllOrders');
   }
 
+  togglePopUp(){
+    this.setState({showPopUp : !this.state.showPopUp});
+  }
+
+  togglePopUpPaidOut(order){
+    this.setState({popUpOrder : order})
+    this.setState({showPopUpPaidOut : !this.state.showPopUpPaidOut});
+  }
+
+  getDetail(order){
+    this.setState({popUpOrder : order});
+    this.togglePopUp();
+  }
 
 
   handleExportOrders = () => {
@@ -554,7 +601,7 @@ class Orders extends React.Component {
               <form className="form-container">
                 {showPopUpPaidOut ? <PopUpPaidOut text='Set Paid Out' changePaidOutRate={this.changePaidOutRate} order={popUpOrder} closePopUpPaidOut={this.togglePopUpPaidOut} /> : null}
                 {showPopUp ? <PopUp text='Transaction Details' order={popUpOrder} closePopUp={this.togglePopUp} /> : null}
-                <OrderItem orders={this.props.orders} getDetail={this.getDetail} togglePopUpPaidOut={this.togglePopUpPaidOut} checkPayment={this.checkPayment} paymentReceived={this.paymentReceived} transferCompleted={this.transferCompleted}/>
+                <OrderItem orders={this.props.orders} reOpenOrder={this.reOpenOrder} cancelOrder={this.cancelOrder} getDetail={this.getDetail} togglePopUpPaidOut={this.togglePopUpPaidOut} checkPayment={this.checkPayment} paymentReceived={this.paymentReceived} transferCompleted={this.transferCompleted}/>
                 <div className="pagination-container">
                   <Pagination
                     activePage={this.state.activePage}
@@ -689,6 +736,7 @@ class Orders extends React.Component {
             text-decoration: none;
             color: #469DDD;
           }
+          
 
           input[type=text] {
 

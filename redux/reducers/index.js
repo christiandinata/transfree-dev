@@ -11,7 +11,9 @@ import photoReducer from './photoReducer';
 import fxMarginReducer from './fxMarginReducer';
 import checkReducer from './checkReducer';
 import complaintReducer from './complaintReducer';
+
 import donasiReducer from './donasiReducer';
+
 
 const rootReducer = combineReducers({
   authentication: authReducer,
@@ -26,7 +28,9 @@ const rootReducer = combineReducers({
   fx: fxMarginReducer,
   ck: checkReducer,
   complaint : complaintReducer,
+
   donasi: donasiReducer,
+
  
 });
 

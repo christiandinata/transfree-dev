@@ -8,17 +8,27 @@ import {
   USER_DATA
 } from '../types';
 import { API } from '../../config';
+import { getCookie } from '../../utils/cookie';
+
 
 // verify phone number
-const verify = ({ phone, email }, type) => {
+const verify = ({ phone, email }, type,condition,req) => {
   if (type !== 'verify') {
     throw new Error('Wrong API call!');
   }
   return (dispatch) => {
     dispatch({type: VERIFY_PHONE_PROGRESS, payload: true});
-    axios.post(`${API}/${type}`, {phone, email})
+    axios.post(`${API}/${type}`, {phone, email}, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
+    })
       .then((response) => {
-        Router.push('/phone-verification');
+        if (condition != "edit") {
+         Router.push('/phone-verification');
+        }else{
+         Router.push('/phone-edit-verification');
+        }
         dispatch({type: VERIFY_PHONE, payload: response.data.serviceSid});
         dispatch({type: USER_DATA, payload: response.data.user_data});
       })
@@ -38,16 +48,25 @@ const verify = ({ phone, email }, type) => {
 };
 
 // check phone number verification
-const check = ({ serviceSid, phone, code, email }, type) => {
+const check = ({ serviceSid, phone, code, email }, type,condition, req) => {
   if (type !== 'check') {
     throw new Error('Wrong API call!');
   }
   return (dispatch) => {
     dispatch({type: VERIFY_PHONE_PROGRESS, payload: true});
-    axios.post(`${API}/${type}`, {serviceSid, phone, code, email})
+    axios.post(`${API}/${type}`, {serviceSid, phone, code, email}, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
+    })
       .then((response) => {
-        if(response.data.status == 'approved') {
-          Router.push('/id-verification');
+         if(response.data.status == 'approved') {
+           if (condition!='edit') {
+            Router.push('/id-verification');
+           }else{
+             alert("Update Phone Number Success")
+             Router.push('/profile')
+           }
           dispatch({type: VERIFY_PHONE_CHECK, payload: response.data.status});
           dispatch({type: USER_DATA, payload: response.data.user_data});
         } else {
@@ -60,6 +79,7 @@ const check = ({ serviceSid, phone, code, email }, type) => {
       });
   };
 };
+
 
 
 

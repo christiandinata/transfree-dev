@@ -10,6 +10,7 @@ import fxMarginActions from './fxMarginActions';
 import checkActions from './checkActions';
 import complaintActions from './complaintActions';
 import donasiActions from './donasiActions'
+
 export default {
   ...authActions,
   ...verifyActions,
@@ -23,5 +24,4 @@ export default {
   ...checkActions,
   ...complaintActions,
   ...donasiActions
-  
 }
