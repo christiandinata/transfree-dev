@@ -1275,7 +1275,7 @@ class Index extends React.Component {
 
           .left-container {
             flex-basis: 80%;
-           margin-top:90px;
+            margin-top:90px;
           }
 
           .left-container h1{
@@ -1348,9 +1348,7 @@ class Index extends React.Component {
             display: flex;
             background-color: #FFFFFF;
             border-radius:30px;
-            height:112px;
-            width:512px;
-            
+           
 
           }
 
@@ -1358,6 +1356,9 @@ class Index extends React.Component {
             display: flex;
             flex-basis: 65%;
             flex-direction: column;
+            height:112px;
+            width:412px;
+            
           }
 
           .money-input span {
