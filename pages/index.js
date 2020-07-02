@@ -1268,13 +1268,14 @@ class Index extends React.Component {
             background-repeat: no-repeat;
             background-position: center;
             background-size: auto;
+            
           }
 
          
 
           .left-container {
-            flex-basis: 40%;
-            margin-top: 95px;
+            flex-basis: 80%;
+           margin-top:90px;
           }
 
           .left-container h1{
@@ -1291,7 +1292,6 @@ class Index extends React.Component {
             flex-basis: 40%;
             margin-top: 55px;
             z-index: 2;
-            margin-right:0px;
           }
           .right-bottom-container{
             margin-top:20px !important;
@@ -1741,15 +1741,27 @@ class Index extends React.Component {
 
             @media only screen and (max-width: 414px) {
               #menuToggle .main-cta {
-                
+                position: absolute;
                 right: 0;
-                position: fixed;
               }
               .external-link-right {
                 lex-basis: 40%;
                 margin-left : 20px;
                 margin-top: 0px;
               }
+
+              .left-container{
+                display:none;
+              }
+
+              .hero{
+                margin-top:-180px;
+              }
+
+              .hero .right-container{
+                margin-top:150px;
+              }
+              
               .btn-secondary-2 {
                 background: #32cd32d4;
                 border: none;
