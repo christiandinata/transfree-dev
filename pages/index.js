@@ -1750,8 +1750,14 @@ class Index extends React.Component {
                 margin-top: 0px;
               }
 
-              .left-container{
-                display:none;
+             
+
+              .testimonial{
+                width:10px;
+              }
+
+              .testimonial .message{
+                width:10px;
               }
 
               .hero{
@@ -1910,10 +1916,12 @@ class Index extends React.Component {
           }
 
           .features-mobile {
-            display: inline-block;
-            padding: 100px 0;
-            background-color: #FFF;
-            text-align: center;
+            // display: inline-block;
+            // padding: 100px 0;
+            // background-color: #FFF;
+            // text-align: center;
+
+            display:none;
           }
 
           .left-feature-container-mobile,
