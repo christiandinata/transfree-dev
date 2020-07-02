@@ -1071,7 +1071,7 @@ class Index extends React.Component {
             display: flex;
             background-color: #FFFFFF;
             border-radius: 4px;
-
+           
           }
 
           .money-input {
