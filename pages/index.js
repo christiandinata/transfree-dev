@@ -1076,7 +1076,7 @@ class Index extends React.Component {
 
           .money-input {
             display: flex;
-            flex-basis: 65%;
+            flex-basis: 85%;
             flex-direction: column;
           }
 
