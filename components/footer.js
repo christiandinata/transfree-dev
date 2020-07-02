@@ -64,7 +64,7 @@ const Footer = () => (
       </div>
     </div>
 
-    <div className="row2 menu2">
+    <div className="row3 menu2">
       <div className="container">
         <div className="footer-item logo">
         </div>
@@ -87,7 +87,7 @@ const Footer = () => (
       width : 1920px 0,36px 0px;
       height : 1246px 0px 6346,42px
     }
-        .row2 {
+        .row3 {
           border-bottom: 1px solid #eaeaea;
         }
         .container {

@@ -11,11 +11,35 @@ import { getCookie } from '../utils/cookie';
 import NumberFormat from 'react-number-format';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-import { Slide } from 'react-slideshow-image';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
  
 
 
+const items = [
+  {
+    name: "Doni",
+    url: "../static/images/testimoni/dummy-photo.png ",
+    school: " Sman 1 Laguboti",
+    message: "Heelo semua teman 2 ku"
+  },
+  {
+    name: "Doni",
+    url: "../static/images/playstore.png ",
+    school: " Sman 1 LAguboti",
+    message: "Heelo semua teman 2 ku"
+  },
+  {
+    name: "Doni",
+    url: "../static/images/testimoni/dummy-photo.png ",
+    school: " Sman 1 LAguboti",
+    message: "Heelo semua teman 2 ku"
+  }
+]
+
 class Index extends React.Component {
+
   constructor({ props }) {
     super(props);
     this.state = {
@@ -232,16 +256,15 @@ class Index extends React.Component {
 
   render() {
     const properties = {
-      duration: 5000,
-      transitionDuration: 500,
+      dots: true,
+      autoplay: true,
       infinite: true,
-      indicators: true,
-      arrows: true,
-      pauseOnHover: true,
-      onChange: (oldIndex, newIndex) => {
-        console.log(`slide transition from ${oldIndex} to ${newIndex}`);
-      }
-    }
+      slidesToShow: 1,
+      speed:500,
+      fade:true,
+      slidesToScroll:1,
+      className: "slides"
+    };
 
 
     
@@ -275,7 +298,7 @@ class Index extends React.Component {
               <div className="desktop">
                 <div className="fixed-btn">
                   <a href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree" target="_blank">
-                  <img style={{width: "50%", marginTop: "25%"}} src="../static/images/wa-logo.png"/></a>
+                  <img style={{width: "50%", marginTop: "15%"}} src="../static/images/wa-logo.png"/></a>
                 </div>
               </div>
             </div>
@@ -649,41 +672,31 @@ class Index extends React.Component {
           </div>
 
         </div>
-        
+
         <div className="row features">
           <div className="container">
-           
-              <div className="boxWorld">
-              
-                <img src="../static/images/features/Box_World Map.png"></img>
-              </div>
-              
-              <div className="background" style={{marginLeft:-1400}}>
-                <img src="../static/images/features/Shadow indonesia.png" style={{width:1800,marginTop:-10}}></img>
-              </div>
-              <div style={{marginLeft:-1600}}>
-                <div className="images">
+          <div style={{marginLeft:100,marginTop:200,position:"absolute"}}>
+                <h1 style={{color:"#000000",marginLeft:190,textAlign:"center"}}>Why should you use Transfree</h1>
+          </div>
+          <div className="images">
                   <div className="column">
-                      <img src="../static/images/features/monas.png" style={{marginTop:-22}} alt="monas" name="monas" id="monas" ></img>
+                      <img src="../static/images/features/monas.png" style={{marginTop:-6}} alt="monas" name="monas" id="monas" ></img>
                   </div>
                   <div className="column">
-                  <img src="../static/images/features/rumah.png" style={{marginLeft:50,marginTop:40}} alt="rumah"  id="rumah" ></img>
+                  <img src="../static/images/features/rumah.png" style={{marginLeft:50,marginTop:57}} alt="rumah"  id="rumah" ></img>
                   </div>
                   <div className="column">
-                  <img src="../static/images/features/bali.png" style={{marginLeft:50,marginTop:-18}} alt="bali" ></img>
+                  <img src="../static/images/features/bali.png" style={{marginLeft:50,marginTop:0}} alt="bali" ></img>
                   </div>
                   <div className="column">
-                  <img src="../static/images/features/surabaya.png" style={{marginLeft:50,marginTop:-10}} alt="surabaya" ></img>
+                  <img src="../static/images/features/surabaya.png" style={{marginLeft:50,marginTop:8}} alt="surabaya" ></img>
                   </div>
                   <div className="column">
-                  <img src="../static/images/features/borobudur.png" style={{marginLeft:50,marginTop:10}} alt="borobudur"  ></img>
+                  <img src="../static/images/features/borobudur.png" style={{marginLeft:50,marginTop:28}} alt="borobudur"  ></img>
                   </div>
-                </div>
-                </div>
-                <div style={{marginLeft:-200,marginTop:100}}>
-                <h1 style={{color:"#000000",width:500}}>Why we should to use Transfree</h1>
-                </div>
-                <div className="benefit">
+          </div>
+
+          <div className="benefit">
                     <div className="column">
                     <div className ="btn-primary-start" style={{marginLeft:20}}>
                     <img src="../static/images/features/money.png" style={{float:"center",position:"center"}}></img>
@@ -706,11 +719,10 @@ class Index extends React.Component {
                       <h3 style={{color:"#000000", textAlign:"center",marginTop:-20}}>it sometimes takes longer for your money to arrive</h3>
                       <h3 style={{color:"#000000",textAlign:"center",marginTop:-20}}>Don't worry, we are here now</h3>
                 </div>
-                
-                
           </div>
-
         </div>
+        
+     
      
 
         <div className="row application">
@@ -742,38 +754,34 @@ class Index extends React.Component {
         </div>
 
         <div className="row achievement">
-            <div className="container" style={{marginTop:-10}}>
-             <div className="content-achievement">
-                    <h1 style={{textAlign:"center",position:"center",marginLeft:700,marginTop:150}}>What can we achieve</h1>
+            <div className="container">
+             <div className="content-achievement" style={{textAlign:"center"}}>
+                    <h1 style={{marginLeft:340,marginTop:140}}>What can we achieve</h1>
+                  
              </div>
             </div>
         </div>
 
         <div className="row testimonial">
           <div className="container">
-              <div className="content-testimonial">
-              <div className="container" style={{position:"absolute",marginTop:90,width:"auto"}} >
-                  <h1 style={{float:"center",marginLeft:650,width:500}} >What our Customer say?</h1>
-                    <div className="profile-testimonial">
-                          <img src="../static/images/testimoni/dummy-photo.png" alt="first slide"></img>
-                          <div className="textTesti">
-                          <h1 style={{marginTop:-10,marginLeft:-40}}>YOLANDA</h1>
-                          <h1 style={{marginTop:-30,width:600,marginLeft:-130}}>Imperial College London</h1>
-                          </div>
-                        </div> 
-                        <div className="message">
-                          <div className="content">
-                          <p >It is very difficult to send money from IDR to GDP and Transfree</p>
-                          <p>come out with the best solution ever. First time I use it when I was in</p>
-                          <p>Indonesia to pay for my flat deposit and rent. And now I'm still use</p>
-                          <p>Transfree to transfer money from the UK to Indonesia. It gives me a fair rate</p>
-                       </div>
-                    </div>
-                 
-              </div>
-              </div>
+          <div className="profile-testimonial" style={{position:"relative"}}>
+          <h1 style={{marginLeft:-100}}>What our Customer say?</h1> 
+              <img src="../static/images/testimoni/dummy-photo.png" alt="first slide"></img>
+                <div className="textTesti">
+                    <h1 style={{marginTop:-10}}>YOLANDA</h1>
+                    <h1 style={{marginTop:-30,width:600,marginLeft:-110}}>Imperial College London</h1>
+                </div>
+          </div>
+            <div className="message">
+                <p >It is very difficult to send money from IDR to GDP and Transfree</p>
+                <p>come out with the best solution ever. First time I use it when I was in</p>
+                <p>Indonesia to pay for my flat deposit and rent. And now I'm still use</p>
+                <p>Transfree to transfer money from the UK to Indonesia. It gives me a fair rate</p>
+                
+            </div> 
           </div>
         </div>
+
 
         <div className="row features-mobile">
           <div className="container-mobile">
@@ -811,26 +819,59 @@ class Index extends React.Component {
 
        
 
+      .features{
+        background:url('../static/images/features/batik.png');
+
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size:2100px 1300px;
+        margin-top:-120px;
+        height:1300px;
+        
+
+        
+      }
+      .features .images{
+        margin-top:-67px;
+        display:flex;
+        margin-left:-150px;
+        position:absolute;
+      }
+
+     .features .message{
+        background:url('../static/images/features/chat-box.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size:1200px 300px;
+        margin-top:760px;
+        margin-left:-160px;
+        height:300px;
+        width:1300px;
+        position:absolute;
+        opacity:0.8;
+        padding:70px 30px 0px 50px;
+     }
+
+     .features .message {
+       font-size:23px;
+     }
+
       .testimonial .message{
-        position:relative;
         background-image:url('../static/images/testimoni/box-message.png');
         background-repeat: no-repeat;
-        background-size: 1400px 290px;
-        width:2000px;
-        float:left;
-        position:left;
-        margin-top:500px;
-        text-align:left;
-        margin-left:-1120px;
-        margin-bottom:-900px;
-        padding:50px 100px 200px 200px;
-       
+        background-position: center;
+        background-size:contain;
+        width:1200px;
+        padding:100px;
+        margin-left:-130px;
       }
 
       .testimonial .message p{
         color:#000000;
         font-size:28px;
         margin-top:-30px;
+        text-align:center;
+        margin-left:80px;
       }
 
       .testimonial .message .content{
@@ -845,22 +886,24 @@ class Index extends React.Component {
         height:auto;
       }
 
-      .profile-testimonial{
-        padding:10px;
-        margin-top:120px;
-        width:auto;
-        margin-left:-300px;
+      .testimonial .profile-testimonial{
+       display:block;
+       margin-top:0px;
+       position:center;
+       margin-left:43%;
+       
       }
 
       .profile-testimonial .textTesti{
-        margin-left:-80px;
-        margin-top:10px;
+        margin-left:20px;
+        margin-top:20px;
       }
 
       .profile-testimonial img{
         width:200px;
         height:200px;
-        margin-left:-140px;
+        display:block;
+       
       }
 
       .text h1,h2{
@@ -872,10 +915,7 @@ class Index extends React.Component {
         margin-top:0px;
       }
 
-      .features .images{
-        margin-top:-180px;
-        display:flex;
-      }
+    
 
 
       .features .btn-primary-start {
@@ -936,34 +976,15 @@ class Index extends React.Component {
       }
 
       .features .benefit{
-        margin-top:200px;
+        margin-top:360px;
         margin-left:-90px;
         position:absolute;
       }
 
-      .features .message{
-        position:relative;
-        margin-top:700px;
-        margin-left:-800px;
-        background-image:url('../static/images/features/Group 400.png');
-        background-repeat: no-repeat;
-        background-size: contain;
-        width:2000px;
-        padding:20px 20px;
-        opacity: 0.6;
-        
-      }
-
-      
 
       .features .column{
         flex:30%;
       }
-
-       .features{
-         margin-top:0px;
-         flex-basis: 80%;
-       }
 
        .features .background img{
         height:1000px;
@@ -972,12 +993,6 @@ class Index extends React.Component {
         margin-top:-100px;
        }
 
-       .features .boxWorld img{
-        height:1300px;
-        width:2000px;
-        margin-left:-480px;
-        margin-top:-130px;
-       }
 
        .benefit img{
          width:150px;
@@ -1008,7 +1023,7 @@ class Index extends React.Component {
         }
 
         .application{
-          margin-top:10px;
+          margin-top:-150px;
           padding:25px;
         }
 
@@ -1017,28 +1032,49 @@ class Index extends React.Component {
         font-weight: 900;
         color: #000000;
         text-shadow: 1px 1px 1px #000000;
+       
         
         }
 
         .achievement{
-         margin-top:10px;
+         background:url('../static/images/achievment/achievement.png');
+         background-repeat: no-repeat;
+         background-position: center;
+         background-size:auto;
+         height:1100px;
+         margin-top:-40px;
+         padding:0px, 0px, 0px, 0px;
+         z-index:-1;
         }
 
         .testimonial {
-          margin-top:0px;
+          background:url('../static/images/testimoni/background.png');
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size:auto;
+          height:900px;
+          width:auto;
+          z-index:-1;
+          margin-top:-150px;
+          padding:100px 0px 0px 0px;
+        }
+
+        .testimonial div{
+          display:block;
         }
 
         .content-testimonial{
           background:url('../static/images/testimoni/background.png');
           background-repeat: no-repeat;
-          background-size:1800px 900px;
-          width:2300px;
-          height:900px;
-          margin-top:-140px;
+        
+          margin-top:-240px;
+          height:950px;
+         
+          background-size:2200px 2000px;
+          margin-right:-100px;
+          padding:25px;
           z-index:-5;
-          position:relative;
-          margin-right:-1000px;
-          margin-left:-250px;
+          
         }
 
 
@@ -1063,15 +1099,6 @@ class Index extends React.Component {
 
         }
 
-        .content-achievement{
-          background:url('../static/images/achievment/achievement.png');
-          background-repeat: no-repeat;
-          background-size:1800px 900px;
-          width:1800px;
-          height:900px;
-          margin-right:-800px;
-          margin-left:-300px;
-        }
 
         .top-right {
           position:center;
@@ -1237,7 +1264,6 @@ class Index extends React.Component {
 
 
           .hero {
-           
             background-image:url('../static/images/Asset Web/content/Banner_Web.png');
             background-repeat: no-repeat;
             background-position: center;
@@ -1247,7 +1273,7 @@ class Index extends React.Component {
          
 
           .left-container {
-            flex-basis: 80%;
+            flex-basis: 40%;
             margin-top: 95px;
           }
 
@@ -1715,8 +1741,9 @@ class Index extends React.Component {
 
             @media only screen and (max-width: 414px) {
               #menuToggle .main-cta {
-                position: absolute;
+                
                 right: 0;
+                position: fixed;
               }
               .external-link-right {
                 lex-basis: 40%;
