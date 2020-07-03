@@ -3,6 +3,7 @@ import {
   EXCHANGE_RATE
 } from '../types';
 import { API } from '../../config';
+import { getCookie } from '../../utils/cookie';
 
 const getRates = (from, to) => {
   return async (dispatch) => {

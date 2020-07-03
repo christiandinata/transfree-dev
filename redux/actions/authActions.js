@@ -16,7 +16,7 @@ import {
   RESET_PASSWORD_ERROR
 } from '../types';
 import { API } from '../../config';
-import { setCookie, removeCookie } from '../../utils/cookie';
+import { setCookie, removeCookie,getCookie } from '../../utils/cookie';
 
 // register user
 const register = ({ fullname, email, password }, type) => {
@@ -155,13 +155,17 @@ export const forgot = ({ email }, type) => {
   };
 };
 
-export const resetPassword = ({ newPassword, verifyPassword, token }, type) => {
+export const resetPassword = ({ newPassword, verifyPassword, token }, type, req) => {
   if (type !== 'resetPassword') {
     throw new Error('Wrong API call!');
   }
   return (dispatch) => {
     dispatch({type: RESET_PASSWORD_PROGRESS, payload: true});
-    axios.post(`${API}/${type}`, { newPassword, verifyPassword, token })
+    axios.post(`${API}/${type}`, { newPassword, verifyPassword, token }, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
+    })
       .then((response) => {
         if (response.status == 200)
         dispatch({type: RESET_PASSWORD_SUCCESS, payload: response.data.message});
