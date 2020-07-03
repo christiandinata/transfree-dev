@@ -107,7 +107,15 @@ const getOrderByQuery = ({page, query},type) => {
   }
   return async (dispatch) => {
     dispatch({type: ORDER_DATA_ARRAY_IN_PROGRESS, payload: true});
+
     await axios.get(`${API}/${type}?page=`+page+`&q=`+query)
+
+    await axios.get(`${API}/${type}?page=`+page+`&q=`+query, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token')}`
+      }
+    })
+
       .then((response) => {
         dispatch({type: ORDER_DATA_ARRAY, payload: response.data.order_data_array});
       })
@@ -117,7 +125,10 @@ const getOrderByQuery = ({page, query},type) => {
   };
 };
 
+
 const getAllOrders = (page,type) => {
+
+
 
 const getAllOrders = (page,type, req) => {
 
@@ -300,6 +311,7 @@ export default {
   addOrder,
   getOrderById,
   getOrderByUid,
+  getOrderByQuery,
   getAllOrders,
   checkPayment,
   paymentReceived,
