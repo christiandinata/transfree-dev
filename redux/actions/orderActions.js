@@ -100,6 +100,26 @@ const getOrderByUid = (uid , type, req) => {
   };
 };
 
+const getOrderByQuery = ({page, query},type) => {
+  if (type !== 'getAllOrders') {
+    throw new Error('Wrong API call!');
+  }
+  return async (dispatch) => {
+    dispatch({type: ORDER_DATA_ARRAY_IN_PROGRESS, payload: true});
+    await axios.get(`${API}/${type}?page=`+page+`&q=`+query, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token')}`
+      }
+    })
+      .then((response) => {
+        dispatch({type: ORDER_DATA_ARRAY, payload: response.data.order_data_array});
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  };
+};
+
 const getAllOrders = (page,type, req) => {
   if (type !== 'getAllOrders') {
     throw new Error('Wrong API call!');
@@ -280,6 +300,7 @@ export default {
   addOrder,
   getOrderById,
   getOrderByUid,
+  getOrderByQuery,
   getAllOrders,
   checkPayment,
   paymentReceived,

@@ -27,6 +27,26 @@ const getUser = (uid, type, req) => {
   };
 };
 
+const getUsersByQuery = (page, query, type) => {
+  if (type !== 'getUsersByQuery') {
+    throw new Error('Wrong API call!');
+  }
+  return async (dispatch) => {
+    dispatch({type: USER_DATA_ARRAY_IN_PROGRESS, payload: true});
+    await axios.get(`${API}/${type}?page=`+page+`&q=`+query, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token')}`
+      }
+    })
+      .then((response) => {
+        dispatch({type: USER_DATA_ARRAY, payload: response.data.user_data_array});
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  };
+};
+
 const getAllUsers = (page, type, req) => {
   if (type !== 'getAllUsers') {
     throw new Error('Wrong API call!');
@@ -91,6 +111,7 @@ const deleteUser = ({uid} , type,req) => {
 
 export default {
   getUser,
+  getUsersByQuery,
   getAllUsers,
   approveUser,
   deleteUser
