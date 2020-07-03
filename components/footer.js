@@ -22,7 +22,7 @@ const Footer = () => (
             <li><Link href="/privacy-policy"><a>Privacy Policy</a></Link></li>
           </ul>
         </div>
-        <div className="footer-item" style={{marginLeft:120}}>
+        <div className="footer-item" >
           <h3>Contact Us</h3>
           <ul>
             <li>Phone/WhatsApp: <br/>+44 7985 497391 </li>
@@ -31,7 +31,7 @@ const Footer = () => (
           </ul>
         </div>
 
-        <div className="footer-item" style={{marginLeft:120}}>
+        <div className="footer-item" >
           <h3>Follow Us On</h3>
           <ul>
             <li><a href="https://www.instagram.com/transfree_id/?hl=en" target="blank"><img className="img" src="../static/images/instagram.png"></img> </a></li>
@@ -51,7 +51,7 @@ const Footer = () => (
       <div className="container">
         <div className="footer-item logo">
         </div>
-        <div >
+        <div className="footer-item-collab" >
           <h3>Collaborators and Partners</h3>
           <ul>
             <li><Link ><a href="https://ristekdikti.go.id/" target="_blank">Ministry of Research Technology and Higher Education</a></Link></li>
@@ -144,7 +144,7 @@ const Footer = () => (
           flex-basis: 35%;
         }
         .footer-item-collab {
-          flex-basis: 50%;
+          flex-basis: 100%;
         }
         .logo img {
           width: 1920px 0,36px;
@@ -154,7 +154,8 @@ const Footer = () => (
         .menu2 {
           padding-bottom: 60px;
           padding-top: 20px;
-          margin-left:-350px;
+          text-align:left;
+          
         }
         .menu {
           padding-top: 60px;

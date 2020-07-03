@@ -76,15 +76,15 @@ const Header = () => (
 
       .btn-secondary-login {
         background: transparent;
-        border: 2px solid #469DDD;
+        border: 2px solid #FFFFFF;
         color: #469DDD;
-        padding: 8px 18px;
+        padding: 8px 18px 10px 30px;
         text-align: center;
         text-decoration: none;
-        font-size: 16px;
-        border-radius: 4px;
+        font-size: 1px;
+        border-radius: 24px;
         transition: all 0.2s ease;
-        margin-left:10px;
+        margin-bottom:90px;
       }
 
       .btn-secondary {

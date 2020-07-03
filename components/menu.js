@@ -8,8 +8,9 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
   <div className="row">
     <div className="container">
       <div id="menuToggle">
-        <div className="main-cta">
-          {!isAuthenticated && <Link href="/login"><a className="btn-secondary-login">Log in</a></Link>}
+        <div className="main-cta" style={{textAlign:"center"}}>
+          <img style={{width:"40%",marginLeft:"20%",marginRight:"10%",height:"30%",textAlign:"center"}} src="../static/images/transfree-logo.png"></img>
+          {!isAuthenticated && <Link href="/login"><a className="btn-secondary">Log in</a></Link>}
           {isAuthenticated && <li><Link href="/logout"><a>Logout</a></Link></li>}
         </div>
         <input type="checkbox" />
@@ -26,10 +27,10 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           {isAuthenticated && isApproved && <li><Link href="/order"><a>Send money</a></Link></li>}
           {isAuthenticated && isApproved && <li><Link href="/account"><a>Transactions</a></Link></li>}
           <hr/>
-          {!isAuthenticated && <li><Link href="/login"><a>Log in</a></Link></li>}
-          {!isAuthenticated && <li><Link href="/signup"><a>Signup</a></Link></li>}
-          {isAuthenticated && <li><Link href="/profile"><a>Profile</a></Link></li>}
-          {isAuthenticated && <li><Link href="/logout"><a>Logout</a></Link></li>}
+          {!isAuthenticated && <li><Link href="/login"><a className="btn-secondary-login" >Log in</a></Link></li>}
+          {!isAuthenticated && <li><Link href="/signup"><a className="btn-secondary-login">Signup</a></Link></li>}
+          {isAuthenticated && <li><Link href="/profile"><a className="btn-secondary-login">Profile</a></Link></li>}
+          {isAuthenticated && <li><Link href="/logout"><a className="btn-secondary-login">Logout</a></Link></li>}
         </ul>
       </div>
       <div className="header-container">
@@ -58,6 +59,21 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
       </div>
     </div>
     <style jsx>{`
+
+
+        .btn-secondary-login {
+          background: transparent;
+          border: 2px solid #FFFFFF;
+          color: #469DDD;
+          padding: 8px 18px;
+          text-align: center;
+          text-decoration: none;
+          font-size: 16px;
+          border-radius: 24px;
+          transition: all 0.2s ease;
+          margin-left:10px;
+
+        }
         .row {
           border-bottom: 1px solid #eaeaea;
           
@@ -69,6 +85,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           align-items: center;
           height: 75px;
           background-color: #FFFFFF;
+         
           
         }
 
@@ -87,10 +104,12 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           flex-grow: 1;
           justify-content: flex-end;
           border: 1px #707070;
+          
         }
 
         .header-cta {
           display: flex;
+         
         }
 
         .btn-primary {
@@ -127,6 +146,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           left: 50px;
 
           z-index: 100;
+         
 
           -webkit-user-select: none;
           user-select: none;
@@ -142,6 +162,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           left: -5px;
 
           cursor: pointer;
+           
 
           opacity: 0; /* hide this */
           z-index: 2; /* and place it over the hamburger */
@@ -158,9 +179,10 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           width: 33px;
           height: 4px;
           margin-bottom: 5px;
+          
           position: relative;
 
-          background: #cdcdcd;
+          background: #5BB7DE;
           border-radius: 3px;
 
           z-index: 1;
@@ -220,6 +242,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           width: 300px;
           margin: -100px 0 0 -50px;
           padding: 50px;
+          height:50px;
           padding-top: 125px;
 
           background: #ededed;
@@ -231,6 +254,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           transform: translate(-100%, 0);
 
           transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+          
         }
 
         #menu li
@@ -238,6 +262,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           padding: 0px 0;
           font-size: 22px;
           display: block;
+          margin-bottom:20px;
         }
 
         /*
@@ -267,11 +292,24 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           }
           li {
             display; block;
+           
+            
           }
+
+          ul > li > a {
+            color:#FFFFFF;
+            text-decoration: none;
+            transition: 0.2s ease-in;
+            font-size: 20px;
+            font-family: 'Campton-Bold', sans-serif;
+            
+          }
+           
           #menu {
             height: 100vh;
             width: 100%;
-            background-color: #FFFFFF;
+            // background-color: #FFFFFF;
+            background-image: repeating-linear-gradient( #00d4ff,#35a4ba, #619fac );
           }
           .row {
             border: none;
