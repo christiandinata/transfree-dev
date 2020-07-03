@@ -13,49 +13,64 @@ function FormattedNumber(props) {
     <NumberFormat value={props.value} displayType={'text'} thousandSeparator={true} decimalScale={2} />
   )
 }
+
 class Rates extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      upperMargin: 0,
-      lowerMargin: 0,
-      idrToGbpOos: 'false',
-      gbpToIdrOos: 'false',
-      idrToEurOos: 'false',
-      eurToIdrOos: 'false'
+      adjustedRates : [],
+      rates : []
     }
   }
 
   static async getInitialProps(ctx) {
     initialize(ctx);
-    await ctx.store.dispatch(actions.getMultipleRates('IDR','MYR','KRW','GBP','USD','EUR','HKD'));
-    await ctx.store.dispatch(actions.getAdjustedRates('IDR', 'getAdjustedRates'));
+    await ctx.store.dispatch(actions.getMultipleRates('IDR', ['MYR','KRW','GBP','USD','EUR','HKD']));
+    await ctx.store.dispatch(actions.getAllAdjustedRates('IDR', 'getAllAdjustedRates', ctx.req));
   };
 
-  componentDidMount() {
+  componentDidMount(){
     this.setState({
-      upperMargin: this.props.adjustedRates.upperMargin,
-      lowerMargin: this.props.adjustedRates.lowerMargin,
-      idrToGbpOos: this.props.adjustedRates.idrToGbpOos,
-      gbpToIdrOos: this.props.adjustedRates.gbpToIdrOos,
-      idrToEurOos: this.props.adjustedRates.idrToEurOos,
-      eurToIdrOos: this.props.adjustedRates.eurToIdrOos
+      adjustedRates : this.props.adjustedRates,
+      rates : this.props.rates
     })
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    this.props.updateRates(
-      { base: 'IDR', 
-       upperMargin: this.state.upperMargin, 
-       lowerMargin: this.state.lowerMargin,
-       idrToGbpOos: this.state.idrToGbpOos, 
-       gbpToIdrOos: this.state.gbpToIdrOos, 
-       idrToEurOos: this.state.idrToEurOos, 
-       eurToIdrOos: this.state.eurToIdrOos
-      },
-      'updateRates'
-    );
+  handleChange(event){    
+    console.log(event.target.name)
+    let newAdjustedRates = this.state.adjustedRates;
+    let i =0; let found=false;
+
+    while((i < newAdjustedRates.length) && (!found)){
+      const rateName = newAdjustedRates[i].ratesName;
+      if((rateName == event.target.name) || (rateName == event.target.dataset.name)){
+        found = true;
+      }
+      else{
+        i++;
+      }
+    }
+
+    if(found){
+      const update = event.target.dataset.updating;
+      console.log(update);
+      if(update == "upperMargin"){
+        newAdjustedRates[i].upperMargin = event.target.value;
+      }
+      else if(update == "lowerMargin"){
+        newAdjustedRates[i].lowerMargin = event.target.value;
+      }
+      else if(update == "idrToOtherOos"){
+        newAdjustedRates[i].idrToOtherOos = event.target.value;
+      }
+      else if(update == "otherToIdrOos"){
+        newAdjustedRates[i].otherToIdrOos = event.target.value;
+      }
+    }
+
+    this.setState({
+      adjustedRates : newAdjustedRates
+    })
   }
 
   render() {
@@ -66,9 +81,107 @@ class Rates extends React.Component {
         <div className="container-fluid">
           <div className="container-fixed">
             <div className="list-header">
-              <h2>FX Margin Settings</h2>
+              <h2>FX Margin and Out of Stock Settings</h2>
             </div>
-            <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
+            {this.state.adjustedRates.map((rates, idx) => {
+              let allRates = this.state.rates;
+              let selectedRate = [];
+              for(var i=0;i<allRates.length;i++){
+                if(rates.ratesName == allRates[i][0]){
+                  selectedRate = allRates[i];
+                }
+              }
+              const foreignRate = selectedRate[1];
+
+              return(
+                <div key={idx} className="form-container">
+                  <div className="left">
+                    <h3>Live FX Rates</h3>
+                    <div>1 {rates.ratesName} = <FormattedNumber value={1/foreignRate} /> IDR</div>
+                  </div>
+
+                  <div className="center">
+                    <h3>Margin Settings</h3>
+                    <label htmlFor={rates.ratesName + " upperMargin"}>IDR to {rates.ratesName} (+)</label><br/>
+                    <input
+                      type="tel"
+                      id={rates.ratesName + " upperMargin"}
+                      name={rates.ratesName}
+                      data-updating="upperMargin"
+                      placeholder="100"
+                      value={rates.upperMargin}
+                      onChange={e => this.handleChange(e)}/>
+
+                    <label htmlFor={rates.ratesName + " lowerMargin"}>{rates.ratesName} to IDR (-)</label><br/>
+                    <input
+                      type="tel"
+                      id={rates.ratesName + " lowerMargin"}
+                      name={rates.ratesName}
+                      data-updating="lowerMargin"
+                      placeholder="100"
+                      value={rates.lowerMargin}
+                      onChange={e => this.handleChange(e)}/>
+                  </div>
+
+                  <div className="right">
+                    <h3>Out of Stock Settings</h3>
+                    {/* IDR to Other Out Of Stock*/}
+                    <h4>IDR to {rates.ratesName}</h4>
+                    <label htmlFor={rates.ratesName + " idrToOtherOos"}>TRUE</label>
+                    <input
+                      type="radio"
+                      id={rates.ratesName + " idrToOtherOos"}
+                      name={`idrTo${rates.ratesName}Oos`}
+                      data-name={rates.ratesName}
+                      data-updating="idrToOtherOos"
+                      placeholder="100"
+                      value="true"
+                      checked={rates.idrToOtherOos == "true"}
+                      onChange={e => this.handleChange(e)}/>
+
+                    <label htmlFor={rates.ratesName + " idrToOtherOos"}>FALSE</label>
+                    <input
+                      type="radio"
+                      id={rates.ratesName + " idrToOtherOos"}
+                      name={`idrTo${rates.ratesName}Oos`}
+                      data-name={rates.ratesName}
+                      data-updating="idrToOtherOos"
+                      placeholder="100"
+                      value="false"
+                      checked={rates.idrToOtherOos == "false"}
+                      onChange={e => this.handleChange(e)}/>
+
+                    {/* Other to IDR Out Of Stock*/}
+                    <h4>{rates.ratesName} to IDR</h4>
+                    <label htmlFor={rates.ratesName + " otherToIdrOos"}>TRUE</label>
+                    <input
+                      type="radio"
+                      id={rates.ratesName + " otherToIdrOos"}
+                      name={`${rates.ratesName}ToIdrOos`}
+                      data-name={rates.ratesName}
+                      data-updating="otherToIdrOos"
+                      placeholder="100"
+                      value="true"
+                      checked={rates.otherToIdrOos == "true"}
+                      onChange={e => this.handleChange(e)}/>
+
+                    <label htmlFor={rates.ratesName + " otherToIdrOos"}>FALSE</label>
+                    <input
+                      type="radio"
+                      id={rates.ratesName + " otherToIdrOos"}
+                      name={`${rates.ratesName}ToIdrOos`}
+                      data-name={rates.ratesName}
+                      data-updating="otherToIdrOos"
+                      placeholder="100"
+                      value="false"
+                      checked={rates.otherToIdrOos == "false"}
+                      onChange={e => this.handleChange(e)}/>
+                  </div>
+                </div>
+              );
+            })}
+            
+            {/* <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
               <div className="left">
                 <h3>Live FX rates</h3>
                 <ul>
@@ -147,7 +260,7 @@ class Rates extends React.Component {
                 ) : 'Update'}</button>
               </div>
 
-            </form>
+            </form> */}
           </div>
         </div>
         <style jsx>{`
@@ -200,6 +313,11 @@ class Rates extends React.Component {
             width: 300px;
           }
 
+          input[type=radio]{
+            text-align:left;
+            margin: 0;
+          }
+
           ::placeholder {
             color: #CACACA;
           }
@@ -209,6 +327,7 @@ class Rates extends React.Component {
           }
 
           .left,
+          .center,
           .right {
             width: 50%;
             flex-basis: 50%;

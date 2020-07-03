@@ -28,13 +28,34 @@ const updateRates = ({base, upperMargin, lowerMargin, idrToGbpOos,gbpToIdrOos,id
   };
 };
 
-const getAdjustedRates = (base, type) => {
+const getAdjustedRates = (base, name, type, req) => {
   if (type !== 'getAdjustedRates') {
     throw new Error('Wrong API call!');
   }
   return async (dispatch) => {
-    await axios.get(`${API}/${type}?base=`+base)
+    await axios.get(`${API}/${type}?base=`+base+`&name=`+name)
       .then((response) => {
+        dispatch({type: UPDATE_FX_SUCCESS, payload: response.data.adjustedRates})
+      })
+      .catch((error) => {
+        dispatch({type: UPDATE_FX_FAIL, payload: 'We cannot update the FX margin at the moment. Please try again later.'});
+      });
+  };
+};
+
+const getAllAdjustedRates = (base, type, req) => {
+  if (type !== 'getAllAdjustedRates') {
+    throw new Error('Wrong API call!');
+  }
+  console.log("All Adjusted Rates Called");
+  return async (dispatch) => {
+    await axios.get(`${API}/${type}?base=`+base, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
+    })
+      .then((response) => {
+        console.log(response.data);
         dispatch({type: UPDATE_FX_SUCCESS, payload: response.data.adjustedRates})
       })
       .catch((error) => {
@@ -45,5 +66,6 @@ const getAdjustedRates = (base, type) => {
 
 export default {
   updateRates,
-  getAdjustedRates
+  getAdjustedRates,
+  getAllAdjustedRates
 };
