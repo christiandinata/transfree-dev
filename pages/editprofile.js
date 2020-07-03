@@ -86,7 +86,7 @@ class EditProfile extends React.Component {
 
     static async getInitialProps(ctx) {
         initialize(ctx);
-        await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
+        await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
       };
 
       handleChange(event){

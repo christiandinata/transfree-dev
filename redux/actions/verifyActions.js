@@ -8,15 +8,21 @@ import {
   USER_DATA
 } from '../types';
 import { API } from '../../config';
+import { getCookie } from '../../utils/cookie';
+
 
 // verify phone number
-const verify = ({ phone, email }, type,condition) => {
+const verify = ({ phone, email }, type,condition,req) => {
   if (type !== 'verify') {
     throw new Error('Wrong API call!');
   }
   return (dispatch) => {
     dispatch({type: VERIFY_PHONE_PROGRESS, payload: true});
-    axios.post(`${API}/${type}`, {phone, email})
+    axios.post(`${API}/${type}`, {phone, email}, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
+    })
       .then((response) => {
         if (condition != "edit") {
          Router.push('/phone-verification');
@@ -42,13 +48,17 @@ const verify = ({ phone, email }, type,condition) => {
 };
 
 // check phone number verification
-const check = ({ serviceSid, phone, code, email }, type,condition) => {
+const check = ({ serviceSid, phone, code, email }, type,condition, req) => {
   if (type !== 'check') {
     throw new Error('Wrong API call!');
   }
   return (dispatch) => {
     dispatch({type: VERIFY_PHONE_PROGRESS, payload: true});
-    axios.post(`${API}/${type}`, {serviceSid, phone, code, email})
+    axios.post(`${API}/${type}`, {serviceSid, phone, code, email}, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
+    })
       .then((response) => {
          if(response.data.status == 'approved') {
            if (condition!='edit') {

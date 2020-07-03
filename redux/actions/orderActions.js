@@ -17,7 +17,12 @@ const addOrder = ({ uid, senderName, senderEmail, senderPhone, rate, fromCurrenc
   }
   return (dispatch) => {
     axios.post(`${API}/${type}`, {uid, senderName, senderEmail, senderPhone, rate, fromCurrency, toCurrency, fromAmount, toAmount,
-      email, name, bankName, bankAccountNumber, accountNumber, sortcode, iban, swift, routingNumber, bsbCode, paymentMethod})
+      email, name, bankName, bankAccountNumber, accountNumber, sortcode, iban, swift, routingNumber, bsbCode, paymentMethod
+    }, {
+      headers: {
+        'Authorization': 'Bearer ' + getCookie('token') 
+      }
+    })
       .then((response) => {
         dispatch({type: ORDER_DATA, payload: response.data.order_data});
 
@@ -53,18 +58,18 @@ const addOrder = ({ uid, senderName, senderEmail, senderPhone, rate, fromCurrenc
   };
 };
 
-const getOrderById = (oid, type) => {
+const getOrderById = (oid, type,req) => {
   if (type !== 'getOrderById') {
     throw new Error('Wrong API call!');
   }
   return async (dispatch) => {
-    await axios.get(`${API}/${type}?oid=`+oid)
+    await axios.get(`${API}/${type}?oid=`+oid, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
+    })
       .then((response) => {
         dispatch({type: ORDER_DATA, payload: response.data.order_data});
-      },{
-        headers:{
-          'Authorization': 'Bearer' + getCookie('token') 
-        }
       })
       .catch((error) => {
         throw new Error(error);
@@ -72,12 +77,16 @@ const getOrderById = (oid, type) => {
   };
 };
 
-const getOrderByUid = (uid , type) => {
+const getOrderByUid = (uid , type, req) => {
   if (type !== 'getOrderByUid') {
     throw new Error('Wrong API call!');
   }
   return async (dispatch) => {
-    await axios.get(`${API}/${type}?uid=`+uid)
+    await axios.get(`${API}/${type}?uid=`+uid, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
+    })
       .then((response) => {
         dispatch({type: ORDER_DATA_ARRAY, payload: response.data.order_data_array});
       },{
@@ -97,7 +106,11 @@ const getOrderByQuery = ({page, query},type) => {
   }
   return async (dispatch) => {
     dispatch({type: ORDER_DATA_ARRAY_IN_PROGRESS, payload: true});
-    await axios.get(`${API}/${type}?page=`+page+`&q=`+query)
+    await axios.get(`${API}/${type}?page=`+page+`&q=`+query, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token')}`
+      }
+    })
       .then((response) => {
         dispatch({type: ORDER_DATA_ARRAY, payload: response.data.order_data_array});
       })
@@ -107,13 +120,17 @@ const getOrderByQuery = ({page, query},type) => {
   };
 };
 
-const getAllOrders = (page,type) => {
+const getAllOrders = (page,type, req) => {
   if (type !== 'getAllOrders') {
     throw new Error('Wrong API call!');
   }
   return async (dispatch) => {
     dispatch({type: ORDER_DATA_ARRAY_IN_PROGRESS, payload: true});
-    await axios.get(`${API}/${type}?page=`+page)
+    await axios.get(`${API}/${type}?page=`+page, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
+    })
       .then((response) => {
         dispatch({type: ORDER_DATA_ARRAY, payload: response.data.order_data_array});
       })
@@ -123,12 +140,16 @@ const getAllOrders = (page,type) => {
   };
 };
 
-const checkPayment = ({_id} , type) => {
+const checkPayment = ({_id} , type, req) => {
   if (type !== 'checkPayment') {
     throw new Error('Wrong API call!');
   }
   return async (dispatch) => {
-    await axios.post(`${API}/${type}`, {_id})
+    await axios.post(`${API}/${type}`, {_id}, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
+    })
       .then((response) => {
         Router.push('/dashboard/orders');
         console.log(response);
@@ -140,12 +161,16 @@ const checkPayment = ({_id} , type) => {
   };
 };
 
-const paymentReceived = ({_id} , type) => {
+const paymentReceived = ({_id} , type, req) => {
   if (type !== 'paymentReceived') {
     throw new Error('Wrong API call!');
   }
   return async (dispatch) => {
-    await axios.post(`${API}/${type}`, {_id})
+    await axios.post(`${API}/${type}`, {_id}, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
+    })
       .then((response) => {
         Router.push('/dashboard/orders');
         console.log(response);
@@ -157,12 +182,16 @@ const paymentReceived = ({_id} , type) => {
   };
 };
 
-const transferCompleted = ({_id} , type) => {
+const transferCompleted = ({_id} , type, req) => {
   if (type !== 'transferCompleted') {
     throw new Error('Wrong API call!');
   }
   return async (dispatch) => {
-    await axios.post(`${API}/${type}`, {_id})
+    await axios.post(`${API}/${type}`, {_id}, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
+    })
       .then((response) => {
         Router.push('/dashboard/orders');
         console.log(response);
@@ -174,7 +203,7 @@ const transferCompleted = ({_id} , type) => {
   };
 };
 
-const exportOrders = (startDate,endDate,type) =>{
+const exportOrders = (startDate,endDate,type, req) =>{
   if (type !== 'download') {
     throw new Error('Wrong API call!');
   }
@@ -183,6 +212,10 @@ const exportOrders = (startDate,endDate,type) =>{
        url: `${API}/${type}/orders?startDate=${startDate}&endDate=${endDate}`, //your url
       method: 'GET',
       responseType: 'blob', // important
+    }, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
     }).then((response) => {
        const url = window.URL.createObjectURL(new Blob([response.data]));
        const link = document.createElement('a');
@@ -199,12 +232,16 @@ const exportOrders = (startDate,endDate,type) =>{
 }
 
 
-const changePaidOutRate = ({_id, paidOutRate, partnerPaidOutRate}, type) => {
+const changePaidOutRate = ({_id, paidOutRate, partnerPaidOutRate}, type,req) => {
   if (type !== 'changePaidOutRate') {
     throw new Error('Wrong API call!');
   }
   return async(dispatch) => {
-    await axios.post(`${API}/${type}`, {_id, paidOutRate, partnerPaidOutRate})
+    await axios.post(`${API}/${type}`, {_id, paidOutRate, partnerPaidOutRate}, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
+    })
       .then((response) => {
         Router.push('/dashboard/orders');
         console.log(response);
@@ -216,12 +253,16 @@ const changePaidOutRate = ({_id, paidOutRate, partnerPaidOutRate}, type) => {
   }
 }
 
-const cancelOrder = ({_id}, type) => {
+const cancelOrder = ({_id}, type,req) => {
   if (type !== 'cancelOrder'){
     throw new Error('Wrong API call!');
   }
   return async(dispatch) => {
-    await axios.post(`${API}/${type}`, {_id})
+    await axios.post(`${API}/${type}`, {_id}, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
+    })
       .then((response) => {
         Router.push('/dashboard/orders');
         console.log(response);
@@ -233,12 +274,16 @@ const cancelOrder = ({_id}, type) => {
   }
 }
 
-const reOpenOrder = ({_id}, type) => {
+const reOpenOrder = ({_id}, type,req) => {
   if (type !== 'reOpenOrder'){
     throw new Error('Wrong API call!');
   }
   return async(dispatch) => {
-    await axios.post(`${API}/${type}`, {_id})
+    await axios.post(`${API}/${type}`, {_id}, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
+    })
       .then((response) => {
         Router.push('/dashboard/orders');
         console.log(response);
@@ -255,6 +300,7 @@ export default {
   addOrder,
   getOrderById,
   getOrderByUid,
+  getOrderByQuery,
   getAllOrders,
   checkPayment,
   paymentReceived,
