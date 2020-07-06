@@ -284,7 +284,7 @@ class Index extends React.Component {
                     <h1 style={{fontWeight:400}}> feels like </h1>
                     <h2 style={{fontWeight:900}}> Local</h2>
               </div>
-              <h3 style={{marginTop:0}}>Send. Arrives. Pick-up in 5 minutes</h3>
+              <h3 style={{marginTop:0}}>Send. Arrives. Pick-up in 5 minute</h3>
               <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-primary-start" style={{fontSize:20,width:"auto"}}>Touch in action</a>
               <div style={{marginTop:40}}>
                
@@ -298,7 +298,7 @@ class Index extends React.Component {
               <div className="desktop">
                 <div className="fixed-btn">
                   <a href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree" target="_blank">
-                  <img style={{width: "50%", marginTop: "15%"}} src="../static/images/wa-logo.png"/></a>
+                  <img style={{width: "75%",height:"85%", marginTop: "10%"}} src="../static/images/wa-logo.png"/></a>
                 </div>
               </div>
             </div>
@@ -914,6 +914,9 @@ class Index extends React.Component {
 
 
 
+      h2,h1,h3{
+        color:#FFFFFF;
+      }
       hr.line{
           border: 1px solid black;
           width:300px;
@@ -939,13 +942,10 @@ class Index extends React.Component {
        display:none;
      }
 
-   
-
-   
       .features .images{
         margin-top:-67px;
         display:flex;
-        margin-left:-150px;
+        margin-left:-30px;
         position:absolute;
       }
 
@@ -1862,9 +1862,7 @@ class Index extends React.Component {
             display:none;
           }
 
-          .achievement-mobile{
-            display:none;
-          }
+          
 
             @media only screen and (max-width: 414px) {
               #menuToggle .main-cta {
@@ -1880,9 +1878,6 @@ class Index extends React.Component {
                 display:none;
               }
 
-              .achievement-mobile{
-                display:none;
-              }
 
               .testimonial-mobile{
                 background:url('../static/images/testimoni/background.png');
@@ -1925,7 +1920,8 @@ class Index extends React.Component {
                   display: flex;
                   background-size:100% 100%;
                   height:auto;
-                  width:370px;
+                  width:auto;
+                  
                 }
 
                 .testimonial-mobile .message{

@@ -38,7 +38,7 @@ const Header = () => (
       h1, h2, h3, h4, b, .bold, button {
         font-family: 70px 'Campton-Bold', sans-serif;
         font-weight: 900;
-        color: #FFFFFF;
+        color: #000000;
       }
 
       a {
@@ -78,26 +78,27 @@ const Header = () => (
         background: transparent;
         border: 2px solid #FFFFFF;
         color: #469DDD;
-        padding: 8px 18px 10px 30px;
+        padding: 8px 18px;
         text-align: center;
         text-decoration: none;
-        font-size: 1px;
+        font-size: 16px;
         border-radius: 24px;
         transition: all 0.2s ease;
-        margin-bottom:90px;
+        margin-left:10px;
       }
 
       .btn-secondary {
         background:  #FAAF40;
         border: 3px solid #FAAF40;
         color: #FFFFFF;
-        padding: 8px 18px;
+        padding: 5px 18px ;
         text-align: center;
         text-decoration: none;
         display: inline-block;
         font-size: 16px;
         border-radius: 4px;
         transition: all 0.2s ease;
+        
       }
 
       .btn-tertiary {

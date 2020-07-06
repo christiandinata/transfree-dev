@@ -10,7 +10,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
       <div id="menuToggle">
         <div className="main-cta" style={{textAlign:"center"}}>
           <img style={{width:"40%",marginLeft:"20%",marginRight:"10%",height:"30%",textAlign:"center"}} src="../static/images/transfree-logo.png"></img>
-          {!isAuthenticated && <Link href="/login"><a className="btn-secondary">Log in</a></Link>}
+          {!isAuthenticated && <Link href="/login"><a style={{marginTop:-10}} className="btn-secondary">Log in</a></Link>}
           {isAuthenticated && <li><Link href="/logout"><a>Logout</a></Link></li>}
         </div>
         <input type="checkbox" />
@@ -142,7 +142,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
         {
           display: none;
           position: relative;
-          top: 50px;
+          top: 10px;
           left: 50px;
 
           z-index: 100;
@@ -178,7 +178,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           display: block;
           width: 33px;
           height: 4px;
-          margin-bottom: 5px;
+          margin-bottom: 4px;
           
           position: relative;
 
