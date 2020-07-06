@@ -298,7 +298,7 @@ class Index extends React.Component {
               <div className="desktop">
                 <div className="fixed-btn">
                   <a href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree" target="_blank">
-                  <img style={{width: "75%",height:"85%", marginTop: "10%"}} src="../static/images/wa-logo.png"/></a>
+                  <img style={{width: "75%",height:"75%", marginTop: "13%"}} src="../static/images/wa-logo.png"/></a>
                 </div>
               </div>
             </div>
@@ -402,126 +402,126 @@ class Index extends React.Component {
 						// :
 						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'hkd' ) ?
 						this.reverse.bind(this,'idr' , 'hkd')
-						:
-						(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'idr' ) ?
-						this.reverse.bind(this,'hkd' , 'idr')
-						:
-						(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'myr' ) ?
-						this.reverse.bind(this,'gbp' , 'myr')
-						:
-						(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'gbp' ) ?
-						this.reverse.bind(this,'myr' , 'gbp')
-						:
-					/**	(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'krw' ) ?
-						this.reverse.bind(this,'gbp' , 'krw')
-						:
-						(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'gbp' ) ?
-						this.reverse.bind(this,'krw' , 'gbp')
-            :
-            */
-						(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'usd' ) ?
-						this.reverse.bind(this,'gbp' , 'usd')
-						:
-						(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'gbp' ) ?
-						this.reverse.bind(this,'usd' , 'gbp')
-						:
-						(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'eur' ) ?
-						this.reverse.bind(this,'gbp' , 'eur')
-						:
-						(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'gbp' ) ?
-						this.reverse.bind(this,'eur' , 'gbp')
-						:
-						(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'aud' ) ?
-						this.reverse.bind(this,'gbp' , 'aud')
-						:
-						(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'gbp' ) ?
-						this.reverse.bind(this,'aud' , 'gbp')
-						:
-						(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'hkd' ) ?
-						this.reverse.bind(this,'gbk' , 'hkd')
-						:
-						(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'gbp' ) ?
-						this.reverse.bind(this,'hkd' , 'gbp')
-						:
+						// :
+					// 	(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'idr' ) ?
+					// 	this.reverse.bind(this,'hkd' , 'idr')
+					// 	:
+					// 	(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'myr' ) ?
+					// 	this.reverse.bind(this,'gbp' , 'myr')
+					// 	:
+					// 	(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'gbp' ) ?
+					// 	this.reverse.bind(this,'myr' , 'gbp')
+					// 	:
+					// /**	(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'krw' ) ?
+					// 	this.reverse.bind(this,'gbp' , 'krw')
+					// 	:
+					// 	(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'gbp' ) ?
+					// 	this.reverse.bind(this,'krw' , 'gbp')
+          //   :
+          //   */
+					// 	(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'usd' ) ?
+					// 	this.reverse.bind(this,'gbp' , 'usd')
+					// 	:
+					// 	(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'gbp' ) ?
+					// 	this.reverse.bind(this,'usd' , 'gbp')
+					// 	:
+					// 	(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'eur' ) ?
+					// 	this.reverse.bind(this,'gbp' , 'eur')
+					// 	:
+					// 	(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'gbp' ) ?
+					// 	this.reverse.bind(this,'eur' , 'gbp')
+					// 	:
+					// 	(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'aud' ) ?
+					// 	this.reverse.bind(this,'gbp' , 'aud')
+					// 	:
+					// 	(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'gbp' ) ?
+					// 	this.reverse.bind(this,'aud' , 'gbp')
+					// 	:
+					// 	(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'hkd' ) ?
+					// 	this.reverse.bind(this,'gbk' , 'hkd')
+					// 	:
+					// 	(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'gbp' ) ?
+					// 	this.reverse.bind(this,'hkd' , 'gbp')
+					// 	:
 
-						(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'myr' ) ?
-						this.reverse.bind(this,'usd' , 'myr')
-						:
-						(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'usd' ) ?
-						this.reverse.bind(this,'myr' , 'usd')
-						:
-					/** 	(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'krw' ) ?
-						this.reverse.bind(this,'usd' , 'krw')
-						:
-						(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'usd' ) ?
-						this.reverse.bind(this,'krw' , 'usd')
-            :
-            */
-						(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'eur' ) ?
-						this.reverse.bind(this,'usd' , 'eur')
-						:
-						(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'usd' ) ?
-						this.reverse.bind(this,'eur' , 'usd')
-						:
-						(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'aud' ) ?
-						this.reverse.bind(this,'usd' , 'aud')
-						:
-						(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'usd' ) ?
-						this.reverse.bind(this,'aud' , 'usd')
-						:
-						(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'hkd' ) ?
-						this.reverse.bind(this,'usd' , 'hkd')
-						:
-						(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'usd' ) ?
-						this.reverse.bind(this,'hkd' , 'usd')
-						:
+					// 	(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'myr' ) ?
+					// 	this.reverse.bind(this,'usd' , 'myr')
+					// 	:
+					// 	(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'usd' ) ?
+					// 	this.reverse.bind(this,'myr' , 'usd')
+					// 	:
+					// /** 	(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'krw' ) ?
+					// 	this.reverse.bind(this,'usd' , 'krw')
+					// 	:
+					// 	(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'usd' ) ?
+					// 	this.reverse.bind(this,'krw' , 'usd')
+          //   :
+          //   */
+					// 	(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'eur' ) ?
+					// 	this.reverse.bind(this,'usd' , 'eur')
+					// 	:
+					// 	(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'usd' ) ?
+					// 	this.reverse.bind(this,'eur' , 'usd')
+					// 	:
+					// 	(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'aud' ) ?
+					// 	this.reverse.bind(this,'usd' , 'aud')
+					// 	:
+					// 	(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'usd' ) ?
+					// 	this.reverse.bind(this,'aud' , 'usd')
+					// 	:
+					// 	(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'hkd' ) ?
+					// 	this.reverse.bind(this,'usd' , 'hkd')
+					// 	:
+					// 	(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'usd' ) ?
+					// 	this.reverse.bind(this,'hkd' , 'usd')
+					// 	:
 
-						(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'myr' ) ?
-						this.reverse.bind(this,'aud' , 'myr')
-						:
-						(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'aud' ) ?
-						this.reverse.bind(this,'myr' , 'aud')
-						:
-						/**
-            (this.state.fromCurrency == 'aud' && this.state.toCurrency == 'krw' ) ?
-						this.reverse.bind(this,'aud' , 'krw')
-						:
-						(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'aud' ) ?
-						this.reverse.bind(this,'krw' , 'aud')
-            :
-            */
-						(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'eur' ) ?
-						this.reverse.bind(this,'aud' , 'eur')
-						:
-						(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'aud' ) ?
-						this.reverse.bind(this,'eur' , 'aud')
-						:
-						(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'hkd' ) ?
-						this.reverse.bind(this,'aud' , 'hkd')
-						:
-						(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'aud' ) ?
-						this.reverse.bind(this,'hkd' , 'aud')
-						:
+					// 	(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'myr' ) ?
+					// 	this.reverse.bind(this,'aud' , 'myr')
+					// 	:
+					// 	(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'aud' ) ?
+					// 	this.reverse.bind(this,'myr' , 'aud')
+					// 	:
+					// 	/**
+          //   (this.state.fromCurrency == 'aud' && this.state.toCurrency == 'krw' ) ?
+					// 	this.reverse.bind(this,'aud' , 'krw')
+					// 	:
+					// 	(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'aud' ) ?
+					// 	this.reverse.bind(this,'krw' , 'aud')
+          //   :
+          //   */
+					// 	(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'eur' ) ?
+					// 	this.reverse.bind(this,'aud' , 'eur')
+					// 	:
+					// 	(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'aud' ) ?
+					// 	this.reverse.bind(this,'eur' , 'aud')
+					// 	:
+					// 	(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'hkd' ) ?
+					// 	this.reverse.bind(this,'aud' , 'hkd')
+					// 	:
+					// 	(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'aud' ) ?
+					// 	this.reverse.bind(this,'hkd' , 'aud')
+					// 	:
 
-						(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'myr' ) ?
-						this.reverse.bind(this,'eur' , 'myr')
-						:
-						(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'eur' ) ?
-						this.reverse.bind(this,'myr' , 'eur')
-						:
-						/**
-            (this.state.fromCurrency == 'eur' && this.state.toCurrency == 'krw' ) ?
-						this.reverse.bind(this,'eur' , 'krw')
-						:
-						(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'eur' ) ?
-						this.reverse.bind(this,'krw' , 'eur')
-						:
-            */
-            (this.state.fromCurrency == 'eur' && this.state.toCurrency == 'hkd' ) ?
-						this.reverse.bind(this,'eur' , 'hkd')
-						:
-						(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'eur' ) ?
-						this.reverse.bind(this,'hkd' , 'eur')
+					// 	(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'myr' ) ?
+					// 	this.reverse.bind(this,'eur' , 'myr')
+					// 	:
+					// 	(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'eur' ) ?
+					// 	this.reverse.bind(this,'myr' , 'eur')
+					// 	:
+					// 	/**
+          //   (this.state.fromCurrency == 'eur' && this.state.toCurrency == 'krw' ) ?
+					// 	this.reverse.bind(this,'eur' , 'krw')
+					// 	:
+					// 	(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'eur' ) ?
+					// 	this.reverse.bind(this,'krw' , 'eur')
+					// 	:
+          //   */
+          //   (this.state.fromCurrency == 'eur' && this.state.toCurrency == 'hkd' ) ?
+					// 	this.reverse.bind(this,'eur' , 'hkd')
+					// 	:
+					// 	(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'eur' ) ?
+					// 	this.reverse.bind(this,'hkd' , 'eur')
 						:
 						null
                     }
@@ -982,7 +982,7 @@ class Index extends React.Component {
         font-size:28px;
         margin-top:-30px;
         text-align:center;
-        margin-left:80px;
+        margin-left:40px;
       }
 
       .testimonial .message .content{
@@ -1154,7 +1154,7 @@ class Index extends React.Component {
          background:url('../static/images/achievment/achievement.png');
          background-repeat: no-repeat;
          background-position: center;
-         background-size:auto;
+         background-size:contain;
          height:1100px;
          margin-top:-40px;
          padding:0px, 0px, 0px, 0px;
@@ -1165,7 +1165,7 @@ class Index extends React.Component {
           background:url('../static/images/testimoni/background.png');
           background-repeat: no-repeat;
           background-position: center;
-          background-size:auto;
+          background-size:contain;
           height:900px;
           width:auto;
           z-index:-1;
@@ -1382,7 +1382,7 @@ class Index extends React.Component {
             background-image:url('../static/images/Asset Web/content/Banner_Web.png');
             background-repeat: no-repeat;
             background-position: center;
-            background-size:auto 100%;
+            background-size:contain 100%;
             margin-top:0px;
             display: flex;
             flex-wrap: wrap;
