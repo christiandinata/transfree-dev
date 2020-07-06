@@ -8,7 +8,9 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
   <div className="row">
     <div className="container">
       <div id="menuToggle">
-        <div className="main-cta" style={{textAlign:"center"}}>
+        <div className="main-cta">
+        {/* {(isAuthenticated && (<Link href="/"><a><img src="../static/images/transfree-logo.png" style={{width:10}}/></a></Link>)) ||
+             (<Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>)} */}
           <img style={{width:"40%",marginLeft:"20%",marginRight:"10%",height:"30%",textAlign:"center"}} src="../static/images/transfree-logo.png"></img>
           {!isAuthenticated && <Link href="/login"><a style={{marginTop:-10}} className="btn-secondary">Log in</a></Link>}
           {isAuthenticated && <li><Link href="/logout"><a>Logout</a></Link></li>}
@@ -276,6 +278,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
         #menuToggle .main-cta {
           position: absolute;
           right: 0;
+          display:flex;
         }
 
         #menuToggle {
