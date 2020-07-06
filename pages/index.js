@@ -856,8 +856,7 @@ class Index extends React.Component {
         <div className="row achievement">
             <div className="container">
              <div className="content-achievement" style={{textAlign:"center"}}>
-                    <h1 style={{marginLeft:340,marginTop:140}}>What we have achieved?</h1>
-                  
+                <h1 style={{marginLeft:340,marginTop:140}}>What we have achieved?</h1>
              </div>
             </div>
         </div>
@@ -870,6 +869,7 @@ class Index extends React.Component {
           <img src="../static/images/achievment/Button_entrepreneur winner.png" style={{height:200}}></img>
           </div>
         </div>
+
 
         <div className="row testimonial">
           <div className="container">
@@ -911,9 +911,6 @@ class Index extends React.Component {
 
 
         <style jsx>{`
-
-
-
       h2,h1,h3{
         color:#FFFFFF;
       }
