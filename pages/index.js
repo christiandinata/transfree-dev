@@ -284,7 +284,7 @@ class Index extends React.Component {
                     <h1 style={{fontWeight:400}}> feels like </h1>
                     <h2 style={{fontWeight:900}}> Local</h2>
               </div>
-              <h3 style={{marginTop:0}}>Send. Arrives. Pick-up in 5 minute</h3>
+              <h3 style={{marginTop:0}}>Send today, receive money in sameday or next working day</h3>
               <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-primary-start" style={{fontSize:20,width:"auto"}}>Touch in action</a>
               <div style={{marginTop:40}}>
                
