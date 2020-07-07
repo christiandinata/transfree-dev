@@ -666,7 +666,7 @@ class Index extends React.Component {
 
         </div>
 
-        <div className="row features">
+        {/* <div className="row features">
           <div className="container">
           <div style={{marginLeft:100,marginTop:200,position:"absolute"}}>
                 <h1 style={{color:"#000000",marginLeft:190,textAlign:"center"}}>Why should you use Transfree</h1>
@@ -713,7 +713,7 @@ class Index extends React.Component {
                       <h3 style={{color:"#000000",textAlign:"center",marginTop:-20}}>Don't worry, we are here now</h3>
                 </div>
           </div>
-        </div>
+        </div> */}
 
 
         <div className="row fiture-mobile">
@@ -881,12 +881,12 @@ class Index extends React.Component {
                     <h1 style={{marginTop:-30,width:600,marginLeft:-110}}>Imperial College London</h1>
                 </div>
           </div>
-            <div className="message">
+            {/* <div className="message">
                 <p >It is very difficult to send money from IDR to GDP and Transfree</p>
                 <p>come out with the best solution ever. First time I use it when I was in</p>
                 <p>Indonesia to pay for my flat deposit and rent. And now I'm still use</p>
                 <p>Transfree to transfer money from the UK to Indonesia. It gives me a fair rate</p>
-            </div> 
+            </div>  */}
             <a href="/testimoni" style={{textAlign:"center",color:"#000000",fontSize:"20pt"}}><p>More Testimonials</p></a>
           </div>
         </div>
@@ -925,12 +925,12 @@ class Index extends React.Component {
       
       .features{
         background:url('../static/images/features/batik.png');
-
         background-repeat: no-repeat;
         background-position: center;
-        background-size:2100px 1300px;
+        background-size:auto 1300px;
         margin-top:-120px;
         height:1300px;
+        display:flex;
        }
 
     
@@ -1377,14 +1377,15 @@ class Index extends React.Component {
 
 
           .hero {
-            background-image:url('../static/images/Asset Web/content/Banner_Web.png');
+             background-image:url('../static/images/Asset Web/content/Banner_Web.png');
             background-repeat: no-repeat;
-            background-position: center;
-            background-size:auto;
+            // background-position: center;
+             background-size:cover;
             margin-top:0px;
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: row-reverse;
+            position:relative;
+            // display: flex;
+            // flex-wrap: wrap;
+            // flex-direction: row-reverse;
           }
 
          
