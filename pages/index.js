@@ -1154,8 +1154,9 @@ class Index extends React.Component {
          background:url('../static/images/achievment/achievement.png');
          background-repeat: no-repeat;
          background-position: center;
-         background-size:contain;
+         background-size:110vw;
          height:1100px;
+         width:auto;
          margin-top:-40px;
          padding:0px, 0px, 0px, 0px;
          z-index:-1;
@@ -1165,7 +1166,7 @@ class Index extends React.Component {
           background:url('../static/images/testimoni/background.png');
           background-repeat: no-repeat;
           background-position: center;
-          background-size:contain;
+          background-size:auto;
           height:900px;
           width:auto;
           z-index:-1;
@@ -1382,7 +1383,7 @@ class Index extends React.Component {
             background-image:url('../static/images/Asset Web/content/Banner_Web.png');
             background-repeat: no-repeat;
             background-position: center;
-            background-size:contain 100%;
+            background-size:auto;
             margin-top:0px;
             display: flex;
             flex-wrap: wrap;
