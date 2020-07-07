@@ -716,7 +716,7 @@ class Index extends React.Component {
         </div> */}
 
 
-        <div className="row fiture-mobile">
+        {/* <div className="row fiture-mobile">
           <div className="container">
            <div className="fiture-mobile-message">
               <h1 style={{fontWeight:400}}>Internasional <span style={{fontWeight:900}}> Money</span></h1>
@@ -768,7 +768,7 @@ class Index extends React.Component {
                   <div className="borobudur" style={{marginLeft:"10%"}}>
                   <img src="../static/images/features/borobudur.png"  alt="borobudur" style={{marginTop:30}}  ></img>
                   </div>
-          </div>
+          </div> */}
 
           {/* <div className="benefit">
                     <div className="column">
@@ -793,14 +793,14 @@ class Index extends React.Component {
                       <h3 style={{color:"#000000", textAlign:"center",marginTop:-20}}>it sometimes takes longer for your money to arrive</h3>
                       <h3 style={{color:"#000000",textAlign:"center",marginTop:-20}}>Don't worry, we are here now</h3>
                 </div> */}
-           </div>
-        </div> 
+           {/* </div>
+        </div>  */}
 
         
      
      
 
-        <div className="row application">
+        {/* <div className="row application">
           <div className="container">
           <div className="left-container">
             <img src="../static/images/ASSET/Mockup.png" style={{width:"80%",height:"100%"}}></img>
@@ -849,19 +849,19 @@ class Index extends React.Component {
             </div>
           </div>
 
-        </div>
+        </div> */}
 
 
 
-        <div className="row achievement">
+        {/* <div className="row achievement">
             <div className="container">
              <div className="content-achievement" style={{textAlign:"center"}}>
                 <h1 style={{marginLeft:340,marginTop:140}}>What we have achieved?</h1>
              </div>
             </div>
-        </div>
+        </div> */}
 
-
+{/* 
         <div className="row achievement-mobile">
           <div className="container">
           <h1 style={{textAlign:"center"}}>What we have achieved?</h1>
@@ -881,12 +881,12 @@ class Index extends React.Component {
                     <h1 style={{marginTop:-30,width:600,marginLeft:-110}}>Imperial College London</h1>
                 </div>
           </div>
-            {/* <div className="message">
+            <div className="message">
                 <p >It is very difficult to send money from IDR to GDP and Transfree</p>
                 <p>come out with the best solution ever. First time I use it when I was in</p>
                 <p>Indonesia to pay for my flat deposit and rent. And now I'm still use</p>
                 <p>Transfree to transfer money from the UK to Indonesia. It gives me a fair rate</p>
-            </div>  */}
+            </div> 
             <a href="/testimoni" style={{textAlign:"center",color:"#000000",fontSize:"20pt"}}><p>More Testimonials</p></a>
           </div>
         </div>
@@ -907,7 +907,7 @@ class Index extends React.Component {
             </div>
             <a href="/testimoni" style={{textAlign:"center",color:"#000000",fontSize:"20pt"}}><p>More Testimonials</p></a> 
           </div>
-        </div>
+        </div> */}
 
 
         <style jsx>{`
@@ -1377,15 +1377,14 @@ class Index extends React.Component {
 
 
           .hero {
-             background-image:url('../static/images/Asset Web/content/Banner_Web.png');
+            background-image:url('../static/images/Asset Web/content/Banner_Web.png');
             background-repeat: no-repeat;
-            // background-position: center;
-             background-size:cover;
+            background-position: center;
+            // background-size:contain;
             margin-top:0px;
-            position:relative;
-            // display: flex;
-            // flex-wrap: wrap;
-            // flex-direction: row-reverse;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row-reverse;
           }
 
          
