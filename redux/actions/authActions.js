@@ -155,17 +155,13 @@ export const forgot = ({ email }, type) => {
   };
 };
 
-export const resetPassword = ({ newPassword, verifyPassword, token }, type, req) => {
+export const resetPassword = ({ newPassword, verifyPassword, token }, type) => {
   if (type !== 'resetPassword') {
     throw new Error('Wrong API call!');
   }
   return (dispatch) => {
     dispatch({type: RESET_PASSWORD_PROGRESS, payload: true});
-    axios.post(`${API}/${type}`, { newPassword, verifyPassword, token }, {
-      headers: {
-        Authorization: `Bearer ${getCookie('token',req)}`
-      }
-    })
+    axios.post(`${API}/${type}`, { newPassword, verifyPassword, token })
       .then((response) => {
         if (response.status == 200)
         dispatch({type: RESET_PASSWORD_SUCCESS, payload: response.data.message});
@@ -173,8 +169,6 @@ export const resetPassword = ({ newPassword, verifyPassword, token }, type, req)
       .catch((error) => {
         const errorMessage = error.response.data.message;
         dispatch({type: RESET_PASSWORD_ERROR, payload: errorMessage});
-
-
       });
   };
 };
