@@ -84,8 +84,13 @@ const Footer = () => (
     <style jsx>{`
     .row-footer{
       background-color:#F6F8FC;
-      width : 1920px 0,36px 0px;
-      height : 1246px 0px 6346,42px
+      // background-size:cover;
+      // overflow:auto;
+      clear:both;
+      width:auto;
+      height:auto;
+      // width : 1920px 0,36px 0px;
+      // height : 1246px 0px 6346,42px
     }
         .row3 {
           border-bottom: 1px solid #eaeaea;

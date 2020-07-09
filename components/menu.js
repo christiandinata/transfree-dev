@@ -61,8 +61,6 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
       </div>
     </div>
     <style jsx>{`
-
-
         .btn-secondary-login {
           background: transparent;
           border: 2px solid #FFFFFF;
@@ -74,13 +72,11 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           border-radius: 24px;
           transition: all 0.2s ease;
           margin-left:10px;
-
         }
         .row {
           border-bottom: 1px solid #eaeaea;
           
         }
-
         .header-container {
           display: flex;
           justify-content: center;
@@ -90,17 +86,14 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
          
           
         }
-
         .logo {
           display: flex;
           justify-content: flex-start;
           flex-grow: 1;
         }
-
         .logo img {
           height: 37px;
         }
-
         .header-menu {
           display: flex;
           flex-grow: 1;
@@ -108,37 +101,30 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           border: 1px #707070;
           
         }
-
         .header-cta {
           display: flex;
          
         }
-
         .btn-primary {
           width: auto;
           padding: 10px 20px;
         }
-
         ul {
           list-style-type: none;
           margin: 0;
           padding: 0;
         }
-
         li {
           display: inline;
           margin: 0 20px;
           
         }
-
         .header-cta a {
           margin: 0 5px;
         }
-
         hr {
           border: 1px solid #eaeaea;
         }
-
         // MENU Start
         #menuToggle
         {
@@ -146,14 +132,11 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           position: relative;
           top: 10px;
           left: 50px;
-
           z-index: 100;
          
-
           -webkit-user-select: none;
           user-select: none;
         }
-
         #menuToggle input
         {
           display: block;
@@ -162,16 +145,12 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           position: absolute;
           top: -7px;
           left: -5px;
-
           cursor: pointer;
            
-
           opacity: 0; /* hide this */
           z-index: 2; /* and place it over the hamburger */
-
           -webkit-touch-callout: none;
         }
-
         /*
          * Just a quick hamburger
          */
@@ -183,29 +162,22 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           margin-bottom: 4px;
           
           position: relative;
-
           background: #5BB7DE;
           border-radius: 3px;
-
           z-index: 1;
-
           transform-origin: 4px 0px;
-
           transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
                       background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
                       opacity 0.55s ease;
         }
-
         #menuToggle span:first-child
         {
           transform-origin: 0% 0%;
         }
-
         #menuToggle span:nth-last-child(2)
         {
           transform-origin: 0% 100%;
         }
-
         /*
          * Transform all the slices of hamburger
          * into a crossmark.
@@ -216,7 +188,6 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           transform: rotate(45deg) translate(-2px, -1px);
           background: #232323;
         }
-
         /*
          * But let's hide the middle one.
          */
@@ -225,7 +196,6 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           opacity: 0;
           transform: rotate(0deg) scale(0.2, 0.2);
         }
-
         /*
          * Ohyeah and the last one should go the other direction
          */
@@ -233,7 +203,6 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
         {
           transform: rotate(-45deg) translate(0, -1px);
         }
-
         /*
          * Make this absolute positioned
          * at the top left of the screen
@@ -246,19 +215,15 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           padding: 50px;
           height:50px;
           padding-top: 125px;
-
           background: #ededed;
           list-style-type: none;
           -webkit-font-smoothing: antialiased;
           /* to stop flickering of text in safari */
-
           transform-origin: 0% 0%;
           transform: translate(-100%, 0);
-
           transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
           
         }
-
         #menu li
         {
           padding: 0px 0;
@@ -266,7 +231,6 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           display: block;
           margin-bottom:20px;
         }
-
         /*
          * And let's slide it in from the left
          */
@@ -274,13 +238,11 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
         {
           transform: none;
         }
-
         #menuToggle .main-cta {
           position: absolute;
           right: 0;
           display:flex;
         }
-
         #menuToggle {
           padding-bottom: 15px;
           border-bottom: 1px solid #eaeaea;
@@ -298,7 +260,6 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
            
             
           }
-
           ul > li > a {
             color:#FFFFFF;
             text-decoration: none;
@@ -322,7 +283,6 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
             left: 0;
           }
         }
-
       `}</style>
   </div>
 )

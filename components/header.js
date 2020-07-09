@@ -17,12 +17,10 @@ const Header = () => (
         font-family: 'Campton-Book';
         src: url('../static/fonts/Campton_Book.otf');
       }
-
       @font-face {
         font-family: 'Campton-Bold';
         src: url('../static/fonts/Campton_Bold.otf');
       }
-
       body {
         font-family: 'Campton-Book', sans-serif;
         line-height: 1.6;
@@ -34,32 +32,26 @@ const Header = () => (
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
-
       h1, h2, h3, h4, b, .bold, button {
         font-family: 70px 'Campton-Bold', sans-serif;
         font-weight: 900;
         color: #000000;
       }
-
       a {
         font-family: 'Campton-Bold', sans-serif;
         color: #469DDD;
         text-decoration: none;
       }
-
       button:hover {
         cursor: pointer;
       }
-
       .container {
         width: 1124px;
         margin: 0 auto;
       }
-
       button:focus {
         outline: none;
       }
-
       .btn-primary {
         background-color: #46B2E0;
         border:  3px #46B2E0;
@@ -73,7 +65,6 @@ const Header = () => (
         transition: all 0.2s ease-in-out;
         box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
       }
-
       .btn-secondary-login {
         background: transparent;
         border: 2px solid #FFFFFF;
@@ -86,7 +77,6 @@ const Header = () => (
         transition: all 0.2s ease;
         margin-left:10px;
       }
-
       .btn-secondary {
         background:  #FAAF40;
         border: 3px solid #FAAF40;
@@ -100,7 +90,6 @@ const Header = () => (
         transition: all 0.2s ease;
         
       }
-
       .btn-tertiary {
         background-color: #EBF6FB;
         color: #469DDD;
@@ -113,7 +102,6 @@ const Header = () => (
         border-radius: 4px;
         transition: all 0.2s ease;
       }
-
       .btn-disabled {
         background-color: #DADADA;
         border: none;
@@ -127,17 +115,14 @@ const Header = () => (
         transition: all 0.2s ease-in-out;
         box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
       }
-
       .btn-primary:hover,
       .btn-secondary:hover,
       .btn-tertiary:hover {
         transform: translateY(-1px);
       }
-
       .btn-primary:hover {
         background-color: #5FB4F3;
       }
-
       .btn-secondary:hover {
         border: 2px solid #5FB4F3;
         color: #5FB4F3;
@@ -156,13 +141,11 @@ const Header = () => (
         padding: 15px 0;
         margin-top: 15px;
       }
-
       .row:after {
         content: "";
         display: table;
         clear: both;
       }
-
       ul > li > a {
         color: #000000;
         text-decoration: none;
@@ -171,35 +154,28 @@ const Header = () => (
         font-family: 'Campton-Bold', sans-serif;
         font-weight: bold;
       }
-
       ul > li > a:hover {
         color: #000000;
       }
-
       .react-phone-number-input__row {
         width: 100%;
         margin-bottom: 30px;
         border: none;
       }
-
       .react-phone-number-input__input {
         padding: 15px 0;
         font-family: "Campton-Book", sans-serif;
         font-size: 16px;
-
       }
-
       .react-phone-number-input__icon {
         margin-top: 5px;
         height: initial;
         border: 0;
       }
-
       .react-datepicker-wrapper,
       .react-datepicker__input-container {
         width: 100%;
       }
-
       .react-datepicker__input-container input {
         width: 100%;
         margin-bottom: 30px;
@@ -209,16 +185,13 @@ const Header = () => (
         border-bottom: 1px solid #eaeaea;
         font-family: "Campton-Book", sans-serif;
       }
-
       .react-datepicker__input-container input:focus {
         outline: none;
         border-bottom: 1px solid #469DDD;
       }
-
       ::placeholder {
         color: #CACACA;
       }
-
       .converter-container input {
         width: 100%;
         font-family: 'Campton-Book', sans-serif;
@@ -228,16 +201,13 @@ const Header = () => (
         padding: 0 10px 10px;
         box-sizing: border-box;
       }
-
       .converter-container input:focus {
         outline: none;
       }
-
       .converter-container .source-container input,
       .converter-container .destination-container input {
         border-radius: 4px 0 0 4px;
       }
-
       .converter-container-order input {
         width: 100%;
         font-family: 'Campton-Book', sans-serif;
@@ -248,20 +218,16 @@ const Header = () => (
         box-sizing: border-box;
         background-color: #ECECEE;
       }
-
       .converter-container-order input:focus {
         outline: none;
       }
-
       .converter-container-order .source-container input {
         border-radius: 4px 0 0 4px;
         border-right: 2px solid #FFF;
       }
-
       .converter-container-order .destination-container input {
         border-radius: 0 4px 4px 0;
       }
-
       .converter-container .flag-icon.flag-icon-squared,
       .converter-container-order .flag-icon.flag-icon-squared {
         border-radius: 50%;
@@ -270,24 +236,19 @@ const Header = () => (
         height: 34px;
         margin-right: 10px;
       }
-
       .svg-inline--fa.caret {
         margin-left: 10px;
       }
-
       .accordion__button {
         width: auto;
         background-color: #EDF0F3;
       }
-
       .accordion__button:focus {
         outline: none;
       }
-
       .accordion__button:hover {
         background-color: #E0E4E8;
       }
-
       .form-container {
         width: 400px;
         height: auto;
@@ -296,12 +257,10 @@ const Header = () => (
         box-shadow: 0 10px 30px 0 rgba(0,0,0,0.10);
         border-radius: 8px;
       }
-
       .form-container label {
         font-size: 14px;
         text-transform: uppercase;
       }
-
       .form-container input,
        .form-container textarea {
          width: 100%;
@@ -312,32 +271,26 @@ const Header = () => (
          border-bottom: 1px solid #eaeaea;
          font-family: "Campton-Book", sans-serif;
        }
-
        .form-container input:focus,
        .form-container textarea:focus {
          outline: none;
          border-bottom: 1px solid #469DDD;
        }
-
       ::placeholder {
         color: #CACACA;
       }
-
       .btn-primary {
         width: 100%;
         padding: 15px 0;
         margin: 19px 1px;
       }
-
       .right p {
         margin: 30px 0;
       }
-
       .right .link {
         color: #469DDD;
         text-decoration: none;
       }
-
       .error-container {
         width: 400px;
         height: auto;
@@ -348,7 +301,6 @@ const Header = () => (
         border-radius: 8px;
         display: none;
       }
-
       .success-container {
         width: 400px;
         height: auto;
@@ -359,55 +311,44 @@ const Header = () => (
         border-radius: 8px;
         display: none;
       }
-
       .error-show,
       .success-show {
         display: block;
       }
-
       .container-fluid {
         display: flex;
         height: 100vh;
         align-items: center;
       }
-
       .container-fluid p {
         max-width: 500px;
         text-align: center;
       }
-
       .container-fluid h1 {
         margin: 10px auto;
       }
-
       .logo img {
         height: 28px;
         margin: 50px auto;
       }
-
       ul.pagination {
         list-style-type: none;
       }
-
       ul.pagination  li {
         display: inline-block;
       }
-
       ul.pagination li a {
         padding: 8px 16px;
       }
-
       ul.pagination li.active a {
         background-color: #469DDD;
         border-radius: 2px;
         color: white;
       }
-
       ul.pagination li a:hover {
         background-color: #eaeaea;
         border-radius: 2px;
       }
-
       @media only screen and (max-width: 414px) {
         h1 {
           font-size: 18.5px;
