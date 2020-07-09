@@ -298,7 +298,7 @@ class Index extends React.Component {
               <div className="desktop">
                 <div className="fixed-btn">
                   <a href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree" target="_blank">
-                  <img style={{width: "75%",height:"75%", marginTop: "13%"}} src="../static/images/wa-logo.png"/></a>
+                  <img style={{width: "75%",height:"75%", marginTop: "13%",zIndex:999}} src="../static/images/wa-logo.png"/></a>
                 </div>
               </div>
             </div>
@@ -838,7 +838,7 @@ class Index extends React.Component {
         <div className="row achievement">
             <div className="container">
              <div className="content-achievement" style={{textAlign:"center"}}>
-                {/* <h1 style={{marginLeft:340,marginTop:140}}>What we have achieved?</h1> */}
+                <h1 style={{marginLeft:340,marginTop:30}}>What we have achieved?</h1>
              </div>
             </div>
         </div>
@@ -909,8 +909,7 @@ class Index extends React.Component {
         margin-top:-90px;
         height:1300px;
         padding:100px 0px 0px 0px;
-        // -webkit-filter: drop-shadow( -5px 5px 5px #000 );
-        filter: drop-shadow( 0px 5px 9px #000 );
+        z-index:-99;
        }
 
        .features .container{
@@ -1144,8 +1143,8 @@ class Index extends React.Component {
           background-position: center;
           background-size:100% 100%;
           height:800px;
-          z-index:999;
-          filter: drop-shadow( 0px 5px 9px #000 );
+          // filter: drop-shadow( 0px 5px 9px #000 );
+          z-index:-1;
         }
 
         .testimonial {
@@ -1890,7 +1889,7 @@ class Index extends React.Component {
               .testimonial-mobile img{
                 width:30%;
                 height:30%;
-                margin-left:38%;
+                
                 text-align:center;
                
               }
