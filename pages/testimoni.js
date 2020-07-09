@@ -122,6 +122,7 @@ const About = () => (
       p {
         font-size: 1.1rem;
         line-height: 1.6;
+        color:#000000;
       }
     `}</style>
     <Footer />

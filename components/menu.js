@@ -9,7 +9,10 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
     <div className="container">
       <div id="menuToggle">
         <div className="main-cta">
-          {!isAuthenticated && <Link href="/login"><a className="btn-secondary-login">Log in</a></Link>}
+        {/* {(isAuthenticated && (<Link href="/"><a><img src="../static/images/transfree-logo.png" style={{width:10}}/></a></Link>)) ||
+             (<Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>)} */}
+          <img style={{width:"40%",marginLeft:"20%",marginRight:"10%",height:"30%",textAlign:"center"}} src="../static/images/transfree-logo.png"></img>
+          {!isAuthenticated && <Link href="/login"><a style={{marginTop:-10}} className="btn-secondary">Log in</a></Link>}
           {isAuthenticated && <li><Link href="/logout"><a>Logout</a></Link></li>}
         </div>
         <input type="checkbox" />
@@ -19,17 +22,17 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
         <span></span>
 
         <ul id="menu">
-          {!isAuthenticated && <li><Link href="/about"><a>About</a></Link></li>}
-          {!isAuthenticated && <li><Link href="/faq"><a>FAQ</a></Link></li>}
+          {!isAuthenticated && <li><Link href="/about"><a>How it works</a></Link></li>}
+          {!isAuthenticated && <li><Link href="/faq"><a>About Us</a></Link></li>}
 
           {/* !isAuthenticated && <li><Link href="/"><a>How it works</a></Link></li> */}
           {isAuthenticated && isApproved && <li><Link href="/order"><a>Send money</a></Link></li>}
           {isAuthenticated && isApproved && <li><Link href="/account"><a>Transactions</a></Link></li>}
           <hr/>
-          {!isAuthenticated && <li><Link href="/login"><a>Log in</a></Link></li>}
-          {!isAuthenticated && <li><Link href="/signup"><a>Signup</a></Link></li>}
-          {isAuthenticated && <li><Link href="/profile"><a>Profile</a></Link></li>}
-          {isAuthenticated && <li><Link href="/logout"><a>Logout</a></Link></li>}
+          {!isAuthenticated && <li><Link href="/login"><a className="btn-secondary-login" >Log in</a></Link></li>}
+          {!isAuthenticated && <li><Link href="/signup"><a className="btn-secondary-login">Signup</a></Link></li>}
+          {isAuthenticated && <li><Link href="/profile"><a className="btn-secondary-login">Profile</a></Link></li>}
+          {isAuthenticated && <li><Link href="/logout"><a className="btn-secondary-login">Logout</a></Link></li>}
         </ul>
       </div>
       <div className="header-container">
@@ -39,8 +42,8 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
         </div>
         <div className="header-menu">
           <ul>
-            {!isAuthenticated && <li><Link href="/about"><a>About</a></Link></li>}
-            {!isAuthenticated && <li><Link href="/faq"><a>FAQ</a></Link></li>}
+            {!isAuthenticated && <li><Link href="/about"><a>How it works</a></Link></li>}
+            {!isAuthenticated && <li><Link href="/faq"><a>About Us</a></Link></li>}
 
             {/* !isAuthenticated && <li><Link href="/"><a>How it works</a></Link></li> */}
             {isAuthenticated && <li><Link href="/order"><a>Send money</a></Link></li>}
@@ -58,78 +61,82 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
       </div>
     </div>
     <style jsx>{`
+        .btn-secondary-login {
+          background: transparent;
+          border: 2px solid #FFFFFF;
+          color: #469DDD;
+          padding: 8px 18px;
+          text-align: center;
+          text-decoration: none;
+          font-size: 16px;
+          border-radius: 24px;
+          transition: all 0.2s ease;
+          margin-left:10px;
+        }
         .row {
           border-bottom: 1px solid #eaeaea;
+          
         }
-
         .header-container {
           display: flex;
           justify-content: center;
           align-items: center;
           height: 75px;
-          background-color: #F6F8FB;
+          background-color: #FFFFFF;
+         
+          
         }
-
         .logo {
           display: flex;
           justify-content: flex-start;
           flex-grow: 1;
         }
-
         .logo img {
           height: 37px;
         }
-
         .header-menu {
           display: flex;
-          justify-content: center;
           flex-grow: 1;
+          justify-content: flex-end;
+          border: 1px #707070;
+          
         }
-
         .header-cta {
           display: flex;
-          justify-content: flex-end;
-          flex-grow: 1;
+         
         }
-
         .btn-primary {
           width: auto;
           padding: 10px 20px;
         }
-
         ul {
           list-style-type: none;
           margin: 0;
           padding: 0;
         }
-
         li {
           display: inline;
-          margin: 0 30px;
+          margin: 0 20px;
+          
         }
-
         .header-cta a {
           margin: 0 5px;
         }
-
         hr {
           border: 1px solid #eaeaea;
         }
-
         // MENU Start
         #menuToggle
         {
           display: none;
           position: relative;
-          top: 50px;
+          top: 10px;
           left: 50px;
-
           z-index: 100;
-
+         
           -webkit-user-select: none;
           user-select: none;
         }
-
         #menuToggle input
         {
           display: block;
@@ -138,15 +145,12 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           position: absolute;
           top: -7px;
           left: -5px;
-
           cursor: pointer;
-
+           
           opacity: 0; /* hide this */
           z-index: 2; /* and place it over the hamburger */
-
           -webkit-touch-callout: none;
         }
-
         /*
          * Just a quick hamburger
          */
@@ -155,31 +159,25 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           display: block;
           width: 33px;
           height: 4px;
-          margin-bottom: 5px;
+          margin-bottom: 4px;
+          
           position: relative;
-
-          background: #cdcdcd;
+          background: #5BB7DE;
           border-radius: 3px;
-
           z-index: 1;
-
           transform-origin: 4px 0px;
-
           transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
                       background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
                       opacity 0.55s ease;
         }
-
         #menuToggle span:first-child
         {
           transform-origin: 0% 0%;
         }
-
         #menuToggle span:nth-last-child(2)
         {
           transform-origin: 0% 100%;
         }
-
         /*
          * Transform all the slices of hamburger
          * into a crossmark.
@@ -190,7 +188,6 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           transform: rotate(45deg) translate(-2px, -1px);
           background: #232323;
         }
-
         /*
          * But let's hide the middle one.
          */
@@ -199,7 +196,6 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           opacity: 0;
           transform: rotate(0deg) scale(0.2, 0.2);
         }
-
         /*
          * Ohyeah and the last one should go the other direction
          */
@@ -207,7 +203,6 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
         {
           transform: rotate(-45deg) translate(0, -1px);
         }
-
         /*
          * Make this absolute positioned
          * at the top left of the screen
@@ -218,26 +213,24 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           width: 300px;
           margin: -100px 0 0 -50px;
           padding: 50px;
+          height:50px;
           padding-top: 125px;
-
           background: #ededed;
           list-style-type: none;
           -webkit-font-smoothing: antialiased;
           /* to stop flickering of text in safari */
-
           transform-origin: 0% 0%;
           transform: translate(-100%, 0);
-
           transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+          
         }
-
         #menu li
         {
-          padding: 10px 0;
+          padding: 0px 0;
           font-size: 22px;
           display: block;
+          margin-bottom:20px;
         }
-
         /*
          * And let's slide it in from the left
          */
@@ -245,12 +238,11 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
         {
           transform: none;
         }
-
         #menuToggle .main-cta {
           position: absolute;
           right: 0;
+          display:flex;
         }
-
         #menuToggle {
           padding-bottom: 15px;
           border-bottom: 1px solid #eaeaea;
@@ -265,11 +257,23 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           }
           li {
             display; block;
+           
+            
           }
+          ul > li > a {
+            color:#FFFFFF;
+            text-decoration: none;
+            transition: 0.2s ease-in;
+            font-size: 20px;
+            font-family: 'Campton-Bold', sans-serif;
+            
+          }
+           
           #menu {
             height: 100vh;
             width: 100%;
-            background-color: #F6F8FB;
+            // background-color: #FFFFFF;
+            background-image: repeating-linear-gradient( #00d4ff,#35a4ba, #619fac );
           }
           .row {
             border: none;
@@ -279,7 +283,6 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
             left: 0;
           }
         }
-
       `}</style>
   </div>
 )
