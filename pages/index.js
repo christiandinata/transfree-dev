@@ -909,6 +909,8 @@ class Index extends React.Component {
         margin-top:-90px;
         height:1300px;
         padding:100px 0px 0px 0px;
+        // -webkit-filter: drop-shadow( -5px 5px 5px #000 );
+        filter: drop-shadow( 0px 5px 9px #000 );
        }
 
        .features .container{
@@ -1143,6 +1145,7 @@ class Index extends React.Component {
           background-size:100% 100%;
           height:800px;
           z-index:999;
+          filter: drop-shadow( 0px 5px 9px #000 );
         }
 
         .testimonial {
@@ -1154,7 +1157,7 @@ class Index extends React.Component {
           width:auto;
           z-index:-1;
           margin-top:-100px;
-          padding:100px 0px 0px 0px;
+          padding:130px 0px 0px 0px;
         }
 
 

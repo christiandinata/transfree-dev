@@ -6,6 +6,7 @@ const AuthLayout = ({ children }) => (
     <Header />
     <div className="container-fluid">
       <div className="left">
+        
       </div>
       <div className="right">
         {children}
@@ -40,6 +41,8 @@ const AuthLayout = ({ children }) => (
         justify-content: center;
         align-items: center;
       }
+
+     
 
       @media only screen and (max-width: 414px) {
         .left {

@@ -249,13 +249,33 @@ const Header = () => (
       .accordion__button:hover {
         background-color: #E0E4E8;
       }
+
+      // Sign up
+      .box-title{
+        width: 625px;
+        height:30px;
+        padding:30px;
+        background-color: #FAAF40;
+        border-radius:8px;
+        align-items: center;
+        justify-content: center;
+        display:flex;
+        
+      }
+      .box-title h1{
+        font-weight:900px;
+        color:#FFFFFF;
+        font-size:50px;
+      }
       .form-container {
-        width: 400px;
+        width: 500px;
         height: auto;
-        padding: 30px;
+        padding: 0px 90px 70px 90px;
         background: #FFFFFF;
+        border : 2px solid grey;
         box-shadow: 0 10px 30px 0 rgba(0,0,0,0.10);
         border-radius: 8px;
+        border-top-style: none;
       }
       .form-container label {
         font-size: 14px;
@@ -266,7 +286,7 @@ const Header = () => (
          width: 100%;
          margin-bottom: 30px;
          border: none;
-         font-size: 16px;
+         font-size: 23px;
          padding: 15px 0;
          border-bottom: 1px solid #eaeaea;
          font-family: "Campton-Book", sans-serif;
@@ -380,6 +400,10 @@ const Header = () => (
           margin: 15px auto;
         }
         .form-container {
+          width: 305px;
+          padding: 15px;
+        }
+        .box-title{
           width: 305px;
           padding: 15px;
         }
