@@ -7,7 +7,7 @@ import {
 const initialState = {
   adjustedRates: null,
   inProgress: false,
-  errorMessage: '',
+  errorMessage: ''
 };
 
 export default (state = initialState, action) => {
