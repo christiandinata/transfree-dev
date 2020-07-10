@@ -13,7 +13,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
              (<Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>)} */}
           <img style={{width:"40%",marginLeft:"20%",marginRight:"10%",height:"30%",textAlign:"center"}} src="../static/images/transfree-logo.png"></img>
           {!isAuthenticated && <Link href="/login"><a style={{marginTop:-10}} className="btn-secondary">Log in</a></Link>}
-          {isAuthenticated && <li><Link href="/logout"><a>Logout</a></Link></li>}
+          {/* {isAuthenticated && <li><Link href="/logout"><a>Logout</a></Link></li>} */}
         </div>
         <input type="checkbox" />
 
@@ -29,7 +29,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           {isAuthenticated && isApproved && <li><Link href="/order"><a>Send money</a></Link></li>}
           {isAuthenticated && isApproved && <li><Link href="/account"><a>Transactions</a></Link></li>}
           <hr/>
-          {!isAuthenticated && <li><Link href="/login"><a className="btn-secondary-login" >Log in</a></Link></li>}
+          {/* {!isAuthenticated && <li><Link href="/login"><a className="btn-secondary-login" >Log in</a></Link></li>} */}
           {!isAuthenticated && <li><Link href="/signup"><a className="btn-secondary-login">Signup</a></Link></li>}
           {isAuthenticated && <li><Link href="/profile"><a className="btn-secondary-login">Profile</a></Link></li>}
           {isAuthenticated && <li><Link href="/logout"><a className="btn-secondary-login">Logout</a></Link></li>}
