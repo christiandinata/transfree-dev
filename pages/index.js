@@ -290,9 +290,9 @@ class Index extends React.Component {
                
 
                 <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank">
-                <img src="../static/images/appstore.png"/></a>
+                <img style={{width:"auto", paddingRight:"9px"}} src="../static/images/appstore.png"/></a>
                 <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
-                <img src="../static/images/playstore.png" style={{marginLeft:20}}/></a>
+                <img style={{width:"auto", paddingLeft:"9px", marginLeft:20}} src="../static/images/playstore.png"/></a>
                 
               </div>
               <div className="desktop">
@@ -624,7 +624,7 @@ class Index extends React.Component {
                   <div className=" store">
                     <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
                     <img style={{width: "47%", paddingRight:"9px"}} src="../static/images/playstore.png"/></a>
-                    <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank">
+                      <a>
                     <img style={{width:"47%", paddingLeft:"9px"}} src="../static/images/appstore.svg"/></a>
                   </div>
 
