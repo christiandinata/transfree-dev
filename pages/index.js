@@ -289,7 +289,7 @@ class Index extends React.Component {
               <div style={{marginTop:40}}>
                
 
-                <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank">
+                <a>
                 <img style={{width:"auto", paddingRight:"9px"}} src="../static/images/appstore.png"/></a>
                 <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
                 <img style={{width:"auto", paddingLeft:"9px", marginLeft:20}} src="../static/images/playstore.png"/></a>
@@ -625,7 +625,7 @@ class Index extends React.Component {
                     <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
                     <img style={{width: "47%", paddingRight:"9px"}} src="../static/images/playstore.png"/></a>
                       <a>
-                    <img style={{width:"47%", paddingLeft:"9px"}} src="../static/images/appstore.svg"/></a>
+                    <img style={{width:"47%", paddingLeft:"9px"}} src="../static/images/appstore.png"/></a>
                   </div>
 
 		  {/*
@@ -793,8 +793,8 @@ class Index extends React.Component {
 
           <div >
 
-
-          <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank" >
+{/*  href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank"  */}
+          <a>
           <img src="../static/images/appstore.png"/></a>
                     
             
@@ -819,7 +819,7 @@ class Index extends React.Component {
                 <div className="right-container">
                 <h1>Avaliable in</h1>
                   <div>
-                      <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank">
+                      <a>
                       <img src="../static/images/appstore.png" /></a>
                   </div>
                   <div>
