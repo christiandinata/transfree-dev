@@ -17,26 +17,6 @@ import 'slick-carousel/slick/slick-theme.css';
  
 
 
-const items = [
-  {
-    name: "Doni",
-    url: "../static/images/testimoni/dummy-photo.png ",
-    school: " Sman 1 Laguboti",
-    message: "Heelo semua teman 2 ku"
-  },
-  {
-    name: "Doni",
-    url: "../static/images/playstore.png ",
-    school: " Sman 1 LAguboti",
-    message: "Heelo semua teman 2 ku"
-  },
-  {
-    name: "Doni",
-    url: "../static/images/testimoni/dummy-photo.png ",
-    school: " Sman 1 LAguboti",
-    message: "Heelo semua teman 2 ku"
-  }
-]
 
 class Index extends React.Component {
 
@@ -276,7 +256,7 @@ class Index extends React.Component {
           <div className="container">
             <div className="left-container">
               <div className="text">
-                    <h1 style={{fontWeight:400}}>Internasional</h1>
+                    <h1 style={{fontWeight:400}}>International</h1>
                     <h2 style={{fontWeight:900}}> Money</h2>
               </div>
               <div className="text">
@@ -304,14 +284,14 @@ class Index extends React.Component {
             </div>
             <div className="right-container">
               <div className="converter-container" >
-                <h1 style={{float:"center",textAlign:"center"}}>Transfer With Transfree</h1>
+                <h1 style={{float:"center",fontSize:20,textAlign:"center"}}>Transfer With Transfree</h1>
                 <div className="row exchange-container">
                   <div className="source-container">
                     <div className="money-input-container">
                       <div className="money-input">
                         <span >You send</span>
                         <NumberFormat
-                          style={{fontSize:30,fontWeight:800,marginLeft:10}}
+                          style={{fontSize:25,fontWeight:800,marginLeft:10}}
                           id="money-from"
                           type="text"
                           thousandSeparator={true}
@@ -534,7 +514,7 @@ class Index extends React.Component {
                       <div className="money-input">
                         <span>Recipient gets</span>
                         <NumberFormat
-                        style={{fontSize:30,fontWeight:800,marginLeft:10}}
+                        style={{fontSize:25,fontWeight:800,marginLeft:10}}
                           id="money-to"
                           type="text"
                           thousandSeparator={true}
@@ -604,8 +584,8 @@ class Index extends React.Component {
                 <div className="row rate"style={{marginTop:"-20px"}} >
                   <span className="rate-desc" >Transfer fee </span> <span className="rate-value" style={{textAlign:"right",marginLeft:"5px"}}><span ><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value="0" /></span></span>
                 </div>
-                <div className="row note" style={{width:"100%",float:"center",textAlign:"center"}}>
-                  <p style={{maxWidth: "100%", marginBottom: "0",color:"#FFFFFF"}}>Your transfer will be processed immediately.
+                <div className="row note" style={{width:"90%",marginLeft:"auto",marginRight:"auto",float:"center",textAlign:"center"}}>
+                  <p style={{maxWidth: "100%", marginBottom: "0",color:"#FFFFFF",fontSize:15}}>Your transfer will be processed immediately.
                   The recipient will get the money in next working day. </p>
 		  {/*<span className="received-on">24 hours</span>*/}
                 </div>
@@ -615,29 +595,19 @@ class Index extends React.Component {
               
                   <div className="row cta-primary">
 
-                  <Link href="/order">
-                    <a className="btn-primary-start">Get started</a>
-                  </Link>
-                  <Link href="/fxroom">
-                    <a className="btn-primary-2">Fx Room</a>
-                  </Link>
-                  <div className=" store">
-                    <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
-                    <img style={{width: "47%", paddingRight:"9px"}} src="../static/images/playstore.png"/></a>
-                    <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank">
-                    <img style={{width:"47%", paddingLeft:"9px"}} src="../static/images/appstore.svg"/></a>
-                  </div>
-
-		  {/*
-                  {this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr' ?
-                     <Link href="/">
-                      <a className="btn-disabled">Out Of Stock</a>
-                     </Link>
-                     :
-                     <Link href="/order">
-                      <a className="btn-primary">Get started</a>
-                     </Link>
-                    }*/}
+                   
+                      <a href="/order" className="btn-primary-start" style={{width:"80%",marginRight:"auto",marginLeft:"10%",textAlign:"center",float:"center"}}>Get started</a>
+                      {/* <Link href="/login"><a style={{marginTop:-10}} className="btn-secondary">Log in</a></Link>
+                     */}
+                    {/* <Link >
+                      <a href="/fxroom" className="btn-primary-start">x Room</a>
+                    </Link> */}
+                    {/* <div className=" store">
+                      <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank" name="eadea" id="deadae">
+                      <img style={{width: "47%", paddingRight:"9px"}} src="../static/images/playstore.png"/></a>
+                      <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank" name="deae" id="dedea">
+                      <img style={{width:"47%", paddingLeft:"9px"}} src="../static/images/appstore.svg"/></a>
+                    </div> */}
 
                   </div>
                 </div>
@@ -671,19 +641,19 @@ class Index extends React.Component {
           <div className="container">
           <div className="images">
                   <div className="monas">
-                      <img src="../static/images/features/monas.png" style={{marginTop:-6}} alt="monas" name="monas" id="monas" ></img>
+                      <img src="../static/images/features/monas.png" style={{marginTop:85}} alt="monas" name="monas" id="monas" ></img>
                   </div>
                   <div className="rumah" style={{marginLeft:"4%"}}>
-                  <img src="../static/images/features/rumah.png"  alt="rumah"  id="rumah"  style={{marginTop:58}}></img>
+                  <img src="../static/images/features/rumah.png"  alt="rumah"  id="rumah"  style={{marginTop:75}}></img>
                   </div>
                   <div className="bali" style={{marginLeft:"4%"}}>
-                  <img src="../static/images/features/bali.png" alt="bali" ></img>
+                  <img src="../static/images/features/bali.png" alt="bali" style={{marginTop:68}}></img>
                   </div>
                   <div className="surabaya" style={{marginLeft:"4%"}}>
-                  <img src="../static/images/features/surabaya.png" alt="surabaya" style={{marginTop:9}}></img>
+                  <img src="../static/images/features/surabaya.png" alt="surabaya" style={{marginTop:65}}></img>
                   </div>
                   <div className="borobudur" style={{marginLeft:"4%"}}>
-                  <img src="../static/images/features/borobudur.png"  alt="borobudur" style={{marginTop:30}}  ></img>
+                  <img src="../static/images/features/borobudur.png"  alt="borobudur" style={{marginTop:60}}  ></img>
                   </div>
           </div>
                 <h1 style={{color:"#000000",textAlign:"center",marginTop:60}}>Why should you use Transfree</h1>
@@ -694,7 +664,7 @@ class Index extends React.Component {
               <div className="benefit">
                   {/* <div className="column"> */}
                     <div className ="btn-primary-start">
-                    <img src="../static/images/features/money.png" style={{float:"center",position:"center"}}></img>
+                    <img src="../static/images/features/money.png" style={{width:140}}></img>
                     <h1>Better rate for Transfree</h1>
                     </div>
                 {/* </div> */}
@@ -711,7 +681,7 @@ class Index extends React.Component {
                 </div>
 
                 <div className="message">
-                      <h3 style={{color:"#000000",textAlign:"center"}}>Does your family need it for an emergency? And when you use</h3>
+                      <h3 style={{color:"#000000",textAlign:"center",marginTop:100}}>Does your family need it for an emergency? And when you use</h3>
                       <h3 style={{color:"#000000", textAlign:"center",marginTop:-20}}>a cheaper option, it sometimes takes longer for your money to arrive</h3>
                       <h3 style={{color:"#000000",textAlign:"center",marginTop:-20}}>Don't worry, we are here now</h3>
                 </div>
@@ -892,6 +862,7 @@ class Index extends React.Component {
 
 
         <style jsx>{`
+
       h2,h1,h3{
         color:#FFFFFF;
       }
@@ -906,7 +877,7 @@ class Index extends React.Component {
         background-repeat: no-repeat;
         background-position: center;
         background-size:auto 1300px;
-        margin-top:-90px;
+        margin-top:-100px;
         height:1300px;
         padding:100px 0px 0px 0px;
         z-index:-99;
@@ -920,16 +891,23 @@ class Index extends React.Component {
 
     
 
-     .fiture-mobile{
+     .fiture-mobile {
        display:none;
      }
 
       .features .images{
         display:flex;
         margin-top:-190px;
+        margin-left:20px;
         
       }
 
+      .features .images img{
+        height:80px;
+        width:70px;
+      }
+
+      
      .features .message{
         background:url('../static/images/features/chat-box.png');
         background-repeat: no-repeat;
@@ -938,8 +916,10 @@ class Index extends React.Component {
         height:300px;
         width:90%;
         margin-left:auto;
+        margin-right:auto;
         opacity:0.8;
-        padding:70px 30px 90px 50px;
+        padding:0px 30px 90px 50px;
+       
      }
 
      .features .message {
@@ -988,7 +968,7 @@ class Index extends React.Component {
 
       .text h1,h2{
         display:inline;
-        font-size:45px;
+        font-size:35px;
       }
 
       .text{
@@ -1068,8 +1048,18 @@ class Index extends React.Component {
 
 
        .benefit img{
-         width:150px;
-         height:150px;
+         width:120px;
+         height:120px;
+       }
+
+       .benefit{
+         margin-right:100px;
+         margin-left:100px;
+       }
+
+       .benefit .btn-primary-start{
+         padding:10px 0px 0px 0px;
+         height:auto;
        }
 
 
@@ -1118,7 +1108,8 @@ class Index extends React.Component {
         .application .right-container{
           justify-content:center;
           text-align:center;
-         margin-top:20%;
+          margin-top:20%;
+          
          
         }
 
@@ -1372,13 +1363,17 @@ class Index extends React.Component {
             background-position: center;
             background-size:auto;
             margin-top:0px;
+            
           }
 
          
 
           .left-container {
-            flex-basis: 60%;
-            margin-top:90px;
+            flex-basis: 55%;
+            margin-top:40px;
+            margin-left:30px;
+            margin-right:10px;
+           
             
           }
 
@@ -1393,10 +1388,18 @@ class Index extends React.Component {
           }
 
           .right-container {
-            flex-basis: 40%;
+            flex-basis: 60%;
             margin-top: 55px;
-          
+           
           }
+
+          .hero .right-container{
+            flex-basis: 38%;
+            margin-top: 15px;
+            margin-right:0px;
+            margin-left:0px;
+          }
+
           .right-bottom-container{
             margin-top:20px !important;
             display: none;
@@ -1458,7 +1461,7 @@ class Index extends React.Component {
 
           .money-input span {
             margin: 5px 0 0 20px;
-            font-size:26px;
+            font-size:16px;
           }
 
           .currency-change {
@@ -1857,6 +1860,11 @@ class Index extends React.Component {
 
               .hero .money-input span{ 
                 font-size:20px;
+              }
+
+              .hero .right-container{
+                margin-right:0px;
+                
               }
 
               .store img{

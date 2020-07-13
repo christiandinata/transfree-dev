@@ -26,7 +26,7 @@ const Header = () => (
         line-height: 1.6;
         letter-spacing: 0.2px;
         color: #3E495E;
-        margin: 0;
+        margin: 0px;
         background-color: #FFFFFF;
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
@@ -150,7 +150,7 @@ const Header = () => (
         color: #000000;
         text-decoration: none;
         transition: 0.2s ease-in;
-        font-size: 25px;
+        font-size: 20px;
         font-family: 'Campton-Bold', sans-serif;
         font-weight: bold;
       }
