@@ -81,7 +81,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           display: flex;
           justify-content: center;
           align-items: center;
-          height: 30px;
+          height: 40px;
           background-color: #FFFFFF;
           padding:5px 5px 5px 5px;
         }

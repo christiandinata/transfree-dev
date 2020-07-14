@@ -265,8 +265,8 @@ class Index extends React.Component {
                     <h2 style={{fontWeight:900}}> Local</h2>
               </div>
               <h3 style={{marginTop:0}}>Send today, receive money in sameday or next working day</h3>
-              <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-primary-start" style={{fontSize:20,width:"auto"}}>Touch in action</a>
-              <div style={{marginTop:40}}>
+              <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-primary-start" style={{fontSize:15}}>Touch in action</a>
+              {/* <div style={{marginTop:40}}>
                
 
                 <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank">
@@ -274,7 +274,7 @@ class Index extends React.Component {
                 <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
                 <img src="../static/images/playstore.png" style={{marginLeft:20}}/></a>
                 
-              </div>
+              </div> */}
               <div className="desktop">
                 <div className="fixed-btn">
                   <a href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree" target="_blank">
@@ -291,7 +291,7 @@ class Index extends React.Component {
                       <div className="money-input">
                         <span >You send</span>
                         <NumberFormat
-                          style={{fontSize:25,fontWeight:800,marginLeft:10}}
+                          style={{fontWeight:800,marginLeft:10}}
                           id="money-from"
                           type="text"
                           thousandSeparator={true}
@@ -578,59 +578,29 @@ class Index extends React.Component {
                   </div>
 
                 </div>
-                <div className="row rate">
+               
+               <div className="result-conversion">
+               <div className="row rate">
                   <span className="rate-desc">Conversion rate</span> <span className="rate-value"><span className="live-rate"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={5} value={this.state.rate} /></span></span>
                 </div>
                 <div className="row rate"style={{marginTop:"-20px"}} >
                   <span className="rate-desc" >Transfer fee </span> <span className="rate-value" style={{textAlign:"right",marginLeft:"5px"}}><span ><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value="0" /></span></span>
                 </div>
+               </div>
                 <div className="row note" style={{width:"90%",marginLeft:"auto",marginRight:"auto",float:"center",textAlign:"center"}}>
-                  <p style={{maxWidth: "100%", marginBottom: "0",color:"#FFFFFF",fontSize:15}}>Your transfer will be processed immediately.
+                  <p style={{maxWidth: "100%", marginBottom: "0",color:"#FFFFFF",fontSize:12}}>Your transfer will be processed immediately.
                   The recipient will get the money in next working day. </p>
 		  {/*<span className="received-on">24 hours</span>*/}
                 </div>
-
+                {/* <a href="/order" className="btn-primary-2" style={{width:"80%",marginRight:"auto",marginLeft:"10%",textAlign:"center",float:"center"}}>Get started</a> */}
 
                 <div className="row converter-cta" >
               
                   <div className="row cta-primary">
-
-                   
-                      <a href="/order" className="btn-primary-start" style={{width:"80%",marginRight:"auto",marginLeft:"10%",textAlign:"center",float:"center"}}>Get started</a>
-                      {/* <Link href="/login"><a style={{marginTop:-10}} className="btn-secondary">Log in</a></Link>
-                     */}
-                    {/* <Link >
-                      <a href="/fxroom" className="btn-primary-start">x Room</a>
-                    </Link> */}
-                    {/* <div className=" store">
-                      <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank" name="eadea" id="deadae">
-                      <img style={{width: "47%", paddingRight:"9px"}} src="../static/images/playstore.png"/></a>
-                      <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank" name="deae" id="dedea">
-                      <img style={{width:"47%", paddingLeft:"9px"}} src="../static/images/appstore.svg"/></a>
-                    </div> */}
-
+                      <a href="/order" className="btn-primary-2" style={{width:"80%",marginRight:"auto",marginLeft:"10%",textAlign:"center",float:"center"}}>Get started</a>
                   </div>
                 </div>
               </div>
-            {/* <div className="right-bottom-container">
-              <div className="fixed-btn">
-                <a href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree" target="_blank">
-                <img style={{width: "50%", marginTop: "25%"}} src="../static/images/wa-logo.png"/></a>
-              </div>
-              <h1>International money transfer feels like local</h1>
-              <center>
-                <Link>
-                  <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-secondary">See how it works</a>
-                </Link>
-                <Link>
-                  <a style={{marginTop: "20px"}} href="/send" className="btn-secondary sell-buy">Send for Living</a>
-                </Link>
-                <Link>
-                  <a  href="/donasiqurban" className="btn-secondary" style={{marginTop:10}}>Qurban Sekarang</a>
-                </Link>
-                
-              </center>
-            </div> */}
             </div>
           </div>
 
@@ -641,19 +611,19 @@ class Index extends React.Component {
           <div className="container">
           <div className="images">
                   <div className="monas">
-                      <img src="../static/images/features/monas.png" style={{marginTop:85}} alt="monas" name="monas" id="monas" ></img>
+                      <img src="../static/images/features/monas.png" style={{marginTop:66}}  alt="monas" name="monas" id="monas" ></img>
                   </div>
-                  <div className="rumah" style={{marginLeft:"4%"}}>
-                  <img src="../static/images/features/rumah.png"  alt="rumah"  id="rumah"  style={{marginTop:75}}></img>
+                  <div className="rumah" style={{marginLeft:"3%"}}>
+                  <img src="../static/images/features/rumah.png"  alt="rumah"  id="rumah"  style={{marginTop:55}}></img>
                   </div>
-                  <div className="bali" style={{marginLeft:"4%"}}>
-                  <img src="../static/images/features/bali.png" alt="bali" style={{marginTop:68}}></img>
+                  <div className="bali" style={{marginLeft:"7%"}}>
+                  <img src="../static/images/features/bali.png" alt="bali" style={{marginTop:50}}></img>
                   </div>
                   <div className="surabaya" style={{marginLeft:"4%"}}>
-                  <img src="../static/images/features/surabaya.png" alt="surabaya" style={{marginTop:65}}></img>
+                  <img src="../static/images/features/surabaya.png" alt="surabaya" style={{marginTop:45}}></img>
                   </div>
-                  <div className="borobudur" style={{marginLeft:"4%"}}>
-                  <img src="../static/images/features/borobudur.png"  alt="borobudur" style={{marginTop:60}}  ></img>
+                  <div className="borobudur" style={{marginLeft:"6%"}}>
+                  <img src="../static/images/features/borobudur.png"  alt="borobudur" style={{marginTop:40}}  ></img>
                   </div>
           </div>
                 <h1 style={{color:"#000000",textAlign:"center",marginTop:60}}>Why should you use Transfree</h1>
@@ -863,6 +833,15 @@ class Index extends React.Component {
 
         <style jsx>{`
 
+        .right-container .result-conversion{
+          box-shadow: 0 2px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
+          height:auto;
+          font-size:11px;
+          padding:1px 20px 1px 20px;
+          margin-top:4px;
+         
+        }
+
       h2,h1,h3{
         color:#FFFFFF;
       }
@@ -877,7 +856,7 @@ class Index extends React.Component {
         background-repeat: no-repeat;
         background-position: center;
         background-size:auto 1300px;
-        margin-top:-100px;
+        margin-top:-110px;
         height:1300px;
         padding:100px 0px 0px 0px;
         z-index:-99;
@@ -897,14 +876,16 @@ class Index extends React.Component {
 
       .features .images{
         display:flex;
-        margin-top:-190px;
-        margin-left:20px;
+        margin-top:-200px;
+       
         
       }
 
       .features .images img{
-        height:80px;
-        width:70px;
+         width:80px;
+         height:110px;
+         margin:auto;
+        
       }
 
       
@@ -1075,8 +1056,8 @@ class Index extends React.Component {
       }
 
       .application .left-container img {
-        height:700px;
-        width:400px;
+        height:600px;
+        width:300px;
         margin-left:auto;
         margin-right:auto;
         
@@ -1086,16 +1067,16 @@ class Index extends React.Component {
       }
 
       .application .right-container img{
-        width:60%;
+        width:50%;
        
       }
 
       
 
-        container{
-          background-color: #d2222f;
-          width:20px;
-        }
+        // container{
+        //   background-color: #d2222f;
+        //   width:20px;
+        // }
 
         .application{
           display:flex;
@@ -1108,7 +1089,7 @@ class Index extends React.Component {
         .application .right-container{
           justify-content:center;
           text-align:center;
-          margin-top:20%;
+          margin-top:10%;
           
          
         }
@@ -1225,7 +1206,7 @@ class Index extends React.Component {
           text-decoration: none;
           display: inline-block;
           border-radius: 12px;
-          font-size:29px;
+          font-size:20px;
           transition: all 0.2s ease-in-out;
           box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
           padding:10px 10px 10px 10px;
@@ -1251,15 +1232,15 @@ class Index extends React.Component {
         .btn-primary-start {
           background-color: #FAAF40;
           border: none;
-          width:50px;
+          width:150px;
           margin-bottom:20px;
           color: white;
-          padding: 10px 20px;
+          padding: 10px 10px;
           text-align: center;
           text-decoration: none;
           display: inline-block;
           border-radius: 12px;
-          font-size:29px;
+          font-size:20px;
           transition: all 0.2s ease-in-out;
           box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
         }
@@ -1432,7 +1413,7 @@ class Index extends React.Component {
           }
 
           .converter-container {
-            padding: 20px;
+            padding: 15px 20px 33px 20px;
             background: #354E7A;
             box-shadow: 0 10px 30px 0 rgba(0,0,0,0.30);
             border-radius: 30px;
@@ -1461,7 +1442,7 @@ class Index extends React.Component {
 
           .money-input span {
             margin: 5px 0 0 20px;
-            font-size:16px;
+            font-size:14px;
           }
 
           .currency-change {
@@ -1859,7 +1840,11 @@ class Index extends React.Component {
               }
 
               .hero .money-input span{ 
-                font-size:20px;
+                font-size:12px;
+              }
+
+              .hero .money-input NumberFormat{
+                font-size:11px;
               }
 
               .hero .right-container{
