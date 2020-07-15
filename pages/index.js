@@ -376,15 +376,15 @@ class Index extends React.Component {
 						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur' ) ?
 						this.reverse.bind(this,'idr' , 'eur')
 						:
-						(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr' ) ?
-						this.reverse.bind(this,'eur' , 'idr')
-						:
+						// (this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr' ) ?
+						// this.reverse.bind(this,'eur' , 'idr')
+						// :
 						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'myr' ) ?
 						this.reverse.bind(this,'idr' , 'myr')
 						:
-						(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'idr' ) ?
-						this.reverse.bind(this,'myr' , 'idr')
-						:
+						// (this.state.fromCurrency == 'myr' && this.state.toCurrency == 'idr' ) ?
+						// this.reverse.bind(this,'myr' , 'idr')
+						// :
 						/**(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'krw' ) ?
 						this.reverse.bind(this,'idr' , 'krw')
 						:
@@ -755,9 +755,9 @@ class Index extends React.Component {
               <h1>Mobile Application now in</h1>
 
           <div >
-
-
-          <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank" >
+{/* 
+ href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank"  */}
+          <a>
           <img src="../static/images/appstore.png"/></a>
                     
             
@@ -782,7 +782,7 @@ class Index extends React.Component {
                 <div className="right-container">
                 <h1>Avaliable in</h1>
                   <div>
-                      <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank">
+                      <a>
                       <img src="../static/images/appstore.png" /></a>
                   </div>
                   <div>
