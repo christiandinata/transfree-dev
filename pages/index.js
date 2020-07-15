@@ -875,7 +875,7 @@ class Index extends React.Component {
         background-repeat: no-repeat;
         background-position: center;
         background-size:100% 100%;
-        margin-top:-45px;
+        margin-top: -20vh;
         // height:1300px;
         padding:100px 0px 0px 0px;
         z-index:-99;
@@ -908,13 +908,14 @@ class Index extends React.Component {
 
       .hero .images{
         display:flex;  
-        margin-top:79px;
+        margin-top:-6vh;
+        margin-left:-4vh;
         
       }
 
       .hero .images img{
-         width:70px;
-         height:70px;
+         width:auto;
+         height:15vh;
          margin:auto;
       }
 
@@ -1093,8 +1094,8 @@ class Index extends React.Component {
       }
 
       .application .left-container img {
-        height:600px;
-        width:300px;
+        height:auto;
+        width:23vw;
         margin-left:auto;
         margin-right:auto;
         
