@@ -275,12 +275,12 @@ class Index extends React.Component {
                 <img src="../static/images/playstore.png" style={{marginLeft:20}}/></a>
                 
               </div> */}
-              <div className="desktop">
+              {/* <div className="desktop">
                 <div className="fixed-btn">
                   <a href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree" target="_blank">
                   <img style={{width: "75%",height:"75%", marginTop: "13%",zIndex:999}} src="../static/images/wa-logo.png"/></a>
                 </div>
-              </div>
+              </div> */}
               <div className="images">
                   <div className="monas">
                       <img src="../static/images/features/monas.png" style={{marginTop:78}}  alt="monas" name="monas" id="monas" ></img>
@@ -707,12 +707,12 @@ class Index extends React.Component {
               <h1 style={{marginTop:-30}}>Transfer <span style={{fontWeight:400}}>feels like</span> local</h1>
               <h2 style={{textAlign:"center",marginLeft:20,marginTop:-10,fontSize:"13pt",color:"#000000"}}>Send. Arrives. Pick-up in 5 minutes</h2>
            </div>
-           <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-primary-start" style={{fontSize:20,width:"70%",marginLeft:"auto",marginRight:"auto"}}>How it works</a>
+           <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-primary-start" style={{fontSize:20,marginTop:15,width:"70%",marginLeft:"auto",marginRight:"auto"}}>How it works</a>
            <hr className="line"/>
            <p style={{textAlign:"center"}}>Why we should to use Transfree?</p>
           <div className="fiture-mobile-benefit">
               <div className="first-benefit" style={{marginBottom:"5%"}}>
-              <button className="btn-primary-2" style={{fontSize:"80%",width:"70%",marginLeft:"13%",marginRight:"auto"}}>Better rate for transfer</button>
+              <button className="btn-primary-2">Better rate for transfer</button>
               <div className="first-message">
                 <h1 style={{textAlign:"center",fontSize:"15pt",marginTop:10}}>Better rate for transfer</h1>
                 <p style={{textAlign:"center"}}>Does your family need it for an emergency? And when you use a cheaper option,it sometimes takes longer for your money to arriveDon't worry, we are here now</p>
@@ -720,7 +720,7 @@ class Index extends React.Component {
               </div>
 
               <div className="first-benefit" style={{marginBottom:"5%"}} >
-              <button className="btn-primary-2" style={{fontSize:"80%",width:"70%",marginLeft:"13%",marginRight:"auto"}}>Quickly sent quickly arrived</button>
+              <button className="btn-primary-2">Quickly sent quickly arrived</button>
               <div className="first-message">
                 <h1 style={{textAlign:"center",fontSize:"15pt",marginTop:10}}>Quickly sent quickly arrived</h1>
                 <p style={{textAlign:"center"}}>Does your family need it for an emergency? And when you use a cheaper option,it sometimes takes longer for your money to arriveDon't worry, we are here now</p>
@@ -728,7 +728,7 @@ class Index extends React.Component {
               </div>
 
               <div className="first-benefit" style={{marginBottom:"5%"}}>
-              <button className="btn-primary-2" style={{fontSize:"80%",width:"70%",marginLeft:"13%",marginRight:"auto"}}>Unchargeable for Transfer</button>
+              <button className="btn-primary-2">Unchargeable for Transfer</button>
               <div className="first-message">
               <h1 style={{textAlign:"center",fontSize:"15pt",marginTop:10}}>Unchargeable for Transfer</h1>
                 <p style={{textAlign:"center"}}>Does your family need it for an emergency? And when you use a cheaper option,it sometimes takes longer for your money to arriveDon't worry, we are here now</p>
@@ -807,9 +807,7 @@ class Index extends React.Component {
 
         <div className="row achievement-mobile">
           <div className="container">
-          <h1 style={{textAlign:"center"}}>What we have achieved?</h1>
-          <img src="../static/images/achievment/Button_official partner.png" style={{width:"100%",height:200}}></img>
-          <img src="../static/images/achievment/Button_entrepreneur winner.png" style={{height:200}}></img>
+          <h1>What we have achieved?</h1>
           </div>
         </div>
 
@@ -1363,7 +1361,7 @@ class Index extends React.Component {
             background-image:url('../static/images/Asset Web/content/Banner_Web.png');
             background-repeat: no-repeat;
             background-position: center;
-            background-size:cover;
+            background-size:100% 100%;
             margin-top:0px;
             
           }
@@ -1936,10 +1934,10 @@ class Index extends React.Component {
               display:none;
             }
 
-            .hero .right-container{
-              flex-basis:80%;
-              margin-left:10%;
-            }
+             .hero .right-container{
+               flex-basis:80%;
+               margin-left:10%;
+             }
 
             // .features .message{
             //   display:none;
@@ -2002,6 +2000,15 @@ class Index extends React.Component {
                 right: 0;
               }
 
+              .first-benefit .btn-primary-2{
+                font-size:89%;
+                padding:15px 15px 15px 15px;
+                text-align:center;
+                width:100%;
+                margin-left:2%;
+                margin-right:auto;
+              }
+
               .hero .money-input span{ 
                 font-size:12px;
               }
@@ -2011,8 +2018,8 @@ class Index extends React.Component {
               }
 
               .hero .right-container{
-                margin-left:-10%;
-                
+                margin-right:5%;
+                margin-left:0%;
               }
 
               .store img{
@@ -2021,13 +2028,15 @@ class Index extends React.Component {
 
 
               .testimonial-mobile{
-                background:url('../static/images/testimoni/background.png');
+                background:url('../static/images/achievment/lingkaran setengah.png'),url('../static/images/testimoni/background.png') no-repeat;
                 display: flex;
-                background-size:100% 100%;
+                background-size:100% 50px,100% 100%;
                 height:auto;
                 width:auto;
                 margin-top:0%;
                 z-index:1;
+                background-repeat: no-repeat;
+                background-position:  0px -30px,center;
               }
 
               .achievement-mobile h1{
@@ -2036,7 +2045,8 @@ class Index extends React.Component {
                  width:auto;
                 margin-top:30px;
                 text-shadow: 1px 1px 1px #000000;
-                display:none;
+                // display:none;
+                text-align:center;
               }
 
               .note{
@@ -2057,12 +2067,14 @@ class Index extends React.Component {
 
 
               .achievement-mobile{
-                  background:url('../static/images/achievment/Box_World Map.png');
-                  // padding:10px 10px 50px 0px;
-                  display: none;
+                  background:url('../static/images/achievment/Achievement-mobile.png') no-repeat;
+                  // // padding:10px 10px 50px 0px;
+                  display: block;
                   background-size:100% 100%;
-                  height:auto;
-                  width:auto;
+                  height:600px;
+                  
+                  // -webkit-filter: drop-shadow( -5px 5px 5px #000 );
+                  // filter: drop-shadow( -5px 5px 5px #000 );
                  
                 }
 
@@ -2206,6 +2218,8 @@ class Index extends React.Component {
                     background:url('../static/images/features/background-batik.png');
                     padding:10px 10px 80px 10px;
                     display:flex;
+                    margin-top:80px;
+                    
                    }
             
                    .fiture-mobile .images{
@@ -2275,7 +2289,7 @@ class Index extends React.Component {
                 background-size:100% 100%;
                 height:auto;
                 width:auto;
-                margin-top:-140px;
+                margin-top:-110px;
                 margin-left:-30px;
               
               }
@@ -2339,7 +2353,7 @@ class Index extends React.Component {
 
               .fiture-mobile .images .borobudur{
                 margin-top:13%;
-
+                z-index:1;
                
               }
 
@@ -2352,10 +2366,10 @@ class Index extends React.Component {
 
 
               .hero {
-                display: flex;
+                // display: flex;
                 flex-wrap: wrap;
                 flex-direction: row-reverse;
-                padding:0px 0px 180px 30px;
+                padding:0px 0px 180px 0px;
               }
 
               .hero .left-container{
@@ -2502,9 +2516,9 @@ class Index extends React.Component {
           .partner-item-mobile-small img{
             max-width:100%;
           }
-          .desktop{
-            display:none;
-          }
+          // .desktop{
+          //   display:none;
+          // }
           .left-container h1{
             display:none;
           }
