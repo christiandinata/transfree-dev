@@ -91,9 +91,11 @@ const Footer = () => (
       height:auto;
       // width : 1920px 0,36px 0px;
       // height : 1246px 0px 6346,42px
+      margin-top:0px;
     }
         .row3 {
           border-bottom: 1px solid #eaeaea;
+          // margin-top:-90px;
         }
         .container {
           display: flex;
@@ -111,14 +113,14 @@ const Footer = () => (
         }
         li {
           display: block;
-          margin: 16px 0px 6px;
+          // margin: 16px 0px 6px;
           color: #000000;
         }
 
         ul > li > a{
           list-style-type: none;
           display: block;
-          margin: 16px 0px 6px;
+          margin: 6px 0px 6px;
           color: #000000;
           font-size:16px;
           font-weight:800px;
@@ -133,7 +135,7 @@ const Footer = () => (
         .menu2  ul > li > a{
           list-style-type: none;
           display: block;
-          margin: 16px 0px -10px;
+          // margin: 16px 0px -10px;
           color: #000000;
           font-size:16px;
           font-weight:100px;
@@ -146,7 +148,7 @@ const Footer = () => (
           height: 25px;
         }
         .footer-item {
-          flex-basis: 35%;
+          flex-basis: 33%;
         }
         .footer-item-collab {
           flex-basis: 100%;
@@ -157,13 +159,13 @@ const Footer = () => (
           margin-top: 10px;
         }
         .menu2 {
-          padding-bottom: 60px;
-          padding-top: 20px;
+          padding-bottom: 15px;
+           padding-top: 10px;
           text-align:left;
           
         }
         .menu {
-          padding-top: 60px;
+          padding-top: 5px;
         }
         .copyright {
           color: #A6AEBB;
@@ -173,8 +175,18 @@ const Footer = () => (
           font-family: 'Campton-Book', sans-serif;
         }
         h3 {
+        margin-bottom:5px;
+        }
+
+        @media only screen and (max-width: 500px) {
+          .container{
+            flex-direction:column;
+            margin-left:3px;
+          }
+
         
         }
+
       `}</style>
   </div>
 )

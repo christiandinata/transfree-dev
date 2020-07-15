@@ -37,16 +37,11 @@ const Header = () => (
         font-weight: 900;
         color: #000000;
       }
-      a {
-        font-family: 'Campton-Bold', sans-serif;
-        color: #469DDD;
-        text-decoration: none;
-      }
+      
       button:hover {
         cursor: pointer;
       }
       .container {
-        width: 1124px;
         margin: 0 auto;
       }
       button:focus {
@@ -60,7 +55,7 @@ const Header = () => (
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 12px;
         border-radius: 4px;
         transition: all 0.2s ease-in-out;
         box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
@@ -150,7 +145,6 @@ const Header = () => (
         color: #000000;
         text-decoration: none;
         transition: 0.2s ease-in;
-        font-size: 25px;
         font-family: 'Campton-Bold', sans-serif;
         font-weight: bold;
       }
@@ -249,7 +243,6 @@ const Header = () => (
       .accordion__button:hover {
         background-color: #E0E4E8;
       }
-
       // Sign up
       .box-title{
         width: 625px;
@@ -369,6 +362,8 @@ const Header = () => (
         background-color: #eaeaea;
         border-radius: 2px;
       }
+
+   
       @media only screen and (max-width: 414px) {
         h1 {
           font-size: 18.5px;
