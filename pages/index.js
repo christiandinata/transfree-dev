@@ -712,7 +712,7 @@ class Index extends React.Component {
            <p style={{textAlign:"center"}}>Why we should to use Transfree?</p>
           <div className="fiture-mobile-benefit">
               <div className="first-benefit" style={{marginBottom:"5%"}}>
-              <button className="btn-primary-2" style={{fontSize:"80%",width:"70%",marginLeft:"13%",marginRight:"auto"}}>Better rate for transfer</button>
+              <button className="btn-primary-2">Better rate for transfer</button>
               <div className="first-message">
                 <h1 style={{textAlign:"center",fontSize:"15pt",marginTop:10}}>Better rate for transfer</h1>
                 <p style={{textAlign:"center"}}>Does your family need it for an emergency? And when you use a cheaper option,it sometimes takes longer for your money to arriveDon't worry, we are here now</p>
@@ -720,7 +720,7 @@ class Index extends React.Component {
               </div>
 
               <div className="first-benefit" style={{marginBottom:"5%"}} >
-              <button className="btn-primary-2" style={{fontSize:"80%",width:"70%",marginLeft:"13%",marginRight:"auto"}}>Quickly sent quickly arrived</button>
+              <button className="btn-primary-2">Quickly sent quickly arrived</button>
               <div className="first-message">
                 <h1 style={{textAlign:"center",fontSize:"15pt",marginTop:10}}>Quickly sent quickly arrived</h1>
                 <p style={{textAlign:"center"}}>Does your family need it for an emergency? And when you use a cheaper option,it sometimes takes longer for your money to arriveDon't worry, we are here now</p>
@@ -728,7 +728,7 @@ class Index extends React.Component {
               </div>
 
               <div className="first-benefit" style={{marginBottom:"5%"}}>
-              <button className="btn-primary-2" style={{fontSize:"80%",width:"70%",marginLeft:"13%",marginRight:"auto"}}>Unchargeable for Transfer</button>
+              <button className="btn-primary-2">Unchargeable for Transfer</button>
               <div className="first-message">
               <h1 style={{textAlign:"center",fontSize:"15pt",marginTop:10}}>Unchargeable for Transfer</h1>
                 <p style={{textAlign:"center"}}>Does your family need it for an emergency? And when you use a cheaper option,it sometimes takes longer for your money to arriveDon't worry, we are here now</p>
@@ -2002,6 +2002,15 @@ class Index extends React.Component {
                 right: 0;
               }
 
+              .first-benefit .btn-primary-2{
+                font-size:89%;
+                padding:15px 15px 15px 15px;
+                text-align:center;
+                width:100%;
+                margin-left:auto;
+                margin-right:auto;
+              }
+
               .hero .money-input span{ 
                 font-size:12px;
               }
@@ -2011,8 +2020,8 @@ class Index extends React.Component {
               }
 
               .hero .right-container{
-                margin-left:-10%;
-                
+                margin-right:5%;
+                margin-left:-5%;
               }
 
               .store img{
@@ -2206,6 +2215,8 @@ class Index extends React.Component {
                     background:url('../static/images/features/background-batik.png');
                     padding:10px 10px 80px 10px;
                     display:flex;
+                    margin-top:80px;
+                    
                    }
             
                    .fiture-mobile .images{
@@ -2275,7 +2286,7 @@ class Index extends React.Component {
                 background-size:100% 100%;
                 height:auto;
                 width:auto;
-                margin-top:-140px;
+                margin-top:-110px;
                 margin-left:-30px;
               
               }
