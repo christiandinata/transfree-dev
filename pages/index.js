@@ -314,7 +314,7 @@ class Index extends React.Component {
                       <div className="money-input">
                         <span >You send</span>
                         <NumberFormat
-                          style={{fontWeight:800,marginLeft:10}}
+                          style={{fontSize:"2vw",fontWeight:800,marginLeft:10}}
                           id="money-from"
                           type="text"
                           thousandSeparator={true}
@@ -537,7 +537,7 @@ class Index extends React.Component {
                       <div className="money-input">
                         <span>Recipient gets</span>
                         <NumberFormat
-                        style={{fontSize:25,fontWeight:800,marginLeft:10}}
+                        style={{fontSize:"2vw",fontWeight:800,marginLeft:10}}
                           id="money-to"
                           type="text"
                           thousandSeparator={true}
@@ -875,7 +875,7 @@ class Index extends React.Component {
         background-repeat: no-repeat;
         background-position: center;
         background-size:100% 100%;
-        margin-top: -20vh;
+        margin-top: -11vh;
         // height:1300px;
         padding:100px 0px 0px 0px;
         z-index:-99;
@@ -907,15 +907,15 @@ class Index extends React.Component {
       // }
 
       .hero .images{
-        display:flex;  
-        margin-top:-6vh;
-        margin-left:-4vh;
+        display:flex;
+        margin-top:5vh;
+        margin-left:-3vh;
         
       }
 
       .hero .images img{
          width:auto;
-         height:15vh;
+         height:14vh;
          margin:auto;
       }
 
