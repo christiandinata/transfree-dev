@@ -777,7 +777,7 @@ class Index extends React.Component {
           <div className="container">
             <div className="main-container">
                 <div className="left-container">
-                <img src="../static/images/ASSET/Mockup.png" style={{width:"80%",height:"100%",marginLeft:40}}></img>
+                <img src="../static/images/ASSET/Mockup.png"></img>
                 </div>
                 <div className="right-container">
                 <h1>Avaliable in</h1>
@@ -842,7 +842,7 @@ class Index extends React.Component {
                 </div>
           </div>
             <div className="message">
-                <p >It is very difficult to send money from IDR to GDP and Transfree come out with the best solution ever. First time I use
+                <p style={{marginTop:30}} >It is very difficult to send money </p> <p style={{marginTop:-10}}> from IDR to GDP  and Transfree come out with the best solution ever. First time I use
                   it when I was in Indonesia to pay for my flat deposit and rent. And now I'm still use Transfree to transfer money from the UK to Indonesia. It gives me a fair rate</p>
             </div>
             <a href="/testimoni" style={{textAlign:"center",color:"#000000",fontSize:"20pt"}}><p>More Testimonials</p></a> 
@@ -1093,12 +1093,13 @@ class Index extends React.Component {
       }
 
       .application .left-container img {
-        height:600px;
-        width:300px;
+        height:80%;
+        width:80%;
         margin-left:auto;
         margin-right:auto;
         
         text-align:center;
+        
         
         
       }
@@ -1120,20 +1121,29 @@ class Index extends React.Component {
           justify-content: center;
           align-items: center;
           margin-top:-100px;
-          height:auto;
+          // height:auto;
         }
 
         .application .right-container{
           justify-content:center;
           text-align:center;
-          margin-top:15%;
-          
+          // margin-top:15%;
+          // background:blue;
+          display:flex;
+          flex-direction:column;
+          padding: 0px;
          
         }
 
         .application .left-container{
           justify-content:center;
           text-align:center;
+          // background:blue;
+          flex-basis:50%;
+          height:auto;
+          padding:0px;
+          display:flex;
+          flex-direction:column;
         }
 
         
@@ -2020,6 +2030,7 @@ class Index extends React.Component {
               .hero .right-container{
                 margin-right:5%;
                 margin-left:0%;
+                margin-top:-20px;
               }
 
               .store img{
@@ -2086,45 +2097,29 @@ class Index extends React.Component {
                   background-position: center;
                   background-size:100% 100%;
                   width:auto;
-                  padding:80px 40px 80px 40px;
+                  padding:0px 10px 10px 10px;
                   text-align:center;
 
+                  font-size:13px;
                 }
 
-                .testimonial-mobile .p{
-                  letter-spacing: 2px
-                  text-align:center;
+                .testimonial-mobile .message .p{
+                  // letter-spacing: 232px
+                  // text-align:center;
+                  // font-size:04px;
                   
                 }
           
 
-              .main-container{
-                display:flex;
-                display: -moz-flex;
-                display: -o-flex;
-                display: -webkit-flex;
-              
-                justify-content: space-around;
-                padding:5px;
-              }
-        
-              .main-container .left-container{
-                height: 350px;
-                margin: 10px;
-                text-align:center:
-              }
-        
-              .main-container .right-container{                
-                height: 350px;
-                text-align:center;
-                align-items:center;
-                vertical-align: middle;
-               
-              
-              }
+             
 
               .application-mobile{
                 display:block;
+              }
+
+              .main-container .left-container img{
+                height:100%;
+                width:120%;
               }
 
               
@@ -2133,19 +2128,55 @@ class Index extends React.Component {
                 font-weight: 900;
                 color: #000000;
                 font-size:15px;
-                margin-top:90%;
+                // margin-top:90%;
                 text-shadow: 1px 1px 1px #000000;
               
                 
                 }
 
+                
+              .main-container{
+                display:flex;
+                display: -moz-flex;
+                display: -o-flex;
+                display: -webkit-flex;
+              
+                justify-content: space-around;
+                // padding:5px;
+                // background:grey;
+              }
+        
+              .main-container .left-container{
+                // height: 350px;
+                // margin: 10px;
+                text-align:center:
+               
+                // backgroud:red;
+              }
+        
+
               .main-container .right-container img{
-                width:80%;
-                height:100%;
-                float:center;
+                width:70%;
+                height:80%;
+                // background:red;
+              }
+
+              .main-container .right-container{
+                // background:blue;
+                display:flex;
+                justify-content:center;
+                flex-direction:column;
                 text-align:center;
+                align-items:center;
+                vertical-align: middle;
+                margin-left:5%;
+               
                
               }
+
+            
+              
+
 
               .application{
                 display:none;
@@ -2190,10 +2221,14 @@ class Index extends React.Component {
               }
 
 
-              .application .left-container,
-              .application .right-container{
-                flex-basis:50%
-              }
+              // .application .left-container,
+              // .application .right-container{
+              //   flex-basis:50%;
+              //   background:blue;
+
+              // }
+
+              
 
               .testimonial{
                 display:none;
@@ -2215,12 +2250,30 @@ class Index extends React.Component {
               }
 
                  .fiture-mobile{
-                    background:url('../static/images/features/background-batik.png');
+                    background:url('../static/images/features/Shadow indonesia.png'),url('../static/images/features/background-mobile.png');
                     padding:10px 10px 80px 10px;
                     display:flex;
-                    margin-top:80px;
+                    background-size:800px 500px,100% 100%;
+                    background-position:  -170px 25px,center;
+                    height:auto;
+                    width:auto;
+                    margin-top:-109px;
+                    margin-left:auto;
+                    margin-right:auto;
+                    // margin-left:-30px;
+                    background-repeat:no-repeat;
+                    // margin-top:80px;
                     
                    }
+
+                  //  .fiture-mobile{
+                  //   background-size:100% 100%;
+                  //   height:auto;
+                  //   width:auto;
+                  //   margin-top:-130px;
+                  //   margin-left:-30px;
+                  
+                  // }
             
                    .fiture-mobile .images{
                     margin-top:-105px;
@@ -2246,6 +2299,10 @@ class Index extends React.Component {
                 .fiture-mobile-benefit{
                   display:flex;
                   flex-direction: column;
+                }
+
+                .fiture-mobile-benefit .btn-primary-2{
+                  font-size:20px;
                 }
 
                 .first-message{
@@ -2285,14 +2342,7 @@ class Index extends React.Component {
                 display:none;
               }
 
-              .fiture-mobile{
-                background-size:100% 100%;
-                height:auto;
-                width:auto;
-                margin-top:-110px;
-                margin-left:-30px;
-              
-              }
+            
 
               .fiture-mobile .btn-primary-start{
                 width:30%;
@@ -2330,8 +2380,8 @@ class Index extends React.Component {
               }
 
               .fiture-mobile .images .monas  { 
-                margin-top:25%;
-                margin-left:9%;
+                margin-top:28%;
+                
                 transform: rotate(-10deg);
               }
               
@@ -2347,7 +2397,7 @@ class Index extends React.Component {
               }
 
               .fiture-mobile .images .rumah{
-                margin-top:-7%;
+                margin-top:-6%;
                 
               }
 
