@@ -314,7 +314,7 @@ class Index extends React.Component {
                       <div className="money-input">
                         <span >You send</span>
                         <NumberFormat
-                          style={{fontWeight:800,marginLeft:10}}
+                          style={{fontSize:"2vw",fontWeight:800,marginLeft:10}}
                           id="money-from"
                           type="text"
                           thousandSeparator={true}
@@ -537,7 +537,7 @@ class Index extends React.Component {
                       <div className="money-input">
                         <span>Recipient gets</span>
                         <NumberFormat
-                        style={{fontSize:25,fontWeight:800,marginLeft:10}}
+                        style={{fontSize:"2vw",fontWeight:800,marginLeft:10}}
                           id="money-to"
                           type="text"
                           thousandSeparator={true}
@@ -656,24 +656,24 @@ class Index extends React.Component {
 
               <div className="benefit">
                   {/* <div className="column"> */}
-                    <div className ="btn-primary-start">
-                    <img src="../static/images/features/money.png" style={{width:100}}></img>
-                    <h1>Better rate for Transfree</h1>
-                    </div>
+                  <div className ="btn-primary-start">
+                <img src="../static/images/features/money.png" style={{width:"8vw",height:"auto", paddingBottom:"2vh"}}></img>
+                      <h1>Better rate for Transfree</h1>
+                  </div>
                 {/* </div> */}
                 <div className ="btn-primary-start">
                   <img src="../static/images/features/time.png" style={{float:"center",position:"center"}}></img>
                     <h1>Quickly sent quickly arrived</h1>
                 </div>
                 <div className ="btn-primary-start">
-                  <img src="../static/images/features/search.png" style={{float:"center",position:"center"}}></img>
+                  <img src="../static/images/features/search.png" style={{float:"center",position:"center", paddingBottom:"1vh"}}></img>
                     <h1>Unchargeable for Transfer</h1>
                 </div>
                     {/* </div> */}
                 
                 </div>
 
-                <div className="message">
+                <div className="message" style={{fontSize:"1.6vw"}}>
                       <h3 style={{color:"#000000",textAlign:"center"}}>Does your family need it for an emergency? And when you use</h3>
                       <h3 style={{color:"#000000", textAlign:"center",marginTop:-20}}>a cheaper option, it sometimes takes longer for your money to arrive</h3>
                       <h3 style={{color:"#000000",textAlign:"center",marginTop:-20}}>Don't worry, we are here now</h3>
@@ -735,15 +735,8 @@ class Index extends React.Component {
               </div>
               </div>
           </div>
-         
-
-
-           </div>
+          </div>
         </div> 
-
-        
-     
-     
 
         <div className="row application">
           <div className="container">
@@ -752,7 +745,7 @@ class Index extends React.Component {
           </div>
 
           <div className="right-container">
-              <h1>Mobile Application now in</h1>
+              <h1 style={{fontSize:"3vw"}}>Mobile Application now in</h1>
 
           <div >
 {/* 
@@ -796,21 +789,17 @@ class Index extends React.Component {
 
         </div>
 
-
-
         <div className="row achievement">
             <div className="container">
-            <h1 style={{textAlign:"center",marginLeft:"25%"}}>What we have achieved?</h1>
+            <h1 style={{textAlign:"center",margin:"auto",fontSize:"6vh",paddingTop:"4vh"}}>What we have achieved?</h1>
             </div>
         </div>
-
 
         <div className="row achievement-mobile">
           <div className="container">
           <h1>What we have achieved?</h1>
           </div>
         </div>
-
 
         <div className="row testimonial">
           <div className="container">
@@ -875,7 +864,7 @@ class Index extends React.Component {
         background-repeat: no-repeat;
         background-position: center;
         background-size:100% 100%;
-        margin-top:-45px;
+        margin-top: -11vh;
         // height:1300px;
         padding:100px 0px 0px 0px;
         z-index:-99;
@@ -885,10 +874,12 @@ class Index extends React.Component {
        .features .container{
          display:flex;
          flex-direction: column;
-         
        }
 
-    
+       .features .container .benefit{
+         width:85vw;
+         margin:auto;
+       }
 
      .fiture-mobile {
        display:none;
@@ -907,14 +898,15 @@ class Index extends React.Component {
       // }
 
       .hero .images{
-        display:flex;  
-        margin-top:79px;
+        display:flex;
+        margin-top:5vh;
+        margin-left:-3vh;
         
       }
 
       .hero .images img{
-         width:70px;
-         height:70px;
+         width:auto;
+         height:14vh;
          margin:auto;
       }
 
@@ -1067,12 +1059,12 @@ class Index extends React.Component {
 
 
        .benefit img{
-         width:90px;
-         height:90px;
+         width:7vw;
+         height:auto;
        }
 
        .benefit h1{
-         font-size:25px;
+         font-size:2.8vw;
        }
     
        .benefit .btn-primary-start{
@@ -1093,8 +1085,8 @@ class Index extends React.Component {
       }
 
       .application .left-container img {
-        height:600px;
-        width:300px;
+        height:auto;
+        width:23vw;
         margin-left:auto;
         margin-right:auto;
         
@@ -1104,7 +1096,7 @@ class Index extends React.Component {
       }
 
       .application .right-container img{
-        width:50%;
+        width:17vw;
        
       }
 
@@ -1143,8 +1135,6 @@ class Index extends React.Component {
         font-weight: 900;
         color: #000000;
         text-shadow: 1px 1px 1px #000000;
-       
-        
         }
 
         .achievement{
