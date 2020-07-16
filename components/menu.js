@@ -4,16 +4,14 @@ import authActions from '../redux/actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 
-const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
+const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
   <div className="row">
     <div className="container">
       <div id="menuToggle">
         <div className="main-cta">
-        {/* {(isAuthenticated && (<Link href="/"><a><img src="../static/images/transfree-logo.png" style={{width:10}}/></a></Link>)) ||
-             (<Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>)} */}
-          <img style={{width:"40%",marginLeft:"20%",marginRight:"10%",height:"30%",textAlign:"center"}} src="../static/images/transfree-logo.png"></img>
-          {!isAuthenticated && <Link href="/login"><a style={{marginTop:-10}} className="btn-secondary">Log in</a></Link>}
-          {/* {isAuthenticated && <li><Link href="/logout"><a>Logout</a></Link></li>} */}
+          <a href="/" ><img style={{height:"30px"}} src="../static/images/transfree-logo.png"/></a>
+          {!isAuthenticated && <Link href="/login"><a className="btn-secondary">Log in</a></Link>}
+          {isAuthenticated && <li><a href="/profile"><img className="profile-pic" src="../static/images/navbar/profile.png"/></a></li>}
         </div>
         <input type="checkbox" />
 
@@ -25,11 +23,9 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           {!isAuthenticated && <li><Link href="/about"><a>How it works</a></Link></li>}
           {!isAuthenticated && <li><Link href="/faq"><a>About Us</a></Link></li>}
 
-          {/* !isAuthenticated && <li><Link href="/"><a>How it works</a></Link></li> */}
-          {isAuthenticated && isApproved && <li><Link href="/order"><a>Send money</a></Link></li>}
+          {isAuthenticated && isApproved && <li><Link href="/order"><a>Send Money</a></Link></li>}
           {isAuthenticated && isApproved && <li><Link href="/account"><a>Transactions</a></Link></li>}
           <hr/>
-          {/* {!isAuthenticated && <li><Link href="/login"><a className="btn-secondary-login" >Log in</a></Link></li>} */}
           {!isAuthenticated && <li><Link href="/signup"><a className="btn-secondary-login">Signup</a></Link></li>}
           {isAuthenticated && <li><Link href="/profile"><a className="btn-secondary-login">Profile</a></Link></li>}
           {isAuthenticated && <li><Link href="/logout"><a className="btn-secondary-login">Logout</a></Link></li>}
@@ -37,30 +33,37 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
       </div>
       <div className="header-container">
         <div className="logo">
-            {(isAuthenticated && (<Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>)) ||
-             (<Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>)}
+            {(!isAuthenticated && (<Link href="/"><a><img style={{height:"30px"}} src="../static/images/transfree-logo.png"/></a></Link>))}
         </div>
-        <div className="header-menu">
+        <div className="authorized-menu">
           <ul>
-            {!isAuthenticated && <li><Link href="/about"><a>How it works</a></Link></li>}
-            {!isAuthenticated && <li><Link href="/faq"><a>About Us</a></Link></li>}
-
-            {/* !isAuthenticated && <li><Link href="/"><a>How it works</a></Link></li> */}
-            {isAuthenticated && <li><Link href="/order"><a>Send money</a></Link></li>}
+            {isAuthenticated && <li><Link href="/order"><a>Send Money</a></Link></li>}
             {isAuthenticated && <li><Link href="/account"><a>Transactions</a></Link></li>}
           </ul>
         </div>
+        <div className="unauthorized-menu">
+          <ul>
+            {!isAuthenticated && <li><Link href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank"><a>How it works</a></Link></li>}
+            {!isAuthenticated && <li><Link href="/about"><a>About Us</a></Link></li>}
+          </ul>
+        </div>
         <div className="header-cta">
-          {!isAuthenticated && <Link href="/login"><a className="btn-secondary">Log in</a></Link>}
-          {!isAuthenticated && <Link href="/signup"><a className="btn-primary">Sign up</a></Link>}
+          {!isAuthenticated && <Link href="/login"><a id="login" className="btn-primary">Login</a></Link>}
+          {!isAuthenticated && <Link href="/signup"><a id="signup" className="btn-primary">Sign Up</a></Link>}
 
-          {isAuthenticated && <li><Link href="/profile"><a>Profile</a></Link></li>}
-          {isAuthenticated && <li><Link href="/logout"><a>Logout</a></Link></li>}
-          
+          {isAuthenticated && <li><Link href="/profile"><a id="profile">{username}</a></Link></li>}
+          {isAuthenticated && <li><a href="/profile"><img className="profile-pic" src="../static/images/navbar/profile.png"/></a></li>}
+
         </div>
       </div>
     </div>
     <style jsx>{`
+        .btn-secondary {
+          font-size: 12px;
+          width: fit-content;
+          margin-left: 8%;
+        }
+        
         .btn-secondary-login {
           background: transparent;
           border: 2px solid #FFFFFF;
@@ -74,17 +77,16 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           margin-left:10px;
         }
         .row {
-          border-bottom: 1px solid #eaeaea;
-          
+          border-bottom: 1px solid #FFFFFF;
         }
         .header-container {
           display: flex;
           justify-content: center;
           align-items: center;
-          height: 75px;
+          height: 45px;
+          padding: 0 2.5%;
           background-color: #FFFFFF;
-         
-          
+          box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.5);
         }
         .logo {
           display: flex;
@@ -94,33 +96,81 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
         .logo img {
           height: 37px;
         }
-        .header-menu {
-          display: flex;
-          flex-grow: 1;
+        .unauthorized-menu {
           justify-content: flex-end;
-          border: 1px #707070;
-          
+        }
+        
+        .authorized-menu {
+          display: flex;
+          justify-content: center;
+          flex-grow: 10;
+        }
+        .profile-pic {
+          height: 50px;
+          vertical-align: middle;
         }
         .header-cta {
-          display: flex;
-         
+          justify-content: flex-end;
         }
         .btn-primary {
           width: auto;
           padding: 10px 20px;
         }
+        
+        #login {
+          background-color: #FAAF40;
+          border-color: #FAAF40;
+          font-weight: bold;
+        }
+        
+        #signup {
+          background-color: #5BB7DE;
+          border-color: #5BB7DE;
+          font-weight: bold;
+        }
+        
+        #profile {
+          color: black;
+          text-decoration: none;
+        }
+        
         ul {
           list-style-type: none;
           margin: 0;
           padding: 0;
         }
-        li {
+        .authorized-menu li {
+          margin: 0 40px;
           display: inline;
-          margin: 0 20px;
-          
         }
+        
+        .unauthorized-menu li {
+          margin: 0 20px;
+          display: inline;
+        }
+        
+        .authorized-menu li a {
+          font-family: sans;
+          color: black !important;
+          text-decoration: none;
+          font-size: 1.3rem;
+          font-weight: bold;
+          vertical-align: middle;
+        }      
+          
+        .unauthorized-menu li a {
+          font-family: sans;
+          color: black !important;
+          text-decoration: none;
+        }
+        
         .header-cta a {
           margin: 0 5px;
+          color: white;
+        }
+        
+        .header-cta li {
+           display: inline;
         }
         hr {
           border: 1px solid #eaeaea;
@@ -130,10 +180,12 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
         {
           display: none;
           position: relative;
-          top: 10px;
           left: 50px;
           z-index: 100;
-         
+          height: 55px;
+          margin-left: 2%;
+          margin-top: 2.5%;
+          
           -webkit-user-select: none;
           user-select: none;
         }
@@ -146,7 +198,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           top: -7px;
           left: -5px;
           cursor: pointer;
-           
+          
           opacity: 0; /* hide this */
           z-index: 2; /* and place it over the hamburger */
           -webkit-touch-callout: none;
@@ -157,8 +209,8 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
         #menuToggle span
         {
           display: block;
-          width: 33px;
-          height: 4px;
+          width: 40px;
+          height: 20%;
           margin-bottom: 4px;
           
           position: relative;
@@ -185,7 +237,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
         #menuToggle input:checked ~ span
         {
           opacity: 1;
-          transform: rotate(45deg) translate(-2px, -1px);
+          transform: rotate(45deg) translate(4px, 6px);
           background: #232323;
         }
         /*
@@ -242,13 +294,13 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           position: absolute;
           right: 0;
           display:flex;
-        }
-        #menuToggle {
-          padding-bottom: 15px;
-          border-bottom: 1px solid #eaeaea;
+          padding-right: 5%;
+          list-style: none;
+          width: 100%;
+          justify-content: flex-end;
         }
         // MENU End
-        @media only screen and (max-width: 414px) {
+        @media only screen and (max-width: 700px) {
           #menuToggle {
             display: block;
           }
@@ -257,9 +309,12 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
           }
           li {
             display; block;
-           
-            
           }
+          
+          .profile-pic {
+            height: 40px;
+          }
+          
           ul > li > a {
             color:#FFFFFF;
             text-decoration: none;
@@ -268,7 +323,6 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
             font-family: 'Campton-Bold', sans-serif;
             
           }
-           
           #menu {
             height: 100vh;
             width: 100%;
@@ -279,8 +333,11 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
             border: none;
           }
           #menuToggle {
-            top: 5px;
             left: 0;
+          }
+          
+          #menuToggle .main-cta li {
+            margin-left: 12%;
           }
         }
       `}</style>
@@ -290,7 +347,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate}) => (
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: !!state.authentication.token,
-
+    username: state.user.user_data ? state.user.user_data.fullname : ""
   }
 }
 
