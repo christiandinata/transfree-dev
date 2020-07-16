@@ -2254,7 +2254,7 @@ class Index extends React.Component {
                     padding:10px 10px 80px 10px;
                     display:flex;
                     background-size:800px 500px,100% 100%;
-                    background-position:  -170px 25px,center;
+                    background-position:  -160px 30px,center;
                     height:auto;
                     width:auto;
                     margin-top:-109px;
