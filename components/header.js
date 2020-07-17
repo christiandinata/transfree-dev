@@ -240,46 +240,66 @@ const Header = () => (
       .accordion__button:focus {
         outline: none;
       }
-      .accordion__button:hover {
-        background-color: #E0E4E8;
-      }
-      // Sign up
       .box-title{
-        width: 625px;
-        height:30px;
-        padding:30px;
-        background-color: #FAAF40;
-        border-radius:8px;
-        align-items: center;
-        justify-content: center;
+        width: 330px;
+        padding:5px 5px 5px 5px;
         display:flex;
-        
+        justify-content:center;
+        border-radius:8px 8px 8px 8px;
+        background:#FAAF40;
       }
       .box-title h1{
-        font-weight:900px;
         color:#FFFFFF;
-        font-size:50px;
       }
+
+      //show and hide password
+      .pass-wrapper {
+        position: relative;
+        display: flex;
+        // margin-bottom: 14px;
+      }
+      
+      i {
+        position: absolute;
+        top: 10%;
+        right: 6%;
+        width:30px;
+      }
+
+      i:hover {
+        color: #FAAF40;
+        cursor: pointer;
+      }
+
       .form-container {
-        width: 500px;
+        width: 320px;
         height: auto;
-        padding: 0px 90px 70px 90px;
+        padding: 0px 90px 30px 90px;
         background: #FFFFFF;
-        border : 2px solid grey;
+        border:2px solid grey;
         box-shadow: 0 10px 30px 0 rgba(0,0,0,0.10);
-        border-radius: 8px;
-        border-top-style: none;
+        border-radius: 0px 0px 32px 32px;
+        border-top:none;
       }
       .form-container label {
         font-size: 14px;
         text-transform: uppercase;
       }
+      .rectangle {
+        width:580px;
+        height:90px;
+        background:#FAAF40;
+        border-radius: 8px;
+        text-align:center;
+        z-index:5;
+    }
+
       .form-container input,
        .form-container textarea {
          width: 100%;
-         margin-bottom: 30px;
+         margin-bottom: 15px;
          border: none;
-         font-size: 23px;
+         font-size: 20px;
          padding: 15px 0;
          border-bottom: 1px solid #eaeaea;
          font-family: "Campton-Book", sans-serif;
@@ -296,6 +316,13 @@ const Header = () => (
         width: 100%;
         padding: 15px 0;
         margin: 19px 1px;
+      }
+
+      .form-container .btn-primary {
+        width: 100%;
+        padding: 15px 0;
+         margin: 0px;
+         border-radius:16px 16px;
       }
       .right p {
         margin: 30px 0;
