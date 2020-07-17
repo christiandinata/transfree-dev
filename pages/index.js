@@ -41,7 +41,7 @@ class Index extends React.Component {
   }
   static async getInitialProps(ctx) {
     initialize(ctx);
-    await ctx.store.dispatch(actions.getAdjustedRates('IDR','getAdjustedRates'));
+    await ctx.store.dispatch(actions.getAdjustedRates('IDR', 'GBP', 'getAdjustedRates'));
     await ctx.store.dispatch(actions.getRates('GBP','IDR'));
   };
 
@@ -735,15 +735,8 @@ class Index extends React.Component {
               </div>
               </div>
           </div>
-         
-
-
-           </div>
+          </div>
         </div> 
-
-        
-     
-     
 
         <div className="row application">
           <div className="container">
@@ -753,6 +746,7 @@ class Index extends React.Component {
 
           <div className="right-container">
               <h1 style={{fontSize:"2.2vw"}}>Mobile Application now in</h1>
+
 
           <div >
 
@@ -796,21 +790,17 @@ class Index extends React.Component {
 
         </div>
 
-
-
         <div className="row achievement">
             <div className="container">
             <h1 style={{textAlign:"center",margin:"auto",fontSize:"6vh",paddingTop:"4vh"}}>What we have achieved?</h1>
             </div>
         </div>
 
-
         <div className="row achievement-mobile">
           <div className="container">
           <h1>What we have achieved?</h1>
           </div>
         </div>
-
 
         <div className="row testimonial">
           <div className="container">
@@ -885,7 +875,6 @@ class Index extends React.Component {
        .features .container{
          display:flex;
          flex-direction: column;
-         
        }
 
        .features .container .benefit{
@@ -893,7 +882,6 @@ class Index extends React.Component {
         margin:auto;
       }
 
-    
 
      .fiture-mobile {
        display:none;
@@ -914,6 +902,7 @@ class Index extends React.Component {
       .hero .images{
         display:flex;  
         margin-top:3.3vh;
+        display:flex;
         margin-left:-3vh;
         
       }
@@ -1079,7 +1068,11 @@ class Index extends React.Component {
 
        .benefit h1{
         font-size:2.8vw;
+         width:7vw;
+         height:auto;
        }
+
+      
     
        .benefit .btn-primary-start{
          padding:10px 10px 30px 10px;
@@ -1159,8 +1152,6 @@ class Index extends React.Component {
         font-weight: 900;
         color: #000000;
         text-shadow: 1px 1px 1px #000000;
-       
-        
         }
 
         .achievement{
@@ -1466,7 +1457,7 @@ class Index extends React.Component {
           .money-input-container {
             display: flex;
             background-color: #FFFFFF;
-            border-radius:15px;
+            border-radius: 4px;
           }
 
           .money-input {
