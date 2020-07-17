@@ -16,7 +16,7 @@ import {
   RESET_PASSWORD_ERROR
 } from '../types';
 import { API } from '../../config';
-import { setCookie, removeCookie } from '../../utils/cookie';
+import { setCookie, removeCookie,getCookie } from '../../utils/cookie';
 
 // register user
 const register = ({ fullname, email, password }, type) => {
@@ -169,8 +169,6 @@ export const resetPassword = ({ newPassword, verifyPassword, token }, type) => {
       .catch((error) => {
         const errorMessage = error.response.data.message;
         dispatch({type: RESET_PASSWORD_ERROR, payload: errorMessage});
-
-
       });
   };
 };

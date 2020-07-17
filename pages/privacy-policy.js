@@ -86,7 +86,7 @@ const Terms = () => (
         <p className="paragraph">This Privacy Policy was last updated on: Monday, August 5th, 2019.
         Should we update, amend or make any changes to our privacy policy, those changes will be posted here.</p>
 
-      </div>>
+      </div>
     </div>
     <style jsx>{`
       .row {

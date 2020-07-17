@@ -4,8 +4,10 @@ import {
   GENERATE_VA_NUMBER
 } from '../types';
 import { API } from '../../config';
+import { getCookie } from '../../utils/cookie';
 
-const generateVA = (merchantId, merchantRefCode, secretWord, custName, custEmail, totalAmount) => {
+
+const generateVA = (merchantId, merchantRefCode, secretWord, custName, custEmail, totalAmount,req) => {
   return (dispatch) => {
     axios.post(`${API}/generateVA`, {
       'merchantId': merchantId,
@@ -14,6 +16,10 @@ const generateVA = (merchantId, merchantRefCode, secretWord, custName, custEmail
       'custName': custName,
       'custEmail': custEmail,
       'totalAmount': totalAmount
+    }, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
     }).then((response) => {
         //console.log(response);
         if(response.status == 200) {

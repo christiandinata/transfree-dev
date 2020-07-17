@@ -463,9 +463,9 @@ class Orders extends React.Component {
 
       showPopUp : false,
       showPopUpPaidOut : false,
-      popUpOrder : null
+      popUpOrder : null,
 
-
+      searchQuery : ''
     }
 
     this.checkPayment = this.checkPayment.bind(this);
@@ -485,11 +485,14 @@ class Orders extends React.Component {
     this.togglePopUpPaidOut = this.togglePopUpPaidOut.bind(this);
     this.cancelOrder = this.cancelOrder.bind(this);
     this.reOpenOrder = this.reOpenOrder.bind(this);
+
+    this.handleSearchEnter = this.handleSearchEnter.bind(this);
+    this.handleSearchQuery = this.handleSearchQuery.bind(this);
   }
 
   static async getInitialProps(ctx) {
     initialize(ctx);
-    await ctx.store.dispatch(actions.getAllOrders(1,'getAllOrders'));
+    await ctx.store.dispatch(actions.getAllOrders(1,'getAllOrders',ctx.req));
   };
 
   checkPayment(_id) {
@@ -569,8 +572,22 @@ class Orders extends React.Component {
 
   }
 
+  handleSearchEnter(event){
+    let {activePage, searchQuery} = this.state;
+
+    if(event.key == 'Enter'){
+      this.props.getOrderByQuery(activePage, searchQuery, 'getOrderByQuery');
+    }
+  }
+
+  handleSearchQuery(event){
+    this.setState({
+      searchQuery : event.target.value
+    })
+  }
+
   render() {
-    const {showPopUp, showPopUpPaidOut, popUpOrder} = this.state;
+    const {showPopUp, showPopUpPaidOut, popUpOrder, searchQuery} = this.state;
     
     return (
       <div>
@@ -587,7 +604,7 @@ class Orders extends React.Component {
                 {/* </h2>    */}
               </div>
               <div className="right">
-                <input type="text" className="search" placeholder="Search user"/>
+                <input type="text" className="search" onKeyPress={this.handleSearchEnter} onChange={this.handleSearchQuery} value={searchQuery} placeholder="Search user"/>
               </div>
             </div>
             { this.props.inProgress ? (
@@ -601,7 +618,16 @@ class Orders extends React.Component {
               <form className="form-container">
                 {showPopUpPaidOut ? <PopUpPaidOut text='Set Paid Out' changePaidOutRate={this.changePaidOutRate} order={popUpOrder} closePopUpPaidOut={this.togglePopUpPaidOut} /> : null}
                 {showPopUp ? <PopUp text='Transaction Details' order={popUpOrder} closePopUp={this.togglePopUp} /> : null}
-                <OrderItem orders={this.props.orders} reOpenOrder={this.reOpenOrder} cancelOrder={this.cancelOrder} getDetail={this.getDetail} togglePopUpPaidOut={this.togglePopUpPaidOut} checkPayment={this.checkPayment} paymentReceived={this.paymentReceived} transferCompleted={this.transferCompleted}/>
+                <OrderItem 
+                  orders={this.props.orders} 
+                  reOpenOrder={this.reOpenOrder} 
+                  cancelOrder={this.cancelOrder} 
+                  getDetail={this.getDetail} 
+                  togglePopUpPaidOut={this.togglePopUpPaidOut} 
+                  checkPayment={this.checkPayment} 
+                  paymentReceived={this.paymentReceived} 
+                  transferCompleted={this.transferCompleted}
+                />
                 <div className="pagination-container">
                   <Pagination
                     activePage={this.state.activePage}
