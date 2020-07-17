@@ -1067,9 +1067,10 @@ class Index extends React.Component {
        }
 
        .benefit h1{
-        font-size:2.8vw;
-         width:7vw;
+         font-size:2.8vw;
+        //  width:7vw;
          height:auto;
+         text-align:center;
        }
 
       
@@ -1457,7 +1458,7 @@ class Index extends React.Component {
           .money-input-container {
             display: flex;
             background-color: #FFFFFF;
-            border-radius: 4px;
+            border-radius: 15px;
           }
 
           .money-input {
