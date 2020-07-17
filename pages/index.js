@@ -868,9 +868,9 @@ class Index extends React.Component {
        .features{
         background:url('../static/images/features/background-batik.png');
         background-repeat: no-repeat;
-        background-position: center;
-        background-size:100% 100%;
-        margin-top: -60px;
+        background-position: top;
+        background-size:100%;
+        margin-top: -5.8vw;
         // height:1300px;
         // padding:100px 0px 0px 0px;
         z-index:-99;
@@ -907,14 +907,15 @@ class Index extends React.Component {
      }
 
       .features .container-image .images{ 
-         margin-top:-60px;
+        margin-top:-4.18vw;
         display:flex;
-        // margin-left:-3vh;
-        flex-basis:60%;
+        margin-left:-1vw;
+        flex-basis:65%;
       }
 
       .features .images img{
-        height:40%;
+        height:6vw;
+        width:auto;
          margin:auto;
          max-width: 100%;
       }
