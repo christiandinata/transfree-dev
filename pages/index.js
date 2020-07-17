@@ -686,19 +686,19 @@ class Index extends React.Component {
           <div className="container">
           <div className="images">
                   <div className="monas">
-                      <img src="../static/images/features/monas.png" style={{marginTop:-6}} alt="monas" name="monas" id="monas" ></img>
+                      <img src="../static/images/features/monas.png" style={{marginTop:8}} alt="monas" name="monas" id="monas" ></img>
                   </div>
-                  <div className="rumah" style={{marginLeft:"10%"}}>
-                  <img src="../static/images/features/rumah.png"  alt="rumah"  id="rumah"  style={{marginTop:58}}></img>
+                  <div className="rumah" style={{marginLeft:"9%"}}>
+                  <img src="../static/images/features/rumah.png"  alt="rumah"  id="rumah"  style={{marginTop:55}}></img>
                   </div>
-                  <div className="bali" style={{marginLeft:"10%"}}>
-                  <img src="../static/images/features/bali.png" alt="bali" ></img>
+                  <div className="bali" style={{marginLeft:"18%"}}>
+                  <img src="../static/images/features/bali.png" alt="bali"></img>
                   </div>
-                  <div className="surabaya" style={{marginLeft:"10%"}}>
-                  <img src="../static/images/features/surabaya.png" alt="surabaya" style={{marginTop:9}}></img>
+                  <div className="surabaya" style={{marginLeft:"18%"}}>
+                  <img src="../static/images/features/surabaya.png" alt="surabaya" style={{marginTop:4}}></img>
                   </div>
-                  <div className="borobudur" style={{marginLeft:"10%"}}>
-                  <img src="../static/images/features/borobudur.png"  alt="borobudur" style={{marginTop:30}}  ></img>
+                  <div className="borobudur" style={{marginLeft:"18%"}}>
+                  <img src="../static/images/features/borobudur.png"  alt="borobudur" style={{marginTop:32}}  ></img>
                   </div>
           </div>
            <div className="fiture-mobile-message">
@@ -2372,13 +2372,26 @@ class Index extends React.Component {
 
               .fiture-mobile .images .monas  { 
                 margin-top:28%;
+                height:90px;
+                margin-left:2%;
+                transform: rotate(-9deg);
+              }
+
+              .fiture-mobile .images .monas img { 
+                // margin-top:28%;
+                width:30px;
                 
-                transform: rotate(-10deg);
+                // transform: rotate(-7deg);
               }
               
               .fiture-mobile .images .bali{
-                margin-top:7%;
+                margin-top:8%;
                 transform: rotate(2deg);
+                margin-left:3%;
+              }
+
+              .fiture-mobile .images .bali img{
+                width:30px;
               }
 
               .fiture-mobile .images .surabaya{
@@ -2387,8 +2400,14 @@ class Index extends React.Component {
                 transform: rotate(10deg);
               }
 
+              .fiture-mobile .images .surabaya img{
+                height:60px;
+                width:40px;
+              }
+
               .fiture-mobile .images .rumah{
-                margin-top:-6%;
+                margin-top:-5%;
+                transform: rotate(-5deg);
                 
               }
 
