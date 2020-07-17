@@ -283,19 +283,19 @@ class Index extends React.Component {
               </div> */}
               <div className="images">
                   <div className="monas">
-                      <img src="../static/images/features/monas.png" style={{marginTop:78}}  alt="monas" name="monas" id="monas" ></img>
+                      <img src="../static/images/features/monas.png" style={{marginTop:85}}  alt="monas" name="monas" id="monas" ></img>
                   </div>
                   <div className="rumah" style={{marginLeft:"10%"}}>
-                  <img src="../static/images/features/rumah.png"  alt="rumah"  id="rumah"  style={{marginTop:58}}></img>
+                  <img src="../static/images/features/rumah.png"  alt="rumah"  id="rumah"  style={{marginTop:68}}></img>
                   </div>
                   <div className="bali" style={{marginLeft:"12%"}}>
-                  <img src="../static/images/features/bali.png" alt="bali" style={{marginTop:48}}></img>
+                  <img src="../static/images/features/bali.png" alt="bali" style={{marginTop:53}}></img>
                   </div>
                   <div className="surabaya" style={{marginLeft:"12%"}}>
-                  <img src="../static/images/features/surabaya.png" alt="surabaya" style={{marginTop:43}}></img>
+                  <img src="../static/images/features/surabaya.png" alt="surabaya" style={{marginTop:48}}></img>
                   </div>
                   <div className="borobudur" style={{marginLeft:"12%"}}>
-                  <img src="../static/images/features/borobudur.png"  alt="borobudur" style={{marginTop:42}}  ></img>
+                  <img src="../static/images/features/borobudur.png"  alt="borobudur" style={{marginTop:44}}  ></img>
                   </div>
           </div>
             </div>
@@ -314,7 +314,7 @@ class Index extends React.Component {
                       <div className="money-input">
                         <span >You send</span>
                         <NumberFormat
-                          style={{fontWeight:800,marginLeft:10}}
+                          style={{fontSize:"20px",fontWeight:800,marginLeft:10}}
                           id="money-from"
                           type="text"
                           thousandSeparator={true}
@@ -537,7 +537,7 @@ class Index extends React.Component {
                       <div className="money-input">
                         <span>Recipient gets</span>
                         <NumberFormat
-                        style={{fontSize:25,fontWeight:800,marginLeft:10}}
+                        style={{fontSize:"20px",fontWeight:800,marginLeft:10}}
                           id="money-to"
                           type="text"
                           thousandSeparator={true}
@@ -657,7 +657,7 @@ class Index extends React.Component {
               <div className="benefit">
                   {/* <div className="column"> */}
                     <div className ="btn-primary-start">
-                    <img src="../static/images/features/money.png" style={{width:100}}></img>
+                    <img src="../static/images/features/money.png" style={{width:"8vw",height:"auto", paddingBottom:"2vh"}}></img>
                     <h1>Better rate for Transfree</h1>
                     </div>
                 {/* </div> */}
@@ -666,14 +666,14 @@ class Index extends React.Component {
                     <h1>Quickly sent quickly arrived</h1>
                 </div>
                 <div className ="btn-primary-start">
-                  <img src="../static/images/features/search.png" style={{float:"center",position:"center"}}></img>
+                  <img src="../static/images/features/search.png" style={{float:"center",position:"center", paddingBottom:"1vh"}}></img>
                     <h1>Unchargeable for Transfer</h1>
                 </div>
                     {/* </div> */}
                 
                 </div>
 
-                <div className="message">
+                <div className="message" style={{fontSize:"1.6vw"}}>
                       <h3 style={{color:"#000000",textAlign:"center"}}>Does your family need it for an emergency? And when you use</h3>
                       <h3 style={{color:"#000000", textAlign:"center",marginTop:-20}}>a cheaper option, it sometimes takes longer for your money to arrive</h3>
                       <h3 style={{color:"#000000",textAlign:"center",marginTop:-20}}>Don't worry, we are here now</h3>
@@ -714,7 +714,7 @@ class Index extends React.Component {
               <div className="first-benefit" style={{marginBottom:"5%"}}>
               <button className="btn-primary-2">Better rate for transfer</button>
               <div className="first-message">
-                <h1 style={{textAlign:"center",fontSize:"15pt",marginTop:10}}>Better rate for transfer</h1>
+                <h1 style={{textAlign:"center",fontSize:"15pt",marginTop:12}}>Better rate for transfer</h1>
                 <p style={{textAlign:"center"}}>Does your family need it for an emergency? And when you use a cheaper option,it sometimes takes longer for your money to arriveDon't worry, we are here now</p>
               </div>
               </div>
@@ -722,7 +722,7 @@ class Index extends React.Component {
               <div className="first-benefit" style={{marginBottom:"5%"}} >
               <button className="btn-primary-2">Quickly sent quickly arrived</button>
               <div className="first-message">
-                <h1 style={{textAlign:"center",fontSize:"15pt",marginTop:10}}>Quickly sent quickly arrived</h1>
+                <h1 style={{textAlign:"center",fontSize:"15pt",marginTop:12}}>Quickly sent quickly arrived</h1>
                 <p style={{textAlign:"center"}}>Does your family need it for an emergency? And when you use a cheaper option,it sometimes takes longer for your money to arriveDon't worry, we are here now</p>
               </div>
               </div>
@@ -730,7 +730,7 @@ class Index extends React.Component {
               <div className="first-benefit" style={{marginBottom:"5%"}}>
               <button className="btn-primary-2">Unchargeable for Transfer</button>
               <div className="first-message">
-              <h1 style={{textAlign:"center",fontSize:"15pt",marginTop:10}}>Unchargeable for Transfer</h1>
+              <h1 style={{textAlign:"center",fontSize:"15pt",marginTop:12}}>Unchargeable for Transfer</h1>
                 <p style={{textAlign:"center"}}>Does your family need it for an emergency? And when you use a cheaper option,it sometimes takes longer for your money to arriveDon't worry, we are here now</p>
               </div>
               </div>
@@ -752,7 +752,7 @@ class Index extends React.Component {
           </div>
 
           <div className="right-container">
-              <h1>Mobile Application now in</h1>
+              <h1 style={{fontSize:"2.2vw"}}>Mobile Application now in</h1>
 
           <div >
 
@@ -800,7 +800,7 @@ class Index extends React.Component {
 
         <div className="row achievement">
             <div className="container">
-            <h1 style={{textAlign:"center",marginLeft:"25%"}}>What we have achieved?</h1>
+            <h1 style={{textAlign:"center",margin:"auto",fontSize:"6vh",paddingTop:"4vh"}}>What we have achieved?</h1>
             </div>
         </div>
 
@@ -875,7 +875,7 @@ class Index extends React.Component {
         background-repeat: no-repeat;
         background-position: center;
         background-size:100% 100%;
-        margin-top:-45px;
+        margin-top: -11vh;
         // height:1300px;
         padding:100px 0px 0px 0px;
         z-index:-99;
@@ -887,6 +887,11 @@ class Index extends React.Component {
          flex-direction: column;
          
        }
+
+       .features .container .benefit{
+        width:85vw;
+        margin:auto;
+      }
 
     
 
@@ -908,13 +913,14 @@ class Index extends React.Component {
 
       .hero .images{
         display:flex;  
-        margin-top:79px;
+        margin-top:3.3vh;
+        margin-left:-3vh;
         
       }
 
       .hero .images img{
-         width:70px;
-         height:70px;
+        width:auto;
+        height:14vh;
          margin:auto;
       }
 
@@ -1067,12 +1073,12 @@ class Index extends React.Component {
 
 
        .benefit img{
-         width:90px;
-         height:90px;
+        width:7vw;
+        height:auto;
        }
 
        .benefit h1{
-         font-size:25px;
+        font-size:2.8vw;
        }
     
        .benefit .btn-primary-start{
@@ -1093,8 +1099,8 @@ class Index extends React.Component {
       }
 
       .application .left-container img {
-        height:80%;
-        width:80%;
+        height:auto;
+        width:23vw;
         margin-left:auto;
         margin-right:auto;
         
@@ -1105,7 +1111,7 @@ class Index extends React.Component {
       }
 
       .application .right-container img{
-        width:50%;
+        width:17vw;
        
       }
 
@@ -1163,6 +1169,7 @@ class Index extends React.Component {
           background-size:100% 100%;
           height:600px;
           z-index:-1;
+          margin-top:2vw;
         }
 
         .testimonial {
@@ -1891,7 +1898,7 @@ class Index extends React.Component {
             }
 
             .application h1{
-              font-size:20px;
+              font-size:10vw;
             }
 
             .testimonial .message p{
@@ -2266,15 +2273,7 @@ class Index extends React.Component {
                     
                    }
 
-                  //  .fiture-mobile{
-                  //   background-size:100% 100%;
-                  //   height:auto;
-                  //   width:auto;
-                  //   margin-top:-130px;
-                  //   margin-left:-30px;
-                  
-                  // }
-            
+               
                    .fiture-mobile .images{
                     margin-top:-105px;
                     display:flex;
@@ -2314,7 +2313,7 @@ class Index extends React.Component {
                   background-repeat: no-repeat;
                   background-position: center;
                   background-size:100% 100%;
-                  padding:0px 10px 0px 10px;
+                  padding:1.5px 10px 0px 10px;
                   height:auto;
                 }
 
