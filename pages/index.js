@@ -281,7 +281,7 @@ class Index extends React.Component {
                   <img style={{width: "75%",height:"75%", marginTop: "13%",zIndex:999}} src="../static/images/wa-logo.png"/></a>
                 </div>
               </div> */}
-              <div className="images">
+              {/* <div className="images">
                   <div className="monas">
                       <img src="../static/images/features/monas.png" style={{marginTop:85}}  alt="monas" name="monas" id="monas" ></img>
                   </div>
@@ -297,7 +297,7 @@ class Index extends React.Component {
                   <div className="borobudur" style={{marginLeft:"12%"}}>
                   <img src="../static/images/features/borobudur.png"  alt="borobudur" style={{marginTop:44}}  ></img>
                   </div>
-          </div>
+          </div> */}
             </div>
             <div className="right-container">
             <div className="desktop">
@@ -632,52 +632,57 @@ class Index extends React.Component {
 
         <div className="row features">
           <div className="container">
-          {/* <div className="images">
+            <div className="container-image">
+            <div className="images">
                   <div className="monas">
-                      <img src="../static/images/features/monas.png" style={{marginTop:66}}  alt="monas" name="monas" id="monas" ></img>
+                      <img src="../static/images/features/monas.png" style={{marginTop:18}}  alt="monas" name="monas" id="monas" ></img>
                   </div>
-                  <div className="rumah" style={{marginLeft:"3%"}}>
-                  <img src="../static/images/features/rumah.png"  alt="rumah"  id="rumah"  style={{marginTop:55}}></img>
+                  <div className="rumah" style={{marginLeft:"12%"}}>
+                  <img src="../static/images/features/rumah.png"  alt="rumah"  id="rumah"  style={{marginTop:-2}}></img>
                   </div>
-                  <div className="bali" style={{marginLeft:"7%"}}>
-                  <img src="../static/images/features/bali.png" alt="bali" style={{marginTop:50}}></img>
+                  <div className="bali" style={{marginLeft:"14%"}}>
+                  <img src="../static/images/features/bali.png" alt="bali" style={{marginTop:-15}}></img>
                   </div>
-                  <div className="surabaya" style={{marginLeft:"4%"}}>
-                  <img src="../static/images/features/surabaya.png" alt="surabaya" style={{marginTop:45}}></img>
+                  <div className="surabaya" style={{marginLeft:"13%"}}>
+                  <img src="../static/images/features/surabaya.png" alt="surabaya" style={{marginTop:-20}}></img>
                   </div>
-                  <div className="borobudur" style={{marginLeft:"6%"}}>
-                  <img src="../static/images/features/borobudur.png"  alt="borobudur" style={{marginTop:40}}  ></img>
+                  <div className="borobudur" style={{marginLeft:"13%"}}>
+                  <img src="../static/images/features/borobudur.png"  alt="borobudur" style={{marginTop:-22}}  ></img>
                   </div>
-          </div> */}
-                <h1 style={{color:"#000000",textAlign:"center",marginTop:60}}>Why should you use Transfree</h1>
+          </div>
+            </div>
+          
+               <div className="container-content">
+               <h1 style={{color:"#000000",textAlign:"center",marginTop:60}}>Why should you use Transfree</h1>
                
-          {/* </div> */}
-         
-
-              <div className="benefit">
-                  {/* <div className="column"> */}
-                    <div className ="btn-primary-start">
-                    <img src="../static/images/features/money.png" style={{width:"8vw",height:"auto", paddingBottom:"2vh"}}></img>
-                    <h1>Better rate for Transfree</h1>
-                    </div>
-                {/* </div> */}
-                <div className ="btn-primary-start">
-                  <img src="../static/images/features/time.png" style={{float:"center",position:"center"}}></img>
-                    <h1>Quickly sent quickly arrived</h1>
-                </div>
-                <div className ="btn-primary-start">
-                  <img src="../static/images/features/search.png" style={{float:"center",position:"center", paddingBottom:"1vh"}}></img>
-                    <h1>Unchargeable for Transfer</h1>
-                </div>
-                    {/* </div> */}
-                
-                </div>
-
-                <div className="message" style={{fontSize:"1.6vw"}}>
-                      <h3 style={{color:"#000000",textAlign:"center"}}>Does your family need it for an emergency? And when you use</h3>
-                      <h3 style={{color:"#000000", textAlign:"center",marginTop:-20}}>a cheaper option, it sometimes takes longer for your money to arrive</h3>
-                      <h3 style={{color:"#000000",textAlign:"center",marginTop:-20}}>Don't worry, we are here now</h3>
-                </div>
+               {/* </div> */}
+              
+     
+                   <div className="benefit">
+                       {/* <div className="column"> */}
+                         <div className ="btn-primary-start">
+                         <img src="../static/images/features/money.png" style={{width:"8vw",height:"auto", paddingBottom:"2vh"}}></img>
+                         <h1>Better rate for Transfree</h1>
+                         </div>
+                     {/* </div> */}
+                     <div className ="btn-primary-start">
+                       <img src="../static/images/features/time.png" style={{float:"center",position:"center"}}></img>
+                         <h1>Quickly sent quickly arrived</h1>
+                     </div>
+                     <div className ="btn-primary-start">
+                       <img src="../static/images/features/search.png" style={{float:"center",position:"center", paddingBottom:"1vh"}}></img>
+                         <h1>Unchargeable for Transfer</h1>
+                     </div>
+                         {/* </div> */}
+                     
+                     </div>
+     
+                     <div className="message" style={{fontSize:"1.6vw"}}>
+                           <h3 style={{color:"#000000",textAlign:"center"}}>Does your family need it for an emergency? And when you use</h3>
+                           <h3 style={{color:"#000000", textAlign:"center",marginTop:-20}}>a cheaper option, it sometimes takes longer for your money to arrive</h3>
+                           <h3 style={{color:"#000000",textAlign:"center",marginTop:-20}}>Don't worry, we are here now</h3>
+                     </div>
+               </div>
           </div>
         </div>
 
@@ -792,7 +797,7 @@ class Index extends React.Component {
 
         <div className="row achievement">
             <div className="container">
-            <h1 style={{textAlign:"center",margin:"auto",fontSize:"6vh",paddingTop:"4vh"}}>What we have achieved?</h1>
+            <h1 style={{textAlign:"center",margin:"auto",paddingTop:"14px"}}>What we have achieved?</h1>
             </div>
         </div>
 
@@ -865,17 +870,31 @@ class Index extends React.Component {
         background-repeat: no-repeat;
         background-position: center;
         background-size:100% 100%;
-        margin-top: -11vh;
+        margin-top: -60px;
         // height:1300px;
-        padding:100px 0px 0px 0px;
+        // padding:100px 0px 0px 0px;
         z-index:-99;
         margin-bottom:140px;
+        display:flex;
+         flex-direction:column;
        }
 
        .features .container{
          display:flex;
          flex-direction: column;
        }
+
+       .features .container-image{
+        display:flex;
+        flex-direction: row;
+        flex-basis:100%;
+
+      }
+
+      .features .container-content{
+        display:flex;
+        flex-direction: column;
+      }
 
        .features .container .benefit{
         width:85vw;
@@ -887,31 +906,19 @@ class Index extends React.Component {
        display:none;
      }
 
-      // .features .images{
-      //   display:flex;  
-      //   margin-top:-200px;
-        
-      // }
-
-      // .features .images img{
-      //    width:80px;
-      //    height:110px;
-      //    margin:auto;
-      // }
-
-      .hero .images{
-        display:flex;  
-        margin-top:3.3vh;
+      .features .container-image .images{ 
+         margin-top:-60px;
         display:flex;
-        margin-left:-3vh;
-        
+        // margin-left:-3vh;
+        flex-basis:60%;
       }
 
-      .hero .images img{
-        width:auto;
-        height:14vh;
+      .features .images img{
+        height:40%;
          margin:auto;
+         max-width: 100%;
       }
+
 
       
      .features .message{
@@ -1863,10 +1870,16 @@ class Index extends React.Component {
             display:none;
           }
 
+          @media only screen and (max-width:780px){
+            .features .container-image .images{ 
+             display:none;
+             }
+          }
+
           @media only screen and (max-width:800px){
-            .hero .left-container{
-              flex-basis:40%;
-            }
+            // .hero .left-container{
+            //   flex-basis:40%;
+            // }
 
             .hero .right-container{
               flex-basis:60%;
@@ -1894,13 +1907,22 @@ class Index extends React.Component {
             }
 
             .testimonial .message p{
-              font-size:15px;
+              font-size:vw;
             }
 
           
             // .features{
             //   display:none;
             // }
+
+            .features .container-image .images{ 
+            //   margin-top:-60px;
+            //  display:flex;
+            //  // margin-left:-3vh;
+            //  flex-basis:60%;
+            flex-basis:50%;
+           }
+
 
 
           }
@@ -1948,18 +1970,6 @@ class Index extends React.Component {
                margin-left:10%;
              }
 
-            // .features .message{
-            //   display:none;
-            // }
-
-            // .features{
-            //   display:none;
-            // }
-
-            // .achievement{
-            //   display:none;
-            // }
-
             .achievement h1{
               text-align:center;
             }
@@ -1970,17 +1980,11 @@ class Index extends React.Component {
             .application .right-container{
               flex-basis:60%;
             }
-              
-              
-            
 
-            // .application .right-container{
-            //   background:red;
-            // }
-
-            // .application{
-            //   display:none;
-            // }
+            .features .container-image .images{
+              display:none;
+            }
+              
           }
 
           @media only screen and (max-width: 500px){
