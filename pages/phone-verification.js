@@ -49,7 +49,7 @@ class PhoneVerification extends React.Component {
           {this.props.errorMessage}
         </div>
         
-        <div className="box-title">Verification Code</div>
+        <div className="box-title">Code Verification</div>
         
         <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
         <h1>Join us</h1>
@@ -95,8 +95,8 @@ class PhoneVerification extends React.Component {
           }
 
           p{
-            // font-size:10px;
-            // color:grey;
+            font-size:10px;
+            color:grey;
           
           }
 
@@ -106,18 +106,15 @@ class PhoneVerification extends React.Component {
             margin-bottom:20%;
           }
 
+         
+
        
          
       
           @media only screen and (max-width: 414px) {
-            h1{
+            .form-container{
               display:none;
             }
-
-            .form-container p{
-             display:none;
-            }
-            
           }
 
         `}</style>

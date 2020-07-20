@@ -492,10 +492,9 @@ const Header = () => (
 
         .form-container .btn-primary{
           padding:18px;
-        }
+        }       
 
-       
-
+     
        
       }
     `}</style>

@@ -98,6 +98,12 @@ const AuthLayout = ({ children }) => (
         display:flex;
       }
 
+      p{
+        font-size:30px;
+        color:grey;
+      
+      }
+
     
       
       }

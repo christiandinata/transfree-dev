@@ -200,10 +200,12 @@ class Signup extends React.Component {
             display:block;
           }
 
+       
           .form-container label {
             font-size: 19px;
             text-transform: uppercase;
             display:flex;
+
             // margin-bottom:-15px;
             
           }
