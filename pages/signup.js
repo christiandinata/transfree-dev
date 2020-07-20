@@ -129,11 +129,11 @@ class Signup extends React.Component {
                 <i onClick={this.toggleConfirmShow}>{eye}</i>
           </div>
           <label htmlFor="email">PHONE NUMBER</label>
-          {/* <PhoneInput
+          <PhoneInput
               placeholder="Enter phone number"
               country="GB"
               value={ this.state.phone }
-              onChange={ phone => this.setState({ phone }) }/>   */}
+              onChange={ phone => this.setState({ phone }) }/>  
 
           <button type="submit" className="btn-primary">{this.props.inProgress ? (
             <FontAwesomeIcon icon="sync-alt" spin style={{width:40,height:40}}/>
