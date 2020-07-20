@@ -71,6 +71,27 @@ const getAllUsers = (page, type, req) => {
   };
 };
 
+const getAllUsersFilledByAdmin = (page, type, req) => {
+
+  if (type !== 'getAllUsersFilledByAdmin') {
+    throw new Error('Wrong API call!');
+  }
+  return async (dispatch) => {
+    dispatch({type: USER_DATA_ARRAY_IN_PROGRESS, payload: true});
+    await axios.get(`${API}/${type}?page=`+page, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
+    })
+      .then((response) => {
+        dispatch({type: USER_DATA_ARRAY, payload: response.data.user_data_array});
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  };
+};
+
 const approveUser = ({uid} , type, req) => {
   if (type !== 'approveUser') {
     throw new Error('Wrong API call!');
@@ -113,10 +134,33 @@ const deleteUser = ({uid} , type,req) => {
   };
 };
 
+const updateUser = (id, { fullname, email, idType, idNumber, idName, gender, dob, pob, address }, type, req) => {
+  if (type !== 'user') {
+    throw new Error('Wrong API call!');
+  }
+  return async (dispatch) => {
+    await axios.put(`${API}/${id}/${type}`, { fullname, email, idType, idNumber, idName, gender, dob, pob, address }, {
+      headers: {
+        Authorization: `Bearer ${getCookie('token',req)}`
+      }
+    })
+      .then((response) => {
+        Router.push('/dashboard/userfill');
+        console.log(response);
+        //dispatch({type: USER_DATA_ARRAY, payload: response.data.user_data_array});
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
+  };
+};
+
 export default {
   getUser,
   getUsersByQuery,
   getAllUsers,
+  getAllUsersFilledByAdmin,
   approveUser,
-  deleteUser
+  deleteUser,
+  updateUser,
 };
