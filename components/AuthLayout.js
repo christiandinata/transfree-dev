@@ -9,13 +9,20 @@ const AuthLayout = ({ children }) => (
         
       </div>
       <div className="right">
+        <div className="background-top">
+            <img src="../static/images/transfree-logo.png"></img> 
+        </div>
         {children}
+        <div className="background-bottom">
+            <img src="../static/images/features/setengah-lingkaran.png"></img> 
+        </div>
       </div>
     </div>
     <style jsx>{`
       .container-fluid {
         display: flex;
-        min-height: 100vh;
+        // min-height: 100vh;
+
       }
 
       .left,
@@ -25,9 +32,11 @@ const AuthLayout = ({ children }) => (
 
       .left {
         background-image: url('../static/images/people.jpg');
-        background-size: cover;
+        background-size:cover;
         text-align: center;
-        height: 100vh;
+        height: 620px;
+        width:auto;
+        background-repeat:no-repeat;
       }
 
       .left img {
@@ -38,16 +47,59 @@ const AuthLayout = ({ children }) => (
       .right {
         display: flex;
         flex-direction: column;
+         text-align:center;
         justify-content: center;
         align-items: center;
+        padding:10px 0px 0px 0px;
+        // background:blue;
       }
 
-     
+      .background-top img,
+      .background-bottom img{
+        display:none;
+    }
+
+   
 
       @media only screen and (max-width: 414px) {
         .left {
           display: none;
         }
+
+        .background-top{
+          background-image: url('../static/images/features/background-mobile.png');
+          background-size:100% 100%;
+          padding:40px 0px 40px 0px;
+          height:30px;
+          text-align: center;
+          margin-top:-20px;
+          background-repeat:no-repeat;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+        }
+
+        .background-bottom{
+           margin-top:120px;
+           width:100%;
+        }
+
+        .background-top img{
+          width:40%;
+          height:90%;
+          display:flex;
+          text-align:center;
+          
+      }
+
+      .background-bottom img{
+        width:100%;
+        height:30px;
+        display:flex;
+      }
+
+    
+      
       }
     `}</style>
   </div>

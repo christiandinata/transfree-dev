@@ -60,7 +60,7 @@ const Terms = () => (
         <p>10) Amendments, Assignments and Terminations Conditions : Transfree has the right to change these Terms at any time, and conditions will take effect immediately after sending notification of changes to the Customer , or at a later date as stated in the notification or required by the applicable law . If the Customer rejects the amended agreement, the Customer must immediately notify Transfree in writing that he has terminated this agreement . The Customer cannot change any part of these Terms without the prior written approval of Transfree ; provided that, however, that the customer can change the "contents&rdquo; of this terms by completing a new agreement Wire Transfer and send it to Transfree in the range of commercially reasonable time to act upon it. Customer may not assign these Terms to any other person or entity without the approval of Transfree in the form of a written agreement. Customers can terminate these Terms at any time by sending written notification to Transfree . Termination by Customer is effective on the second business day after receiving written notice, but Transfree may act on such notice in advance. Termination by Transfree will valid immediately after written or oral notification sent or given to the Customer. Termination by either party shall not affect the obligations happen before termination.</p>
 
         <p>11) Official Account : Customer represents and warrants that each account listed in this Section is and must remain fully owned by the Customer (or that the account is jointly owned entirely by the Customer and others, both of them entitled as the joint owner of the world database Transfree ).</p>
-      </div>>
+      </div>
     </div>
     <style jsx>{`
       .row {

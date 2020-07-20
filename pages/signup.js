@@ -82,10 +82,11 @@ class Signup extends React.Component {
           Password and Confirm Password not match
         </div>
         
-        <div className="box-title"><h1>Register</h1></div>
+        <div className="box-title">Register</div>
         <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
-        <h1 style={{textAlign:"center"}}>join us</h1>
-        <p style={{marginTop:-10,color:"grey"}}>Already have an Account? <a href="">Log In</a></p>
+        <h1 style={{marginTop:10,textAlign:"center"}}>Join us</h1>
+        <p style={{marginTop:-10,fontSize:15,color:"grey"}}>Already have an Account? <a className="link" href="/login">Log In</a></p>
+        <label htmlFor="email">FULL NAME</label>
         <input
             type="text"
             id="fullname"
@@ -93,6 +94,7 @@ class Signup extends React.Component {
             value={this.state.fullname}
             onChange={e => this.setState({ fullname: e.target.value })}
           />
+        <label htmlFor="email">EMAIL ADDRESS</label>
           <input
             type="email"
             id="email"
@@ -101,6 +103,7 @@ class Signup extends React.Component {
             value={this.state.email}
             onChange={e => this.setState({ email: e.target.value })}
             />
+        <label htmlFor="email">PASSWORD</label>
           <div className="pass-wrapper">
             <input
                   type={this.state.hiddenPass ? "text" : "password"}
@@ -113,6 +116,7 @@ class Signup extends React.Component {
                <i onClick={this.togglePassShow}>{eye}</i>
           </div>
 
+          <label htmlFor="email">CONFIRM PASSWORD</label>
           <div className="pass-wrapper">
             <input
                   type={this.state.hiddenConfirm ? "text" : "password"}
@@ -124,24 +128,108 @@ class Signup extends React.Component {
                 />
                 <i onClick={this.toggleConfirmShow}>{eye}</i>
           </div>
-            
+          <label htmlFor="email">PHONE NUMBER</label>
           <PhoneInput
               placeholder="Enter phone number"
               country="GB"
               value={ this.state.phone }
-              onChange={ phone => this.setState({ phone }) }/>
+              onChange={ phone => this.setState({ phone }) }/>  
 
           <button type="submit" className="btn-primary">{this.props.inProgress ? (
             <FontAwesomeIcon icon="sync-alt" spin style={{width:40,height:40}}/>
           ) : 'Continue'}</button>
         </form>
         <div className="bottom-container">
+          <p>Already have an Account?  <a href="/login"> Log In</a></p>
         </div>
+        <p><a className="link" href="/">Back to Home</a></p>
+        
         <style jsx>{`
         .right .bottom-container p,h5 { 
           display:inline;
           text-align:left;
         }
+
+        .form-container label{
+          display:none;
+        }
+
+        .form-container input{
+          margin-bottom:10px;
+        }
+
+        .pass-wrapper{
+          margin-bottom:0px;
+        }
+
+        i {
+          position: absolute;
+          top: 20%;
+          right: 6%;
+          // width:10px;
+        }
+
+        
+        p{
+          margin:0px;
+        }
+
+        .bottom-container{
+          display:none;
+        }
+
+        @media only screen and (max-width: 414px) {
+          .logo img{
+            display:none;
+          }
+          .box-title{
+            margin-top:30px;
+          }
+
+          .form-container h1,p{
+            display:none;
+          }
+
+          .bottom-container p{
+            display:flex;
+            font-size:20px;
+            color:#FFFFFF;
+          }
+
+          .bottom-container{
+            display:block;
+          }
+
+          .form-container label {
+            font-size: 19px;
+            text-transform: uppercase;
+            display:flex;
+            // margin-bottom:-15px;
+            
+          }
+
+          // .pass-wrapper{
+          //   margin-top:20px;
+          // }
+
+          .form-container input{
+            // margin-bottom:60px;
+            font-size:18px;
+          }
+
+          .bottom-container p > a{
+            color:#FFFFFF;
+            font-size:20px;
+            font-family: "Open Sans", sans-serif;
+             font-weight:900;    
+
+          }
+
+
+        }
+
+
+        
 
     `}</style>
       </AuthLayout>

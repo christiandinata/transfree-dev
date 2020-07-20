@@ -241,15 +241,20 @@ const Header = () => (
         outline: none;
       }
       .box-title{
-        width: 330px;
-        padding:5px 5px 5px 5px;
+        width: 389px;
+        padding:12px 25px 12px 25px;
         display:flex;
         justify-content:center;
-        border-radius:8px 8px 8px 8px;
+        border-radius:2px 2px 2px 2px;
         background:#FAAF40;
-      }
-      .box-title h1{
         color:#FFFFFF;
+        font-size:30px;
+        font-family: "Open Sans", sans-serif;
+        font-weight:700;       
+      }
+
+      .form-container h1{
+        font-size:20px;
       }
 
       //show and hide password
@@ -257,13 +262,14 @@ const Header = () => (
         position: relative;
         display: flex;
         // margin-bottom: 14px;
+        flex-direction:row;
       }
       
       i {
         position: absolute;
-        top: 10%;
+        top: 6px;
         right: 6%;
-        width:30px;
+        width:20px;
       }
 
       i:hover {
@@ -272,18 +278,19 @@ const Header = () => (
       }
 
       .form-container {
-        width: 320px;
+        width: 335px;
         height: auto;
-        padding: 0px 90px 30px 90px;
+        padding: 0px 50px 30px 50px;
         background: #FFFFFF;
-        border:2px solid grey;
-        box-shadow: 0 10px 30px 0 rgba(0,0,0,0.10);
+        border:1px solid grey;
+        box-shadow: 0 10px 40px 0px rgba(0,0,0,0.10);
         border-radius: 0px 0px 32px 32px;
         border-top:none;
       }
       .form-container label {
         font-size: 14px;
         text-transform: uppercase;
+        // margin-bottom:-10px;
       }
       .rectangle {
         width:580px;
@@ -297,10 +304,10 @@ const Header = () => (
       .form-container input,
        .form-container textarea {
          width: 100%;
-         margin-bottom: 15px;
+        //  margin-bottom: 20px;
          border: none;
-         font-size: 20px;
-         padding: 15px 0;
+         font-size: 15px;
+         padding: 10px 0;
          border-bottom: 1px solid #eaeaea;
          font-family: "Campton-Book", sans-serif;
        }
@@ -320,22 +327,33 @@ const Header = () => (
 
       .form-container .btn-primary {
         width: 100%;
-        padding: 15px 0;
+        padding: 8px 0;
          margin: 0px;
-         border-radius:16px 16px;
+         font-size:18px;
+         border-radius:12px 12px;
+         color:#FFFFFF;
+         font-size:20px;
+         font-family: "Open Sans", sans-serif;
+         font-weight:700;    
+         
       }
-      .right p {
-        margin: 30px 0;
+      .right .form-container p {
+        margin: 5px 0;
       }
-      .right .link {
+      .right  .link {
         color: #469DDD;
-        text-decoration: none;
+        font-family: "Open Sans", sans-serif;
+        font-weight:600;
+        // text-decoration: none;
+        
       }
+
+    
       .error-container {
         width: 400px;
         height: auto;
-        padding: 20px;
-        margin-bottom: 30px;
+        padding: 10px;
+        // margin-bottom: 30px;
         background-color: #FF3A43;
         color: #FFF;
         border-radius: 8px;
@@ -356,8 +374,8 @@ const Header = () => (
         display: block;
       }
       .container-fluid {
-        display: flex;
-        height: 100vh;
+        // display: flex;
+        // height: 100vh;
         align-items: center;
       }
       .container-fluid p {
@@ -369,7 +387,7 @@ const Header = () => (
       }
       .logo img {
         height: 28px;
-        margin: 50px auto;
+        margin: 10px auto;
       }
       ul.pagination {
         list-style-type: none;
@@ -402,6 +420,29 @@ const Header = () => (
           padding: 10px;
           margin: 0 auto;
         }
+
+        .logo img{
+          display:none;
+        }
+
+        .form-container label {
+          display:flex;
+          
+        }
+
+       
+
+        .container-fluid{
+           background-image: url('../static/images/testimoni/background.png');
+           background-size:cover;
+            justify-content:center;
+           background-repeat:no-repeat;
+          //  align-items: center;
+           margin:0 auto;
+           padding:0px;
+           width:auto;
+           z-index:-1;
+        }
         .feature {
           flex-direction: column;
         }
@@ -422,17 +463,40 @@ const Header = () => (
           margin: 15px auto;
         }
         .form-container {
-          width: 305px;
+          width: 315px;
           padding: 15px;
+        
         }
         .box-title{
-          width: 305px;
-          padding: 15px;
+          width: 320px;
+          padding: 20px;
+          margin-top:130px;
+          border-radius: 2px 2px 2px 2px;
+        }
+
+        .box-title{
+          font-size:20px;
         }
         .error-container,
         .success-container {
           width: auto;
         }
+
+        .form-container{
+           margin-bottom:10px;
+        }
+
+        .form-container{
+          border-radius: 0px 0px 0px 0px;
+        }
+
+        .form-container .btn-primary{
+          padding:18px;
+        }
+
+       
+
+       
       }
     `}</style>
   </div>
