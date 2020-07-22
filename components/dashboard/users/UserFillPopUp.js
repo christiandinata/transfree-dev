@@ -55,8 +55,10 @@ class UserFillPopUp extends React.Component{
   }
 
   upgradeUser(){
+    let uid = this.state.id;
+
     this.updateUser();
-    this.props.approveUser(this.state, 'approveUser');
+    this.props.approveUser({uid}, 'approveUser');
     this.props.closePopUp();
   }
 
