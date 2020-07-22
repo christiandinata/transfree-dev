@@ -1,5 +1,5 @@
 import Router from 'next/router';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { getCookie } from '../utils/cookie';
 import initialize from '../utils/initialize';
@@ -16,7 +16,7 @@ function Progress (props) {
     if (i === props.currentStep) {
       items.push(<img src='../../static/images/step_round_filled.svg' />)
     } else {
-        items.push(<img src='../../static/images/step_round.svg' />)
+      items.push(<img src='../../static/images/step_round.svg' />)
     }
   }
 
@@ -50,27 +50,28 @@ function NewUser (props) {
   })
 
   return (
-    <div className='new-user-page'>
+    <Fragment>
       <Header />
       <Menu />
-
-      <div className='new-user-container'>
-        <div className='new-user-header'>
-          <div className='new-user-progress'>
-            <Progress totalSteps={ totalSteps } currentStep = { currentStep } />
+      <div className='new-user-page'>
+        <div className='new-user-container'>
+          <div className='new-user-header'>
+            <div className='new-user-progress'>
+              <Progress totalSteps={ totalSteps } currentStep = { currentStep } />
+            </div>
+            <div className='new-user-title'>
+              Information Detail
+            </div>
+            <div className='new-user-close'>
+              <a href='/'>
+                <img src='../../static/images/close.svg' />
+              </a>
+            </div>
           </div>
-          <div className='new-user-title'>
-            Information Detail
-          </div>
-          <div className='new-user-close'>
-            <a href='/'>
-              <img src='../../static/images/close.svg' />
-            </a>
-          </div>
+          <CurrentStepWindow currentStep={ currentStep } onNextStep={ () => setCurrentStep(currentStep+1) } />
         </div>
-        <CurrentStepWindow currentStep={ currentStep } onNextStep={ () => setCurrentStep(currentStep+1) } />
       </div>
-    </div>
+    </Fragment>
   );
 }
 
