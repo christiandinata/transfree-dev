@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import Router from 'next/router';
+import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { getCookie } from '../utils/cookie';
+import initialize from '../utils/initialize';
 import Header from '../components/header';
 import Menu from '../components/menu';
 import CreateProfile from '../components/new-user/CreateProfile';
 import UploadPhoto from '../components/new-user/UploadPhoto';
-import actions from '../redux/actions';
+import userActions from '../redux/actions/userActions';
 import '../styles/new-user.css';
 
 function Progress (props) {
@@ -23,10 +26,10 @@ function Progress (props) {
 
 function CurrentStepWindow (props) {
   switch(props.currentStep) {
+    case 1:
+      return <CreateProfile nextStep={ props.onNextStep } />
     case 2:
-      return <CreateProfile nextStep={ () => setCurrentStep(currentStep+1) } />
-    case 3:
-      return <UploadPhoto nextStep={ () => setCurrentStep(currentStep+1) } />
+      return <UploadPhoto nextStep={ props.onNextStep  } />
     default:
       return ''
   }
@@ -34,17 +37,18 @@ function CurrentStepWindow (props) {
 
 function NewUser (props) {
   const totalSteps = 2
-  const [currentStep, setCurrentStep] = useState(1)
+  const [currentStep, setCurrentStep] = useState(props.userData.registrationStep - 1)
 
-  // switch(props.userData.registrationStep) {
-  switch(props) {
-    case 2:
-      setCurrentStep(1)
-      break
-    case 3:
-      setCurrentStep(2)
-      break
-  }
+  useEffect(() => {
+    switch(currentStep) {
+      case 1:
+        break
+      case 2:
+        break
+      default:
+        Router.replace('/')
+    }
+  })
 
   return (
     <div className='new-user-page'>
@@ -60,15 +64,20 @@ function NewUser (props) {
             Information Detail
           </div>
           <div className='new-user-close'>
-            <a href='/account'>
+            <a href='/'>
               <img src='../../static/images/close.svg' />
             </a>
           </div>
         </div>
-        <CurrentStepWindow currentStep={ currentStep } />
+        <CurrentStepWindow currentStep={ currentStep } onNextStep={ () => setCurrentStep(currentStep+1) } />
       </div>
     </div>
   );
+}
+
+NewUser.getInitialProps = async (ctx) => {
+  initialize(ctx)
+  await ctx.store.dispatch(userActions.getUser(getCookie('_id', ctx.req), 'user', ctx.req))
 }
 
 const mapStateToProps = (state) => {
@@ -77,4 +86,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, actions)(NewUser);
+export default connect(mapStateToProps)(NewUser);

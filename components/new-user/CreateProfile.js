@@ -1,8 +1,8 @@
 import { useState, Fragment } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import CustomDatePicker from '../../components/CustomDatePicker';
-import '../../styles/components/new-user/CreateProfile.css';
+import CustomDatePicker from '../CustomDatePicker';
 import MobilePopup from '../MobilePopup';
+import '../../styles/components/new-user/CreateProfile.css';
 
 function CreateProfile (props) {
   const [idType, setIdType] = useState('');
@@ -50,15 +50,15 @@ function CreateProfile (props) {
             message='Do you want to fill this form ?'
             isChoice
             confirmMessage='Yes'
-            onConfirm= { props.nextStep }
+            onConfirm= { () => setIsSkipPopupVisible(false) }
             rejectMessage='No'
-            onReject={ () => setIsSkipPopupVisible(false) }
+            onReject={ props.nextStep }
           />
         : ''
       }
       <div className='create-profile-form-body-heading'>
         <div className='create-profile-form-skip'>
-          <a href='uploadPhoto'>
+          <a onClick={ props.nextStep } >
             I don't want to fill the form
           </a>
         </div>
