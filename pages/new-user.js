@@ -6,7 +6,6 @@ import initialize from '../utils/initialize';
 import Header from '../components/header';
 import Menu from '../components/menu';
 import CreateProfile from '../components/new-user/CreateProfile';
-import UploadPhoto from '../components/new-user/UploadPhoto';
 import userActions from '../redux/actions/userActions';
 import '../styles/new-user.css';
 
