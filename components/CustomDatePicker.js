@@ -2,7 +2,7 @@ import moment from 'moment'
 import DatePicker from "react-datepicker"
 import '../styles/components/CustomDatePicker.css'
 
-const CustomDatePickerMobile = ({ value, onClick }) => <input className="custom-date-picker-mobile" value={ value } onClick={ onClick } />
+const CustomDatePickerMobile = ({ value, onClick }) => <input className="custom-date-picker-mobile" value={ value } readOnly onClick={ onClick } />
 const CustomDatePickerButton = ({ onClick }) => <div className="custom-date-picker-desktop-button" onClick={ onClick } />
 
 function CustomDatePicker (props) {

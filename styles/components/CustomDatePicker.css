@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.custom-date-picker .react-datepicker-wrapper {
+  width: 100%;
+}
+
 .custom-date-picker-date {
   display: none;
 }
@@ -25,9 +29,14 @@
   background-size: contain;
   background-color: transparent;
   cursor:pointer;
+  padding: 0 !important;
 }
 
 @media only screen and (min-width: 1024px) {
+  .custom-date-picker .react-datepicker-wrapper {
+    width: initial;
+  }
+
   .custom-date-picker-date {
     display: initial;
     width: 12.5%;
