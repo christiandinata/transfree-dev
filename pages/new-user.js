@@ -6,6 +6,7 @@ import initialize from '../utils/initialize';
 import Header from '../components/header';
 import Menu from '../components/menu';
 import CreateProfile from '../components/new-user/CreateProfile';
+import UploadPhoto from '../components/new-user/UploadPhoto';
 import userActions from '../redux/actions/userActions';
 import '../styles/new-user.css';
 
@@ -26,9 +27,9 @@ function Progress (props) {
 function CurrentStepWindow (props) {
   switch(props.currentStep) {
     case 1:
-      return <CreateProfile nextStep={ props.onNextStep } />
+      return <CreateProfile userData={ props.userData } nextStep={ props.onNextStep } />
     case 2:
-      return <UploadPhoto nextStep={ props.onNextStep  } />
+      return <UploadPhoto userData={ props.userData } nextStep={ props.onNextStep  } />
     default:
       return ''
   }
@@ -68,7 +69,7 @@ function NewUser (props) {
               </a>
             </div>
           </div>
-          <CurrentStepWindow currentStep={ currentStep } onNextStep={ () => setCurrentStep(currentStep+1) } />
+          <CurrentStepWindow userData={ props.userData } currentStep={ currentStep } onNextStep={ () => setCurrentStep(currentStep+1) } />
         </div>
       </div>
     </Fragment>
