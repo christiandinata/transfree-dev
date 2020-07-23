@@ -6,6 +6,7 @@ import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { getCookie } from '../utils/cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import AuthLayout from '../components/AuthLayout';
 
 class PhoneVerification extends React.Component {
   constructor({ props }) {
@@ -40,38 +41,84 @@ class PhoneVerification extends React.Component {
 
   render() {
     return (
-      <div>
-        <Header />
-        <div className="container-fluid">
-          <div className="logo">
-            <img src="../static/images/transfree-logo.png"/>
-          </div>
-          <h1>Code Verification</h1>
-          <p>Enter 6 digits verification code that we sent to your number {this.props.phone}.</p>
-          <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
+      <AuthLayout>
+        <div className="logo">
+          <Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>
+        </div>
+        <div className={"error-container "+(this.props.errorMessage != '' && this.props.errorMessage != undefined ? "error-show" : "") }>
+          {this.props.errorMessage}
+        </div>
+        
+        <div className="box-title">Code Verification</div>
+        
+        <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
+        <h1>Join us</h1>
+        <p>We have succesfully sent the code</p>
+        <p>Your code valid for 60 seconds</p>
             <label htmlFor="code">Verification Code</label><br/>
             <input
               type="tel"
               id="code"
-              placeholder="Enter 6-digit verification code"
+              // placeholder="Enter 6-digit verification code"
               value={this.state.code}
               onChange={e => this.setState({ code: e.target.value })}/>
+              <h2>Enter 6- Digit Code</h2>
+              {/* <p style={{fontSize:13}}>No code showing on your phone? <Link href="/"><a className="link">Resend Code</a></Link></p> */}
+
 
             <button type="submit" className="btn-primary">{this.props.inProgress ? (
               <FontAwesomeIcon icon="sync-alt" spin/>
             ) : 'Continue'}</button>
           </form>
-          {// <p>Haven't received the code? <Link href=""><a className="link">Resend code.</a></Link></p>
-          }
-          <p>Wrong phone number? <Link href="/phone"><a className="link">Enter again.</a></Link></p>
-        </div>
+          <p style={{fontSize:15}}>Wrong phone number? <Link href="/phone"><a className="link">Enter again.</a></Link></p>
+       <div className="bottom">
+          <h1 ><Link href="/forgot"><a className="link">Forgot Password? </a></Link></h1>
+            <p>Don't you have an account?<Link href="/signup"><a className="link"> Sign up</a></Link></p>
+       </div>
+       
         <style jsx>{`
-          .container-fluid {
-            flex-direction: column;
+          .form-container input{
+            // margin-bottom:20px;
+            text-align:center;
           }
-          `}
-        </style>
-      </div>
+          .form-container label {
+            display:none;
+            
+          }
+
+          .btn-primary{ 
+             margin-top:20px;
+          }
+
+          .bottom{
+            display:none;
+          }
+
+          p{
+            font-size:10px;
+            color:grey;
+          
+          }
+
+          h2{
+            color:#707070;
+            font-size:15px;
+            margin-bottom:20%;
+          }
+
+         
+
+       
+         
+      
+          @media only screen and (max-width: 414px) {
+            .form-container{
+              display:none;
+            }
+          }
+
+        `}</style>
+      </AuthLayout>
     )
   }
 }
