@@ -1,7 +1,9 @@
 import { useState, Fragment } from 'react';
+import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CustomDatePicker from '../CustomDatePicker';
 import MobilePopup from '../MobilePopup';
+import profileActions from '../../redux/actions/profileActions';
 import '../../styles/components/new-user/CreateProfile.css';
 
 function CreateProfile (props) {
@@ -14,8 +16,11 @@ function CreateProfile (props) {
   const [isIdNumberValid, setIsIdNumberValid] = useState(true);
   const [isPobValid, setIsPobValid] = useState(true);
   const [isAddressValid, setIsAddressValid] = useState(true);
-  const [isInProgress, setIsInProgress] = useState(false);
   const [isSkipPopupVisible, setIsSkipPopupVisible] = useState(true);
+
+  if (props.response && !props.errorMessage) {
+    props.nextStep()
+  }
 
   function checkIdnumber(e) {
     if (e.target.value === '') {
@@ -39,6 +44,22 @@ function CreateProfile (props) {
     } else {
       setIsAddressValid(true)
     }
+  }
+
+  function handleOnClickButton(e) {
+    e.preventDefault()
+
+    props.createProfile({
+        idType: idType,
+        idNumber: idNumber,
+        gender: gender,
+        pob: placeOfBirth,
+        dob: dateOfBirth,
+        address: address,
+        email: props.userData.email
+      },
+      'createProfile'
+    )
   }
 
   return(
@@ -160,9 +181,9 @@ function CreateProfile (props) {
             *data must match to your id card
           </p>
         </div>
-        <button className='form-submit-button' onClick={ () => {console.log('yow')} }>
+        <button className='form-submit-button' onClick={ handleOnClickButton }>
           {
-            isInProgress
+            props.isInProgress
               ? ( <FontAwesomeIcon icon='sync-alt' spin/> )
               : 'Continue'
           }
@@ -172,4 +193,12 @@ function CreateProfile (props) {
   )
 }
 
-export default CreateProfile
+const mapStateToProps = (state) => {
+  return {
+    isInProgress: state.profile.inProgress,
+    response: state.profile.response,
+    errorMessage: state.profile.errorMessage,
+  }
+}
+
+export default connect(mapStateToProps, profileActions)(CreateProfile)
