@@ -1,0 +1,61 @@
+.upload-photo-description-mobile {
+  font-family: Open Sans;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+@media only screen and (min-width: 1024px) {
+  .upload-photo-description-mobile {
+    display: none;
+  }
+}
+
+.upload-photo-dropboxes-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media only screen and (min-width: 1024px) {
+  .upload-photo-dropboxes-container {
+    flex-direction: row;
+    min-width: 1024px;
+  }
+}
+
+.upload-photo-terms-agreement {
+  font-family: Open Sans;
+  font-size: 0.9rem;
+  color: #FAAF40;
+  margin: 10px auto;
+}
+
+.upload-photo-terms-link {
+  font-family: Open Sans;
+  font-size: 0.9rem;
+  color: #FAAF40;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.upload-photo-privacy-policy-statement {
+  font-family: Open Sans;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  margin: 10px auto;
+}
+
+.upload-photo-privacy-policy-link {
+  color: #FAAF40;
+  text-decoration: none;
+}
+
+.upload-photo-error-message {
+  font-family: Open Sans;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: red;
+  text-align: center;
+  margin: 10px auto 0;
+}
