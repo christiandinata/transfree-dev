@@ -186,3 +186,12 @@
     min-width: 400px;
   }
 }
+
+.create-profile-error-message {
+  font-family: Open Sans;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: red;
+  text-align: center;
+  margin: 10px auto 0;
+}

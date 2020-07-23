@@ -49,6 +49,10 @@ function CreateProfile (props) {
   function handleOnClickButton(e) {
     e.preventDefault()
 
+    if (!checkIdDataValid()) {
+      return
+    }
+
     props.createProfile({
         idType: idType,
         idNumber: idNumber,
@@ -61,6 +65,27 @@ function CreateProfile (props) {
       },
       'createProfile'
     )
+  }
+
+  function checkIdDataValid() {
+    let isValid = true
+
+    if (idNumber === '') {
+      isValid = false
+      setIsIdNumberValid(false)
+    }
+
+    if (placeOfBirth === '') {
+      isValid = false
+      setIsPobValid(false)
+    }
+
+    if (address === '') {
+      isValid = false
+      setIsAddressValid(false)
+    }
+
+    return isValid
   }
 
   return(
@@ -182,6 +207,11 @@ function CreateProfile (props) {
             *data must match to your id card
           </p>
         </div>
+        {
+          props.errorMessage
+          ? <div className='create-profile-error-message'>{ errorMessage }</div>
+          : ''
+        }
         <button className='form-submit-button' onClick={ handleOnClickButton }>
           {
             props.isInProgress
