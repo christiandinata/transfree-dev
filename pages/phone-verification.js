@@ -63,14 +63,14 @@ class PhoneVerification extends React.Component {
               value={this.state.code}
               onChange={e => this.setState({ code: e.target.value })}/>
               <h2>Enter 6- Digit Code</h2>
-              <p style={{fontSize:13}}>No code showing on your phone? <Link href="/"><a className="link">Resend Code</a></Link></p>
+              {/* <p style={{fontSize:13}}>No code showing on your phone? <Link href="/"><a className="link">Resend Code</a></Link></p> */}
 
 
             <button type="submit" className="btn-primary">{this.props.inProgress ? (
               <FontAwesomeIcon icon="sync-alt" spin/>
             ) : 'Continue'}</button>
           </form>
-
+          <p style={{fontSize:15}}>Wrong phone number? <Link href="/phone"><a className="link">Enter again.</a></Link></p>
        <div className="bottom">
           <h1 ><Link href="/forgot"><a className="link">Forgot Password? </a></Link></h1>
             <p>Don't you have an account?<Link href="/signup"><a className="link"> Sign up</a></Link></p>

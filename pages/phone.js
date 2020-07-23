@@ -90,8 +90,10 @@ class Phone extends React.Component {
           {this.props.errorMessage}
         </div>
         
-        <div className="box-title">Verification Code</div>
+        <div className="box-title">Phone Verification</div>
+       
         <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
+        <p>Enter your phone number</p>
              <label htmlFor="phone">Phone Number</label><br/>
              <PhoneInput
               placeholder="Enter phone number"
