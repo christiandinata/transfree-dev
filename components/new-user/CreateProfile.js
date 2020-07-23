@@ -7,9 +7,9 @@ import profileActions from '../../redux/actions/profileActions';
 import '../../styles/components/new-user/CreateProfile.css';
 
 function CreateProfile (props) {
-  const [idType, setIdType] = useState('');
+  const [idType, setIdType] = useState('KTP');
   const [idNumber, setIdNumber] = useState('');
-  const [gender, setGender] = useState('');
+  const [gender, setGender] = useState('Male');
   const [placeOfBirth, setPlaceOfBirth] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState(new Date());
   const [address, setAddress] = useState('');
