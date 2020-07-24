@@ -20,6 +20,7 @@ export const VERIFY_PHONE_ERROR = 'verify_phone_error';
 export const USER_EMAIL = 'user_email';
 export const USER_STATUS = 'user_status';
 export const USER_DATA = 'user_data';
+export const INITIAL_DATA_USER = "initial_data";
 export const USER_DATA_ARRAY = 'user_data_array';
 export const USER_DATA_ARRAY_IN_PROGRESS = 'user_data_array_in_progress';
 export const USER_APPROVE_SUCCESS = 'user_approve_success';

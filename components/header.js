@@ -479,7 +479,7 @@ const Header = () => (
         }
         .error-container,
         .success-container {
-          width: auto;
+          width: 85%;
         }
 
         .form-container{

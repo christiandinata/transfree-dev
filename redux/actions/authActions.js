@@ -13,19 +13,20 @@ import {
   FORGOT_ERROR,
   RESET_PASSWORD_PROGRESS,
   RESET_PASSWORD_SUCCESS,
-  RESET_PASSWORD_ERROR
+  RESET_PASSWORD_ERROR,
+  VERIFY_PHONE_PROGRESS,
 } from '../types';
 import { API } from '../../config';
 import { setCookie, removeCookie,getCookie } from '../../utils/cookie';
 
 // register user
-const register = ({ fullname, email, password }, type) => {
+const register = ({ fullname, email, password,phone,code,serviceSid }, type) => {
   if (type !== 'register') {
     throw new Error('Wrong API call!');
   }
   return (dispatch) => {
-    dispatch({type: REGISTER_PROGRESS, payload: true});
-    axios.post(`${API}/${type}`, {fullname, email, password})
+    dispatch({type: VERIFY_PHONE_PROGRESS, payload: true});
+    axios.post(`${API}/v1/${type}`, {fullname, email, password,phone,code,serviceSid})
       .then((response) => {
         setCookie('token', response.data.token);
         const userData = response.data.user_data;
@@ -33,10 +34,10 @@ const register = ({ fullname, email, password }, type) => {
         if (userData.role == 'admin') {
           Router.replace('/dashboard/home')
         } else {
-          Router.replace('/phone');
+          Router.replace('/');
         }
         dispatch({type: REGISTER, payload: response.data.token});
-        dispatch({type: USER_DATA, payload: response.data.user_data});
+        dispatch({type: USER_DATA, payload: response.date.user_data});
       })
       .catch((error) => {
         let errorMessage = '';

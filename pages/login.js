@@ -95,7 +95,7 @@ class Login extends React.Component {
          
 
           .btn-primary{ 
-             margin-top:70px;
+             margin-top:50px;
           }
 
           .bottom{
@@ -192,6 +192,10 @@ class Login extends React.Component {
               color:#FFFFFF;
               font-weight:700;
               font-size:20px;
+            }
+
+            .error-container{
+              margin-top:120px;
             }
 
             

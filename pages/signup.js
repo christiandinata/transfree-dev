@@ -50,6 +50,7 @@ class Signup extends React.Component {
     }
   }
 
+
   handleSubmit(e) {
     e.preventDefault();
     if (this.state.password != this.state.confirmPassword) {
@@ -57,16 +58,28 @@ class Signup extends React.Component {
         verifyPassword:false
       })
     }else{
-      // alert("oke pas");
-       this.props.register(
-        { fullname: this.state.fullname, email: this.state.email, password: this.state.password },
-        'register'
+      e.preventDefault();
+      this.props.verify({
+        phone: this.state.phone,
+        email: this.state.email,
+        fullname: this.state.fullname,
+        password:this.state.password,
+      },
+        'verify'
       );
       this.setState({
         verifyPassword:true
       })
     }
   }
+
+  // handleSubmit(e) {
+  //   e.preventDefault();
+  //   this.props.authenticate(
+  //     { email: this.state.email, password: this.state.password },
+  //     'login'
+  //   );
+  // }
 
   render() {
     return (
@@ -128,12 +141,12 @@ class Signup extends React.Component {
                 />
                 <i onClick={this.toggleConfirmShow}>{eye}</i>
           </div>
-          {/* <label htmlFor="email">PHONE NUMBER</label>
+          <label htmlFor="email">PHONE NUMBER</label>
           <PhoneInput
               placeholder="Enter phone number"
               country="GB"
               value={ this.state.phone }
-              onChange={ phone => this.setState({ phone }) }/>   */}
+              onChange={ phone => this.setState({ phone }) }/>
 
           <button type="submit" className="btn-primary">{this.props.inProgress ? (
             <FontAwesomeIcon icon="sync-alt" spin style={{width:40,height:40}}/>
@@ -149,35 +162,28 @@ class Signup extends React.Component {
           display:inline;
           text-align:left;
         }
-
         .form-container label{
           display:none;
         }
-
         .form-container input{
           margin-bottom:10px;
         }
-
         .pass-wrapper{
           margin-bottom:0px;
         }
-
         i {
           position: absolute;
           top: 20%;
           right: 6%;
           // width:10px;
         }
-
         
         p{
           margin:0px;
         }
-
         .bottom-container{
           display:none;
         }
-
         @media only screen and (max-width: 414px) {
           .logo img{
             display:none;
@@ -185,54 +191,39 @@ class Signup extends React.Component {
           .box-title{
             margin-top:30px;
           }
-
           .form-container h1,p{
             display:none;
           }
-
           .bottom-container p{
             display:flex;
             font-size:20px;
             color:#FFFFFF;
           }
-
           .bottom-container{
             display:block;
           }
-
        
           .form-container label {
             font-size: 19px;
             text-transform: uppercase;
             display:flex;
-
             // margin-bottom:-15px;
             
           }
-
           // .pass-wrapper{
           //   margin-top:20px;
           // }
-
           .form-container input{
             // margin-bottom:60px;
             font-size:18px;
           }
-
           .bottom-container p > a{
             color:#FFFFFF;
             font-size:20px;
             font-family: "Open Sans", sans-serif;
              font-weight:900;    
-
           }
-
-
         }
-
-
-        
-
     `}</style>
       </AuthLayout>
     );

@@ -13,6 +13,7 @@ import checkReducer from './checkReducer';
 import complaintReducer from './complaintReducer';
 
 import donasiReducer from './donasiReducer';
+import initialDataUser from './initialDataReducer';
 
 
 const rootReducer = combineReducers({
@@ -28,7 +29,7 @@ const rootReducer = combineReducers({
   fx: fxMarginReducer,
   ck: checkReducer,
   complaint : complaintReducer,
-
+  initialDataUser: initialDataUser,
   donasi: donasiReducer,
 
  

@@ -205,6 +205,9 @@ class IdVerification extends React.Component {
         <style jsx>{`
           .container-fluid {
             flex-direction: column;
+            position:center;
+            margin-right:auto;
+            margin-left:auto;
           }
           .select-css {
             width: 100%;
