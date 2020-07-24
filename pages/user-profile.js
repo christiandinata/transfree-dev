@@ -24,7 +24,7 @@ class UserProfile extends React.Component {
             pob: this.props.user.pob ? this.props.user.pob : "",
             address: this.props.user.address ? this.props.user.address : "",
             password: "123456",
-            confirmPassword: "",
+            confirmPassword: "123456",
         };
     }
 
@@ -41,6 +41,7 @@ class UserProfile extends React.Component {
         this.checkAddress();
         this.checkPOB();
         this.checkEmailAddress();
+        this.checkPassword();
     }
 
     startEdit() {
@@ -53,6 +54,7 @@ class UserProfile extends React.Component {
         document.querySelector('#edit-button').style.display = 'none';
         document.querySelector('#logout-button').style.display = 'none';
         this.setState({password: ""});
+        this.setState({confirmPassword: ""});
     }
 
     stopEdit() {
@@ -65,6 +67,7 @@ class UserProfile extends React.Component {
         document.querySelector('#edit-button').style.display = 'block';
         document.querySelector('#logout-button').style.display = 'block';
         this.setState({password: "123456"});
+        document.querySelector("#error-password").className = "form-error-label-hidden";
     }
 
     componentDidMount() {
@@ -155,6 +158,14 @@ class UserProfile extends React.Component {
             document.querySelector("#error-email").className = "form-error-label";
         } else {
             document.querySelector("#error-email").className = "form-error-label-hidden";
+        }
+    }
+
+    checkPassword() {
+        if (document.querySelector("#password").value !== document.querySelector("#confirm-password").value) {
+            document.querySelector("#error-password").className = "form-error-label";
+        } else {
+            document.querySelector("#error-password").className = "form-error-label-hidden";
         }
     }
 
@@ -261,6 +272,10 @@ class UserProfile extends React.Component {
                                                    placeholder="Confirm your new password"
                                                    value={this.state.confirmPassword} name="confirmPassword"
                                                    onChange={this.handleChange.bind(this)}/>
+                                            <span
+                                                className="form-error-label-hidden"
+                                                id="error-password">
+                                                Password must be match.</span>
                                         </div>
                                     </div>
                                     <div className="create-profile-form-field-container-column"
