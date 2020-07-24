@@ -1,0 +1,275 @@
+import CustomDatePicker from '../components/CustomDatePicker';
+import Header from "../components/header";
+import Menu from "../components/menu";
+import '../styles/components/new-user/CreateProfile.css';
+import '../styles/new-user.css';
+import '../styles/user-profile.css';
+import {connect} from "react-redux";
+import initialize from "../utils/initialize";
+import actions from "../redux/actions";
+import {getCookie} from "../utils/cookie";
+import Link from 'next/link';
+import ENV from "../config";
+import GlobalFunction from "../utils/globalFunction";
+
+class UserProfile extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            emailUser: this.props.user.email ? this.props.user.email : "",
+            fullname: this.props.user.fullname ? this.props.user.fullname : "",
+            idNumber: this.props.user.idNumber ? this.props.user.idNumber : "",
+            gender: this.props.user.gender ? this.props.user.gender : "Male",
+            dob: this.props.user.dob ? this.props.user.dob : new Date(),
+            pob: this.props.user.pob ? this.props.user.pob : "",
+            address: this.props.user.address ? this.props.user.address : "",
+            password: "123456",
+            confirmPassword: "",
+        };
+    }
+
+    static async getInitialProps(ctx) {
+        initialize(ctx);
+        await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req), 'user', ctx.req));
+    };
+
+    handleChange(event) {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+    }
+
+    startEdit() {
+        document.querySelectorAll('input').forEach(element => element.disabled = false);
+        document.querySelectorAll('select').forEach(element => element.disabled = false);
+        document.querySelector('#confirm-password').style.display = 'block';
+        document.querySelector('#confirm-password-label').style.display = 'block';
+        document.querySelector('#cancel-button').style.display = 'block';
+        document.querySelector('#save-button').style.display = 'block';
+        document.querySelector('#edit-button').style.display = 'none';
+        document.querySelector('#logout-button').style.display = 'none';
+        this.setState({password: ""});
+    }
+
+    stopEdit() {
+        document.querySelectorAll('input').forEach(element => element.disabled = true)
+        document.querySelectorAll('select').forEach(element => element.disabled = true)
+        document.querySelector('#confirm-password').style.display = 'none';
+        document.querySelector('#confirm-password-label').style.display = 'none';
+        document.querySelector('#cancel-button').style.display = 'none';
+        document.querySelector('#save-button').style.display = 'none';
+        document.querySelector('#edit-button').style.display = 'block';
+        document.querySelector('#logout-button').style.display = 'block';
+        this.setState({password: "123456"});
+    }
+
+    componentDidMount() {
+        this.stopEdit();
+    }
+
+    updateUser = (e) => {
+        let urlFetch = ENV.API + `/${this.props.user._id}/user`;
+        let data;
+        if (this.state.password != "") {
+            data = {
+                "fullname": this.state.fullname,
+                "email": this.state.emailUser,
+                "idNumber": this.state.idNumber,
+                "gender": this.state.gender,
+                "dob": this.state.dob,
+                "pob": this.state.pob,
+                "address": this.state.address,
+                "password": this.state.password,
+            }
+        } else {
+            data = {
+                "fullname": this.state.fullname,
+                "email": this.state.emailUser,
+                "idNumber": this.state.idNumber,
+                "gender": this.state.gender,
+                "dob": this.state.dob,
+                "pob": this.state.pob,
+                "address": this.state.address,
+            }
+        }
+        fetch(urlFetch,
+            {
+                method: 'put',
+                headers: {
+                    "Authorization": `Bearer ${GlobalFunction.token ? GlobalFunction.token : this.props.token}`
+                },
+                body: JSON.stringify(data)
+
+
+            }).then((response) => response.json()).then(async (responseJson) => {
+            let user_data = this.props.user;
+
+            user_data.email = this.state.emailUser;
+            user_data.fullname = this.state.fullname;
+            user_data.idNumber = this.state.idNumber;
+            user_data.gender = this.state.gender;
+            user_data.dob = this.state.dob;
+            user_data.pob = this.state.pob;
+            user_data.address = this.state.address;
+
+            this.props.onChangeUser(this.user_data);
+            this.props.onChangeUserEmailLogin(this.state.emailUser);
+
+            this.stopEdit();
+        }).catch((error) => {
+            console.log(error)
+            alert("Please check your data");
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <Header/>
+                <Menu/>
+                <div className="new-user-page">
+                    <div className="new-user-container">
+                        <div className="new-user-header">
+                            <div className="new-user-title" id="user-profile-title">Profile Detail</div>
+                            <div className="new-user-close">
+                                <a href="/">
+                                    <img src="../../static/images/close.svg"/>
+                                </a>
+                            </div>
+                        </div>
+                        <div className="create-profile-form-body-heading">
+                            <div className="create-profile-profile-picture">
+                                <img style={{marginTop: "2%"}} src="../../static/images/profile.svg"/>
+                            </div>
+                        </div>
+                        <div className="create-profile-form-body">
+                            <div className="create-profile-form-box" style={{flexDirection: "column"}}>
+                                <div className="create-profile-form-field-container">
+                                    <div className="create-profile-form-field-container-column">
+                                        <div className="create-profile-form-field">
+                                            <label className="create-profile-form-label" htmlFor="full-name">Full
+                                                Name</label>
+                                            <input name="fullname" id="full-name" placeholder="Enter Full Name"
+                                                   value={this.state.fullname} onChange={this.handleChange.bind(this)}/>
+                                        </div>
+                                        <div className="create-profile-form-field">
+                                            <label className="create-profile-form-label" htmlFor="id-number">ID
+                                                Number</label>
+                                            <input name="idNumber" id="id-number" placeholder="Enter ID number"
+                                                   value={this.state.idNumber} onChange={this.handleChange.bind(this)}/>
+                                            <span className="form-error-label-hidden">You must input your ID Number (KTP/Passport/SIM)!</span>
+                                        </div>
+                                        <div className="create-profile-form-field">
+                                            <label className="create-profile-form-label" htmlFor="gender">Gender</label>
+                                            <select name="gender" id="gender" placeholder="Choose your gender"
+                                                    value={this.state.gender} onChange={this.handleChange.bind(this)}>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                                <option value="Others">Others</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className="create-profile-form-field-container-column">
+                                        <div className="create-profile-form-field">
+                                            <label className="create-profile-form-label" htmlFor="pob">Place of
+                                                Birth</label>
+                                            <input name="pob" id="pob" placeholder="Enter the city (e.g. Jakarta)"
+                                                   value={this.state.pob} onChange={this.handleChange.bind(this)}/>
+                                            <span
+                                                className="form-error-label-hidden">Your Place of Birth may not be empty.</span>
+                                        </div>
+                                        <div className="create-profile-form-field">
+                                            <label className="create-profile-form-label" htmlFor="dob">Date of
+                                                Birth</label>
+                                            <CustomDatePicker date={this.state.dob} name="dob" id="dob"
+                                                              onChange={(value) => this.setState({dob: value})}/>
+                                        </div>
+                                        <div className="create-profile-form-field">
+                                            <label className="create-profile-form-label"
+                                                   htmlFor="address">Address</label>
+                                            <input id="address" name="address" placeholder="Enter your full address"
+                                                   value={this.state.address} onChange={this.handleChange.bind(this)}/>
+                                            <span
+                                                className="form-error-label-hidden">Your address may not be empty.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h2 className="user-profile-subheader">Account</h2>
+                                <div className="create-profile-form-field-container">
+                                    <div className="create-profile-form-field-container-column">
+                                        <div className="create-profile-form-field">
+                                            <label className="create-profile-form-label" htmlFor="email-address">
+                                                Email Address</label>
+                                            <input name="emailUser" id="email-address" placeholder="Enter Email Address"
+                                                   value={this.state.emailUser}
+                                                   onChange={this.handleChange.bind(this)}/>
+                                        </div>
+                                        <div className="create-profile-form-field">
+                                            <label className="create-profile-form-label"
+                                                   htmlFor="password">Password</label>
+                                            <input name="password" id="password" type="password"
+                                                   placeholder="Enter Password" value={this.state.password}
+                                                   onChange={this.handleChange.bind(this)}/>
+                                        </div>
+                                        <div className="create-profile-form-field">
+                                            <label
+                                                className="create-profile-form-label"
+                                                htmlFor="confirm-password"
+                                                id="confirm-password-label"
+                                            >Confirm Password</label>
+                                            <input id="confirm-password" type="password"
+                                                   placeholder="Confirm your password"
+                                                   value={this.state.confirmPassword} name="confirmPassword"
+                                                   onChange={this.handleChange.bind(this)}/>
+                                        </div>
+                                    </div>
+                                    <div className="create-profile-form-field-container-column"
+                                         id="user-profile-field-button">
+                                        <div className="create-profile-form-field" id="user-profile-buttons">
+                                            <button className='form-submit-button'
+                                                    onClick={this.startEdit.bind(this)}
+                                                    id="edit-button"
+                                            >Edit
+                                            </button>
+                                            <button className='form-submit-button'
+                                                    style={{backgroundColor: '#ea5252'}}
+                                                    id="logout-button"
+                                            >
+                                                <Link href="/logout">Log out</Link>
+                                            </button>
+                                            <button
+                                                className='form-submit-button'
+                                                style={{backgroundColor: '#ea5252'}}
+                                                onClick={this.stopEdit.bind(this)}
+                                                id="cancel-button"
+                                            >
+                                                Cancel
+                                            </button>
+                                            <button className='form-submit-button'
+                                                    onClick={this.updateUser}
+                                                    id="save-button"
+                                            >Save
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+
+const mapStateToProps = (state) => ({
+    user: state.user.user_data,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    onChangeUser: (value) => dispatch(onChangeUser(value)),
+    onChangeUserEmailLogin: (value) => dispatch(onChangeUserEmailLogin(value)),
+    onChangeUserPasswordLogin: (value) => dispatch(onChangeUserPasswordLogin(value)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
