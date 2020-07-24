@@ -37,6 +37,10 @@ class UserProfile extends React.Component {
         this.setState({
             [event.target.name]: event.target.value
         });
+        this.checkIdNumber();
+        this.checkAddress();
+        this.checkPOB();
+        this.checkEmailAddress();
     }
 
     startEdit() {
@@ -122,6 +126,38 @@ class UserProfile extends React.Component {
         });
     }
 
+    checkIdNumber() {
+        if (document.querySelector("#id-number").value === "") {
+            document.querySelector("#error-idnumber").className = "form-error-label";
+        } else {
+            document.querySelector("#error-idnumber").className = "form-error-label-hidden";
+        }
+    }
+
+    checkPOB() {
+        if (document.querySelector("#pob").value === "") {
+            document.querySelector("#error-pob").className = "form-error-label";
+        } else {
+            document.querySelector("#error-pob").className = "form-error-label-hidden";
+        }
+    }
+
+    checkAddress() {
+        if (document.querySelector("#address").value === "") {
+            document.querySelector("#error-address").className = "form-error-label";
+        } else {
+            document.querySelector("#error-address").className = "form-error-label-hidden";
+        }
+    }
+
+    checkEmailAddress() {
+        if (document.querySelector("#email-address").value === "") {
+            document.querySelector("#error-email").className = "form-error-label";
+        } else {
+            document.querySelector("#error-email").className = "form-error-label-hidden";
+        }
+    }
+
     render() {
         return (
             <div>
@@ -157,7 +193,8 @@ class UserProfile extends React.Component {
                                                 Number</label>
                                             <input name="idNumber" id="id-number" placeholder="Enter ID number"
                                                    value={this.state.idNumber} onChange={this.handleChange.bind(this)}/>
-                                            <span className="form-error-label-hidden">You must input your ID Number (KTP/Passport/SIM)!</span>
+                                            <span className="form-error-label-hidden" id="error-idnumber"
+                                            >You must input your ID Number (KTP/Passport/SIM)!</span>
                                         </div>
                                         <div className="create-profile-form-field">
                                             <label className="create-profile-form-label" htmlFor="gender">Gender</label>
@@ -176,7 +213,7 @@ class UserProfile extends React.Component {
                                             <input name="pob" id="pob" placeholder="Enter the city (e.g. Jakarta)"
                                                    value={this.state.pob} onChange={this.handleChange.bind(this)}/>
                                             <span
-                                                className="form-error-label-hidden">Your Place of Birth may not be empty.</span>
+                                                className="form-error-label-hidden" id="error-pob">Your Place of Birth may not be empty.</span>
                                         </div>
                                         <div className="create-profile-form-field">
                                             <label className="create-profile-form-label" htmlFor="dob">Date of
@@ -190,7 +227,7 @@ class UserProfile extends React.Component {
                                             <input id="address" name="address" placeholder="Enter your full address"
                                                    value={this.state.address} onChange={this.handleChange.bind(this)}/>
                                             <span
-                                                className="form-error-label-hidden">Your address may not be empty.</span>
+                                                className="form-error-label-hidden" id="error-address">Your address may not be empty.</span>
                                         </div>
                                     </div>
                                 </div>
@@ -203,12 +240,15 @@ class UserProfile extends React.Component {
                                             <input name="emailUser" id="email-address" placeholder="Enter Email Address"
                                                    value={this.state.emailUser}
                                                    onChange={this.handleChange.bind(this)}/>
+                                            <span className="form-error-label-hidden" id="error-email">
+                                                Your Email may not be empty.</span>
+
                                         </div>
                                         <div className="create-profile-form-field">
                                             <label className="create-profile-form-label"
                                                    htmlFor="password">Password</label>
                                             <input name="password" id="password" type="password"
-                                                   placeholder="Enter Password" value={this.state.password}
+                                                   placeholder="Enter New Password" value={this.state.password}
                                                    onChange={this.handleChange.bind(this)}/>
                                         </div>
                                         <div className="create-profile-form-field">
@@ -216,9 +256,9 @@ class UserProfile extends React.Component {
                                                 className="create-profile-form-label"
                                                 htmlFor="confirm-password"
                                                 id="confirm-password-label"
-                                            >Confirm Password</label>
+                                            >Confirm New Password</label>
                                             <input id="confirm-password" type="password"
-                                                   placeholder="Confirm your password"
+                                                   placeholder="Confirm your new password"
                                                    value={this.state.confirmPassword} name="confirmPassword"
                                                    onChange={this.handleChange.bind(this)}/>
                                         </div>
