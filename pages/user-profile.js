@@ -75,58 +75,64 @@ class UserProfile extends React.Component {
     }
 
     updateUser = (e) => {
-        let urlFetch = ENV.API + `/${this.props.user._id}/user`;
-        let data;
-        if (this.state.password != "") {
-            data = {
-                "fullname": this.state.fullname,
-                "email": this.state.emailUser,
-                "idNumber": this.state.idNumber,
-                "gender": this.state.gender,
-                "dob": this.state.dob,
-                "pob": this.state.pob,
-                "address": this.state.address,
-                "password": this.state.password,
+        if (this.checkData()) {
+
+
+            let urlFetch = ENV.API + `/${this.props.user._id}/user`;
+            let data;
+            if (this.state.password != "") {
+                data = {
+                    "fullname": this.state.fullname,
+                    "email": this.state.emailUser,
+                    "idNumber": this.state.idNumber,
+                    "gender": this.state.gender,
+                    "dob": this.state.dob,
+                    "pob": this.state.pob,
+                    "address": this.state.address,
+                    "password": this.state.password,
+                }
+            } else {
+                data = {
+                    "fullname": this.state.fullname,
+                    "email": this.state.emailUser,
+                    "idNumber": this.state.idNumber,
+                    "gender": this.state.gender,
+                    "dob": this.state.dob,
+                    "pob": this.state.pob,
+                    "address": this.state.address,
+                }
             }
+            fetch(urlFetch,
+                {
+                    method: 'put',
+                    headers: {
+                        "Authorization": `Bearer ${GlobalFunction.token ? GlobalFunction.token : this.props.token}`
+                    },
+                    body: JSON.stringify(data)
+
+
+                }).then((response) => response.json()).then(async (responseJson) => {
+                let user_data = this.props.user;
+
+                user_data.email = this.state.emailUser;
+                user_data.fullname = this.state.fullname;
+                user_data.idNumber = this.state.idNumber;
+                user_data.gender = this.state.gender;
+                user_data.dob = this.state.dob;
+                user_data.pob = this.state.pob;
+                user_data.address = this.state.address;
+
+                this.props.onChangeUser(this.user_data);
+                this.props.onChangeUserEmailLogin(this.state.emailUser);
+
+                this.stopEdit();
+            }).catch((error) => {
+                console.log(error)
+                alert("Please check your data");
+            });
         } else {
-            data = {
-                "fullname": this.state.fullname,
-                "email": this.state.emailUser,
-                "idNumber": this.state.idNumber,
-                "gender": this.state.gender,
-                "dob": this.state.dob,
-                "pob": this.state.pob,
-                "address": this.state.address,
-            }
-        }
-        fetch(urlFetch,
-            {
-                method: 'put',
-                headers: {
-                    "Authorization": `Bearer ${GlobalFunction.token ? GlobalFunction.token : this.props.token}`
-                },
-                body: JSON.stringify(data)
-
-
-            }).then((response) => response.json()).then(async (responseJson) => {
-            let user_data = this.props.user;
-
-            user_data.email = this.state.emailUser;
-            user_data.fullname = this.state.fullname;
-            user_data.idNumber = this.state.idNumber;
-            user_data.gender = this.state.gender;
-            user_data.dob = this.state.dob;
-            user_data.pob = this.state.pob;
-            user_data.address = this.state.address;
-
-            this.props.onChangeUser(this.user_data);
-            this.props.onChangeUserEmailLogin(this.state.emailUser);
-
-            this.stopEdit();
-        }).catch((error) => {
-            console.log(error)
             alert("Please check your data");
-        });
+        }
     }
 
     checkIdNumber() {
@@ -167,6 +173,14 @@ class UserProfile extends React.Component {
         } else {
             document.querySelector("#error-password").className = "form-error-label-hidden";
         }
+    }
+
+    checkData() {
+        return document.querySelector("#id-number").value !== "" &&
+            document.querySelector("#pob").value !== "" &&
+            document.querySelector("#address").value !== "" &&
+            document.querySelector("#email-address").value !== "" &&
+            document.querySelector("#password").value === document.querySelector("#confirm-password").value;
     }
 
     render() {
