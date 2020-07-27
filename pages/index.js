@@ -256,15 +256,15 @@ class Index extends React.Component {
           <div className="container">
             <div className="left-container">
               <div className="text" style={{marginTop:40}}>
-                    <h1 style={{fontWeight:400}}>International</h1>
+                    <h1 style={{fontWeight:600}}>International</h1>
                     <h2 style={{fontWeight:900}}> Money</h2>
               </div>
               <div className="text">
                     <h1 style={{fontWeight:900}}>Transfer</h1>
-                    <h1 style={{fontWeight:400}}> feels like </h1>
+                    <h1 style={{fontWeight:600}}> feels like </h1>
                     <h2 style={{fontWeight:900}}> Local</h2>
               </div>
-              <h3 style={{marginTop:0}}>Send today, receive money in sameday or next working day</h3>
+              <p style={{marginTop:0}}>Send today, receive money in sameday or next working day</p>
               <a  href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-primary-start" style={{fontSize:15,marginTop:23}}>How it works</a>
               {/* <div style={{marginTop:40}}>
                
@@ -678,9 +678,9 @@ class Index extends React.Component {
                      </div>
      
                      <div className="message" style={{fontSize:"1.6vw"}}>
-                           <h3 style={{color:"#000000",textAlign:"center"}}>Does your family need it for an emergency? And when you use</h3>
-                           <h3 style={{color:"#000000", textAlign:"center",marginTop:-20}}>a cheaper option, it sometimes takes longer for your money to arrive</h3>
-                           <h3 style={{color:"#000000",textAlign:"center",marginTop:-20}}>Don't worry, we are here now</h3>
+                           <p style={{color:"#000000",textAlign:"center"}}>Does your family need it for an emergency? And when you use</p>
+                           <p style={{color:"#000000", textAlign:"center",marginTop:-20}}>a cheaper option, it sometimes takes longer for your money to arrive</p>
+                           <p style={{color:"#000000",textAlign:"center",marginTop:-20}}>Don't worry, we are here now</p>
                      </div>
                </div>
           </div>
@@ -719,7 +719,7 @@ class Index extends React.Component {
               <div className="first-benefit" style={{marginBottom:"5%"}}>
               <button className="btn-primary-2">Better rate for transfer</button>
               <div className="first-message">
-                <h1 style={{textAlign:"center",fontSize:"15pt",marginTop:12}}>Better rate for transfer</h1>
+                <h1 style={{textAlign:"center",fontSize:"15pt",marginTop:5}}>Better rate for transfer</h1>
                 <p style={{textAlign:"center"}}>Does your family need it for an emergency? And when you use a cheaper option,it sometimes takes longer for your money to arriveDon't worry, we are here now</p>
               </div>
               </div>
@@ -727,7 +727,7 @@ class Index extends React.Component {
               <div className="first-benefit" style={{marginBottom:"5%"}} >
               <button className="btn-primary-2">Quickly sent quickly arrived</button>
               <div className="first-message">
-                <h1 style={{textAlign:"center",fontSize:"15pt",marginTop:12}}>Quickly sent quickly arrived</h1>
+                <h1 style={{textAlign:"center",fontSize:"15pt",marginTop:5}}>Quickly sent quickly arrived</h1>
                 <p style={{textAlign:"center"}}>Does your family need it for an emergency? And when you use a cheaper option,it sometimes takes longer for your money to arriveDon't worry, we are here now</p>
               </div>
               </div>
@@ -735,7 +735,7 @@ class Index extends React.Component {
               <div className="first-benefit" style={{marginBottom:"5%"}}>
               <button className="btn-primary-2">Unchargeable for Transfer</button>
               <div className="first-message">
-              <h1 style={{textAlign:"center",fontSize:"15pt",marginTop:12}}>Unchargeable for Transfer</h1>
+              <h1 style={{textAlign:"center",fontSize:"15pt",marginTop:5}}>Unchargeable for Transfer</h1>
                 <p style={{textAlign:"center"}}>Does your family need it for an emergency? And when you use a cheaper option,it sometimes takes longer for your money to arriveDon't worry, we are here now</p>
               </div>
               </div>
@@ -750,9 +750,7 @@ class Index extends React.Component {
           </div>
 
           <div className="right-container">
-              <h1 style={{fontSize:"2.2vw"}}>Mobile Application now in</h1>
-
-
+              <h1 style={{fontSize:"2.0vw"}}>Mobile Application now in</h1>
           <div >
 
 
@@ -803,7 +801,7 @@ class Index extends React.Component {
 
         <div className="row achievement-mobile">
           <div className="container">
-          <h1>What we have achieved?</h1>
+           <h1>What we have achieved?</h1>
           </div>
         </div>
 
@@ -862,6 +860,20 @@ class Index extends React.Component {
       hr.line{
           border: 1px solid black;
           width:300px;
+      }
+
+      .application .right-container > h1,
+      .application-mobile .right-container >h1{
+        font-weight:500;
+        text-shadow:  0 0 15px black;
+        // display:none;
+      }
+
+      .achievement  h1{
+        font-weight:500;
+        text-shadow:  0 0 15px black;
+        font-size:20px;
+        //  display:none;
       }
 
 
@@ -1091,8 +1103,16 @@ class Index extends React.Component {
 
        .left-container h1 {
         font-family: 70px 'Open Sans', sans-serif;
+        font-weight: 800;
+        color: #FFFFFF;
+      }
+
+      .left-container > p {
+        font-family:"Open Sans", sans-serif;
         font-weight: 700;
         color: #FFFFFF;
+        font-size:16px;
+        
       }
 
       .left-container img {
@@ -1449,7 +1469,7 @@ class Index extends React.Component {
           }
 
           .converter-container {
-            padding: 15px 10px 23px 20px;
+            padding: 15px 20px 23px 20px;
             background: #354E7A;
             box-shadow: 0 10px 30px 0 rgba(0,0,0,0.30);
             border-radius: 30px;
@@ -1569,6 +1589,7 @@ class Index extends React.Component {
           .cta-primary {
             flex-basis: 50%;
             padding: 5px;
+            
           }
 
           .cta-secondary a,

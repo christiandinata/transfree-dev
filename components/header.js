@@ -22,7 +22,7 @@ const Header = () => (
         src: url('../static/fonts/Campton_Bold.otf');
       }
       body {
-        font-family: 'Campton-Book', sans-serif;
+         font-family: "Open Sans", sans-serif; 
         line-height: 1.6;
         letter-spacing: 0.2px;
         color: #3E495E;
@@ -33,7 +33,7 @@ const Header = () => (
         -moz-osx-font-smoothing: grayscale;
       }
       h1, h2, h3, h4, b, .bold, button {
-        font-family: 70px 'Campton-Bold', sans-serif;
+        font-family: 70px 'Open Sans', sans-serif;
         font-weight: 900;
         color: #000000;
       }
@@ -145,7 +145,7 @@ const Header = () => (
         color: #000000;
         text-decoration: none;
         transition: 0.2s ease-in;
-        font-family: 'Campton-Bold', sans-serif;
+        font-family: "Open Sans", sans-serif; 
         font-weight: bold;
       }
       ul > li > a:hover {

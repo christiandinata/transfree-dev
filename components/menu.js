@@ -74,7 +74,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
           font-size: 16px;
           border-radius: 24px;
           transition: all 0.2s ease;
-          margin-left:10px;
+          margin-left:0px;
         }
         .row {
           border-bottom: 1px solid #FFFFFF;
@@ -150,16 +150,16 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
         }
         
         .authorized-menu li a {
-          font-family: sans;
+          font-family: "Open Sans", sans-serif;   
           color: black !important;
           text-decoration: none;
           font-size: 1.3rem;
-          font-weight: bold;
+          font-weight: 100;
           vertical-align: middle;
         }      
           
         .unauthorized-menu li a {
-          font-family: sans;
+          font-family: "Open Sans", sans-serif;  
           color: black !important;
           text-decoration: none;
         }
@@ -182,7 +182,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
           position: relative;
           left: 50px;
           z-index: 100;
-          height: 55px;
+          height: 35px;
           margin-left: 2%;
           margin-top: 2.5%;
           
@@ -228,7 +228,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
         }
         #menuToggle span:nth-last-child(2)
         {
-          transform-origin: 0% 100%;
+          transform-origin: 10% 100%;
         }
         /*
          * Transform all the slices of hamburger
@@ -237,8 +237,8 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
         #menuToggle input:checked ~ span
         {
           opacity: 1;
-          transform: rotate(45deg) translate(4px, 6px);
-          background: #232323;
+          transform: rotate(45deg) translate(1px, 1px);
+          background: #FFFFFF;
         }
         /*
          * But let's hide the middle one.
@@ -278,10 +278,12 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
         }
         #menu li
         {
-          padding: 0px 0;
+          padding: 0px 0px;
           font-size: 22px;
           display: block;
           margin-bottom:20px;
+          margin-top:20px;
+
         }
         /*
          * And let's slide it in from the left
@@ -315,12 +317,14 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
             height: 40px;
           }
           
+        
           ul > li > a {
             color:#FFFFFF;
             text-decoration: none;
             transition: 0.2s ease-in;
             font-size: 20px;
-            font-family: 'Campton-Bold', sans-serif;
+            font-family: 'Open Sans', sans-serif;
+
             
           }
           #menu {
