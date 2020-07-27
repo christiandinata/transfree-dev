@@ -88,7 +88,7 @@ class Signup extends React.Component {
           <Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>
         </div>
         {/* <h1>Register</h1> */}
-        <div className={"error-container "+(this.props.errorMessage != '' && this.state.email == '' && this.props.errorMessage != undefined ? "error-show" : "") }>
+        <div className={"error-container "+(this.props.errorMessage != '' && this.props.errorMessage != undefined ? "error-show" : "") }>
           {this.props.errorMessage}
         </div>
         <div className={"error-container "+(this.props.errorMessage != ' '&& this.state.verifyPassword == false ? "error-show" : "") }>

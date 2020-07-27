@@ -26,14 +26,15 @@ const verify = ({ phone, email,fullname,password }, type) => {
     // axios.post(`${API}/login`, { email, password })
       .then((response) => {    
           Router.push('/phone-verification');
+          console.log(response);
           dispatch({type: VERIFY_PHONE, payload: response.data.serviceSid});
           dispatch({type:INITIAL_DATA_USER,payload:({email,fullname,password,phone})});
       })
       .catch((error) => {
         let errorMessage = '';
         switch (error.response.status) {
-          case 200:
-            errorMessage = 'Phone number and email has been used';
+          case 422:
+            errorMessage = error.response.data.message;
             break;
         }
         dispatch({type: AUTHENTICATE_ERROR, payload: errorMessage});

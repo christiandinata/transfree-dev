@@ -69,6 +69,7 @@ const authenticate = ({ email, password }, type) => {
     dispatch({type: AUTHENTICATE_PROGRESS, payload: true});
     axios.post(`${API}/${type}`, { email, password })
       .then((response) => {
+        console.log(response);
         setCookie('token', response.data.token);
         const userData = response.data.user_data;
         setCookie('_id', userData._id)
