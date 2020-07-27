@@ -56,7 +56,7 @@ const uploadPhotoFillAdmin = ({ photoId, photoFace, email }, type) => {
   }
   return (dispatch) => {
     dispatch({type: PHOTO_UPLOAD_PROGRESS, payload: true});
-    axios.post(`${API}/user/uploadPhotoFillAdmin`, {photoId, photoFace, email}, {
+    axios.post(`${API}/v1/user/uploadPhotoFillAdmin`, {photoId, photoFace, email}, {
       headers: {
         Authorization: `Bearer ${getCookie('token')}`
       }
