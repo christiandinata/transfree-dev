@@ -98,7 +98,7 @@ class Signup extends React.Component {
         <div className="box-title">Register</div>
         <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
         <h1 style={{marginTop:10,textAlign:"center"}}>Join us</h1>
-        <p style={{marginTop:-10,fontSize:15,color:"grey"}}>Already have an Account? <a className="link" href="/login">Log In</a></p>
+        <p style={{marginTop:-10,fontSize:13,color:"grey",opacity:"66%"}}>Already have an Account? <a className="link" href="/login">Log In</a></p>
         <label htmlFor="email">FULL NAME</label>
         <input
             type="text"
@@ -155,12 +155,29 @@ class Signup extends React.Component {
         <div className="bottom-container">
           <p>Already have an Account?  <a href="/login"> Log In</a></p>
         </div>
-        <p><a className="link" href="/">Back to Home</a></p>
+        <div className = "bottom-container-web">
+        <div className="left">
+          <a href></a><img src="../static/images/Sign Up ASSET WEB/Component 2 – 11.png"></img>
+          <a href><img src="../static/images/Sign Up ASSET WEB/Component 2 – 12.png"></img></a>
+             
+          </div>
+          <div className="right">
+           <p style={{fontSize:13,marginRight:"19%"}}><a className="link" href="/">&lt; Back to Home</a></p>
+          </div>
+         
+          
+        </div>
         
         <style jsx>{`
         .right .bottom-container p,h5 { 
           display:inline;
           text-align:left;
+        }
+
+        h1{
+          font-size:20px;
+          font-family: "Open Sans", sans-serif;
+           font-weight:500;    
         }
         .form-container label{
           display:none;
@@ -173,16 +190,54 @@ class Signup extends React.Component {
         }
         i {
           position: absolute;
-          top: 20%;
+          top: 30%;
           right: 6%;
           // width:10px;
         }
-        
-        p{
+        p > a{
           margin:0px;
-        }
+          font-weight:540;
+          font-color:#5BB7DE;
+          -webkit-text-stroke:0.5px #5BB7DE;
+      }
         .bottom-container{
           display:none;
+        }
+        .bottom-container-web{
+          display:flex;
+          flex-direction:row;
+          // background:blue;
+          margin:0 auto;
+          width:100%;
+          align-items: flex-start;
+          justify-content: flex-start;
+          align-self: flex-start;
+        }
+
+        .bottom-container-web .left{
+          flex-basis:26%;
+          // background:red; 
+          display:flex;
+          margin-top:1%;
+          justify-content: flex-end;
+          align-self: flex-start;
+        }
+
+        .bottom-container-web .right{
+          flex-basis:60%;
+          // background:yellow;
+          text-align:left;
+          margin-top:1%;
+          align-items: flex-start;
+          justify-content: flex-start;
+          align-self: flex-start;
+          margin-top:-1%;
+        }
+
+        .bottom-container-web img{
+          height:25px;
+          width:25px;
+          tex-align:center;
         }
         @media only screen and (max-width: 414px) {
           .logo img{
@@ -222,6 +277,10 @@ class Signup extends React.Component {
             font-size:20px;
             font-family: "Open Sans", sans-serif;
              font-weight:900;    
+          }
+
+          .bottom-container-web{
+            display:none;
           }
         }
     `}</style>

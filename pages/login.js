@@ -50,12 +50,12 @@ class Login extends React.Component {
         
         <div className="box-title">Login</div>
         <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
-        <p style={{marginBottom:"15%",color:"grey"}}>Don't you have an account?  <Link href="/signup"><a className="link">Sign up</a></Link></p>
+        <p style={{marginBottom:"15%",color:"grey"}}>Don't you have an account?<a href="/signup" className="link" style={{marginLeft:10}}>Sign up</a></p>
           <label htmlFor="email">Email address</label><br/>
           <input
             type="email"
             id="email"
-            placeholder="Enter your email address"
+            placeholder="Your email address"
             required
             value={this.state.email}
             onChange={e => this.setState({ email: e.target.value })}
@@ -66,7 +66,7 @@ class Login extends React.Component {
             <input
                   type={this.state.hiddenPass ? "text" : "password"}
                   id="password"
-                  placeholder="Password"
+                  placeholder="Your password"
                   autoComplete="new-password"
                   value={this.state.password}
                   onChange={e => this.setState({ password: e.target.value })}
@@ -84,13 +84,17 @@ class Login extends React.Component {
 
        <div className="bottom">
           <h1 ><Link href="/forgot"><a className="link">Forgot Password? </a></Link></h1>
-          <p>Don't you have an account?  <Link href="/signup"><a className="link">Sign up</a></Link></p>
+          <p>Don't you have an account?<a className="link" href="/signup"> Sign up</a></p>
        </div>
-       <p><a className="link" href="/">Back to Home</a></p>
+       <p><a style={{fontSize:13}} className="link" href="/"> &lt; Back to Home</a></p>
        
         <style jsx>{`
           .form-container input{
             margin-bottom:20px;
+          }
+
+          i{
+            margin-top:5%;
           }
          
 
@@ -102,15 +106,18 @@ class Login extends React.Component {
             display:none;
           }
 
-          p{
-            margin:0px;
-          }
-
+         
           .form-container > label {
             display:none;
             
           }
       
+          p > a{
+            margin:0px;
+            font-weight:510;
+            font-color:#5BB7DE;
+            -webkit-text-stroke:0.5px #5BB7DE;
+        }
           @media only screen and (max-width: 414px) {
             .logo > a > img{
               display:none;

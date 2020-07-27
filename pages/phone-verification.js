@@ -75,8 +75,8 @@ class PhoneVerification extends React.Component {
 
 
             <button type="submit" className="btn-primary">{this.props.inProgress ? (
-              <FontAwesomeIcon icon="sync-alt" spin/>
-            ) : 'Continue'}</button>
+              <FontAwesomeIcon icon="sync-alt" spin style={{width:40,height:40}}/>
+            ) : 'Verification Code'}</button>
 
             <div className="bottom-mobile">
                  
@@ -91,8 +91,25 @@ class PhoneVerification extends React.Component {
             <p>Don't you have an account?<Link href="/signup"><a className="link"> Sign up</a></Link></p>
        </div>
 
+       <div className = "bottom-container-web">
+        <div className="left">
+          <a href  = "/signup"><img src="../static/images/Sign Up ASSET WEB/Component 2 – 12.png"></img></a>
+          <a href></a><img src="../static/images/Sign Up ASSET WEB/Component 2 – 11.png"></img>
+          
+             
+          </div>
+          <div className="right">
+           {/* <p style={{fontSize:13}}><a className="link" href="/">&lt; Back to Home</a></p> */}
+          </div>
+        </div>
+
       
         <style jsx>{`
+         h1{
+          font-size:20px;
+          font-family: "Open Sans", sans-serif;
+           font-weight:500;    
+        }
             #partitioned {
               padding-left: 9px;
               letter-spacing: 32px;
@@ -129,6 +146,7 @@ class PhoneVerification extends React.Component {
             color:#707070;
             font-size:15px;
             margin-bottom:20%;
+            font-weight:640;
           }
           .form-container span{
             font-weight:900;
@@ -142,6 +160,43 @@ class PhoneVerification extends React.Component {
             width:15%;
             margin-left:5%;
             // margin-top:6%;
+          }
+
+          .bottom-container-web{
+            display:flex;
+            flex-direction:row;
+            // background:blue;
+            margin:0 auto;
+            width:100%;
+            align-items: flex-start;
+            justify-content: flex-start;
+            align-self: flex-start;
+          }
+      
+          .bottom-container-web .left{
+            flex-basis:26%;
+            // background:red; 
+            display:flex;
+            margin-top:1%;
+            justify-content: flex-end;
+            align-self: flex-start;
+          }
+      
+          .bottom-container-web .right{
+            flex-basis:60%;
+            // background:yellow;
+            text-align:left;
+            margin-top:1%;
+            align-items: flex-start;
+            justify-content: flex-start;
+            align-self: flex-start;
+            margin-top:-1%;
+          }
+      
+          .bottom-container-web img{
+            height:25px;
+            width:25px;
+            tex-align:center;
           }
           
           a{
@@ -181,6 +236,9 @@ class PhoneVerification extends React.Component {
              text-decoration:none;
             
            }
+           .bottom-container-web{
+            display:none;
+          }
           }
         `}</style>
       </AuthLayout>
@@ -193,6 +251,7 @@ const mapStateToProps = (state) => {
     serviceSid: state.verify.serviceSid,
     inProgress: state.verify.inProgress,
     data : state.initialDataUser.data_user,
+    errorMessage: state.authentication.errorMessage
   }
 };
 

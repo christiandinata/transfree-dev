@@ -36,10 +36,7 @@ const verify = ({ phone, email,fullname,password }, type) => {
             errorMessage = 'Phone number and email has been used';
             break;
         }
-
         dispatch({type: AUTHENTICATE_ERROR, payload: errorMessage});
-
-
       });
   };
 };
