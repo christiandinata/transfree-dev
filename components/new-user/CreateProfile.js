@@ -61,7 +61,6 @@ function CreateProfile (props) {
         dob: dateOfBirth,
         address: address,
         email: props.userData.email,
-        idName: props.userData.fullname,
       },
       'createProfile'
     )
