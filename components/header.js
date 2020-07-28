@@ -166,23 +166,6 @@ const Header = () => (
         height: initial;
         border: 0;
       }
-      .react-datepicker-wrapper,
-      .react-datepicker__input-container {
-        width: 100%;
-      }
-      .react-datepicker__input-container input {
-        width: 100%;
-        margin-bottom: 30px;
-        border: none;
-        font-size: 16px;
-        padding: 15px 0;
-        border-bottom: 1px solid #eaeaea;
-        font-family: "Campton-Book", sans-serif;
-      }
-      .react-datepicker__input-container input:focus {
-        outline: none;
-        border-bottom: 1px solid #469DDD;
-      }
       ::placeholder {
         color: #CACACA;
       }
