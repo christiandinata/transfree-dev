@@ -34,7 +34,7 @@ const register = ({ fullname, email, password,phone,code,serviceSid }, type) => 
         if (userData.role == 'admin') {
           Router.replace('/dashboard/home')
         } else {
-          Router.replace('/');
+          Router.replace('/id-verification');
         }
         dispatch({type: REGISTER, payload: response.data.token});
         dispatch({type: USER_DATA, payload: response.date.user_data});
@@ -77,7 +77,7 @@ const authenticate = ({ email, password }, type) => {
           Router.replace('/dashboard/home')
         } else {
           if (userData.isApproved) {
-            Router.replace('/account');
+            Router.replace('/home');
           } else {
             switch(userData.registrationStep) {
               case 1:
@@ -90,7 +90,7 @@ const authenticate = ({ email, password }, type) => {
                 Router.replace('/photo-verification');
                 break;
               case 4:
-                Router.replace('/account');
+                Router.replace('/home');
                 break;
             }
           }

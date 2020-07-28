@@ -15,7 +15,7 @@ app.prepare()
 
     server.get('/', (req, res) => {
       if(req.cookies.token) {
-        res.redirect('/account');
+        res.redirect('/home');
       } else {
         return app.render(req, res, '/index', req.query);
       }
@@ -25,7 +25,15 @@ app.prepare()
       if(!req.cookies.token) {
         res.redirect('/');
       } else {
-        return app.render(req, res, '/account', req.query);
+        return app.render(req, res, '/home', req.query);
+      }
+    });
+
+    server.get('/home', (req, res) => {
+      if(!req.cookies.token) {
+        res.redirect('/login');
+      } else {
+        return app.render(req, res, '/home', req.query);
       }
     });
 
@@ -36,6 +44,15 @@ app.prepare()
         return app.render(req, res, '/login', req.query);
       }
     });
+
+    // server.get('/dashboard', (req, res) => {
+    //   if(req.cookies.token) {
+    //     res.redirect('/dashboard');
+    //   } else {
+    //     return app.render(req, res, '/login', req.query);
+    //   }
+    // });
+
 
     server.get('/signup', (req, res) => {
       if(req.cookies.token) {
@@ -148,7 +165,7 @@ app.prepare()
       if(!req.cookies.token) {
         res.redirect('/login');
       } else {
-        return app.render(req, res, '/profile', req.query.oid);
+        return app.render(req, res, '/account', req.query.oid);
       }
     });
 
