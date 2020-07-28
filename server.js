@@ -39,7 +39,7 @@ app.prepare()
 
     server.get('/login', (req, res) => {
       if(req.cookies.token) {
-        res.redirect('/account');
+        res.redirect('/home');
       } else {
         return app.render(req, res, '/login', req.query);
       }
@@ -56,7 +56,7 @@ app.prepare()
 
     server.get('/signup', (req, res) => {
       if(req.cookies.token) {
-        res.redirect('/account');
+        res.redirect('/home');
       } else {
         return app.render(req, res, '/signup', req.query);
       }
@@ -165,7 +165,7 @@ app.prepare()
       if(!req.cookies.token) {
         res.redirect('/login');
       } else {
-        return app.render(req, res, '/account', req.query.oid);
+        return app.render(req, res, '/profile', req.query.oid);
       }
     });
 
