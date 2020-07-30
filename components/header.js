@@ -22,7 +22,7 @@ const Header = () => (
         src: url('../static/fonts/Campton_Bold.otf');
       }
       body {
-        font-family: 'Campton-Book', sans-serif;
+        font-family: 'Open Sans', sans-serif;
         line-height: 1.6;
         letter-spacing: 0.2px;
         color: #3E495E;
@@ -32,8 +32,8 @@ const Header = () => (
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
-      h1, h2, h3, h4, b, .bold, button {
-        font-family: 70px 'Campton-Bold', sans-serif;
+      h1, h2, h3, h4, b, .bold, button{
+        font-family: 70px 'Open Sans', sans-serif;
         font-weight: 900;
         color: #000000;
       }
@@ -166,23 +166,6 @@ const Header = () => (
         height: initial;
         border: 0;
       }
-      // .react-datepicker-wrapper,
-      // .react-datepicker__input-container {
-      //   width: 100%;
-      // }
-      // .react-datepicker__input-container input {
-      //   width: 100%;
-      //   margin-bottom: 30px;
-      //   border: none;
-      //   font-size: 16px;
-      //   padding: 15px 0;
-      //   border-bottom: 1px solid #eaeaea;
-      //   font-family: "Campton-Book", sans-serif;
-      // }
-      // .react-datepicker__input-container input:focus {
-      //   outline: none;
-      //   border-bottom: 1px solid #469DDD;
-      // }
       ::placeholder {
         color: #CACACA;
       }
@@ -240,49 +223,79 @@ const Header = () => (
       .accordion__button:focus {
         outline: none;
       }
-      .accordion__button:hover {
-        background-color: #E0E4E8;
-      }
-      // Sign up
       .box-title{
-        width: 625px;
-        height:30px;
-        padding:30px;
-        background-color: #FAAF40;
-        border-radius:8px;
-        align-items: center;
-        justify-content: center;
+        width: 389px;
+        padding:12px 25px 12px 25px;
         display:flex;
-        
-      }
-      .box-title h1{
-        font-weight:900px;
+        justify-content:center;
+        border-radius:2px 2px 2px 2px;
+        background:#FAAF40;
         color:#FFFFFF;
-        font-size:50px;
+        font-size:30px;
+        font-family: "Open Sans", sans-serif;
+        font-weight:700;       
       }
+
+      .form-container h1{
+        font-size:20px;
+      }
+
+      //show and hide password
+      .pass-wrapper {
+        position: relative;
+        display: flex;
+        // margin-bottom: 14px;
+        flex-direction:row;
+      }
+      
+      i {
+        position: absolute;
+        top: 0px;
+        right: 6%;
+        width:20px;
+      }
+
+      i:hover {
+        color: #FAAF40;
+        cursor: pointer;
+      }
+
       .form-container {
-        width: 500px;
+        width: 335px;
         height: auto;
-        padding: 0px 90px 70px 90px;
+        padding: 0px 50px 30px 50px;
         background: #FFFFFF;
-        border : 2px solid grey;
-        box-shadow: 0 10px 30px 0 rgba(0,0,0,0.10);
-        border-radius: 8px;
-        border-top-style: none;
+        border:1px solid grey;
+        box-shadow: 0 10px 40px 0px rgba(0,0,0,0.10);
+        border-radius: 0px 0px 32px 32px;
+        border-top:none;
+        
       }
       .form-container label {
         font-size: 14px;
         text-transform: uppercase;
+        // margin-bottom:-10px;
       }
+      .rectangle {
+        width:580px;
+        height:90px;
+        background:#FAAF40;
+        border-radius: 8px;
+        text-align:center;
+        z-index:5;
+    }
+
       .form-container input,
        .form-container textarea {
          width: 100%;
-         margin-bottom: 30px;
+        //  margin-bottom: 20px;
          border: none;
-         font-size: 23px;
-         padding: 15px 0;
+         font-size: 16px;
+         padding: 10px 0;
          border-bottom: 1px solid #eaeaea;
-         font-family: "Campton-Book", sans-serif;
+         font-family: 'Open Sans', sans-serif;
+         font-color:#707070;
+         
        }
        .form-container input:focus,
        .form-container textarea:focus {
@@ -297,18 +310,36 @@ const Header = () => (
         padding: 15px 0;
         margin: 19px 1px;
       }
-      .right p {
-        margin: 30px 0;
+
+      .form-container .btn-primary {
+        width: 100%;
+        padding: 8px 0;
+         margin: 0px;
+         font-size:18px;
+         border-radius:12px 12px;
+         color:#FFFFFF;
+         font-size:20px;
+         font-family: "Open Sans", sans-serif;
+         font-weight:700;    
+         
       }
-      .right .link {
+      .right .form-container p {
+        margin: 5px 0;
+      }
+      .right  .link {
         color: #469DDD;
-        text-decoration: none;
+        font-family: "Open Sans", sans-serif;
+        font-weight:600;
+        // text-decoration: none;
+        
       }
+
+    
       .error-container {
         width: 400px;
         height: auto;
-        padding: 20px;
-        margin-bottom: 30px;
+        padding: 10px;
+        // margin-bottom: 30px;
         background-color: #FF3A43;
         color: #FFF;
         border-radius: 8px;
@@ -329,8 +360,8 @@ const Header = () => (
         display: block;
       }
       .container-fluid {
-        display: flex;
-        height: 100vh;
+        // display: flex;
+        // height: 100vh;
         align-items: center;
       }
       .container-fluid p {
@@ -342,7 +373,7 @@ const Header = () => (
       }
       .logo img {
         height: 28px;
-        margin: 50px auto;
+        margin: 10px auto;
       }
       ul.pagination {
         list-style-type: none;
@@ -375,6 +406,29 @@ const Header = () => (
           padding: 10px;
           margin: 0 auto;
         }
+
+        .logo img{
+          display:none;
+        }
+
+        .form-container label {
+          display:flex;
+          
+        }
+
+       
+
+        .container-fluid{
+           background-image: url('../static/images/testimoni/background.png');
+           background-size:cover;
+            justify-content:center;
+           background-repeat:no-repeat;
+          //  align-items: center;
+           margin:0 auto;
+           padding:0px;
+           width:auto;
+           z-index:-1;
+        }
         .feature {
           flex-direction: column;
         }
@@ -395,17 +449,39 @@ const Header = () => (
           margin: 15px auto;
         }
         .form-container {
-          width: 305px;
+          width: 315px;
           padding: 15px;
+        
         }
         .box-title{
-          width: 305px;
-          padding: 15px;
+          width: 320px;
+          padding: 20px;
+          margin-top:130px;
+          border-radius: 2px 2px 2px 2px;
+        }
+
+        .box-title{
+          font-size:20px;
         }
         .error-container,
         .success-container {
-          width: auto;
+          width: 85%;
         }
+
+        .form-container{
+           margin-bottom:10px;
+        }
+
+        .form-container{
+          border-radius: 0px 0px 0px 0px;
+        }
+
+        .form-container .btn-primary{
+          padding:18px;
+        }       
+
+     
+       
       }
     `}</style>
   </div>

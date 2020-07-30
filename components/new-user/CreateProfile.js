@@ -61,7 +61,6 @@ function CreateProfile (props) {
         dob: dateOfBirth,
         address: address,
         email: props.userData.email,
-        idName: props.userData.fullname,
       },
       'createProfile'
     )
@@ -209,7 +208,7 @@ function CreateProfile (props) {
         </div>
         {
           props.errorMessage
-          ? <div className='create-profile-error-message'>{ errorMessage }</div>
+          ? <div className='create-profile-error-message'>{ props.errorMessage }</div>
           : ''
         }
         <button className='form-submit-button' onClick={ handleOnClickButton }>

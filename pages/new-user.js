@@ -5,6 +5,7 @@ import { getCookie } from '../utils/cookie';
 import initialize from '../utils/initialize';
 import Header from '../components/header';
 import Menu from '../components/menu';
+import MobileFooter from '../components/MobileFooter';
 import CreateProfile from '../components/new-user/CreateProfile';
 import UploadPhoto from '../components/new-user/UploadPhoto';
 import userActions from '../redux/actions/userActions';
@@ -71,6 +72,7 @@ function NewUser (props) {
           </div>
           <CurrentStepWindow userData={ props.userData } currentStep={ currentStep } onNextStep={ () => setCurrentStep(currentStep+1) } />
         </div>
+      <MobileFooter />
       </div>
     </Fragment>
   );

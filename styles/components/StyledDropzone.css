@@ -10,7 +10,7 @@
 }
 
 .styled-dropzone-title {
-  font-family: Open Sans;
+  font-family: 'Open Sans', sans-serif;
   font-size: 1rem;
   font-weight: 400;
   text-align: center;
@@ -50,7 +50,7 @@
 }
 
 .styled-dropzone-instruction {
-  font-family: Open Sans;
+  font-family: 'Open Sans', sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
   text-align: center;

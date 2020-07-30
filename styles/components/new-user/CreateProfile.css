@@ -21,7 +21,7 @@
 }
 
 .create-profile-form-skip a {
-  font-family: Open Sans;
+  font-family: 'Open Sans', sans-serif;
   font-size: 1.1rem;
   font-weight: 600;
   color: #5BB7DE;
@@ -82,7 +82,7 @@
 }
 
 .create-profile-form-label {
-  font-family: Open Sans;
+  font-family: 'Open Sans', sans-serif;
   font-size: 1rem;
 }
 
@@ -94,7 +94,7 @@
   padding: 5px;
   border-bottom: 2px solid #7777;
   outline: none;
-  font-family: Open Sans;
+  font-family: 'Open Sans', sans-serif;
   font-size: 1rem;
 }
 
@@ -115,7 +115,7 @@
 }
 
 .form-error-label {
-  font-family: Open Sans;
+  font-family: 'Open Sans', sans-serif;
   font-size: 1rem;
   color: red;
   margin: 10px 0 0;
@@ -126,7 +126,7 @@
 }
 
 .create-profile-form-description {
-  font-family: Open Sans;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 700;
   font-size: 0.9rem;
   text-align: center;
@@ -142,7 +142,7 @@
 }
 
 .create-profile-form-note {
-  font-family: Open Sans;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 600;
   font-size: 0.9rem;
   font-style: italic;
@@ -162,7 +162,7 @@
   padding: 10px 20px;
   color: white;
   text-align: center;
-  font-family: Open Sans;
+  font-family: 'Open Sans', sans-serif;
   font-size: 1rem;
   border-radius: 12px;
   transition: all 0.2s ease-in-out;
@@ -188,7 +188,7 @@
 }
 
 .create-profile-error-message {
-  font-family: Open Sans;
+  font-family: 'Open Sans', sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
   color: red;

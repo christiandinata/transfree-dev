@@ -7,275 +7,250 @@ import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { getCookie } from '../utils/cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-class IdVerification extends React.Component {
-  constructor({ props }) {
-    super(props);
-    this.state = {
-      isIdnumbervalid:true,
-      isFullnamevalid: true,
-      isPobvalid: true,
-      isDobvalid: true,
-      isAddressvalid: true,
-      idType: 'KTP',
-      idNumber: '',
-      idName: '',
-      dob: '',
-      address: '',
-      pob: '',
-      gender: '',
-    };
-    this.checkIdnumber = this.checkIdnumber.bind(this);
-    this.checkFullname = this.checkFullname.bind(this);
-    this.checkPob = this.checkPob.bind(this);
-    this.checkDob = this.checkDob.bind(this);
-    this.checkAddress = this.checkAddress.bind(this);
-  }
-
-  static async getInitialProps(ctx) {
-    initialize(ctx);
-    if (ctx.isServer) {
-      if(ctx.req.headers.cookie) {
-        await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user'));
-      }
-    }
-  }
+import PendingLayout from './pending-layout';
+import AccountLayout from '../components/AccountLayout';
 
 
-  handleChange = (value) => {
-    this.setState({dob: value});
-  }
+class Popup extends React.Component {
+  render() {
+    return (
+      <div>
+    <div className='popup'>
+        <div className='popup_inner'>
+          <h1>Hello {this.props.text}!</h1>
+          <h2>Congratulations!</h2>
+          <p>You have successfully registered.</p>
+          <p style={{marginTop:"-1%"}}>Please complete your information detail!</p>
+        <div className="buttonPopUp">
+          <button className="btn-popup" onClick={this.props.closePopup} >Later</button>
+          <button className="btn-popup" >Go Now</button>
+        </div>
+        </div>
+        
+      </div>
+      <div className="popup-mobile">
+      
+          <div className = "popup-inner-mobile"> 
+          <div className="box-title">Hello {this.props.text}!</div>        
+            <form className="form-container">
+              <p>You have successfully registered</p>
+              <p>Do you to fill  the detail information?</p>
+                <div className="buttonPopUp">
+                <button className="btn-popup-error" onClick={this.props.closePopup} >No</button>
+                <button className="btn-popup-verify" >Yes</button>
+          </div>
+            </form>
+          </div>
+      </div>
+      <style jsx>
+          {`
 
-  handleSubmit(e) {
-    e.preventDefault();
-    this.props.verifyId({
-        idType: this.state.idType,
-        idNumber: this.state.idNumber,
-        idName: this.state.idName,
-        dob: this.state.dob,
-        address: this.state.address,
-        pob: this.state.pob,
-        gender: this.state.gender,
-        email: this.props.email
-      },
-      'verifyId'
+          .popup-mobile{
+            display:none;
+          }
+          .btn-popup {
+            border: 2px solid #5BB7DE;
+            color: #FFFFFF;
+            padding: 5px 23px 5px 23px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 24px;
+            transition: all 0.2s ease;
+            margin-left:10px;
+            background:#5BB7DE;
+            font-weight:700;
+            width:120px;
+          }
+
+          .buttonPopUp{
+            display:flex;
+            flex-direction:row;
+            margin-top:30px;
+          }
+          .popup,
+          .popup-mobile {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            background-color: rgba(0,0,0, 0.5);
+          }
+          .popup_inner{
+            position: absolute;
+            left: 20%;
+            right: 20%;
+            top: 15%;
+            margin: auto;
+            height:auto;
+            width:auto;
+            border-radius: 20px;
+            background: white;
+            text-align:center;
+            padding:1% 0 1% 0;
+            display:flex;
+            flex-direction:column;
+          
+            align-items:center;
+          }
+          .popup-inner-mobile{
+            position: absolute;
+            left: 20%;
+            right: 20%;
+            top: 25%;
+            margin: auto;
+            height:auto;
+            width:auto;
+            display:flex;
+            flex-direction:column;
+          
+            align-items:center;
+          }
+          h1{
+            color:#5BB7DE;
+            font-weight:700;
+            font-size:1.3em;
+          }
+          h2{
+            margin:0px;
+            padding:0px;
+            text-align:center;
+            font-weight:700;
+            color:#000000;
+            font-size:1em;
+            margin-bottom:2%;
+
+          }
+          p{
+            margin:0px;
+            padding:0px;
+            font-size:0.8em;
+            color:#000000;
+           
+
+          }
+
+          .popup{
+            display:flex;
+          }
+
+          .form-container
+          ,.box-title{
+            border-radius: 0px;
+            
+           }
+
+
+          @media only screen and (max-width: 414px) {
+            .popup_inner{
+              left: 10%;
+              right: 10%;
+           }
+
+           .popup{
+             display:none;
+           }
+
+           .popup-mobile{
+             display:flex;
+           }
+
+           .btn-popup-error,
+           .btn-popup-verify {
+            border: 2px solid #5BB7DE;
+            color: #FFFFFF;
+            padding: 5px 20px 5px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 18px;
+            transition: all 0.2s ease;
+           
+            background:#5BB7DE;
+            font-weight:700;
+            
+          }
+
+          .btn-popup-error{
+            background:#EA5252;
+            border: 2px solid #EA5252;
+          
+            margin-left:15%;
+          }
+
+          .btn-popup-verify{
+            margin-left:25%;
+          }
+
+           .form-container{
+            padding:15% 5% ;
+           }
+           
+           
+          }
+
+          `}
+        </style>
+      </div>
+    
     );
   }
+}
 
-  checkIdnumber(e) {
-    if (e.target.value == '') {
-      this.setState({isIdnumbervalid: false})
-    } else {
-      this.setState({isIdnumbervalid: true})
+class IdVerification extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = { showPopup: true };
     }
+
+    static async getInitialProps(ctx) {
+      initialize(ctx);
+      await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
+      await ctx.store.dispatch(actions.getOrderByUid(getCookie('_id', ctx.req),'getOrderByUid',ctx.req));
+    };
+
+  togglePopup() {
+   this.setState({
+     showPopup: !this.state.showPopup
+   });
   }
-  checkFullname(e) {
-    if (e.target.value == '') {
-      this.setState({isFullnamevalid: false})
-    } else {
-      this.setState({isFullnamevalid: true})
-    }
-  }
-  checkPob(e) {
-    if (e.target.value == '') {
-      this.setState({isPobvalid: false})
-    } else {
-      this.setState({isPobvalid: true})
-    }
-  }
-  checkDob(e) {
-    if (e.target.value == '') {
-      this.setState({isDobvalid: false})
-    } else {
-      this.setState({isDobvalid: true})
-    }
-  }
-  checkAddress(e) {
-    if (e.target.value == '') {
-      this.setState({isAddressvalid: false})
-    } else {
-      this.setState({isAddressvalid: true})
-    }
+
+  renderContent() {
+    return(
+      <div>
+        <PendingLayout/>
+        {this.state.showPopup ?
+         <Popup
+          text={this.props.userData.fullname}
+          closePopup={this.togglePopup.bind(this)}
+         />
+         : null
+       }
+      </div>
+
+    );
   }
 
   render() {
     return (
-      <div>
-        <Header />
-        <div className="container-fluid">
-          <div className="logo">
-            <img src="../static/images/transfree-logo.png"/>
-          </div>
-          <h1>More Detail</h1>
-          <p>According to the regulation from Bank Indonesia, we have to verify your identity. Please provide your identity details below.</p>
-          <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
-          <label htmlFor="fullname">Full name</label><br/>
-            <input
-              type="text"
-              id="fullname"
-              placeholder="Enter your full name (should match your ID)"
-              value={this.state.idName}
-              onChange={e => this.setState({ idName: e.target.value })}
-              onBlur={this.checkFullname}/>
-            <span className={this.state.isFullnamevalid ? 'error-label-hidden' : 'error-label'}>Your Full Name may not be empty.</span>
-            
-            <label htmlFor="id-type">ID Type</label><br/>
-            <select
-              id="id-type"
-              className="select-css"
-              value={this.state.idType}
-              onChange={e => this.setState({ idType: e.target.value })}>
-              <option value="KTP">KTP</option>
-              <option value="Passport">Passport</option>
-              <option value="SIM">SIM</option>
-            </select>
-
-            <label htmlFor="id-number">ID Number (No. KTP/Passport/SIM)</label><br/>
-            <input
-              type="tel"
-              id="id-number"
-              placeholder="Enter ID number"
-              value={this.state.idNumber}
-              onChange={e => this.setState({ idNumber: e.target.value })}
-              onBlur={this.checkIdnumber}/>
-            <span className={this.state.isIdnumbervalid ? 'error-label-hidden' : 'error-label'}>You must input your ID Number (KTP/Passport/SIM).</span>
-
-           
-
-            <div style={{marginBottom: "15px"}}>GENDER</div>
-            <input
-              type="radio"
-              id="male"
-              name="gender"
-              value="male"
-              onChange={e => this.setState({ gender: e.target.value })}/>
-            <label htmlFor="male">Male</label><br/>
-
-            <input
-              type="radio"
-              id="female"
-              name="gender"
-              value="female"
-              onChange={e => this.setState({ gender: e.target.value })}/>
-            <label htmlFor="female">Female</label><br/>
-
-            <label htmlFor="pob">Place of Birth</label><br/>
-            <input
-              type="text"
-              id="pob"
-              placeholder="Enter the city (e.g. Jakarta)"
-              value={this.state.pob}
-              onChange={e => this.setState({ pob: e.target.value })}
-              onBlur={this.checkPob}/>
-            <span className={this.state.isPobvalid ? 'error-label-hidden' : 'error-label'}>Your Place of Birth may not be empty.</span>
-
-            <label htmlFor="dob">Date of birth</label><br/>
-            <DatePicker
-              placeholderText="DD/MM/YYYY"
-              dateFormat="dd/MM/yyyy"
-              selected={this.state.dob}
-              onChange={this.handleChange}
-              peekNextMonth
-              showMonthDropdown
-              showYearDropdown
-              dropdownMode="select"
-              onBlur={this.checkDob}/>
-            <span className={this.state.isDobvalid ? 'error-label-hidden' : 'error-label'}>Your Day of Birth may not be empty.</span>
-
-            <label htmlFor="address">Address</label><br/>
-            <textarea
-              id="address"
-              placeholder="Enter your full address"
-              value={this.state.address}
-              onChange={e => this.setState({ address: e.target.value })}
-              onBlur={this.checkAddress}/>
-            <span className={this.state.isAddressvalid ? 'error-label-hidden' : 'error-label'}>Your address may not be empty.</span> 
-
-            <p className="description"><input type="checkbox"/>I agree to the 
-            <a  href="/terms"  target="_blank" className="more-privacy" > Terms and Condition </a></p>
-
-            <p className="description"> * We will not, in any circumstances, share your personal information irresponsibly.
-            <a  href="/privacy-policy"  target="_blank" className="more-privacy" > More about Privacy Policy </a></p>
-
-            <button type="submit" className="btn-primary">{this.props.inProgress ? (
-              <FontAwesomeIcon icon="sync-alt" spin/>
-            ) : 'Continue'}</button>
-          </form>
-        </div>
-        <style jsx>{`
-          .container-fluid {
-            flex-direction: column;
-          }
-          .select-css {
-            width: 100%;
-            margin-bottom: 30px;
-            border: none;
-            border-radius: 0;
-            font-size: 16px;
-            padding: 15px 0;
-            border-bottom: 1px solid #eaeaea;
-            font-family: "Campton-Book", sans-serif;
-            display: block;
-            box-sizing: border-box;
-            -moz-appearance: none;
-            -webkit-appearance: none;
-            appearance: none;
-            background-color: #fff;
-            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
-            background-repeat: no-repeat, repeat;
-            background-position: right .7em top 50%, 0 0;
-            background-size: .65em auto, 100%;
-          }
-          .select-css::-ms-expand {
-            display: none;
-          }
-          .select-css:hover {
-            border-color: #469DDD;
-          }
-          .select-css:focus {
-            border-color: #469DDD;
-            outline: none;
-          }
-          .select-css option {
-            font-weight:normal;
-          }
-          .form-container input[type="radio"] {
-            width: 20px;
-          }
-          .form-container input[type="checkbox"] {
-            width: 20px;
-          }
-          .description{
-            color:#e79635;
-            font-size: 14px;
-            margin: 0px 0px 20px 0px !important;
-          }
-          .more-privacy{
-            color:#e79635;
-          }
-          .error-label {
-            display: block;
-            font-size: 14px;
-            color: red;
-            margin: -25px 0 30px;
-          }
-          .error-label-hidden {
-            display: none;
-          }
-        `}</style>
-      </div>
-    )
+      <AccountLayout isApproved={this.props.isApproved}>
+        {this.renderContent()}
+      </AccountLayout>
+    );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    inProgress: state.id.inProgress,
-    email: state.user.user_data.email
+    // isApproved: !!state.user.user_data.isApproved,
+    userData: state.user.user_data,
+    orderArray: state.order.orders,
+    
   }
-};
+}
 
-export default connect(
-  mapStateToProps,
-  actions
-)(IdVerification);
+export default connect(mapStateToProps, actions)(IdVerification);

@@ -32,30 +32,43 @@ class Forgot extends React.Component {
         <div className="logo">
           <Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>
         </div>
-        <h1>Forgot password</h1>
-        <p>Enter your email. We will send password reset instruction to your email.</p>
-        <div className={"error-container "+(this.props.errorMessage != '' && this.props.errorMessage != undefined ? "error-show" : "") }>
-          {this.props.errorMessage}
-        </div>
-        <div className={"success-container "+(this.props.successMessage != '' && this.props.successMessage != undefined ? "success-show" : "") }>
-          {this.props.successMessage}
-        </div>
+        <div className="box-title">Account Recovery</div>
         <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
           <label htmlFor="email">Email address</label><br/>
           <input
             type="email"
             id="email"
-            placeholder="Enter your email address"
-            required
+            placeholder="Email"
+            autoComplete="username"
             value={this.state.email}
             onChange={e => this.setState({ email: e.target.value })}
-          />
+            />
 
           <button type="submit" className="btn-primary">{this.props.inProgress ? (
             <FontAwesomeIcon icon="sync-alt" spin/>
-          ) : 'Send instruction'}</button>
+          ) : 'Send'}</button>
 
         </form>
+        <style jsx>{`
+          .form-container input{
+            margin-bottom:20px;
+            margin-top:50px;
+          }
+
+          @media only screen and (max-width: 414px) {
+            .form-container input{
+              margin-bottom:10px;
+              margin-top:-10px;
+            }
+
+            .form-container label {
+              font-size: 19px;
+              text-transform: uppercase;
+              display:flex;
+              margin-top:20px;
+              
+            }
+        `}</style>
       </AuthLayout>
     )
   }

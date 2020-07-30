@@ -12,6 +12,7 @@
   background-color: #ffffff;
   box-shadow: 7px 7px 10px #0000001B;
   margin: 50px 20px;
+  z-index: 10;
 }
 
 @media only screen and (min-width: 1024px) {
@@ -62,7 +63,7 @@
   flex: 8;
   display: flex;
   justify-content: center;
-  font-family: Open Sans;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 700;
   font-size: 1.5rem;
   text-shadow: 0 3px 6px #00000072;
