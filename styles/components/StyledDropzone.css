@@ -1,0 +1,65 @@
+.styled-dropzone {
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (min-width: 1024px) {
+  .styled-dropzone {
+    flex-direction: column-reverse;
+  }
+}
+
+.styled-dropzone-title {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+@media only screen and (min-width: 1024px) {
+  .styled-dropzone-title {
+    font-weight: 700;
+  }
+}
+
+.styled-dropzone-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 280px;
+  height: auto;
+  margin: 10px 30px 30px;
+  border-width: 3;
+  border-color: #5BB7DE;
+  border-style: dashed;
+  outline: none;
+  transition: border .24s ease-in-out;
+}
+
+@media only screen and (min-width: 1024px) {
+  .styled-dropzone-container {
+    margin: 30px 30px 10px;
+    min-height: 280px;
+  }
+}
+
+.styled-dropzone-placeholder {
+  margin: 1rem 1rem 0.25rem;
+}
+
+.styled-dropzone-instruction {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  text-align: center;
+  margin: 0.25rem 1rem 1rem;
+}
+
+.styled-dropzone-instruction b {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 600;
+  text-align: inherit;
+}

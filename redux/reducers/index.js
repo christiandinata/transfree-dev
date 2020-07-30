@@ -11,8 +11,10 @@ import photoReducer from './photoReducer';
 import fxMarginReducer from './fxMarginReducer';
 import checkReducer from './checkReducer';
 import complaintReducer from './complaintReducer';
+import profileReducer from './profileReducer';
 
 import donasiReducer from './donasiReducer';
+import initialDataUser from './initialDataReducer';
 
 
 const rootReducer = combineReducers({
@@ -28,10 +30,9 @@ const rootReducer = combineReducers({
   fx: fxMarginReducer,
   ck: checkReducer,
   complaint : complaintReducer,
-
+  initialDataUser: initialDataUser,
   donasi: donasiReducer,
-
- 
+  profile: profileReducer,
 });
 
 export default rootReducer;

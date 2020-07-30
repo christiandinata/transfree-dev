@@ -14,6 +14,7 @@ const MenuAdmin = ({deauthenticate}) => (
         <div className="header-menu">
           <ul>
             <li><Link href="/dashboard/users"><a>Users</a></Link></li>
+            <li><Link href="/dashboard/userfill"><a>Requests</a></Link></li>
             <li><Link href="/dashboard/orders"><a>Orders</a></Link></li>
             <li><Link href="/dashboard/rates"><a>FX Margin</a></Link></li>
             <li><Link href="/dashboard/summary"><a>Customer Summary</a></Link></li>

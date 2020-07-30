@@ -20,6 +20,7 @@ export const VERIFY_PHONE_ERROR = 'verify_phone_error';
 export const USER_EMAIL = 'user_email';
 export const USER_STATUS = 'user_status';
 export const USER_DATA = 'user_data';
+export const INITIAL_DATA_USER = "initial_data";
 export const USER_DATA_ARRAY = 'user_data_array';
 export const USER_DATA_ARRAY_IN_PROGRESS = 'user_data_array_in_progress';
 export const USER_APPROVE_SUCCESS = 'user_approve_success';
@@ -46,6 +47,9 @@ export const GET_PHOTO_SUCCESS = 'get_photo_success';
 export const GET_PHOTO_ERROR = 'get_photo_error';
 export const PHOTO_DATA = 'photo_data';
 export const FEEDBACK_SUCCESS = 'feedback_success';
+export const PROFILE_CREATE = 'profile_create';
+export const PROFILE_CREATE_PROGRESS = 'profile_create_progress';
+export const PROFILE_CREATE_ERROR = 'profile_create_error';
 
 export const DONASI_SUCCESS = 'donasi_success';
 
