@@ -10,7 +10,7 @@ import actions from "../redux/actions";
 import {getCookie} from "../utils/cookie";
 import Link from 'next/link';
 import ENV from "../config";
-import GlobalFunction from "../utils/globalFunction";
+import * as axios from "axios";
 
 class UserProfile extends React.Component {
     constructor(props) {
@@ -45,8 +45,11 @@ class UserProfile extends React.Component {
     }
 
     startEdit() {
-        document.querySelectorAll('input').forEach(element => element.disabled = false);
-        document.querySelectorAll('select').forEach(element => element.disabled = false);
+        document.querySelector('#email-address').disabled = false;
+        document.querySelector('#address').disabled = false;
+        document.querySelector('#gender').disabled = false;
+        document.querySelector('#password').disabled = false;
+        document.querySelector('#confirm-password').disabled = false;
         document.querySelector('#confirm-password').style.display = 'block';
         document.querySelector('#confirm-password-label').style.display = 'block';
         document.querySelector('#cancel-button').style.display = 'block';
@@ -74,65 +77,61 @@ class UserProfile extends React.Component {
         this.stopEdit();
     }
 
-    updateUser = (e) => {
+    updateUser = async () => {
         if (this.checkData()) {
-
-
-            let urlFetch = ENV.API + `/${this.props.user._id}/user`;
-            let data;
-            if (this.state.password != "") {
-                data = {
-                    "fullname": this.state.fullname,
-                    "email": this.state.emailUser,
-                    "idNumber": this.state.idNumber,
-                    "gender": this.state.gender,
-                    "dob": this.state.dob,
-                    "pob": this.state.pob,
-                    "address": this.state.address,
-                    "password": this.state.password,
-                }
-            } else {
-                data = {
-                    "fullname": this.state.fullname,
-                    "email": this.state.emailUser,
-                    "idNumber": this.state.idNumber,
-                    "gender": this.state.gender,
-                    "dob": this.state.dob,
-                    "pob": this.state.pob,
-                    "address": this.state.address,
-                }
-            }
-            fetch(urlFetch,
+            axios.post(ENV.API + `/v1/user/checkEmail`, {"email": this.state.emailUser},
                 {
-                    method: 'put',
                     headers: {
-                        "Authorization": `Bearer ${GlobalFunction.token ? GlobalFunction.token : this.props.token}`
-                    },
-                    body: JSON.stringify(data)
+                        Authorization: `Bearer ${getCookie('token')}`
+                    }
+                }
+            ).then(async (response) => {
+                if (response.data.duplicate) {
+                    alert("Email already used");
+                } else {
+                    let urlFetch = ENV.API + `/v1/user/editProfile`;
+                    let data;
+                    if (this.state.password != "") {
+                        data = {
+                            "email": this.state.emailUser,
+                            "gender": this.state.gender,
+                            "address": this.state.address,
+                            "password": this.state.password,
+                        }
+                    } else {
+                        data = {
+                            "email": this.state.emailUser,
+                            "gender": this.state.gender,
+                            "address": this.state.address,
+                        }
+                    }
 
+                    await axios.post(urlFetch, data, {
+                        headers: {
+                            Authorization: `Bearer ${getCookie('token')}`
+                        }
+                    }).then(async () => {
+                        let user_data = this.props.user;
 
-                }).then((response) => response.json()).then(async (responseJson) => {
-                let user_data = this.props.user;
+                        user_data.email = this.state.emailUser;
+                        user_data.gender = this.state.gender;
+                        user_data.address = this.state.address;
 
-                user_data.email = this.state.emailUser;
-                user_data.fullname = this.state.fullname;
-                user_data.idNumber = this.state.idNumber;
-                user_data.gender = this.state.gender;
-                user_data.dob = this.state.dob;
-                user_data.pob = this.state.pob;
-                user_data.address = this.state.address;
+                        this.stopEdit();
+                        // window.location.reload();
+                    }).catch((error) => {
+                        console.log(error)
+                        alert("Please check your data");
+                    });
 
-                this.props.onChangeUser(this.user_data);
-                this.props.onChangeUserEmailLogin(this.state.emailUser);
-
-                this.stopEdit();
+                }
             }).catch((error) => {
                 console.log(error)
-                alert("Please check your data");
             });
         } else {
             alert("Please check your data");
         }
+
     }
 
     checkIdNumber() {
@@ -335,10 +334,4 @@ const mapStateToProps = (state) => ({
     user: state.user.user_data,
 })
 
-const mapDispatchToProps = (dispatch) => ({
-    onChangeUser: (value) => dispatch(onChangeUser(value)),
-    onChangeUserEmailLogin: (value) => dispatch(onChangeUserEmailLogin(value)),
-    onChangeUserPasswordLogin: (value) => dispatch(onChangeUserPasswordLogin(value)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
+export default connect(mapStateToProps)(UserProfile);
