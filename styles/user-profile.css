@@ -1,0 +1,44 @@
+@media only screen and (min-width: 1024px) {
+    #user-profile-title {
+        margin-left: 12% !important;
+    }
+}
+
+.user-profile-subheader {
+    margin: 0 40px;
+}
+
+#user-profile-buttons button{
+    margin: 0 60px 15px;
+}
+
+#user-profile-buttons button a{
+    text-decoration: none;
+    color: white;
+}
+
+@media only screen and (min-width: 1024px) {
+    .user-profile-subheader {
+        margin: 0 55px;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    #user-profile-buttons {
+        min-height: auto;
+        justify-content: flex-end;
+        flex-direction: row;
+    }
+
+    #user-profile-field-button {
+        align-self: flex-end;
+        margin-bottom: 40px;
+    }
+
+    #user-profile-buttons button{
+        min-width: 140px;
+        margin: 0 9px;
+        align-self: auto;
+    }
+}
+
