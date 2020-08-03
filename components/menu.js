@@ -150,7 +150,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
         }
         
         .authorized-menu li a {
-          font-family: sans;
+          font-family: Open Sans;
           color: black !important;
           text-decoration: none;
           font-size: 1.3rem;
@@ -159,7 +159,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
         }      
           
         .unauthorized-menu li a {
-          font-family: sans;
+          font-family: Open Sans;
           color: black !important;
           text-decoration: none;
         }
@@ -238,7 +238,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
         {
           opacity: 1;
           transform: rotate(45deg) translate(4px, 6px);
-          background: #232323;
+          background: #FFFFFF;
         }
         /*
          * But let's hide the middle one.
@@ -282,6 +282,8 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
           font-size: 22px;
           display: block;
           margin-bottom:20px;
+          margin-top:20px;
+          margin-left:-2%;
         }
         /*
          * And let's slide it in from the left
@@ -320,7 +322,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
             text-decoration: none;
             transition: 0.2s ease-in;
             font-size: 20px;
-            font-family: 'Campton-Bold', sans-serif;
+            font-family: 'Open Sans', sans-serif;
             
           }
           #menu {

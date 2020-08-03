@@ -92,6 +92,7 @@ const Footer = () => (
       // width : 1920px 0,36px 0px;
       // height : 1246px 0px 6346,42px
       margin-top:0px;
+      padding:0px 0px 0px 10px;
     }
         .row3 {
           border-bottom: 1px solid #eaeaea;
@@ -109,6 +110,7 @@ const Footer = () => (
           color: #000000;
           font-size:30px;
           margin-top:0px;
+          font-weight:600;
 
         }
         li {

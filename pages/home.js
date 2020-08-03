@@ -1355,7 +1355,7 @@ class Home extends React.Component {
           }
 
           .converter-container {
-            padding: 15px 10px 23px 20px;
+            padding: 15px 20px 23px 20px;
             background: #354E7A;
             box-shadow: 0 10px 30px 0 rgba(0,0,0,0.30);
             border-radius: 30px;

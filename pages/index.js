@@ -661,26 +661,26 @@ class Index extends React.Component {
                    <div className="benefit">
                        {/* <div className="column"> */}
                          <div className ="btn-primary-start">
-                         <img src="../static/images/features/money.png" style={{width:"8vw",height:"auto", paddingBottom:"2vh"}}></img>
+                         <img src="../static/images/features/money.png"></img>
                          <h1>Better rate for Transfree</h1>
                          </div>
                      {/* </div> */}
                      <div className ="btn-primary-start">
-                       <img src="../static/images/features/time.png" style={{float:"center",position:"center"}}></img>
+                       <img src="../static/images/features/time.png" ></img>
                          <h1>Quickly sent quickly arrived</h1>
                      </div>
                      <div className ="btn-primary-start">
-                       <img src="../static/images/features/search.png" style={{float:"center",position:"center", paddingBottom:"1vh"}}></img>
+                       <img src="../static/images/features/search.png"></img>
                          <h1>Unchargeable for Transfer</h1>
                      </div>
                          {/* </div> */}
                      
                      </div>
      
-                     <div className="message" style={{fontSize:"1.6vw"}}>
-                           <h3 style={{color:"#000000",textAlign:"center"}}>Does your family need it for an emergency? And when you use</h3>
-                           <h3 style={{color:"#000000", textAlign:"center",marginTop:-20}}>a cheaper option, it sometimes takes longer for your money to arrive</h3>
-                           <h3 style={{color:"#000000",textAlign:"center",marginTop:-20}}>Don't worry, we are here now</h3>
+                     <div className="message" style={{fontSize:"1.3em"}}>
+                           <p style={{color:"#000000",textAlign:"center"}}>Does your family need it for an emergency? And when you use</p>
+                           <p style={{color:"#000000", textAlign:"center",marginTop:-20}}>a cheaper option, it sometimes takes longer for your money to arrive</p>
+                           <p style={{color:"#000000",textAlign:"center",marginTop:-20}}>Don't worry, we are here now</p>
                      </div>
                </div>
           </div>
@@ -750,7 +750,7 @@ class Index extends React.Component {
           </div>
 
           <div className="right-container">
-              <h1 style={{fontSize:"2.2vw"}}>Mobile Application now in</h1>
+              <h1 style={{fontSize:"1.4em"}}>Mobile Application now in</h1>
 
 
           <div >
@@ -797,7 +797,7 @@ class Index extends React.Component {
 
         <div className="row achievement">
             <div className="container">
-            <h1 style={{textAlign:"center",margin:"auto",paddingTop:"14px"}}>What we have achieved?</h1>
+            <h1 style={{textAlign:"center",margin:"auto",paddingTop:"14px",fontSize:"2em",marginTop:"5%"}}>What we have achieved?</h1>
             </div>
         </div>
 
@@ -809,7 +809,7 @@ class Index extends React.Component {
 
         <div className="row testimonial">
           <div className="container">
-          <h1 style={{textAlign:"center",color:"#000000"}}>What our Customer say?</h1> 
+          <h1 style={{textAlign:"center",color:"#FFFFFF"}}>What our Customer say?</h1> 
               <img src="../static/images/testimoni/dummy-photo.png" alt="first slide"></img>
                 <div style={{textAlign:"center"}}>
                     <h1 >YOLANDA</h1>
@@ -847,12 +847,44 @@ class Index extends React.Component {
 
         <style jsx>{`
 
+        .application .right-container h1,
+        .achievement h1{
+          font-weight:normal;
+          color:#000000;
+          font-weight:700;
+          text-shadow: 0 0 8px #707070;
+        }
+        .container-content > .benefit > .btn-primary-start{
+          display:flex;
+          flex-direction:column;
+          justify-content:center;
+          align-items:center;
+          padding:0px;
+          padding-top:3%;
+          margin-top:5%;
+        }
+
+        .benefit > .btn-primary-start h1{
+          font-size:0.7em;
+        }
+
+        .container-content > .benefit > .btn-primary-start img{
+          height:50%;
+          width:30%;
+        }
+
+        
+
+        span{
+          font-weight:500;
+        }
         .right-container .result-conversion{
           box-shadow: 0 2px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
           height:auto;
           font-size:11px;
           padding:1px 20px 1px 20px;
           margin-top:4px;
+         
          
         }
 
@@ -910,7 +942,7 @@ class Index extends React.Component {
         margin-top:-4.18vw;
         display:flex;
         margin-left:-1vw;
-        flex-basis:65%;
+        flex-basis:60%;
       }
 
       .features .images img{
@@ -931,7 +963,7 @@ class Index extends React.Component {
         margin-left:auto;
         margin-right:auto;
         opacity:0.8;
-        padding:10px 10px 10px 10px;
+        padding:20px 30px 50px 30px;
         
        
      }
@@ -1156,13 +1188,6 @@ class Index extends React.Component {
 
         
 
-        .application h1{
-        font-family: 800em ,'Open Sans', sans-serif;
-        font-weight: 900;
-        color: #000000;
-        text-shadow: 1px 1px 1px #000000;
-        }
-
         .achievement{
           background:url('../static/images/achievment/achievement.png') no-repeat ;
           background-position: center;
@@ -1201,13 +1226,6 @@ class Index extends React.Component {
 
        
 
-        .achievement  h1{
-          color:#000000;
-          font-size:40px;
-          text-shadow: 1px 1px 1px #000000;
-         
-        }
-
 
         .top-right {
           position:center;
@@ -1230,13 +1248,17 @@ class Index extends React.Component {
           width:140px;
         }
 
+      
+
         
 
         .btn-primary-2 {
           background-color: #5BB7DE;
           border: none;
+          width:150px;
+          margin-bottom:20px;
           color: white;
-          padding: 10px 20px;
+          padding: 10px 10px;
           text-align: center;
           text-decoration: none;
           display: inline-block;
@@ -1244,23 +1266,11 @@ class Index extends React.Component {
           font-size:20px;
           transition: all 0.2s ease-in-out;
           box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
-          padding:10px 10px 10px 10px;
+          font-weight:600;
         }
 
         .btn-primary-2:hover {
-          background-color: #5BB7DE;
-          // border: none;
-          // // transform: translateY(2px);
-          // margin-bottom:20px;
-          // color: white;
-          // text-align: center;
-          // text-decoration: none;
-          // display: inline-block;
-          // border-radius: 21px;
-          // font-size:29px;
-          // margin-right:10px;
-         
-          box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
+          transform: translateY(-1px);
         }
 
 
@@ -1449,7 +1459,7 @@ class Index extends React.Component {
           }
 
           .converter-container {
-            padding: 15px 10px 23px 20px;
+            padding: 15px 20px 23px 20px;
             background: #354E7A;
             box-shadow: 0 10px 30px 0 rgba(0,0,0,0.30);
             border-radius: 30px;
@@ -2069,8 +2079,8 @@ class Index extends React.Component {
               }
 
               .testimonial-mobile img{
-                width:30%;
-                height:30%;
+                width:40%;
+                height:40%;
                 
                 text-align:center;
                

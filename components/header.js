@@ -14,12 +14,12 @@ const Header = () => (
     </Head>
     <style jsx global>{`
       @font-face {
-        font-family: 'Campton-Book';
-        src: url('../static/fonts/Campton_Book.otf');
+        font-family: 'Open Sans';
+        src: url('../static/fonts/Open Sans.otf');
       }
       @font-face {
-        font-family: 'Campton-Bold';
-        src: url('../static/fonts/Campton_Bold.otf');
+        font-family: 'Open Sans';
+        src: url('../static/fonts/Open Sans.otf');
       }
       body {
         font-family: 'Open Sans', sans-serif;
@@ -34,7 +34,7 @@ const Header = () => (
       }
       h1, h2, h3, h4, b, .bold, button{
         font-family: 70px 'Open Sans', sans-serif;
-        font-weight: 900;
+        font-weight: 700;
         color: #000000;
       }
       
