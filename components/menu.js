@@ -11,7 +11,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
         <div className="main-cta">
           <a href="/" ><img style={{height:"30px"}} src="../static/images/transfree-logo.png"/></a>
           {!isAuthenticated && <Link href="/login"><a className="btn-secondary">Log in</a></Link>}
-          {isAuthenticated && <li><a href="/profile"><img className="profile-pic" src="../static/images/navbar/profile.png"/></a></li>}
+          {isAuthenticated && <li><a href="/user-profile"><img className="profile-pic" src="../static/images/navbar/profile.png"/></a></li>}
         </div>
         <input type="checkbox" />
 
@@ -27,7 +27,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
           {isAuthenticated && isApproved && <li><Link href="/account"><a>Transactions</a></Link></li>}
           <hr/>
           {!isAuthenticated && <li><Link href="/signup"><a className="btn-secondary-login">Signup</a></Link></li>}
-          {isAuthenticated && <li><Link href="/profile"><a className="btn-secondary-login">Profile</a></Link></li>}
+          {isAuthenticated && <li><Link href="/user-profile"><a className="btn-secondary-login">Profile</a></Link></li>}
           {isAuthenticated && <li><Link href="/logout"><a className="btn-secondary-login">Logout</a></Link></li>}
         </ul>
       </div>
@@ -51,8 +51,8 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
           {!isAuthenticated && <Link href="/login"><a id="login" className="btn-primary">Login</a></Link>}
           {!isAuthenticated && <Link href="/signup"><a id="signup" className="btn-primary">Sign Up</a></Link>}
 
-          {isAuthenticated && <li><Link href="/profile"><a id="profile">{username}</a></Link></li>}
-          {isAuthenticated && <li><a href="/profile"><img className="profile-pic" src="../static/images/navbar/profile.png"/></a></li>}
+          {isAuthenticated && <li><Link href="/user-profile"><a id="profile">{username}</a></Link></li>}
+          {isAuthenticated && <li><a href="/user-profile"><img className="profile-pic" src="../static/images/navbar/profile.png"/></a></li>}
 
         </div>
       </div>
@@ -74,7 +74,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
           font-size: 16px;
           border-radius: 24px;
           transition: all 0.2s ease;
-          margin-left:10px;
+          margin-left:0px;
         }
         .row {
           border-bottom: 1px solid #FFFFFF;
@@ -150,16 +150,18 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
         }
         
         .authorized-menu li a {
-          font-family: Open Sans;
+          font-family: "Open Sans", sans-serif;   
           color: black !important;
           text-decoration: none;
           font-size: 1.3rem;
-          font-weight: bold;
+          font-weight: 100;
           vertical-align: middle;
         }      
           
         .unauthorized-menu li a {
-          font-family: Open Sans;
+
+          font-family: "Open Sans", sans-serif;  
+
           color: black !important;
           text-decoration: none;
         }
@@ -182,7 +184,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
           position: relative;
           left: 50px;
           z-index: 100;
-          height: 55px;
+          height: 35px;
           margin-left: 2%;
           margin-top: 2.5%;
           
@@ -228,7 +230,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
         }
         #menuToggle span:nth-last-child(2)
         {
-          transform-origin: 0% 100%;
+          transform-origin: 10% 100%;
         }
         /*
          * Transform all the slices of hamburger
@@ -237,7 +239,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
         #menuToggle input:checked ~ span
         {
           opacity: 1;
-          transform: rotate(45deg) translate(4px, 6px);
+          transform: rotate(45deg) translate(1px, 1px);
           background: #FFFFFF;
         }
         /*
@@ -278,12 +280,11 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
         }
         #menu li
         {
-          padding: 0px 0;
+          padding: 0px 0px;
           font-size: 22px;
           display: block;
           margin-bottom:20px;
           margin-top:20px;
-          margin-left:-2%;
         }
         /*
          * And let's slide it in from the left
@@ -317,6 +318,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
             height: 40px;
           }
           
+        
           ul > li > a {
             color:#FFFFFF;
             text-decoration: none;

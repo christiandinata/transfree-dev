@@ -1,0 +1,197 @@
+.create-profile-form-body {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.create-profile-form-body-heading {
+  display: none;
+}
+
+@media only screen and (min-width: 1024px) {
+  .create-profile-form-body-heading {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+}
+
+.create-profile-form-skip {
+  display: flex;
+}
+
+.create-profile-form-skip a {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #5BB7DE;
+  margin: 20px 0 0 40px;
+}
+
+.create-profile-profile-picture {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-profile-profile-picture img {
+  object-fit: contain;
+  height: 84px;
+  width: 84px;
+}
+
+.create-profile-form-box {
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (min-width: 1024px) {
+  .create-profile-form-box {
+    flex-direction: column-reverse;
+  }
+}
+
+.create-profile-form-field-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+@media only screen and (min-width: 1024px) {
+  .create-profile-form-field-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+.create-profile-form-field-column {
+  display: flex;
+}
+
+.create-profile-form-field {
+  display: flex;
+  flex-direction: column;
+  min-height: 100px;
+  margin: 0 40px;
+}
+
+@media only screen and (min-width: 1024px) {
+  .create-profile-form-field {
+    width: 400px;
+  }
+}
+
+.create-profile-form-label {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+}
+
+.create-profile-form-field input,
+.create-profile-form-field textarea,
+.create-profile-form-field select {
+  background: transparent;
+  border: none;
+  padding: 5px;
+  border-bottom: 2px solid #7777;
+  outline: none;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+}
+
+.create-profile-form-field input:focus,
+.create-profile-form-field textarea:focus,
+.create-profile-form-field select:focus {
+  outline: none;
+  border-bottom: 2px solid #469DDD;
+  background-color: #ECF3FA;
+}
+
+.create-profile-form-field select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 5px 35px 5px 5px;
+  background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzgiIGhlaWdodD0iMzUiIHZpZXdCb3g9IjAgMCAzOCAzNSI+PGRlZnM+PGZpbHRlciBpZD0iYSIgeD0iMCIgeT0iMCIgd2lkdGg9IjM4IiBoZWlnaHQ9IjM1IiBmaWx0ZXJVbml0cz0idXNlclNwYWNlT25Vc2UiPjxmZU9mZnNldCBkeT0iMyIgaW5wdXQ9IlNvdXJjZUFscGhhIi8+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMyIgcmVzdWx0PSJiIi8+PGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMC4xNjEiLz48ZmVDb21wb3NpdGUgb3BlcmF0b3I9ImluIiBpbjI9ImIiLz48ZmVDb21wb3NpdGUgaW49IlNvdXJjZUdyYXBoaWMiLz48L2ZpbHRlcj48L2RlZnM+PGcgdHJhbnNmb3JtPSJtYXRyaXgoMSwgMCwgMCwgMSwgMCwgMCkiIGZpbHRlcj0idXJsKCNhKSI+PHBhdGggZD0iTTEwLDAsMjAsMTdIMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI5IDIzKSByb3RhdGUoMTgwKSIgZmlsbD0iIzY4Njg2OCIvPjwvZz48L3N2Zz4=') 98% / 26px no-repeat white;
+}
+
+.form-error-label {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  color: red;
+  margin: 10px 0 0;
+}
+
+.form-error-label-hidden {
+  display: none;
+}
+
+.create-profile-form-description {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 1rem 3rem;
+  border-bottom: 2px solid #7777;
+}
+
+@media only screen and (min-width: 1024px) {
+  .create-profile-form-description {
+    margin: 3rem 3rem 0;
+    border-bottom: unset;
+  }
+}
+
+.create-profile-form-note {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  font-style: italic;
+  margin: 0 40px;
+}
+
+@media only screen and (min-width: 1024px) {
+  .create-profile-form-note {
+    display: none;
+  }
+}
+
+.form-submit-button {
+  background-color: #5BB7DE;
+  border: none;
+  margin: 20px 60px 40px;
+  padding: 10px 20px;
+  color: white;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  border-radius: 12px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0px 3px 6px #0000001B;
+}
+
+.form-submit-button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 3px 6px #0004;
+}
+
+.form-submit-button:active {
+  transform: translateY(0);
+  transition: all 0.1s ease-in-out;
+  box-shadow: 0px 3px 6px #0000001B;
+}
+
+@media only screen and (min-width: 1024px) {
+  .form-submit-button {
+    align-self: center;
+    min-width: 400px;
+  }
+}
+
+.create-profile-error-message {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: red;
+  text-align: center;
+  margin: 10px auto 0;
+}

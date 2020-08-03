@@ -22,7 +22,8 @@ const Header = () => (
         src: url('../static/fonts/Open Sans.otf');
       }
       body {
-        font-family: 'Open Sans', sans-serif;
+
+        font-family: "Open Sans", sans-serif; 
         line-height: 1.6;
         letter-spacing: 0.2px;
         color: #3E495E;
@@ -32,6 +33,7 @@ const Header = () => (
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
+      
       h1, h2, h3, h4, b, .bold, button{
         font-family: 70px 'Open Sans', sans-serif;
         font-weight: 700;
@@ -145,7 +147,7 @@ const Header = () => (
         color: #000000;
         text-decoration: none;
         transition: 0.2s ease-in;
-        font-family: 'Campton-Bold', sans-serif;
+        font-family: "Open Sans", sans-serif; 
         font-weight: bold;
       }
       ul > li > a:hover {
@@ -165,23 +167,6 @@ const Header = () => (
         margin-top: 5px;
         height: initial;
         border: 0;
-      }
-      .react-datepicker-wrapper,
-      .react-datepicker__input-container {
-        width: 100%;
-      }
-      .react-datepicker__input-container input {
-        width: 100%;
-        margin-bottom: 30px;
-        border: none;
-        font-size: 16px;
-        padding: 15px 0;
-        border-bottom: 1px solid #eaeaea;
-        font-family: "Campton-Book", sans-serif;
-      }
-      .react-datepicker__input-container input:focus {
-        outline: none;
-        border-bottom: 1px solid #469DDD;
       }
       ::placeholder {
         color: #CACACA;

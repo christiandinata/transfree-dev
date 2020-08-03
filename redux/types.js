@@ -47,6 +47,9 @@ export const GET_PHOTO_SUCCESS = 'get_photo_success';
 export const GET_PHOTO_ERROR = 'get_photo_error';
 export const PHOTO_DATA = 'photo_data';
 export const FEEDBACK_SUCCESS = 'feedback_success';
+export const PROFILE_CREATE = 'profile_create';
+export const PROFILE_CREATE_PROGRESS = 'profile_create_progress';
+export const PROFILE_CREATE_ERROR = 'profile_create_error';
 
 export const DONASI_SUCCESS = 'donasi_success';
 
