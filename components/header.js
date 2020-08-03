@@ -22,7 +22,8 @@ const Header = () => (
         src: url('../static/fonts/Campton_Bold.otf');
       }
       body {
-         font-family: "Open Sans", sans-serif; 
+
+        font-family: "Open Sans", sans-serif; 
         line-height: 1.6;
         letter-spacing: 0.2px;
         color: #3E495E;
@@ -32,7 +33,8 @@ const Header = () => (
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
-      h1, h2, h3, h4, b, .bold, button {
+      
+      h1, h2, h3, h4, b, .bold, button{
         font-family: 70px 'Open Sans', sans-serif;
         font-weight: 900;
         color: #000000;
@@ -250,7 +252,7 @@ const Header = () => (
       
       i {
         position: absolute;
-        top: 6px;
+        top: 0px;
         right: 6%;
         width:20px;
       }
@@ -269,6 +271,7 @@ const Header = () => (
         box-shadow: 0 10px 40px 0px rgba(0,0,0,0.10);
         border-radius: 0px 0px 32px 32px;
         border-top:none;
+        
       }
       .form-container label {
         font-size: 14px;
@@ -289,10 +292,12 @@ const Header = () => (
          width: 100%;
         //  margin-bottom: 20px;
          border: none;
-         font-size: 15px;
+         font-size: 16px;
          padding: 10px 0;
          border-bottom: 1px solid #eaeaea;
-         font-family: "Campton-Book", sans-serif;
+         font-family: 'Open Sans', sans-serif;
+         font-color:#707070;
+         
        }
        .form-container input:focus,
        .form-container textarea:focus {
@@ -462,7 +467,7 @@ const Header = () => (
         }
         .error-container,
         .success-container {
-          width: auto;
+          width: 85%;
         }
 
         .form-container{

@@ -50,6 +50,7 @@ class Signup extends React.Component {
     }
   }
 
+
   handleSubmit(e) {
     e.preventDefault();
     if (this.state.password != this.state.confirmPassword) {
@@ -57,16 +58,28 @@ class Signup extends React.Component {
         verifyPassword:false
       })
     }else{
-      // alert("oke pas");
-       this.props.register(
-        { fullname: this.state.fullname, email: this.state.email, password: this.state.password },
-        'register'
+      e.preventDefault();
+      this.props.verify({
+        phone: this.state.phone,
+        email: this.state.email,
+        fullname: this.state.fullname,
+        password:this.state.password,
+      },
+        'verify'
       );
       this.setState({
         verifyPassword:true
       })
     }
   }
+
+  // handleSubmit(e) {
+  //   e.preventDefault();
+  //   this.props.authenticate(
+  //     { email: this.state.email, password: this.state.password },
+  //     'login'
+  //   );
+  // }
 
   render() {
     return (
@@ -75,7 +88,7 @@ class Signup extends React.Component {
           <Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>
         </div>
         {/* <h1>Register</h1> */}
-        <div className={"error-container "+(this.props.errorMessage != '' && this.state.email == '' && this.props.errorMessage != undefined ? "error-show" : "") }>
+        <div className={"error-container "+(this.props.errorMessage != '' && this.props.errorMessage != undefined ? "error-show" : "") }>
           {this.props.errorMessage}
         </div>
         <div className={"error-container "+(this.props.errorMessage != ' '&& this.state.verifyPassword == false ? "error-show" : "") }>
@@ -85,7 +98,7 @@ class Signup extends React.Component {
         <div className="box-title">Register</div>
         <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
         <h1 style={{marginTop:10,textAlign:"center"}}>Join us</h1>
-        <p style={{marginTop:-10,fontSize:15,color:"grey"}}>Already have an Account? <a className="link" href="/login">Log In</a></p>
+        <p style={{marginTop:-10,fontSize:13,color:"grey",opacity:"66%"}}>Already have an Account? <a className="link" href="/login">Log In</a></p>
         <label htmlFor="email">FULL NAME</label>
         <input
             type="text"
@@ -128,12 +141,12 @@ class Signup extends React.Component {
                 />
                 <i onClick={this.toggleConfirmShow}>{eye}</i>
           </div>
-          {/* <label htmlFor="email">PHONE NUMBER</label>
+          <label htmlFor="email">PHONE NUMBER</label>
           <PhoneInput
               placeholder="Enter phone number"
               country="GB"
               value={ this.state.phone }
-              onChange={ phone => this.setState({ phone }) }/>   */}
+              onChange={ phone => this.setState({ phone }) }/>
 
           <button type="submit" className="btn-primary">{this.props.inProgress ? (
             <FontAwesomeIcon icon="sync-alt" spin style={{width:40,height:40}}/>
@@ -142,7 +155,18 @@ class Signup extends React.Component {
         <div className="bottom-container">
           <p>Already have an Account?  <a href="/login"> Log In</a></p>
         </div>
-        <p><a className="link" href="/">Back to Home</a></p>
+        <div className = "bottom-container-web">
+        <div className="left">
+          <a href></a><img src="../static/images/Sign Up ASSET WEB/Component 2 – 11.png"></img>
+          <a href><img src="../static/images/Sign Up ASSET WEB/Component 2 – 12.png"></img></a>
+             
+          </div>
+          <div className="right">
+           <p style={{fontSize:13,marginRight:"19%"}}><a className="link" href="/">&lt; Back to Home</a></p>
+          </div>
+         
+          
+        </div>
         
         <style jsx>{`
         .right .bottom-container p,h5 { 
@@ -150,34 +174,71 @@ class Signup extends React.Component {
           text-align:left;
         }
 
+        h1{
+          font-size:20px;
+          font-family: "Open Sans", sans-serif;
+           font-weight:500;    
+        }
         .form-container label{
           display:none;
         }
-
         .form-container input{
           margin-bottom:10px;
         }
-
         .pass-wrapper{
           margin-bottom:0px;
         }
-
         i {
           position: absolute;
-          top: 20%;
+          top: 30%;
           right: 6%;
           // width:10px;
         }
-
-        
-        p{
+        p > a{
           margin:0px;
-        }
-
+          font-weight:540;
+          font-color:#5BB7DE;
+          -webkit-text-stroke:0.5px #5BB7DE;
+      }
         .bottom-container{
           display:none;
         }
+        .bottom-container-web{
+          display:flex;
+          flex-direction:row;
+          // background:blue;
+          margin:0 auto;
+          width:100%;
+          align-items: flex-start;
+          justify-content: flex-start;
+          align-self: flex-start;
+        }
 
+        .bottom-container-web .left{
+          flex-basis:26%;
+          // background:red; 
+          display:flex;
+          margin-top:1%;
+          justify-content: flex-end;
+          align-self: flex-start;
+        }
+
+        .bottom-container-web .right{
+          flex-basis:60%;
+          // background:yellow;
+          text-align:left;
+          margin-top:1%;
+          align-items: flex-start;
+          justify-content: flex-start;
+          align-self: flex-start;
+          margin-top:-1%;
+        }
+
+        .bottom-container-web img{
+          height:25px;
+          width:25px;
+          tex-align:center;
+        }
         @media only screen and (max-width: 414px) {
           .logo img{
             display:none;
@@ -185,54 +246,43 @@ class Signup extends React.Component {
           .box-title{
             margin-top:30px;
           }
-
           .form-container h1,p{
             display:none;
           }
-
           .bottom-container p{
             display:flex;
             font-size:20px;
             color:#FFFFFF;
           }
-
           .bottom-container{
             display:block;
           }
-
        
           .form-container label {
             font-size: 19px;
             text-transform: uppercase;
             display:flex;
-
             // margin-bottom:-15px;
             
           }
-
           // .pass-wrapper{
           //   margin-top:20px;
           // }
-
           .form-container input{
             // margin-bottom:60px;
             font-size:18px;
           }
-
           .bottom-container p > a{
             color:#FFFFFF;
             font-size:20px;
             font-family: "Open Sans", sans-serif;
              font-weight:900;    
-
           }
 
-
+          .bottom-container-web{
+            display:none;
+          }
         }
-
-
-        
-
     `}</style>
       </AuthLayout>
     );

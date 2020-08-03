@@ -11,7 +11,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
         <div className="main-cta">
           <a href="/" ><img style={{height:"30px"}} src="../static/images/transfree-logo.png"/></a>
           {!isAuthenticated && <Link href="/login"><a className="btn-secondary">Log in</a></Link>}
-          {isAuthenticated && <li><a href="/profile"><img className="profile-pic" src="../static/images/navbar/profile.png"/></a></li>}
+          {isAuthenticated && <li><a href="/user-profile"><img className="profile-pic" src="../static/images/navbar/profile.png"/></a></li>}
         </div>
         <input type="checkbox" />
 
@@ -27,7 +27,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
           {isAuthenticated && isApproved && <li><Link href="/account"><a>Transactions</a></Link></li>}
           <hr/>
           {!isAuthenticated && <li><Link href="/signup"><a className="btn-secondary-login">Signup</a></Link></li>}
-          {isAuthenticated && <li><Link href="/profile"><a className="btn-secondary-login">Profile</a></Link></li>}
+          {isAuthenticated && <li><Link href="/user-profile"><a className="btn-secondary-login">Profile</a></Link></li>}
           {isAuthenticated && <li><Link href="/logout"><a className="btn-secondary-login">Logout</a></Link></li>}
         </ul>
       </div>
@@ -51,8 +51,8 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
           {!isAuthenticated && <Link href="/login"><a id="login" className="btn-primary">Login</a></Link>}
           {!isAuthenticated && <Link href="/signup"><a id="signup" className="btn-primary">Sign Up</a></Link>}
 
-          {isAuthenticated && <li><Link href="/profile"><a id="profile">{username}</a></Link></li>}
-          {isAuthenticated && <li><a href="/profile"><img className="profile-pic" src="../static/images/navbar/profile.png"/></a></li>}
+          {isAuthenticated && <li><Link href="/user-profile"><a id="profile">{username}</a></Link></li>}
+          {isAuthenticated && <li><a href="/user-profile"><img className="profile-pic" src="../static/images/navbar/profile.png"/></a></li>}
 
         </div>
       </div>
@@ -219,7 +219,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
           z-index: 1;
           transform-origin: 4px 0px;
           transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-                      background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+          background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
                       opacity 0.55s ease;
         }
         #menuToggle span:first-child

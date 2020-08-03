@@ -57,15 +57,19 @@ const AuthLayout = ({ children }) => (
       .background-top img,
       .background-bottom img{
         display:none;
+
+       
     }
 
-   
+    // .background-top{
+    //   display:flex;
+    // }
 
       @media only screen and (max-width: 414px) {
         .left {
           display: none;
         }
-
+        
         .background-top{
           background-image: url('../static/images/features/background-mobile.png');
           background-size:100% 100%;

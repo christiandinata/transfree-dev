@@ -13,19 +13,20 @@ import {
   FORGOT_ERROR,
   RESET_PASSWORD_PROGRESS,
   RESET_PASSWORD_SUCCESS,
-  RESET_PASSWORD_ERROR
+  RESET_PASSWORD_ERROR,
+  VERIFY_PHONE_PROGRESS,
 } from '../types';
 import { API } from '../../config';
 import { setCookie, removeCookie,getCookie } from '../../utils/cookie';
 
 // register user
-const register = ({ fullname, email, password }, type) => {
+const register = ({ fullname, email, password,phone,code,serviceSid }, type) => {
   if (type !== 'register') {
     throw new Error('Wrong API call!');
   }
   return (dispatch) => {
-    dispatch({type: REGISTER_PROGRESS, payload: true});
-    axios.post(`${API}/${type}`, {fullname, email, password})
+    dispatch({type: VERIFY_PHONE_PROGRESS, payload: true});
+    axios.post(`${API}/v1/${type}`, {fullname, email, password,phone,code,serviceSid})
       .then((response) => {
         setCookie('token', response.data.token);
         const userData = response.data.user_data;
@@ -33,10 +34,10 @@ const register = ({ fullname, email, password }, type) => {
         if (userData.role == 'admin') {
           Router.replace('/dashboard/home')
         } else {
-          Router.replace('/phone');
+          Router.replace('/id-verification');
         }
         dispatch({type: REGISTER, payload: response.data.token});
-        dispatch({type: USER_DATA, payload: response.data.user_data});
+        dispatch({type: USER_DATA, payload: response.date.user_data});
       })
       .catch((error) => {
         let errorMessage = '';
@@ -68,6 +69,7 @@ const authenticate = ({ email, password }, type) => {
     dispatch({type: AUTHENTICATE_PROGRESS, payload: true});
     axios.post(`${API}/${type}`, { email, password })
       .then((response) => {
+        console.log(response);
         setCookie('token', response.data.token);
         const userData = response.data.user_data;
         setCookie('_id', userData._id)
@@ -75,7 +77,7 @@ const authenticate = ({ email, password }, type) => {
           Router.replace('/dashboard/home')
         } else {
           if (userData.isApproved) {
-            Router.replace('/account');
+            Router.replace('/home');
           } else {
             switch(userData.registrationStep) {
               case 1:
@@ -88,7 +90,7 @@ const authenticate = ({ email, password }, type) => {
                 Router.replace('/photo-verification');
                 break;
               case 4:
-                Router.replace('/account');
+                Router.replace('/home');
                 break;
             }
           }
