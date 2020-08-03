@@ -828,7 +828,7 @@ class Index extends React.Component {
           <div className="container">
           <div className="profile-testimonial" style={{textAlign:"center"}}>
           <h1 style={{textAlign:"center",fontSize:20}}>What our Customer say?</h1> 
-              <img src="../static/images/testimoni/dummy-photo.png" alt="first slide"></img>
+              <img src="../static/images/testimoni/dummy-photo.png" alt="first slide" style={{width:70,height:70}}></img>
                 <div className="textTesti">
                     <h1 style={{}}>YOLANDA</h1>
                     <h1 style={{marginTop:-20}}>Imperial College London</h1>
