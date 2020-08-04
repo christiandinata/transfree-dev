@@ -142,11 +142,13 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
         .authorized-menu li {
           margin: 0 40px;
           display: inline;
+          
         }
         
         .unauthorized-menu li {
           margin: 0 20px;
           display: inline;
+        
         }
         
         .authorized-menu li a {
@@ -164,6 +166,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
 
           color: black !important;
           text-decoration: none;
+          font-weight:semi-bold;
         }
         
         .header-cta a {

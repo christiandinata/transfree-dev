@@ -111,7 +111,7 @@ const Footer = () => (
           color: #000000;
           font-size:20px;
           margin-top:0px;
-          font-weight:600;
+          font-weight:700;
 
         }
         li {
