@@ -14,7 +14,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
- 
+
 
 
 
@@ -41,61 +41,61 @@ class Index extends React.Component {
   }
   static async getInitialProps(ctx) {
     initialize(ctx);
-    await ctx.store.dispatch(actions.getAdjustedRates('IDR','getAdjustedRates'));
-    await ctx.store.dispatch(actions.getRates('GBP','IDR'));
+    await ctx.store.dispatch(actions.getAdjustedRates('IDR', 'getAdjustedRates'));
+    await ctx.store.dispatch(actions.getRates('GBP', 'IDR'));
   };
 
   componentDidMount() {
     this.setState({
       rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
-      toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100 ))
+      toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
     })
   }
-  reverse(country,country2) {
-	this.setState({
+  reverse(country, country2) {
+    this.setState({
 
-    fromCurrency: country2,
-    toCurrency: country,
-    toAmount :0,
-    fromAmount :0
+      fromCurrency: country2,
+      toCurrency: country,
+      toAmount: 0,
+      fromAmount: 0
 
     });
-  if (country == 'idr') {
-    this.props.getRates(country2, country).then(() => {
-      if (this.state.fromCurrency == 'idr') {
-        this.setState({
-          rate: 1,
+    if (country == 'idr') {
+      this.props.getRates(country2, country).then(() => {
+        if (this.state.fromCurrency == 'idr') {
+          this.setState({
+            rate: 1,
 
-        });
-      } else {
-        this.setState({
-          rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
-        });
-      }
-    });
-  } else {
-    if (country2 == 'idr') {
-      this.props.getRates(country, country2).then(() => {
-        this.setState({
-          rate: this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100),
-        });
+          });
+        } else {
+          this.setState({
+            rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
+          });
+        }
       });
     } else {
-      this.props.getRates(country2,country).then(() => {
-        this.setState({
-          rate: this.props.rate,
-
+      if (country2 == 'idr') {
+        this.props.getRates(country, country2).then(() => {
+          this.setState({
+            rate: this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100),
+          });
         });
-      });
+      } else {
+        this.props.getRates(country2, country).then(() => {
+          this.setState({
+            rate: this.props.rate,
+
+          });
+        });
+      }
     }
-  }
 
   }
   toggleSource() {
     this.setState({
       isSourceActive: !this.state.isSourceActive
     });
-    if(this.state.isDestinationActive)
+    if (this.state.isDestinationActive)
       this.hideDestination();
   }
 
@@ -109,7 +109,7 @@ class Index extends React.Component {
     this.setState({
       isDestinationActive: !this.state.isDestinationActive
     });
-    if(this.state.isSourceActive)
+    if (this.state.isSourceActive)
       this.hideSource();
   }
 
@@ -240,32 +240,32 @@ class Index extends React.Component {
       autoplay: true,
       infinite: true,
       slidesToShow: 1,
-      speed:500,
-      fade:true,
-      slidesToScroll:1,
+      speed: 500,
+      fade: true,
+      slidesToScroll: 1,
       className: "slides"
     };
 
 
-    
+
     return (
       <div>
-        <Header/>
-        <Menu isApproved={this.props.isApproved}/>
+        <Header />
+        <Menu isApproved={this.props.isApproved} />
         <div className="row hero">
           <div className="container">
             <div className="left-container">
-              <div className="text" style={{marginTop:40}}>
-                    <h1 style={{fontWeight:400}}>International</h1>
-                    <h2 style={{fontWeight:900}}> Money</h2>
+              <div className="text" style={{ marginTop: 40 }}>
+                <h1 style={{ fontWeight: 400 }}>International</h1>
+                <h2 style={{ fontWeight: 900 }}> Money</h2>
               </div>
               <div className="text">
-                    <h1 style={{fontWeight:900}}>Transfer</h1>
-                    <h1 style={{fontWeight:400}}> feels like </h1>
-                    <h2 style={{fontWeight:900}}> Local</h2>
+                <h1 style={{ fontWeight: 900 }}>Transfer</h1>
+                <h1 style={{ fontWeight: 400 }}> feels like </h1>
+                <h2 style={{ fontWeight: 900 }}> Local</h2>
               </div>
-              <h3 style={{marginTop:0}}>Send today, receive money in sameday or next working day</h3>
-              <a  href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-primary-start" style={{fontSize:15,marginTop:23}}>How it works</a>
+              <h3 style={{ marginTop: 0 }}>Send today, receive money in sameday or next working day</h3>
+              <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-primary-start" style={{ fontSize: 15, marginTop: 23 }}>How it works</a>
               {/* <div style={{marginTop:40}}>
                
 
@@ -300,41 +300,41 @@ class Index extends React.Component {
           </div> */}
             </div>
             <div className="right-container">
-            <div className="desktop">
+              <div className="desktop">
                 <div className="fixed-btn">
                   <a href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree" target="_blank">
-                  <img style={{width: "75%",height:"75%", marginTop: "13%",zIndex:999}} src="../static/images/wa-logo.png"/></a>
+                    <img style={{ width: "75%", height: "75%", marginTop: "13%", zIndex: 999 }} src="../static/images/wa-logo.png" /></a>
                 </div>
               </div>
               <div className="converter-container" >
-                <h1 style={{float:"center",fontSize:16,textAlign:"center"}}>TRANSFER WITH TRANSFREE</h1>
+                <h1 style={{ float: "center", fontSize: 16, textAlign: "center" }}>TRANSFER WITH TRANSFREE</h1>
                 <div className="row exchange-container">
                   <div className="source-container">
                     <div className="money-input-container">
                       <div className="money-input">
                         <span >You send</span>
                         <NumberFormat
-                          style={{fontSize:"20px",fontWeight:800,marginLeft:10}}
+                          style={{ fontSize: "20px", fontWeight: 800, marginLeft: 10 }}
                           id="money-from"
                           type="text"
                           thousandSeparator={true}
                           decimalScale={2}
                           value={this.state.fromAmount}
-                          onKeyUp={this.handleSourceChange}/>
+                          onKeyUp={this.handleSourceChange} />
                       </div>
                       <div className="currency-change">
                         <button className="currency-from dropdown-button" onClick={this.toggleSource}>
-                          <span className={'flag-icon flag-icon-'+this.state.fromCurrency.substring(0,2)+' flag-icon-squared'}></span> {this.state.fromCurrency}
-                          <FontAwesomeIcon className="caret" icon="caret-down"/>
+                          <span className={'flag-icon flag-icon-' + this.state.fromCurrency.substring(0, 2) + ' flag-icon-squared'}></span> {this.state.fromCurrency}
+                          <FontAwesomeIcon className="caret" icon="caret-down" />
                         </button>
                         <div className={this.state.isSourceActive ? 'dropdown-menu show' : 'dropdown-menu'}>
                           <ul>
-                            <li onClick={this.selectSource.bind(this,'idr')}>
+                            <li onClick={this.selectSource.bind(this, 'idr')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-id flag-icon-squared"></span> IDR (Indonesian Rupiah)
                               </a>
                             </li>
-                            <li onClick={this.selectSource.bind(this,'gbp')}>
+                            <li onClick={this.selectSource.bind(this, 'gbp')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP (British Poundsterling)
                               </a>
@@ -349,7 +349,7 @@ class Index extends React.Component {
                   		<span className="flag-icon flag-icon-au flag-icon-squared"></span> AUD (Australian Dollar)
                   	      </a>
                   	    </li> */}
-                            <li onClick={this.selectSource.bind(this,'eur')}>
+                            <li onClick={this.selectSource.bind(this, 'eur')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-eu flag-icon-squared"></span> EUR (European Euro)
                               </a>
@@ -364,172 +364,172 @@ class Index extends React.Component {
 
                   </div>
 
-                  <div style={{textAlign:"right"}}>
+                  <div style={{ textAlign: "right" }}>
                     <img onClick={
 
-                    	(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr' ) ?
-						this.reverse.bind(this,'gbp' , 'idr')
-                    	:
-                    	(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' ) ?
-						this.reverse.bind(this,'idr' , 'gbp')
-						:
-						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur' ) ?
-						this.reverse.bind(this,'idr' , 'eur')
-						:
-						// (this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr' ) ?
-						// this.reverse.bind(this,'eur' , 'idr')
-						// :
-						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'myr' ) ?
-						this.reverse.bind(this,'idr' , 'myr')
-						:
-						// (this.state.fromCurrency == 'myr' && this.state.toCurrency == 'idr' ) ?
-						// this.reverse.bind(this,'myr' , 'idr')
-						// :
-						/**(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'krw' ) ?
-						this.reverse.bind(this,'idr' , 'krw')
-						:
-						(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'idr' ) ?
-						this.reverse.bind(this,'krw' , 'idr')
-						:*/
-						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'usd' ) ?
-						this.reverse.bind(this,'idr' , 'usd')
-						:
-						// (this.state.fromCurrency == 'usd' && this.state.toCurrency == 'idr' ) ?
-						// this.reverse.bind(this,'usd' , 'idr')
-						// :
-						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'aud' ) ?
-						this.reverse.bind(this,'idr' , 'aud')
-						:
-						// (this.state.fromCurrency == 'aud' && this.state.toCurrency == 'idr' ) ?
-						// this.reverse.bind(this,'aud' , 'idr')
-						// :
-						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'hkd' ) ?
-						this.reverse.bind(this,'idr' , 'hkd')
-						// :
-					// 	(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'idr' ) ?
-					// 	this.reverse.bind(this,'hkd' , 'idr')
-					// 	:
-					// 	(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'myr' ) ?
-					// 	this.reverse.bind(this,'gbp' , 'myr')
-					// 	:
-					// 	(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'gbp' ) ?
-					// 	this.reverse.bind(this,'myr' , 'gbp')
-					// 	:
-					// /**	(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'krw' ) ?
-					// 	this.reverse.bind(this,'gbp' , 'krw')
-					// 	:
-					// 	(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'gbp' ) ?
-					// 	this.reverse.bind(this,'krw' , 'gbp')
-          //   :
-          //   */
-					// 	(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'usd' ) ?
-					// 	this.reverse.bind(this,'gbp' , 'usd')
-					// 	:
-					// 	(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'gbp' ) ?
-					// 	this.reverse.bind(this,'usd' , 'gbp')
-					// 	:
-					// 	(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'eur' ) ?
-					// 	this.reverse.bind(this,'gbp' , 'eur')
-					// 	:
-					// 	(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'gbp' ) ?
-					// 	this.reverse.bind(this,'eur' , 'gbp')
-					// 	:
-					// 	(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'aud' ) ?
-					// 	this.reverse.bind(this,'gbp' , 'aud')
-					// 	:
-					// 	(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'gbp' ) ?
-					// 	this.reverse.bind(this,'aud' , 'gbp')
-					// 	:
-					// 	(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'hkd' ) ?
-					// 	this.reverse.bind(this,'gbk' , 'hkd')
-					// 	:
-					// 	(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'gbp' ) ?
-					// 	this.reverse.bind(this,'hkd' , 'gbp')
-					// 	:
+                      (this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr') ?
+                        this.reverse.bind(this, 'gbp', 'idr')
+                        :
+                        (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp') ?
+                          this.reverse.bind(this, 'idr', 'gbp')
+                          :
+                          (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur') ?
+                            this.reverse.bind(this, 'idr', 'eur')
+                            :
+                            // (this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr' ) ?
+                            // this.reverse.bind(this,'eur' , 'idr')
+                            // :
+                            (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'myr') ?
+                              this.reverse.bind(this, 'idr', 'myr')
+                              :
+                              // (this.state.fromCurrency == 'myr' && this.state.toCurrency == 'idr' ) ?
+                              // this.reverse.bind(this,'myr' , 'idr')
+                              // :
+                              /**(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'krw' ) ?
+                              this.reverse.bind(this,'idr' , 'krw')
+                              :
+                              (this.state.fromCurrency == 'krw' && this.state.toCurrency == 'idr' ) ?
+                              this.reverse.bind(this,'krw' , 'idr')
+                              :*/
+                              (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'usd') ?
+                                this.reverse.bind(this, 'idr', 'usd')
+                                :
+                                // (this.state.fromCurrency == 'usd' && this.state.toCurrency == 'idr' ) ?
+                                // this.reverse.bind(this,'usd' , 'idr')
+                                // :
+                                (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'aud') ?
+                                  this.reverse.bind(this, 'idr', 'aud')
+                                  :
+                                  // (this.state.fromCurrency == 'aud' && this.state.toCurrency == 'idr' ) ?
+                                  // this.reverse.bind(this,'aud' , 'idr')
+                                  // :
+                                  (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'hkd') ?
+                                    this.reverse.bind(this, 'idr', 'hkd')
+                                    // :
+                                    // 	(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'idr' ) ?
+                                    // 	this.reverse.bind(this,'hkd' , 'idr')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'myr' ) ?
+                                    // 	this.reverse.bind(this,'gbp' , 'myr')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'gbp' ) ?
+                                    // 	this.reverse.bind(this,'myr' , 'gbp')
+                                    // 	:
+                                    // /**	(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'krw' ) ?
+                                    // 	this.reverse.bind(this,'gbp' , 'krw')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'gbp' ) ?
+                                    // 	this.reverse.bind(this,'krw' , 'gbp')
+                                    //   :
+                                    //   */
+                                    // 	(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'usd' ) ?
+                                    // 	this.reverse.bind(this,'gbp' , 'usd')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'gbp' ) ?
+                                    // 	this.reverse.bind(this,'usd' , 'gbp')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'eur' ) ?
+                                    // 	this.reverse.bind(this,'gbp' , 'eur')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'gbp' ) ?
+                                    // 	this.reverse.bind(this,'eur' , 'gbp')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'aud' ) ?
+                                    // 	this.reverse.bind(this,'gbp' , 'aud')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'gbp' ) ?
+                                    // 	this.reverse.bind(this,'aud' , 'gbp')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'hkd' ) ?
+                                    // 	this.reverse.bind(this,'gbk' , 'hkd')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'gbp' ) ?
+                                    // 	this.reverse.bind(this,'hkd' , 'gbp')
+                                    // 	:
 
-					// 	(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'myr' ) ?
-					// 	this.reverse.bind(this,'usd' , 'myr')
-					// 	:
-					// 	(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'usd' ) ?
-					// 	this.reverse.bind(this,'myr' , 'usd')
-					// 	:
-					// /** 	(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'krw' ) ?
-					// 	this.reverse.bind(this,'usd' , 'krw')
-					// 	:
-					// 	(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'usd' ) ?
-					// 	this.reverse.bind(this,'krw' , 'usd')
-          //   :
-          //   */
-					// 	(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'eur' ) ?
-					// 	this.reverse.bind(this,'usd' , 'eur')
-					// 	:
-					// 	(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'usd' ) ?
-					// 	this.reverse.bind(this,'eur' , 'usd')
-					// 	:
-					// 	(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'aud' ) ?
-					// 	this.reverse.bind(this,'usd' , 'aud')
-					// 	:
-					// 	(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'usd' ) ?
-					// 	this.reverse.bind(this,'aud' , 'usd')
-					// 	:
-					// 	(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'hkd' ) ?
-					// 	this.reverse.bind(this,'usd' , 'hkd')
-					// 	:
-					// 	(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'usd' ) ?
-					// 	this.reverse.bind(this,'hkd' , 'usd')
-					// 	:
+                                    // 	(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'myr' ) ?
+                                    // 	this.reverse.bind(this,'usd' , 'myr')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'usd' ) ?
+                                    // 	this.reverse.bind(this,'myr' , 'usd')
+                                    // 	:
+                                    // /** 	(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'krw' ) ?
+                                    // 	this.reverse.bind(this,'usd' , 'krw')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'usd' ) ?
+                                    // 	this.reverse.bind(this,'krw' , 'usd')
+                                    //   :
+                                    //   */
+                                    // 	(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'eur' ) ?
+                                    // 	this.reverse.bind(this,'usd' , 'eur')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'usd' ) ?
+                                    // 	this.reverse.bind(this,'eur' , 'usd')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'aud' ) ?
+                                    // 	this.reverse.bind(this,'usd' , 'aud')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'usd' ) ?
+                                    // 	this.reverse.bind(this,'aud' , 'usd')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'usd' && this.state.toCurrency == 'hkd' ) ?
+                                    // 	this.reverse.bind(this,'usd' , 'hkd')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'usd' ) ?
+                                    // 	this.reverse.bind(this,'hkd' , 'usd')
+                                    // 	:
 
-					// 	(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'myr' ) ?
-					// 	this.reverse.bind(this,'aud' , 'myr')
-					// 	:
-					// 	(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'aud' ) ?
-					// 	this.reverse.bind(this,'myr' , 'aud')
-					// 	:
-					// 	/**
-          //   (this.state.fromCurrency == 'aud' && this.state.toCurrency == 'krw' ) ?
-					// 	this.reverse.bind(this,'aud' , 'krw')
-					// 	:
-					// 	(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'aud' ) ?
-					// 	this.reverse.bind(this,'krw' , 'aud')
-          //   :
-          //   */
-					// 	(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'eur' ) ?
-					// 	this.reverse.bind(this,'aud' , 'eur')
-					// 	:
-					// 	(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'aud' ) ?
-					// 	this.reverse.bind(this,'eur' , 'aud')
-					// 	:
-					// 	(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'hkd' ) ?
-					// 	this.reverse.bind(this,'aud' , 'hkd')
-					// 	:
-					// 	(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'aud' ) ?
-					// 	this.reverse.bind(this,'hkd' , 'aud')
-					// 	:
+                                    // 	(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'myr' ) ?
+                                    // 	this.reverse.bind(this,'aud' , 'myr')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'aud' ) ?
+                                    // 	this.reverse.bind(this,'myr' , 'aud')
+                                    // 	:
+                                    // 	/**
+                                    //   (this.state.fromCurrency == 'aud' && this.state.toCurrency == 'krw' ) ?
+                                    // 	this.reverse.bind(this,'aud' , 'krw')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'aud' ) ?
+                                    // 	this.reverse.bind(this,'krw' , 'aud')
+                                    //   :
+                                    //   */
+                                    // 	(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'eur' ) ?
+                                    // 	this.reverse.bind(this,'aud' , 'eur')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'aud' ) ?
+                                    // 	this.reverse.bind(this,'eur' , 'aud')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'aud' && this.state.toCurrency == 'hkd' ) ?
+                                    // 	this.reverse.bind(this,'aud' , 'hkd')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'aud' ) ?
+                                    // 	this.reverse.bind(this,'hkd' , 'aud')
+                                    // 	:
 
-					// 	(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'myr' ) ?
-					// 	this.reverse.bind(this,'eur' , 'myr')
-					// 	:
-					// 	(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'eur' ) ?
-					// 	this.reverse.bind(this,'myr' , 'eur')
-					// 	:
-					// 	/**
-          //   (this.state.fromCurrency == 'eur' && this.state.toCurrency == 'krw' ) ?
-					// 	this.reverse.bind(this,'eur' , 'krw')
-					// 	:
-					// 	(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'eur' ) ?
-					// 	this.reverse.bind(this,'krw' , 'eur')
-					// 	:
-          //   */
-          //   (this.state.fromCurrency == 'eur' && this.state.toCurrency == 'hkd' ) ?
-					// 	this.reverse.bind(this,'eur' , 'hkd')
-					// 	:
-					// 	(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'eur' ) ?
-					// 	this.reverse.bind(this,'hkd' , 'eur')
-						:
-						null
+                                    // 	(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'myr' ) ?
+                                    // 	this.reverse.bind(this,'eur' , 'myr')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'eur' ) ?
+                                    // 	this.reverse.bind(this,'myr' , 'eur')
+                                    // 	:
+                                    // 	/**
+                                    //   (this.state.fromCurrency == 'eur' && this.state.toCurrency == 'krw' ) ?
+                                    // 	this.reverse.bind(this,'eur' , 'krw')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'krw' && this.state.toCurrency == 'eur' ) ?
+                                    // 	this.reverse.bind(this,'krw' , 'eur')
+                                    // 	:
+                                    //   */
+                                    //   (this.state.fromCurrency == 'eur' && this.state.toCurrency == 'hkd' ) ?
+                                    // 	this.reverse.bind(this,'eur' , 'hkd')
+                                    // 	:
+                                    // 	(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'eur' ) ?
+                                    // 	this.reverse.bind(this,'hkd' , 'eur')
+                                    :
+                                    null
                     }
 
-            className="reverse-img" style={{width: "4.5%",paddingBottom:"10px",marginTop:"-15px",paddingRight:"17px"}} src="../static/images/reverse.png"/>
+                      className="reverse-img" style={{ width: "4.5%", paddingBottom: "10px", marginTop: "-15px", paddingRight: "17px" }} src="../static/images/reverse.png" />
                   </div>
 
                   <div className="destination-container">
@@ -537,27 +537,27 @@ class Index extends React.Component {
                       <div className="money-input">
                         <span>Recipient gets</span>
                         <NumberFormat
-                        style={{fontSize:"20px",fontWeight:800,marginLeft:10}}
+                          style={{ fontSize: "20px", fontWeight: 800, marginLeft: 10 }}
                           id="money-to"
                           type="text"
                           thousandSeparator={true}
                           decimalScale={2}
                           value={this.state.toAmount}
-                          onKeyUp={this.handleDestinationChange}/>
+                          onKeyUp={this.handleDestinationChange} />
                       </div>
                       <div className="currency-change" >
                         <button className="currency-from dropdown-button" onClick={this.toggleDestination}>
-                          <span  className={'flag-icon flag-icon-'+this.state.toCurrency.substring(0,2)+' flag-icon-squared'}></span> {this.state.toCurrency}
-                          <FontAwesomeIcon  className="caret" icon="caret-down"/>
+                          <span className={'flag-icon flag-icon-' + this.state.toCurrency.substring(0, 2) + ' flag-icon-squared'}></span> {this.state.toCurrency}
+                          <FontAwesomeIcon className="caret" icon="caret-down" />
                         </button>
                         <div className={this.state.isDestinationActive ? 'dropdown-menu show' : 'dropdown-menu'}>
                           <ul>
-                            <li onClick={this.selectDestination.bind(this,'idr')}>
+                            <li onClick={this.selectDestination.bind(this, 'idr')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-id flag-icon-squared"></span> IDR (Indonesian Rupiah)
                               </a>
                             </li>
-                            <li onClick={this.selectDestination.bind(this,'myr')}>
+                            <li onClick={this.selectDestination.bind(this, 'myr')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-my flag-icon-squared"></span> MYR (Malaysian Ringgit)
                               </a>
@@ -568,27 +568,27 @@ class Index extends React.Component {
                               </a>
                             </li>
                             */}
-                            <li onClick={this.selectDestination.bind(this,'gbp')}>
+                            <li onClick={this.selectDestination.bind(this, 'gbp')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP (British Poundsterling)
                               </a>
                             </li>
-                            <li onClick={this.selectDestination.bind(this,'usd')}>
+                            <li onClick={this.selectDestination.bind(this, 'usd')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-us flag-icon-squared"></span> USD (US Dollar)
                               </a>
                             </li>
-                  	    <li onClick={this.selectDestination.bind(this,'aud')}>
+                            <li onClick={this.selectDestination.bind(this, 'aud')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-au flag-icon-squared"></span> AUD (Australian Dollar)
                               </a>
                             </li>
-                            <li onClick={this.selectDestination.bind(this,'eur')}>
+                            <li onClick={this.selectDestination.bind(this, 'eur')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-eu flag-icon-squared"></span> EUR (European Euro)
                               </a>
                             </li>
-                            <li onClick={this.selectDestination.bind(this,'hkd')}>
+                            <li onClick={this.selectDestination.bind(this, 'hkd')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-hk flag-icon-squared"></span> HKD (Hongkong Dollar)
                               </a>
@@ -601,26 +601,26 @@ class Index extends React.Component {
                   </div>
 
                 </div>
-               
-               <div className="result-conversion">
-               <div className="row rate">
-                  <span className="rate-desc">Conversion rate</span> <span className="rate-value"><span className="live-rate"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={5} value={this.state.rate} /></span></span>
+
+                <div className="result-conversion">
+                  <div className="row rate">
+                    <span className="rate-desc">Conversion rate</span> <span className="rate-value"><span className="live-rate"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={5} value={this.state.rate} /></span></span>
+                  </div>
+                  <div className="row rate" style={{ marginTop: "-20px" }} >
+                    <span className="rate-desc" >Transfer fee </span> <span className="rate-value" style={{ textAlign: "right", marginLeft: "5px" }}><span ><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value="0" /></span></span>
+                  </div>
                 </div>
-                <div className="row rate"style={{marginTop:"-20px"}} >
-                  <span className="rate-desc" >Transfer fee </span> <span className="rate-value" style={{textAlign:"right",marginLeft:"5px"}}><span ><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value="0" /></span></span>
-                </div>
-               </div>
-                <div className="row note" style={{width:"90%",marginLeft:"auto",marginRight:"auto",float:"center",textAlign:"center"}}>
-                  <p style={{maxWidth: "100%", marginBottom: "0",color:"#FFFFFF",fontSize:12}}>Your transfer will be processed immediately.
+                <div className="row note" style={{ width: "90%", marginLeft: "auto", marginRight: "auto", float: "center", textAlign: "center" }}>
+                  <p style={{ maxWidth: "100%", marginBottom: "0", color: "#FFFFFF", fontSize: 12 }}>Your transfer will be processed immediately.
                   The recipient will get the money in next working day. </p>
-		  {/*<span className="received-on">24 hours</span>*/}
+                  {/*<span className="received-on">24 hours</span>*/}
                 </div>
                 {/* <a href="/order" className="btn-primary-2" style={{width:"80%",marginRight:"auto",marginLeft:"10%",textAlign:"center",float:"center"}}>Get started</a> */}
 
                 <div className="row converter-cta" >
-              
+
                   <div className="row cta-primary">
-                      <a href="/order" className="btn-primary-2" style={{width:"80%",marginRight:"auto",marginLeft:"10%",textAlign:"center",float:"center"}}>Get started</a>
+                    <a href="/order" className="btn-primary-2" style={{ width: "80%", marginRight: "auto", marginLeft: "10%", textAlign: "center", float: "center" }}>Get started</a>
                   </div>
                 </div>
               </div>
@@ -633,214 +633,214 @@ class Index extends React.Component {
         <div className="row features">
           <div className="container">
             <div className="container-image">
-            <div className="images">
-                  <div className="monas">
-                      <img src="../static/images/features/monas.png" style={{marginTop:18}}  alt="monas" name="monas" id="monas" ></img>
-                  </div>
-                  <div className="rumah" style={{marginLeft:"12%"}}>
-                  <img src="../static/images/features/rumah.png"  alt="rumah"  id="rumah"  style={{marginTop:-2}}></img>
-                  </div>
-                  <div className="bali" style={{marginLeft:"14%"}}>
-                  <img src="../static/images/features/bali.png" alt="bali" style={{marginTop:-15}}></img>
-                  </div>
-                  <div className="surabaya" style={{marginLeft:"13%"}}>
-                  <img src="../static/images/features/surabaya.png" alt="surabaya" style={{marginTop:-20}}></img>
-                  </div>
-                  <div className="borobudur" style={{marginLeft:"13%"}}>
-                  <img src="../static/images/features/borobudur.png"  alt="borobudur" style={{marginTop:-22}}  ></img>
-                  </div>
-          </div>
+              <div className="images">
+                <div className="monas">
+                  <img src="../static/images/features/monas.png" style={{ marginTop: 18 }} alt="monas" name="monas" id="monas" ></img>
+                </div>
+                <div className="rumah" style={{ marginLeft: "12%" }}>
+                  <img src="../static/images/features/rumah.png" alt="rumah" id="rumah" style={{ marginTop: -2 }}></img>
+                </div>
+                <div className="bali" style={{ marginLeft: "14%" }}>
+                  <img src="../static/images/features/bali.png" alt="bali" style={{ marginTop: -15 }}></img>
+                </div>
+                <div className="surabaya" style={{ marginLeft: "13%" }}>
+                  <img src="../static/images/features/surabaya.png" alt="surabaya" style={{ marginTop: -20 }}></img>
+                </div>
+                <div className="borobudur" style={{ marginLeft: "13%" }}>
+                  <img src="../static/images/features/borobudur.png" alt="borobudur" style={{ marginTop: -22 }}  ></img>
+                </div>
+              </div>
             </div>
-          
-               <div className="container-content">
-               <h1 style={{color:"#000000",textAlign:"center",marginTop:60}}>Why should you use Transfree</h1>
-               
-               {/* </div> */}
-              
-     
-                   <div className="benefit">
-                       {/* <div className="column"> */}
-                         <div className ="btn-primary-start">
-                         <img src="../static/images/features/money.png" style={{width:"8vw",height:"auto", paddingBottom:"2vh"}}></img>
-                         <h1>Better rate for Transfree</h1>
-                         </div>
-                     {/* </div> */}
-                     <div className ="btn-primary-start">
-                       <img src="../static/images/features/time.png" style={{float:"center",position:"center"}}></img>
-                         <h1>Quickly sent quickly arrived</h1>
-                     </div>
-                     <div className ="btn-primary-start">
-                       <img src="../static/images/features/search.png" style={{float:"center",position:"center", paddingBottom:"1vh"}}></img>
-                         <h1>Unchargeable for Transfer</h1>
-                     </div>
-                         {/* </div> */}
-                     
-                     </div>
-     
-                     <div className="message" style={{fontSize:"1.6vw"}}>
-                           <h3 style={{color:"#000000",textAlign:"center"}}>Does your family need it for an emergency? And when you use</h3>
-                           <h3 style={{color:"#000000", textAlign:"center",marginTop:-20}}>a cheaper option, it sometimes takes longer for your money to arrive</h3>
-                           <h3 style={{color:"#000000",textAlign:"center",marginTop:-20}}>Don't worry, we are here now</h3>
-                     </div>
-               </div>
+
+            <div className="container-content">
+              <h1 style={{ color: "#000000", textAlign: "center", marginTop: 60 }}>Why should you use Transfree</h1>
+
+              {/* </div> */}
+
+
+              <div className="benefit">
+                {/* <div className="column"> */}
+                <div className="btn-primary-start">
+                  <img src="../static/images/features/money.png" style={{ width: "8vw", height: "auto", paddingBottom: "2vh" }}></img>
+                  <h1>Better rate for Transfree</h1>
+                </div>
+                {/* </div> */}
+                <div className="btn-primary-start">
+                  <img src="../static/images/features/time.png" style={{ float: "center", position: "center" }}></img>
+                  <h1>Quickly sent quickly arrived</h1>
+                </div>
+                <div className="btn-primary-start">
+                  <img src="../static/images/features/search.png" style={{ float: "center", position: "center", paddingBottom: "1vh" }}></img>
+                  <h1>Unchargeable for Transfer</h1>
+                </div>
+                {/* </div> */}
+
+              </div>
+
+              <div className="message" style={{ fontSize: "1.6vw" }}>
+                <h3 style={{ color: "#000000", textAlign: "center" }}>Does your family need it for an emergency? And when you use</h3>
+                <h3 style={{ color: "#000000", textAlign: "center", marginTop: -20 }}>a cheaper option, it sometimes takes longer for your money to arrive</h3>
+                <h3 style={{ color: "#000000", textAlign: "center", marginTop: -20 }}>Don't worry, we are here now</h3>
+              </div>
+            </div>
           </div>
         </div>
 
 
         <div className="row fiture-mobile">
           <div className="container">
-          <div className="images">
-                  <div className="monas">
-                      <img src="../static/images/features/monas.png" style={{marginTop:-33}} alt="monas" name="monas" id="monas" ></img>
-                  </div>
-                  <div className="rumah" style={{marginLeft:"9%"}}>
-                  <img src="../static/images/features/rumah.png"  alt="rumah"  id="rumah"  style={{marginTop:55}}></img>
-                  </div>
-                  <div className="bali" style={{marginLeft:"18%"}}>
-                  <img src="../static/images/features/bali.png" alt="bali"></img>
-                  </div>
-                  <div className="surabaya" style={{marginLeft:"18%"}}>
-                  <img src="../static/images/features/surabaya.png" alt="surabaya" style={{marginTop:4}}></img>
-                  </div>
-                  <div className="borobudur" style={{marginLeft:"18%"}}>
-                  <img src="../static/images/features/borobudur.png"  alt="borobudur" style={{marginTop:32}}  ></img>
-                  </div>
-          </div>
-           <div className="fiture-mobile-message">
-              <h1 style={{fontWeight:400}}>Internasional <span style={{fontWeight:900}}> Money</span></h1>
-             
-              <h1 style={{marginTop:-30}}>Transfer <span style={{fontWeight:400}}>feels like</span> local</h1>
-              <h2 style={{textAlign:"center",marginLeft:20,marginTop:-10,fontSize:"13pt",color:"#000000"}}>Send. Arrives. Pick-up in 5 minutes</h2>
-           </div>
-           <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-primary-start" style={{fontSize:20,marginTop:15,width:"70%",marginLeft:"auto",marginRight:"auto"}}>How it works</a>
-           <hr className="line"/>
-           <p style={{textAlign:"center"}}>Why we should to use Transfree?</p>
-          <div className="fiture-mobile-benefit">
-              <div className="first-benefit" style={{marginBottom:"5%"}}>
-              <button className="btn-primary-2">Better rate for transfer</button>
-              <div className="first-message">
-                <h1 style={{textAlign:"center",fontSize:"15pt",marginTop:12}}>Better rate for transfer</h1>
-                <p style={{textAlign:"center"}}>Does your family need it for an emergency? And when you use a cheaper option,it sometimes takes longer for your money to arriveDon't worry, we are here now</p>
+            <div className="images">
+              <div className="monas">
+                <img src="../static/images/features/monas.png" style={{ marginTop: -33 }} alt="monas" name="monas" id="monas" ></img>
               </div>
+              <div className="rumah" style={{ marginLeft: "9%" }}>
+                <img src="../static/images/features/rumah.png" alt="rumah" id="rumah" style={{ marginTop: 55 }}></img>
+              </div>
+              <div className="bali" style={{ marginLeft: "18%" }}>
+                <img src="../static/images/features/bali.png" alt="bali"></img>
+              </div>
+              <div className="surabaya" style={{ marginLeft: "18%" }}>
+                <img src="../static/images/features/surabaya.png" alt="surabaya" style={{ marginTop: 4 }}></img>
+              </div>
+              <div className="borobudur" style={{ marginLeft: "18%" }}>
+                <img src="../static/images/features/borobudur.png" alt="borobudur" style={{ marginTop: 32 }}  ></img>
+              </div>
+            </div>
+            <div className="fiture-mobile-message">
+              <h1 style={{ fontWeight: 400 }}>Internasional <span style={{ fontWeight: 900 }}> Money</span></h1>
+
+              <h1 style={{ marginTop: -30 }}>Transfer <span style={{ fontWeight: 400 }}>feels like</span> local</h1>
+              <h2 style={{ textAlign: "center", marginLeft: 20, marginTop: -10, fontSize: "13pt", color: "#000000" }}>Send. Arrives. Pick-up in 5 minutes</h2>
+            </div>
+            <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-primary-start" style={{ fontSize: 20, marginTop: 15, width: "70%", marginLeft: "auto", marginRight: "auto" }}>How it works</a>
+            <hr className="line" />
+            <p style={{ textAlign: "center" }}>Why we should to use Transfree?</p>
+            <div className="fiture-mobile-benefit">
+              <div className="first-benefit" style={{ marginBottom: "5%" }}>
+                <button className="btn-primary-2">Better rate for transfer</button>
+                <div className="first-message">
+                  <h1 style={{ textAlign: "center", fontSize: "15pt", marginTop: 12 }}>Better rate for transfer</h1>
+                  <p style={{ textAlign: "center" }}>Does your family need it for an emergency? And when you use a cheaper option,it sometimes takes longer for your money to arriveDon't worry, we are here now</p>
+                </div>
               </div>
 
-              <div className="first-benefit" style={{marginBottom:"5%"}} >
-              <button className="btn-primary-2">Quickly sent quickly arrived</button>
-              <div className="first-message">
-                <h1 style={{textAlign:"center",fontSize:"15pt",marginTop:12}}>Quickly sent quickly arrived</h1>
-                <p style={{textAlign:"center"}}>Does your family need it for an emergency? And when you use a cheaper option,it sometimes takes longer for your money to arriveDon't worry, we are here now</p>
-              </div>
+              <div className="first-benefit" style={{ marginBottom: "5%" }} >
+                <button className="btn-primary-2">Quickly sent quickly arrived</button>
+                <div className="first-message">
+                  <h1 style={{ textAlign: "center", fontSize: "15pt", marginTop: 12 }}>Quickly sent quickly arrived</h1>
+                  <p style={{ textAlign: "center" }}>Does your family need it for an emergency? And when you use a cheaper option,it sometimes takes longer for your money to arriveDon't worry, we are here now</p>
+                </div>
               </div>
 
-              <div className="first-benefit" style={{marginBottom:"5%"}}>
-              <button className="btn-primary-2">Unchargeable for Transfer</button>
-              <div className="first-message">
-              <h1 style={{textAlign:"center",fontSize:"15pt",marginTop:12}}>Unchargeable for Transfer</h1>
-                <p style={{textAlign:"center"}}>Does your family need it for an emergency? And when you use a cheaper option,it sometimes takes longer for your money to arriveDon't worry, we are here now</p>
+              <div className="first-benefit" style={{ marginBottom: "5%" }}>
+                <button className="btn-primary-2">Unchargeable for Transfer</button>
+                <div className="first-message">
+                  <h1 style={{ textAlign: "center", fontSize: "15pt", marginTop: 12 }}>Unchargeable for Transfer</h1>
+                  <p style={{ textAlign: "center" }}>Does your family need it for an emergency? And when you use a cheaper option,it sometimes takes longer for your money to arriveDon't worry, we are here now</p>
+                </div>
               </div>
-              </div>
+            </div>
           </div>
-          </div>
-        </div> 
+        </div>
 
         <div className="row application">
           <div className="container">
-          <div className="left-container">
-            <img src="../static/images/ASSET/Mockup.png"></img>
-          </div>
-
-          <div className="right-container">
-              <h1 style={{fontSize:"2.2vw"}}>Mobile Application now in</h1>
-
-
-          <div >
-{/* 
- href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank"  */}
-          <a>
-          <img src="../static/images/appstore.png"/></a>
-                    
-            
-          </div>
-          
-            <div>
-            <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
-            <img src="../static/images/playstore.png"/></a>
-             
+            <div className="left-container">
+              <img src="../static/images/ASSET/Mockup.png"></img>
             </div>
-          </div>
-        
+
+            <div className="right-container">
+              <h1 style={{ fontSize: "2.2vw" }}>Mobile Application now in</h1>
+
+
+              <div >
+                {/* 
+ href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank"  */}
+                <a>
+                  <img src="../static/images/appstore.png" /></a>
+
+
+              </div>
+
+              <div>
+                <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
+                  <img src="../static/images/playstore.png" /></a>
+
+              </div>
+            </div>
+
           </div>
         </div>
 
         <div className="row application-mobile">
           <div className="container">
             <div className="main-container">
-                <div className="left-container">
+              <div className="left-container">
                 <img src="../static/images/ASSET/Mockup.png"></img>
+              </div>
+              <div className="right-container">
+                <h1>Available in</h1>
+                <div>
+                  <a>
+                    <img src="../static/images/appstore.png" /></a>
                 </div>
-                <div className="right-container">
-                <h1>Avaliable in</h1>
-                  <div>
-                      <a>
-                      <img src="../static/images/appstore.png" /></a>
-                  </div>
-                  <div>
-                      <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
-                      <img src="../static/images/playstore.png"/></a>
-                  </div>
+                <div>
+                  <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
+                    <img src="../static/images/playstore.png" /></a>
+                </div>
 
-                </div>
+              </div>
             </div>
           </div>
 
         </div>
 
         <div className="row achievement">
-            <div className="container">
-            <h1 style={{textAlign:"center",margin:"auto",paddingTop:"14px"}}>What we have achieved?</h1>
-            </div>
+          <div className="container">
+            <h1 style={{ textAlign: "center", margin: "auto", paddingTop: "14px" }}>What we have achieved?</h1>
+          </div>
         </div>
 
         <div className="row achievement-mobile">
           <div className="container">
-          <h1>What we have achieved?</h1>
+            <h1>What we have achieved?</h1>
           </div>
         </div>
 
         <div className="row testimonial">
           <div className="container">
-          <h1 style={{textAlign:"center",color:"#000000"}}>What our Customer say?</h1> 
-              <img src="../static/images/testimoni/dummy-photo.png" alt="first slide"></img>
-                <div style={{textAlign:"center"}}>
-                    <h1 >YOLANDA</h1>
-                    <h1 style={{textAlign:"center",marginTop:-20}}>Imperial College London</h1>
-                </div>
-          {/* </div> */}
+            <h1 style={{ textAlign: "center", color: "#000000" }}>What our Customer say?</h1>
+            <img src="../static/images/testimoni/dummy-photo.png" alt="first slide"></img>
+            <div style={{ textAlign: "center" }}>
+              <h1 >YOLANDA</h1>
+              <h1 style={{ textAlign: "center", marginTop: -20 }}>Imperial College London</h1>
+            </div>
+            {/* </div> */}
             <div className="message">
-                <p style={{marginLeft:50}}>It is very difficult to send money from IDR to GDP and</p>
-                <p>Transfree come out with the best solution ever. First time I use it when</p>
-                <p>I was in Indonesia to pay for my flat deposit and rent. And now I'm still use</p>
-                <p>Transfree to transfer money from the UK to Indonesia. It gives me a fair rate</p>
-            </div> 
-            <a href="/testimoni" style={{textAlign:"center",color:"#000000",fontSize:"20pt"}}><p>More Testimonials</p></a>
+              <p style={{ marginLeft: 50 }}>It is very difficult to send money from IDR to GDP and</p>
+              <p>Transfree come out with the best solution ever. First time I use it when</p>
+              <p>I was in Indonesia to pay for my flat deposit and rent. And now I'm still use</p>
+              <p>Transfree to transfer money from the UK to Indonesia. It gives me a fair rate</p>
+            </div>
+            <a href="/testimoni" style={{ textAlign: "center", color: "#000000", fontSize: "20pt" }}><p>More Testimonials</p></a>
           </div>
         </div>
 
         <div className="row testimonial-mobile">
           <div className="container">
-          <div className="profile-testimonial" style={{textAlign:"center"}}>
-          <h1 style={{textAlign:"center",fontSize:20}}>What our Customer say?</h1> 
+            <div className="profile-testimonial" style={{ textAlign: "center" }}>
+              <h1 style={{ textAlign: "center", fontSize: 20 }}>What our Customer say?</h1>
               <img src="../static/images/testimoni/dummy-photo.png" alt="first slide"></img>
-                <div className="textTesti">
-                    <h1 style={{}}>YOLANDA</h1>
-                    <h1 style={{marginTop:-20}}>Imperial College London</h1>
-                </div>
-          </div>
+              <div className="textTesti">
+                <h1 style={{}}>YOLANDA</h1>
+                <h1 style={{ marginTop: -20 }}>Imperial College London</h1>
+              </div>
+            </div>
             <div className="message">
-                <p style={{marginTop:30}} >It is very difficult to send money </p> <p style={{marginTop:-10}}> from IDR to GDP  and Transfree come out with the best solution ever. First time I use
+              <p style={{ marginTop: 30 }} >It is very difficult to send money </p> <p style={{ marginTop: -10 }}> from IDR to GDP  and Transfree come out with the best solution ever. First time I use
                   it when I was in Indonesia to pay for my flat deposit and rent. And now I'm still use Transfree to transfer money from the UK to Indonesia. It gives me a fair rate</p>
             </div>
-            <a href="/testimoni" style={{textAlign:"center",color:"#000000",fontSize:"20pt"}}><p>More Testimonials</p></a> 
+            <a href="/testimoni" style={{ textAlign: "center", color: "#000000", fontSize: "20pt" }}><p>More Testimonials</p></a>
           </div>
         </div>
 
@@ -2662,8 +2662,8 @@ class Index extends React.Component {
 
         `}</style>
         <div id={"row-footer"}>
-	<Footer />
-	</div>
+          <Footer />
+        </div>
       </div>
     );
   }
