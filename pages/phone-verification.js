@@ -87,7 +87,7 @@ class PhoneVerification extends React.Component {
           </form>
 
        <div className="bottom">
-          <h1 ><Link href="/forgot"><a className="link">Forgot Password? </a></Link></h1>
+          <h1 ><Link href="/forgot-password"><a className="link">Forgot Password? </a></Link></h1>
             <p>Don't you have an account?<Link href="/signup"><a className="link"> Sign up</a></Link></p>
        </div>
 

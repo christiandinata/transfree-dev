@@ -707,7 +707,7 @@ class Index extends React.Component {
                   </div>
           </div>
            <div className="fiture-mobile-message">
-              <h1 style={{fontWeight:400}}>Internasional <span style={{fontWeight:900}}> Money</span></h1>
+              <h1 style={{fontWeight:400}}>International <span style={{fontWeight:900}}> Money</span></h1>
              
               <h1 style={{marginTop:-30}}>Transfer <span style={{fontWeight:400}}>feels like</span> local</h1>
               <h2 style={{textAlign:"center",marginLeft:20,marginTop:-10,fontSize:"13pt",color:"#000000"}}>Send. Arrives. Pick-up in 5 minutes</h2>
@@ -777,7 +777,7 @@ class Index extends React.Component {
                 <img src="../static/images/ASSET/Mockup.png"></img>
                 </div>
                 <div className="right-container">
-                <h1>Avaliable in</h1>
+                <h1>Available in</h1>
                   <div>
                       <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank">
                       <img src="../static/images/appstore.png" /></a>
