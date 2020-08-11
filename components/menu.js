@@ -78,15 +78,22 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
         }
         .row {
           border-bottom: 1px solid #FFFFFF;
+          //  position: fixed;
+          // top: 0;
+          //  width: 100%;
         }
         .header-container {
           display: flex;
+          position: fixed;
+          // top: 0;
+          width: 94%;
           justify-content: center;
           align-items: center;
           height: 45px;
-          padding: 0 2.5%;
+          padding:0 3.5% 0 3.5%;
           background-color: #FFFFFF;
           box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.5);
+          z-index:1000;
         }
         .logo {
           display: flex;
@@ -184,15 +191,22 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
         #menuToggle
         {
           display: none;
-          position: relative;
-          left: 50px;
+          // position: relative;
+          // left: 50px;
           z-index: 100;
-          height: 35px;
-          margin-left: 2%;
-          margin-top: 2.5%;
+          height: 5vh;
+          // margin-left: 2%;
+          // margin-top: 2.5%;
           
           -webkit-user-select: none;
           user-select: none;
+          position:fixed;
+          width:96%;
+          background:#FFFFFF;
+          // display:flex;
+          // justify-content:center;
+           padding:10px;
+          // margin:30px;
         }
         #menuToggle input
         {
@@ -242,7 +256,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
         #menuToggle input:checked ~ span
         {
           opacity: 1;
-          transform: rotate(45deg) translate(1px, 1px);
+          -webkit-transform: rotate(45deg) translate(8px, 8px);
           background: #FFFFFF;
         }
         /*
@@ -309,6 +323,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
         @media only screen and (max-width: 700px) {
           #menuToggle {
             display: block;
+            position:fixed;
           }
           .header-container {
             display: none;
@@ -331,10 +346,13 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
             
           }
           #menu {
-            height: 100vh;
+            height: 30vh;
             width: 100%;
+            position:fixed;
+
             // background-color: #FFFFFF;
             background-image: repeating-linear-gradient( #00d4ff,#35a4ba, #619fac );
+            
           }
           .row {
             border: none;

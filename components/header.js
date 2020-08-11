@@ -22,7 +22,6 @@ const Header = () => (
         src: url('../static/fonts/Open Sans.otf');
       }
       body {
-
         font-family: "Open Sans", sans-serif; 
         line-height: 1.6;
         letter-spacing: 0.2px;
@@ -405,7 +404,7 @@ const Header = () => (
         .container-fluid {
           width: 355px;
           flex-direction: column;
-          padding: 10px;
+          // padding: 10px;
           margin: 0 auto;
         }
 

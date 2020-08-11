@@ -677,7 +677,6 @@ class Index extends React.Component {
 
               </div>
               <div className="message" style={{ fontSize: "1.6vw",lineHeight:0.5}}>
-
                 <p style={{ color: "#000000", textAlign: "center" }}>Does your family need it for an emergency? And when you use</p>
                 <p style={{ color: "#000000", textAlign: "center" }}>a cheaper option, it sometimes takes longer for your money to arrive</p>
                 <p style={{ color: "#000000", textAlign: "center" }}>Don't worry, we are here now</p>
@@ -814,8 +813,8 @@ class Index extends React.Component {
               <h1 style={{ textAlign: "center", marginTop: -20 }}>Imperial College London</h1>
             </div>
             {/* </div> */}
-            <div className="message">
-              <p style={{ marginLeft: 50 }}>It is very difficult to send money from IDR to GDP and</p>
+            <div className="message" style={{lineHeight:0.5}}>
+              <p>It is very difficult to send money from IDR to GDP and</p>
               <p>Transfree come out with the best solution ever. First time I use it when</p>
               <p>I was in Indonesia to pay for my flat deposit and rent. And now I'm still use</p>
               <p>Transfree to transfer money from the UK to Indonesia. It gives me a fair rate</p>
@@ -983,8 +982,9 @@ class Index extends React.Component {
         width:90%;
         margin-left:auto;
         margin-right:auto;
-        opacity:0.8;
+        // opacity:0.8;
         padding:20px 30px 50px 30px;
+        // z-index:0;
         
        
      }
@@ -1000,17 +1000,19 @@ class Index extends React.Component {
         background-position: center;
         background-size:100% 100%;
         width:80%;
-        padding:50px 0px 50px 0px;
+        padding:30px 0px 50px 0px;
         text-align:center;
         margin-left:auto;
         margin-right:auto;
+        white-space: pre;
       }
 
       .testimonial .message p{
         color:#000000;
-        font-size:20px;
+        font-size:1em;
         text-align:center;
-        margin-top:-25px;
+        white-space: pre-line;
+        // margin-top:-25px;
         
       }
 
@@ -1988,7 +1990,7 @@ class Index extends React.Component {
             // }
 
             .testimonial .message p{
-              font-size:18px;
+              font-size:0.8em;
             }
 
             .achievement h1{
@@ -2054,6 +2056,10 @@ class Index extends React.Component {
               #menuToggle .main-cta {
                 position: absolute;
                 right: 0;
+              }
+
+              .hero > container{
+                padding: 90px;
               }
 
               .first-benefit .btn-primary-2{
@@ -2314,7 +2320,7 @@ class Index extends React.Component {
 
                
                    .fiture-mobile .images{
-                    margin-top:-105px;
+                    margin-top:-95px;
                     display:flex;
                     
                     position:absolute;
@@ -2476,7 +2482,7 @@ class Index extends React.Component {
                 // display: flex;
                 flex-wrap: wrap;
                 flex-direction: row-reverse;
-                padding:0px 0px 180px 0px;
+                padding:80px 0px 180px 0px;
               }
 
               .hero .left-container{
