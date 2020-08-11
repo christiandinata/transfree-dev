@@ -26,7 +26,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
           {isAuthenticated && isApproved && <li><Link href="/order"><a>Send Money</a></Link></li>}
           {isAuthenticated && isApproved && <li><Link href="/account"><a>Transactions</a></Link></li>}
           <hr/>
-          {!isAuthenticated && <li><Link href="/signup"><a className="btn-secondary-login">Signup</a></Link></li>}
+          {!isAuthenticated && <li><Link href="/signup"><a className="btn-secondary-login">Sign up</a></Link></li>}
           {isAuthenticated && <li><Link href="/user-profile"><a className="btn-secondary-login">Profile</a></Link></li>}
           {isAuthenticated && <li><Link href="/logout"><a className="btn-secondary-login">Logout</a></Link></li>}
         </ul>
@@ -191,7 +191,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
         #menuToggle
         {
           display: none;
-          // position: relative;
+          position: fixed;
           // left: 50px;
           z-index: 100;
           height: 5vh;
@@ -203,9 +203,10 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
           position:fixed;
           width:96%;
           background:#FFFFFF;
-          // display:flex;
+          //  display:flex;
           // justify-content:center;
            padding:10px;
+           align-items:center;
           // margin:30px;
         }
         #menuToggle input
@@ -229,9 +230,9 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
         {
           display: block;
           width: 40px;
-          height: 20%;
+          height: 15%;
           margin-bottom: 4px;
-          
+        //  margin-top:90px; 
           position: relative;
           background: #5BB7DE;
           border-radius: 3px;
@@ -255,8 +256,8 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
          */
         #menuToggle input:checked ~ span
         {
-          opacity: 1;
-          -webkit-transform: rotate(45deg) translate(8px, 8px);
+           opacity: 1;
+           transform: rotate(40deg) translate(-2px, -1px);
           background: #FFFFFF;
         }
         /*
@@ -346,7 +347,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
             
           }
           #menu {
-            height: 30vh;
+            height: 40vh;
             width: 100%;
             position:fixed;
 

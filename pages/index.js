@@ -268,7 +268,6 @@ class Index extends React.Component {
               <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-primary-start" style={{ fontSize: 15, marginTop: 23 }}>How it works</a>
               {/* <div style={{marginTop:40}}>
                
-
                 <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank">
                 <img src="../static/images/appstore.png"/></a>
                 <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
@@ -314,7 +313,7 @@ class Index extends React.Component {
                       <div className="money-input">
                         <span >You send</span>
                         <NumberFormat
-                          style={{ fontSize: "20px", fontWeight: 800, marginLeft: 10 }}
+                          style={{ fontSize: "1.5rem", fontWeight: 600, marginLeft: 10 }}
                           id="money-from"
                           type="text"
                           thousandSeparator={true}
@@ -537,7 +536,7 @@ class Index extends React.Component {
                       <div className="money-input">
                         <span>Recipient gets</span>
                         <NumberFormat
-                          style={{ fontSize: "20px", fontWeight: 800, marginLeft: 10 }}
+                          style={{ fontSize: "1.5rem", fontWeight: 600, marginLeft: 10 }}
                           id="money-to"
                           type="text"
                           thousandSeparator={true}
@@ -676,7 +675,8 @@ class Index extends React.Component {
                 {/* </div> */}
 
               </div>
-              <div className="message" style={{ fontSize: "1.6vw",lineHeight:0.5}}>
+              <div className="message" style={{ fontSize: "1.5rem",lineHeight:0.5}}>
+
                 <p style={{ color: "#000000", textAlign: "center" }}>Does your family need it for an emergency? And when you use</p>
                 <p style={{ color: "#000000", textAlign: "center" }}>a cheaper option, it sometimes takes longer for your money to arrive</p>
                 <p style={{ color: "#000000", textAlign: "center" }}>Don't worry, we are here now</p>
@@ -688,38 +688,9 @@ class Index extends React.Component {
 
         <div className="row fiture-mobile">
           <div className="container">
-          <div className="images">
-                  <div className="monas">
-                      <img src="../static/images/features/monas.png" style={{marginTop:-33}} alt="monas" name="monas" id="monas" ></img>
-                  </div>
-                  <div className="rumah" style={{marginLeft:"9%"}}>
-                  <img src="../static/images/features/rumah.png"  alt="rumah"  id="rumah"  style={{marginTop:55}}></img>
-                  </div>
-                  <div className="bali" style={{marginLeft:"18%"}}>
-                  <img src="../static/images/features/bali.png" alt="bali"></img>
-                  </div>
-                  <div className="surabaya" style={{marginLeft:"18%"}}>
-                  <img src="../static/images/features/surabaya.png" alt="surabaya" style={{marginTop:4}}></img>
-                  </div>
-                  <div className="borobudur" style={{marginLeft:"18%"}}>
-                  <img src="../static/images/features/borobudur.png"  alt="borobudur" style={{marginTop:32}}  ></img>
-                  </div>
-          </div>
-           <div className="fiture-mobile-message">
-              <h1 style={{fontWeight:400}}>International <span style={{fontWeight:900}}> Money</span></h1>
-             
-              <h1 style={{marginTop:-30}}>Transfer <span style={{fontWeight:400}}>feels like</span> local</h1>
-              <h2 style={{textAlign:"center",marginLeft:20,marginTop:-10,fontSize:"13pt",color:"#000000"}}>Send. Arrives. Pick-up in 5 minutes</h2>
-           </div>
-           <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-primary-start" style={{fontSize:20,marginTop:15,width:"70%",marginLeft:"auto",marginRight:"auto"}}>How it works</a>
-           <hr className="line"/>
-           <p style={{textAlign:"center"}}>Why we should to use Transfree?</p>
-          <div className="fiture-mobile-benefit">
-              <div className="first-benefit" style={{marginBottom:"5%"}}>
-              <button className="btn-primary-2">Better rate for transfer</button>
-              <div className="first-message">
-                <h1 style={{textAlign:"center",fontSize:"15pt",marginTop:5}}>Better rate for transfer</h1>
-                <p style={{textAlign:"center"}}>Does your family need it for an emergency? And when you use a cheaper option,it sometimes takes longer for your money to arriveDon't worry, we are here now</p>
+            <div className="images">
+              <div className="monas">
+                <img src="../static/images/features/monas.png" style={{ marginTop: -33 }} alt="monas" name="monas" id="monas" ></img>
               </div>
               <div className="rumah" style={{ marginLeft: "9%" }}>
                 <img src="../static/images/features/rumah.png" alt="rumah" id="rumah" style={{ marginTop: 55 }}></img>
@@ -738,7 +709,7 @@ class Index extends React.Component {
               <h1 style={{ fontWeight: 400 }}>Internasional <span style={{ fontWeight: 900 }}> Money</span></h1>
 
               <h1 style={{ marginTop: -30 }}>Transfer <span style={{ fontWeight: 400 }}>feels like</span> local</h1>
-              <h2 style={{ textAlign: "center", marginLeft: 20, marginTop: -10, fontSize: "13pt", color: "#000000" }}>Send. Arrives. Pick-up in 5 minutes</h2>
+              <h2 style={{ textAlign: "center", marginLeft: 20, marginTop: -10, fontSize: "13pt", color: "#000000" }}>Send. Arrives. Pick-up in a day</h2>
             </div>
             <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-primary-start" style={{ fontSize: 20, marginTop: 15, width: "70%", marginLeft: "auto", marginRight: "auto" }}>How it works</a>
             <hr className="line" />
@@ -803,17 +774,12 @@ class Index extends React.Component {
             <div className="main-container">
               <div className="left-container">
                 <img src="../static/images/ASSET/Mockup.png"></img>
-                </div>
-                <div className="right-container">
-                <h1>Available in</h1>
-                  <div>
-                      <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank">
-                      <img src="../static/images/appstore.png" /></a>
-                  </div>
-                  <div>
-                      <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
-                      <img src="../static/images/playstore.png"/></a>
-                  </div>
+              </div>
+              <div className="right-container">
+                <h1>Avaliable in</h1>
+                <div>
+                  <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank">
+                    <img src="../static/images/appstore.png" /></a>
                 </div>
                 <div>
                   <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
@@ -847,8 +813,8 @@ class Index extends React.Component {
               <h1 style={{ textAlign: "center", marginTop: -20 }}>Imperial College London</h1>
             </div>
             {/* </div> */}
-            <div className="message" style={{lineHeight:0.5}}>
-              <p>It is very difficult to send money from IDR to GDP and</p>
+            <div className="message">
+              <p style={{ marginLeft: 50 }}>It is very difficult to send money from IDR to GDP and</p>
               <p>Transfree come out with the best solution ever. First time I use it when</p>
               <p>I was in Indonesia to pay for my flat deposit and rent. And now I'm still use</p>
               <p>Transfree to transfer money from the UK to Indonesia. It gives me a fair rate</p>
@@ -877,7 +843,6 @@ class Index extends React.Component {
 
 
         <style jsx>{`
-
         .application .right-container h1,
         .achievement h1,
         .achievement-mobile h1
@@ -903,18 +868,14 @@ class Index extends React.Component {
                       0 0px 80px 10px rgba(0, 0, 0, 0.12)
                     ;
         }
-
         .benefit > .btn-primary-start h1{
           font-size:0.7em;
         }
-
         .container-content > .benefit > .btn-primary-start img{
           height:50%;
           width:30%;
         }
-
         
-
         span{
           font-weight:500;
         }
@@ -927,7 +888,6 @@ class Index extends React.Component {
          
          
         }
-
       h2,h1,h3{
         color:#FFFFFF;
       }
@@ -935,22 +895,18 @@ class Index extends React.Component {
           border: 1px solid black;
           width:300px;
       }
-
       .application .right-container > h1,
       .application-mobile .right-container >h1{
         font-weight:500;
         text-shadow:  0 0 15px black;
         // display:none;
       }
-
       .achievement  h1{
         font-weight:500;
         text-shadow:  0 0 15px black;
         font-size:20px;
         //  display:none;
       }
-
-
        .features{
         background:url('../static/images/features/background-batik.png');
         background-repeat: no-repeat;
@@ -964,49 +920,38 @@ class Index extends React.Component {
         display:flex;
          flex-direction:column;
        }
-
        .features .container{
          display:flex;
          flex-direction: column;
        }
-
        .features .container-image{
         display:flex;
         flex-direction: row;
         flex-basis:100%;
-
       }
-
       .features .container-content{
         display:flex;
         flex-direction: column;
       }
-
        .features .container .benefit{
         width:85vw;
         margin:auto;
       }
-
-
      .fiture-mobile {
        display:none;
      }
-
       .features .container-image .images{ 
         margin-top:-4.18vw;
         display:flex;
         margin-left:-1vw;
         flex-basis:60%;
       }
-
       .features .images img{
         height:6vw;
         width:auto;
          margin:auto;
          max-width: 100%;
       }
-
-
       
      .features .message{
         background:url('../static/images/features/chat-box.png');
@@ -1016,59 +961,47 @@ class Index extends React.Component {
         width:90%;
         margin-left:auto;
         margin-right:auto;
-        // opacity:0.8;
+        opacity:0.8;
         padding:20px 30px 50px 30px;
-        // z-index:0;
         
        
      }
-
      .features .message {
        font-size:23px;
        margin-top:6%;
      }
-
       .testimonial .message{
         background-image:url('../static/images/testimoni/box-message.png');
         background-repeat: no-repeat;
         background-position: center;
         background-size:100% 100%;
         width:80%;
-        padding:30px 0px 50px 0px;
+        padding:50px 0px 50px 0px;
         text-align:center;
         margin-left:auto;
         margin-right:auto;
-        white-space: pre;
       }
-
       .testimonial .message p{
         color:#000000;
-        font-size:1em;
+        font-size:20px;
         text-align:center;
-        white-space: pre-line;
-        // margin-top:-25px;
+        margin-top:-25px;
         
       }
-
       .testimonial div h1{
         font-size:25px;
       }
-
-
       .box-message{
         margin-top:500px;
         width:auto;
         height:auto;
       }
-
      
-
       .profile-testimonial .textTesti h1{
         // font-size:25px;
         // color:blue;
         // margin:200px;
       }
-
       .testimonial img{
         width:14%;
         margin-left:auto;
@@ -1076,19 +1009,14 @@ class Index extends React.Component {
         display:block;
        
       }
-
       .text h1,h2{
         display:inline;
         font-size:35px;
       }
-
       .text{
         margin-top:0px;
       }
-
     
-
-
       .features .btn-primary-start {
         background-color: #5BB7DE;
         border: none;
@@ -1106,7 +1034,6 @@ class Index extends React.Component {
         transition: all 0.2s ease-in-out;
         box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
       }
-
       .features .btn-primary-start:hover {
         background-color: #FAAF40;
         border: none;
@@ -1124,7 +1051,6 @@ class Index extends React.Component {
         transition: all 0.2s ease-in-out;
         box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
       }
-
        .btn-primary-start:hover {
         background-color: #FAAF40;
         border: none;
@@ -1140,50 +1066,40 @@ class Index extends React.Component {
        
         box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
       }
-
       // .column {
       //   flex :23.35%;
         
       // }
-
       .features .benefit{
        display:flex;
       }
-
        .features .background img{
         height:1000px;
         width:2000px;
         margin-left:-480px;
         margin-top:-100px;
        }
-
-
        .benefit img{
         width:7vw;
         height:auto;
        }
-
        .benefit h1{
          font-size:2.8vw;
         //  width:7vw;
          height:auto;
          text-align:center;
        }
-
       
     
        .benefit .btn-primary-start{
          padding:10px 10px 30px 10px;
          height:auto;
        }
-
-
        .left-container h1 {
         font-family: 70px 'Open Sans', sans-serif;
         font-weight: 800;
         color: #FFFFFF;
       }
-
       .left-container > p {
         font-family:"Open Sans", sans-serif;
         font-weight: 700;
@@ -1191,12 +1107,10 @@ class Index extends React.Component {
         font-size:16px;
         
       }
-
       .left-container img {
         height:70px;
         width:200px;
       }
-
       .application .left-container img {
         height:auto;
         width:23vw;
@@ -1208,19 +1122,15 @@ class Index extends React.Component {
         
         
       }
-
       .application .right-container img{
         width:17vw;
        
       }
-
       
-
         // container{
         //   background-color: #d2222f;
         //   width:20px;
         // }
-
         .application{
           display:flex;
           justify-content: center;
@@ -1228,7 +1138,6 @@ class Index extends React.Component {
           margin-top:-100px;
           // height:auto;
         }
-
         .application .right-container{
           justify-content:center;
           text-align:center;
@@ -1241,7 +1150,6 @@ class Index extends React.Component {
           width:50%;
          
         }
-
         .application .left-container{
           justify-content:center;
           text-align:center;
@@ -1252,9 +1160,7 @@ class Index extends React.Component {
           display:flex;
           flex-direction:column;
         }
-
         
-
         .achievement{
           background:url('../static/images/achievment/achievement.png') no-repeat ;
           background-position: center;
@@ -1263,7 +1169,6 @@ class Index extends React.Component {
           z-index:-1;
           margin-top:2vw;
         }
-
         .testimonial {
           background:url('../static/images/achievment/lingkaran setengah.png'),url('../static/images/testimoni/background.png');
           background-repeat: no-repeat;
@@ -1275,25 +1180,16 @@ class Index extends React.Component {
           margin-top:-100px;
           padding:130px 0px 0px 0px;
         }
-
-
-
         .testimonial div{
           display:block;
         }
-
-
         .title{
           margin-top:20px;
         }
-
         .title h1{
           display: inline-block;
         }
-
        
-
-
         .top-right {
           position:center;
           left:10px;
@@ -1314,11 +1210,8 @@ class Index extends React.Component {
           box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
           width:140px;
         }
-
       
-
         
-
         .btn-primary-2 {
           background-color: #5BB7DE;
           border: none;
@@ -1335,12 +1228,9 @@ class Index extends React.Component {
           box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
           font-weight:600;
         }
-
         .btn-primary-2:hover {
           transform: translateY(-1px);
         }
-
-
         .btn-primary-start {
           background-color: #FAAF40;
           border: none;
@@ -1356,29 +1246,24 @@ class Index extends React.Component {
           transition: all 0.2s ease-in-out;
           box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
         }
-
         .testimoni{
           margin-left: 590px;
           margin-top: 0px;
           font-size: 15px;
-
         }
          .fixed-btn{
            position: fixed;
            background: #00a82d;
-
            width: 65px;
            height: 65px;
            line-height: 45px;
-
            bottom: 4%;
            right: 3%;
            border-radius: 50%;
            text-align: center;
-
            box-shadow: 0 10px 30px 0 rgba(0,0,0,0.30);
            cursor: pointer;
-
+           z-index:1000;
         }
         .fixed-btn:active{
           box-shadow: 0 0;
@@ -1387,7 +1272,6 @@ class Index extends React.Component {
         .lightbox {
           /** Default lightbox to hidden */
           display: none;
-
           /** Position and style */
           position: fixed;
           z-index: 999;
@@ -1398,22 +1282,18 @@ class Index extends React.Component {
           left: 0;
           background: rgba(0,0,0,0.8);
         }
-
         .lightbox iframe {
           /** Pad the lightbox image */
           min-width: 55%;
           min-height: 60%;
           margin-top: 10%;
         }
-
         .lightbox:target {
           /** Remove default browser outline */
           outline: none;
-
           /** Unhide lightbox **/
           display: block;
         }
-
           .desktop {
             margin-top:40px;
             display: block;
@@ -1443,14 +1323,10 @@ class Index extends React.Component {
           .left-container h1{
             margin-bottom:0px !important;
           }
-
           .container {
             display: flex;
             max-width:1124px;
           }
-
-
-
           .hero {
             background-image:url('../static/images/Asset Web/content/Banner_Web.png');
             background-repeat: no-repeat;
@@ -1459,9 +1335,7 @@ class Index extends React.Component {
             margin-top:0px;
             
           }
-
          
-
           .left-container {
             flex-basis: 55%;
             margin-top:40px;
@@ -1470,30 +1344,23 @@ class Index extends React.Component {
            
             
           }
-
           .left-container h1{
-
           }
-
-
           .left-container p {
             max-width: 80%;
             margin-bottom: 30px;
           }
-
           .right-container {
             flex-basis: 60%;
             margin-top: 55px;
            
           }
-
           .hero .right-container{
             flex-basis: 34%;
             margin-top: 25px;
             margin-right:0px;
             margin-left:30px;
           }
-
           .right-bottom-container{
             margin-top:20px !important;
             display: none;
@@ -1502,29 +1369,23 @@ class Index extends React.Component {
             margin-top: 15px;
            
           }
-
           h1 {
             font-size: 2rem;
           }
-
           .benefits {
             display: flex;
             margin-top: 50px;
           }
-
           .benefit-item {
             flex-basis: 40%;
             text-align: center
           }
-
           .benefit-item p {
             margin: 0 auto;
           }
-
           .benefit-item img {
             margin-bottom: 20px;
           }
-
           .converter-container {
             padding: 15px 20px 23px 20px;
             background: #354E7A;
@@ -1532,32 +1393,27 @@ class Index extends React.Component {
             border-radius: 30px;
             color: #AAB2C0;
           }
-
           .exchange-container {
             display: flex;
             flex-direction: column;
             
             
           }
-
           .money-input-container {
             display: flex;
             background-color: #FFFFFF;
             border-radius: 15px;
           }
-
           .money-input {
             display: flex;
             flex-basis: 85%;
             flex-direction: column;
             padding:1px;
           }
-
           .money-input span {
             margin: 5px 0 0 20px;
             font-size:14px;
           }
-
           .currency-change {
             display: flex;
             justify-content: center;
@@ -1572,26 +1428,21 @@ class Index extends React.Component {
             transition: all .15s ease-in-out;
            
           }
-
           .currency-change span{
             font-size:10px;
           }
-
           .currency-change:hover {
             border: 1px solid #eaeaea;
           }
-
           .source-container {
             margin-bottom: 30px;
           }
-
           .currency-from {
             display: flex;
             align-items: center;
             font-size: 20px;
             color: #FFF;
           }
-
           input {
             margin-top: 20px;
             width: 100%;
@@ -1601,27 +1452,21 @@ class Index extends React.Component {
             padding: 12px;
             box-sizing: border-box;
           }
-
           input:focus {
             outline: none;
           }
-
-
           .rate {
             display: flex;
             margin: 20px 0;
           }
-
           .live-rate {
             text-transform: uppercase;
           }
-
           .rate-desc {
             flex-basis: 50%;
             width: 50%;
             color:#FFFFFF;
           }
-
           .rate-value {
             flex-basis: 50%;
             width: 50%;
@@ -1629,39 +1474,31 @@ class Index extends React.Component {
             font-weight: 700;
             color: #FFF;
           }
-
           .note {
             margin-bottom: 20px;
           }
-
           .received-on {
             color: #FFF;
           }
-
           .converter-cta {
             display: flex;
           }
-
           .cta-secondary,
           .cta-primary {
             flex-basis: 50%;
             padding: 5px;
             
           }
-
           .cta-secondary a,
           .cta-primary a {
             width: 100%;
           }
-
           .cta-secondary a {
             padding: 8px 0;
           }
-
           .cta-primary a {
             padding: 10px 0;
           }
-
           .promo {
             display: flex;
             align-items: center;
@@ -1671,84 +1508,63 @@ class Index extends React.Component {
             color: #3E495E;
             border-radius: 8px;
           }
-
           .promo-desc {
             flex-basis: 60%;
           }
-
           .promo-cta {
             flex-basis: 40%;
             text-align: center;
           }
-
           .promo a {
             font-size: 14px;
           }
-
           .curve {
             display: flex;
             width: 100%;
             height: auto;
           }
-
           .partners-mobile{
             display: none;
           }
-
           .partners {
             margin-top: -7px;
             padding-top: 50px;
             background-color: #FFF;
             text-align: center;
           }
-
           .partners h1 {
             text-align: center;
             margin-bottom: 50px;
           }
-
-
           .partners-wrapper {
             flex-direction: column;
           }
-
           .partners-container {
             display: flex;
             justify-content: center;
           }
-
           .partner-item {
             flex-basis:20%;
             align-self: center;
           }
-
           .partner-item img {
             max-width: 60%;
           }
-
           .partner-item-small {
             flex-basis:20%;
             padding:0px 20px;
-
             align-self: center;
           }
-
           .partner-item-small img{
             max-width:90%;
           }
-
          
-
           
-
           .left-feature-container,
           .right-feature-container {
             flex-basis: 50%;
           }
-
-
       
-
           .logo-left{
             background:url('../static/images/Asset Web/content/Group 296.png'), url('../static/images/Asset Web/content/Rectangle 160.png');
             background-repeat: no-repeat;
@@ -1759,22 +1575,17 @@ class Index extends React.Component {
             display:flex;
             
           }
-
           .logo-left h1{
             display:flex
             margin-top:300px;
           }
-
-
           // .features .container .row {
           //   display: flex;
           //   padding: 30px 0;
           // }
-
           .features-mobile{
             display: none;
           }
-
           .testimonials {
             background-size: contain;
             background-repeat: no-repeat;
@@ -1784,67 +1595,54 @@ class Index extends React.Component {
             margin-top: -180px;
             padding-top: 80px;
           }
-
           .testimonials .container {
             flex-direction: column;
           }
-
           .testimonials h1 {
             text-align: center;
             margin-bottom: 100px;
           }
-
           .features-container {
             display: flex;
             text-align: center;
           }
-
           .feature-item {
             flex-basis: 33.33%;
           }
-
           .testimonials {
             padding: 100px 0;
           }
-
           .testimonials-wrapper {
             padding-top: 100px;
             display: flex;
             flex-direction: column;
           }
-
           .testimonials-wrapper h1 {
             margin-bottom: 100px;
           }
-
           .testimonials-items {
             max-width: 550px;
             text-align: center;
             align-self: center;
           }
-
           .user {
             margin-top: 100px;
             display: flex;
             flex-direction: row;
             justify-content: center;
           }
-
           .user img {
             width: 80px;
             height: 80px;
           }
-
           .user-details {
             padding-left: 20px;
             text-align: left;
             align-self: center;
           }
-
           .user-details h3 {
             margin: 5px 0;
           }
-
           .caret::after {
             display: inline-block;
             width: 16px;
@@ -1856,7 +1654,6 @@ class Index extends React.Component {
             background-image: url(../static/images/ic-caret.svg);
             background-size: 16px;
           }
-
           .dropdown-menu {
             position: absolute;
             min-width: 300px;
@@ -1875,11 +1672,9 @@ class Index extends React.Component {
             border: 1px solid rgba(0,0,0,.15);
             border-radius: .25rem;
           }
-
           .show {
             display: block;
           }
-
           .dropdown-menu ul {
             height: auto;
             max-height: 200px;
@@ -1888,112 +1683,89 @@ class Index extends React.Component {
             margin: 0;
             padding: 0;
           }
-
           .dropdown-item {
             display: flex;
             align-items: center;
             padding: 14px 20px 8px;
             color: #15233c;
           }
-
           .dropdown-item .flag-icon {
             border: 1px solid #eaeaea;
           }
-
           .dropdown-item:hover {
             background-color: #469DDD;
             cursor: pointer;
           }
-
           .dropdown-button {
             background: none;
             border: none;
             text-transform: uppercase;
           }
-
           .dropdown-button:active,
           .dropdown-button:focus {
             outline: none;
           }
-
           a.dropdown-item {
             transition: none;
           }
-
           .feature {
             display: flex;
             align-items: center;
             margin: 0;
             
           }
-
           hr {
             border-color: 1px solid #eaeaea;
           }
-
           .cta-primary {
             flex-basis: 100%;
           
             
           }
-
           .application-mobile{
             display:none;
           }
-
           .achievement-mobile{
             display:none;
           }
-
           .testimonial-mobile{
             display:none;
           }
-
           @media only screen and (max-width:780px){
             .features .container-image .images{ 
              display:none;
              }
           }
-
           @media only screen and (max-width:800px){
             // .hero .left-container{
             //   flex-basis:40%;
             // }
-
             .hero .right-container{
               flex-basis:60%;
             }
-
             .hero .images{
               display:none;
             }
-
             .btn-primary-start h1{
               font-size:20px;
             }
-
             // .btn-primary-start img{
             //   width:40%;
             //   height:30%;
             // }
-
             .features .message h3{
               font-size:20px;
             }
-
             .application h1{
               font-size:10vw;
             }
-
             .testimonial .message p{
               font-size:vw;
             }
-
           
             // .features{
             //   display:none;
             // }
-
             .features .container-image .images{ 
             //   margin-top:-60px;
             //  display:flex;
@@ -2001,101 +1773,75 @@ class Index extends React.Component {
             //  flex-basis:60%;
             flex-basis:50%;
            }
-
-
-
           }
           
           @media only screen and (max-width: 700px){
             // .hero .images img{
             //   display:none;
             // }
-
             // .hero .left-container{
             //   flex-basis:40%;
             // }
-
             // .hero .right-container{
             //   flex-basis:60%;
             // }
-
             // .features{
             //   display:none;
             // }
-
             .testimonial .message p{
-              font-size:0.8em;
+              font-size:18px;
             }
-
             .achievement h1{
               font-size:25px;
             }
-
             .achievement{
               height:500px;
             }
-
             .
           }
-
-
           @media only screen and (max-width: 600px){
             .hero .left-container{
               display:none;
             }
-
              .hero .right-container{
                flex-basis:80%;
                margin-left:10%;
              }
-
             .achievement h1{
               text-align:center;
             }
             .application .left-container{
               flex-basis:40%;
             }
-
             .application .right-container{
               flex-basis:60%;
             }
-
             .features .container-image .images{
               display:none;
             }
               
           }
-
           @media only screen and (max-width: 500px){
           //  .features .benefit img{
           //    width:30px;
           //  }
-
           //  .features .benefit h1{
           //    font-size:18px;
           //  }
             .features .benefit{
               display:none;
             }
-
             .fiture-mobile-benefit{
               display:flex;
               flex-direction: column;
             }
-
             
-
           }
             @media only screen and (max-width: 414px) {
               #menuToggle .main-cta {
                 position: absolute;
                 right: 0;
               }
-
-              .hero > container{
-                padding: 90px;
-              }
-
               .first-benefit .btn-primary-2{
                 font-size:89%;
                 padding:15px 15px 15px 15px;
@@ -2104,26 +1850,20 @@ class Index extends React.Component {
                 margin-left:2%;
                 margin-right:auto;
               }
-
               .hero .money-input span{ 
                 font-size:12px;
               }
-
               .hero .money-input NumberFormat{
                 font-size:11px;
               }
-
               .hero .right-container{
                 margin-right:5%;
                 margin-left:0%;
                 margin-top:-20px;
               }
-
               .store img{
                 display:none;
               }
-
-
               .testimonial-mobile{
                 background:url('../static/images/achievment/lingkaran setengah.png'),url('../static/images/testimoni/background.png') no-repeat;
                 display: flex;
@@ -2135,7 +1875,6 @@ class Index extends React.Component {
                 background-repeat: no-repeat;
                 background-position:  0px -30px,center;
               }
-
               .achievement-mobile h1{
                 // color:#000000;
                  font-size:15pt;
@@ -2145,11 +1884,9 @@ class Index extends React.Component {
                 // // display:none;
                 // text-align:center;
               }
-
               .note{
                 width:100px;
               }
-
               .testimonial-mobile img{
                 width:40%;
                 height:40%;
@@ -2157,12 +1894,9 @@ class Index extends React.Component {
                 text-align:center;
                
               }
-
               .testimonial-mobile .textTesti h1{
                 font-size:20px;
               }
-
-
               .achievement-mobile{
                   background:url('../static/images/achievment/Achievement-mobile.png') no-repeat;
                   // // padding:10px 10px 50px 0px;
@@ -2174,9 +1908,7 @@ class Index extends React.Component {
                   // filter: drop-shadow( -5px 5px 5px #000 );
                  
                 }
-
                
-
                 .testimonial-mobile .message{
                   background-image:url('../static/images/testimoni/box-message.png');
                   background-repeat: no-repeat;
@@ -2185,10 +1917,8 @@ class Index extends React.Component {
                   width:auto;
                   padding:0px 10px 10px 10px;
                   text-align:center;
-
                   font-size:13px;
                 }
-
                 .testimonial-mobile .message .p{
                   // letter-spacing: 232px
                   // text-align:center;
@@ -2196,18 +1926,14 @@ class Index extends React.Component {
                   
                 }
           
-
              
-
               .application-mobile{
                 display:block;
               }
-
               .main-container .left-container img{
                 height:100%;
                 width:120%;
               }
-
               
               .application-mobile h1{
                 font-family: 10em ,'Open Sans', sans-serif;
@@ -2219,7 +1945,6 @@ class Index extends React.Component {
               
                 
                 }
-
                 
               .main-container{
                 display:flex;
@@ -2240,13 +1965,11 @@ class Index extends React.Component {
                 // backgroud:red;
               }
         
-
               .main-container .right-container img{
                 width:70%;
                 height:80%;
                 // background:red;
               }
-
               .main-container .right-container{
                 // background:blue;
                 display:flex;
@@ -2259,29 +1982,22 @@ class Index extends React.Component {
                
                
               }
-
             
               
-
-
               .application{
                 display:none;
               }
-
               .first-benefit:hover .first-message {
                 display: block;
                 animation: fade-in 1s;
               }
-
               .first-benefit:hover .btn-primary-2 {
                 display: none;
                 animation: fade-in 1s;
               }
-
               .feature .images{
                 display:none;
               }
-
               @keyframes fade-in {
                 from {
                   opacity: 0;
@@ -2301,40 +2017,30 @@ class Index extends React.Component {
               }
               
               
-
               .achievement{
                 display:none;
               }
-
-
               // .application .left-container,
               // .application .right-container{
               //   flex-basis:50%;
               //   background:blue;
-
               // }
-
               
-
               .testimonial{
                 display:none;
               }
-
               .testimonial .message{
                 display:none;
               }
-
               
               .external-link-right {
                 lex-basis: 40%;
                 margin-left : 20px;
                 margin-top: 0px;
               }
-
               .features .benefit{
                 display:none;
               }
-
                  .fiture-mobile{
                     background:url('../static/images/features/Shadow indonesia.png'),url('../static/images/features/background-mobile.png');
                     padding:10px 10px 80px 10px;
@@ -2351,7 +2057,6 @@ class Index extends React.Component {
                     // margin-top:80px;
                     
                    }
-
                
                    .fiture-mobile .images{
                     margin-top:-95px;
@@ -2373,20 +2078,16 @@ class Index extends React.Component {
                     opacity:0.8;
                     padding:70px 30px 0px 50px;
                  }
-
                 .fiture-mobile-benefit{
                   display:flex;
                   flex-direction: column;
                 }
-
                 .fiture-mobile-benefit .btn-primary-2{
                   font-size:20px;
                 }
-
                 .first-message{
                   display:none;
                 }
-
                 .first-message{
                   background:url('../static/images/features/Why should we use Transfree_Pop up button.png');
                   background-repeat: no-repeat;
@@ -2395,49 +2096,36 @@ class Index extends React.Component {
                   padding:1.5px 10px 0px 10px;
                   height:auto;
                 }
-
                 .application{
                   width:100%;
                 }
-
                  .fiture-mobile .message {
                    font-size:23px;
                  }
-
                  .fiture-mobile-message h1{
                    font-size:30px;
                    color:#000000;
                  }
-
                  .fiture-mobile-message {
                   display:block;
                   margin-top:40px;
-
                 }
-
               .features .message{
                
                 display:none;
               }
-
             
-
               .fiture-mobile .btn-primary-start{
                 width:30%;
               }
-
               
-
              .fiture-mobile{
               display: flex;
               flex-direction: column;
-
              }
-
               .features {
                 display:none;
               }
-
               .achievement{
                 background-size:100% 100%;
                 height:500px;
@@ -2446,24 +2134,20 @@ class Index extends React.Component {
                 margin-left:-30px;
               
               }
-
               .fiture-mobile .images{
                 margin-left:0px;
               }
-
               .fiture-mobile .images img{
                 width:50px;
                 // height:50px;
                 margin-top:20px;
               }
-
               .fiture-mobile .images .monas  { 
                 margin-top:28%;
                 height:90px;
                 // margin-left:2%;
                 // transform: rotate(-9deg);
               }
-
               .fiture-mobile .images .monas img { 
                 // margin-top:28%;
                 width:30px;
@@ -2476,67 +2160,52 @@ class Index extends React.Component {
                 transform: rotate(2deg);
                 margin-left:3%;
               }
-
               .fiture-mobile .images .bali img{
                 width:30px;
               }
-
               .fiture-mobile .images .surabaya{
                 margin-top:11%;
                 margin-left:2%;
                 // transform: rotate(10deg);
               }
-
               .fiture-mobile .images .surabaya img{
                 height:60px;
                 width:40px;
               }
-
               .fiture-mobile .images .rumah{
                 margin-top:-9%;
                 // transform: rotate(-5deg);
                 
               }
-
               .fiture-mobile .images .borobudur{
                 margin-top:7%;
                 z-index:1;
                
               }
-
               .fiture-mobile .images .borobudur img{
                 transform: rotate(5deg);
-
                
               }
               
-
-
               .hero {
                 // display: flex;
                 flex-wrap: wrap;
                 flex-direction: row-reverse;
                 padding:80px 0px 180px 0px;
               }
-
               .hero .left-container{
                 display:none;
               }
-
               .hero .right-container{
                 order:1;
               }
-
              
-
               .testimonial{
                 width:10px;
               }
-
               .testimonial .message{
                 width:10px;
               }
-
               .btn-secondary-2 {
                 background: #32cd32d4;
                 border: none;
@@ -2556,32 +2225,25 @@ class Index extends React.Component {
               padding-right : 23px !important;
               width : 6% !important
             }
-
             .fixed-btn{
              width: 70px !important;
              height: 70px !important;
              line-height: 45px !imoprant;
-
              bottom: 3%;
              right: 6.5%;
               }
-
             .store{
               display: block;
             }
-
             .store img{
               width: 50%;
               height: 50%;
             }
-
             .logo{
               text-align: left;
               padding-left: 10px;
               display: block;
-
             }
-
             .logo img {
               width :50%;
               height :50%;
@@ -2610,15 +2272,12 @@ class Index extends React.Component {
               height: 50vh;
               width: 100%;
             }
-
             .dropdown-menu ul {
               height: 50vh;
             }
-
             .partners{
               display:none;
             }
-
             .partners-mobile {
             margin-top: -7px;
             padding-top: 50px;
@@ -2627,39 +2286,31 @@ class Index extends React.Component {
             text-align: center;
             display: block;
           }
-
           .partners-mobile h1 {
             text-align: center;
             margin-bottom: 30px;
           }
-
-
           .partners-wrapper-mobile {
             flex-direction: column;
           }
-
           .partners-container-mobile {
             display: flex;
             justify-content: center;
           }
-
           .partner-item-mobile {
             flex-basis:20%;
             align-self: center;
             padding:0px 20px;
           }
-
           .partner-item-mobile img {
             max-width: 80%;
             padding-bottom: 25px;
           }
-
           .partner-item-mobile-small {
             flex-basis:20%;
             align-self: center;
             padding:0px 20px;
           }
-
           .partner-item-mobile-small img{
             max-width:100%;
           }
@@ -2669,51 +2320,40 @@ class Index extends React.Component {
           .left-container h1{
             display:none;
           }
-
           .right-container {
             margin-top: 0px ;
            
           }
-
           .right-bottom-container{
             display: inline-block;
           }
-
-
           .features{
             display: none;
           }
-
           .features-mobile {
             display: none;
             padding: 100px 0;
             background-color: #FFF;
             text-align: center;
             
-
           }
-
           .left-feature-container-mobile,
           .right-feature-container {
             flex-basis: 50%;
           }
-
           .features-mobile .container-mobile {
             display: flex;
             flex-direction: column;
           }
-
           .features-mobile .container-mobile .row {
             display: flex;
             margin: 100px 0;
           }
-
           .left-feature-container-mobile img{
             width: 80%;
           }
           .right-feature-container-mobile h2{
             margin-top:0px !important;
-
             padding: 0px 20px;
           }
           .right-feature-container-mobile p{
@@ -2725,15 +2365,12 @@ class Index extends React.Component {
             margin: 20px 0px !important;
             margin-bottom: 40px !important;
           }
-
           .feature-item p{
             margin-bottom: 40px !important;
           }
-
           .testimonials-wrapper{
             padding-top:50px !important;
           }
-
           .user {
             margin-top: 40px;
             display: flex;
@@ -2741,7 +2378,6 @@ class Index extends React.Component {
             justify-content: center;
           }
           }
-
         `}</style>
         <div id={"row-footer"}>
           <Footer />

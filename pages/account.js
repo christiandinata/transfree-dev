@@ -342,7 +342,7 @@ const OrderLayout = ({ordersList}) => {
       <style jsx>{`
         .container-fixed {
           max-width: 768px;
-          margin: 50px auto;
+          margin: 60px auto;
         }
 
         .form-container {

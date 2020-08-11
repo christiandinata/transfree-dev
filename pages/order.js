@@ -255,6 +255,7 @@ class Order extends React.Component {
             flex-direction: column;
             min-height: 100vh;
             align-items: center;
+            margin-top:20px;
           }
 
           // Progress Bar

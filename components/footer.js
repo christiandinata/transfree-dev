@@ -123,10 +123,10 @@ const Footer = () => (
         ul > li > a{
           list-style-type: none;
           display: block;
-          margin: 6px 0px 6px;
+          // margin: 6px 0px 6px;
           color: #000000;
           font-size:16px;
-          font-weight:800px;
+          font-weight:normal;
         }
 
         ul > li > a > img{

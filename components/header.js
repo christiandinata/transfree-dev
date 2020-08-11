@@ -159,7 +159,7 @@ const Header = () => (
       }
       .react-phone-number-input__input {
         padding: 15px 0;
-        font-family: "Campton-Book", sans-serif;
+        font-family: "Open Sans", sans-serif;
         font-size: 16px;
       }
       .react-phone-number-input__icon {
@@ -172,7 +172,7 @@ const Header = () => (
       }
       .converter-container input {
         width: 100%;
-        font-family: 'Campton-Book', sans-serif;
+        font-family: 'Open Sans', sans-serif;
         font-size: 22px;
         color: #15233C;
         border: none;
@@ -188,7 +188,7 @@ const Header = () => (
       }
       .converter-container-order input {
         width: 100%;
-        font-family: 'Campton-Book', sans-serif;
+        font-family: 'Open Sans', sans-serif;
         font-size: 22px;
         color: #15233C;
         border: none;
@@ -404,7 +404,6 @@ const Header = () => (
         .container-fluid {
           width: 355px;
           flex-direction: column;
-          // padding: 10px;
           margin: 0 auto;
         }
 
