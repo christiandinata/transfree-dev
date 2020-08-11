@@ -688,9 +688,38 @@ class Index extends React.Component {
 
         <div className="row fiture-mobile">
           <div className="container">
-            <div className="images">
-              <div className="monas">
-                <img src="../static/images/features/monas.png" style={{ marginTop: -33 }} alt="monas" name="monas" id="monas" ></img>
+          <div className="images">
+                  <div className="monas">
+                      <img src="../static/images/features/monas.png" style={{marginTop:-33}} alt="monas" name="monas" id="monas" ></img>
+                  </div>
+                  <div className="rumah" style={{marginLeft:"9%"}}>
+                  <img src="../static/images/features/rumah.png"  alt="rumah"  id="rumah"  style={{marginTop:55}}></img>
+                  </div>
+                  <div className="bali" style={{marginLeft:"18%"}}>
+                  <img src="../static/images/features/bali.png" alt="bali"></img>
+                  </div>
+                  <div className="surabaya" style={{marginLeft:"18%"}}>
+                  <img src="../static/images/features/surabaya.png" alt="surabaya" style={{marginTop:4}}></img>
+                  </div>
+                  <div className="borobudur" style={{marginLeft:"18%"}}>
+                  <img src="../static/images/features/borobudur.png"  alt="borobudur" style={{marginTop:32}}  ></img>
+                  </div>
+          </div>
+           <div className="fiture-mobile-message">
+              <h1 style={{fontWeight:400}}>International <span style={{fontWeight:900}}> Money</span></h1>
+             
+              <h1 style={{marginTop:-30}}>Transfer <span style={{fontWeight:400}}>feels like</span> local</h1>
+              <h2 style={{textAlign:"center",marginLeft:20,marginTop:-10,fontSize:"13pt",color:"#000000"}}>Send. Arrives. Pick-up in 5 minutes</h2>
+           </div>
+           <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-primary-start" style={{fontSize:20,marginTop:15,width:"70%",marginLeft:"auto",marginRight:"auto"}}>How it works</a>
+           <hr className="line"/>
+           <p style={{textAlign:"center"}}>Why we should to use Transfree?</p>
+          <div className="fiture-mobile-benefit">
+              <div className="first-benefit" style={{marginBottom:"5%"}}>
+              <button className="btn-primary-2">Better rate for transfer</button>
+              <div className="first-message">
+                <h1 style={{textAlign:"center",fontSize:"15pt",marginTop:5}}>Better rate for transfer</h1>
+                <p style={{textAlign:"center"}}>Does your family need it for an emergency? And when you use a cheaper option,it sometimes takes longer for your money to arriveDon't worry, we are here now</p>
               </div>
               <div className="rumah" style={{ marginLeft: "9%" }}>
                 <img src="../static/images/features/rumah.png" alt="rumah" id="rumah" style={{ marginTop: 55 }}></img>
@@ -774,12 +803,17 @@ class Index extends React.Component {
             <div className="main-container">
               <div className="left-container">
                 <img src="../static/images/ASSET/Mockup.png"></img>
-              </div>
-              <div className="right-container">
-                <h1>Avaliable in</h1>
-                <div>
-                  <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank">
-                    <img src="../static/images/appstore.png" /></a>
+                </div>
+                <div className="right-container">
+                <h1>Available in</h1>
+                  <div>
+                      <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank">
+                      <img src="../static/images/appstore.png" /></a>
+                  </div>
+                  <div>
+                      <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
+                      <img src="../static/images/playstore.png"/></a>
+                  </div>
                 </div>
                 <div>
                   <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
