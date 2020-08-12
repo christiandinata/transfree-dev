@@ -1847,8 +1847,8 @@ class Index extends React.Component {
                 padding:15px 15px 15px 15px;
                 text-align:center;
                 width:100%;
-                margin-left:2%;
-                margin-right:auto;
+                // margin-left:2%;
+                // margin-right:auto;
               }
               .hero .money-input span{ 
                 font-size:12px;
