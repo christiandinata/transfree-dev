@@ -92,6 +92,7 @@ const Footer = () => (
       // width : 1920px 0,36px 0px;
       // height : 1246px 0px 6346,42px
       margin-top:0px;
+      padding-left: 3vw;
     }
         .row3 {
           border-bottom: 1px solid #eaeaea;

@@ -634,7 +634,7 @@ class Index extends React.Component {
           <div className="container">
             <div className="container-image">
               <div className="images">
-                <div className="monas">
+                {/* <div className="monas">
                   <img src="../static/images/features/monas.png" style={{ marginTop: 18 }} alt="monas" name="monas" id="monas" ></img>
                 </div>
                 <div className="rumah" style={{ marginLeft: "12%" }}>
@@ -648,12 +648,12 @@ class Index extends React.Component {
                 </div>
                 <div className="borobudur" style={{ marginLeft: "13%" }}>
                   <img src="../static/images/features/borobudur.png" alt="borobudur" style={{ marginTop: -22 }}  ></img>
-                </div>
+                </div> */}
               </div>
             </div>
 
             <div className="container-content">
-              <h1 style={{ color: "#000000", textAlign: "center", marginTop: 60 }}>Why should you use Transfree</h1>
+              <h1 style={{ color: "#000000", textAlign: "center", marginTop: 100, fontSize: "2.9vw" }}>Why should you use Transfree</h1>
 
               {/* </div> */}
 
