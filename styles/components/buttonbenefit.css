@@ -1,0 +1,49 @@
+.btn-benefit-mobile {
+    background-color: #5BB7DE;
+    border: none;
+    width: 100%;
+    margin-bottom: 20px;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 12px;
+    font-size: 20px;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 4px 6px 0 rgba(21, 35, 60, 0.15);
+    font-weight: 600;
+    padding: 15px 15px 15px 15px;
+}
+
+.btn-benefit-mobile:hover {
+    transform: translateY(-1px);
+}
+
+.first-benefit:hover .first-message {
+    display: block;
+    animation: fade-in 1s;
+}
+
+.first-benefit:hover .btn-benefit-mobile {
+    display: none;
+    animation: fade-in 1s;
+}
+
+@keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }

@@ -26,8 +26,7 @@ const Header = () => (
         line-height: 1.6;
         letter-spacing: 0.2px;
         color: #3E495E;
-        margin: 0;
-        background-color: #FFFFFF;
+        margin: 0px ;
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -43,7 +42,8 @@ const Header = () => (
         cursor: pointer;
       }
       .container {
-        margin: 0 auto;
+        width: auto;
+        margin: 0px auto;
       }
       button:focus {
         outline: none;

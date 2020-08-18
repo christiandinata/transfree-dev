@@ -1,0 +1,50 @@
+.achievement h1 {
+    font-size: 2rem !important;
+    text-align: center;
+    /* margin-left: 20%; */
+}
+
+.achievement {
+    background-image: url("../../static/images/achievment/achievement.png");
+    background-position: center;
+    background-size:contain;
+    height: 600px;
+    margin-top: 2vw;
+    /* background: red; */
+    display: flex;
+    
+}
+
+.achievement-mobile {
+    display: none;
+}
+
+@media only screen and (max-width: 700px) {
+    .achievement h1 {
+        font-size: 25px;
+    }
+    .achievement {
+        height: 500px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .achievement h1 {
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 414px) {
+    .achievement-mobile h1 {
+        font-size: 15pt;
+    }
+    .achievement-mobile {
+        background: url('../../static/images/achievment/Achievement-mobile.png') no-repeat;
+        display: block;
+        background-size: 100% 100%;
+        height: 600px;
+    }
+    .achievement {
+        display: none;
+    }
+}

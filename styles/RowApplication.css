@@ -1,0 +1,92 @@
+.application .left-container img {
+    height: auto;
+    width: 17rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.application .right-container img {
+    width: 17rem;
+}
+
+.application {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -100px;
+    /* background-color: red; */
+    background-image: url("../../static/images/achievment/achievement.png");
+}
+
+.application .right-container h1 {
+    font-size: 1.2rem;
+}
+
+.application .right-container {
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    flex-basis: 50%;
+    width: 50%;
+}
+
+.application-mobile {
+    display: none;
+}
+
+.application .left-container {
+    justify-content: center;
+    text-align: center;
+    flex-basis: 50%;
+    height: auto;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+.application .right-container>h1, .application-mobile .right-container>h1 {
+    font-weight: 500;
+    text-shadow: 0 0 15px black;
+    color: #000000;
+}
+
+.application-mobile .right-container>h1 {
+    font-size: 1rem;
+}
+
+
+
+@media only screen and (max-width:800px) {
+    .features .message h3 {
+        font-size: 20px;
+    }
+    .application .right-container h1 {
+        font-size: 0.7rem;
+    }
+    .application .left-container img {
+        height: auto;
+        width: 10rem;
+    }
+    .application .right-container img {
+        width: 10rem;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .application .left-container {
+        flex-basis: 40%;
+    }
+    .application .right-container {
+        flex-basis: 60%;
+    }
+}
+
+@media only screen and (max-width: 414px) {
+    .application {
+        display: none;
+    }
+    
+}

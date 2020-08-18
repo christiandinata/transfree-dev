@@ -1,0 +1,90 @@
+.box-benefit h1 {
+    font-size: 1.2rem !important;
+    height: auto;
+    text-align: center;
+}
+
+.benefit .btn-primary-start {
+    padding: 10px 10px 30px 10px;
+    height: auto;
+}
+
+.benefits {
+    display: flex;
+    margin-top: 50px;
+}
+
+.benefit-item {
+    flex-basis: 40%;
+    text-align: center
+}
+
+.benefit-item p {
+    margin: 0 auto;
+}
+
+.benefit-item img {
+    margin-bottom: 20px;
+}
+
+.features .container-content>.benefit>.box-benefit {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    padding-top: 3%;
+    margin-top: 5%;
+    box-shadow: 0px 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px 10px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px 10px rgba(0, 0, 0, 0.086), 0 0px 80px 10px rgba(0, 0, 0, 0.12) !important;
+}
+
+.features .benefit {
+    display: flex;
+}
+
+.box-benefit {
+    background-color: #5BB7DE;
+    border: none;
+    max-width: 50%;
+    max-height: 50%;
+    margin-bottom: 20px;
+    color: white;
+    padding: 1em !important;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 21px;
+    font-size: 29px;
+    margin-right: 10px;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 4px 6px 0 rgba(21, 35, 60, 0.15);
+}
+
+.box-benefit:hover {
+    background-color: #FAAF40;
+    border: none;
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);
+    transform: scale(1.5);
+    margin-bottom: 20px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 21px;
+    font-size: 29px;
+    margin-right: 10px;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 4px 6px 0 rgba(21, 35, 60, 0.15);
+}
+
+.box-benefit img {
+    width: 40% !important;
+    height: 60% !important;
+}
+
+@media only screen and (max-width:624px) {
+    .box-benefit {
+        display: none !important;
+    }
+}
