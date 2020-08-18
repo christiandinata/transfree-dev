@@ -705,7 +705,7 @@ class PendingLayout extends React.Component {
                   </div>
           </div>
            <div className="fiture-mobile-message">
-              <h1 style={{fontWeight:400}}>Internasional <span style={{fontWeight:900,color:"#000000"}}> Money</span></h1>
+              <h1 style={{fontWeight:400}}>International <span style={{fontWeight:900,color:"#000000"}}> Money</span></h1>
              
               <h1 style={{marginTop:-30}}>Transfer <span style={{fontWeight:400,color:"#000000"}}>feels like</span> local</h1>
               <h2 style={{textAlign:"center",marginLeft:20,marginTop:-10,fontSize:"13pt",color:"#000000"}}>Send. Arrives. Pick-up in 5 minutes</h2>

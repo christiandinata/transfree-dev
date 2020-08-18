@@ -73,7 +73,7 @@ class Login extends React.Component {
                 />
                <i onClick={this.togglePassShow}>{eye}</i>
           </div>
-           <p style={{textAlign:"end",marginBottom:"10%"}}><Link href="/forgot"><a className="link">Forgot password ?</a></Link></p>
+           <p style={{textAlign:"end",marginBottom:"10%"}}><Link href="/forgot-password"><a className="link">Forgot password ?</a></Link></p>
 
 
           <button type="submit" className="btn-primary">{this.props.inProgress ? (
@@ -83,7 +83,7 @@ class Login extends React.Component {
         </form>
 
        <div className="bottom">
-          <h1 ><Link href="/forgot"><a className="link">Forgot Password? </a></Link></h1>
+          <h1 ><Link href="/forgot-password"><a className="link">Forgot Password? </a></Link></h1>
           <p>Don't you have an account?<a className="link" href="/signup"> Sign up</a></p>
        </div>
        <p><a style={{fontSize:13}} className="link" href="/"> &lt; Back to Home</a></p>
