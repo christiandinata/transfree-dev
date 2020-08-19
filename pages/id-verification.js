@@ -23,7 +23,7 @@ class Popup extends React.Component {
           <p style={{marginTop:"-1%"}}>Please complete your information detail!</p>
         <div className="buttonPopUp">
           <button className="btn-popup" onClick={this.props.closePopup} >Later</button>
-          <button className="btn-popup" >Go Now</button>
+          <a href="/createprofile" className="btn-popup">Go Now</a>
         </div>
         </div>
         
@@ -37,7 +37,8 @@ class Popup extends React.Component {
               <p>Do you to fill  the detail information?</p>
                 <div className="buttonPopUp">
                 <button className="btn-popup-error" onClick={this.props.closePopup} >No</button>
-                <button className="btn-popup-verify" >Yes</button>
+                <a href="/createprofile" className="btn-popup-verify">Yes</a>
+                {/* <button className="btn-popup-verify">Yes</button> */}
           </div>
             </form>
           </div>
@@ -132,6 +133,10 @@ class Popup extends React.Component {
             color:#000000;
            
 
+          }
+
+          a{
+            padding: 5px 3px 5px 3px !important;
           }
 
           .popup{
