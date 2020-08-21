@@ -327,7 +327,7 @@ class Index extends React.Component {
                       </div>
                       <div className="currency-change">
                         <button className="currency-from dropdown-button" onClick={this.toggleSource}>
-                          <span className={'flag-icon flag-icon-' + this.state.fromCurrency.substring(0, 2) + ' flag-icon-squared'}></span> {this.state.fromCurrency}
+                          <span className={'flag-icon flag-icon-' + this.state.fromCurrency.substring(0, 2) + ' flag-icon-squared'}></span> <p>{this.state.fromCurrency}</p>
                           <FontAwesomeIcon className="caret" icon="caret-down" />
                         </button>
                         <div className={this.state.isSourceActive ? 'dropdown-menu show' : 'dropdown-menu'}>
@@ -550,7 +550,7 @@ class Index extends React.Component {
                       </div>
                       <div className="currency-change" >
                         <button className="currency-from dropdown-button" onClick={this.toggleDestination}>
-                          <span className={'flag-icon flag-icon-' + this.state.toCurrency.substring(0, 2) + ' flag-icon-squared'}></span> {this.state.toCurrency}
+                          <span className={'flag-icon flag-icon-' + this.state.toCurrency.substring(0, 2) + ' flag-icon-squared'}></span> <p>{this.state.toCurrency}</p>
                           <FontAwesomeIcon className="caret" icon="caret-down" />
                         </button>
                         <div className={this.state.isDestinationActive ? 'dropdown-menu show' : 'dropdown-menu'}>
@@ -638,13 +638,13 @@ class Index extends React.Component {
             <div className="container-image">
               <div className="images">
                 <div className="monas">
-                  <img src="../static/images/features/monas.png" style={{ marginTop: 18 }} alt="monas" name="monas" id="monas" ></img>
+                  <img src="../static/images/features/monas.png" style={{ marginTop: 7 }} alt="monas" name="monas" id="monas" ></img>
                 </div>
                 <div className="rumah" style={{ marginLeft: "12%" }}>
-                  <img src="../static/images/features/rumah.png" alt="rumah" id="rumah" style={{ marginTop: -2 }}></img>
+                  <img src="../static/images/features/rumah.png" alt="rumah" id="rumah" style={{ marginTop: -6 }}></img>
                 </div>
                 <div className="bali" style={{ marginLeft: "14%" }}>
-                  <img src="../static/images/features/bali.png" alt="bali" style={{ marginTop: -15 }}></img>
+                  <img src="../static/images/features/bali.png" alt="bali" style={{ marginTop: -16 }}></img>
                 </div>
                 <div className="surabaya" style={{ marginLeft: "13%" }}>
                   <img src="../static/images/features/surabaya.png" alt="surabaya" style={{ marginTop: -20 }}></img>
@@ -851,11 +851,39 @@ class Index extends React.Component {
           text-shadow: 0 0 8px #707070;
         }
 
+        
+        .achievement{
+          background:url('../static/images/achievment/achievement.png') no-repeat ;
+          background-position: center;
+          background-size:100% 100%;
+          height:600px;
+          z-index:-1;
+          margin-top:2vw;
+        }
+
         .fiture-mobile{
           display:none;
         }
       
-  
+        .btn-primary-2 {
+          background-color: #5BB7DE;
+          border: none;
+          width:150px;
+          
+          color: white;
+          padding: 10px 10px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          border-radius: 12px;
+          font-size:20px;
+          transition: all 0.2s ease-in-out;
+          box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
+          font-weight:600;
+        }
+        .btn-primary-2:hover {
+          transform: translateY(-1px);
+        }
         
         span{
           font-weight:500;
@@ -1488,6 +1516,17 @@ class Index extends React.Component {
               .store img{
                 display:none;
               }
+              .achievement-mobile{
+                background:url('../static/images/achievment/Achievement-mobile.png') no-repeat;
+                // // padding:10px 10px 50px 0px;
+                display: block;
+                background-size:100% 100%;
+                height:600px;
+                
+                // -webkit-filter: drop-shadow( -5px 5px 5px #000 );
+                // filter: drop-shadow( -5px 5px 5px #000 );
+               
+              }
               .testimonial-mobile{
                 background:url('../static/images/achievment/lingkaran setengah.png'),url('../static/images/testimoni/background.png') no-repeat;
                 display: flex;
@@ -1625,7 +1664,7 @@ class Index extends React.Component {
               line-height: 1.5;
               text-align: center;
             }
-            .dropdown-button .flag-icon {
+            .dropdown-button p {
               display: none;
             }
             .dropdown-menu {

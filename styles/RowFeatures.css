@@ -1,4 +1,5 @@
 @import './components/BoxBenefit.css';
+@import './components/buttonbenefit.css';
 .features .container {
     display: flex;
     flex-direction: column;
@@ -39,7 +40,7 @@
 
 
 .features .message {
-    font-size: 23px;
+    /* font-size: 23px; */
     margin-top: 6%;
 }
 

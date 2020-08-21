@@ -23,7 +23,7 @@ class Popup extends React.Component {
           <p style={{marginTop:"-1%"}}>Please complete your information detail!</p>
         <div className="buttonPopUp">
           <button className="btn-popup" onClick={this.props.closePopup} >Later</button>
-          <a href="/createprofile" className="btn-popup">Go Now</a>
+          <a href="/new-user" className="btn-popup" currentStep={1}>Go Now</a>
         </div>
         </div>
         
@@ -37,7 +37,8 @@ class Popup extends React.Component {
               <p>Do you to fill  the detail information?</p>
                 <div className="buttonPopUp">
                 <button className="btn-popup-error" onClick={this.props.closePopup} >No</button>
-                <a href="/createprofile" className="btn-popup-verify">Yes</a>
+                <button className="btn-popup-verify"> <a href="/new-user">Yes</a></button>
+               
                 {/* <button className="btn-popup-verify">Yes</button> */}
           </div>
             </form>
@@ -137,6 +138,8 @@ class Popup extends React.Component {
 
           a{
             padding: 5px 3px 5px 3px !important;
+            text-decoration:none;
+            color:white;
           }
 
           .popup{
@@ -149,6 +152,9 @@ class Popup extends React.Component {
             
            }
 
+           .popup-mobile a{
+            padding: 5px 20px 5px 20px;;
+           }
 
           @media only screen and (max-width: 414px) {
             .popup_inner{
