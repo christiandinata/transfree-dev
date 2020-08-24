@@ -45,6 +45,7 @@ const PendingLayout = () => {
           min-height: 100vh;
           align-items: center;
           justify-content: justify;
+          margin-top:30px;
         }
       `}</style>
     </div>
@@ -255,7 +256,7 @@ class Order extends React.Component {
             flex-direction: column;
             min-height: 100vh;
             align-items: center;
-            margin-top:20px;
+            margin-top:40px;
           }
 
           // Progress Bar

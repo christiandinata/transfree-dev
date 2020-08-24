@@ -36,7 +36,8 @@
 
 @media only screen and (max-width: 414px) {
     .achievement-mobile h1 {
-        font-size: 15pt;
+        font-size: 15px !important;
+        margin-top: 2rem;
     }
     .achievement-mobile {
         background: url('../../static/images/achievment/Achievement-mobile.png') no-repeat;

@@ -31,7 +31,7 @@ const AuthLayout = ({ children }) => (
       }
 
       .left {
-        background-image: url('../static/images/people.jpg');
+        background-image: url('../static/images/Sign Up ASSET WEB/signup.jpg');
         background-size:cover;
         text-align: center;
         height: 620px;

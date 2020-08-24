@@ -47,6 +47,7 @@ const ApprovedLayout = () => {
           min-height: 100vh;
           align-items: center;
           justify-content: center;
+          margin-top:30px;
         }
       `}</style>
     </div>
@@ -85,6 +86,7 @@ const PendingLayout = () => {
           min-height: 70vh;
           align-items: center;
           justify-content: center;
+          margin-top:30px;
         }
       `}</style>
     </div>

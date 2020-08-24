@@ -30,6 +30,7 @@ const Header = () => (
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        
       }
       
       h1, h2, h3, h4, b, .bold, button{
