@@ -89,7 +89,7 @@ class Recipient extends React.Component {
     if (this.state.recipientType == 0) {
 
       var data = {
-        email: this.email.current.value ? this.email.current.value : null,
+        email: this.email.current.value ? this.email.current.value : "-",
         name: this.name.current.value,
         bankName: this.bankName.current.value,
         bankAccountNumber: this.bankAccountNumber.current.value,
@@ -228,7 +228,7 @@ class Recipient extends React.Component {
 
   checkEmail(e) {
     if (e.target.value == '') {
-      this.setState({isEmailValid: false})
+      this.setState({isEmailValid: true})
     } else {
       if (this.validateEmail(e.target.value)) {
         this.setState({isEmailValid: true})
