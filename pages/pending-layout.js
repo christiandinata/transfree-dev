@@ -656,7 +656,7 @@ class PendingLayout extends React.Component {
               <div className="benefit">
                 {/* <div className="column"> */}
                 <div className="box-benefit">
-                  <img src="../static/images/features/money.png"></img>
+                  <img src="../static/images/features/money.png" id="money"></img>
                   <h1>Better rate for Transfree</h1>
                 </div>
                 {/* </div> */}

@@ -238,7 +238,7 @@ class Order extends React.Component {
     return (
       <div>
         <Header />
-        <Menu />
+        <Menu isApproved={this.props.isApproved} />
         <div className="container-fluid">
           <div className="header-progress-container">
             <ol className="header-progress-list">
