@@ -67,7 +67,6 @@ class PhoneVerification extends React.Component {
     if (this.props.errorMessage != '' && this.props.errorMessage != undefined) {
       this.setState({
         isValidCode:false,
-        code:''
       })
     } else {
       this.setState({
@@ -108,7 +107,7 @@ class PhoneVerification extends React.Component {
               onChange={e => this.setState({ code: e.target.value })}
               />
               <br></br>
-               <span style={{fontSize:13,color:"red",fontWeight:"normal"}} className={this.state.isValidCode ? 'error-label-hidden' : 'error-label'}>Code Invalid</span>
+               <span style={{fontSize:13,color:"red",fontWeight:"normal"}} className={this.state.isValidCode ? 'error-label-hidden' : 'error-label'}>{this.props.errorMessage}</span>
               <div>
                 <h2>Enter 6- Digit Code</h2>
                 <p style={{fontSize:13}}>No code showing on your phone? <a onClick={this.handleResendCode.bind(this)} className="link">Resend Code</a></p>

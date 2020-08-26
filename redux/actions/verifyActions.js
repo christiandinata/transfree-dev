@@ -26,7 +26,7 @@ const verify = ({ phone, email,fullname,password }, type) => {
       .then((response) => {    
           Router.push('/phone-verification');
           console.log(response);
-          dispatch({type: VERIFY_PHONE, payload: response.data.serviceSid});
+          dispatch({type: VERIFY_PHONE, payload:response.data.serviceSid});
           dispatch({type:INITIAL_DATA_USER,payload:({email,fullname,password,phone})});
           dispatch({type: AUTHENTICATE_PROGRESS, payload: false});
       })

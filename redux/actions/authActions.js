@@ -15,6 +15,7 @@ import {
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_ERROR,
   VERIFY_PHONE_PROGRESS,
+  VERIFY_PHONE,
 } from '../types';
 import { API } from '../../config';
 import { setCookie, removeCookie,getCookie } from '../../utils/cookie';
@@ -97,6 +98,7 @@ const register = ({ fullname, email, password,phone,code,serviceSid }, type) => 
         }
         dispatch({type: AUTHENTICATE_ERROR, payload: errorMessage});
         dispatch({type: VERIFY_PHONE_PROGRESS, payload: false});
+        dispatch({type: VERIFY_PHONE, payload:serviceSid});
       });
   };
 };
