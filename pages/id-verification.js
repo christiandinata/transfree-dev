@@ -222,6 +222,7 @@ class IdVerification extends React.Component{
       initialize(ctx);
       await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
       await ctx.store.dispatch(actions.getOrderByUid(getCookie('_id', ctx.req),'getOrderByUid',ctx.req));
+      await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
     };
 
   togglePopup() {

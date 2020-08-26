@@ -20,7 +20,6 @@ const verify = ({ phone, email,fullname,password }, type) => {
     throw new Error('Wrong API call!');
   }
   return (dispatch) => {
-    // dispatch({type: FORGOT_PROGRESS, payload: true});
     dispatch({type: AUTHENTICATE_PROGRESS, payload: true});
     axios.post(`${API}/v1/${type}`, {email,phone}) 
     // axios.post(`${API}/login`, { email, password })
@@ -29,6 +28,7 @@ const verify = ({ phone, email,fullname,password }, type) => {
           console.log(response);
           dispatch({type: VERIFY_PHONE, payload: response.data.serviceSid});
           dispatch({type:INITIAL_DATA_USER,payload:({email,fullname,password,phone})});
+          dispatch({type: AUTHENTICATE_PROGRESS, payload: false});
       })
       .catch((error) => {
         let errorMessage = '';

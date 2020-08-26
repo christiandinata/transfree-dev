@@ -20,6 +20,50 @@ import { API } from '../../config';
 import { setCookie, removeCookie,getCookie } from '../../utils/cookie';
 
 // register user
+// const register = ({ fullname, email, password,phone,code,serviceSid }, type) => {
+//   if (type !== 'register') {
+//     throw new Error('Wrong API call!');
+//   }
+//   return (dispatch) => {
+//     dispatch({type: VERIFY_PHONE_PROGRESS, payload: true});
+//     axios.post(`${API}/v1/${type}`, {fullname, email, password,phone,code,serviceSid})
+//       .then((response) => {
+//         setCookie('token', response.data.token);
+//         const userData = response.data.user_data;
+//         setCookie('_id', userData._id)
+//         if (userData.role == 'admin') {
+//           Router.replace('/dashboard/home')
+//         } else {
+//           Router.replace('/id-verification');
+//         }
+//         dispatch({type: REGISTER, payload: response.data.token});
+//         dispatch({type: USER_DATA, payload: response.date.user_data});
+//       })
+//       .catch((error) => {
+//         let errorMessage = '';
+//         switch (error.response.status) {
+//           case 422:
+//             errorMessage = 'Email has been registered. Please choose different email address.';
+//             break;
+//           case 420:
+//             errorMessage = 'Email and password must be provided.';
+//             break;
+//           case 500:
+//             errorMessage = 'Interval server error! Try again!';
+//             break;
+//           default:
+//             errorMessage = 'Zzzzz. Something is wrong.';
+//             break;
+//         }
+
+//         dispatch({type: AUTHENTICATE_ERROR, payload: errorMessage});
+//       });
+//   };
+// };
+
+
+
+// register user
 const register = ({ fullname, email, password,phone,code,serviceSid }, type) => {
   if (type !== 'register') {
     throw new Error('Wrong API call!');
@@ -28,38 +72,35 @@ const register = ({ fullname, email, password,phone,code,serviceSid }, type) => 
     dispatch({type: VERIFY_PHONE_PROGRESS, payload: true});
     axios.post(`${API}/v1/${type}`, {fullname, email, password,phone,code,serviceSid})
       .then((response) => {
+        
         setCookie('token', response.data.token);
         const userData = response.data.user_data;
         setCookie('_id', userData._id)
-        if (userData.role == 'admin') {
-          Router.replace('/dashboard/home')
-        } else {
-          Router.replace('/id-verification');
-        }
-        dispatch({type: REGISTER, payload: response.data.token});
-        dispatch({type: USER_DATA, payload: response.date.user_data});
+          if (userData.role == 'admin') {
+            Router.replace('/dashboard/home')
+          } else {
+            Router.replace('/id-verification');
+          }
+          dispatch({type: REGISTER, payload: response.data.token});
+          dispatch({type: USER_DATA, payload: response.date.user_data});
+          dispatch({type: VERIFY_PHONE_PROGRESS, payload: false});
       })
       .catch((error) => {
         let errorMessage = '';
         switch (error.response.status) {
-          case 422:
-            errorMessage = 'Email has been registered. Please choose different email address.';
-            break;
-          case 420:
-            errorMessage = 'Email and password must be provided.';
-            break;
-          case 500:
-            errorMessage = 'Interval server error! Try again!';
+          case 400:
+            errorMessage = error.response.data.message;
             break;
           default:
             errorMessage = 'Zzzzz. Something is wrong.';
             break;
         }
-
         dispatch({type: AUTHENTICATE_ERROR, payload: errorMessage});
+        dispatch({type: VERIFY_PHONE_PROGRESS, payload: false});
       });
   };
 };
+
 // gets token from the api and stores it in the redux store and in cookie
 const authenticate = ({ email, password }, type) => {
   if (type !== 'login') {
@@ -98,12 +139,13 @@ const authenticate = ({ email, password }, type) => {
 
         dispatch({type: AUTHENTICATE, payload: response.data.token});
         dispatch({type: USER_DATA, payload: response.data.user_data});
+        // dispatch({type: AUTHENTICATE_PROGRESS, payload: false});
       })
       .catch((error) => {
         let errorMessage = '';
         switch (error.response.status) {
           case 401:
-            errorMessage = 'Incorrect password. Please try again or you can reset your password.';
+            errorMessage = error.response.data.message;
             break;
           case 500:
             errorMessage = 'Interval server error! Try again!';
@@ -112,10 +154,7 @@ const authenticate = ({ email, password }, type) => {
             errorMessage = 'Zzzzz. Something is wrong.';
             break;
         }
-
-        dispatch({type: AUTHENTICATE_ERROR, payload: errorMessage});
-
-
+        dispatch({type: AUTHENTICATE_ERROR, payload:errorMessage});
       });
   };
 };
@@ -150,8 +189,7 @@ export const forgot = ({ email }, type) => {
       })
       .catch((error) => {
         const errorMessage = error.response.data.message;
-        dispatch({type: FORGOT_ERROR, payload: errorMessage});
-
+        dispatch({type: FORGOT_ERROR, payload: errorMessage})
 
       });
   };

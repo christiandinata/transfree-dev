@@ -23,6 +23,7 @@ class Signup extends React.Component {
       verifyPassword: true,
       hiddenPass: false,
       hiddenConfirm: false,
+      isInvalidFullName:false,
     };
 
     this.togglePassShow = this.togglePassShow.bind(this);
@@ -49,6 +50,7 @@ class Signup extends React.Component {
       })
     }
   }
+
 
 
   handleSubmit(e) {
@@ -94,7 +96,6 @@ class Signup extends React.Component {
         <div className={"error-container "+(this.props.errorMessage != ' '&& this.state.verifyPassword == false ? "error-show" : "") }>
           Password and Confirm Password not match
         </div>
-        
         <div className="box-title">Register</div>
         <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
         <h1 style={{marginTop:10,textAlign:"center"}}>Join us</h1>
@@ -104,6 +105,7 @@ class Signup extends React.Component {
             type="text"
             id="fullname"
             placeholder="Full Name"
+            required
             value={this.state.fullname}
             onChange={e => this.setState({ fullname: e.target.value })}
           />
@@ -112,6 +114,7 @@ class Signup extends React.Component {
             type="email"
             id="email"
             placeholder="Email"
+            required
             autoComplete="username"
             value={this.state.email}
             onChange={e => this.setState({ email: e.target.value })}
@@ -122,6 +125,7 @@ class Signup extends React.Component {
                   type={this.state.hiddenPass ? "text" : "password"}
                   id="password"
                   placeholder="Password"
+                  required
                   autoComplete="new-password"
                   value={this.state.password}
                   onChange={e => this.setState({ password: e.target.value })}
@@ -136,6 +140,7 @@ class Signup extends React.Component {
                   id="confirm-password"
                   placeholder="Confirm Password"
                   autoComplete="new-password"
+                  required
                   value={this.state.confirmPassword}
                   onChange={e => this.setState({ confirmPassword: e.target.value })}
                 />
@@ -145,6 +150,7 @@ class Signup extends React.Component {
           <PhoneInput
               placeholder="Enter phone number"
               country="GB"
+              requiredS
               value={ this.state.phone }
               onChange={ phone => this.setState({ phone }) }/>
 
@@ -245,6 +251,10 @@ class Signup extends React.Component {
           }
           .box-title{
             margin-top:30px;
+          }
+          .error-container{
+            margin-top:50% !important;
+
           }
           .form-container h1,p{
             display:none;

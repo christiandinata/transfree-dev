@@ -334,7 +334,7 @@ class Recipient extends React.Component {
                 ref={this.email}
                 defaultValue={this.props.data.email}
                 onBlur={this.checkEmail}/>
-              <span className={this.state.isEmailValid ? 'error-label-hidden' : 'error-label'}>Email address is not valid.</span>
+                <span className={this.state.isEmailValid ? 'error-label-hidden' : 'error-label'}>Email address is not valid.</span>
 
               <label htmlFor="bank">Bank Name</label><br/>
               <input

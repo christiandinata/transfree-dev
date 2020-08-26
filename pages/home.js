@@ -47,6 +47,7 @@ class Home extends React.Component {
     initialize(ctx);
     await ctx.store.dispatch(actions.getAdjustedRates('IDR', 'GBP', 'getAdjustedRates'));
     await ctx.store.dispatch(actions.getRates('GBP', 'IDR'));
+    await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
   };
 
   componentDidMount() {
@@ -255,7 +256,7 @@ class Home extends React.Component {
     return (
       <div>
         <Header />
-        <Menu isApproved={this.props.isApproved} />
+        <Menu />
         <div className="row hero">
           <div className="container">
             <div className="left-container">

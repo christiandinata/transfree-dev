@@ -36,6 +36,10 @@ class Login extends React.Component {
     );
   }
 
+  handleErrorMessage(){
+
+  }
+
 
 
   render() {
@@ -57,6 +61,7 @@ class Login extends React.Component {
             id="email"
             placeholder="Your email address"
             required
+            onInvalid="deadkaed"
             value={this.state.email}
             onChange={e => this.setState({ email: e.target.value })}
           />
@@ -90,11 +95,22 @@ class Login extends React.Component {
        
         <style jsx>{`
           .form-container input{
-            margin-bottom:20px;
+            margin-bottom:5px;
+           
           }
 
           i{
             margin-top:5%;
+          }
+
+
+          span{
+            float:left;
+          }
+
+          .pass-wrapper{
+            margin-top:0px;
+           
           }
          
 
@@ -105,6 +121,8 @@ class Login extends React.Component {
           .bottom{
             display:none;
           }
+
+        
 
          
           .form-container > label {
@@ -123,7 +141,12 @@ class Login extends React.Component {
               display:none;
             }
 
-            
+            .error-container{
+              margin-top:50% !important;
+              margin-bottom:-25%;
+            }
+
+           
             i {
               position: absolute;
               top: 0%;
@@ -201,9 +224,9 @@ class Login extends React.Component {
               font-size:20px;
             }
 
-            .error-container{
-              margin-top:120px;
-            }
+            // .error-container{
+            //   margin-top:120px;
+            // }
 
             
           }
