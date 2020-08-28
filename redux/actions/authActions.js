@@ -21,50 +21,6 @@ import { API } from '../../config';
 import { setCookie, removeCookie,getCookie } from '../../utils/cookie';
 
 // register user
-// const register = ({ fullname, email, password,phone,code,serviceSid }, type) => {
-//   if (type !== 'register') {
-//     throw new Error('Wrong API call!');
-//   }
-//   return (dispatch) => {
-//     dispatch({type: VERIFY_PHONE_PROGRESS, payload: true});
-//     axios.post(`${API}/v1/${type}`, {fullname, email, password,phone,code,serviceSid})
-//       .then((response) => {
-//         setCookie('token', response.data.token);
-//         const userData = response.data.user_data;
-//         setCookie('_id', userData._id)
-//         if (userData.role == 'admin') {
-//           Router.replace('/dashboard/home')
-//         } else {
-//           Router.replace('/id-verification');
-//         }
-//         dispatch({type: REGISTER, payload: response.data.token});
-//         dispatch({type: USER_DATA, payload: response.date.user_data});
-//       })
-//       .catch((error) => {
-//         let errorMessage = '';
-//         switch (error.response.status) {
-//           case 422:
-//             errorMessage = 'Email has been registered. Please choose different email address.';
-//             break;
-//           case 420:
-//             errorMessage = 'Email and password must be provided.';
-//             break;
-//           case 500:
-//             errorMessage = 'Interval server error! Try again!';
-//             break;
-//           default:
-//             errorMessage = 'Zzzzz. Something is wrong.';
-//             break;
-//         }
-
-//         dispatch({type: AUTHENTICATE_ERROR, payload: errorMessage});
-//       });
-//   };
-// };
-
-
-
-// register user
 const register = ({ fullname, email, password,phone,code,serviceSid }, type) => {
   if (type !== 'register') {
     throw new Error('Wrong API call!');
@@ -73,7 +29,6 @@ const register = ({ fullname, email, password,phone,code,serviceSid }, type) => 
     dispatch({type: VERIFY_PHONE_PROGRESS, payload: true});
     axios.post(`${API}/v1/${type}`, {fullname, email, password,phone,code,serviceSid})
       .then((response) => {
-        
         setCookie('token', response.data.token);
         const userData = response.data.user_data;
         setCookie('_id', userData._id)
@@ -83,11 +38,12 @@ const register = ({ fullname, email, password,phone,code,serviceSid }, type) => 
             Router.replace('/id-verification');
           }
           dispatch({type: REGISTER, payload: response.data.token});
-          dispatch({type: USER_DATA, payload: response.date.user_data});
+          dispatch({type: USER_DATA, payload: response.data.user_data});
           dispatch({type: VERIFY_PHONE_PROGRESS, payload: false});
       })
       .catch((error) => {
         let errorMessage = '';
+        console.log(error);
         switch (error.response.status) {
           case 400:
             errorMessage = error.response.data.message;

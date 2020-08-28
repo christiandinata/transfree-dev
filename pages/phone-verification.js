@@ -134,7 +134,7 @@ class PhoneVerification extends React.Component {
        <div className = "bottom-container-web">
         <div className="left">
           <a href  = "/signup"><img src="../static/images/Sign Up ASSET WEB/Component 2 – 12.png"></img></a>
-          <a href></a><img src="../static/images/Sign Up ASSET WEB/Component 2 – 11.png"></img>
+          <img src="../static/images/Sign Up ASSET WEB/Component 2 – 11.png"></img>
           
              
           </div>
@@ -145,6 +145,9 @@ class PhoneVerification extends React.Component {
 
       
         <style jsx>{`
+        a :hover{
+           cursor: pointer;
+        }
          .error-label-hidden {
           display: none;
         }
