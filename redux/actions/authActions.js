@@ -72,8 +72,7 @@ const register = ({ fullname, email, password,phone,code,serviceSid }, type) => 
   return (dispatch) => {
     dispatch({type: VERIFY_PHONE_PROGRESS, payload: true});
     axios.post(`${API}/v1/${type}`, {fullname, email, password,phone,code,serviceSid})
-      .then((response) => {
-        
+      .then((response) => {  
         setCookie('token', response.data.token);
         const userData = response.data.user_data;
         setCookie('_id', userData._id)
@@ -125,12 +124,15 @@ const authenticate = ({ email, password }, type) => {
             switch(userData.registrationStep) {
               case 1:
                 Router.replace('/phone');
-                break;
+                break;   
               case 2:
                 Router.replace('/id-verification');
                 break;
               case 3:
-                Router.replace('/photo-verification');
+                Router.replace('/fill-photo');
+                break;
+              case 3.5:
+                Router.replace('/home');
                 break;
               case 4:
                 Router.replace('/home');
