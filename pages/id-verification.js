@@ -7,8 +7,8 @@ import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { getCookie } from '../utils/cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import PendingLayout from './pending-layout';
 import AccountLayout from '../components/AccountLayout';
+import ConfirmationLayout from './confirmation-layout.js';
 
 
 class Popup extends React.Component {
@@ -234,7 +234,7 @@ class IdVerification extends React.Component{
   renderContent() {
     return(
       <div>
-        <PendingLayout/>
+        <ConfirmationLayout/>
         {this.state.showPopup ?
          <Popup
           text={this.props.userData.fullname}

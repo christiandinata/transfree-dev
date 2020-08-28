@@ -25,7 +25,7 @@ import '../styles/testimonialdesktop.css';
 import '../styles/testimonialmobile.css';
 
 
-class PendingLayout extends React.Component {
+class ConfirmationLayout extends React.Component {
   constructor({ props }) {
     super(props);
     this.state = {
@@ -52,12 +52,12 @@ class PendingLayout extends React.Component {
     await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
   };
 
-  //   componentDidMount() {
-  //     this.setState({
-  //       rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
-  //       toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100 ))
-  //     })
-  //   }
+    // componentDidMount() {
+    //   this.setState({
+    //     rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
+    //     toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100 ))
+    //   })
+    // }
   reverse(country, country2) {
     this.setState({
 
@@ -243,6 +243,7 @@ class PendingLayout extends React.Component {
 
   render() {
     return (
+     
       <div>
      <div className="row hero">
           <div className="container">
@@ -1641,4 +1642,4 @@ const mapStateToProps = (state) => {
 
 };
 
-export default PendingLayout;
+export default ConfirmationLayout;
