@@ -78,8 +78,9 @@ const Footer = () => (
     </div>
   
     <div className="copyright">
-      <p>Transfree © Copyright 2019. All rights reserved.</p>
-      <p>Transfree is a trademark of PT. Pelita Transfer Nusantara. Registered in the Directorate General of Intellectual Property of the United Kingdom</p>
+      Transfree © Copyright 2019. All rights reserved.
+      <br></br>
+      Transfree is a trademark of PT. Pelita Transfer Nusantara. Registered in the Directorate General of Intellectual Property of the United Kingdom
     </div>
     <style jsx>{`
     .row-footer{
@@ -174,6 +175,7 @@ const Footer = () => (
           color: #A6AEBB;
           text-align: center;
           width:auto;
+          padding:10px;
         }
         a {
           font-family: 'Campton-Book', sans-serif;
