@@ -28,11 +28,7 @@ const register = ({ fullname, email, password,phone,code,serviceSid }, type) => 
   return (dispatch) => {
     dispatch({type: VERIFY_PHONE_PROGRESS, payload: true});
     axios.post(`${API}/v1/${type}`, {fullname, email, password,phone,code,serviceSid})
-<<<<<<< HEAD
-      .then((response) => {  
-=======
       .then((response) => {
->>>>>>> alpha/create-profile
         setCookie('token', response.data.token);
         const userData = response.data.user_data;
         setCookie('_id', userData._id)
