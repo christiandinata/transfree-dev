@@ -50,12 +50,12 @@ class Home extends React.Component {
     await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
   };
 
-  // componentDidMount() {
-  //   this.setState({
-  //     rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
-  //     toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
-  //   })
-  // }
+  componentDidMount() {
+    this.setState({
+      rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
+      toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
+    })
+  }
   reverse(country, country2) {
     this.setState({
 
