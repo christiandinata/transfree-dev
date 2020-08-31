@@ -89,7 +89,7 @@ class Recipient extends React.Component {
     if (this.state.recipientType == 0) {
 
       var data = {
-        email: this.email.current.value ? this.email.current.value : "-",
+        email: this.email.current.value ? this.email.current.value : null,
         name: this.name.current.value,
         bankName: this.bankName.current.value,
         bankAccountNumber: this.bankAccountNumber.current.value,
@@ -228,7 +228,7 @@ class Recipient extends React.Component {
 
   checkEmail(e) {
     if (e.target.value == '') {
-      this.setState({isEmailValid: true})
+      this.setState({isEmailValid: false})
     } else {
       if (this.validateEmail(e.target.value)) {
         this.setState({isEmailValid: true})
@@ -325,7 +325,7 @@ class Recipient extends React.Component {
           </TabList>
           <TabPanel>
             <form className="form-container">
-            <label htmlFor="bank">Email</label>  (Optional)<br/>
+            <label htmlFor="bank">Email</label><br/>
               <input
                 type="email"
                 id="email"
