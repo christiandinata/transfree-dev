@@ -131,6 +131,15 @@ class UserFillPopUp extends React.Component{
                 value={this.state.dob}
                 onChange={this.handleChange.bind(this)}
             />  
+
+            <h4>Address</h4>
+              <input
+                type="text"
+                id="address"
+                required
+                value={this.state.address}
+                onChange={this.handleChange.bind(this)}
+            />  
           </div>
           <button className="btn-popup closebutton" onClick={this.props.closePopUp}>Close without Saving</button>
           <button className="btn-popup draftbutton" onClick={this.updateUser}>Save Draft</button>
@@ -138,6 +147,12 @@ class UserFillPopUp extends React.Component{
         </div>
 
         <style jsx>{`
+         .photoId, .photoFace{
+          max-height:50%;
+          max-width:50%;
+          min-width:50%;
+          min-height:50%;
+        }
           hr{
             border : 5px solid gray;
             border-radius : 0px;

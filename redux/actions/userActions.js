@@ -150,6 +150,7 @@ const updateUser = (id, { fullname, email, idType, idNumber, idName, gender, dob
         //dispatch({type: USER_DATA_ARRAY, payload: response.data.user_data_array});
       })
       .catch((error) => {
+        console.log(error.response);
         throw new Error(error);
       });
   };

@@ -28,13 +28,13 @@ const ApprovedLayout = () => {
         }
         .big-icon img {
           height: 300px;
-          margin: -80px auto 50px;
+          margin: 0px auto 50px;
         }
 
         p {
           max-width: 600px;
           text-align: center;
-          margin-bottom: 50px;
+          margin-bottom: 10px;
         }
 
         h1 {

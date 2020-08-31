@@ -16,7 +16,7 @@ class UserDetailPopUp extends React.Component{
         <div className="popupcontainer">
           <h2>{this.props.text}</h2>
           <div className="content">
-            ID Name &#9; : {this.props.user.idName} <br></br>
+            ID Name &#9; : {this.props.user.fullname} <br></br>
             ID Number &#9; : {this.props.user.idNumber} <br></br>
             ID Type &#9; : {this.props.user.idType} <br></br>
             ID Photo &#9; :<br></br>
@@ -32,6 +32,12 @@ class UserDetailPopUp extends React.Component{
         </div>
 
         <style jsx>{`
+        .photoId, .photoFace{
+          max-height:50%;
+          max-width:50%;
+          min-width:50%;
+          min-height:50%;
+        }
           hr{
             border : 5px solid gray;
             border-radius : 0px;

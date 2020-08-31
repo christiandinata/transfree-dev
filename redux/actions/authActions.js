@@ -86,7 +86,10 @@ const authenticate = ({ email, password }, type) => {
                 Router.replace('/id-verification');
                 break;
               case 3:
-                Router.replace('/photo-verification');
+                Router.replace('/fill-photo');
+                break;
+              case 3.5:
+                Router.replace('/home');
                 break;
               case 4:
                 Router.replace('/home');
