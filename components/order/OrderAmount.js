@@ -66,13 +66,14 @@ class OrderAmount extends React.Component {
     }
 
   }
-  // componentDidMount() {
-  //   this.setState({
-  //     rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
-  //     toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100 )),
-  //     currentDay : this.state.currentDay
-  //   })
-  // }
+
+  componentDidMount() {
+    this.setState({
+      // rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
+      // toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100 )),
+      currentDay : this.state.currentDay
+    })
+  }
 
   toggleSource() {
     this.setState({

@@ -53,7 +53,6 @@ app.prepare()
     //   }
     // });
 
-
     server.get('/signup', (req, res) => {
       if(req.cookies.token) {
         res.redirect('/home');
