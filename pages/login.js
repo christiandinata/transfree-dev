@@ -95,7 +95,7 @@ class Login extends React.Component {
        
         <style jsx>{`
           .form-container input{
-            margin-bottom:5px;
+            margin-bottom:15px;
            
           }
 
