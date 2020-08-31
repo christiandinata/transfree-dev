@@ -81,7 +81,7 @@ const authenticate = ({ email, password }, type) => {
             switch(userData.registrationStep) {
               case 1:
                 Router.replace('/phone');
-                break;
+                break;   
               case 2:
                 Router.replace('/id-verification');
                 break;

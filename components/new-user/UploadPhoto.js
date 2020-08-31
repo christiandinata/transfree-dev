@@ -62,8 +62,8 @@ function UploadPhoto (props) {
       Please send us your ID Picture and Your Photo
       </p>
       <div className='upload-photo-dropboxes-container'>
-        <StyledDropzone title='ID Card' onDrop={ setPhotoId } />
-        <StyledDropzone title='Your Photo' onDrop={ setPhotoFace } />
+        <StyledDropzone title='ID Card' id='card' onDrop={ setPhotoId } />
+        <StyledDropzone title='Your Photo' id='photo' onDrop={ setPhotoFace } />
       </div>
       <label class="upload-photo-terms-agreement">
         <input type="checkbox" checked={ isTermsAgreed } onChange={ () => setIsTermsAgreed(!isTermsAgreed) } />
