@@ -35,7 +35,7 @@ const register = ({ fullname, email, password,phone,code,serviceSid }, type) => 
           if (userData.role == 'admin') {
             Router.replace('/dashboard/home')
           } else {
-            Router.replace('/id-verification');
+            Router.replace('/home');
           }
           dispatch({type: REGISTER, payload: response.data.token});
           dispatch({type: USER_DATA, payload: response.data.user_data});
@@ -83,7 +83,7 @@ const authenticate = ({ email, password }, type) => {
                 Router.replace('/phone');
                 break;   
               case 2:
-                Router.replace('/id-verification');
+                Router.replace('/home');
                 break;
               case 3:
                 Router.replace('/fill-photo');
