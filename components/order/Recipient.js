@@ -108,7 +108,7 @@ class Recipient extends React.Component {
       }
 
       if(
-        (this.bankName.current.value.toLowerCase() == 'monzo') ||
+        // (this.bankName.current.value.toLowerCase() == 'monzo') ||
         (this.bankName.current.value.toLowerCase() == 'monese') ||
         (this.bankName.current.value.toLowerCase() == 'starling') ||
         (this.bankName.current.value.toLowerCase() == 'revolut') ||
@@ -122,7 +122,7 @@ class Recipient extends React.Component {
         (this.bankName.current.value.toLowerCase() == 'doconomy') ||
         (this.bankName.current.value.toLowerCase() == 'paypal') ||
         
-        (this.bankName.current.value.toLowerCase() == 'monzo bank') ||
+        // (this.bankName.current.value.toLowerCase() == 'monzo bank') ||
         (this.bankName.current.value.toLowerCase() == 'monese bank') ||
         (this.bankName.current.value.toLowerCase() == 'starling bank') ||
         (this.bankName.current.value.toLowerCase() == 'revolut bank') ||
