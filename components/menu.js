@@ -88,7 +88,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
           position: fixed;
           // top: 0;
           width: auto;
-          width: 97%;
+          width: 99%;
           justify-content: center;
           align-items: center;
           height: 45px;

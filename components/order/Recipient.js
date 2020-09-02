@@ -334,6 +334,7 @@ class Recipient extends React.Component {
                 ref={this.email}
                 defaultValue={this.props.data.email}
                 onBlur={this.checkEmail}/>
+                <br></br>
                 <span className={this.state.isEmailValid ? 'error-label-hidden' : 'error-label'}>Email address is not valid.</span>
 
               <label htmlFor="bank">Bank Name</label><br/>
@@ -344,6 +345,7 @@ class Recipient extends React.Component {
                 ref={this.bankName}
                 defaultValue={this.props.data.bankName}
                 onBlur={this.checkBankName}/>
+                <br></br>
               <span className={this.state.isBankNameValid ? 'error-label-hidden' : 'error-label'}>Bank name may not be empty.</span>
               <span className={this.state.isBankNameVirtual ? 'error-label-hidden' : 'error-label'}>We can not send money to Digital Bank Account.</span>
 
@@ -355,6 +357,7 @@ class Recipient extends React.Component {
                 ref={this.bankAccountNumber}
                 defaultValue={this.props.data.bankAccountNumber}
                 onBlur={this.checkBankAccountNumber}/>
+                <br></br>
               <span className={this.state.isBankAccountNumberValid ? 'error-label-hidden' : 'error-label'}>Bank account name may not be empty.</span>
           
               <label htmlFor="fullname">Recipient's name</label><br/>
@@ -366,6 +369,7 @@ class Recipient extends React.Component {
                 ref={this.name}
                 defaultValue={this.props.data.name}
                 onBlur={this.checkName}/>
+                <br></br>
               <span className={this.state.isNameValid ? 'error-label-hidden' : 'error-label'}>Recipient's full name may not be empty.</span>
 
               <div className={this.state.toCurrency == 'gbp' ? 'div-show' : 'div-hide'}>
@@ -379,6 +383,7 @@ class Recipient extends React.Component {
                   format="## ## ##"
                   onBlur={this.checkSortCodeValid}
                   onValueChange={this.updateSortcode} />
+                  <br></br>
                 <span className={this.state.isSortCodeValid ? 'error-label-hidden' : 'error-label'}>Sort code may not be empty.</span>
                 <span className={this.state.isSortCodeVirtual ? 'error-label-hidden' : 'error-label'}>Sorry we cannot identify this sort code.</span>            
               </div>
@@ -421,6 +426,7 @@ class Recipient extends React.Component {
                   defaultValue={this.props.data.accountNumber}
                   onBlur={this.checkAccountNumber}
                   onValueChange={this.updateAccountNumber}  />
+                  <br></br>
                 <span className={this.state.isAccountNumberValid ? 'error-label-hidden' : 'error-label'}>Bank account number may not be empty.Account number may not be empty.</span>
               </div>
 
@@ -433,6 +439,7 @@ class Recipient extends React.Component {
                   ref={this.iban}
                   defaultValue={this.props.data.iban}
                   onBlur={this.checkIBAN}/>
+                  <br></br>
                 <span className={this.state.isIBANValid ? 'error-label-hidden' : 'error-label'}>IBAN may not be empty.</span>
               </div>
               <div className={this.state.toCurrency == 'aud' ? 'div-show' : 'div-hide'}>
@@ -445,6 +452,7 @@ class Recipient extends React.Component {
                   defaultValue={this.props.data.bsbCode}
                   onBlur={this.checkBsbCode}
                   onValueChange={this.updateBsbCode}  />
+                  <br></br>
                 <span className={this.state.isBsbCodeValid ? 'error-label-hidden' : 'error-label'}>BSB Code may not be empty.</span>
               </div>
               <div className={this.state.toCurrency == 'usd' ? 'div-show' : 'div-hide'}>
@@ -458,6 +466,7 @@ class Recipient extends React.Component {
                   defaultValue={this.props.data.routingNumber}
                   onBlur={this.checkRoutingNumber}
                   onValueChange={this.updateRoutingNumber}  />
+                  <br></br>
                 <span className={this.state.isRoutingNumberValid ? 'error-label-hidden' : 'error-label'}>Routing number may not be empty.</span>
               </div>
               <label htmlFor="purposeTransfer">Purpose Of Transfer</label><br/>
@@ -606,10 +615,15 @@ class Recipient extends React.Component {
             margin: -25px 0 30px;
           }
 
+          .form-container input{
+            margin-bottom:20px;
+          }
+
           .error-label-hidden {
             display: none;
           }
 
+          i
           ::placeholder {
             color: #CACACA;
           }
