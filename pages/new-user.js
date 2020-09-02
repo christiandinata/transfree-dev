@@ -70,7 +70,7 @@ function NewUser (props) {
               </a>
             </div>
           </div>
-          <CurrentStepWindow userData={ props.userData } currentStep={ currentStep } onNextStep={ () => setCurrentStep(currentStep+1) } />
+          <CurrentStepWindow userData={ props.userData } currentStep={props.currentStep ? props.currentStep : currentStep} onNextStep={ () => setCurrentStep(currentStep+1) } />
         </div>
       <MobileFooter />
       </div>

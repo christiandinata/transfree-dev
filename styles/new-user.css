@@ -3,7 +3,7 @@
   flex-direction: column;
   background-image: linear-gradient(#5BB7DE, #8BDDFF);
   align-items: center;
-  min-height: 100vh
+  min-height: 100vh;
 }
 
 .new-user-container {
@@ -11,7 +11,7 @@
   flex-direction: column;
   background-color: #ffffff;
   box-shadow: 7px 7px 10px #0000001B;
-  margin: 50px 20px;
+  margin: 80px 20px;
   z-index: 10;
 }
 
@@ -31,6 +31,7 @@
   background-color: #FAAF40;
   box-shadow: 7px 7px 10px #0000001B;
   align-self: center;
+  /* margin-top: 20px; */
 }
 
 @media only screen and (min-width: 1024px) {

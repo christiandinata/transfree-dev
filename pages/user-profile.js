@@ -192,7 +192,7 @@ class UserProfile extends React.Component {
                         <div className="new-user-header">
                             <div className="new-user-title" id="user-profile-title">Profile Detail</div>
                             <div className="new-user-close">
-                                <a href="/">
+                                <a href="/home">
                                     <img src="../../static/images/close.svg"/>
                                 </a>
                             </div>

@@ -44,7 +44,7 @@ class UserItem extends React.Component {
                 <td className="column">{user.fullname}</td>
                 <td className="column">{user.email}</td>
                 <td className="column">{user.gender}</td>
-                <td className="column">{user.pob}, {moment(user.dob).format("DD MMM YYYY")}</td>
+                <td className="column">{user.pob}{user.pob&&user.dob ? ",":""} {user.dob ? moment(user.dob).format("DD MMM YYYY"):""}</td>
                 <td className="column">
                   {user.idNumber ? 
                     (<div className="btn-primary btn-small" onClick={() => {this.props.getIdDetail(user)}}>Click to see details</div>) :

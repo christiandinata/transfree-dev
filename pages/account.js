@@ -28,13 +28,13 @@ const ApprovedLayout = () => {
         }
         .big-icon img {
           height: 300px;
-          margin: -80px auto 50px;
+          margin: 0px auto 50px;
         }
 
         p {
           max-width: 600px;
           text-align: center;
-          margin-bottom: 50px;
+          margin-bottom: 10px;
         }
 
         h1 {
@@ -47,6 +47,7 @@ const ApprovedLayout = () => {
           min-height: 100vh;
           align-items: center;
           justify-content: center;
+          margin-top:30px;
         }
       `}</style>
     </div>
@@ -85,6 +86,7 @@ const PendingLayout = () => {
           min-height: 70vh;
           align-items: center;
           justify-content: center;
+          margin-top:30px;
         }
       `}</style>
     </div>
@@ -342,7 +344,7 @@ const OrderLayout = ({ordersList}) => {
       <style jsx>{`
         .container-fixed {
           max-width: 768px;
-          margin: 50px auto;
+          margin: 60px auto;
         }
 
         .form-container {

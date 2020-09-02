@@ -2,6 +2,23 @@ import {useCallback, useEffect, useMemo, useState} from 'react'
 import {useDropzone} from 'react-dropzone'
 import '../styles/components/StyledDropzone.css'
 
+const thumbsContainer = {
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+};
+const thumb = {
+  width: '250px',
+  height: '250px',
+};
+
+const img = {
+  minWidth: '250px',
+  minHeight: '250px',
+  maxWidth: '250px',
+  maxHeight: '250px',
+};
+
 const activeStyle = {
   borderColor: '#2196f3'
 }
@@ -37,6 +54,21 @@ function StyledDropzone (props) {
     files.forEach(file => URL.revokeObjectURL(file.preview))
   }, [files])
 
+
+
+
+  const thumbs = files.map(file => (
+    <div style={thumb} key={file.name}>
+        <img
+            src={file.preview}
+            style={img}
+        />  
+        {hideInstruction()}     
+    </div>
+    
+));
+
+
   const {
     getRootProps,
     getInputProps,
@@ -54,19 +86,31 @@ function StyledDropzone (props) {
     isDragReject
   ])
 
+  function hideInstruction () {
+    document.querySelector(`#${props.id}`).style.display = 'none';
+    // alert("deadeabnil")
+  }
+
+
   return (
     <div className='styled-dropzone'>
       <div className='styled-dropzone-title'>
-        { props.title }
+        { props.file }{props.title}
       </div>
-      <div className='styled-dropzone-container' { ...getRootProps({ style }) }>
-        <input { ...getInputProps() } />
-        <img className='styled-dropzone-placeholder' src='../static/images/dropbox_image_placeholder.svg' />
-        <p className='styled-dropzone-instruction' >
-          <b>Drag and Drop</b> or <b>Browse Files</b><br/>
-          Max 10 MB
-        </p>
+      <div className='styled-dropzone-container' { ...getRootProps({ style }) } style={{textAlign:"center"}}>
+        <input { ...getInputProps() }/>
+        <div id={props.id} style={{textAlign:"center"}}>
+            <img className='styled-dropzone-placeholder' src='../static/images/dropbox_image_placeholder.svg' />
+            <p className='styled-dropzone-instruction' >
+              <b>Drag and Drop</b> or <b>Browse Files</b><br/>
+              Max 10 MB
+            </p>
+        </div>
+         <aside style={thumbsContainer}>
+                {thumbs}
+          </aside>
       </div>
+     
     </div>
   )
 }

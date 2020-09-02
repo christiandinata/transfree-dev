@@ -1,0 +1,52 @@
+.main-container .left-container img {
+    height: 100%;
+    width: 120%;
+}
+
+.main-container {
+    display: flex;
+    display: -moz-flex;
+    display: -o-flex;
+    display: -webkit-flex;
+    justify-content: space-around;
+}
+
+.main-container .left-container {
+    text-align: center;
+}
+
+.main-container .right-container img {
+    width: 70%;
+    height: 80%;
+}
+
+.main-container .right-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    vertical-align: middle;
+    margin-left: 5%;
+}
+
+.application-mobile .right-container>h1 {
+    font-size: 1rem;
+}
+
+.application-mobile{
+    display: none;
+}
+
+@media only screen and (max-width: 414px) {
+    .application-mobile h1 {
+        font-family: 10em, 'Open Sans', sans-serif;
+        font-weight: 900;
+        color: #000000;
+        font-size: 15px;
+        text-shadow: 1px 1px 1px #000000;
+    }
+    .application-mobile {
+        display: block;
+    }
+}

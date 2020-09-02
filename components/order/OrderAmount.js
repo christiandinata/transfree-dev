@@ -66,6 +66,7 @@ class OrderAmount extends React.Component {
     }
 
   }
+
   componentDidMount() {
     this.setState({
       rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),

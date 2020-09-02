@@ -45,6 +45,7 @@ const PendingLayout = () => {
           min-height: 100vh;
           align-items: center;
           justify-content: justify;
+          margin-top:30px;
         }
       `}</style>
     </div>
@@ -237,7 +238,7 @@ class Order extends React.Component {
     return (
       <div>
         <Header />
-        <Menu />
+        <Menu isApproved={this.props.isApproved} />
         <div className="container-fluid">
           <div className="header-progress-container">
             <ol className="header-progress-list">
@@ -255,6 +256,7 @@ class Order extends React.Component {
             flex-direction: column;
             min-height: 100vh;
             align-items: center;
+            margin-top:40px;
           }
 
           // Progress Bar

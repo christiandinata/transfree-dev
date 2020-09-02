@@ -13,9 +13,14 @@ class PhoneVerification extends React.Component {
     super(props);
     this.state = {
       service_sid: '',
-      code: ''
+      code: '',
+      isValidCode: true,
     };
+
+    this.checkCodeOTP = this.checkCodeOTP.bind(this);
   }
+
+  
 
 
   static async getInitialProps(ctx) {
@@ -42,6 +47,38 @@ class PhoneVerification extends React.Component {
     );
   }
 
+
+
+  handleResendCode(e){
+    e.preventDefault();
+    const{email,fullname,password,phone}=this.props.data;
+    e.preventDefault();
+    this.props.verify({
+      phone: phone,
+      email: email,
+      fullname: fullname,
+      password:password,
+    },
+      'verify'
+    );
+  }
+
+  checkCodeOTP = () => {
+    if (this.props.errorMessage != '' && this.props.errorMessage != undefined) {
+      this.setState({
+        isValidCode:false,
+      })
+    } else {
+      this.setState({
+        isValidCode:true
+      })
+    }
+  }
+
+  componentWillReceiveProps(){
+    this.checkCodeOTP();
+  }
+
   render() {
    
     return (
@@ -50,12 +87,10 @@ class PhoneVerification extends React.Component {
         <div className="logo">
           <Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>
         </div>
-        <div className={"error-container "+(this.props.errorMessage != '' && this.props.errorMessage != undefined ? "error-show" : "") }>
+        <div className={"error-container "+(this.props.errorMessage != '' && this.props.errorMessage != undefined ? 'error-label' : "") }>
           {this.props.errorMessage}
         </div>
-        
         <div className="box-title">Code Verification</div>
-        
         <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
         <h1>Join us</h1>
         <p>We have succesfully sent the code</p>
@@ -65,12 +100,17 @@ class PhoneVerification extends React.Component {
               type="tel"
               id="partitioned"
               maxLength="6"
+              required
               // placeholder="Enter 6-digit verification code"
               value={this.state.code}
-              onChange={e => this.setState({ code: e.target.value })}/>
+              // onBlur={this.checkCodeOTP}
+              onChange={e => this.setState({ code: e.target.value })}
+              />
+              <br></br>
+               <span style={{fontSize:13,color:"red",fontWeight:"normal"}} className={this.state.isValidCode ? 'error-label-hidden' : 'error-label'}>{this.props.errorMessage}</span>
               <div>
                 <h2>Enter 6- Digit Code</h2>
-                <p style={{fontSize:13}}>No code showing on your phone? <Link href="/"><a className="link">Resend Code</a></Link></p>
+                <p style={{fontSize:13}}>No code showing on your phone? <a onClick={this.handleResendCode.bind(this)} className="link">Resend Code</a></p>
               </div>
 
 
@@ -79,8 +119,8 @@ class PhoneVerification extends React.Component {
             ) : 'Verification Code'}</button>
 
             <div className="bottom-mobile">
-                 
-                  <Link href="/"><a><span>Resend Code</span><img src="../static/images/features/resend code_icon.png"/></a></Link>
+                
+                  <a onClick={this.handleResendCode.bind(this)}><span>Resend Code</span><img src="../static/images/features/resend code_icon.png"/></a>
                   {/* <img src="../static/images/features/resend code_icon.png"/> */}
             </div>
        
@@ -94,7 +134,7 @@ class PhoneVerification extends React.Component {
        <div className = "bottom-container-web">
         <div className="left">
           <a href  = "/signup"><img src="../static/images/Sign Up ASSET WEB/Component 2 – 12.png"></img></a>
-          <a href></a><img src="../static/images/Sign Up ASSET WEB/Component 2 – 11.png"></img>
+          <img src="../static/images/Sign Up ASSET WEB/Component 2 – 11.png"></img>
           
              
           </div>
@@ -105,6 +145,12 @@ class PhoneVerification extends React.Component {
 
       
         <style jsx>{`
+        a :hover{
+           cursor: pointer;
+        }
+         .error-label-hidden {
+          display: none;
+        }
          h1{
           font-size:20px;
           font-family: "Open Sans", sans-serif;

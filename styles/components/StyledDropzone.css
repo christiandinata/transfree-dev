@@ -40,7 +40,7 @@
 
 @media only screen and (min-width: 1024px) {
   .styled-dropzone-container {
-    margin: 30px 30px 10px;
+    margin: 30px 30px 10px 0px;
     min-height: 280px;
   }
 }

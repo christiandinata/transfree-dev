@@ -19,6 +19,7 @@ class UserFillPopUp extends React.Component{
 
     this.updateUser = this.updateUser.bind(this);
     this.upgradeUser = this.upgradeUser.bind(this);
+    this.validasiData = this.validasiData.bind(this);
   }
 
   componentWillMount() {
@@ -38,6 +39,14 @@ class UserFillPopUp extends React.Component{
     }
   }
 
+  validasiData(){
+    if (this.state.idNumber === undefined  && this.state.gender === undefined && this.state.pob === undefined && this.state.dob === undefined && this.state.address === undefined) {
+      return false
+    } else {
+      return true;
+    }
+  }
+
   updateUser(){
     let id = this.state.id;
     let fullname = this.state.fullname;
@@ -49,7 +58,7 @@ class UserFillPopUp extends React.Component{
     let pob = this.state.pob;
     let dob = this.state.dob;
     let address = this.state.address;
-
+    // alert(address);
     this.props.updateUser(id, { fullname, email, idType, idNumber, idName, gender, dob, pob, address }, 'user');
     this.props.closePopUp();
   }
@@ -73,7 +82,8 @@ class UserFillPopUp extends React.Component{
                 <img className="photoId" src={this.props.photo.photoData.photoId}></img> : 'ID Photo Not Available'
             }<br></br>
 
-            <h4>ID Type</h4>
+           <form>
+           <h4>ID Type</h4>
             <input
                 type="text"
                 id="idType"
@@ -99,6 +109,7 @@ class UserFillPopUp extends React.Component{
                 id="gender-male"
                 name="gender"
                 value='male'
+                required
                 onClick={this.handleChange.bind(this)}
                 checked={this.state.gender === 'male'}
             />
@@ -131,19 +142,38 @@ class UserFillPopUp extends React.Component{
                 value={this.state.dob}
                 onChange={this.handleChange.bind(this)}
             />  
+
+            <h4>Address</h4>
+              <input
+                type="text"
+                id="address"
+                required
+                value={this.state.address}
+                onChange={this.handleChange.bind(this)}
+            />  
+          <button type="submit" className="btn-popup closebutton" onClick={this.props.closePopUp}>Close without Saving</button>
+          <button type = "submit" className="btn-popup draftbutton" onClick={this.updateUser}>Save Draft</button>
+          <button type="submit" className="btn-popup submitbutton" onClick={this.upgradeUser}>Submit and Approve</button>
+           </form>
           </div>
-          <button className="btn-popup closebutton" onClick={this.props.closePopUp}>Close without Saving</button>
-          <button className="btn-popup draftbutton" onClick={this.updateUser}>Save Draft</button>
-          <button className="btn-popup submitbutton" onClick={this.upgradeUser}>Submit and Approve</button>
+         
         </div>
+         
 
         <style jsx>{`
+         .photoId, .photoFace{
+          max-height:50%;
+          max-width:50%;
+          min-width:50%;
+          min-height:50%;
+        }
           hr{
             border : 5px solid gray;
             border-radius : 0px;
           }
           .content{
             text-align : left;
+            margin-bottom:20px;
           }
           .popup{
             position: fixed;

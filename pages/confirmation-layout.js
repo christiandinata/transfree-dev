@@ -14,6 +14,8 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import AccountLayout from '../components/AccountLayout';
+import moment from 'moment';
 import '../styles/RowApplication.css';
 import '../styles/Achievement.css';
 import '../styles/RowFeatures.css';
@@ -22,8 +24,8 @@ import '../styles/rowapplicationmobile.css';
 import '../styles/testimonialdesktop.css';
 import '../styles/testimonialmobile.css';
 
-class Index extends React.Component {
 
+class ConfirmationLayout extends React.Component {
   constructor({ props }) {
     super(props);
     this.state = {
@@ -47,14 +49,15 @@ class Index extends React.Component {
     initialize(ctx);
     await ctx.store.dispatch(actions.getAdjustedRates('IDR', 'GBP', 'getAdjustedRates'));
     await ctx.store.dispatch(actions.getRates('GBP', 'IDR'));
+    await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
   };
 
-  componentDidMount() {
-    this.setState({
-      rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
-      toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
-    })
-  }
+    // componentDidMount() {
+    //   this.setState({
+    //     rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
+    //     toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100 ))
+    //   })
+    // }
   reverse(country, country2) {
     this.setState({
 
@@ -239,24 +242,10 @@ class Index extends React.Component {
 
 
   render() {
-    const properties = {
-      dots: true,
-      autoplay: true,
-      infinite: true,
-      slidesToShow: 1,
-      speed: 500,
-      fade: true,
-      slidesToScroll: 1,
-      className: "slides"
-    };
-
-
-
     return (
+     
       <div>
-        <Header />
-        <Menu isApproved={this.props.isApproved} />
-        <div className="row hero">
+     <div className="row hero">
           <div className="container">
             <div className="left-container">
               <div className="text" style={{ marginTop: 40 }}>
@@ -613,17 +602,21 @@ class Index extends React.Component {
                     <span className="rate-desc" >Transfer fee </span> <span className="rate-value" style={{ textAlign: "right", marginLeft: "5px" }}><span ><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value="0" /></span></span>
                   </div>
                 </div>
-                <div className="row note" style={{ width: "90%", marginLeft: "auto", marginRight: "auto", float: "center", textAlign: "center" }}>
-                  <p style={{ maxWidth: "100%", marginBottom: "0", color: "#FFFFFF", fontSize: 12 }}>Your transfer will be processed immediately.
-                  The recipient will get the money in next working day. </p>
+                <div className="pending-image">
+                  <img src="static/images/Sign Up ASSET WEB/Path 6276.png"></img>
+                </div>
+
+                <div className="row note" style={{ width: "60%", marginLeft: "auto", marginRight: "auto", float: "center", textAlign: "center" }}>
+                  <p style={{ maxWidth: "100%", marginBottom: "0", color: "#FFFFFF", fontSize: 11 }}>Please fill your Information detail than you can start to SEND MONEY</p>
                   {/*<span className="received-on">24 hours</span>*/}
                 </div>
                 {/* <a href="/order" className="btn-primary-2" style={{width:"80%",marginRight:"auto",marginLeft:"10%",textAlign:"center",float:"center"}}>Get started</a> */}
 
                 <div className="row converter-cta" >
-
-                  <div className="row cta-primary">
-                    <a href="/order" className="btn-primary-2" style={{ width: "80%", marginRight: "auto", marginLeft: "10%", textAlign: "center", float: "center" }}>Get started</a>
+                  <div className="row cta-primary" >
+                    {/* <button>aedea</button> */}
+                    <a href="/new-user" className="btn-primary-2" style={{ width: "80%", marginRight: "auto", marginLeft: "10%", textAlign: "center", float: "center" }} >Create Profile</a>
+                    <p>I can't fill manually? <a href="/fill-photo">Upload File</a></p>
                   </div>
                 </div>
               </div>
@@ -638,10 +631,10 @@ class Index extends React.Component {
             <div className="container-image">
               <div className="images">
                 <div className="monas">
-                  <img src="../static/images/features/monas.png" style={{ marginTop: 7 }} alt="monas" name="monas" id="monas" ></img>
+                  <img src="../static/images/features/monas.png" style={{ marginTop: 8 }} alt="monas" name="monas" id="monas" ></img>
                 </div>
                 <div className="rumah" style={{ marginLeft: "12%" }}>
-                  <img src="../static/images/features/rumah.png" alt="rumah" id="rumah" style={{ marginTop: -6 }}></img>
+                  <img src="../static/images/features/rumah.png" alt="rumah" id="rumah" style={{ marginTop: -7 }}></img>
                 </div>
                 <div className="bali" style={{ marginLeft: "14%" }}>
                   <img src="../static/images/features/bali.png" alt="bali" style={{ marginTop: -16 }}></img>
@@ -679,16 +672,9 @@ class Index extends React.Component {
                 {/* </div> */}
 
               </div>
-              <div className="message" style={{ fontSize: "1.5rem", lineHeight: 0.5 }}>
-
-                <p style={{ color: "#000000", textAlign: "center" }}>Does your family need it for an emergency? And when you use</p>
-                <p style={{ color: "#000000", textAlign: "center" }}>a cheaper option, it sometimes takes longer for your money to arrive</p>
-                <p style={{ color: "#000000", textAlign: "center" }}>Don't worry, we are here now</p>
-              </div>
             </div>
           </div>
         </div>
-
 
         <div className="row fiture-mobile">
           <div className="container">
@@ -716,129 +702,9 @@ class Index extends React.Component {
             </div>
             <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-primary-start" style={{ fontSize: 20, marginTop: 15, width: "70%", marginLeft: "auto", marginRight: "auto" }}>How it works</a>
             <hr className="line" />
-            <p style={{ textAlign: "center" }}>Why we should to use Transfree?</p>
-            <div className="fiture-mobile-benefit">
-              <div className="first-benefit" style={{ marginBottom: "5%" }}>
-                <button className="btn-benefit-mobile">Better rate for transfer</button>
-                <div className="first-message">
-                  <h1 style={{ textAlign: "center", fontSize: "15pt", marginTop: 5 }}>Better rate for transfer</h1>
-                  <p style={{ textAlign: "center" }}>Does your family need it for an emergency? And when you use a cheaper option,it sometimes takes longer for your money to arriveDon't worry, we are here now</p>
-                </div>
-              </div>
-
-              <div className="first-benefit" style={{ marginBottom: "5%" }} >
-                <button className="btn-benefit-mobile">Quickly sent quickly arrived</button>
-                <div className="first-message">
-                  <h1 style={{ textAlign: "center", fontSize: "15pt", marginTop: 5 }}>Quickly sent quickly arrived</h1>
-                  <p style={{ textAlign: "center" }}>Does your family need it for an emergency? And when you use a cheaper option,it sometimes takes longer for your money to arriveDon't worry, we are here now</p>
-                </div>
-              </div>
-
-              <div className="first-benefit" style={{ marginBottom: "5%" }}>
-                <button className="btn-benefit-mobile">Unchargeable for Transfer</button>
-                <div className="first-message">
-                  <h1 style={{ textAlign: "center", fontSize: "15pt", marginTop: 5 }}>Unchargeable for Transfer</h1>
-                  <p style={{ textAlign: "center" }}>Does your family need it for an emergency? And when you use a cheaper option,it sometimes takes longer for your money to arriveDon't worry, we are here now</p>
-                </div>
-              </div>
-            </div>
+        
           </div>
         </div>
-
-        <div className="row application">
-          <div className="container">
-            <div className="left-container">
-              <img src="../static/images/ASSET/Mockup.png"></img>
-            </div>
-
-            <div className="right-container" style={{ marginLeft: "10%" }}>
-              <h1>Mobile Application now in</h1>
-              <div >
-                <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank" >
-                  <img src="../static/images/appstore.png" /></a>
-              </div>
-              <div>
-                <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
-                  <img src="../static/images/playstore.png" /></a>
-
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div className="row application-mobile">
-          <div className="container">
-            <div className="main-container">
-              <div className="left-container">
-                <img src="../static/images/ASSET/Mockup.png"></img>
-              </div>
-              <div className="right-container">
-                <h1>Avaliable in</h1>
-                <div>
-                  <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank">
-                    <img src="../static/images/appstore.png" /></a>
-                </div>
-                <div>
-                  <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
-                    <img src="../static/images/playstore.png" /></a>
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div className="row achievement">
-          <div className="container">
-            <h1>What we have achieved?</h1>
-          </div>
-        </div>
-
-        <div className="row achievement-mobile">
-          <div className="container">
-            <h1>What we have achieved?</h1>
-          </div>
-        </div>
-
-        <div className="row testimonial">
-          <div className="container">
-            <h1 style={{ textAlign: "center", color: "#FFFFFF" }}>What our Customer say?</h1>
-            <img src="../static/images/testimoni/dummy-photo.png" alt="first slide"></img>
-            <div style={{ textAlign: "center" }}>
-              <h1 >YOLANDA</h1>
-              <h1 style={{ textAlign: "center", marginTop: -20 }}>Imperial College London</h1>
-            </div>
-            {/* </div> */}
-            <div className="message">
-              <p style={{ marginLeft: 50 }}>It is very difficult to send money from IDR to GDP and</p>
-              <p>Transfree come out with the best solution ever. First time I use it when</p>
-              <p>I was in Indonesia to pay for my flat deposit and rent. And now I'm still use</p>
-              <p>Transfree to transfer money from the UK to Indonesia. It gives me a fair rate</p>
-            </div>
-            <a href="/testimoni" style={{ textAlign: "center", color: "#000000", fontSize: "20pt" }}><p>More Testimonials</p></a>
-          </div>
-        </div>
-
-        <div className="row testimonial-mobile">
-          <div className="container">
-            <div className="profile-testimonial" style={{ textAlign: "center" }}>
-              <h1 style={{ textAlign: "center", fontSize: 20 }}>What our Customer say?</h1>
-              <img src="../static/images/testimoni/dummy-photo.png" alt="first slide" style={{ width: 70, height: 70 }}></img>
-              <div className="textTesti">
-                <h1 style={{}}>YOLANDA</h1>
-                <h1 style={{ marginTop: -20 }}>Imperial College London</h1>
-              </div>
-            </div>
-            <div className="message">
-              <p style={{ marginTop: 30 }} >It is very difficult to send money </p> <p style={{ marginTop: -10 }}> from IDR to GDP  and Transfree come out with the best solution ever. First time I use
-                  it when I was in Indonesia to pay for my flat deposit and rent. And now I'm still use Transfree to transfer money from the UK to Indonesia. It gives me a fair rate</p>
-            </div>
-            <a href="/testimoni" style={{ textAlign: "center", color: "#000000", fontSize: "20pt" }}><p>More Testimonials</p></a>
-          </div>
-        </div>
-
 
         <style jsx>{`
         .application .right-container h1,
@@ -851,39 +717,35 @@ class Index extends React.Component {
           text-shadow: 0 0 8px #707070;
         }
 
-        
-        .achievement{
-          background:url('../static/images/achievment/achievement.png') no-repeat ;
-          background-position: center;
-          background-size:100% 100%;
-          height:600px;
-          z-index:-1;
-          margin-top:2vw;
-        }
-
         .fiture-mobile{
           display:none;
         }
-      
-        .btn-primary-2 {
-          background-color: #5BB7DE;
+
+        .pending-image{
+          text-align:center;
+          margin-top:-10%;
+        }
+        .pending-image img{
+          width:25%;
+          height:25%;
+        }
+
+.cta-primary >p > a{
           border: none;
-          width:150px;
-          
-          color: white;
-          padding: 10px 10px;
+          margin-bottom:20px;
+          color: #FAAF40;
           text-align: center;
           text-decoration: none;
-          display: inline-block;
+          display: inline;
           border-radius: 12px;
-          font-size:20px;
-          transition: all 0.2s ease-in-out;
-          box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
-          font-weight:600;
+          // font-size:20px;
+          margin-bottom:20px;
         }
-        .btn-primary-2:hover {
-          transform: translateY(-1px);
+        .cta-primary{
+          margin-bottom:30px;
         }
+      
+  
         
         span{
           font-weight:500;
@@ -912,7 +774,7 @@ class Index extends React.Component {
         background-position: top;
         background-size:100%;
         margin-top: -5.8vw;
-        // height:1300px;
+         height:720px;
         // padding:100px 0px 0px 0px;
         z-index:-99;
         margin-bottom:140px;
@@ -926,11 +788,10 @@ class Index extends React.Component {
         background-repeat: no-repeat;
         background-position: center;
         background-size:100% 100%;
-        width:90%;
-        margin-left:auto;
-        margin-right:auto;
+        width:auto;
         opacity:0.8;
         padding:20px 30px 50px 30px;
+        text-align:center;
      }
       .testimonial .message{
         background-image:url('../static/images/testimoni/box-message.png');
@@ -943,9 +804,27 @@ class Index extends React.Component {
         margin-left:auto;
         margin-right:auto;
       }
-     
 
-     
+      
+      .btn-primary-2 {
+        background-color: #5BB7DE;
+        border: none;
+        width:150px;
+        
+        color: white;
+        padding: 10px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border-radius: 12px;
+        font-size:20px;
+        transition: all 0.2s ease-in-out;
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
+        font-weight:600;
+      }
+      .btn-primary-2:hover {
+        transform: translateY(-1px);
+      }
      
       .text h1,h2{
         display:inline;
@@ -1516,17 +1395,6 @@ class Index extends React.Component {
               .store img{
                 display:none;
               }
-              .achievement-mobile{
-                background:url('../static/images/achievment/Achievement-mobile.png') no-repeat;
-                // // padding:10px 10px 50px 0px;
-                display: block;
-                background-size:100% 100%;
-                height:600px;
-                
-                // -webkit-filter: drop-shadow( -5px 5px 5px #000 );
-                // filter: drop-shadow( -5px 5px 5px #000 );
-               
-              }
               .testimonial-mobile{
                 background:url('../static/images/achievment/lingkaran setengah.png'),url('../static/images/testimoni/background.png') no-repeat;
                 display: flex;
@@ -1774,4 +1642,4 @@ const mapStateToProps = (state) => {
 
 };
 
-export default connect(mapStateToProps, actions)(Index);
+export default ConfirmationLayout;

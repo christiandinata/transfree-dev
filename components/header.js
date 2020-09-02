@@ -14,27 +14,28 @@ const Header = () => (
     </Head>
     <style jsx global>{`
       @font-face {
-        font-family: 'Campton-Book';
-        src: url('../static/fonts/Campton_Book.otf');
+        font-family: 'Open Sans';
+        src: url('../static/fonts/Open Sans.otf');
       }
       @font-face {
-        font-family: 'Campton-Bold';
-        src: url('../static/fonts/Campton_Bold.otf');
+        font-family: 'Open Sans';
+        src: url('../static/fonts/Open Sans.otf');
       }
       body {
-        font-family: 'Open Sans', sans-serif;
+        font-family: "Open Sans", sans-serif; 
         line-height: 1.6;
         letter-spacing: 0.2px;
         color: #3E495E;
-        margin: 0;
-        background-color: #FFFFFF;
+        margin: 0px ;
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        
       }
+      
       h1, h2, h3, h4, b, .bold, button{
         font-family: 70px 'Open Sans', sans-serif;
-        font-weight: 900;
+        font-weight: 700;
         color: #000000;
       }
       
@@ -42,7 +43,8 @@ const Header = () => (
         cursor: pointer;
       }
       .container {
-        margin: 0 auto;
+        width: auto;
+        margin: 0px auto;
       }
       button:focus {
         outline: none;
@@ -145,7 +147,7 @@ const Header = () => (
         color: #000000;
         text-decoration: none;
         transition: 0.2s ease-in;
-        font-family: 'Campton-Bold', sans-serif;
+        font-family: "Open Sans", sans-serif; 
         font-weight: bold;
       }
       ul > li > a:hover {
@@ -158,7 +160,7 @@ const Header = () => (
       }
       .react-phone-number-input__input {
         padding: 15px 0;
-        font-family: "Campton-Book", sans-serif;
+        font-family: "Open Sans", sans-serif;
         font-size: 16px;
       }
       .react-phone-number-input__icon {
@@ -171,7 +173,7 @@ const Header = () => (
       }
       .converter-container input {
         width: 100%;
-        font-family: 'Campton-Book', sans-serif;
+        font-family: 'Open Sans', sans-serif;
         font-size: 22px;
         color: #15233C;
         border: none;
@@ -187,7 +189,7 @@ const Header = () => (
       }
       .converter-container-order input {
         width: 100%;
-        font-family: 'Campton-Book', sans-serif;
+        font-family: 'Open Sans', sans-serif;
         font-size: 22px;
         color: #15233C;
         border: none;
@@ -403,7 +405,6 @@ const Header = () => (
         .container-fluid {
           width: 355px;
           flex-direction: column;
-          padding: 10px;
           margin: 0 auto;
         }
 
@@ -479,6 +480,8 @@ const Header = () => (
         .form-container .btn-primary{
           padding:18px;
         }       
+
+    
 
      
        

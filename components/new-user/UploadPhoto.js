@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import StyledDropzone from '../StyledDropzone'
 import photoActions from '../../redux/actions/photoActions';
 import '../../styles/components/new-user/UploadPhoto.css'
+import PopupUpload from '../PopupUpload';
 
 function UploadPhoto (props) {
   const [photoId, setPhotoId] = useState('')
@@ -55,13 +56,14 @@ function UploadPhoto (props) {
 
   return (
     <Fragment>
+      <PopupUpload></PopupUpload>
       <p className='upload-photo-description-mobile'>
       We need to verify your information detail.<br/>
       Please send us your ID Picture and Your Photo
       </p>
       <div className='upload-photo-dropboxes-container'>
-        <StyledDropzone title='ID Card' onDrop={ setPhotoId } />
-        <StyledDropzone title='Your Photo' onDrop={ setPhotoFace } />
+        <StyledDropzone title='ID Card' id='card' onDrop={ setPhotoId } />
+        <StyledDropzone title='Your Photo' id='photo' onDrop={ setPhotoFace } />
       </div>
       <label class="upload-photo-terms-agreement">
         <input type="checkbox" checked={ isTermsAgreed } onChange={ () => setIsTermsAgreed(!isTermsAgreed) } />

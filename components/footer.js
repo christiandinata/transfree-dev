@@ -77,9 +77,10 @@ const Footer = () => (
       </div>
     </div>
   
-    <div className="row copyright">
-      <p>Transfree © Copyright 2019. All rights reserved.</p>
-      <p>Transfree is a trademark of PT. Pelita Transfer Nusantara. Registered in the Directorate General of Intellectual Property of the United Kingdom</p>
+    <div className="copyright">
+      Transfree © Copyright 2019. All rights reserved.
+      <br></br>
+      Transfree is a trademark of PT. Pelita Transfer Nusantara. Registered in the Directorate General of Intellectual Property of the United Kingdom
     </div>
     <style jsx>{`
     .row-footer{
@@ -89,9 +90,11 @@ const Footer = () => (
       clear:both;
       width:auto;
       height:auto;
+      padding:0px 0px 10px 20px;
       // width : 1920px 0,36px 0px;
       // height : 1246px 0px 6346,42px
       margin-top:0px;
+      padding:0px 0px 0px 10px;
     }
         .row3 {
           border-bottom: 1px solid #eaeaea;
@@ -107,8 +110,9 @@ const Footer = () => (
         }
         h3 {
           color: #000000;
-          font-size:30px;
+          font-size:20px;
           margin-top:0px;
+          font-weight:700;
 
         }
         li {
@@ -120,10 +124,10 @@ const Footer = () => (
         ul > li > a{
           list-style-type: none;
           display: block;
-          margin: 6px 0px 6px;
+          // margin: 6px 0px 6px;
           color: #000000;
           font-size:16px;
-          font-weight:800px;
+          font-weight:normal;
         }
 
         ul > li > a > img{
@@ -170,6 +174,8 @@ const Footer = () => (
         .copyright {
           color: #A6AEBB;
           text-align: center;
+          width:auto;
+          padding:10px;
         }
         a {
           font-family: 'Campton-Book', sans-serif;
