@@ -17,29 +17,18 @@ const getRates = (from, to) => {
   };
 };
 
-const getMultipleRates = (base, currencies) => {
-  let curQuery = '';
-  if(currencies.length == 1){
-    curQuery += currencies[0].toUpperCase();
-  }
-  else{
-    for(var i=0; i<currencies.length-1; i++){
-      curQuery += currencies[i].toUpperCase() + ",";
-    }
-
-    curQuery += currencies[currencies.length-1].toUpperCase();
-  }
-
+const getMultipleRates = (idr,myr, krw, gbp, usd, eur, hkd) => {
   return async (dispatch) => {
     await axios.get('https://data.fixer.io/latest?access_key=1c2c1df7d16f7d0e30bb25aebd730a22&base='+
-                                                      base.toUpperCase()+'&symbols='+curQuery)
+                                                      idr.toUpperCase()+'&symbols='+myr.toUpperCase()+
+                                                      ','+krw.toUpperCase()+
+                                                      ','+gbp.toUpperCase()+
+                                                      ','+usd.toUpperCase()+
+                                                      ','+eur.toUpperCase()+
+                                                      ','+hkd.toUpperCase())
       .then((response) => {
         let rates = response.data.rates;
-        let ratesMap = new Map();
-        Object.keys(rates).forEach(k => {
-          ratesMap.set(k, rates[k])
-        })
-        dispatch({type: EXCHANGE_RATE, payload: ratesMap});
+        dispatch({type: EXCHANGE_RATE, payload: rates});
       }).catch((err) => {
         throw new Error(err);
       });
