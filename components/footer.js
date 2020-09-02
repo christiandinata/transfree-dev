@@ -61,6 +61,10 @@ const Footer = () => (
 
           </ul>
         </div>
+        <div className="footer-item-collab" >
+	  <h3>License</h3>
+          <img src="../static/images/partners/bank-indonesia.png"></img>
+        </div>
       </div>
     </div>
 
@@ -68,7 +72,7 @@ const Footer = () => (
       <div className="container">
         <div className="footer-item logo">
         </div>
-        <div className="footer-item-collab">
+        <div className="footer-item-collab-office">
         <h3>Office</h3>
           <ul>
             <li style={{fontSize: '14px'}}>Innovation Room - Mezanine Floor. Kementerian Ketenegakerjaan RI. Jl. Gatot Subroto No.Kav. 51, Jakarta Selatan, 12950 Indonesia</li>
@@ -155,7 +159,17 @@ const Footer = () => (
           flex-basis: 33%;
         }
         .footer-item-collab {
-          flex-basis: 100%;
+          flex-basis: 50%;
+        }
+
+	.footer-item-collab-office{
+	  flex-basis:100%;
+		
+	}
+
+        .footer-item-collab img {
+          width: 35%;
+          height: 35%;
         }
         .logo img {
           width: 1920px 0,36px;
@@ -166,8 +180,11 @@ const Footer = () => (
           padding-bottom: 15px;
            padding-top: 10px;
           text-align:left;
-          
         }
+
+	.container-partner{
+	  display:flex
+	}
         .menu {
           padding-top: 5px;
         }
@@ -184,15 +201,12 @@ const Footer = () => (
         margin-bottom:5px;
         }
 
-        @media only screen and (max-width: 500px) {
+        @media only screen and (max-width: 900px) {
           .container{
             flex-direction:column;
             margin-left:3px;
           }
-
-        
         }
-
       `}</style>
   </div>
 )
