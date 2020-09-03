@@ -254,8 +254,8 @@ class ConfirmationLayout extends React.Component {
               </div>
               <div className="text">
                 <h1 style={{ fontWeight: 900 }}>Transfer</h1>
-                <h1 style={{ fontWeight: 600 }}> feels like </h1>
-                <h2 style={{ fontWeight: 900 }}> Local</h2>
+                <h1 style={{ fontWeight: 600 }}>feels like </h1>
+                <h2 style={{ fontWeight: 900 }}>Local</h2>
               </div>
               <p style={{ marginTop: 0 }}>Send today, receive money in sameday or next working day</p>
               <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-primary-start" style={{ fontSize: 15, marginTop: 23 }}>How it works</a>
