@@ -68,7 +68,7 @@
 }
 
 .fiture-mobile .images .monas {
-    margin-top: 28%;
+    margin-top: 26%;
     height: 90px;
 }
 
@@ -103,7 +103,6 @@
 
 .fiture-mobile .images .borobudur {
     margin-top: 7%;
-    z-index: 1;
 }
 
 .fiture-mobile .images .borobudur img {
