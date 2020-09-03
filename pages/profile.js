@@ -26,14 +26,14 @@ class Profile extends React.Component{
                 <Menu/>
                 <div className = "container-fluid">
                     <div className = "form-container">
-                    <div className="dropdown">
+                    {/* <div className="dropdown">
                     <button className="mainmenubtn btn-primary">Edit</button>
                         <div className="dropdown-child">
                         <a href = "/phone-edit">Changes Phone Number</a>
                         <a href = "/editprofile">Edit Profile</a>
                         </div>
                     </div>
-                        <br></br>
+                        <br></br> */}
                         <div>
                             <div className = "label">Name</div>
                             <div className = "field">{fullname ? fullname: '-'}

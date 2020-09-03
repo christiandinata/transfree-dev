@@ -45,8 +45,8 @@ class Index extends React.Component {
   }
   static async getInitialProps(ctx) {
     initialize(ctx);
-    await ctx.store.dispatch(actions.getAdjustedRates('IDR', 'GBP', 'getAdjustedRates'));
-    await ctx.store.dispatch(actions.getRates('GBP', 'IDR'));
+    await ctx.store.dispatch(actions.getAdjustedRates('IDR','getAdjustedRates'));
+    await ctx.store.dispatch(actions.getRates('GBP','IDR'));
   };
 
   componentDidMount() {
@@ -747,21 +747,24 @@ class Index extends React.Component {
 
         <div className="row application">
           <div className="container">
-            <div className="left-container">
-              <img src="../static/images/ASSET/Mockup.png"></img>
-            </div>
+          <div className="left-container">
+            <img src="../static/images/ASSET/Mockup.png"></img>
+          </div>
 
             <div className="right-container" style={{ marginLeft: "10%" }}>
-              <h1>Mobile Application now in</h1>
-              <div >
-                <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank" >
-                  <img src="../static/images/appstore.png" /></a>
-              </div>
-              <div>
-                <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
-                  <img src="../static/images/playstore.png" /></a>
+              <h1 style={{fontSize:"2.2vw"}}>Mobile Application now in</h1>
 
-              </div>
+</div>
+          <div >
+{/* 
+ href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank"  */}
+          <a>
+          <img src="../static/images/appstore.png"/></a>
+          </div>
+            <div>
+            <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
+            <img src="../static/images/playstore.png"/></a>
+             
             </div>
 
           </div>
@@ -779,9 +782,17 @@ class Index extends React.Component {
                   <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank">
                     <img src="../static/images/appstore.png" /></a>
                 </div>
-                <div>
-                  <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
-                    <img src="../static/images/playstore.png" /></a>
+                <div className="right-container">
+                <h1>Available in</h1>
+                  <div>
+                      <a>
+                      <img src="../static/images/appstore.png" /></a>
+                  </div>
+                  <div>
+                      <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
+                      <img src="../static/images/playstore.png"/></a>
+                  </div>
+
                 </div>
 
               </div>
@@ -1754,6 +1765,7 @@ class Index extends React.Component {
           <Footer />
         </div>
       </div>
+    
     );
   }
 }
