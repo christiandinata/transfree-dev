@@ -34,7 +34,7 @@ class ConfirmationLayout extends React.Component {
       fromCurrency: 'gbp',
       toCurrency: 'idr',
       fromAmount: 1000,
-      toAmount: 0
+      toAmount: 0,
     };
 
     this.toggleSource = this.toggleSource.bind(this);
@@ -47,7 +47,7 @@ class ConfirmationLayout extends React.Component {
   }
   static async getInitialProps(ctx) {
     initialize(ctx);
-    await ctx.store.dispatch(actions.getAdjustedRates('IDR', 'GBP', 'getAdjustedRates'));
+    await ctx.store.dispatch(actions.getAdjustedRates('IDR', 'getAdjustedRates'));
     await ctx.store.dispatch(actions.getRates('GBP', 'IDR'));
     await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
   };
@@ -55,7 +55,7 @@ class ConfirmationLayout extends React.Component {
     componentDidMount() {
       this.setState({
         rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
-        toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100 ))
+        toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
       })
     }
   reverse(country, country2) {
@@ -254,8 +254,8 @@ class ConfirmationLayout extends React.Component {
               </div>
               <div className="text">
                 <h1 style={{ fontWeight: 900 }}>Transfer</h1>
-                <h1 style={{ fontWeight: 600 }}> feels like </h1>
-                <h2 style={{ fontWeight: 900 }}> Local</h2>
+                <h1 style={{ fontWeight: 600 }}>feels like </h1>
+                <h2 style={{ fontWeight: 900 }}>Local</h2>
               </div>
               <p style={{ marginTop: 0 }}>Send today, receive money in sameday or next working day</p>
               <a href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" target="_blank" className="btn-primary-start" style={{ fontSize: 15, marginTop: 23 }}>How it works</a>
