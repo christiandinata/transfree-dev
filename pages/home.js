@@ -245,14 +245,14 @@ class Home extends React.Component{
 renderDashboard(){
   return(
     <div>
-      <Dashboard adjustedRates={this.props.adjustedRates}/>
+      <Dashboard adjustedRates={this.props.adjustedRates} rate={this.props.rate}/>
     </div>
   )
 }
   renderContent() {
     return(
       <div>
-        <ConfirmationLayout adjustedRates={this.props.adjustedRates}/>
+        <ConfirmationLayout adjustedRates={this.props.adjustedRates} rate={this.props.rate}/>
         {this.state.showPopup ?
          <Popup
           text={this.props.userData.fullname}
