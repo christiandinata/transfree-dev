@@ -34,7 +34,7 @@ class ConfirmationLayout extends React.Component {
       fromCurrency: 'gbp',
       toCurrency: 'idr',
       fromAmount: 1000,
-      toAmount: 0
+      toAmount: 0,
     };
 
     this.toggleSource = this.toggleSource.bind(this);
@@ -47,7 +47,7 @@ class ConfirmationLayout extends React.Component {
   }
   static async getInitialProps(ctx) {
     initialize(ctx);
-    await ctx.store.dispatch(actions.getAdjustedRates('IDR', 'GBP', 'getAdjustedRates'));
+    await ctx.store.dispatch(actions.getAdjustedRates('IDR', 'getAdjustedRates'));
     await ctx.store.dispatch(actions.getRates('GBP', 'IDR'));
     await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
   };
@@ -55,7 +55,7 @@ class ConfirmationLayout extends React.Component {
     componentDidMount() {
       this.setState({
         rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
-        toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100 ))
+        toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
       })
     }
   reverse(country, country2) {
