@@ -177,12 +177,12 @@ class PhotoVerification extends React.Component {
                         <img src="../static/images/transfree-logo.png"/>
                     </div>
                     <h1>Photo ID verification</h1>
-                    <p>Last step, upload photos of your ID ( KTP , Passport or SIM ) and your face according to the
-                        instruction below to verify your identity.</p>
+                    <p>Last step, upload photos of your ID ( KTP , Passport or SIM ) and photo of yourself with the ID / selfie with your ID.
+                    Make sure we can read the ID number clearly.</p>
                     <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
-                        <h4>Upload Photo of Your ID</h4>
+                        <h4>Upload Photo of Your ID (Make sure we can read the ID number clearly)</h4>
                         <StyledDropzone docType={"photoId"} setPhotoIdSrc={this.setPhotoIdSrc}/>
-                        <h4>Upload Photo of Your Face</h4>
+                        <h4>Upload Photo of Your Selfie with your ID (Make sure we can read the ID number clearly)</h4>
                         <StyledDropzone docType={"photoFace"} setPhotoFaceSrc={this.setPhotoFaceSrc}/>
                         <div className="cta-submit">
                             <div style={{marginTop: "-15px"}}>
