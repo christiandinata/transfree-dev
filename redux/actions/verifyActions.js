@@ -23,12 +23,12 @@ const verify = ({ phone, email,fullname,password }, type) => {
     dispatch({type: AUTHENTICATE_PROGRESS, payload: true});
     axios.post(`${API}/v1/${type}`, {email,phone}) 
     // axios.post(`${API}/login`, { email, password })
-      .then((response) => {    
-          Router.push('/phone-verification');
+      .then((response) => {          
           console.log(response);
           dispatch({type: VERIFY_PHONE, payload:response.data.serviceSid});
           dispatch({type:INITIAL_DATA_USER,payload:({email,fullname,password,phone})});
           dispatch({type: AUTHENTICATE_PROGRESS, payload: false});
+          Router.push('/phone-verification');
       })
       .catch((error) => {
         let errorMessage = '';

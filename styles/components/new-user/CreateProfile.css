@@ -8,6 +8,14 @@
   display: none;
 }
 
+.create-profile-form-skip a:hover{
+  cursor: pointer;
+  
+
+}
+
+
+
 @media only screen and (min-width: 1024px) {
   .create-profile-form-body-heading {
     display: flex;
@@ -26,6 +34,7 @@
   font-weight: 600;
   color: #5BB7DE;
   margin: 20px 0 0 40px;
+  text-decoration: underline;
 }
 
 .create-profile-profile-picture {

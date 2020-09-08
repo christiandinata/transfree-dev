@@ -21,7 +21,7 @@ class Popup extends React.Component {
           <h1>Hello {this.props.text}!</h1>
           <h2>Congratulations!</h2>
           <p>You have successfully registered.</p>
-          <p style={{marginTop:"-1%"}}>Please complete your information detail!</p>
+          <p>Please complete your information detail!</p>
         <div className="buttonPopUp">
           <button className="btn-popup" onClick={this.props.closePopup} >Later</button>
           <a href="/new-user" className="btn-popup" currentStep={1}>Go Now</a>

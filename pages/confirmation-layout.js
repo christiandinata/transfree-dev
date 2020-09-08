@@ -629,7 +629,7 @@ class ConfirmationLayout extends React.Component {
         <div className="row features">
           <div className="container">
             <div className="container-image">
-              <div className="images">
+              {/* <div className="images">
                 <div className="monas">
                   <img src="../static/images/features/monas.png" style={{ marginTop: 8 }} alt="monas" name="monas" id="monas" ></img>
                 </div>
@@ -645,11 +645,11 @@ class ConfirmationLayout extends React.Component {
                 <div className="borobudur" style={{ marginLeft: "13%" }}>
                   <img src="../static/images/features/borobudur.png" alt="borobudur" style={{ marginTop: -22 }}  ></img>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             <div className="container-content">
-              <h1 style={{ color: "#000000", textAlign: "center", marginTop: 60 }}>Why should you use Transfree</h1>
+              <h1 style={{ color: "#000000", textAlign: "center", marginTop: 80 }}>Why should you use Transfree</h1>
 
               {/* </div> */}
 
