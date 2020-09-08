@@ -30,6 +30,11 @@
   align-items:center;
 }
 
+.popup_inner p{
+  line-height: normal !important;
+  color: black;
+}
+
 .field_popup{
     display: flex;
     flex-direction: row;

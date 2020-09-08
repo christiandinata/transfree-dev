@@ -12,8 +12,11 @@ class PopupUpload extends React.Component {
     }
     renderContent() {
         return(
-            <div className="popup_dekstop" id="popup">
+            <div className="popup_dekstop" id="popup"> 
             <div className="popup_inner">
+            <p>Please Upload 2 pictures for the verification purpose: <br></br>
+                1. ID Card Picture (Passport/ KTP/ SIM)<br></br>
+                2. Selfie with the ID Card </p>
                 <div className="field_popup">
                     <div className="popup-left">
                         <h1>Id Card Example</h1>
