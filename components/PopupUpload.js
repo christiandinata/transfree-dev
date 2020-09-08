@@ -28,7 +28,7 @@ class PopupUpload extends React.Component {
                     </div>
                     <div className="popup-right">
                         <h1>Photo Example</h1>
-                        <img src="../static/images/Sign Up ASSET WEB/selfie.jpg"></img>
+                        <img src="../static/images/Sign Up ASSET WEB/selfie.png"></img>
                     </div>
 
                 </div>
