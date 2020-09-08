@@ -47,9 +47,9 @@
 
 .popup-left img,
 .popup-right img{
-    min-width: 80%;
+    min-width: 60%;
     min-height: 60%;
-    max-width: 80%;
+    max-width: 60%;
     max-height: 60%;
 }
 
