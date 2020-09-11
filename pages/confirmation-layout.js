@@ -1642,4 +1642,4 @@ const mapStateToProps = (state) => {
 
 };
 
-export default ConfirmationLayout;
+export default connect(mapStateToProps, actions)(ConfirmationLayout);
