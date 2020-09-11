@@ -15,11 +15,11 @@ const Header = () => (
     <style jsx global>{`
       @font-face {
         font-family: 'Open Sans';
-        src: url('../static/fonts/Open Sans.otf');
+        src: url('../static/fonts/OpenSans-Regular.ttf');
       }
       @font-face {
         font-family: 'Open Sans';
-        src: url('../static/fonts/Open Sans.otf');
+        src: url('../static/fonts/OpenSans-Regular.ttf');
       }
       body {
         font-family: "Open Sans", sans-serif; 
@@ -457,7 +457,7 @@ const Header = () => (
         .box-title{
           width: 320px;
           padding: 20px;
-          margin-top:130px;
+          margin-top:30px;
           border-radius: 2px 2px 2px 2px;
         }
 

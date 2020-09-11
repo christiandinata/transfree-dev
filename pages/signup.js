@@ -253,7 +253,7 @@ class Signup extends React.Component {
             margin-top:30px;
           }
           .error-container{
-            margin-top:50% !important;
+            margin-top:10% !important;
 
           }
           .form-container h1,p{

@@ -492,7 +492,7 @@ class Recipient extends React.Component {
                 type="checkbox"
                 id="isSaveRecipient"
                 onChange={this.checkSaveRecipient} />
-              Save recipient
+                Save recipient
 
               <Link href="">
                 <a className="btn-primary" onClick={this.saveAndContinue}>Continue</a>

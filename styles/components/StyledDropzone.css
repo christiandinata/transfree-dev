@@ -41,12 +41,19 @@
 @media only screen and (min-width: 1024px) {
   .styled-dropzone-container {
     margin: 30px 30px 10px 0px;
-    min-height: 280px;
+    min-height: 190px;
   }
 }
 
 .styled-dropzone-placeholder {
   margin: 1rem 1rem 0.25rem;
+}
+
+.styled-dropzone-placeholder img{
+  min-width: 60%;
+  max-width: 60%;
+  min-height: 60%;
+  max-height: 60%;
 }
 
 .styled-dropzone-instruction {

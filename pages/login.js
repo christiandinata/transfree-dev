@@ -142,8 +142,8 @@ class Login extends React.Component {
             }
 
             .error-container{
-              margin-top:50% !important;
-              margin-bottom:-25%;
+              margin-top:10% !important;
+              
             }
 
            
@@ -203,6 +203,7 @@ class Login extends React.Component {
             .form-container input,
             .form-container textarea {
               margin-bottom:17px;
+              
             }
 
             h1{

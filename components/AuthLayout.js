@@ -47,10 +47,10 @@ const AuthLayout = ({ children }) => (
       .right {
         display: flex;
         flex-direction: column;
-         text-align:center;
-        justify-content: center;
+        text-align:center;
+         min-height: 51vw;
         align-items: center;
-        padding:10px 0px 0px 0px;
+        padding:0px 0px 0px 0px;
         // background:blue;
       }
 
@@ -61,9 +61,6 @@ const AuthLayout = ({ children }) => (
        
     }
 
-    // .background-top{
-    //   display:flex;
-    // }
 
       @media only screen and (max-width: 414px) {
         .left {
@@ -106,10 +103,7 @@ const AuthLayout = ({ children }) => (
         font-size:30px;
         color:grey;
       
-      }
-
-    
-      
+      }  
       }
     `}</style>
   </div>

@@ -46,6 +46,7 @@ const PendingLayout = () => {
           align-items: center;
           justify-content: justify;
           margin-top:30px;
+          padding:15px;
         }
       `}</style>
     </div>
