@@ -19,8 +19,6 @@ class PopupUpload extends React.Component {
                 <p>1. ID Card Picture (Passport/ KTP/ SIM)<br></br>
                 2. Selfie with the ID Card </p>
             </div>
-           
-             
                 <div className="field_popup">
                     <div className="popup-left">
                         <h1>Id Card Example</h1>
