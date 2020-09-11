@@ -94,7 +94,7 @@ class PhoneVerification extends React.Component {
         <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
         <h1>Join us</h1>
         <p>We have succesfully sent the code</p>
-        <p>Your code valid for <span>60 seconds</span></p>
+        <p>Your code valid for <span>5 minutes</span></p>
             <label htmlFor="code">Verification Code</label><br/>
             <input
               type="tel"
