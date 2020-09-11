@@ -5,9 +5,26 @@ import orderActions from '../../redux/actions';
 
 
 class Review extends React.Component {
+  constructor({ props }) {
+    super(props);
+    this.state = {
+     isCanceled:false
+    };
+  }
+
   saveAndContinue = (e) => {
     e.preventDefault();
-    this.props.nextStep();
+    if (this.state.isCanceled) {
+      this.props.nextStep();
+    } else {
+      alert("Please check the terms")
+    }
+  }
+
+  isCanceled = (e) => {
+    this.setState({
+      isCanceled : !this.state.isCanceled
+    })
   }
 
   render() {
@@ -90,6 +107,19 @@ class Review extends React.Component {
           <div className={this.props.data.toCurrency == 'aud' ? 'list-item' : 'div-hide'}>
             <span className="left">BSB Code</span>
             <span className="right">{this.props.data.bsbCode}</span>
+          </div>
+
+          <div className="list-item">
+            <span className="left" style={{flexBasis:"10%"}}><input
+                type="checkbox"
+                id="isSaveRecipient"
+                onChange={ () => this.isCanceled() }/>
+              </span>
+            <span className="right" style={{textAlign:"left",flexBasis:"90%"}}>I understand that my order will be canceled if no payment is made within the next 3hours</span>
+            <br></br>
+            {/* <span style={{color:"red"}}  >
+              {this.state.isCanceled ? "Please check this checkbox" :"" } 
+            </span> */}
           </div>
 
           <Link href="">

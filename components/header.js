@@ -15,11 +15,11 @@ const Header = () => (
     <style jsx global>{`
       @font-face {
         font-family: 'Open Sans';
-        src: url('../static/fonts/Open Sans.otf');
+        src: url('../static/fonts/OpenSans-Regular.ttf');
       }
       @font-face {
         font-family: 'Open Sans';
-        src: url('../static/fonts/Open Sans.otf');
+        src: url('../static/fonts/OpenSans-Regular.ttf');
       }
       body {
         font-family: "Open Sans", sans-serif; 
