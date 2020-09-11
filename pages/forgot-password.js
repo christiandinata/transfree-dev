@@ -434,6 +434,10 @@ class ForgotPassword extends React.Component {
               margin-top:20px;
               
             }
+
+            .new-user-progress{
+                width:380px !important;
+            }
         `}</style>
             </AuthLayout>
         )

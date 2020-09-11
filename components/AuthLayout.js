@@ -47,7 +47,7 @@ const AuthLayout = ({ children }) => (
       .right {
         display: flex;
         flex-direction: column;
-        text-align:left;
+        text-align:center;
          min-height: 51vw;
         align-items: center;
         padding:0px 0px 0px 0px;
@@ -103,10 +103,7 @@ const AuthLayout = ({ children }) => (
         font-size:30px;
         color:grey;
       
-      }
-
-    
-      
+      }  
       }
     `}</style>
   </div>

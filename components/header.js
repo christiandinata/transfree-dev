@@ -457,7 +457,7 @@ const Header = () => (
         .box-title{
           width: 320px;
           padding: 20px;
-          margin-top:130px;
+          margin-top:30px;
           border-radius: 2px 2px 2px 2px;
         }
 
