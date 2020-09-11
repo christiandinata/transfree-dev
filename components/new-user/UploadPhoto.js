@@ -59,11 +59,11 @@ function UploadPhoto (props) {
       <PopupUpload></PopupUpload>
       <p className='upload-photo-description-mobile'>
       We need to verify your information detail.<br/>
-      Please send us your ID Picture and Your Photo
+      Please send us your ID Picture and Your Selfie with the ID Card (Make sure we can read the ID number clearly)
       </p>
       <div className='upload-photo-dropboxes-container'>
-        <StyledDropzone title='ID Card' id='card' onDrop={ setPhotoId } />
-        <StyledDropzone title='Your Photo' id='photo' onDrop={ setPhotoFace } />
+        <StyledDropzone title='Your ID Card' id='card' onDrop={ setPhotoId } />
+        <StyledDropzone title='Your Selfie with the ID Card' id='photo' onDrop={ setPhotoFace } />
       </div>
       <label class="upload-photo-terms-agreement">
         <input type="checkbox" checked={ isTermsAgreed } onChange={ () => setIsTermsAgreed(!isTermsAgreed) } />

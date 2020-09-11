@@ -22,11 +22,8 @@ import NumberFormat from 'react-number-format';
             totalHargaB1:0,
             totalHarga:0,
             emailUser: " ",
-            namaDonatur:" ",
-           
-            
+            namaDonatur:" ",   
         }
-       
       
     }
 
@@ -496,7 +493,7 @@ const mapStateToProps = (state) => {
     return {
       successTransaction: state.donasi.successDonasi
     }
-  };
+};
 
 export default connect(mapStateToProps,actions)(DonasiQurban);
 

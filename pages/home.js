@@ -21,7 +21,7 @@ class Popup extends React.Component {
           <h1>Hello {this.props.text}!</h1>
           <h2>Congratulations!</h2>
           <p>You have successfully registered.</p>
-          <p style={{marginTop:"-1%"}}>Please complete your information detail!</p>
+          <p>Please complete your information detail!</p>
         <div className="buttonPopUp">
           <button className="btn-popup" onClick={this.props.closePopup} >Later</button>
           <a href="/new-user" className="btn-popup" currentStep={1}>Go Now</a>
@@ -224,7 +224,16 @@ class Home extends React.Component{
       await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
       await ctx.store.dispatch(actions.getOrderByUid(getCookie('_id', ctx.req),'getOrderByUid',ctx.req));
       await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
+      await ctx.store.dispatch(actions.getAdjustedRates('IDR', 'getAdjustedRates'));
+      await ctx.store.dispatch(actions.getRates('GBP', 'IDR'));
     };
+
+    componentDidMount() {
+      this.setState({
+        rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
+        toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
+      })
+    }
 
   togglePopup() {
    this.setState({
@@ -236,14 +245,14 @@ class Home extends React.Component{
 renderDashboard(){
   return(
     <div>
-      <Dashboard/>
+      <Dashboard adjustedRates={this.props.adjustedRates} rate={this.props.rate}/>
     </div>
   )
 }
   renderContent() {
     return(
       <div>
-        <ConfirmationLayout/>
+        <ConfirmationLayout adjustedRates={this.props.adjustedRates} rate={this.props.rate}/>
         {this.state.showPopup ?
          <Popup
           text={this.props.userData.fullname}
@@ -267,11 +276,19 @@ renderDashboard(){
 }
 
 const mapStateToProps = (state) => {
-  return {
-    // isApproved: !!state.user.user_data.isApproved,
-    userData: state.user.user_data,
-    orderArray: state.order.orders,
-    
+  if (state.user.user_data != null) {
+    return {
+      isApproved: !!state.user.user_data.isApproved,
+      rate: state.rate.rates,
+      adjustedRates: state.fx.adjustedRates,
+      userData: state.user.user_data,
+      orderArray: state.order.orders,
+    }
+  } else {
+    return {
+      rate: state.rate.rates,
+      adjustedRates: state.fx.adjustedRates
+    }
   }
 }
 
