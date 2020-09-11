@@ -8,14 +8,14 @@ const thumbsContainer = {
   flexWrap: 'wrap',
 };
 const thumb = {
-  maxWidth: '280px',
-  maxHeight: '150px',
+  maxWidth: '150px',
+  height: '150px',
 };
 
 const img = {
-  minWidth: '280px',
+  minWidth: '150px',
   minHeight: '150px',
-  maxWidth: '280px',
+  maxWidth: '150px',
   maxHeight: '150px',
 };
 
