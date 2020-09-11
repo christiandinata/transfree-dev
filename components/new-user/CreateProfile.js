@@ -105,7 +105,7 @@ function CreateProfile (props) {
       <div className='create-profile-form-body-heading'>
         <div className='create-profile-form-skip'>
           <a onClick={ props.nextStep } >
-            I don't want to fill the form
+            Do you want to fill the form for you?
           </a>
         </div>
         <div className='create-profile-profile-picture'>
