@@ -56,14 +56,19 @@ function UploadPhoto (props) {
 
   return (
     <Fragment>
-      <PopupUpload></PopupUpload>
+      {/* <PopupUpload></PopupUpload> */}
       <p className='upload-photo-description-mobile'>
       We need to verify your information detail.<br/>
       Please send us your ID Picture and Your Selfie with the ID Card (Make sure we can read the ID number clearly)
       </p>
+      <p className="description-uploadphoto" style={{textAlign:"center"}}>
+      Please Upload 2 pictures for the verification purpose:<br/>
+      1. ID Card Picture (Passport/ KTP/ SIM. Make sure we can read the ID number clearly)<br></br>
+      2. Selfie with the ID Card (Make sure we can read the ID number clearly)
+      </p>
       <div className='upload-photo-dropboxes-container'>
-        <StyledDropzone title='Your ID Card' id='card' onDrop={ setPhotoId } />
-        <StyledDropzone title='Your Selfie with the ID Card' id='photo' onDrop={ setPhotoFace } />
+        <StyledDropzone title='Your ID Card' id='card' image='../static/images/Sign Up ASSET WEB/ktp.png' onDrop={ setPhotoId } />
+        <StyledDropzone title='Your Selfie holding the ID Card' id='photo' image='../static/images/Sign Up ASSET WEB/selfie.png' onDrop={ setPhotoFace } />
       </div>
       <label class="upload-photo-terms-agreement">
         <input type="checkbox" checked={ isTermsAgreed } onChange={ () => setIsTermsAgreed(!isTermsAgreed) } />

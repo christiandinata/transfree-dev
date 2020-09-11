@@ -8,15 +8,15 @@ const thumbsContainer = {
   flexWrap: 'wrap',
 };
 const thumb = {
-  width: '250px',
-  height: '250px',
+  maxWidth: '280px',
+  maxHeight: '150px',
 };
 
 const img = {
-  minWidth: '250px',
-  minHeight: '250px',
-  maxWidth: '250px',
-  maxHeight: '250px',
+  minWidth: '280px',
+  minHeight: '150px',
+  maxWidth: '280px',
+  maxHeight: '150px',
 };
 
 const activeStyle = {
@@ -100,15 +100,18 @@ function StyledDropzone (props) {
       <div className='styled-dropzone-container' { ...getRootProps({ style }) } style={{textAlign:"center"}}>
         <input { ...getInputProps() }/>
         <div id={props.id} style={{textAlign:"center"}}>
-            <img className='styled-dropzone-placeholder' src='../static/images/dropbox_image_placeholder.svg' />
+            <div className="styled-dropzone-placeholder">
+                <img src={props.image}></img>
+            </div>
+
             <p className='styled-dropzone-instruction' >
-              <b>Drag and Drop</b> or <b>Browse Files</b><br/>
-              Max 10 MB
+              {/* <b>Drag and Drop</b> or <b>Browse Files</b><br/>
+              Max 10 MB */}
             </p>
         </div>
          <aside style={thumbsContainer}>
                 {thumbs}
-          </aside>
+         </aside>
       </div>
      
     </div>

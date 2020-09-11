@@ -272,7 +272,7 @@ class PhoneVerification extends React.Component {
             // padding-bottom:30%;
            }
            .bottom-mobile{
-             margin-top:40%;
+             margin-top:25%;
              display:inline-block;
              text-align:right;
             //  background:red;
