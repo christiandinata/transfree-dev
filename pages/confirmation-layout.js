@@ -616,7 +616,7 @@ class ConfirmationLayout extends React.Component {
                   <div className="row cta-primary" >
                     {/* <button>aedea</button> */}
                     <a href="/new-user" className="btn-primary-2" style={{ width: "80%", marginRight: "auto", marginLeft: "10%", textAlign: "center", float: "center" }} >Create Profile</a>
-                    <p>I can't fill manually? <a href="/fill-photo">Upload File</a></p>
+                    <p style={{fontSize:"12px"}}>Do you want us to fill the form for you? <a href="/fill-photo">Upload File</a></p>
                   </div>
                 </div>
               </div>

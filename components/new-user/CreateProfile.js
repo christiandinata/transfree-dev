@@ -93,19 +93,21 @@ function CreateProfile (props) {
         isSkipPopupVisible
         ? <MobilePopup
             title='Confirmation'
-            message='Do you want to fill this form ?'
+            message='Do you want us to fill the form for you?'
             isChoice
             confirmMessage='Yes'
-            onConfirm= { () => setIsSkipPopupVisible(false) }
+            onConfirm= { props.nextStep }
+            onReject= { () => setIsSkipPopupVisible(false) }
             rejectMessage='No'
-            onReject={ props.nextStep }
+           
+            
           />
         : ''
       }
       <div className='create-profile-form-body-heading'>
         <div className='create-profile-form-skip'>
           <a onClick={ props.nextStep } >
-            Do you want to fill the form for you?
+            Do you want us to fill the form for you?
           </a>
         </div>
         <div className='create-profile-profile-picture'>
