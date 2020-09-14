@@ -35,7 +35,7 @@ class Popup extends React.Component {
           <div className="box-title">Hello {this.props.text}!</div>        
             <form className="form-container">
               <p>You have successfully registered</p>
-              <p>Do you to fill  the detail information?</p>
+              <p>Do you want to fill the detail information?</p>
                 <div className="buttonPopUp">
                 <button className="btn-popup-error" onClick={this.props.closePopup} >No</button>
                 <button className="btn-popup-verify"> <a href="/new-user">Yes</a></button>
