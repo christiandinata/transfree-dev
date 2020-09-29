@@ -39,7 +39,7 @@
     "moment": "^2.26.0",
     "next": "^8.1.0",
     "next-redux-wrapper": "^3.0.0-alpha.3",
-    "npm": "^6.14.8",
+    "npm": "^6.14.5",
     "order-id": "^1.1.0",
     "react": "^16.13.1",
     "react-accessible-accordion": "^3.3.0",
