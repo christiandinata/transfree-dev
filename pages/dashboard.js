@@ -657,7 +657,7 @@ class Dashboard extends React.Component {
             </div>
 
             <div className="container-content">
-              <h1 style={{ color: "#000000", textAlign: "center", marginTop: 120 }}>Why should you use Transfree</h1>
+              <h1 style={{ color: "#000000", textAlign: "center", marginTop: 120, zIndex:1 }}>Why should you use Transfree</h1>
 
               {/* </div> */}
 
@@ -1139,7 +1139,7 @@ class Dashboard extends React.Component {
           .cta-primary {
             flex-basis: 50%;
             padding: 5px;
-            
+            z-index:5;
           }
           .cta-secondary a,
           .cta-primary a {
