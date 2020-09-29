@@ -623,7 +623,7 @@ class Index extends React.Component {
                 <div className="row converter-cta" >
 
                   <div className="row cta-primary">
-                    <a href="/order" className="btn-primary-2" style={{ width: "80%", marginRight: "auto", marginLeft: "10%", textAlign: "center", float: "center" }}>Get started</a>
+                    <a href="/signup" className="btn-primary-2" style={{ width: "80%", marginRight: "auto", marginLeft: "10%", textAlign: "center", float: "center" }}>Get started</a>
                   </div>
                 </div>
               </div>
@@ -656,7 +656,7 @@ class Index extends React.Component {
             </div>
 
             <div className="container-content">
-              <h1 style={{ color: "#000000", textAlign: "center", marginTop: 120 }}>Why should you use Transfree</h1>
+              <h1 style={{ color: "#000000", textAlign: "center", marginTop: 120, zIndex:1 }}>Why should you use Transfree</h1>
 
               {/* </div> */}
 
@@ -1273,7 +1273,7 @@ class Index extends React.Component {
           .cta-primary {
             flex-basis: 50%;
             padding: 5px;
-            
+            z-index:5;
           }
           .cta-secondary a,
           .cta-primary a {
