@@ -20,44 +20,44 @@ class PhoneVerification extends React.Component {
     this.checkCodeOTP = this.checkCodeOTP.bind(this);
   }
 
-  
+
 
 
   static async getInitialProps(ctx) {
     initialize(ctx);
     if (ctx.isServer) {
-      if(ctx.req.headers.cookie) {
-        await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
+      if (ctx.req.headers.cookie) {
+        await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req), 'user', ctx.req));
       }
     }
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    const{email,fullname,password,phone}=this.props.data;
+    const { email, fullname, password, phone } = this.props.data;
     this.props.register({
-        fullname:fullname,
-        email:email,
-        password:password,
-        phone:phone,
-        code: this.state.code,
-        serviceSid: this.props.serviceSid,
-      },
+      fullname: fullname,
+      email: email,
+      password: password,
+      phone: phone,
+      code: this.state.code,
+      serviceSid: this.props.serviceSid,
+    },
       'register'
     );
   }
 
 
 
-  handleResendCode(e){
+  handleResendCode(e) {
     e.preventDefault();
-    const{email,fullname,password,phone}=this.props.data;
+    const { email, fullname, password, phone } = this.props.data;
     e.preventDefault();
     this.props.verify({
       phone: phone,
       email: email,
       fullname: fullname,
-      password:password,
+      password: password,
     },
       'verify'
     );
@@ -66,85 +66,111 @@ class PhoneVerification extends React.Component {
   checkCodeOTP = () => {
     if (this.props.errorMessage != '' && this.props.errorMessage != undefined) {
       this.setState({
-        isValidCode:false,
+        isValidCode: false,
       })
     } else {
       this.setState({
-        isValidCode:true
+        isValidCode: true
       })
     }
   }
 
-  componentWillReceiveProps(){
+  componentWillReceiveProps() {
     this.checkCodeOTP();
   }
 
   render() {
-   
+
     return (
-     
+
       <AuthLayout>
         <div className="logo">
-          <Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>
+          <Link href="/"><a><img src="../static/images/transfree-logo.png" /></a></Link>
         </div>
-        <div className={"error-container "+(this.props.errorMessage != '' && this.props.errorMessage != undefined ? 'error-label' : "") }>
+        <div className={"error-container " + (this.props.errorMessage != '' && this.props.errorMessage != undefined ? 'error-label' : "")}>
           {this.props.errorMessage}
         </div>
         <div className="box-title">Code Verification</div>
         <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>
-        <h1>Join us</h1>
-        <p>We have succesfully sent the code</p>
-        <p>Your code valid for <span>5 minutes</span></p>
-            <label htmlFor="code">Verification Code</label><br/>
-            <input
-              type="tel"
-              id="partitioned"
-              maxLength="6"
-              required
-              // placeholder="Enter 6-digit verification code"
-              value={this.state.code}
-              // onBlur={this.checkCodeOTP}
-              onChange={e => this.setState({ code: e.target.value })}
-              />
-              <br></br>
-               <span style={{fontSize:13,color:"red",fontWeight:"normal"}} className={this.state.isValidCode ? 'error-label-hidden' : 'error-label'}>{this.props.errorMessage}</span>
-              <div>
-                <h2>Enter 6- Digit Code</h2>
-                <p style={{fontSize:13}}>No code showing on your phone? <a onClick={this.handleResendCode.bind(this)} className="link">Resend Code</a></p>
-              </div>
-
-
-            <button type="submit" className="btn-primary">{this.props.inProgress ? (
-              <FontAwesomeIcon icon="sync-alt" spin style={{width:40,height:40}}/>
-            ) : 'Verification Code'}</button>
-
-            <div className="bottom-mobile">
-                
-                  <a onClick={this.handleResendCode.bind(this)}><span>Resend Code</span><img src="../static/images/features/resend code_icon.png"/></a>
-                  {/* <img src="../static/images/features/resend code_icon.png"/> */}
-            </div>
-       
-          </form>
-
-       <div className="bottom">
-          <h1 ><Link href="/forgot-password"><a className="link">Forgot Password? </a></Link></h1>
-            <p>Don't you have an account?<Link href="/signup"><a className="link"> Sign up</a></Link></p>
-       </div>
-
-       <div className = "bottom-container-web">
-        <div className="left">
-          <a href  = "/signup"><img src="../static/images/Sign Up ASSET WEB/Component 2 – 12.png"></img></a>
-          <img src="../static/images/Sign Up ASSET WEB/Component 2 – 11.png"></img>
+          <h1>Join us</h1>
+          <p>We have succesfully sent the code</p>
+          <p>Your code valid for <span>5 minutes</span></p>
+          <label htmlFor="code">Verification Code</label><br />
+          <div id="divOuter">
+	<div id="divInner">
+	<input
+            type="tel"
+            id="partitioned"
+            maxLength="6"
+            required
+            // placeholder="Enter 6-digit verification code"
+            value={this.state.code}
+            // onBlur={this.checkCodeOTP}
+            onChange={e => this.setState({ code: e.target.value })}
+          />
+	</div>
+</div>
           
-             
+          <br></br>
+          <span style={{ fontSize: 13, color: "red", fontWeight: "normal" }} className={this.state.isValidCode ? 'error-label-hidden' : 'error-label'}>{this.props.errorMessage}</span>
+          <div>
+            <h2>Enter 6- Digit Code</h2>
+            <p style={{ fontSize: 13 }}>No code showing on your phone? <a onClick={this.handleResendCode.bind(this)} className="link">Resend Code</a></p>
+          </div>
+
+
+          <button type="submit" className="btn-primary">{this.props.inProgress ? (
+            <FontAwesomeIcon icon="sync-alt" spin style={{ width: 40, height: 40 }} />
+          ) : 'Verification Code'}</button>
+
+          <div className="bottom-mobile">
+
+            <a onClick={this.handleResendCode.bind(this)}><span>Resend Code</span><img src="../static/images/features/resend code_icon.png" /></a>
+            {/* <img src="../static/images/features/resend code_icon.png"/> */}
+          </div>
+
+        </form>
+
+        <div className="bottom">
+          <h1 ><Link href="/forgot-password"><a className="link">Forgot Password? </a></Link></h1>
+          <p>Don't you have an account?<Link href="/signup"><a className="link"> Sign up</a></Link></p>
+        </div>
+
+        <div className="bottom-container-web">
+          <div className="left">
+            <a href="/signup"><img src="../static/images/Sign Up ASSET WEB/Component 2 – 12.png"></img></a>
+            <img src="../static/images/Sign Up ASSET WEB/Component 2 – 11.png"></img>
+
+
           </div>
           <div className="right">
-           {/* <p style={{fontSize:13}}><a className="link" href="/">&lt; Back to Home</a></p> */}
+            {/* <p style={{fontSize:13}}><a className="link" href="/">&lt; Back to Home</a></p> */}
           </div>
         </div>
 
-      
+
         <style jsx>{`
+
+
+
+
+#divInner{
+  left:0px;
+  position: sticky;
+  
+  
+  background:red;
+  
+}
+
+#divOuter{
+  width: 290px; 
+  overflow: hidden;
+  text-align:center;
+  float:center;
+  padding-left:1.5rem;
+}
+
         a :hover{
            cursor: pointer;
         }
@@ -165,8 +191,8 @@ class PhoneVerification extends React.Component {
               background-size: 50px 1px;
               background-repeat: repeat-x;
               background-position-x: 35px;
-              width: 280px;
-              min-width: 250px;
+              width: 300px;
+              min-width: 300px;
               font-size:30px;
             }
           .form-container input{
@@ -254,6 +280,13 @@ class PhoneVerification extends React.Component {
               min-width: 210px;
               font-size:30px;
             }
+            #divOuter{
+              width: 290px; 
+              overflow: hidden;
+              text-align:center;
+              float:center;
+              padding-left:1rem;
+            }
             .form-container h1{
               display:none;
             }
@@ -296,7 +329,7 @@ const mapStateToProps = (state) => {
   return {
     serviceSid: state.verify.serviceSid,
     inProgress: state.verify.inProgress,
-    data : state.initialDataUser.data_user,
+    data: state.initialDataUser.data_user,
     errorMessage: state.authentication.errorMessage
   }
 };

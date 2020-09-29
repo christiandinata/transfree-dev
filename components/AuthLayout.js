@@ -71,7 +71,7 @@ const AuthLayout = ({ children }) => (
           background-image: url('../static/images/features/background-mobile.png');
           background-size:100% 100%;
           padding:40px 0px 40px 0px;
-          height:30px;
+          height:auto;
           text-align: center;
           margin-top:-20px;
           background-repeat:no-repeat;
