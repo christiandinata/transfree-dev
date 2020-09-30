@@ -260,7 +260,7 @@ class Dashboard extends React.Component {
         <div className="row hero">
           <div className="container">
             <div className="left-container">
-              <div className="text" style={{ marginTop: 40 }}>
+              <div className="text" style={{ marginTop: 50 }}>
                 <h1 style={{ fontWeight: 600 }}>International</h1>
                 <h2 style={{ fontWeight: 900 }}> Money</h2>
               </div>
@@ -304,7 +304,7 @@ class Dashboard extends React.Component {
           </div> */}
             </div>
             <div className="right-container">
-              <div className="desktop">
+              <div className="desktop" style={{ marginTop: 60 }}>
                 <div className="fixed-btn">
                   <a href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree" target="_blank">
                     <img style={{ width: "75%", height: "75%", marginTop: "13%", zIndex: 999 }} src="../static/images/wa-logo.png" /></a>
@@ -760,7 +760,8 @@ class Dashboard extends React.Component {
           font-size:11px;
           padding:1px 20px 1px 20px;
           margin-top:4px;
-         
+          background-color: rgba(0,0,0,0.4);
+          border-radius: 12px;
          
         }
       h2,h1,h3{
