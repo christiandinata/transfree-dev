@@ -33,8 +33,8 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
       </div>
       <div className="header-container">
         <div className="logo">
-            {(!isAuthenticated && (<Link href="/"><a><img style={{height:"30px"}} src="../static/images/transfree-logo.png"/></a></Link>))}
-            {(isAuthenticated && (<Link href="/home"><a><img style={{height:"30px"}} src="../static/images/transfree-logo.png"/></a></Link>))}
+            {(!isAuthenticated && (<Link href="/"><a><img style={{height:"50px"}} src="../static/images/transfree-logo.png"/></a></Link>))}
+            {(isAuthenticated && (<Link href="/home"><a><img style={{height:"50px"}} src="../static/images/transfree-logo.png"/></a></Link>))}
         </div>
         <div className="authorized-menu">
           <ul>
@@ -91,7 +91,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
           width: 99%;
           justify-content: center;
           align-items: center;
-          height: 45px;
+          height: 60px;
           padding:0 3.5% 0 0.5%;
           background-color: #FFFFFF;
           box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.5);

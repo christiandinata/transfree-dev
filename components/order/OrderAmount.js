@@ -303,12 +303,12 @@ class OrderAmount extends React.Component {
 						(this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr' ) ? 
 						this.reverse.bind(this,'eur' , 'idr')						
 						:
-						(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'myr' ) ? 
-						this.reverse.bind(this,'idr' , 'myr')						
-						:
-						(this.state.fromCurrency == 'myr' && this.state.toCurrency == 'idr' ) ? 
-						this.reverse.bind(this,'myr' , 'idr')						
-						:
+						// (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'myr' ) ? 
+						// this.reverse.bind(this,'idr' , 'myr')						
+						// :
+						// (this.state.fromCurrency == 'myr' && this.state.toCurrency == 'idr' ) ? 
+						// this.reverse.bind(this,'myr' , 'idr')						
+						// :
 						/**(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'krw' ) ? 
 						this.reverse.bind(this,'idr' , 'krw')						
 						:
@@ -482,11 +482,11 @@ class OrderAmount extends React.Component {
                             <span className="flag-icon flag-icon-id flag-icon-squared"></span> IDR (Indonesian Rupiah)
                           </a>
                         </li>
-                        <li onClick={this.selectDestination.bind(this,'myr')}>
+                        {/* <li onClick={this.selectDestination.bind(this,'myr')}>
                           <a className="dropdown-item">
                             <span className="flag-icon flag-icon-my flag-icon-squared"></span> MYR (Malaysian Ringgit)
                           </a>
-                        </li>
+                        </li> */}
                         {/**<li onClick={this.selectDestination.bind(this,'krw')}>
                           <a className="dropdown-item">
                             <span className="flag-icon flag-icon-kr flag-icon-squared"></span> KRW (Korean Won)

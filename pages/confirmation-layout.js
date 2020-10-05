@@ -549,11 +549,11 @@ class ConfirmationLayout extends React.Component {
                                 <span className="flag-icon flag-icon-id flag-icon-squared"></span> IDR (Indonesian Rupiah)
                               </a>
                             </li>
-                            <li onClick={this.selectDestination.bind(this, 'myr')}>
+                            {/* <li onClick={this.selectDestination.bind(this, 'myr')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-my flag-icon-squared"></span> MYR (Malaysian Ringgit)
                               </a>
-                            </li>
+                            </li> */}
                             {/**<li onClick={this.selectDestination.bind(this,'krw')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-kr flag-icon-squared"></span> KRW (Korean Won)
@@ -565,11 +565,11 @@ class ConfirmationLayout extends React.Component {
                                 <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP (British Poundsterling)
                               </a>
                             </li>
-                            <li onClick={this.selectDestination.bind(this, 'usd')}>
+                            {/* <li onClick={this.selectDestination.bind(this, 'usd')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-us flag-icon-squared"></span> USD (US Dollar)
                               </a>
-                            </li>
+                            </li> */}
                             <li onClick={this.selectDestination.bind(this, 'aud')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-au flag-icon-squared"></span> AUD (Australian Dollar)
@@ -580,11 +580,11 @@ class ConfirmationLayout extends React.Component {
                                 <span className="flag-icon flag-icon-eu flag-icon-squared"></span> EUR (European Euro)
                               </a>
                             </li>
-                            <li onClick={this.selectDestination.bind(this, 'hkd')}>
+                            {/* <li onClick={this.selectDestination.bind(this, 'hkd')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-hk flag-icon-squared"></span> HKD (Hongkong Dollar)
                               </a>
-                            </li>
+                            </li> */}
                           </ul>
                         </div>
                       </div>
