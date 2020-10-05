@@ -6,11 +6,11 @@ export const InitGA = () => {
         [
             {
                 trackingId: 'UA-152856412-1',
-                gaOptions: {name: "tracker1"}
+                gaOptions: {name: 'tracker1'}
             },
             {
                 trackingId: 'UA-179311441-2',
-                gaOptions:{name: "tracker2"}
+                gaOptions:{name: 'tracker2'}
             }
         ],
         {debug: true, alwaysSendToDefaultTracker: false}
