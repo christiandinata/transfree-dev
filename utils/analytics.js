@@ -2,7 +2,19 @@ import ReactGA from 'react-ga';
 
 export const InitGA = () => {
     console.log('GA init')
-    ReactGA.initialize('UA-152856412-1')
+    ReactGA.initialize(
+        [
+            {
+                trackingId: 'UA-152856412-1',
+                gaOptions: {name: 'tracker1'}
+            },
+            {
+                trackingId: 'UA-179311441-2',
+                gaOptions:{name: 'tracker2'}
+            }
+        ],
+        {debug: true, alwaysSendToDefaultTracker: false}
+    );
 }
 
 export const logPageView = () => {
