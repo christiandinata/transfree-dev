@@ -108,9 +108,12 @@ const FAQ = () => {
                       </AccordionItemButton>
                   </AccordionItemHeading>
                   <AccordionItemPanel>
-                      <p>
-                      We will send the money to your account or recipient's bank account (account to account) as listed in your transaction detail.
-                      </p>
+                        <p>
+                            <ol>
+                                <li>We will send the money to your account or recipient's bank account (account to account) as listed in your transaction detail.</li>
+                                <li>Please note that if you pay after 3 hours of ordering, your order will be considered canceled and you will have to re-order.</li>
+                            </ol>
+                        </p>
                   </AccordionItemPanel>
               </AccordionItem>
               <AccordionItem>

@@ -4,45 +4,40 @@ import {
   VERIFY_PHONE,
   VERIFY_PHONE_PROGRESS,
   VERIFY_PHONE_CHECK,
+  INITIAL_DATA_USER,
   VERIFY_PHONE_ERROR,
-  USER_DATA
+  USER_DATA,
+  AUTHENTICATE_ERROR,
+  AUTHENTICATE_PROGRESS
 } from '../types';
 import { API } from '../../config';
 import { getCookie } from '../../utils/cookie';
 
 
 // verify phone number
-const verify = ({ phone, email }, type,condition,req) => {
+const verify = ({ phone, email,fullname,password }, type) => {
   if (type !== 'verify') {
     throw new Error('Wrong API call!');
   }
   return (dispatch) => {
-    dispatch({type: VERIFY_PHONE_PROGRESS, payload: true});
-    axios.post(`${API}/${type}`, {phone, email}, {
-      headers: {
-        Authorization: `Bearer ${getCookie('token',req)}`
-      }
-    })
-      .then((response) => {
-        if (condition != "edit") {
-         Router.push('/phone-verification');
-        }else{
-         Router.push('/phone-edit-verification');
-        }
-        dispatch({type: VERIFY_PHONE, payload: response.data.serviceSid});
-        dispatch({type: USER_DATA, payload: response.data.user_data});
+    dispatch({type: AUTHENTICATE_PROGRESS, payload: true});
+    axios.post(`${API}/v1/${type}`, {email,phone}) 
+    // axios.post(`${API}/login`, { email, password })
+      .then((response) => {          
+          console.log(response);
+          dispatch({type: VERIFY_PHONE, payload:response.data.serviceSid});
+          dispatch({type:INITIAL_DATA_USER,payload:({email,fullname,password,phone})});
+          dispatch({type: AUTHENTICATE_PROGRESS, payload: false});
+          Router.push('/phone-verification');
       })
       .catch((error) => {
         let errorMessage = '';
         switch (error.response.status) {
           case 422:
-            errorMessage = 'Phone number has been used. Please choose different number.';
-            break;
-          default:
-            errorMessage = 'Zzzzz. Something is wrong.';
+            errorMessage = error.response.data.message;
             break;
         }
-        dispatch({type: VERIFY_PHONE_ERROR, payload: errorMessage});
+        dispatch({type: AUTHENTICATE_ERROR, payload: errorMessage});
       });
   };
 };

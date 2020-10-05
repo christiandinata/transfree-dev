@@ -13,52 +13,52 @@ import {
   FORGOT_ERROR,
   RESET_PASSWORD_PROGRESS,
   RESET_PASSWORD_SUCCESS,
-  RESET_PASSWORD_ERROR
+  RESET_PASSWORD_ERROR,
+  VERIFY_PHONE_PROGRESS,
+  VERIFY_PHONE,
 } from '../types';
 import { API } from '../../config';
 import { setCookie, removeCookie,getCookie } from '../../utils/cookie';
 
 // register user
-const register = ({ fullname, email, password }, type) => {
+const register = ({ fullname, email, password,phone,code,serviceSid }, type) => {
   if (type !== 'register') {
     throw new Error('Wrong API call!');
   }
   return (dispatch) => {
-    dispatch({type: REGISTER_PROGRESS, payload: true});
-    axios.post(`${API}/${type}`, {fullname, email, password})
+    dispatch({type: VERIFY_PHONE_PROGRESS, payload: true});
+    axios.post(`${API}/v1/${type}`, {fullname, email, password,phone,code,serviceSid})
       .then((response) => {
         setCookie('token', response.data.token);
         const userData = response.data.user_data;
         setCookie('_id', userData._id)
-        if (userData.role == 'admin') {
-          Router.replace('/dashboard/home')
-        } else {
-          Router.replace('/phone');
-        }
-        dispatch({type: REGISTER, payload: response.data.token});
-        dispatch({type: USER_DATA, payload: response.data.user_data});
+          if (userData.role == 'admin') {
+            Router.replace('/dashboard/home')
+          } else {
+            Router.replace('/home');
+          }
+          dispatch({type: REGISTER, payload: response.data.token});
+          dispatch({type: USER_DATA, payload: response.data.user_data});
+          dispatch({type: VERIFY_PHONE_PROGRESS, payload: false});
       })
       .catch((error) => {
         let errorMessage = '';
+        console.log(error);
         switch (error.response.status) {
-          case 422:
-            errorMessage = 'Email has been registered. Please choose different email address.';
-            break;
-          case 420:
-            errorMessage = 'Email and password must be provided.';
-            break;
-          case 500:
-            errorMessage = 'Interval server error! Try again!';
+          case 400:
+            errorMessage = error.response.data.message;
             break;
           default:
             errorMessage = 'Zzzzz. Something is wrong.';
             break;
         }
-
         dispatch({type: AUTHENTICATE_ERROR, payload: errorMessage});
+        dispatch({type: VERIFY_PHONE_PROGRESS, payload: false});
+        dispatch({type: VERIFY_PHONE, payload:serviceSid});
       });
   };
 };
+
 // gets token from the api and stores it in the redux store and in cookie
 const authenticate = ({ email, password }, type) => {
   if (type !== 'login') {
@@ -68,6 +68,7 @@ const authenticate = ({ email, password }, type) => {
     dispatch({type: AUTHENTICATE_PROGRESS, payload: true});
     axios.post(`${API}/${type}`, { email, password })
       .then((response) => {
+        console.log(response);
         setCookie('token', response.data.token);
         const userData = response.data.user_data;
         setCookie('_id', userData._id)
@@ -75,20 +76,23 @@ const authenticate = ({ email, password }, type) => {
           Router.replace('/dashboard/home')
         } else {
           if (userData.isApproved) {
-            Router.replace('/account');
+            Router.replace('/home');
           } else {
             switch(userData.registrationStep) {
               case 1:
                 Router.replace('/phone');
-                break;
+                break;   
               case 2:
-                Router.replace('/id-verification');
+                Router.replace('/home');
                 break;
               case 3:
-                Router.replace('/photo-verification');
+                Router.replace('/fill-photo');
+                break;
+              case 3.5:
+                Router.replace('/home');
                 break;
               case 4:
-                Router.replace('/account');
+                Router.replace('/home');
                 break;
             }
           }
@@ -96,12 +100,13 @@ const authenticate = ({ email, password }, type) => {
 
         dispatch({type: AUTHENTICATE, payload: response.data.token});
         dispatch({type: USER_DATA, payload: response.data.user_data});
+        // dispatch({type: AUTHENTICATE_PROGRESS, payload: false});
       })
       .catch((error) => {
         let errorMessage = '';
         switch (error.response.status) {
           case 401:
-            errorMessage = 'Incorrect password. Please try again or you can reset your password.';
+            errorMessage = error.response.data.message;
             break;
           case 500:
             errorMessage = 'Interval server error! Try again!';
@@ -110,10 +115,7 @@ const authenticate = ({ email, password }, type) => {
             errorMessage = 'Zzzzz. Something is wrong.';
             break;
         }
-
-        dispatch({type: AUTHENTICATE_ERROR, payload: errorMessage});
-
-
+        dispatch({type: AUTHENTICATE_ERROR, payload:errorMessage});
       });
   };
 };
@@ -148,24 +150,19 @@ export const forgot = ({ email }, type) => {
       })
       .catch((error) => {
         const errorMessage = error.response.data.message;
-        dispatch({type: FORGOT_ERROR, payload: errorMessage});
-
+        dispatch({type: FORGOT_ERROR, payload: errorMessage})
 
       });
   };
 };
 
-export const resetPassword = ({ newPassword, verifyPassword, token }, type, req) => {
+export const resetPassword = ({ newPassword, verifyPassword, token }, type) => {
   if (type !== 'resetPassword') {
     throw new Error('Wrong API call!');
   }
   return (dispatch) => {
     dispatch({type: RESET_PASSWORD_PROGRESS, payload: true});
-    axios.post(`${API}/${type}`, { newPassword, verifyPassword, token }, {
-      headers: {
-        Authorization: `Bearer ${getCookie('token',req)}`
-      }
-    })
+    axios.post(`${API}/${type}`, { newPassword, verifyPassword, token })
       .then((response) => {
         if (response.status == 200)
         dispatch({type: RESET_PASSWORD_SUCCESS, payload: response.data.message});
@@ -173,8 +170,6 @@ export const resetPassword = ({ newPassword, verifyPassword, token }, type, req)
       .catch((error) => {
         const errorMessage = error.response.data.message;
         dispatch({type: RESET_PASSWORD_ERROR, payload: errorMessage});
-
-
       });
   };
 };

@@ -1,0 +1,12 @@
+.mobile-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+}
+
+
+@media only screen and (min-width: 1024px) {
+  .mobile-footer {
+    display: none;
+  }
+}

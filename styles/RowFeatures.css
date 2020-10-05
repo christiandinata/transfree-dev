@@ -1,0 +1,58 @@
+@import './components/BoxBenefit.css';
+@import './components/buttonbenefit.css';
+.features .container {
+    display: flex;
+    flex-direction: column;
+}
+
+.features .container-image {
+    display: flex;
+    flex-direction: row;
+    flex-basis: 100%;
+}
+
+.features .container-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.features .container .benefit {
+    margin: auto;
+}
+
+.fiture-mobile {
+    display: none;
+}
+
+.features .container-image .images {
+    margin-top: -4.18vw;
+    display: flex;
+    margin-left: -1vw;
+    flex-basis: 60%;
+}
+
+.features .images img {
+    height: 6vw;
+    width: auto;
+    margin: auto;
+    max-width: 100%;
+}
+
+
+.features .message {
+    /* font-size: 23px; */
+    margin-top: 6%;
+}
+
+.features .background img {
+    height: 1000px;
+    width: 2000px;
+    margin-left: -480px;
+    margin-top: -100px;
+}
+
+@media only screen and (max-width:605px){
+    .features img{
+        display: none;
+    }
+}
