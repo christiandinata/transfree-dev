@@ -383,21 +383,21 @@ class Dashboard extends React.Component {
                             (this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr') ?
                               this.reverse.bind(this, 'eur', 'idr')
                               :
-                              (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'myr') ?
-                                this.reverse.bind(this, 'idr', 'myr')
-                                :
-                                (this.state.fromCurrency == 'myr' && this.state.toCurrency == 'idr') ?
-                                  this.reverse.bind(this, 'myr', 'idr')
-                                  :
+                              // (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'myr') ?
+                              //   this.reverse.bind(this, 'idr', 'myr')
+                              //   :
+                              //   (this.state.fromCurrency == 'myr' && this.state.toCurrency == 'idr') ?
+                              //     this.reverse.bind(this, 'myr', 'idr')
+                              //     :
                                   /**(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'krw' ) ?
                                   this.reverse.bind(this,'idr' , 'krw')
                                   :
                                   (this.state.fromCurrency == 'krw' && this.state.toCurrency == 'idr' ) ?
                                   this.reverse.bind(this,'krw' , 'idr')
                                   :*/
-                                  (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'usd') ?
-                                    this.reverse.bind(this, 'idr', 'usd')
-                                    :
+                                  // (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'usd') ?
+                                  //   this.reverse.bind(this, 'idr', 'usd')
+                                  //   :
                                     // (this.state.fromCurrency == 'usd' && this.state.toCurrency == 'idr' ) ?
                                     // this.reverse.bind(this,'usd' , 'idr')
                                     // :
@@ -407,9 +407,9 @@ class Dashboard extends React.Component {
                                       // (this.state.fromCurrency == 'aud' && this.state.toCurrency == 'idr' ) ?
                                       // this.reverse.bind(this,'aud' , 'idr')
                                       // :
-                                      (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'hkd') ?
-                                        this.reverse.bind(this, 'idr', 'hkd')
-                                        // :
+                                      // (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'hkd') ?
+                                      //   this.reverse.bind(this, 'idr', 'hkd')
+                                      //   :
                                         // 	(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'idr' ) ?
                                         // 	this.reverse.bind(this,'hkd' , 'idr')
                                         // 	:
@@ -529,7 +529,7 @@ class Dashboard extends React.Component {
                                         // 	:
                                         // 	(this.state.fromCurrency == 'hkd' && this.state.toCurrency == 'eur' ) ?
                                         // 	this.reverse.bind(this,'hkd' , 'eur')
-                                        :
+                                        // :
                                         null
                     }
 
@@ -561,11 +561,11 @@ class Dashboard extends React.Component {
                                 <span className="flag-icon flag-icon-id flag-icon-squared"></span> IDR (Indonesian Rupiah)
                               </a>
                             </li>
-                            <li onClick={this.selectDestination.bind(this, 'myr')}>
+                            {/* <li onClick={this.selectDestination.bind(this, 'myr')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-my flag-icon-squared"></span> MYR (Malaysian Ringgit)
                               </a>
-                            </li>
+                            </li> */}
                             {/**<li onClick={this.selectDestination.bind(this,'krw')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-kr flag-icon-squared"></span> KRW (Korean Won)
@@ -577,11 +577,11 @@ class Dashboard extends React.Component {
                                 <span className="flag-icon flag-icon-gb flag-icon-squared"></span> GBP (British Poundsterling)
                               </a>
                             </li>
-                            <li onClick={this.selectDestination.bind(this, 'usd')}>
+                            {/* <li onClick={this.selectDestination.bind(this, 'usd')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-us flag-icon-squared"></span> USD (US Dollar)
                               </a>
-                            </li>
+                            </li> */}
                             <li onClick={this.selectDestination.bind(this, 'aud')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-au flag-icon-squared"></span> AUD (Australian Dollar)
@@ -592,11 +592,11 @@ class Dashboard extends React.Component {
                                 <span className="flag-icon flag-icon-eu flag-icon-squared"></span> EUR (European Euro)
                               </a>
                             </li>
-                            <li onClick={this.selectDestination.bind(this, 'hkd')}>
+                            {/* <li onClick={this.selectDestination.bind(this, 'hkd')}>
                               <a className="dropdown-item">
                                 <span className="flag-icon flag-icon-hk flag-icon-squared"></span> HKD (Hongkong Dollar)
                               </a>
-                            </li>
+                            </li> */}
                           </ul>
                         </div>
                       </div>
