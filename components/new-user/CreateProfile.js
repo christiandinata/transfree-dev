@@ -21,7 +21,7 @@ function CreateProfile (props) {
   if (props.response && !props.errorMessage) {
     props.nextStep()
   }
-
+  //Function cek validitas nomer identitas
   function checkIdnumber(e) {
     if (e.target.value === '') {
       setIsIdNumberValid(false)
@@ -29,7 +29,7 @@ function CreateProfile (props) {
       setIsIdNumberValid(true)
     }
   }
-
+  //Function cek validitas tempat lahir
   function checkPob(e) {
     if (e.target.value === '') {
       setIsPobValid(false)
@@ -37,7 +37,7 @@ function CreateProfile (props) {
       setIsPobValid(true)
     }
   }
-
+  //Function cek validitas alamat
   function checkAddress(e) {
     if (e.target.value === '') {
       setIsAddressValid(false)
@@ -45,6 +45,7 @@ function CreateProfile (props) {
       setIsAddressValid(true)
     }
   }
+  
 
   function handleOnClickButton(e) {
     e.preventDefault()
@@ -52,7 +53,7 @@ function CreateProfile (props) {
     if (!checkIdDataValid()) {
       return
     }
-
+    //setelah data valid, data disimpan dalam profile
     props.createProfile({
         idType: idType,
         idNumber: idNumber,
@@ -66,6 +67,7 @@ function CreateProfile (props) {
     )
   }
 
+  //Pengecakan validitas data, disini hanya periksa apakah kosong atau tidak
   function checkIdDataValid() {
     let isValid = true
 
