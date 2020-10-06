@@ -17,7 +17,6 @@ class UserDetailPopUp extends React.Component{
       //Menampilkan popup
       <div className="popup" onClick={this.props.closePopUp}>
         <div className="popupcontainer">
-          {/* Apa ini */}
           <h2>{this.props.text}</h2>
           {/* Menampilkan data user  */}
           <div className="content">

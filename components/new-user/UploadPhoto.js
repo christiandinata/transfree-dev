@@ -68,6 +68,7 @@ function UploadPhoto (props) {
       1. ID Card Picture (Passport/ KTP/ SIM. Make sure we can read the ID number clearly)<br></br>
       2. Selfie with the ID Card (Make sure we can read the ID number clearly)
       </p>
+      {/* Memberi kesempatan pada user untuk upload foto */}
       <div className='upload-photo-dropboxes-container'>
         <StyledDropzone title='Your ID Card' id='card' image='../static/images/Sign Up ASSET WEB/ktp.png' onDrop={ setPhotoId } />
         <StyledDropzone title='Your Selfie holding the ID Card' id='photo' image='../static/images/Sign Up ASSET WEB/selfie.png' onDrop={ setPhotoFace } />

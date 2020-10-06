@@ -90,6 +90,7 @@ function CreateProfile (props) {
   }
 
   return(
+    // Menanyakan apakah user ingin mengisi profile sendiri atau tidak
     <Fragment>
       {
         isSkipPopupVisible
