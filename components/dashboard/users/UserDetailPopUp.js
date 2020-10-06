@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import actions from '../../../redux/actions'
 
 class UserDetailPopUp extends React.Component{
-  // Menerima argumen luar
+  // Menerima argumen luar: text, user, photo
   constructor(props){
     super(props);
   }

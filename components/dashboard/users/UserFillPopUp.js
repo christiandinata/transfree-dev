@@ -3,7 +3,9 @@ import actions from '../../../redux/actions'
 
 class UserFillPopUp extends React.Component{
   constructor(props){
+    // Menerima argumen dari luar
     super(props);
+    // Deklarasi state
     this.state = {
         id : this.props.user._id,
         fullname : this.props.user.fullname,
@@ -16,7 +18,7 @@ class UserFillPopUp extends React.Component{
         dob : this.props.user.dob,
         address : this.props.user.address,
     }
-
+    
     this.updateUser = this.updateUser.bind(this);
     this.upgradeUser = this.upgradeUser.bind(this);
     this.validasiData = this.validasiData.bind(this);
@@ -38,7 +40,7 @@ class UserFillPopUp extends React.Component{
         })
     }
   }
-
+  //Periksa apakah user sudah memasukkan semua data yang diperlukan
   validasiData(){
     if (this.state.idNumber === undefined  && this.state.gender === undefined && this.state.pob === undefined && this.state.dob === undefined && this.state.address === undefined) {
       return false
@@ -46,6 +48,7 @@ class UserFillPopUp extends React.Component{
       return true;
     }
   }
+
 
   updateUser(){
     let id = this.state.id;
