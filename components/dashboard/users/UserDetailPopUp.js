@@ -94,7 +94,7 @@ class UserDetailPopUp extends React.Component{
   }
 }
 
-// Apa ini 
+//Memunculkan pop up foto
 const mapStateToProps = (state) => {
   return {
     photo: state.photo,

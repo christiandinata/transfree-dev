@@ -227,6 +227,7 @@ function CreateProfile (props) {
   )
 }
 
+//Memunculkan pop up data user
 const mapStateToProps = (state) => {
   return {
     isInProgress: state.profile.inProgress,

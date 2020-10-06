@@ -49,7 +49,7 @@ class UserFillPopUp extends React.Component{
     }
   }
 
-
+  //Memasukkan data user ke DB
   updateUser(){
     let id = this.state.id;
     let fullname = this.state.fullname;
@@ -66,6 +66,7 @@ class UserFillPopUp extends React.Component{
     this.props.closePopUp();
   }
 
+  //Mengubah status user menjadi approved
   upgradeUser(){
     let uid = this.state.id;
 
@@ -84,7 +85,7 @@ class UserFillPopUp extends React.Component{
             {this.props.photo.photoData ?
                 <img className="photoId" src={this.props.photo.photoData.photoId}></img> : 'ID Photo Not Available'
             }<br></br>
-
+          {/* Memasukkan data diri  */}
            <form>
            <h4>ID Type</h4>
             <input
@@ -284,10 +285,12 @@ class UserFillPopUp extends React.Component{
   }
 }
 
+//Memunculkan foto yang diupload user
 const mapStateToProps = (state) => {
   return {
     photo: state.photo,
   }
 }
 
+//Memunculkan pop up foto yang diupload user
 export default connect(mapStateToProps, actions)(UserFillPopUp);

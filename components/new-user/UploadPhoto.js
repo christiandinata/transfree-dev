@@ -98,6 +98,7 @@ function UploadPhoto (props) {
   )
 }
 
+//Memunculkan data user di pop up
 const mapStateToProps = (state) => {
   return {
     isInProgress: state.photo.inProgress,
