@@ -14,7 +14,7 @@ function UploadPhoto (props) {
 
   function handleOnClickButton(e) {
     e.preventDefault()
-
+    //Cek apakah user sudah setuju dengan terms dan mengumpulkan foto
     if (!checkPhotoValid() || !checkTermsAgreed()) {
       return
     }
@@ -38,6 +38,7 @@ function UploadPhoto (props) {
     }
   }
 
+  //Periksa apakah foto sudah diupload
   function checkPhotoValid() {
     if (photoId === '' || photoFace === '') {
       setErrorMessage('Neither photo can be empty!')
@@ -46,6 +47,7 @@ function UploadPhoto (props) {
     return true
   }
 
+  //Periksa apakah Terms sudah disetujui
   function checkTermsAgreed() {
     if (!isTermsAgreed) {
       setErrorMessage('You can continue if you agree with our Terms and Condition!')
