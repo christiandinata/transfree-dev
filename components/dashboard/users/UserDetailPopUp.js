@@ -2,19 +2,24 @@ import { connect } from 'react-redux';
 import actions from '../../../redux/actions'
 
 class UserDetailPopUp extends React.Component{
+  // Menerima argumen luar
   constructor(props){
     super(props);
   }
 
+  // Menampilan foto dari user saat component akan diload
   componentWillMount() {
     this.props.getPhoto(this.props.user._id, 'getPhoto');
   }
 
   render(){
     return(
+      //Menampilkan popup
       <div className="popup" onClick={this.props.closePopUp}>
         <div className="popupcontainer">
+          {/* Apa ini */}
           <h2>{this.props.text}</h2>
+          {/* Menampilkan data user  */}
           <div className="content">
             ID Name &#9; : {this.props.user.fullname} <br></br>
             ID Number &#9; : {this.props.user.idNumber} <br></br>
@@ -89,6 +94,7 @@ class UserDetailPopUp extends React.Component{
   }
 }
 
+// Apa ini 
 const mapStateToProps = (state) => {
   return {
     photo: state.photo,
