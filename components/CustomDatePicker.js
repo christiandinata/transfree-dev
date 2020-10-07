@@ -2,6 +2,8 @@ import moment from 'moment'
 import DatePicker from "react-datepicker"
 import '../styles/components/CustomDatePicker.css'
 
+
+//Untuk mengimplementasi pilih tanggal, terdapat di halaman register dan edit profile
 const CustomDatePickerMobile = ({ value, onClick }) => <input className="custom-date-picker-mobile" value={ value } readOnly onClick={ onClick } />
 const CustomDatePickerButton = ({ onClick }) => <div className="custom-date-picker-desktop-button" onClick={ onClick } />
 

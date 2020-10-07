@@ -1,5 +1,6 @@
 import Link from 'next/link';
-
+//Bagian paling bawah, ada "about us", "contact us", "Collaborators and Partners", "License", dan "Office"
+//Dipakai di index.js dan dashboard.js
 const Footer = () => (
  
   <div className="row-footer">

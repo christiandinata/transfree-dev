@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Header from '../components/header.js';
 
+//Untuk Layout form pada halaman login dan sign-up
 const AuthLayout = ({ children }) => (
   <div>
     <Header />
