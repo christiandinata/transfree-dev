@@ -2,6 +2,9 @@ import {useCallback, useEffect, useMemo, useState} from 'react'
 import {useDropzone} from 'react-dropzone'
 import '../styles/components/StyledDropzone.css'
 
+//Untuk styling saat user memasukkan foto
+
+//Styling
 const thumbsContainer = {
   display: 'flex',
   flexDirection: 'row',
@@ -34,6 +37,7 @@ const rejectStyle = {
 function StyledDropzone (props) {
   const [files, setFiles] = useState([])
 
+  //Menerima file yang diupload user
   const onDrop = useCallback(acceptedFiles => {
     const file = acceptedFiles[0]
     const reader = new FileReader()
@@ -42,6 +46,7 @@ function StyledDropzone (props) {
       props.onDrop(event.target.result)
     }
 
+    //Membuat file yang diupload menjadi suatu variabel
     setFiles([
       Object.assign(file, {
         preview: URL.createObjectURL(file)
@@ -49,6 +54,7 @@ function StyledDropzone (props) {
     ])
   }, [])
 
+  //membuat preview untuk file yang diupload
   useEffect(() => () => {
     // Make sure to revoke the data uris to avoid memory leaks
     files.forEach(file => URL.revokeObjectURL(file.preview))
@@ -56,7 +62,7 @@ function StyledDropzone (props) {
 
 
 
-
+  
   const thumbs = files.map(file => (
     <div style={thumb} key={file.name}>
         <img
