@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+//Buat menampilkan menu checkout
 const MenuCheckout = () => (
   <div className="row">
     <div className="container">
@@ -73,5 +74,5 @@ const MenuCheckout = () => (
       `}</style>
   </div>
 )
-
+//Mengirimkan menu checkout
 export default MenuCheckout

@@ -2,8 +2,10 @@ import { connect } from 'react-redux';
 import actions from '../redux/actions';
 
 class ComplaintForm extends React.Component{
+    //Menerima argumen dari luar
     constructor(props){
         super(props);
+    //Mendeklarasikan state
         this.state = {
             fullname : '',
             problemType : '',
@@ -12,7 +14,7 @@ class ComplaintForm extends React.Component{
             contact : ''
         };
     }
-
+    //Memperbarui state react
     handleChange(event){
         event.preventDefault();
 
@@ -20,12 +22,12 @@ class ComplaintForm extends React.Component{
             [event.target.name] : event.target.value
         });
     }
-
+    //Mengumpulkan state react
     handleSubmit(event){
         event.preventDefault();
-
+    //Akan ditampilkan state saat ini pada console
         console.log(this.state);
-
+    //Mengumpulkan feedback yang pilihan other
         if(this.state.problemType === 'Other'){
             console.log("1");
             this.props.submitFeedback(
@@ -38,6 +40,7 @@ class ComplaintForm extends React.Component{
                 'submitFeedback'
             );
         }
+    //Mengumpulkan feedback yang pilihan selain other
         else{
             console.log("2");
             this.props.submitFeedback(
@@ -52,6 +55,7 @@ class ComplaintForm extends React.Component{
         }
     }
 
+    //Menampilkan tulisan dibawah
     render(){
         return(
             <div>
@@ -141,5 +145,6 @@ const mapStateToProps = (state) => {
       successMessage: state.complaint.successMessage
     }
   };
-  
+
+//Mengirimkan complaint form
 export default connect(mapStateToProps,actions)(ComplaintForm);

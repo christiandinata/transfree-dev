@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import authActions from '../redux/actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-
+//Buat menampilkan menu bar (How it works, about us, send money, transactions, sign up, profile, dan logout)
 const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
   <div className="row">
     <div className="container">
@@ -378,5 +378,5 @@ const mapStateToProps = (state) => {
     username: state.user.user_data ? state.user.user_data.fullname : ""
   }
 }
-
+//Mengirimkan menu
 export default connect(mapStateToProps, authActions)(Menu);
