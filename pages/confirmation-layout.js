@@ -24,7 +24,7 @@ import '../styles/rowapplicationmobile.css';
 import '../styles/testimonialdesktop.css';
 import '../styles/testimonialmobile.css';
 
-
+//Untuk Home.js
 class ConfirmationLayout extends React.Component {
   constructor({ props }) {
     super(props);

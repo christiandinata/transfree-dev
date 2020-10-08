@@ -9,6 +9,7 @@ import actions from '../redux/actions';
 import { getCookie } from '../utils/cookie';
 import moment from 'moment';
 
+//Setelah diapprove
 const ApprovedLayout = () => {
   return (
     <div className="content">
@@ -55,6 +56,7 @@ const ApprovedLayout = () => {
 
 }
 
+//Waiting Approve
 const PendingLayout = () => {
   return (
     <div className="content">
@@ -117,7 +119,7 @@ class OrderItem extends React.Component {
     }
 
   }
-
+  //Riwayat Transaksi
 
   render() {
     return (
@@ -324,7 +326,7 @@ class OrderItem extends React.Component {
     )
   }
 }
-
+//Layout Riwayat Transaksi
 const OrderLayout = ({ordersList}) => {
   return (
     <div>
@@ -434,6 +436,7 @@ const OrderLayout = ({ordersList}) => {
   )
 }
 
+//Account Layout
 class Account extends React.Component {
   constructor({props}) {
     super(props);

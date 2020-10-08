@@ -22,6 +22,7 @@ import '../styles/rowapplicationmobile.css';
 import '../styles/testimonialdesktop.css';
 import '../styles/testimonialmobile.css';
 
+//Dashboard untuk Homepage kalau udah login
 class Dashboard extends React.Component {
 
   constructor({ props }) {

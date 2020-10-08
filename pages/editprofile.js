@@ -13,7 +13,7 @@ import GlobalFunction from "../utils/globalFunction";
 import { onChangeToken, onChangeUser, onChangeUserEmailLogin, onChangeUserPasswordLogin } from "../redux/actions/authActions";
 import Router from 'next/router';
 
-
+//Untuk https://www.transfree.id/user-profile
 class EditProfile extends React.Component {
     constructor(props) {
         super(props);
