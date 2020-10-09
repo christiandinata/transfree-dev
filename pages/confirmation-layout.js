@@ -24,7 +24,7 @@ import '../styles/rowapplicationmobile.css';
 import '../styles/testimonialdesktop.css';
 import '../styles/testimonialmobile.css';
 
-//Untuk Home.js
+//Untuk Home.js, sebagai layout homepage ketika sudah login tetapi belum di-approve
 class ConfirmationLayout extends React.Component {
   constructor({ props }) {
     super(props);
