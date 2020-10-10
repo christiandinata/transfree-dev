@@ -11,10 +11,11 @@ import {getCookie} from "../utils/cookie";
 import Link from 'next/link';
 import ENV from "../config";
 import * as axios from "axios";
-
+//Menerima argumen dari luar
 class UserProfile extends React.Component {
     constructor(props) {
         super(props)
+        //Mendeklarasikan state
         this.state = {
             emailUser: this.props.user.email ? this.props.user.email : "",
             fullname: this.props.user.fullname ? this.props.user.fullname : "",
@@ -32,7 +33,7 @@ class UserProfile extends React.Component {
         initialize(ctx);
         await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req), 'user', ctx.req));
     };
-
+//Memperbarui state react
     handleChange(event) {
         this.setState({
             [event.target.name]: event.target.value
@@ -76,7 +77,7 @@ class UserProfile extends React.Component {
     componentDidMount() {
         this.stopEdit();
     }
-
+//Untuk memperbarui info user
     updateUser = async () => {
         if (this.checkData()) {
             axios.post(ENV.API + `/v1/user/checkEmail`, {"email": this.state.emailUser},
@@ -133,7 +134,7 @@ class UserProfile extends React.Component {
         }
 
     }
-
+//Untuk memerika nomer identitas
     checkIdNumber() {
         if (document.querySelector("#id-number").value === "") {
             document.querySelector("#error-idnumber").className = "form-error-label";
@@ -141,7 +142,7 @@ class UserProfile extends React.Component {
             document.querySelector("#error-idnumber").className = "form-error-label-hidden";
         }
     }
-
+//Untuk memerika POB
     checkPOB() {
         if (document.querySelector("#pob").value === "") {
             document.querySelector("#error-pob").className = "form-error-label";
@@ -149,7 +150,7 @@ class UserProfile extends React.Component {
             document.querySelector("#error-pob").className = "form-error-label-hidden";
         }
     }
-
+//Untuk memeriksa alamat
     checkAddress() {
         if (document.querySelector("#address").value === "") {
             document.querySelector("#error-address").className = "form-error-label";
@@ -157,7 +158,7 @@ class UserProfile extends React.Component {
             document.querySelector("#error-address").className = "form-error-label-hidden";
         }
     }
-
+//Untuk memeriksa alamat email
     checkEmailAddress() {
         if (document.querySelector("#email-address").value === "") {
             document.querySelector("#error-email").className = "form-error-label";
@@ -165,7 +166,7 @@ class UserProfile extends React.Component {
             document.querySelector("#error-email").className = "form-error-label-hidden";
         }
     }
-
+//Untuk memeriksa kata sandi
     checkPassword() {
         if (document.querySelector("#password").value !== document.querySelector("#confirm-password").value) {
             document.querySelector("#error-password").className = "form-error-label";
@@ -173,7 +174,7 @@ class UserProfile extends React.Component {
             document.querySelector("#error-password").className = "form-error-label-hidden";
         }
     }
-
+//Untuk memeriksa data (nomer identitas, pob, alamat, alamat email, dan password)
     checkData() {
         return document.querySelector("#id-number").value !== "" &&
             document.querySelector("#pob").value !== "" &&
@@ -181,7 +182,7 @@ class UserProfile extends React.Component {
             document.querySelector("#email-address").value !== "" &&
             document.querySelector("#password").value === document.querySelector("#confirm-password").value;
     }
-
+//Menampilkan tulisan dibawah
     render() {
         return (
             <div>
@@ -333,5 +334,5 @@ class UserProfile extends React.Component {
 const mapStateToProps = (state) => ({
     user: state.user.user_data,
 })
-
+//Mengirimkan user profile
 export default connect(mapStateToProps)(UserProfile);

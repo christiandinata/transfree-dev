@@ -9,11 +9,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 const eye = <FontAwesomeIcon icon={faEye} />;
 
-
+//Menerima Argumen dari luar
 class Signup extends React.Component {
 
   constructor({ props }) {
     super(props);
+    //Mendeklarasikan state
     this.state = {
       fullname: '',
       email: '',
@@ -42,7 +43,7 @@ class Signup extends React.Component {
   static getInitialProps(ctx) {
     initialize(ctx);
   }
-
+//
   handlePassword = () =>{
     if (this.state.password != this.state.confirmPassword) {
       this.setState({
@@ -52,7 +53,7 @@ class Signup extends React.Component {
   }
 
 
-
+//Mengumpulkan state react
   handleSubmit(e) {
     e.preventDefault();
     if (this.state.password != this.state.confirmPassword) {
@@ -83,6 +84,7 @@ class Signup extends React.Component {
   //   );
   // }
 
+//Memunculkan tulisan dan gambar dibawah
   render() {
     return (
       <AuthLayout>
@@ -306,4 +308,5 @@ const mapStateToProps = (state) => {
   }
 };
 
+//Mengirimkan signup
 export default connect(mapStateToProps,actions)(Signup);
