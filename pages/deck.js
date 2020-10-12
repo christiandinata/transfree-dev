@@ -3,7 +3,7 @@ import Menu from '../components/menu.js';
 import Footer from '../components/footer.js';
 import Link from 'next/link';
 
-
+//slide show info transfree
 const Terms = () => (
   <div>
     <Header />

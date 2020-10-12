@@ -5,6 +5,8 @@ import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+
+//Component untuk login
 const eye = <FontAwesomeIcon icon={faEye} />;
 
 class Login extends React.Component {

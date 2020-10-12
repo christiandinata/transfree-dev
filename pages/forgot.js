@@ -5,6 +5,7 @@ import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+//Component yang ditampilkan apabila user lupa detail akun selain password
 class Forgot extends React.Component {
   constructor({ props }) {
     super(props);

@@ -14,6 +14,7 @@ import NumberFormat from 'react-number-format';
 import orderid from 'order-id';
 import shortid from 'shortid';
 
+//Component untuk menampilkan saat order diproses
 const PendingLayout = () => {
   return (
     <div className="content">
@@ -54,6 +55,7 @@ const PendingLayout = () => {
 
 }
 
+//Component yang ditampilkan saat order dilakukan
 class Order extends React.Component {
   constructor({ props }) {
     super(props);

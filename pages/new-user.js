@@ -11,6 +11,7 @@ import UploadPhoto from '../components/new-user/UploadPhoto';
 import userActions from '../redux/actions/userActions';
 import '../styles/new-user.css';
 
+//Component yang menampilkan opsi pengisian detail dari user baru 
 function Progress (props) {
   const items = []
 

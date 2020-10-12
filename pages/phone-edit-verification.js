@@ -7,6 +7,7 @@ import initialize from '../utils/initialize';
 import { getCookie } from '../utils/cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+//Componenet untuk verifikasi nomor handphone
 class PhoneVerification extends React.Component {
   constructor({ props }) {
     super(props);
