@@ -2,6 +2,8 @@ import Header from '../components/header.js';
 import Menu from '../components/menu.js';
 import Footer from '../components/footer.js';
 import Link from 'next/link';
+
+//Menampilkan tulisan dibawah menggunakan style dibawah
 const About = () => (
   <div>
     <Header />
@@ -85,5 +87,5 @@ const About = () => (
     <Footer />
   </div>
 );
-
+//Mengirimkan about
 export default About;

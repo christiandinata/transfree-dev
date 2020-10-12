@@ -4,7 +4,7 @@ import Footer from '../components/footer.js';
 
 import Link from 'next/link';
 
-
+//Menampilkan tulisan dibawah
 const Terms = () => (
   <div>
     <Header />
@@ -129,4 +129,5 @@ const Terms = () => (
   </div>
 );
 
+//Mengirimkan terms
 export default Terms;

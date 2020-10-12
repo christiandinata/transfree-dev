@@ -2,6 +2,7 @@ import Header from '../components/header.js';
 import Menu from '../components/menu.js';
 import Footer from '../components/footer.js';
 
+//Menampilkan tulisan dibawah dengan style dan link google form
 const About = () => (
   <div>
     <Header />
@@ -40,4 +41,5 @@ const About = () => (
   </div>
 );
 
+//mengirimkan about
 export default About;
