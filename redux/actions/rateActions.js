@@ -4,7 +4,7 @@ import {
 } from '../types';
 import { API } from '../../config';
 import { getCookie } from '../../utils/cookie';
-
+//Get currency rates
 const getRates = (from, to) => {
   return async (dispatch) => {
     await axios.get('https://data.fixer.io/latest?access_key=1c2c1df7d16f7d0e30bb25aebd730a22&base='+from.toUpperCase()+'&symbols='+to.toUpperCase())

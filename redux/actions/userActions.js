@@ -7,7 +7,8 @@ import {
 } from '../types';
 import { API } from '../../config';
 import { getCookie } from '../../utils/cookie';
-
+//admin actions
+//get user
 const getUser = (uid, type, req) => {
   if (type !== 'user') {
     throw new Error('Wrong API call!');
@@ -27,7 +28,7 @@ const getUser = (uid, type, req) => {
   };
 };
 
-
+//by query
 const getUsersByQuery = (page, query, type) => {
   if (type !== 'getUsersByQuery') {
     throw new Error('Wrong API call!');
@@ -70,7 +71,7 @@ const getAllUsers = (page, type, req) => {
       });
   };
 };
-
+//get all user that usign fill by admin feature
 const getAllUsersFilledByAdmin = (page, type, req) => {
 
   if (type !== 'getAllUsersFilledByAdmin') {
@@ -91,7 +92,7 @@ const getAllUsersFilledByAdmin = (page, type, req) => {
       });
   };
 };
-
+//approving new user
 const approveUser = ({uid} , type, req) => {
   if (type !== 'approveUser') {
     throw new Error('Wrong API call!');
@@ -112,7 +113,7 @@ const approveUser = ({uid} , type, req) => {
       });
   };
 };
-
+//deleting user
 const deleteUser = ({uid} , type,req) => {
   if (type !== 'deleteUser') {
     throw new Error('Wrong API call!');
@@ -133,7 +134,7 @@ const deleteUser = ({uid} , type,req) => {
       });
   };
 };
-
+//updating user
 const updateUser = (id, { fullname, email, idType, idNumber, idName, gender, dob, pob, address }, type, req) => {
   if (type !== 'user') {
     throw new Error('Wrong API call!');

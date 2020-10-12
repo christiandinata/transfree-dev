@@ -7,7 +7,7 @@ import {
 } from '../types';
 import { API } from '../../config'
 import { getCookie } from '../../utils/cookie'
-
+//creating profile
 const createProfile = ({ idType, idNumber, gender, pob, dob, address, email }, type) => {
   if (type !== 'createProfile') {
     throw new Error('Wrong API call!')
