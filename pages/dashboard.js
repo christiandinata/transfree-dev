@@ -368,7 +368,7 @@ class Dashboard extends React.Component {
 
                   </div>
 
-                  <div style={{ textAlign: "right" }}>
+                  <div style={{ textAlign: "right", height: "0px",marginRight: "30px"}}>
                     <img onClick={
 
                       (this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr') ?
@@ -758,12 +758,13 @@ class Dashboard extends React.Component {
           box-shadow: 0 2px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
           height:auto;
           font-size:11px;
-          padding:1px 20px 1px 20px;
-          margin-top:4px;
-          background-color: rgba(0,0,0,0.4);
-          border-radius: 12px;
-         
+          width: 100%;
+          padding: 1px 30px 1px 30px;
+          box-sizing: border-box;
+          margin-top: 30px;
+          background-color: rgb(31,52,90);
         }
+
       h2,h1,h3{
         color:#FFFFFF;
       }
@@ -1040,7 +1041,7 @@ class Dashboard extends React.Component {
           }
           
           .converter-container {
-            padding: 15px 20px 23px 20px;
+            padding: 15px 0px 23px 0px;
             background: #354E7A;
             box-shadow: 0 10px 30px 0 rgba(0,0,0,0.30);
             border-radius: 30px;
@@ -1088,7 +1089,10 @@ class Dashboard extends React.Component {
             border: 1px solid #eaeaea;
           }
           .source-container {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+          }
+          .destination-container {
+            margin-top: 15px;
           }
           .currency-from {
             display: flex;
