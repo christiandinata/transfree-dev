@@ -160,7 +160,7 @@ class EditProfile extends React.Component {
                         <div className = "form-container">
                             <div class="grid">
                             <div className="logo">
-                                <img className="img" src="../static/images/transfree-logo.png"/>
+                                <img className="img" src="../static/images/transfree-logo.png" slt="Logo"/>
                             </div>
                             <h3>Edit Profile</h3>
                             <div class="row">

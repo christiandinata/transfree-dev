@@ -13,7 +13,7 @@ const ApprovedLayout = () => {
   return (
     <div className="content">
       <div className="big-icon">
-        <img src="../static/images/happy.svg"/>
+        <img src="../static/images/happy.svg" alt="Happy"/>
       </div>
       <h1>No transactions</h1>
       <p>You haven’t sent money using Transfree. Get started now and enjoy fast and cheap international money transfer. </p>
@@ -59,7 +59,7 @@ const PendingLayout = () => {
   return (
     <div className="content">
       <div className="big-icon">
-        <img src="../static/images/document.svg"/>
+        <img src="../static/images/document.svg" alt="Document"/>
       </div>
       <h1>Awaiting confirmation</h1>
       <p>We are now reviewing your account details. We will send you an email & WhatsApp message once the verification process is completed.</p>

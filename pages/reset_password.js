@@ -36,7 +36,7 @@ class ResetPassword extends React.Component {
     return (
       <AuthLayout>
         <div className="logo">
-          <img src="../static/images/transfree-logo.png"/>
+          <img src="../static/images/transfree-logo.png" alt="Logo"/>
         </div>
         <h1>Reset password</h1>
         <div className={"error-container "+(this.props.errorMessage != '' && this.props.errorMessage != undefined ? "error-show" : "") }>

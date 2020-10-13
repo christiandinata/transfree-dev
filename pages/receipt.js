@@ -11,7 +11,7 @@ const ReceiptLayout = (props) => {
       <Header />
       <div className="container">
         <div className="logo">
-          <Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>
+          <Link href="/"><a><img src="../static/images/transfree-logo.png" alt="Logo"/></a></Link>
         </div>
 
         <h2>Transfer Confirmation</h2>

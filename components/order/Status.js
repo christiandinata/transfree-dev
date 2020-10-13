@@ -10,7 +10,7 @@ class Status extends React.Component {
       <div>
         <div className="content">
           <div className="big-icon">
-            <img src="../static/images/checked.png"/>
+            <img src="../static/images/checked.png" alt="checked"/>
           </div>
           <h1>Awaiting Payment confirmation</h1>
           <p>Thank you, we are now reviewing your order details. We will send you an email regarding your payment instruction. Please check your email.</p>

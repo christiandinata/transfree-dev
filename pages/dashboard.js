@@ -274,15 +274,15 @@ class Dashboard extends React.Component {
               {/* <div style={{marginTop:40}}>
                
                 <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank">
-                <img src="../static/images/appstore.png"/></a>
+                <img src="../static/images/appstore.png" alt="appstore"/></a>
                 <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
-                <img src="../static/images/playstore.png" style={{marginLeft:20}}/></a>
+                <img src="../static/images/playstore.png" style={{marginLeft:20}} alt="playstore"/></a>
                 
               </div> */}
               {/* <div className="desktop">
                 <div className="fixed-btn">
                   <a href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree" target="_blank">
-                  <img style={{width: "75%",height:"75%", marginTop: "13%",zIndex:999}} src="../static/images/wa-logo.png"/></a>
+                  <img style={{width: "75%",height:"75%", marginTop: "13%",zIndex:999}} alt="whatsapp" src="../static/images/wa-logo.png"/></a>
                 </div>
               </div> */}
               {/* <div className="images">
@@ -533,7 +533,7 @@ class Dashboard extends React.Component {
                                         null
                     }
 
-                      className="reverse-img" style={{ width: "4.5%", paddingBottom: "10px", marginTop: "-15px", paddingRight: "17px" }} src="../static/images/reverse.png" />
+                      className="reverse-img" style={{ width: "4.5%", paddingBottom: "10px", marginTop: "-15px", paddingRight: "17px" }} src="../static/images/reverse.png" alt="Mata Uang"/>
                   </div>
 
                   <div className="destination-container">
@@ -665,16 +665,16 @@ class Dashboard extends React.Component {
               <div className="benefit">
                 {/* <div className="column"> */}
                 <div className="box-benefit">
-                  <img src="../static/images/features/money.png" id="money"></img>
+                  <img src="../static/images/features/money.png" id="money" alt="Money"></img>
                   <h1>Better rate for Transfree</h1>
                 </div>
                 {/* </div> */}
                 <div className="box-benefit">
-                  <img src="../static/images/features/time.png" style={{ width: "30%", height: "50%" }}></img>
+                  <img src="../static/images/features/time.png" alt="time" style={{ width: "30%", height: "50%" }}></img>
                   <h1>Quickly sent quickly arrived</h1>
                 </div>
                 <div className="box-benefit">
-                  <img src="../static/images/features/search.png"></img>
+                  <img src="../static/images/features/search.png" alt="search"></img>
                   <h1>Unchargeable for Transfer</h1>
                 </div>
                 {/* </div> */}
