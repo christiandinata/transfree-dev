@@ -1316,6 +1316,7 @@ class Dashboard extends React.Component {
             background: none;
             border: none;
             text-transform: uppercase;
+            width: 200px;
           }
           .dropdown-button:active,
           .dropdown-button:focus {
