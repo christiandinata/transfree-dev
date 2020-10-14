@@ -367,7 +367,7 @@ class Index extends React.Component {
 
                   </div>
 
-                  <div style={{ textAlign: "right" }}>
+                  <div style={{ textAlign: "right", height: "0px",marginRight: "30px"}}>
                     <img onClick={
 
                       (this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr') ?
@@ -614,7 +614,7 @@ class Index extends React.Component {
                   </div>
                 </div>
                 <div className="row note" style={{ width: "90%", marginLeft: "auto", marginRight: "auto", float: "center", textAlign: "center" }}>
-                  <p style={{ maxWidth: "100%", marginBottom: "0", color: "#FFFFFF", fontSize: 12 }}>Your transfer will be processed immediately.
+                  <p style={{ maxWidth: "100%", marginBottom: "0", color: "#FFFFFF", fontSize: 12, marginTop: "15px" }}>Your transfer will be processed immediately.
                   The recipient will get the money in next working day. </p>
                   {/*<span className="received-on">24 hours</span>*/}
                 </div>
@@ -892,11 +892,11 @@ class Index extends React.Component {
           box-shadow: 0 2px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
           height:auto;
           font-size:11px;
-          padding:1px 20px 1px 20px;
-          margin-top:4px;
-          background-color: rgba(0,0,0,0.4);
-          border-radius: 12px;
-         
+          width: 100%;
+          padding: 1px 30px 1px 30px;
+          box-sizing: border-box;
+          margin-top: 30px;
+          background-color: rgb(31,52,90);
         }
       h2,h1,h3{
         color:#FFFFFF;
@@ -1174,7 +1174,7 @@ class Index extends React.Component {
           }
           
           .converter-container {
-            padding: 15px 20px 23px 20px;
+            padding: 15px 0px 23px 0px;
             background: #354E7A;
             box-shadow: 0 10px 30px 0 rgba(0,0,0,0.30);
             border-radius: 30px;
@@ -1190,6 +1190,8 @@ class Index extends React.Component {
             display: flex;
             background-color: #FFFFFF;
             border-radius: 15px;
+            margin-left: 20px;
+            margin-right: 20px;
           }
           .money-input {
             display: flex;
@@ -1222,7 +1224,10 @@ class Index extends React.Component {
             border: 1px solid #eaeaea;
           }
           .source-container {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+          }
+          .destination-container {
+            margin-top: 15px;
           }
           .currency-from {
             display: flex;
@@ -1403,6 +1408,7 @@ class Index extends React.Component {
           .dropdown-menu {
             position: absolute;
             min-width: 300px;
+            max-width: 300px;
             transform: translate3d(0px, 0px, 0px);
             z-index: 1000;
             display: none;
