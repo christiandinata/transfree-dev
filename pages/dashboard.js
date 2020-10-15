@@ -1,4 +1,4 @@
-import Menu from '../components/menu.js';
+  import Menu from '../components/menu.js';
 import Header from '../components/header.js';
 import Footer from '../components/footer.js';
 import Link from 'next/link';
@@ -615,7 +615,7 @@ class Dashboard extends React.Component {
                   </div>
                 </div>
                 <div className="row note" style={{ width: "90%", marginLeft: "auto", marginRight: "auto", float: "center", textAlign: "center" }}>
-                  <p style={{ maxWidth: "100%", marginBottom: "0", color: "#FFFFFF", fontSize: 12 }}>Your transfer will be processed immediately.
+                  <p style={{ maxWidth: "100%", marginBottom: "0", color: "#FFFFFF", fontSize: 12, marginTop:"15px" }}>Your transfer will be processed immediately.
                   The recipient will get the money in next working day. </p>
                   {/*<span className="received-on">24 hours</span>*/}
                 </div>
@@ -1057,6 +1057,8 @@ class Dashboard extends React.Component {
             display: flex;
             background-color: #FFFFFF;
             border-radius: 15px;
+            margin-left: 20px;
+            margin-right: 20px;
           }
           .money-input {
             display: flex;
@@ -1273,6 +1275,7 @@ class Dashboard extends React.Component {
           .dropdown-menu {
             position: absolute;
             min-width: 300px;
+            max-width: 300px;
             transform: translate3d(0px, 0px, 0px);
             z-index: 1000;
             display: none;
@@ -1316,6 +1319,7 @@ class Dashboard extends React.Component {
             background: none;
             border: none;
             text-transform: uppercase;
+            width: 200px;
           }
           .dropdown-button:active,
           .dropdown-button:focus {
