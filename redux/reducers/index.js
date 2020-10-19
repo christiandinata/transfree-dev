@@ -12,9 +12,9 @@ import fxMarginReducer from './fxMarginReducer';
 import checkReducer from './checkReducer';
 import complaintReducer from './complaintReducer';
 import profileReducer from './profileReducer';
-
 import donasiReducer from './donasiReducer';
 import initialDataUser from './initialDataReducer';
+import notificationReducer from './notificationReducer'
 
 
 const rootReducer = combineReducers({
@@ -25,6 +25,7 @@ const rootReducer = combineReducers({
   rate: rateReducer,
   order: orderReducer,
   summary: summaryReducer,
+  notification: notificationReducer,
   va: vaReducer,
   photo: photoReducer,
   fx: fxMarginReducer,
