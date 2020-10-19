@@ -6,7 +6,7 @@ import {
 import { API } from '../../config';
 import { getCookie } from '../../utils/cookie';
 
-
+//Veteran Affairs??
 const generateVA = (merchantId, merchantRefCode, secretWord, custName, custEmail, totalAmount,req) => {
   return (dispatch) => {
     axios.post(`${API}/generateVA`, {

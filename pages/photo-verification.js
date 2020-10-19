@@ -7,6 +7,7 @@ import {useDropzone} from 'react-dropzone';
 import {getCookie} from '../utils/cookie';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
+//Pengaturan foto
 const thumbsContainer = {
     display: 'flex',
     flexDirection: 'row',
@@ -108,7 +109,7 @@ function StyledDropzone(props) {
         isDragActive,
         isDragReject
     ]);
-
+//Untuk mengunggah foto
     return (
         <div className='container'>
             <div {...getRootProps({style})}>
@@ -167,7 +168,7 @@ class PhotoVerification extends React.Component {
             'uploadPhoto'
         );
     }
-
+//Menampilkan tulisan dibawah
     render() {
         return (
             <div>
@@ -261,6 +262,7 @@ const mapStateToProps = (state) => {
     }
 };
 
+//Mengirimkan photo verification
 export default connect(
     mapStateToProps,
     actions

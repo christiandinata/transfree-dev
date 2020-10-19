@@ -2,6 +2,8 @@ import Header from '../components/header.js';
 import Menu from '../components/menu.js';
 import Footer from '../components/footer.js';
 import Link from 'next/link';
+
+//Component untuk menjelaskan tentang donasi corona
 const About = () => (
   <div>
     <Header />

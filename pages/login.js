@@ -5,6 +5,8 @@ import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+
+//Component untuk login
 const eye = <FontAwesomeIcon icon={faEye} />;
 
 class Login extends React.Component {
@@ -46,7 +48,7 @@ class Login extends React.Component {
     return (
       <AuthLayout>
         <div className="logo">
-          <Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>
+          <Link href="/"><a><img src="../static/images/transfree-logo.png" alt="Logo"/></a></Link>
         </div>
         <div className={"error-container "+(this.props.errorMessage != '' && this.props.errorMessage != undefined ? "error-show" : "") }>
           {this.props.errorMessage}

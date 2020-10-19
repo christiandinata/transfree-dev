@@ -2,6 +2,7 @@ import Header from '../components/header.js';
 import Menu from '../components/menu.js';
 import Footer from '../components/footer.js';
 
+//Menampilkan tulisan dibawah
 const Terms = () => (
   <div>
     <Header />
@@ -90,4 +91,5 @@ const Terms = () => (
   </div>
 );
 
+//Mengirimkan terms
 export default Terms;

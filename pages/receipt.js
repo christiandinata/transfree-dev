@@ -5,13 +5,14 @@ import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import NumberFormat from 'react-number-format';
 
+//Menampilkan tulisan-tulisan dibawah dengan style
 const ReceiptLayout = (props) => {
   return (
     <div>
       <Header />
       <div className="container">
         <div className="logo">
-          <Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>
+          <Link href="/"><a><img src="../static/images/transfree-logo.png" alt="Logo"/></a></Link>
         </div>
 
         <h2>Transfer Confirmation</h2>
@@ -99,6 +100,7 @@ const ReceiptLayout = (props) => {
   )
 
 }
+//Menerima argumen dari luar
 class Receipt extends React.Component {
   constructor({ props }) {
     super(props);
@@ -124,4 +126,5 @@ const mapStateToProps = (state) => {
   }
 };
 
+//Mengirimkan reciept
 export default connect(mapStateToProps,actions)(Receipt);

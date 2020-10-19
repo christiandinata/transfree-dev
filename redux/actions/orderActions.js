@@ -9,7 +9,7 @@ import {
 import { API } from '../../config';
 import { getCookie } from '../../utils/cookie';
 
-
+//adding new order
 const addOrder = ({ uid, senderName, senderEmail, senderPhone, rate, fromCurrency, toCurrency, fromAmount, toAmount,
   email, name, bankName, bankAccountNumber, accountNumber, sortcode, iban, swift, routingNumber, bsbCode, paymentMethod, isSaveRecipient }, type) => {
   if (type !== 'addOrder') {

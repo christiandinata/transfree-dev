@@ -2,19 +2,23 @@ import { connect } from 'react-redux';
 import actions from '../../../redux/actions'
 
 class UserDetailPopUp extends React.Component{
+  // Menerima argumen luar: text, user, photo
   constructor(props){
     super(props);
   }
 
+  // Menampilan foto dari user saat component akan diload
   componentWillMount() {
     this.props.getPhoto(this.props.user._id, 'getPhoto');
   }
 
   render(){
     return(
+      //Menampilkan popup
       <div className="popup" onClick={this.props.closePopUp}>
         <div className="popupcontainer">
           <h2>{this.props.text}</h2>
+          {/* Menampilkan data user  */}
           <div className="content">
             ID Name &#9; : {this.props.user.fullname} <br></br>
             ID Number &#9; : {this.props.user.idNumber} <br></br>
@@ -23,11 +27,11 @@ class UserDetailPopUp extends React.Component{
             Birthdate &#9; : {this.props.user.dob} <br></br>
             ID Photo &#9; :<br></br>
               {this.props.photo.photoData ?
-                <img className="photoId" src={this.props.photo.photoData.photoId}></img> : 'ID Photo Not Available'
+                <img className="photoId" alt="Photo ID" src={this.props.photo.photoData.photoId}></img> : 'ID Photo Not Available'
               }<br></br>
             Face Photo &#9; :<br></br>
               {this.props.photo.photoData ?
-                <img className="photoFace" src={this.props.photo.photoData.photoFace}></img> : 'Face Photo Not Available'
+                <img className="photoFace" alt="Photo Face" src={this.props.photo.photoData.photoFace}></img> : 'Face Photo Not Available'
               }<br></br>
           </div>
           <button className="btn-primary closebutton" onClick={this.props.closePopUp}>Close</button>
@@ -91,6 +95,7 @@ class UserDetailPopUp extends React.Component{
   }
 }
 
+//Memunculkan pop up foto
 const mapStateToProps = (state) => {
   return {
     photo: state.photo,

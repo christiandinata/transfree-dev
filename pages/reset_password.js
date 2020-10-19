@@ -5,9 +5,11 @@ import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+//Menerima argumen dari luar
 class ResetPassword extends React.Component {
   constructor({ props }) {
     super(props);
+    //Mendeklarasikan state
     this.state = {
       newPassword: '',
       verifyPassword: '',
@@ -23,7 +25,7 @@ class ResetPassword extends React.Component {
   componentDidMount() {
     this.setState({token: this.props.token});
   }
-
+//Mengumpulkan state react
   handleSubmit(e) {
     e.preventDefault();
     this.props.resetPassword(
@@ -31,12 +33,12 @@ class ResetPassword extends React.Component {
       'resetPassword'
     );
   }
-
+//Menampilkan tulisan dan gambar dibawah
   render() {
     return (
       <AuthLayout>
         <div className="logo">
-          <img src="../static/images/transfree-logo.png"/>
+          <img src="../static/images/transfree-logo.png" alt="Logo"/>
         </div>
         <h1>Reset password</h1>
         <div className={"error-container "+(this.props.errorMessage != '' && this.props.errorMessage != undefined ? "error-show" : "") }>
@@ -90,5 +92,5 @@ const mapStateToProps = (state) => {
     successMessage: state.authentication.successMessage
   }
 };
-
+//Mengirimkan reset password
 export default connect(mapStateToProps,actions)(ResetPassword);

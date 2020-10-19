@@ -11,6 +11,9 @@ import CreateProfile from '../components/new-user/CreateProfile';
 import UploadPhoto from '../components/new-user/UploadPhoto';
 import userActions from '../redux/actions/userActions';
 import '../styles/new-user.css';
+
+//Component untuk mengupload foto
+
 class FillPhoto extends React.Component{
     render(){
         return(

@@ -136,7 +136,7 @@ export const deauthenticate = () => {
     dispatch({type: DEAUTHENTICATE});
   };
 };
-
+//Forget account
 export const forgot = ({ email }, type) => {
   if (type !== 'forgot') {
     throw new Error('Wrong API call!');
@@ -155,7 +155,7 @@ export const forgot = ({ email }, type) => {
       });
   };
 };
-
+//call an API to store new password
 export const resetPassword = ({ newPassword, verifyPassword, token }, type) => {
   if (type !== 'resetPassword') {
     throw new Error('Wrong API call!');

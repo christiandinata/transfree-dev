@@ -18,15 +18,15 @@ function BankOption(props) {
       <p className="instruction">Please select the bank below:</p>
       <ul>
         {
-        // <li onClick={() => props.generateVA('bni')}><img src="../static/images/bank_logos/bni.png"/> <span>Bank BNI</span></li>
+        // <li onClick={() => props.generateVA('bni')}><img src="../static/images/bank_logos/bni.png" alt="BNI"/> <span>Bank BNI</span></li>
         // <li onClick={() => props.generateVA('mandiri')}><img src="../static/images/bank_logos/mandiri.png"/> <span>Bank Mandiri</span></li>
         // <li onClick={() => props.generateVA('maybank')}><img src="../static/images/bank_logos/maybank.png"/> <span>Maybank</span></li>
         // <li onClick={() => props.generateVA('permata')}><img src="../static/images/bank_logos/permata.png"/> <span>Permata Bank</span></li>
         // <li onClick={() => props.generateVA('sinarmas')}><img src="../static/images/bank_logos/sinarmas.png"/> <span>Bank Sinarmas</span></li>
         }
-        <li onClick={() => props.transferBankBNI('bni')}><img src="../static/images/bank_logos/bni.png"/> <span>Bank BNI</span></li>
-        <li onClick={() => props.transferBankBCA('bca')}><img src="../static/images/bank_logos/bca.png"/> <span>Bank BCA</span></li>
-        <li onClick={() => props.transferBankMandiri('mandiri')}><img src="../static/images/bank_logos/mandiri.png"/> <span>Bank Mandiri</span></li>
+        <li onClick={() => props.transferBankBNI('bni')}><img src="../static/images/bank_logos/bni.png" alt="BNI"/> <span>Bank BNI</span></li>
+        <li onClick={() => props.transferBankBCA('bca')}><img src="../static/images/bank_logos/bca.png" alt="BCA"/> <span>Bank BCA</span></li>
+        <li onClick={() => props.transferBankMandiri('mandiri')}><img src="../static/images/bank_logos/mandiri.png" alt="Mandiri" <span>Bank Mandiri</span></li>
       </ul>
 
       <style jsx>{`

@@ -1,6 +1,7 @@
 import Header from '../components/header.js';
 import Link from 'next/link';
 
+//Menampilkan tulisan dibawah
 const AccountPending = () => (
   <div>
     <Header />
@@ -56,4 +57,5 @@ const AccountPending = () => (
   </div>
 )
 
+//Mengirimkan accountpending
 export default AccountPending
