@@ -114,7 +114,7 @@ function CreateProfile (props) {
           </a>
         </div>
         <div className='create-profile-profile-picture'>
-          <img src='../../static/images/profile.svg' />
+          <img src='../../static/images/profile.svg' alt="Profile"/>
         </div>
       </div>
       <div className='create-profile-form-body'>

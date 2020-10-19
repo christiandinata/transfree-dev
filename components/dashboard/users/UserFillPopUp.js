@@ -83,7 +83,7 @@ class UserFillPopUp extends React.Component{
           <h2>{this.props.text}</h2>
           <div className="content">
             {this.props.photo.photoData ?
-                <img className="photoId" src={this.props.photo.photoData.photoId}></img> : 'ID Photo Not Available'
+                <img className="photoId" alt="Photo ID" src={this.props.photo.photoData.photoId}></img> : 'ID Photo Not Available'
             }<br></br>
           {/* Memasukkan data diri  */}
            <form>

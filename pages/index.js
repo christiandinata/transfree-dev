@@ -275,15 +275,15 @@ class Index extends React.Component {
               {/* <div style={{marginTop:40}}>
                
                 <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank">
-                <img src="../static/images/appstore.png"/></a>
+                <img src="../static/images/appstore.png" alt="appstore"/></a>
                 <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
-                <img src="../static/images/playstore.png" style={{marginLeft:20}}/></a>
+                <img src="../static/images/playstore.png" style={{marginLeft:20}} alt="playstore"/></a>
                 
               </div> */}
               {/* <div className="desktop">
                 <div className="fixed-btn">
                   <a href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree" target="_blank">
-                  <img style={{width: "75%",height:"75%", marginTop: "13%",zIndex:999}} src="../static/images/wa-logo.png"/></a>
+                  <img style={{width: "75%",height:"75%", marginTop: "13%",zIndex:999}} src="../static/images/wa-logo.png" alt="whatsapp"></a>
                 </div>
               </div> */}
               {/* <div className="images">
@@ -308,7 +308,7 @@ class Index extends React.Component {
               <div className="desktop" style={{ marginTop: 60 }} >
                 <div className="fixed-btn">
                   <a href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree" target="_blank">
-                    <img style={{ width: "75%", height: "75%", marginTop: "13%", zIndex: 999 }} src="../static/images/wa-logo.png" /></a>
+                    <img style={{ width: "75%", height: "75%", marginTop: "13%", zIndex: 999 }} src="../static/images/wa-logo.png" alt="whatsapp"/></a>
                 </div>
               </div>
               <div className="converter-container" >

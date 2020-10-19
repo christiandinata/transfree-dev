@@ -9,9 +9,9 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
     <div className="container">
       <div id="menuToggle">
         <div className="main-cta">
-          <a href="/" ><img style={{height:"30px"}} src="../static/images/transfree-logo.png"/></a>
+          <a href="/" ><img style={{height:"30px"}} src="../static/images/transfree-logo.png" alt="Logo"/></a>
           {!isAuthenticated && <Link href="/login"><a className="btn-secondary">Log in</a></Link>}
-          {isAuthenticated && <li><a href="/user-profile"><img className="profile-pic" src="../static/images/navbar/profile.png"/></a></li>}
+          {isAuthenticated && <li><a href="/user-profile"><img className="profile-pic" alt="profile-pic" src="../static/images/navbar/profile.png"/></a></li>}
         </div>
         <input type="checkbox" />
 
@@ -53,7 +53,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username}) => (
           {!isAuthenticated && <Link href="/signup"><a id="signup" className="btn-primary">Sign Up</a></Link>}
 
           {isAuthenticated && <li><Link href="/user-profile"><a id="profile">{username}</a></Link></li>}
-          {isAuthenticated && <li><a href="/user-profile"><img className="profile-pic" src="../static/images/navbar/profile.png"/></a></li>}
+          {isAuthenticated && <li><a href="/user-profile"><img className="profile-pic" src="../static/images/navbar/profile.png" alt="Profile"/></a></li>}
 
         </div>
       </div>

@@ -25,12 +25,12 @@ class PopupUpload extends React.Component {
                     {/* Bagian foto kartu identitas  */}
                     <div className="popup-left">
                         <h1>Id Card Example</h1>
-                        <img src="../static/images/Sign Up ASSET WEB/ktp.png"></img>
+                        <img src="../static/images/Sign Up ASSET WEB/ktp.png" alt="KTP"></img>
                     </div>
                     {/* Bagian foto diri */}
                     <div className="popup-right">
                         <h1>Selfie with the ID Card Example</h1>
-                        <img src="../static/images/Sign Up ASSET WEB/selfie.png"></img>
+                        <img src="../static/images/Sign Up ASSET WEB/selfie.png" alt="Selfie"></img>
                     </div>
 
                 </div>

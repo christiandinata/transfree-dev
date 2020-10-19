@@ -11,11 +11,11 @@ const AuthLayout = ({ children }) => (
       </div>
       <div className="right">
         <div className="background-top">
-            <img src="../static/images/transfree-logo.png"></img> 
+            <img src="../static/images/transfree-logo.png" alt="Logo"></img> 
         </div>
         {children}
         <div className="background-bottom">
-            <img src="../static/images/features/setengah-lingkaran.png"></img> 
+            <img src="../static/images/features/setengah-lingkaran.png" alt="Background"></img> 
         </div>
       </div>
     </div>

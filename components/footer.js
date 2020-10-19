@@ -35,9 +35,9 @@ const Footer = () => (
         <div className="footer-item" >
           <h3>Follow Us On</h3>
           <ul>
-            <li><a href="https://www.instagram.com/transfree_id/?hl=en" target="blank"><img className="img" src="../static/images/instagram.png"></img> </a></li>
-            <li><a href="https://www.facebook.com/transfree.id.9" target="blank"><img className="img" src="../static/images/facebook.png"></img></a></li>
-            <li><a href="https://www.youtube.com/channel/UCGZ9uWFrBSAKwh6YE4q2hyA/videos" target="_blank"><img className="img" src="../static/images/youtube.png"></img></a></li>
+            <li><a href="https://www.instagram.com/transfree_id/?hl=en" target="blank"><img className="img" src="../static/images/instagram.png" alt="Instagram"></img> </a></li>
+            <li><a href="https://www.facebook.com/transfree.id.9" target="blank"><img className="img" src="../static/images/facebook.png" alt="facebook"></img></a></li>
+            <li><a href="https://www.youtube.com/channel/UCGZ9uWFrBSAKwh6YE4q2hyA/videos" target="_blank"><img className="img" src="../static/images/youtube.png" alt="Youtube"></img></a></li>
             {/**
             <li><Link ><a href="https://www.instagram.com/transfree_id/?hl=en" target="_blank">Instagram</a></Link></li>
             <li><Link ><a href="#" target="_blank">Facebook</a></Link></li>
@@ -64,7 +64,7 @@ const Footer = () => (
         </div>
         <div className="footer-item-collab" >
 	  <h3>License</h3>
-          <img src="../static/images/partners/bank-indonesia.png"></img>
+          <img src="../static/images/partners/bank-indonesia.png" alt="bank-indonesia"></img>
         </div>
       </div>
     </div>

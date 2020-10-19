@@ -23,13 +23,15 @@ class UserDetailPopUp extends React.Component{
             ID Name &#9; : {this.props.user.fullname} <br></br>
             ID Number &#9; : {this.props.user.idNumber} <br></br>
             ID Type &#9; : {this.props.user.idType} <br></br>
+            Birthplace &#9; : {this.props.user.pob} <br></br>
+            Birthdate &#9; : {this.props.user.dob} <br></br>
             ID Photo &#9; :<br></br>
               {this.props.photo.photoData ?
-                <img className="photoId" src={this.props.photo.photoData.photoId}></img> : 'ID Photo Not Available'
+                <img className="photoId" alt="Photo ID" src={this.props.photo.photoData.photoId}></img> : 'ID Photo Not Available'
               }<br></br>
             Face Photo &#9; :<br></br>
               {this.props.photo.photoData ?
-                <img className="photoFace" src={this.props.photo.photoData.photoFace}></img> : 'Face Photo Not Available'
+                <img className="photoFace" alt="Photo Face" src={this.props.photo.photoData.photoFace}></img> : 'Face Photo Not Available'
               }<br></br>
           </div>
           <button className="btn-primary closebutton" onClick={this.props.closePopUp}>Close</button>

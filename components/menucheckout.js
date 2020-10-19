@@ -6,7 +6,7 @@ const MenuCheckout = () => (
     <div className="container">
       <div className="header-container">
         <div className="logo">
-            <Link href="/myaccount"><a><img src="../static/images/transfree-logo.png"/></a></Link>
+            <Link href="/myaccount"><a><img src="../static/images/transfree-logo.png" alt="logo"/></a></Link>
         </div>
         <div className="header-menu">
         </div>
