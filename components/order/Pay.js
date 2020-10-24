@@ -26,7 +26,7 @@ function BankOption(props) {
         }
         <li onClick={() => props.transferBankBNI('bni')}><img src="../static/images/bank_logos/bni.png" alt="BNI"/> <span>Bank BNI</span></li>
         <li onClick={() => props.transferBankBCA('bca')}><img src="../static/images/bank_logos/bca.png" alt="BCA"/> <span>Bank BCA</span></li>
-        <li onClick={() => props.transferBankMandiri('mandiri')}><img src="../static/images/bank_logos/mandiri.png" alt="Mandiri" <span>Bank Mandiri</span></li>
+        <li onClick={() => props.transferBankMandiri('mandiri')}><img src="../static/images/bank_logos/mandiri.png" alt="Mandiri"/> <span>Bank Mandiri</span></li>
       </ul>
 
       <style jsx>{`
