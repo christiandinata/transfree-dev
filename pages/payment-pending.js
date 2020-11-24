@@ -2,6 +2,7 @@ import Header from '../components/header.js';
 import MenuCheckout from '../components/menucheckout.js';
 import Link from 'next/link';
 
+//Menampilkan tulisan dan gambar dibawah
 const Pay = () => (
   <div>
     <Header />
@@ -144,4 +145,5 @@ const Pay = () => (
   </div>
 )
 
+//Mengirimkan pay
 export default Pay

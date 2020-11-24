@@ -5,6 +5,7 @@ import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+//Component yang ditampilkan apabila user lupa detail akun selain password
 class Forgot extends React.Component {
   constructor({ props }) {
     super(props);
@@ -30,7 +31,7 @@ class Forgot extends React.Component {
     return (
       <AuthLayout>
         <div className="logo">
-          <Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>
+          <Link href="/"><a><img src="../static/images/transfree-logo.png" alt="Logo"/></a></Link>
         </div>
         <div className="box-title">Account Recovery</div>
         <form className="form-container" onSubmit={this.handleSubmit.bind(this)}>

@@ -9,6 +9,7 @@ import { getCookie } from '../utils/cookie';
 import PhoneInput from 'react-phone-number-input';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+//Component update nomor HP
 class Phone extends React.Component {
   constructor({ props }) {
     super(props);

@@ -4,7 +4,7 @@ import {
   DONASI_SUCCESS
 } from '../types';
 import { API } from '../../config';
-
+//Submit Donation
 const submitDonation = ({email, donatur, price}, type) => {
     if(type !== 'order'){
         throw new Error('Wrong API Call!!');

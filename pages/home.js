@@ -11,7 +11,7 @@ import AccountLayout from '../components/AccountLayout';
 import ConfirmationLayout from './confirmation-layout.js';
 import Dashboard from './dashboard.js';
 
-
+//Halaman yang ditampilkan setelah user signup dan belum verifikasi
 class Popup extends React.Component {
   render() {
     return (

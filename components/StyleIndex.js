@@ -1,5 +1,7 @@
 import Head from 'next/head';
 
+
+//Kumpulan styling
 const StyleIndex = () => (
   <div>
     <Head>

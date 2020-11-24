@@ -22,6 +22,8 @@ import '../styles/rowapplicationmobile.css';
 import '../styles/testimonialdesktop.css';
 import '../styles/testimonialmobile.css';
 
+
+//Index untuk homepage kalau belum login
 class Index extends React.Component {
 
   constructor({ props }) {
@@ -273,15 +275,15 @@ class Index extends React.Component {
               {/* <div style={{marginTop:40}}>
                
                 <a href="https://apps.apple.com/us/app/transfree/id1493107400?ls=1" target="_blank">
-                <img src="../static/images/appstore.png"/></a>
+                <img src="../static/images/appstore.png" alt="appstore"/></a>
                 <a href="https://play.google.com/store/apps/details?id=com.transfree.id" target="_blank">
-                <img src="../static/images/playstore.png" style={{marginLeft:20}}/></a>
+                <img src="../static/images/playstore.png" style={{marginLeft:20}} alt="playstore"/></a>
                 
               </div> */}
               {/* <div className="desktop">
                 <div className="fixed-btn">
                   <a href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree" target="_blank">
-                  <img style={{width: "75%",height:"75%", marginTop: "13%",zIndex:999}} src="../static/images/wa-logo.png"/></a>
+                  <img style={{width: "75%",height:"75%", marginTop: "13%",zIndex:999}} src="../static/images/wa-logo.png" alt="whatsapp"></a>
                 </div>
               </div> */}
               {/* <div className="images">
@@ -306,7 +308,7 @@ class Index extends React.Component {
               <div className="desktop" style={{ marginTop: 60 }} >
                 <div className="fixed-btn">
                   <a href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree" target="_blank">
-                    <img style={{ width: "75%", height: "75%", marginTop: "13%", zIndex: 999 }} src="../static/images/wa-logo.png" /></a>
+                    <img style={{ width: "75%", height: "75%", marginTop: "13%", zIndex: 999 }} src="../static/images/wa-logo.png" alt="whatsapp"/></a>
                 </div>
               </div>
               <div className="converter-container" >
@@ -367,7 +369,7 @@ class Index extends React.Component {
 
                   </div>
 
-                  <div style={{ textAlign: "right" }}>
+                  <div style={{ textAlign: "right", height: "0px",marginRight: "30px"}}>
                     <img onClick={
 
                       (this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr') ?
@@ -614,7 +616,7 @@ class Index extends React.Component {
                   </div>
                 </div>
                 <div className="row note" style={{ width: "90%", marginLeft: "auto", marginRight: "auto", float: "center", textAlign: "center" }}>
-                  <p style={{ maxWidth: "100%", marginBottom: "0", color: "#FFFFFF", fontSize: 12 }}>Your transfer will be processed immediately.
+                  <p style={{ maxWidth: "100%", marginBottom: "0", color: "#FFFFFF", fontSize: 12, marginTop: "15px" }}>Your transfer will be processed immediately.
                   The recipient will get the money in next working day. </p>
                   {/*<span className="received-on">24 hours</span>*/}
                 </div>
@@ -710,7 +712,7 @@ class Index extends React.Component {
               </div>
             </div>
             <div className="fiture-mobile-message">
-              <h1 style={{ fontWeight: 400 }}>Internasional <span style={{ fontWeight: 900 }}> Money</span></h1>
+              <h1 style={{ fontWeight: 400 }}>International <span style={{ fontWeight: 900 }}> Money</span></h1>
               <h1 style={{ marginTop: -30 }}>Transfer <span style={{ fontWeight: 400 }}>feels like</span> local</h1>
               <h2 style={{ textAlign: "center", marginLeft: 20, marginTop: -10, fontSize: "13pt", color: "#000000" }}>Send. Arrives. Pick-up in a day</h2>
             </div>
@@ -892,11 +894,11 @@ class Index extends React.Component {
           box-shadow: 0 2px 3px 0 rgba(0,0,0,0.08), 0 4px 6px 0 rgba(21,35,60,0.15);
           height:auto;
           font-size:11px;
-          padding:1px 20px 1px 20px;
-          margin-top:4px;
-          background-color: rgba(0,0,0,0.4);
-          border-radius: 12px;
-         
+          width: 100%;
+          padding: 1px 30px 1px 30px;
+          box-sizing: border-box;
+          margin-top: 30px;
+          background-color: rgb(31,52,90);
         }
       h2,h1,h3{
         color:#FFFFFF;
@@ -1174,7 +1176,7 @@ class Index extends React.Component {
           }
           
           .converter-container {
-            padding: 15px 20px 23px 20px;
+            padding: 15px 0px 23px 0px;
             background: #354E7A;
             box-shadow: 0 10px 30px 0 rgba(0,0,0,0.30);
             border-radius: 30px;
@@ -1190,6 +1192,8 @@ class Index extends React.Component {
             display: flex;
             background-color: #FFFFFF;
             border-radius: 15px;
+            margin-left: 20px;
+            margin-right: 20px;
           }
           .money-input {
             display: flex;
@@ -1222,7 +1226,10 @@ class Index extends React.Component {
             border: 1px solid #eaeaea;
           }
           .source-container {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+          }
+          .destination-container {
+            margin-top: 15px;
           }
           .currency-from {
             display: flex;
@@ -1403,6 +1410,7 @@ class Index extends React.Component {
           .dropdown-menu {
             position: absolute;
             min-width: 300px;
+            max-width: 300px;
             transform: translate3d(0px, 0px, 0px);
             z-index: 1000;
             display: none;
@@ -1446,6 +1454,7 @@ class Index extends React.Component {
             background: none;
             border: none;
             text-transform: uppercase;
+            width: 200px;
           }
           .dropdown-button:active,
           .dropdown-button:focus {

@@ -4,7 +4,7 @@ import {
   FEEDBACK_SUCCESS
 } from '../types';
 import { API } from '../../config';
-
+//Submit feedback
 const submitFeedback = ({name, service, details, contact}, type) => {
     if(type !== 'submitFeedback'){
         throw new Error('Wrong API Call!!');

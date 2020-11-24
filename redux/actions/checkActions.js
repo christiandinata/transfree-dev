@@ -11,7 +11,7 @@ import {
 import { API } from '../../config';
 import { getCookie } from '../../utils/cookie';
 
-
+//Adding new order
 const addOrder = ({ uid, senderName, senderEmail, senderPhone, rate, fromCurrency, toCurrency, fromAmount, toAmount,
   email, name, bankName, bankAccountNumber, accountNumber, sortcode, iban, swift, routingNumber, bsbCode, paymentMethod, isSaveRecipient }, type) => {
   if (type !== 'addOrder') {
@@ -59,7 +59,7 @@ const addOrder = ({ uid, senderName, senderEmail, senderPhone, rate, fromCurrenc
       });
   };
 };
-
+//get order by order id
 const getOrderById = (oid, type, req) => {
   if (type !== 'getOrderById') {
     throw new Error('Wrong API call!');
@@ -78,7 +78,7 @@ const getOrderById = (oid, type, req) => {
       });
   };
 };
-
+//get order by user id
 const getOrderByUid = (uid , type, req) => {
   if (type !== 'getOrderByUid') {
     throw new Error('Wrong API call!');
@@ -97,7 +97,7 @@ const getOrderByUid = (uid , type, req) => {
       });
   };
 };
-
+//get order by query
 const getOrderByQuery = (page, query, type) => {
 
   if (type !== 'getOrderByQuery') {
@@ -141,7 +141,7 @@ const getAllOrders = (page,type,req) => {
       });
   };
 };
-
+//get customer recent order
 const getCustomerSummary = (name, fromDate, toDate, type,req) => {
   if (type !== 'getOrderSummary') {
     throw new Error('Wrong API call!');
