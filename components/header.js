@@ -10,6 +10,7 @@ const Header = () => (
       <link rel="icon" href="../static/images/icon-logo.png"/>
       <link href="../static/misc/flag-icon-css/css/flag-icon.min.css" rel="stylesheet"/>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+      <meta name="description" content="International money transfer service to various worlds with a very cheap, fast and reliable process. Currently Transfree serves transfers to several currencies, such as: MYR (Malaysian Ringgit), GBP (British Pound Sterling), USD (US Dollar), AUD (Australian Dollar), EUR (European Euro), and HKD (Hongkong Dollar)"/>
 
     </Head>
     <style jsx global>{`
