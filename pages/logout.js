@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import actions from '../redux/actions';
 import React from 'react';
 
+//Componenet saat user logout
 class Logout extends React.Component {
   componentDidMount() {
     // Session is ended

@@ -13,13 +13,14 @@ import GlobalFunction from "../utils/globalFunction";
 import { onChangeToken, onChangeUser, onChangeUserEmailLogin, onChangeUserPasswordLogin } from "../redux/actions/authActions";
 import Axios from 'axios';
 
-
+//Menerima argumen dari luar
 class EditProfile extends React.Component {
     constructor(props) {
         super(props);
         // if (Platform.OS === 'android') {
         //     UIManager.setLayoutAnimationEnabledExperimental(true);
         // }
+        //Mendeklarasikan state react
         this.state = {
             emailUser: this.props.user.email ? this.props.user.email : "",
             emailUserError: '',
@@ -133,7 +134,7 @@ class EditProfile extends React.Component {
         })
       }
 
-
+//Mengumpulkan state react
       handleSubmit = event => {
         event.preventDefault();
         let urlFetch = ENV.API + `/${this.props.user._id}/user`
@@ -149,7 +150,7 @@ class EditProfile extends React.Component {
           })
       }
 
-
+//Untuk memperbarui info user
       updateUser = (e) => {
             let urlFetch = ENV.API + `/${this.props.user._id}/user`
             fetch(urlFetch,
@@ -221,7 +222,7 @@ class EditProfile extends React.Component {
          }
     
 
-
+//Menampilkan tulisan dibawah
     render() {
         
         return (

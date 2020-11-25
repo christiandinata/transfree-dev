@@ -2,6 +2,7 @@ import Header from '../components/header.js';
 import Menu from '../components/menu.js';
 import Footer from '../components/footer.js';
 
+//Untuk donasi
 const About = () => (
   <div>
     <Header />

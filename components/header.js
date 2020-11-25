@@ -1,5 +1,6 @@
 import Head from 'next/head';
 
+//Menampilkan tulisan yang berada di component head
 const Header = () => (
   <div>
     <Head>
@@ -489,5 +490,5 @@ const Header = () => (
     `}</style>
   </div>
 )
-
+//Mengirimkan header
 export default Header

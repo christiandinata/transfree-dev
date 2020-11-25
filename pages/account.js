@@ -9,11 +9,12 @@ import actions from '../redux/actions';
 import { getCookie } from '../utils/cookie';
 import moment from 'moment';
 
+//Setelah diapprove
 const ApprovedLayout = () => {
   return (
     <div className="content">
       <div className="big-icon">
-        <img src="../static/images/happy.svg"/>
+        <img src="../static/images/happy.svg" alt="Happy"/>
       </div>
       <h1>No transactions</h1>
       <p>You haven’t sent money using Transfree. Get started now and enjoy fast and cheap international money transfer. </p>
@@ -55,11 +56,12 @@ const ApprovedLayout = () => {
 
 }
 
+//Waiting Approve
 const PendingLayout = () => {
   return (
     <div className="content">
       <div className="big-icon">
-        <img src="../static/images/document.svg"/>
+        <img src="../static/images/document.svg" alt="Document"/>
       </div>
       <h1>Awaiting confirmation</h1>
       <p>We are now reviewing your account details. We will send you an email & WhatsApp message once the verification process is completed.</p>
@@ -117,7 +119,7 @@ class OrderItem extends React.Component {
     }
 
   }
-
+  //Riwayat Transaksi
 
   render() {
     return (
@@ -324,7 +326,7 @@ class OrderItem extends React.Component {
     )
   }
 }
-
+//Layout Riwayat Transaksi
 const OrderLayout = ({ordersList}) => {
   return (
     <div>
@@ -434,6 +436,7 @@ const OrderLayout = ({ordersList}) => {
   )
 }
 
+//Account Layout
 class Account extends React.Component {
   constructor({props}) {
     super(props);

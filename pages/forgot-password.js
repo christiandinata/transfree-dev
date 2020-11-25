@@ -6,6 +6,7 @@ import initialize from '../utils/initialize';
 import * as axios from "axios";
 import ENV from "../config";
 
+//Component yang ditampilkan saat user memilih opsi forgot password
 function Progress(props) {
     const items = []
 
@@ -99,6 +100,7 @@ class ForgotPassword extends React.Component {
         });
     }
 
+    //Verifikasi password baru
     handlePassword(event) {
         event.preventDefault();
         if (this.state.password !== '' &&
@@ -125,6 +127,7 @@ class ForgotPassword extends React.Component {
         }
     }
 
+    //Verifikasi untuk ganti password
     handleVerify(event) {
         event.preventDefault();
         document.querySelector('#text-number').style.display = 'none';
@@ -149,6 +152,7 @@ class ForgotPassword extends React.Component {
         });
     }
 
+    //Component untuk mengirimkan email
     handleEmailChange(event) {
         this.setState({email: event.target.value})
         document.querySelector('#text-send').style.display = 'none';
@@ -157,6 +161,7 @@ class ForgotPassword extends React.Component {
         document.querySelector('#button-send').style.display = 'none';
     }
 
+    //Componenet untuk mengirim ulang verification code
     handleResend() {
         axios.post(ENV.API + `/v1/sendotp`, {"email": this.state.email})
             .then(async (response) => {
@@ -343,7 +348,7 @@ class ForgotPassword extends React.Component {
           `}
                 </style>
                 <div className="logo">
-                    <Link href="/"><a><img src="../static/images/transfree-logo.png"/></a></Link>
+                    <Link href="/"><a><img src="../static/images/transfree-logo.png" alt="Logo"/></a></Link>
                 </div>
                 <div className="box-title">Account Recovery</div>
                 <form className="form-container" onKeyDown={(e) => {

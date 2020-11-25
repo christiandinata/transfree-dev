@@ -6,6 +6,9 @@ import initialize from '../utils/initialize';
 import GlobalFunction from '../utils/globalFunction'
 import { getCookie } from '../utils/cookie';
 import NumberFormat from 'react-number-format';
+
+//Untuk menu donasi Qurban. Apakah masih perlu? Sepertinya bisa direfactor
+
  class DonasiQurban extends React.Component{
     constructor(props){
         super(props)

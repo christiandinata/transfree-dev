@@ -17,7 +17,7 @@ class Profile extends React.Component{
         initialize(ctx);
         await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
       };
-
+//Menampilkan tulisan dibawah
     render(){
          const { phone,fullname, email, idType, idNumber, idName, gender, dob, pob, address } = this.props.users // menampung props yang telah diterima
         return(

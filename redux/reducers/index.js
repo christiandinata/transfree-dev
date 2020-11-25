@@ -16,7 +16,7 @@ import profileReducer from './profileReducer';
 import donasiReducer from './donasiReducer';
 import initialDataUser from './initialDataReducer';
 
-
+// describe reducer in this apps
 const rootReducer = combineReducers({
   authentication: authReducer,
   verify: verifyReducer,

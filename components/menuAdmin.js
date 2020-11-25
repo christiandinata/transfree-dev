@@ -4,6 +4,7 @@ import authActions from '../redux/actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 
+//Buat menampilkan menu bar apabila menggunakan akun admin (user, requests, orders, fx margin, dan customer summary)
 const MenuAdmin = ({deauthenticate}) => (
   <div className="row">
     <div className="container">
@@ -85,5 +86,5 @@ const MenuAdmin = ({deauthenticate}) => (
 )
 
 const mapStateToProps = (state) => {return {}}
-
+//Mengirim menu admin
 export default connect(mapStateToProps, authActions)(MenuAdmin);

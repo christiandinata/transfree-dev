@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import{Link}  from "react-router-dom"; 
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+
+//Sidebar untuk user
 export default class SideBar extends Component{
     constructor(){
         super()

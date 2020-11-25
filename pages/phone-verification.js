@@ -8,6 +8,7 @@ import { getCookie } from '../utils/cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AuthLayout from '../components/AuthLayout';
 
+//Verifikasi nomor handphone saat user register
 class PhoneVerification extends React.Component {
   constructor({ props }) {
     super(props);

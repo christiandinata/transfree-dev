@@ -3,7 +3,9 @@ import actions from '../../../redux/actions'
 
 class UserFillPopUp extends React.Component{
   constructor(props){
+    // Menerima argumen dari luar
     super(props);
+    // Deklarasi state
     this.state = {
         id : this.props.user._id,
         fullname : this.props.user.fullname,
@@ -16,7 +18,7 @@ class UserFillPopUp extends React.Component{
         dob : this.props.user.dob,
         address : this.props.user.address,
     }
-
+    
     this.updateUser = this.updateUser.bind(this);
     this.upgradeUser = this.upgradeUser.bind(this);
     this.validasiData = this.validasiData.bind(this);
@@ -38,7 +40,7 @@ class UserFillPopUp extends React.Component{
         })
     }
   }
-
+  //Periksa apakah user sudah memasukkan semua data yang diperlukan
   validasiData(){
     if (this.state.idNumber === undefined  && this.state.gender === undefined && this.state.pob === undefined && this.state.dob === undefined && this.state.address === undefined) {
       return false
@@ -47,6 +49,7 @@ class UserFillPopUp extends React.Component{
     }
   }
 
+  //Memasukkan data user ke DB
   updateUser(){
     let id = this.state.id;
     let fullname = this.state.fullname;
@@ -63,6 +66,7 @@ class UserFillPopUp extends React.Component{
     this.props.closePopUp();
   }
 
+  //Mengubah status user menjadi approved
   upgradeUser(){
     let uid = this.state.id;
 
@@ -79,9 +83,9 @@ class UserFillPopUp extends React.Component{
           <h2>{this.props.text}</h2>
           <div className="content">
             {this.props.photo.photoData ?
-                <img className="photoId" src={this.props.photo.photoData.photoId}></img> : 'ID Photo Not Available'
+                <img className="photoId" alt="Photo ID" src={this.props.photo.photoData.photoId}></img> : 'ID Photo Not Available'
             }<br></br>
-
+          {/* Memasukkan data diri  */}
            <form>
            <h4>ID Type</h4>
             <input
@@ -281,10 +285,12 @@ class UserFillPopUp extends React.Component{
   }
 }
 
+//Memunculkan foto yang diupload user
 const mapStateToProps = (state) => {
   return {
     photo: state.photo,
   }
 }
 
+//Memunculkan pop up foto yang diupload user
 export default connect(mapStateToProps, actions)(UserFillPopUp);

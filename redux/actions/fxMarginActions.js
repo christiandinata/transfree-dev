@@ -7,7 +7,7 @@ import {
 import { API } from '../../config';
 import { getCookie } from '../../utils/cookie';
 
-
+//Updating conversion rate
 const updateRates = ({base, upperMargin, lowerMargin, idrToGbpOos,gbpToIdrOos,idrToEurOos,eurToIdrOos}, type,req) => {
   if (type !== 'updateRates') {
     throw new Error('Wrong API call!');

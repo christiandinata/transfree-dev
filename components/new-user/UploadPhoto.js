@@ -14,7 +14,7 @@ function UploadPhoto (props) {
 
   function handleOnClickButton(e) {
     e.preventDefault()
-
+    //Cek apakah user sudah setuju dengan terms dan mengumpulkan foto
     if (!checkPhotoValid() || !checkTermsAgreed()) {
       return
     }
@@ -38,6 +38,7 @@ function UploadPhoto (props) {
     }
   }
 
+  //Periksa apakah foto sudah diupload
   function checkPhotoValid() {
     if (photoId === '' || photoFace === '') {
       setErrorMessage('Neither photo can be empty!')
@@ -46,6 +47,7 @@ function UploadPhoto (props) {
     return true
   }
 
+  //Periksa apakah Terms sudah disetujui
   function checkTermsAgreed() {
     if (!isTermsAgreed) {
       setErrorMessage('You can continue if you agree with our Terms and Condition!')
@@ -66,6 +68,7 @@ function UploadPhoto (props) {
       1. ID Card Picture (Passport/ KTP/ SIM. Make sure we can read the ID number clearly)<br></br>
       2. Selfie with the ID Card (Make sure we can read the ID number clearly)
       </p>
+      {/* Memberi kesempatan pada user untuk upload foto */}
       <div className='upload-photo-dropboxes-container'>
         <StyledDropzone title='Your ID Card' id='card' image='../static/images/Sign Up ASSET WEB/ktp.png' onDrop={ setPhotoId } />
         <StyledDropzone title='Your Selfie holding the ID Card' id='photo' image='../static/images/Sign Up ASSET WEB/selfie.png' onDrop={ setPhotoFace } />
@@ -96,6 +99,7 @@ function UploadPhoto (props) {
   )
 }
 
+//Memunculkan data user di pop up
 const mapStateToProps = (state) => {
   return {
     isInProgress: state.photo.inProgress,

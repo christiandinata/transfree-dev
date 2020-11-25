@@ -1,6 +1,8 @@
 import '../styles/components/MobilePopup.css';
+//Berisi tentang popup yang akan muncul pada mobile
 
 function MobilePopupConfirmation (props) {
+  //Untuk konfirmasi
   return (
     <div className='mobile-popup-confirmation'>
       <button className='mobile-popup-button mobile-popup-button-confirm' onClick={ props.onConfirm }>
@@ -11,6 +13,7 @@ function MobilePopupConfirmation (props) {
 }
 
 function MobilePopupChoice (props) {
+  //Untuk konfirmasi yang memiliki pilihan
   return (
     <div className='mobile-popup-choice'>
       <button className='mobile-popup-button mobile-popup-button-confirm' onClick={ props.onConfirm }>
@@ -24,6 +27,7 @@ function MobilePopupChoice (props) {
 }
 
 function MobilePopup (props) {
+  //component besar yang menampilkan salah satu dari dua component di atas sesuai kebutuhan
   return (
     <div className='mobile-popup-overlay'>
       <div className='mobile-popup-container'>

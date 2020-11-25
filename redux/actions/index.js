@@ -12,6 +12,7 @@ import complaintActions from './complaintActions';
 import donasiActions from './donasiActions'
 import profileActions from './profileActions'
 
+//exporting all action
 export default {
   ...authActions,
   ...verifyActions,

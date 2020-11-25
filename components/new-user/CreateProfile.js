@@ -21,7 +21,7 @@ function CreateProfile (props) {
   if (props.response && !props.errorMessage) {
     props.nextStep()
   }
-
+  //Function cek validitas nomer identitas
   function checkIdnumber(e) {
     if (e.target.value === '') {
       setIsIdNumberValid(false)
@@ -29,7 +29,7 @@ function CreateProfile (props) {
       setIsIdNumberValid(true)
     }
   }
-
+  //Function cek validitas tempat lahir
   function checkPob(e) {
     if (e.target.value === '') {
       setIsPobValid(false)
@@ -37,7 +37,7 @@ function CreateProfile (props) {
       setIsPobValid(true)
     }
   }
-
+  //Function cek validitas alamat
   function checkAddress(e) {
     if (e.target.value === '') {
       setIsAddressValid(false)
@@ -45,6 +45,7 @@ function CreateProfile (props) {
       setIsAddressValid(true)
     }
   }
+  
 
   function handleOnClickButton(e) {
     e.preventDefault()
@@ -52,7 +53,7 @@ function CreateProfile (props) {
     if (!checkIdDataValid()) {
       return
     }
-
+    //setelah data valid, data disimpan dalam profile
     props.createProfile({
         idType: idType,
         idNumber: idNumber,
@@ -66,6 +67,7 @@ function CreateProfile (props) {
     )
   }
 
+  //Pengecakan validitas data, disini hanya periksa apakah kosong atau tidak
   function checkIdDataValid() {
     let isValid = true
 
@@ -88,6 +90,7 @@ function CreateProfile (props) {
   }
 
   return(
+    // Menanyakan apakah user ingin mengisi profile sendiri atau tidak
     <Fragment>
       {
         isSkipPopupVisible
@@ -111,7 +114,7 @@ function CreateProfile (props) {
           </a>
         </div>
         <div className='create-profile-profile-picture'>
-          <img src='../../static/images/profile.svg' />
+          <img src='../../static/images/profile.svg' alt="Profile"/>
         </div>
       </div>
       <div className='create-profile-form-body'>
@@ -225,6 +228,7 @@ function CreateProfile (props) {
   )
 }
 
+//Memunculkan pop up data user
 const mapStateToProps = (state) => {
   return {
     isInProgress: state.profile.inProgress,
