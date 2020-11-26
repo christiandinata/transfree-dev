@@ -5,7 +5,7 @@ import MenuAdmin from '../../components/menuAdmin.js';
 import StyledDropzone from '../../components/StyledDropzone.js';
 import actions from '../../redux/actions';
 
-function Specialeventform (props) {
+function Event (props) {
   const [title, setTitle] = useState('')
   const [image, setImage] = useState('')
   
@@ -90,7 +90,7 @@ function Specialeventform (props) {
       }
 
         h1 {
-          margin: 100px auto 0;
+          margin: 10px auto 0;
         }
 
         .form-container {
@@ -165,4 +165,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, actions)(Specialeventform);
+export default connect(mapStateToProps, actions)(Event);

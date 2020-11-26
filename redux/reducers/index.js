@@ -15,6 +15,7 @@ import profileReducer from './profileReducer';
 import donasiReducer from './donasiReducer';
 import initialDataUser from './initialDataReducer';
 import notificationReducer from './notificationReducer'
+import eventReducer from './eventReducer'
 
 
 const rootReducer = combineReducers({
@@ -34,6 +35,7 @@ const rootReducer = combineReducers({
   initialDataUser: initialDataUser,
   donasi: donasiReducer,
   profile: profileReducer,
+  eventReducer: eventReducer
 });
 
 export default rootReducer;

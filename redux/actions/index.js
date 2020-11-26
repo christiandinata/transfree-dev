@@ -12,6 +12,7 @@ import complaintActions from './complaintActions';
 import donasiActions from './donasiActions'
 import profileActions from './profileActions'
 import notificationActions from './notificationActions';
+import eventActions from './eventActions'
 
 export default {
   ...authActions,
@@ -28,4 +29,5 @@ export default {
   ...donasiActions,
   ...profileActions,
   ...notificationActions,
+  ...eventActions
 }
