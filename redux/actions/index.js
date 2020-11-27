@@ -11,6 +11,8 @@ import checkActions from './checkActions';
 import complaintActions from './complaintActions';
 import donasiActions from './donasiActions'
 import profileActions from './profileActions'
+import notificationActions from './notificationActions';
+import eventActions from './eventActions'
 
 //exporting all action
 export default {
@@ -26,5 +28,7 @@ export default {
   ...checkActions,
   ...complaintActions,
   ...donasiActions,
-  ...profileActions
+  ...profileActions,
+  ...notificationActions,
+  ...eventActions
 }
