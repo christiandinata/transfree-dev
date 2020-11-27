@@ -5,13 +5,13 @@ import { getCookie } from '../../utils/cookie';
 
 const APIInfoAndSpecialEvent = 'v1/info';
 
-const createSpecialeventform = ({title, image}, type, req) => {    
+const createSpecialeventform = ({title, image, description}, type, req) => {    
     console.log(`Bearer ${getCookie('token',req)}`)
     if (type !== 'create') {
         throw new Error('Wrong API call!');
     }
     return (dispatch) => {
-        axios.post(`${API}/${APIInfoAndSpecialEvent}/${type}`, {title, image}, {
+        axios.post(`${API}/${APIInfoAndSpecialEvent}/${type}`, {title, image, description}, {
             headers: {
                 Authorization: `Bearer ${getCookie('token',req)}`
             } 

@@ -8,6 +8,7 @@ import actions from '../../redux/actions';
 function Event (props) {
   const [title, setTitle] = useState('')
   const [image, setImage] = useState('')
+  const [description, setDescription] = useState('')
   
 
   function handleSubmitButton(e) {
@@ -16,6 +17,7 @@ function Event (props) {
     props.createSpecialeventform({
       title: title,
       image: image,
+      description: description
     }, 'create')
   }
 
@@ -41,6 +43,15 @@ function Event (props) {
               <StyledDropzone
                 id='image'
                 onDrop={ setImage }
+              />
+
+              <label htmlFor="title">Description</label>
+              <input
+                type="text"
+                id="description"
+                placeholder="Description"
+                value={ description }
+                onChange={ (e) => setDescription(e.target.value) }
               />
 
 
