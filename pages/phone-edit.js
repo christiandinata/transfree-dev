@@ -25,6 +25,7 @@ class Phone extends React.Component {
         await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
       }
     }
+    return {};
   }
 
 

@@ -28,6 +28,7 @@ class FillPhoto extends React.Component{
 FillPhoto.getInitialProps = async (ctx) => {
     initialize(ctx)
     await ctx.store.dispatch(userActions.getUser(getCookie('_id', ctx.req), 'user', ctx.req))
+    return {};
   }
   
   const mapStateToProps = (state) => {

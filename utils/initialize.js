@@ -10,6 +10,7 @@ export default function(ctx) {
       ctx.store.dispatch(authActions.reauthenticate(getCookie('token', ctx.req)));
     }
   } else {
+    console.log(ctx)
     const token = ctx.store.getState().authentication.token;
 
     if(token && ctx.pathname === '/login') {

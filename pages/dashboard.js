@@ -49,6 +49,7 @@ class Dashboard extends React.Component {
     await ctx.store.dispatch(actions.getAdjustedRates('IDR', 'getAdjustedRates'));
     await ctx.store.dispatch(actions.getRates('GBP', 'IDR'));
     await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
+    return {};
   };
 
   componentDidMount() {
