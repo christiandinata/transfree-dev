@@ -220,6 +220,7 @@ class UserFills extends React.Component {
   static async getInitialProps(ctx) {
     initialize(ctx);
     await ctx.store.dispatch(actions.getAllUsersFilledByAdmin(1, 'getAllUsersFilledByAdmin',ctx.req));
+    return {};
   };
 
   approveUser(uid) {

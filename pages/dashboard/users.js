@@ -224,6 +224,7 @@ class Users extends React.Component {
   static async getInitialProps(ctx) {
     initialize(ctx);
     await ctx.store.dispatch(actions.getAllUsers(1,'getAllUsers',ctx.req));
+    return {};
   };
 
   approveUser(uid) {

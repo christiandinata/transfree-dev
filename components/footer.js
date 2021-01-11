@@ -55,10 +55,10 @@ const Footer = () => (
         <div className="footer-item-collab" >
           <h3>Collaborators and Partners</h3>
           <ul>
-            <li><Link href="https://ristekdikti.go.id/"><a>Ministry of Research Technology and Higher Education</a></Link></li>
-            <li><Link href="http://kemnaker.go.id/" ><a>Ministry of Manpower Republic of Indonesia</a></Link></li>
-            <li><Link href="https://puspiptek.ristekdikti.go.id/tbic/"><a >Technology Business Incubation Center</a></Link></li>
-            <li><Link href="https://talentindonesia.id/talent-hub/"><a >Innovation Room - TALENT HUB </a></Link></li>
+            <li><Link href="//ristekdikti.go.id/"><a>Ministry of Research Technology and Higher Education</a></Link></li>
+            <li><Link href="//kemnaker.go.id/" ><a>Ministry of Manpower Republic of Indonesia</a></Link></li>
+            <li><Link href="//puspiptek.ristekdikti.go.id/tbic/"><a >Technology Business Incubation Center</a></Link></li>
+            <li><Link href="//talentindonesia.id/talent-hub/"><a >Innovation Room - TALENT HUB </a></Link></li>
 
           </ul>
         </div>
