@@ -60,7 +60,7 @@ class ForgotPassword extends React.Component {
             .then(async (response) => {
                     if (response.data.found) {
                         document.querySelector('#text-send').style.display = 'block';
-                        document.querySelector('#text-number').innerHTML = '<b>'.concat(response.data.phone).concat('</b>');
+                        document.querySelector('#text-email').innerHTML = '<b>'.concat(response.data.email).concat('</b>');
                         document.querySelector('#text-number').style.display = 'block';
                         document.querySelector('#button-check').style.display = 'none';
                         document.querySelector('#button-send').style.display = 'block';
@@ -398,11 +398,11 @@ class ForgotPassword extends React.Component {
                     />
 
                     <img id="img-tablet" src='../../static/images/forgot/tablet.svg'/>
-                    <p id="text-nocode" style={{fontSize: 13}}>
-                        No code showing on your phone? <a href='#' onClick={this.handleResend.bind(this)}
+                    <p id="text-nocode" style={{ fontSize: 13 }}>No code showing on your email?
+                    <a href='#' onClick={this.handleResend.bind(this)}
                                                           style={{color: '#469DDD'}}> Resend Code</a></p>
-                    <p id="text-send" style={{fontSize: 13}}>Transfree will send verification code to</p>
-                    <p id="text-number" style={{fontSize: 13}}><b>**********69</b></p>
+                    <p id="text-send" style={{fontSize: 13}}>Transfree will send verification code to your email</p>
+                    <p id="text-number" style={{fontSize: 13}}><b>{this.state.email}</b></p>
                     <button id="button-check" onClick={this.handleCheck.bind(this)} className="btn-primary">Check
                     </button>
                     <button id="button-send" onClick={this.handleSend.bind(this)} className="btn-primary">Send</button>
