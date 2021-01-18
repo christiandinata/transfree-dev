@@ -116,7 +116,8 @@ class PhoneVerification extends React.Component {
           <span style={{ fontSize: 13, color: "red", fontWeight: "normal" }} className={this.state.isValidCode ? 'error-label-hidden' : 'error-label'}>{this.props.errorMessage}</span>
           <div>
             <h2>Enter 6- Digit Code</h2>
-            <p style={{ fontSize: 13 }}>No code showing on your phone? <a onClick={this.handleResendCode.bind(this)} className="link">Resend Code</a></p>
+            <p style={{ fontSize: 13 }}>No code showing on your email? </p>
+            <p style={{ fontSize: 13 }}>Please check Spam or Promotion <a onClick={this.handleResendCode.bind(this)} className="link">Resend Code</a></p>
           </div>
 
 
