@@ -28,6 +28,8 @@ class Login extends React.Component {
 
   static getInitialProps(ctx) {
     initialize(ctx);
+    return {
+    }
   }
 
   handleSubmit(e) {

@@ -13,6 +13,7 @@ class Home extends React.Component {
 
   static async getInitialProps(ctx) {
     initialize(ctx);
+    return {};
   };
 
   render() {

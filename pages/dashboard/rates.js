@@ -30,6 +30,7 @@ class Rates extends React.Component {
     initialize(ctx);
     await ctx.store.dispatch(actions.getMultipleRates('IDR','MYR','KRW','GBP','USD','EUR','HKD'));
     await ctx.store.dispatch(actions.getAdjustedRates('IDR', 'getAdjustedRates'));
+    return {};
   };
 
   componentDidMount() {

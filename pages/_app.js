@@ -10,15 +10,15 @@ import {InitGA, logPageView} from '../utils/analytics';
 
 export default withRedux(initStore, { debug: false })(
   class MyApp extends App {
-    static async getInitialProps({ Component, ctx }) {
-      return {
-        pageProps: {
-          ...(Component.getInitialProps
-            ? await Component.getInitialProps(ctx)
-            : {})
-        }
-      };
-    }
+    // static async getInitialProps({ Component, ctx }) {
+    //   return {
+    //     pageProps: {
+    //       ...(Component.getInitialProps
+    //         ? await Component.getInitialProps(ctx)
+    //         : {})
+    //     }
+    //   };
+    // }
 
     componentDidMount(){
       InitGA()
@@ -28,11 +28,11 @@ export default withRedux(initStore, { debug: false })(
     render() {
       const { Component, pageProps, store } = this.props;
       return (
-        <Container>
+        <>
           <Provider store={store}>
             <Component {...pageProps} />
           </Provider>
-        </Container>
+        </>
       );
     }
   }

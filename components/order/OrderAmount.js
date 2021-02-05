@@ -537,8 +537,8 @@ class OrderAmount extends React.Component {
                   <a className="close" href="#">&times;</a>
                   <div className="content" >
                     <p> But don't worry, we got you. If you still want your GBP to IDR transfer,<b> we will happily buy your GBP </b> with our IDR , of course <b> with Special Price </b>   . <br/><br/> <b> Click the button below to Sell Your GBP</b> </p>
-                    <Link>
-                      <a href="https://www.transfree.co.uk/currency-seller-to-idr" target="_blank" className="btn-primary">Sell My GBP</a>
+                    <Link href="https://www.transfree.co.uk/currency-seller-to-idr">
+                      <a target="_blank" className="btn-primary">Sell My GBP</a>
                     </Link>
                   </div>
                 </div>
@@ -622,8 +622,8 @@ class OrderAmount extends React.Component {
                  </Link>
                 */}
                 {this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr' ? 
-                  <Link>
-                    <a className="btn-primary" href={"#oos"}>Continue</a>
+                  <Link href={"#oos"}>
+                    <a className="btn-primary" >Continue</a>
                   </Link>
                  :
 		              (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' && this.props.adjustedRates.idrToGbpOos == 'true')

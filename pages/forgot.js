@@ -16,6 +16,7 @@ class Forgot extends React.Component {
   
   static getInitialProps(ctx) {
     initialize(ctx);
+    return {}
   }
 
 

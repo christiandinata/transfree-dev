@@ -37,7 +37,7 @@
     "jsonwebtoken": "^8.5.1",
     "material-responsive-grid": "^1.1.1",
     "moment": "^2.26.0",
-    "next": "^8.1.0",
+    "next": "^9.3.2",
     "next-redux-wrapper": "^3.0.0-alpha.3",
     "npm": "^6.14.5",
     "order-id": "^2.1.0",

@@ -110,6 +110,7 @@ class Summary extends React.Component {
         let firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
         let lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
         await ctx.store.dispatch(actions.getCustomerSummary('', firstDay.getTime(), lastDay.getTime(), "getOrderSummary",ctx.req));
+        return {}
     };
 
     handleSearch() {

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { getCookie } from '../utils/cookie';
@@ -22,11 +23,10 @@ import '../styles/rowapplicationmobile.css';
 import '../styles/testimonialdesktop.css';
 import '../styles/testimonialmobile.css';
 
-
 //Index untuk homepage kalau belum login
 class Index extends React.Component {
 
-  constructor({ props }) {
+  constructor( props ) {
     super(props);
     this.state = {
       isSourceActive: false,
@@ -36,7 +36,6 @@ class Index extends React.Component {
       fromAmount: 1000,
       toAmount: 0
     };
-
     this.toggleSource = this.toggleSource.bind(this);
     this.hideSource = this.hideSource.bind(this);
     this.toggleDestination = this.toggleDestination.bind(this);
@@ -47,11 +46,17 @@ class Index extends React.Component {
   }
   static async getInitialProps(ctx) {
     initialize(ctx);
+    
     await ctx.store.dispatch(actions.getAdjustedRates('IDR', 'getAdjustedRates'));
     await ctx.store.dispatch(actions.getRates('GBP', 'IDR'));
+
+    return {
+    }
   };
 
   componentDidMount() {
+    console.log('ini didMount');
+    console.log(this.props);
     this.setState({
       rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
       toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
