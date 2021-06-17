@@ -16,15 +16,17 @@ const Header = () => (
     </Head>
     <style jsx global>{`
       @font-face {
-        font-family: 'Open Sans';
-        src: url('../static/fonts/OpenSans-Regular.ttf');
+        font-family: 'Avenir LT Pro';
+        src: url('../static/fonts/AvenirLTProBook.otf');
       }
+
       @font-face {
-        font-family: 'Open Sans';
-        src: url('../static/fonts/OpenSans-Regular.ttf');
+        font-family: 'Avenir LT Pro Bold';
+        src: url('../static/fonts/AvenirLTProHeavy.otf');
       }
+
       body {
-        font-family: "Open Sans", sans-serif; 
+        font-family: "Avenir LT Pro", sans-serif; 
         line-height: 1.6;
         letter-spacing: 0.2px;
         color: #3E495E;
@@ -32,13 +34,11 @@ const Header = () => (
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        
+        background-color: #F3F5F7;
       }
       
       h1, h2, h3, h4, b, .bold, button{
-        font-family: 70px 'Open Sans', sans-serif;
-        font-weight: 700;
-        color: #000000;
+        font-family: 'Avenir LT Pro Heavy', sans-serif;
       }
       
       button:hover {
@@ -149,7 +149,7 @@ const Header = () => (
         color: #000000;
         text-decoration: none;
         transition: 0.2s ease-in;
-        font-family: "Open Sans", sans-serif; 
+        font-family: "Avenir LT Pro", sans-serif; 
         font-weight: bold;
       }
       ul > li > a:hover {
@@ -162,7 +162,7 @@ const Header = () => (
       }
       .react-phone-number-input__input {
         padding: 15px 0;
-        font-family: "Open Sans", sans-serif;
+        font-family: "Avenir LT Pro", sans-serif;
         font-size: 16px;
       }
       .react-phone-number-input__icon {
@@ -175,7 +175,7 @@ const Header = () => (
       }
       .converter-container input {
         width: 100%;
-        font-family: 'Open Sans', sans-serif;
+        font-family: 'Avenir LT Pro', sans-serif;
         font-size: 22px;
         color: #15233C;
         border: none;
@@ -191,7 +191,7 @@ const Header = () => (
       }
       .converter-container-order input {
         width: 100%;
-        font-family: 'Open Sans', sans-serif;
+        font-family: 'Avenir LT Pro', sans-serif;
         font-size: 22px;
         color: #15233C;
         border: none;
@@ -236,7 +236,7 @@ const Header = () => (
         background:#FAAF40;
         color:#FFFFFF;
         font-size:30px;
-        font-family: "Open Sans", sans-serif;
+        font-family: "Avenir LT Pro", sans-serif;
         font-weight:700;       
       }
 
@@ -297,7 +297,7 @@ const Header = () => (
          font-size: 16px;
          padding: 10px 0;
          border-bottom: 1px solid #eaeaea;
-         font-family: 'Open Sans', sans-serif;
+         font-family: 'Avenir LT Pro', sans-serif;
          font-color:#707070;
          
        }
@@ -323,7 +323,7 @@ const Header = () => (
          border-radius:12px 12px;
          color:#FFFFFF;
          font-size:20px;
-         font-family: "Open Sans", sans-serif;
+         font-family: "Avenir LT Pro", sans-serif;
          font-weight:700;    
          
       }
@@ -332,7 +332,7 @@ const Header = () => (
       }
       .right  .link {
         color: #469DDD;
-        font-family: "Open Sans", sans-serif;
+        font-family: "Avenir LT Pro", sans-serif;
         font-weight:600;
         // text-decoration: none;
         
