@@ -4,8 +4,7 @@ import styled from 'styled-components';
 
 const Base = styled.div`
   background: #FFFFFF;
-  border: 1px solid #9A9A9A;
-  box-sizing: border-box;
+  border-bottom: 1px solid #9A9A9A;
   display: flex;
   justify-content: center;
   padding-top: 80px;

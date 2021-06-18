@@ -152,6 +152,11 @@ export const RegisterButton = styled.a`
 	line-height: 24px;
 	font-style: normal;
 	font-weight: normal;
+
+	&:hover {
+		background-color: ${({scrolled, homepage}) => (homepage && scrolled ? "#068EC8" : "#fff")}; 
+		border: 1px solid #068EC8;
+	}
 `;
 
 export const ProfileInfo = styled.p`
