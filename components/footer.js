@@ -45,11 +45,13 @@ const Brand = styled.img`
 `;
 
 const LogoDiv = styled.div`
-  // margin-left: 44px;
-  margin-left: -5px;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
-const Logo = styled.a`
+const SocialLogo = styled.a`
   margin-left: 20px;
   text-decoration: none;
 `;
@@ -113,9 +115,11 @@ const Footer = () => (
       <Contacts>
         <Brand src = "../static/images/transfree-logo.png"></Brand> 
         <LogoDiv>
-          <Logo href = "https://www.facebook.com/transfree.id.9"><img src = "../static/images/Footer/facebook-logo.png"></img></Logo>
-          <Logo href = "https://www.instagram.com/transfree_id/?hl=en"><img src = "../static/images/Footer/instagram-logo.png"></img> </Logo>
-          <Logo href = "https://www.youtube.com/channel/UCGZ9uWFrBSAKwh6YE4q2hyA/videos"><img src = "../static/images/Footer/youtube-logo.png"></img></Logo>
+          <SocialLogo href = "https://www.facebook.com/transfree.id.9"><img src = "../static/images/Footer/facebook-logo.png"></img></SocialLogo>
+          <SocialLogo href = "https://www.instagram.com/transfree_id/?hl=en"><img src = "../static/images/Footer/instagram-logo.png"></img> </SocialLogo>
+          <SocialLogo href = "https://www.instagram.com/transfree_id/?hl=en"><img src = "../static/images/Footer/linkedin-logo.png"></img> </SocialLogo>
+          <SocialLogo href = "https://www.youtube.com/channel/UCGZ9uWFrBSAKwh6YE4q2hyA/videos"><img src = "../static/images/Footer/youtube-logo.png"></img></SocialLogo>
+          <SocialLogo href = "https://www.instagram.com/transfree_id/?hl=en"><img src = "../static/images/Footer/medium-logo.png"></img> </SocialLogo>
         </LogoDiv>
       </Contacts>
 
