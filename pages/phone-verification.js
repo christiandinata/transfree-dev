@@ -7,10 +7,11 @@ import initialize from "../utils/initialize";
 import { getCookie } from "../utils/cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState, useEffect } from "react";
-import { Form, FormContainer, NavBar } from "../components/FormComponents";
+import { Form, FormContainer } from "../components/FormComponents";
 import styled from "styled-components";
 import OtpInput from "react-otp-input";
 import Footer from "../components/footer";
+import { NavBar } from "../components/MenuComponents";
 
 //Verifikasi nomor handphone saat user register
 function PhoneVerification(props) {
@@ -176,7 +177,6 @@ function PhoneVerification(props) {
 					height: 54px;
 					margin: 8px;
 					border: 1px solid #e2e2e2;
-					transition: 0.2s all ease-in;
 				}
 
 				.inputStyling.error {
@@ -186,11 +186,6 @@ function PhoneVerification(props) {
 
 				.focusStyling {
 					border: 1px solid #009fe3 !important;
-					outline: none;
-				}
-
-				.focusStyling.error {
-					border: 1px solid #ff0000 !important;
 					outline: none;
 				}
 

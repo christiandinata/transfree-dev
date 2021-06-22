@@ -8,12 +8,13 @@ import {
 	faEyeSlash,
 	faArrowCircleLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import { FormContainer, Form, NavBar } from "../components/FormComponents";
+import { FormContainer, Form } from "../components/FormComponents";
 import styled from "styled-components";
 import Header from "../components/header.js";
 import { useState, useEffect } from "react";
 import { set } from "react-ga";
 import Footer from "../components/footer";
+import { NavBar } from "../components/MenuComponents";
 
 //Component untuk login
 function Login(props) {
@@ -288,7 +289,6 @@ const FormLabel = styled.label`
 			return "#626B79";
 		}
 	}};
-	transition: 0.2s all ease-in;
 `;
 
 const InputContainer = styled.div`
@@ -326,7 +326,6 @@ const InputContainer = styled.div`
 	// "2px solid #068EC8" : "1px solid #e2e2e2"
 	border-radius: 4px;
 	margin-bottom: 1rem;
-	transition: 0.2s all ease-in;
 `;
 
 const ErrorText = styled.p`
