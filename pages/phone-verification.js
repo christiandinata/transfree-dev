@@ -92,6 +92,9 @@ function PhoneVerification(props) {
 	// componentWillReceiveProps() {
 	// 	this.checkCodeOTP();
 	// }
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	});
 
 	useEffect(() => {
 		if (props.errorMessage?.includes("OTP")) {
