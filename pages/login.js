@@ -13,6 +13,7 @@ import styled from "styled-components";
 import Header from "../components/header.js";
 import { useState, useEffect } from "react";
 import { set } from "react-ga";
+import Footer from "../components/footer";
 
 //Component untuk login
 function Login(props) {
@@ -121,7 +122,7 @@ function Login(props) {
 	return (
 		<>
 			<Header />
-			<NavBar navChildColor="#fff" />
+			<NavBar navChildColor="#fff" navText="Homepage" endpoint="/index" />
 			<FormContainer>
 				<Form onSubmit={handleSubmit}>
 					<FormInner>
@@ -217,12 +218,12 @@ function Login(props) {
 								<a>Forgot password ?</a>
 							</Link>
 						</p>
-						<Button>
+						<Button type="submit">
 							{props.inProgress ? (
 								<FontAwesomeIcon
 									icon="sync-alt"
 									spin
-									style={{ width: 40, height: 40 }}
+									style={{ width: 25, height: 25 }}
 								/>
 							) : (
 								"Sign In"
@@ -240,6 +241,7 @@ function Login(props) {
 					color: #009fe3;
 				}
 			`}</style>
+			<Footer />
 		</>
 	);
 }
@@ -264,6 +266,7 @@ const BelowHeading = styled.p`
 	font-size: 14px;
 	line-height: 20px;
 	margin-bottom: 40px;
+	color: #232933;
 `;
 
 const FormLabel = styled.label`
@@ -285,6 +288,7 @@ const FormLabel = styled.label`
 			return "#626B79";
 		}
 	}};
+	transition: 0.2s all ease-in;
 `;
 
 const InputContainer = styled.div`
@@ -322,6 +326,7 @@ const InputContainer = styled.div`
 	// "2px solid #068EC8" : "1px solid #e2e2e2"
 	border-radius: 4px;
 	margin-bottom: 1rem;
+	transition: 0.2s all ease-in;
 `;
 
 const ErrorText = styled.p`

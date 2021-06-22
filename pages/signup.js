@@ -11,6 +11,7 @@ const eye = <FontAwesomeIcon icon={faEye} />;
 import Header from "../components/header";
 import { Form, FormContainer, NavBar } from "../components/FormComponents";
 import styled from "styled-components";
+import Footer from "../components/footer";
 
 //Menerima Argumen dari luar
 function Signup(props) {
@@ -224,14 +225,14 @@ function Signup(props) {
 				...error,
 				email: true,
 			});
-			console.log(props.message);
+			console.log(props.errorMessage);
 		}
 		if (props.errorMessage?.includes("phone")) {
 			setError({
 				...error,
 				phone: true,
 			});
-			console.log(props.message);
+			console.log(props.errorMessage);
 		}
 	}, [props.errorMessage]);
 
@@ -247,7 +248,7 @@ function Signup(props) {
 	return (
 		<>
 			<Header />
-			<NavBar navChildColor="#fff" />
+			<NavBar navChildColor="#fff" navText="Homepage" endpoint="/index" />
 			<FormContainer>
 				<Form onSubmit={handleSubmit}>
 					<FormInner>
@@ -507,12 +508,12 @@ function Signup(props) {
 									: "Phone number cannot be blank"}
 							</ErrorText>
 						) : null}
-						<Button>
+						<Button type="submit">
 							{props.inProgress ? (
 								<FontAwesomeIcon
 									icon="sync-alt"
 									spin
-									style={{ width: 40, height: 40 }}
+									style={{ width: 25, height: 25 }}
 								/>
 							) : (
 								"Continue"
@@ -541,6 +542,7 @@ function Signup(props) {
 					color: #009fe3;
 				}
 			`}</style>
+			<Footer />
 		</>
 	);
 }
@@ -565,6 +567,7 @@ const BelowHeading = styled.p`
 	font-size: 14px;
 	line-height: 20px;
 	margin-bottom: 40px;
+	color: #232933;
 `;
 
 const FormLabel = styled.label`
@@ -605,6 +608,7 @@ const FormLabel = styled.label`
 			return "#626B79";
 		}
 	}};
+	transition: 0.2s all ease-in;
 `;
 
 const InputContainer = styled.div`
@@ -663,6 +667,7 @@ const InputContainer = styled.div`
 	// "2px solid #068EC8" : "1px solid #e2e2e2"
 	border-radius: 4px;
 	margin-bottom: 1rem;
+	transition: 0.2s all ease-in;
 `;
 
 const ErrorText = styled.p`

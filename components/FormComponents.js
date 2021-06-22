@@ -6,6 +6,7 @@ import styled from "styled-components";
 // </FormContainer>
 export const FormContainer = styled.div`
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	min-height: 500px;
