@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons";
 
 // Navbar after main pages
 export function NavBar(props) {

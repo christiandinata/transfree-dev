@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons";
 
 // wrap Form with FormContainer
 // <FOrmContainer>
