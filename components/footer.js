@@ -81,7 +81,7 @@ const FooterLink = styled.a`
   margin-bottom: 16px;
 `;
 
-const FooterText = styled.p`
+const FooterText = styled.span`
   all: unset;
   color: #626B79;
   font-size: 16px;
@@ -117,9 +117,9 @@ const Footer = () => (
         <LogoDiv>
           <SocialLogo href = "https://www.facebook.com/transfree.id.9"><img src = "../static/images/Footer/facebook-logo.png"></img></SocialLogo>
           <SocialLogo href = "https://www.instagram.com/transfree_id/?hl=en"><img src = "../static/images/Footer/instagram-logo.png"></img> </SocialLogo>
-          <SocialLogo href = "https://www.instagram.com/transfree_id/?hl=en"><img src = "../static/images/Footer/linkedin-logo.png"></img> </SocialLogo>
+          <SocialLogo href = "https://www.linkedin.com/company/transfreeid/mycompany/"><img src = "../static/images/Footer/linkedin-logo.png"></img> </SocialLogo>
           <SocialLogo href = "https://www.youtube.com/channel/UCGZ9uWFrBSAKwh6YE4q2hyA/videos"><img src = "../static/images/Footer/youtube-logo.png"></img></SocialLogo>
-          <SocialLogo href = "https://www.instagram.com/transfree_id/?hl=en"><img src = "../static/images/Footer/medium-logo.png"></img> </SocialLogo>
+          <SocialLogo href = "https://transfree-id.medium.com/"><img src = "../static/images/Footer/medium-logo.png"></img> </SocialLogo>
         </LogoDiv>
       </Contacts>
 
