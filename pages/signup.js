@@ -1,13 +1,11 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import AuthLayout from "../components/AuthLayout";
 import actions from "../redux/actions";
 import initialize from "../utils/initialize";
 import PhoneInput from "react-phone-number-input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-const eye = <FontAwesomeIcon icon={faEye} />;
 import Header from "../components/header";
 import { Form, FormContainer } from "../components/FormComponents";
 import styled from "styled-components";
@@ -16,9 +14,7 @@ import { NavBar } from "../components/MenuComponents";
 
 //Menerima Argumen dari luar
 function Signup(props) {
-	// this.togglePassShow = this.togglePassShow.bind(this);
-	// this.toggleConfirmShow = this.toggleConfirmShow.bind(this);
-
+	// state declaration
 	const [values, setValues] = useState({
 		name: "",
 		email: "",
@@ -42,7 +38,7 @@ function Signup(props) {
 		confirmPassword: false,
 		phone: false,
 	});
-	// ada 3 case error (email, password, phone number)
+
 	const [error, setError] = useState({
 		name: false,
 		email: false,
@@ -56,6 +52,7 @@ function Signup(props) {
 	const [verifyPassword, setVerifyPassword] = useState(true);
 	const [isInvalidFullName, setIsInvalidFullName] = useState(false);
 
+	// functions used on this page
 	function handleChange(e) {
 		const { name, value } = e.target;
 		if (value) {
@@ -187,14 +184,6 @@ function Signup(props) {
 		setHiddenPass(!hiddenPass);
 	}
 
-	//
-	// function handlePassword() {
-	// 	if (values.password != values.confirmPassword) {
-	// 		setVerifyPassword(false);
-	// 	}
-	// }
-
-	//Mengumpulkan state react
 	function handleSubmit(e) {
 		e.preventDefault();
 		if (values.password != values.confirmPassword) {
@@ -220,6 +209,7 @@ function Signup(props) {
 		}
 	}
 
+	// triggered when there is an error(s)
 	useEffect(() => {
 		if (props.errorMessage?.includes("email")) {
 			setError({
@@ -237,15 +227,6 @@ function Signup(props) {
 		}
 	}, [props.errorMessage]);
 
-	// handleSubmit(e) {
-	//   e.preventDefault();
-	//   this.props.authenticate(
-	//     { email: this.state.email, password: this.state.password },
-	//     'login'
-	//   );
-	// }
-
-	//Memunculkan tulisan dan gambar dibawah
 	return (
 		<>
 			<Header />
@@ -264,7 +245,6 @@ function Signup(props) {
 						</center>
 						{selected.name || (filled.name && !error.name) ? (
 							<FormLabel
-								// errorMessage={props.errorMessage}
 								filled={filled.name}
 								selectedName={selected.name}>
 								Name
@@ -272,8 +252,6 @@ function Signup(props) {
 						) : null}
 						<InputContainer
 							selectedName={selected.name}
-							// error={error.name}
-							// errorMessage={error.name}
 							filled={filled.name}>
 							<FormInput
 								type="text"
@@ -288,14 +266,6 @@ function Signup(props) {
 								onBlur={handleOnBlur}
 							/>
 						</InputContainer>
-						{/* {error.name ||
-						(!filled.name &&
-							(props.errorMessage || !verifyPassword)) ? (
-							<ErrorText>
-								{(!filled.name || !selected.name) &&
-									"Name cannot be blank"}
-							</ErrorText>
-						) : null} */}
 						{selected.email || (filled.email && !error.email) ? (
 							<FormLabel
 								errorMessage={props.errorMessage?.includes(
@@ -392,14 +362,6 @@ function Signup(props) {
 									: "Password cannot be blank"}
 							</ErrorText>
 						) : null}
-						{/* {error.password ||
-						(!filled.password && props.errorMessage) ? (
-							<ErrorText>
-								{!selected.password && filled.password
-									? null
-									: "Password cannot be blank"}
-							</ErrorText>
-						) : null} */}
 						{selected.confirmPassword ||
 						(filled.confirmPassword && !error.confirmPassword) ? (
 							<FormLabel
@@ -461,15 +423,6 @@ function Signup(props) {
 									: "Confirmation password cannot be blank"}
 							</ErrorText>
 						) : null}
-						{/* {error.confirmPassword ||
-						(!filled.confirmPassword && props.errorMessage) ? (
-							<ErrorText>
-								{!selected.confirmPassword &&
-								filled.confirmPassword
-									? null
-									: "Confirmation password cannot be blank"}
-							</ErrorText>
-						) : null} */}
 						{selected.phone || (filled.phone && !error.phone) ? (
 							<FormLabel
 								errorMessage={props.errorMessage?.includes(
@@ -754,273 +707,3 @@ const mapStateToProps = (state) => {
 
 //Mengirimkan signup
 export default connect(mapStateToProps, actions)(Signup);
-
-{
-	/* <div className="logo">
-				<Link href="/">
-					<a>
-						<img
-							src="../static/images/transfree-logo.png"
-							alt="Logo"
-						/>
-					</a>
-				</Link>
-			</div> */
-}
-{
-	/* <h1>Register</h1> */
-}
-// <div
-// 	className={
-// 		"error-container " +
-// 		(this.props.errorMessage != "" &&
-// 		this.props.errorMessage != undefined
-// 			? "error-show"
-// 			: "")
-// 	}>
-// 	{this.props.errorMessage}
-// </div>
-// <div
-// 	className={
-// 		"error-container " +
-// 		(this.props.errorMessage != " " &&
-// 		this.state.verifyPassword == false
-// 			? "error-show"
-// 			: "")
-// 	}>
-// 	Password and Confirm Password not match
-// </div>
-// <div className="box-title">Register</div>
-// <form
-// 	className="form-container"
-// 	onSubmit={this.handleSubmit.bind(this)}>
-// 	<h1 style={{ marginTop: 10, textAlign: "center" }}>Join us</h1>
-// 	<p
-// 		style={{
-// 			marginTop: -10,
-// 			fontSize: 13,
-// 			color: "grey",
-// 			opacity: "66%",
-// 		}}>
-// 		Already have an Account?{" "}
-// 		<a className="link" href="/login">
-// 			Log In
-// 		</a>
-// 	</p>
-// 	<label htmlFor="email">FULL NAME</label>
-// 	<input
-// 		type="text"
-// 		id="name"
-// 		placeholder="Full Name"
-// 		required
-// 		value={this.state.name}
-// 		onChange={(e) =>
-// 			this.setState({ name: e.target.value })
-// 		}
-// 	/>
-// 	<label htmlFor="email">EMAIL ADDRESS</label>
-// 	<input
-// 		type="email"
-// 		id="email"
-// 		placeholder="Email"
-// 		required
-// 		autoComplete="username"
-// 		value={this.state.email}
-// 		onChange={(e) => this.setState({ email: e.target.value })}
-// 	/>
-// 	<label htmlFor="email">PASSWORD</label>
-// 	<div className="pass-wrapper">
-// 		<input
-// 			type={this.state.hiddenPass ? "text" : "password"}
-// 			id="password"
-// 			placeholder="Password"
-// 			required
-// 			autoComplete="new-password"
-// 			value={this.state.password}
-// 			onChange={(e) =>
-// 				this.setState({ password: e.target.value })
-// 			}
-// 		/>
-// 		<i onClick={this.togglePassShow}>{eye}</i>
-// 	</div>
-
-// 	<label htmlFor="email">CONFIRM PASSWORD</label>
-// 	<div className="pass-wrapper">
-// 		<input
-// 			type={this.state.hiddenConfirm ? "text" : "password"}
-// 			id="confirm-password"
-// 			placeholder="Confirm Password"
-// 			autoComplete="new-password"
-// 			required
-// 			value={this.state.confirmPassword}
-// 			onChange={(e) =>
-// 				this.setState({
-// 					confirmPassword: e.target.value,
-// 				})
-// 			}
-// 		/>
-// 		<i onClick={this.toggleConfirmShow}>{eye}</i>
-// 	</div>
-// 	<label htmlFor="email">PHONE NUMBER</label>
-// 	<PhoneInput
-// 		placeholder="Enter phone number"
-// 		country="GB"
-// 		requiredS
-// 		value={this.state.phone}
-// 		onChange={(phone) => this.setState({ phone })}
-// 	/>
-
-// 	<button type="submit" className="btn-primary">
-// 		{this.props.inProgress ? (
-// 			<FontAwesomeIcon
-// 				icon="sync-alt"
-// 				spin
-// 				style={{ width: 40, height: 40 }}
-// 			/>
-// 		) : (
-// 			"Continue"
-// 		)}
-// 	</button>
-// </form>
-// <div className="bottom-container">
-// 	<p>
-// 		Already have an Account? <a href="/login"> Log In</a>
-// 	</p>
-// </div>
-// <div className="bottom-container-web">
-// 	<div className="left">
-// 		<a href></a>
-// 		<img src="../static/images/Sign Up ASSET WEB/Component 2 – 11.png"></img>
-// 		<a href>
-// 			<img src="../static/images/Sign Up ASSET WEB/Component 2 – 12.png"></img>
-// 		</a>
-// 	</div>
-// 	<div className="right">
-// 		<p style={{ fontSize: 13, marginRight: "19%" }}>
-// 			<a className="link" href="/">
-// 				&lt; Back to Home
-// 			</a>
-// 		</p>
-// 	</div>
-// </div>
-
-// <style jsx>{`
-// 	.right .bottom-container p,
-// 	h5 {
-// 		display: inline;
-// 		text-align: left;
-// 	}
-
-// 	h1 {
-// 		font-size: 20px;
-// 		font-family: "Open Sans", sans-serif;
-// 		font-weight: 500;
-// 	}
-// 	.form-container label {
-// 		display: none;
-// 	}
-// 	.form-container input {
-// 		margin-bottom: 10px;
-// 	}
-// 	.pass-wrapper {
-// 		margin-bottom: 0px;
-// 	}
-// 	i {
-// 		position: absolute;
-// 		top: 30%;
-// 		right: 6%;
-// 		// width:10px;
-// 	}
-// 	p > a {
-// 		margin: 0px;
-// 		font-weight: 540;
-// 		font-color: #5bb7de;
-// 		-webkit-text-stroke: 0.5px #5bb7de;
-// 	}
-// 	.bottom-container {
-// 		display: none;
-// 	}
-// 	.bottom-container-web {
-// 		display: flex;
-// 		flex-direction: row;
-// 		// background:blue;
-// 		margin: 0 auto;
-// 		width: 100%;
-// 		align-items: flex-start;
-// 		justify-content: flex-start;
-// 		align-self: flex-start;
-// 	}
-
-// 	.bottom-container-web .left {
-// 		flex-basis: 26%;
-// 		// background:red;
-// 		display: flex;
-// 		margin-top: 1%;
-// 		justify-content: flex-end;
-// 		align-self: flex-start;
-// 	}
-
-// 	.bottom-container-web .right {
-// 		flex-basis: 60%;
-// 		// background:yellow;
-// 		text-align: left;
-// 		margin-top: 1%;
-// 		align-items: flex-start;
-// 		justify-content: flex-start;
-// 		align-self: flex-start;
-// 		margin-top: -1%;
-// 	}
-
-// 	.bottom-container-web img {
-// 		height: 25px;
-// 		width: 25px;
-// 		tex-align: center;
-// 	}
-// 	@media only screen and (max-width: 414px) {
-// 		.logo img {
-// 			display: none;
-// 		}
-// 		.box-title {
-// 			margin-top: 30px;
-// 		}
-// 		.error-container {
-// 			margin-top: 10% !important;
-// 		}
-// 		.form-container h1,
-// 		p {
-// 			display: none;
-// 		}
-// 		.bottom-container p {
-// 			display: flex;
-// 			font-size: 20px;
-// 			color: #ffffff;
-// 		}
-// 		.bottom-container {
-// 			display: block;
-// 		}
-
-// 		.form-container label {
-// 			font-size: 19px;
-// 			text-transform: uppercase;
-// 			display: flex;
-// 			// margin-bottom:-15px;
-// 		}
-// 		// .pass-wrapper{
-// 		//   margin-top:20px;
-// 		// }
-// 		.form-container input {
-// 			// margin-bottom:60px;
-// 			font-size: 18px;
-// 		}
-// 		.bottom-container p > a {
-// 			color: #ffffff;
-// 			font-size: 20px;
-// 			font-family: "Open Sans", sans-serif;
-// 			font-weight: 900;
-// 		}
-
-// 		.bottom-container-web {
-// 			display: none;
-// 		}
-// 	}
-// `}</style>
