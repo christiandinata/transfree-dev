@@ -7,6 +7,9 @@ import initialize from "../utils/initialize";
 import * as axios from "axios";
 import ENV from "../config";
 import Header from "../components/header";
+import { NavBar } from "../components/MenuComponents";
+import styled from "styled-components";
+// import batik from "../static/images/Batik_World_Map_1.png";
 
 //Component yang ditampilkan saat user memilih opsi forgot password
 function Progress(props) {
@@ -34,20 +37,20 @@ function ForgotPassword(props) {
 	});
 
 	useEffect(() => {
-		document.querySelector("#popup").style.display = "none";
-		document.querySelector("#text-valid").style.display = "none";
-		document.querySelector("#text-success-send").style.display = "none";
-		document.querySelector("#text-email").style.display = "none";
-		document.querySelector("#text-send").style.display = "none";
-		document.querySelector("#text-number").style.display = "none";
-		document.querySelector("#text-nocode").style.display = "none";
-		document.querySelector("#field-password").style.display = "none";
-		document.querySelector("#field-confirm-password").style.display =
-			"none";
-		document.querySelector("#field-code").style.display = "none";
-		document.querySelector("#button-send").style.display = "none";
-		document.querySelector("#button-continue").style.display = "none";
-		document.querySelector("#button-verify").style.display = "none";
+		// document.querySelector("#popup").style.display = "none";
+		// document.querySelector("#text-valid").style.display = "none";
+		// document.querySelector("#text-success-send").style.display = "none";
+		// document.querySelector("#text-email").style.display = "none";
+		// document.querySelector("#text-send").style.display = "none";
+		// document.querySelector("#text-number").style.display = "none";
+		// document.querySelector("#text-nocode").style.display = "none";
+		// document.querySelector("#field-password").style.display = "none";
+		// document.querySelector("#field-confirm-password").style.display =
+		// 	"none";
+		// document.querySelector("#field-code").style.display = "none";
+		// document.querySelector("#button-send").style.display = "none";
+		// document.querySelector("#button-continue").style.display = "none";
+		// document.querySelector("#button-verify").style.display = "none";
 	});
 	// componentDidMount() {
 	// document.querySelector("#popup").style.display = "none";
@@ -232,180 +235,232 @@ function ForgotPassword(props) {
 	return (
 		<>
 			<Header />
-			<div id="popup" className="popup" style={{ display: "none" }}>
-				<div className="popup_inner">
-					<h1 id="text-popup"></h1>
-					<p>Your password has been changed successfully</p>
-					<button
-						className="btn-popup"
-						onClick={() => {
-							window.location = "/login";
-						}}>
-						OK
-					</button>
-				</div>
-			</div>
-			<style jsx>
-				{`
-					.popup-mobile {
-						display: none;
-					}
-					.btn-popup {
-						border: 2px solid #5bb7de;
-						color: #ffffff;
-						padding: 5px 23px 5px 23px;
-						text-align: center;
-						text-decoration: none;
-						font-size: 18px;
-						border-radius: 24px;
-						transition: all 0.2s ease;
-						margin-left: 10px;
-						background: #5bb7de;
-						font-weight: 700;
-						width: 120px;
-					}
-
-					.buttonPopUp {
-						display: flex;
-						flex-direction: row;
-						margin-top: 30px;
-					}
-					.popup,
-					.popup-mobile {
-						position: fixed;
-						width: 100%;
-						height: 100%;
-						top: 0;
-						left: 0;
-						right: 0;
-						bottom: 0;
-						margin: auto;
-						background-color: rgba(0, 0, 0, 0.5);
-					}
-					.popup_inner {
-						position: absolute;
-						left: 20%;
-						right: 20%;
-						top: 15%;
-						margin: auto;
-						height: auto;
-						width: auto;
-						border-radius: 20px;
-						background: white;
-						text-align: center;
-						padding: 1% 0 1% 0;
-						display: flex;
-						flex-direction: column;
-
-						align-items: center;
-					}
-					.popup-inner-mobile {
-						position: absolute;
-						left: 20%;
-						right: 20%;
-						top: 25%;
-						margin: auto;
-						height: auto;
-						width: auto;
-						display: flex;
-						flex-direction: column;
-
-						align-items: center;
-					}
-					h1 {
-						color: #5bb7de;
-						font-weight: 700;
-						font-size: 1.3em;
-					}
-					h2 {
-						margin: 0px;
-						padding: 0px;
-						text-align: center;
-						font-weight: 700;
-						color: #000000;
-						font-size: 1em;
-						margin-bottom: 2%;
-					}
-					p {
-						margin: 0px;
-						padding: 0px;
-						font-size: 0.8em;
-						color: #000000;
-					}
-
-					.popup {
-						display: flex;
-					}
-
-					.form-container,
-					.box-title {
-						border-radius: 0px;
-					}
-
-					@media only screen and (max-width: 414px) {
-						.popup_inner {
-							left: 10%;
-							right: 10%;
+			<NavBar />
+			<RecoveryContainer>
+				<RecoveryForm
+					onKeyDown={(e) => {
+						if (e.key === "Enter") {
+							e.preventDefault();
 						}
+					}}>
+					<RecoveryFormInner>
+						<center>
+							<Heading>Account Recovery</Heading>
+							<BelowHeading>
+								Please enter your email address or phone number
+								here to reset your password
+							</BelowHeading>
+						</center>
+						{/* {selected.name || (filled.name && !error.name) ? (
+							<FormLabel
+								filled={filled.name}
+								selectedName={selected.name}>
+								Name
+							</FormLabel>
+						) : null} */}
+						<InputContainer
+						// selectedName={selected.name}
+						// filled={filled.name}
+						>
+							<FormInput
+								// type="text"
+								// name="name"
+								// autoComplete="new-name"
+								// value={values.name}
+								// required
+								// placeholder="Name"
+								// error={error.name}
+								onChange={handleEmailChange}
+								// onFocus={handleOnFocus}
+								// onBlur={handleOnBlur}
+							/>
+						</InputContainer>
+						<Button disabled={!values.email}>Send</Button>
+						<BelowButton>Back to Login</BelowButton>
+					</RecoveryFormInner>
+				</RecoveryForm>
+			</RecoveryContainer>
+		</>
+	);
+}
 
-						.popup {
-							display: none;
-						}
+const RecoveryContainer = styled.div`
+	min-height: 880px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+`;
 
-						.popup-mobile {
-							display: flex;
-						}
+const RecoveryForm = styled.form`
+	width: 440px;
+	min-height: 300px;
+	height: fit-content;
+	margin-top: 80px;
+	background: #ffffff;
+	box-shadow: 12px 20px 40px rgba(12, 12, 12, 0.1);
+	border-radius: 8px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`;
 
-						.btn-popup-error,
-						.btn-popup-verify {
-							border: 2px solid #5bb7de;
-							color: #ffffff;
-							padding: 5px 20px 5px 20px;
-							text-align: center;
-							text-decoration: none;
-							font-size: 18px;
-							border-radius: 18px;
-							transition: all 0.2s ease;
+const RecoveryFormInner = styled.div`
+	width: 360px;
+	display: flex;
+	height: 100%;
+	flex-direction: column;
+`;
 
-							background: #5bb7de;
-							font-weight: 700;
-						}
+const Heading = styled.p`
+	font-weight: bold;
+	font-size: 32px;
+	line-height: 38px;
+	letter-spacing: -0.02em;
+	color: #009fe3;
+`;
 
-						.btn-popup-error {
-							background: #ea5252;
-							border: 2px solid #ea5252;
+const BelowHeading = styled.div`
+	margin: 32px 0;
+	font-size: 14px;
+	line-height: 17px;
+	text-align: center;
+	letter-spacing: -0.02em;
 
-							margin-left: 15%;
-						}
+	color: #232933;
 
-						.btn-popup-verify {
-							margin-left: 25%;
-						}
+	p {
+		margin: 0;
+	}
+`;
 
-						.form-container {
-							padding: 15% 5%;
-						}
-					}
-				`}
-			</style>
-			<div className="logo">
-				<Link href="/">
-					<a>
-						<img
-							src="../static/images/transfree-logo.png"
-							alt="Logo"
-						/>
-					</a>
-				</Link>
-			</div>
-			<div className="box-title">Account Recovery</div>
-			<form
+const InputContainer = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 48px;
+	width: 100%;
+	background: #ffffff;
+	border: ${({
+		selectedName,
+		selectedPass,
+		selectedConfirmPassword,
+		selectedEmail,
+		selectedPhone,
+		error,
+		errorMessage,
+		filled,
+	}) => {
+		if (errorMessage) {
+			if (filled && !error) {
+				if (
+					selectedEmail ||
+					selectedPass ||
+					selectedName ||
+					selectedConfirmPassword ||
+					selectedPhone
+				) {
+					return "2px solid #F80202";
+				}
+				return "1px solid #e2e2e2";
+			} else if (
+				selectedEmail ||
+				selectedPass ||
+				selectedName ||
+				selectedConfirmPassword ||
+				selectedPhone
+			) {
+				return "2px solid #F80202";
+			}
+			return "1px solid #FF0000";
+		} else {
+			// no error
+			if (
+				selectedEmail ||
+				selectedPass ||
+				selectedName ||
+				selectedConfirmPassword ||
+				selectedPhone
+			) {
+				return "2px solid #068EC8";
+			} // filled
+			return "1px solid #e2e2e2";
+		}
+	}};
+	// "2px solid #068EC8" : "1px solid #e2e2e2"
+	border-radius: 4px;
+	margin-bottom: 1rem;
+`;
+
+const FormInput = styled.input`
+	outline: none;
+	border: none;
+	flex: 1;
+	margin-left: 16px;
+	margin-right: 16px;
+	font-size: 16px;
+	line-height: 24px;
+	color: ${({ error }) => (error ? "#FF0000" : "#232933")};
+
+	::placeholder {
+		color: #b4b4b4;
+	}
+
+	&:focus ::placeholder {
+		color: transparent;
+	}
+
+	&:-webkit-autofill {
+		-webkit-box-shadow: 0 0 0 30px white inset !important;
+		box-shadow: 0 0 0 30px white inset !important;
+		-webkit-text-fill-color: ${({ error }) =>
+			error ? "#FF0000" : "#232933"};
+	}
+`;
+
+const Button = styled.button`
+	margin-top: 50px;
+	margin-bottom: 16px;
+	height: 40px;
+	border-radius: 4px;
+	background-color: ${(props) => (props.disabled ? "#F5F5F5" : "#009fe3")};
+	color: ${(props) => (props.disabled ? "#B4B4B4" : "#FFFFFF")};
+	font-size: 16px;
+	font-weight: 500;
+	outline: none;
+	border: none;
+	transition: 0.4s ease all;
+
+	&:hover {
+		background-color: ${(props) =>
+			props.disabled ? "#F5F5F5" : "#068ec8"};
+	}
+`;
+
+const BelowButton = styled.a`
+	font-size: 14px;
+	line-height: 17px;
+	text-align: center;
+	letter-spacing: -0.02em;
+	text-decoration-line: underline;
+	margin-bottom: 32px;
+	color: #009fe3;
+`;
+
+ForgotPassword.getInitialProps = async (ctx) => {
+	initialize(ctx);
+	return {};
+};
+
+const mapStateToProps = (state) => {
+	return {};
+};
+
+export default connect(mapStateToProps, actions)(ForgotPassword);
+
+{
+	/* <form
 				className="form-container"
-				onKeyDown={(e) => {
-					if (e.key === "Enter") {
-						e.preventDefault();
-					}
-				}}>
+				>
 				<p
 					id="text-email"
 					style={{ marginTop: "15px", marginBottom: "15px" }}>
@@ -555,18 +610,5 @@ function ForgotPassword(props) {
             .new-user-progress{
                 width:380px !important;
             }
-        `}</style>
-		</>
-	);
+        `}</style> */
 }
-
-ForgotPassword.getInitialProps = async (ctx) => {
-	initialize(ctx);
-	return {};
-};
-
-const mapStateToProps = (state) => {
-	return {};
-};
-
-export default connect(mapStateToProps, actions)(ForgotPassword);

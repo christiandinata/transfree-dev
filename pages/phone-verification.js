@@ -84,7 +84,7 @@ function PhoneVerification(props) {
 
 			<FormContainer>
 				{errorMsg ? <ErrorDiv>Wrong Verification Code</ErrorDiv> : null}
-				<Form onSubmit={handleSubmit}>
+				<Form onSubmit={handleSubmit} type="verif">
 					<FormInner>
 						<center>
 							<Heading>Verification code in your email</Heading>

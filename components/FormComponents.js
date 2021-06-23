@@ -19,6 +19,8 @@ export const Form = styled.form`
 	min-height: 448px;
 	background: #fff;
 	display: flex;
+	border: ${(props) => (props.type ? "1px solid #9A9A9A" : "none")};
+	border-radius: ${(props) => (props.type ? "8px" : "4px")};
 	flex-direction: column;
 	align-items: center;
 `;
