@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons";
+import React from "react";
 
-// Navbar after main pages
-export function NavBar(props) {
+// Navbar for blue background with "Back to..." text
+export function NavBarBlue(props) {
 	return (
 		<>
 			<Nav>
@@ -31,6 +32,41 @@ export function NavBar(props) {
 			</Nav>
 		</>
 	);
+}
+
+// Navbar for white background (the same one as the navbar at homepage when scrolled, with profile info)
+export function NavBarWhite(username, id) {
+	return(
+		<Nav scrolled = "true" homepage = "true">
+			<NavInner>
+				<a href = "/"><Logo src="../static/images/transfree-logo.png" scrolled = "true"/></a>
+				<React.Fragment>
+					<NavigationCenter>
+						<NavigationChild href = "/order" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
+							Send Money
+						</NavigationChild>
+						<NavigationChild href = "/account" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
+							Transactions
+						</NavigationChild>
+						<NavigationChild href = "https://www.youtube.com/watch?v=8RzCs_sQ8Ak" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
+							How It Works
+						</NavigationChild>
+						<NavigationChild href = "/about" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
+							About Us
+						</NavigationChild>
+						</NavigationCenter>
+						<NavigationChild href = "/user-profile" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
+						<ProfileInfo scrolled = "true" name = "true">
+							{username}
+						</ProfileInfo>
+						<ProfileInfo scrolled = "true" id = "true">
+							{id}
+						</ProfileInfo>
+					</NavigationChild>
+			</React.Fragment>
+			</NavInner>
+		</Nav>
+	)
 }
 
 export const Nav = styled.div`
@@ -103,8 +139,7 @@ export const NavigationChild = styled.a`
 		homepage ? "24px" : "19px")}; 
 	color: ${({ scrolled, homepage, navChildColor }) => (
 		homepage && scrolled ? "#000" : navChildColor)}; 
-	border-left: ${({ id }) => (
-		id ? "1px solid #e9e9e9" : "none")}; 
+	border-left: "none"
 
 	&:hover {
 		color: ${({ scrolled, navChildColor }) => (

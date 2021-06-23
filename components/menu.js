@@ -6,7 +6,6 @@ import * as Navbar from './MenuComponents';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { useEffect, useState } from 'react';
 
-//Buat menampilkan menu bar (How it works, about us, send money, transactions, sign up, profile, dan logout)
 const Menu = ({isAuthenticated, isApproved, deauthenticate, username, id, homepage}) => {
   const [scrolled, setScrolled] = useState(false)
 
