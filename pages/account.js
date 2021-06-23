@@ -3,6 +3,7 @@ import Menu from '../components/menu.js';
 import Link from 'next/link';
 import AccountLayout from '../components/AccountLayout';
 import NumberFormat from 'react-number-format';
+import styled from "styled-components";
 import { connect } from 'react-redux';
 import initialize from '../utils/initialize';
 import actions from '../redux/actions';
@@ -436,6 +437,21 @@ const OrderLayout = ({ordersList}) => {
   )
 }
 
+const ContainerFluid = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+  margin-top: -20px;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  width: 100%;
+`;
+
+const ContentContainer = styled.div`
+  margin-top: 130px;
+`;
+
 //Account Layout
 class Account extends React.Component {
   constructor({props}) {
@@ -463,9 +479,18 @@ class Account extends React.Component {
 
   render() {
     return (
-      <AccountLayout isApproved={this.props.isApproved}>
-        {this.renderContent()}
-      </AccountLayout>
+      <div>
+        <Header/>
+        <ContainerFluid>
+          <ContentContainer>
+            heyoo
+          </ContentContainer>
+        </ContainerFluid>
+      </div>
+
+      // <AccountLayout isApproved={this.props.isApproved}>
+      //   {this.renderContent()}
+      // </AccountLayout>
     );
   }
 }
