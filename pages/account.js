@@ -126,8 +126,35 @@ class OrderItem extends React.Component {
     return (
       this.props.ordersList.map((order, key) => {
         return (
+          <div>
+            <ItemContainer>
+              <ItemRow>
+                <ItemColumn left>
+                  Transfer to <span style={{fontWeight: "bolder"}}>{order.name}</span>
+                </ItemColumn>
+                <ItemColumn right>
+                  <NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value={order.fromAmount} /> {order.fromCurrency.toUpperCase()}
+                </ItemColumn>
+              </ItemRow>
+              <ItemRow>
+                <ItemColumn left>
+                  <Date>
+                    <span className={order.completedAt == 0.0 ? 'processing' : 'completed'}>
+                      {order.completedAt == 0.0 ? 'Processing' : 'Completed on '+moment(order.completedAt).format("DD/MM/YYYY HH:mm")}
+                    </span>
+                  </Date>
+                </ItemColumn>
+                <ItemColumn right>
+                  <span className="bold"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value={order.toAmount} /> {order.toCurrency.toUpperCase()}</span>
+                </ItemColumn>
+              </ItemRow>
+              <ItemDetail open={true}>
+                hmmmm
+              </ItemDetail>
+            </ItemContainer>
           <div key={key} >
-            <div className={'list-item '+ (this.state.key == key ? 'open' : '')} onClick={() => this.toggleDetail(key)} >
+            
+            {/* <div className={'list-item '+ (this.state.key == key ? 'open' : '')} onClick={() => this.toggleDetail(key)} >
               <div className="left">
                 <div className="date">{order.completedAt == 0.0 ? 'Processing' : 'Completed on '+moment(order.completedAt).format("DD/MM/YYYY HH:mm")}</div>
                 <div className="recipient">Transfer to <b>{order.name}</b></div>
@@ -136,7 +163,7 @@ class OrderItem extends React.Component {
                 <div className="source"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value={order.fromAmount} /> {order.fromCurrency.toUpperCase()}</div>
                 <div className="destination bold"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value={order.toAmount} /> {order.toCurrency.toUpperCase()}</div>
               </div>
-            </div>
+            </div> */}
 
             <div className={'detail '+ (this.state.key == key ? 'open' : '')}>
             <ul className="progress">
@@ -176,6 +203,7 @@ class OrderItem extends React.Component {
               <li><div className={'divider '+ (order.completedAt == 0.0 ? 'grey' : 'blue')}></div></li>
               <li><div className={'node '+ (order.completedAt == 0.0 ? 'grey' : 'blue')}></div><p>{order.completedAt == 0.0 ? ('We will complete your transfer') :  ('Completed on '+moment(order.completedAt).format("DD/MM/YYYY HH:mm"))}</p></li>
             </ul>
+            </div>
             </div>
             <style jsx>{`
               .detail {
@@ -331,19 +359,9 @@ class OrderItem extends React.Component {
 const OrderLayout = ({ordersList}) => {
   return (
     <div>
-      <div className="container-fixed">
-        <div className="list-header">
-          <div className="left"><h2>Recent transactions</h2></div>
-          <div className="right">
-            <input type="text" placeholder="Search transactions"/>
-          </div>
-        </div>
-        <form className="form-container">
+      <div>
           <OrderItem ordersList={ordersList} />
-        </form>
-        <Link href="/order">
-          <a className="btn-primary">Send money</a>
-        </Link>
+       
       </div>
       <style jsx>{`
         .container-fixed {
@@ -438,18 +456,159 @@ const OrderLayout = ({ordersList}) => {
 }
 
 const ContainerFluid = styled.div`
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
   align-items: center;
   margin-top: -20px;
   margin-bottom: 40px;
   padding-bottom: 20px;
-  width: 100%;
 `;
 
 const ContentContainer = styled.div`
-  margin-top: 130px;
+  // display: flex;
+  // flex-direction: column;
+  margin-top: 10px;
+`;
+
+const BackgroundContainer = styled.div`
+  margin-top: 20px;
+  width: 100%;
+  height: 290px;
+  background: #1E345B;
+  position: relative;
+  text-align: center;
+
+  >.image{
+    width: 100%;
+    height: 290px;
+    object-fit: cover;
+    object-position: bottom;
+  }
+
+  >.title{
+    size: 40px;
+    color: white;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+`;
+
+const SearchContainer = styled.div`
+  display: flex;
+  width: 100%;
+  // flex-direction: column;
+
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+const SearchBar = styled.input`
+  // position: absolute;
+  // top: 70%;
+  // left: 40%;
+  // transform: translate(-50%, -50%);
+  font-size: 16px;
+
+  background: #FFFFFF;
+  border: 1px solid #E2E2E2;
+  border-radius: 4px;
+  height: 48px;
+  padding-left: 50px;
+  width: 350px;
+
+  background-image: url('../static/images/Asset Web/transaction/search.svg');
+  background-position: 12px 13px;
+  background-repeat: no-repeat;
+`;
+
+const Button = styled.button`
+  // position: absolute;
+  // top: 70%;
+  // left: 65%;
+  // transform: translate(-50%, -50%);
+
+  border: 1px solid #009FE3;
+  border-radius: 4px;
+
+  width: 184px;
+  height: 50px;
+  font-size: 16px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 24px;
+  margin-bottom: 10px;
+  transition: 0.2s;
+
+  background-color: #009FE3;
+  color: white;
+`;
+
+const AllItemContainer = styled.div`
+  max-width: 1020px;
+  height: auto;
+  margin: 20px auto;
+
+  @media only screen and (max-width: 600px) {
+    padding: 0px 10px 0px 10px;
+  }
+`;
+
+const ItemContainer = styled.div`
+  background: white;
+  padding: 15px 20px 15px 20px ;
+  border: 1px solid #E9E9E9;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+
+  transition: 0.2s;
+
+  &:hover{
+    box-shadow: 0px 18px 50px rgba(98, 107, 121, 0.15);
+  }
+  
+`;
+
+const ItemRow = styled.div`
+  display: flex;
+  padding: 2.5px 0px 2.5px;
+`;
+
+const ItemColumn = styled.span`
+  flex-basis: ${props => props.left ? '60%' : '40%'};
+  text-align: ${props => props.left ? 'left' : 'right'};
+  font-size: ${props => props.left ? '16px' : '20px'};
+  padding-top: ${props => props.left ? '2.5px' : '0px'};
+`;
+
+const Date = styled.span`
+  >.processing{
+    color: #FF9800;
+  }
+
+  >.completed{
+    color: #00A000;
+  }
+`;
+
+const ItemDetail = styled.div`
+  height: 0;
+  overflow: hidden;
+  text-align: left;
+  transition: all 0.5s ease;
+
+  ${({ open }) => open && `
+    height: auto;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  `}
 `;
 
 //Account Layout
@@ -482,8 +641,20 @@ class Account extends React.Component {
       <div>
         <Header/>
         <ContainerFluid>
+          <BackgroundContainer>
+            <img className="image" src = '../static/images/Asset Web/transaction/Batik_World_Map_cut.png'/>
+            <h1 className="title">History Transactions</h1>
+            <SearchContainer>
+              <SearchBar type="text" placeholder="Search transactions"/>
+              <Button>Search</Button>
+            </SearchContainer>
+          </BackgroundContainer>
           <ContentContainer>
-            heyoo
+            <AllItemContainer>
+              {this.renderContent()}
+            </AllItemContainer>
+            <p>heyooo</p>
+            
           </ContentContainer>
         </ContainerFluid>
       </div>
