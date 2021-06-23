@@ -25,7 +25,7 @@ app.prepare()
       if(!req.cookies.token) {
         res.redirect('/');
       } else {
-        return app.render(req, res, '/home', req.query);
+        return app.render(req, res, '/account', req.query);
       }
     });
 

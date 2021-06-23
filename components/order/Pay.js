@@ -1,571 +1,308 @@
 import Link from 'next/link';
+import styled from "styled-components";
 import NumberFormat from 'react-number-format';
-import {
-    Accordion,
-    AccordionItem,
-    AccordionItemHeading,
-    AccordionItemButton,
-    AccordionItemPanel,
-} from 'react-accessible-accordion';
-import 'react-accessible-accordion/dist/fancy-example.css';
 
-function BankOption(props) {
-  return (
-    <div>
-      {/*
-       <a style={{paddingTop: "9.5px",paddingBottom: "9.5px"}} className="btn-primary"  href="https://www.transfree.co.uk/" target="_blank">Pay your transfer</a>
-      */}
-      <p className="instruction">Please select the bank below:</p>
-      <ul>
-        {
-        // <li onClick={() => props.generateVA('bni')}><img src="../static/images/bank_logos/bni.png" alt="BNI"/> <span>Bank BNI</span></li>
-        // <li onClick={() => props.generateVA('mandiri')}><img src="../static/images/bank_logos/mandiri.png"/> <span>Bank Mandiri</span></li>
-        // <li onClick={() => props.generateVA('maybank')}><img src="../static/images/bank_logos/maybank.png"/> <span>Maybank</span></li>
-        // <li onClick={() => props.generateVA('permata')}><img src="../static/images/bank_logos/permata.png"/> <span>Permata Bank</span></li>
-        // <li onClick={() => props.generateVA('sinarmas')}><img src="../static/images/bank_logos/sinarmas.png"/> <span>Bank Sinarmas</span></li>
-        }
-        <li onClick={() => props.transferBankBNI('bni')}><img src="../static/images/bank_logos/bni.png" alt="BNI"/> <span>Bank BNI</span></li>
-        <li onClick={() => props.transferBankBCA('bca')}><img src="../static/images/bank_logos/bca.png" alt="BCA"/> <span>Bank BCA</span></li>
-        <li onClick={() => props.transferBankMandiri('mandiri')}><img src="../static/images/bank_logos/mandiri.png" alt="Mandiri"/> <span>Bank Mandiri</span></li>
-      </ul>
+const Row = styled.div`
+  display: flex;
+  width: 100%;
 
-      <style jsx>{`
-        p {
-          text-align: center;
-        }
-        ul {
-          padding: 0;
-          list-style: none;
-        }
+  @media only screen and (max-width: 800px) {
+    flex-direction: column;
+  }
+`;
 
-        ul li img {
-          max-width: 80px;
-          margin-bottom: -3px;
-          margin-right: 15px;
-        }
+const Column = styled.div`
+  padding: 10px;
+`;
 
-        ul li {
-          display: flex;
-          align-items: center;
-          border-bottom: 1px solid #eaeaea;
-          padding: 15px;
-          transition: all 0.2s ease;
+const PaymentContainer = styled.div `
+  background: #FFFFFF;
+  border: 0.5px solid #B4B4B4;
+  box-sizing: border-box;
+  border-radius: 16px;
+  padding: 10px 30px 30px 30px;
+  max-width: 495px;
+  margin: 0px 25px 0px 25px;
 
-        }
+  @media only screen and (max-width: 1000px) {
+    min-width: 420px;
+    margin: 0px 10px 0px 10px;
+  }
 
-        ul li:hover {
-          cursor: pointer;
-          background-color: #F6F8FB;
-        }
+  @media only screen and (max-width: 800px) {
+    min-width: 300px;
+    max-width: 495px;
+    margin: 0px 15px 0px 15px;
+    padding: 10px 20px 30px 20px;
+  }
+`;
 
-        ul li a {
-          color: #15233C;
-        }
+const PolicyContainer = styled.div `
+  background: #FFFFFF;
+  margin: 0px 25px 0px 25px;
+  min-width: 392px;
+  max-width: 392px;
+  border: 0.5px solid #009FE3;
+  border-radius: 4px;
+  color: #9A9A9A;
 
-        `}</style>
-    </div>
+  @media only screen and (max-width: 1000px) {
+    min-width: 300px;
+    margin: 0px 10px 0px 10px;
+  }
+
+  @media only screen and (max-width: 800px) {
+    max-width: 495px;
+    margin: 0px 15px 0px 15px;
+  }
+`;
+
+const PaymentTitle = styled.h3 `
+  font-size: 20px;
+  margin-bottom: 10px;
+`;
+
+const PaymentDetails = styled.p`
+  color: #626B79;
+`;
+
+const PolicyTitle = styled.div `
+  background: #009FE3;
+  font-size: 20px;
+  border-radius: 4px 4px 0px 0px;
+  padding: 20px;
+  color: white;
+`;
+
+const PolicyContent = styled.div`
+  font-size: 16px;
+  padding: 20px;
+
+  >.link{
+    color: #009FE3;
+  }
+`;
+
+const AmountContainer = styled.div`
+  background: #1E345B;
+  color: white;
+  margin: 20px -30px 30px -30px;
+  padding: 0px 20px 0px 20px; 
+
+
+  @media only screen and (max-width: 800px) {
+    margin: 20px -20px 30px -20px;
+  }
+`;
+
+const BankDetailContainer = styled.div`
+  background: #009FE3;
+  color: white;
+  padding: 0px 5px 0px 5px; 
+  margin-bottom: 5px;
+
+  @media only screen and (max-width: 800px) {
+    font-size: 14px;
+  }
+`;
+
+const PaymentDetailContainer = styled.div`
+  background: #F39200;
+  color: white;
+  padding: 5px 15px 5px 15px; 
+`;
+
+const ItemContainer = styled.div`
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+
+  @media only screen and (max-width: 800px) {
+    padding: 15px 8px 15px 8px ;
+  }
+`;
+
+const ItemRow = styled.div`
+  display: flex;
+  padding: 2.5px 0px 2.5px;
+  
+  ${({ hide }) => hide && `
+    display: none;
+  `}
+`;
+
+const AmountColumn = styled.span`
+  color: white;
+  padding-top: ${props => props.left ? '4.75px' : '2.5px'};
+  flex-basis: ${props => props.left ? '60%' : '40%'};
+  text-align: ${props => props.left ? 'left' : 'right'};
+  font-size: ${props => props.left ? '16px' : '20px'};
+  font-weight: ${props => props.left ? 'normal' : 'bold'};
+`;
+
+
+const BankDetailColumn = styled.span`
+  color: white;
+  font-size: 16px;
+  padding-top: 2.5px;
+  flex-basis: ${props => props.left ? '40%' : '60%'};
+  text-align: ${props => props.left ? 'left' : 'right'};
+  font-weight: ${props => props.left ? 'normal' : 'bold'};
+`;
+
+const ButtonContainer = styled.div`
+  padding-top: 20px;
+`;
+
+const Button = styled.button`
+  border: 1px solid #009FE3;
+  border-radius: 4px;
+
+  width: 100%;
+  height: 50px;
+  font-size: 16px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 24px;
+  margin-bottom: 10px;
+  transition: 0.2s;
+
+  background-color: ${props => props.secondary ? 'white' : '#009FE3'};
+  color: ${props => props.secondary ? '#009FE3' : 'white'};
+`;
+
+const BankList = styled.ul`
+  padding: 0;
+  list-style: none;
+`;
+
+const RadioButton = styled.input.attrs({
+  type: "radio",
+})`
+  height: 18px;
+  width: 18px;
+  cursor: pointer;
+  background: black;
+  border: 10px solid #90DDD0 !important;
+  margin-right: 20px; 
+  pointer-events: none;
+
+`;
+
+const BankItem = styled.li`
+  display: flex;
+  align-items: center;
+  border: 0.5px solid #B4B4B4;
+  padding: 15px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 1;
+
+  ${({ active }) => active && `
+    box-shadow: 0 0 1px 1px #068EC8;
+    border-color: #068EC8;
+    outline: none;
+  `}
+
+  >.bank-img{
+    max-width: 85px;
+    margin-right: 15px;
+  }
+`;
+
+const BankDetail = styled.div`
+  height: 0;
+  overflow: hidden;
+  background-color: #F6F8FB;
+  text-align: left;
+  transition: all 0.5s ease;
+
+  ${({ open }) => open && `
+    height: auto;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  `}
+`;
+
+function RenderButton(props){
+  return(
+    props.method == 'direct_transfer_via_email' ?
+    <Button onClick={() => props.addOrder(props.method)}>Send payment instruction to email</Button>:
+    <Button onClick={() => props.addOrder(props.method)}>Send Money</Button>
   )
 }
 
-function EmailInstruction(props) {
-  return (
-    <div>
-    {/*
-      <p className="instruction">Please check your email below:</p>
-      <div className="payment-details">
-        <div className="list-item">
-          <span className="left">Email:</span>
-          <span className="right bold">{props.data.email}</span>
-        </div>
-      </div>
-      */}
-      {/* <div className="payment-details">
-        <p style={{margin:"0px !important"}}>Transfer Reference 
-      <br/>
-      "Your last name + Today's date" (E.g. Adi22)
-      <br/>
-       Note: Please state the reference number that allows us to identify you.
-      </p>
-      </div> */}
-      <p>We will send payment instruction to your email. Confirm by clicking the button below</p>
-      <Accordion>   
-        <AccordionItem>
-            <AccordionItemHeading>
-                <AccordionItemButton>
-                    Is it safe to use Transfree service?
-                </AccordionItemButton>
-            </AccordionItemHeading>
-            <AccordionItemPanel id={"isItSafe"}>
-                <p>
-                  Yes, you are in a trusted company. We are legally incorporated as PT Pelita Transfer Nusantara, office at Innovation Room Kemnaker RI. We are the official partner of Indonesian Community in several countries and collaborating with the governement.
-                  <a href="../index#row-footer" target="_blank"> See our Partners & Collaboratos </a>
-                </p>
-            </AccordionItemPanel>
-        </AccordionItem>   
-      </Accordion>
-      <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_email')}>Send payment instruction to email</span>
-      <style jsx>{`
-        .list-item {
-          display: flex;
-          width: 100%;
-          margin: 10px 0;
-        }
-
-        .list-item span {
-          flex-basis: 50%;
-        }
-
-        .list-item .right {
-          text-align: right;
-          color: #15233C;
-        }
-
-        .payment-details {
-          background-color: #EBF6FB;
-          padding: 10px 20px;
-          margin: 30px 0;
-          border-radius: 8px;
-        }
-
-        .bold {
-          font-family: "Campton-Bold", sans-serif;
-        }
-
-        .btn-primary {
-          width: 100%;
-          padding: 15px 0;
-        }
-        `}</style>
-    </div>
-  )
-}
-
-function VAGenerated(props) {
-  return (
-    <div>
-      <p className="instruction">Please make a payment to this following Virtual Account (VA) number:</p>
-      <div className="payment-details">
-        <div className="list-item">
-          <span className="left">VA Number:</span>
-          <span className="right bold">{props.vaNumber}</span>
-        </div>
-      </div>
-      <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('virtual_account')}>Continue</span>
-      <p>Please follow the instruction of your bank to transfer money into virtual account number.</p>
-      <Accordion>
-        <AccordionItem>
-            <AccordionItemHeading>
-                <AccordionItemButton>
-                    Is it safe to use Transfree service?
-                </AccordionItemButton>
-            </AccordionItemHeading>
-            <AccordionItemPanel id={"isItSafe"}>
-                <p>
-                  Yes, you are in a trusted company. We are legally incorporated as PT Pelita Transfer Nusantara, office at Innovation Room Kemnaker RI. We are the official partner of Indonesian Community in several countries and collaborating with the governement. 
-                  <a href="../index#row-footer" target="_blank"> See our Partners & Collaboratos </a>
-                </p>
-            </AccordionItemPanel>
-        </AccordionItem>
-      </Accordion>
-      
-      <style jsx>{`
-        .list-item {
-          display: flex;
-          width: 100%;
-          margin: 10px 0;
-        }
-
-        .list-item span {
-          flex-basis: 50%;
-        }
-
-        .list-item .right {
-          text-align: right;
-          color: #15233C;
-        }
-
-        .payment-details {
-          background-color: #EBF6FB;
-          padding: 10px 20px;
-          margin: 30px 0;
-          border-radius: 8px;
-        }
-
-        .bold {
-          font-family: "Campton-Bold", sans-serif;
-        }
-        `}</style>
-    </div>
-  )
-}
-
-function TransferBankBCA(props) {
-  return (
-    <div>
-      <div className="payment-details">
-        <div className="list-item">
-          <span className="left">Bank name</span>
-          <span className="right">BCA</span>
-        </div>
-
-        <div className="list-item">
-          <span className="left">Account Name</span>
-          <span className="right">Pelita Transfer Nusantara</span>
-        </div>
-
-        <div className="list-item">
-          <span className="left">Account number</span>
-          <span className="right">206 37 555 67</span>
-        </div>
-      </div>
-      {/* <div className="payment-details">
-        <p style={{margin:"0px !important"}}>Transfer Reference 
-      <br/>
-      "Your last name + Today's date" (E.g. Adi22)
-      <br/>
-       Note: Please state the reference number that allows us to identify you.
-      </p>
-      </div> */}
-      <p>Please check all of the details above are correct and check your email for the notification</p>
-
-      <p><span className="received-on-weekend" >Please pay with your own bank account. If you are paying from different account, your payment is considered invalid</span></p>
-
-      <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_bca')}>Continue</span>
-      
-      <Accordion>
-        <AccordionItem>
-            <AccordionItemHeading>
-                <AccordionItemButton>
-                    Is it safe to use Transfree service?
-                </AccordionItemButton>
-            </AccordionItemHeading>
-            <AccordionItemPanel id={"isItSafe"}>
-                <p>
-                  Yes, you are in a trusted company. We are legally incorporated as PT Pelita Transfer Nusantara, office at Innovation Room Kemnaker RI. We are the official partner of Indonesian Community in several countries and collaborating with the governement.
-                  <a href="../index#row-footer" target="_blank"> See our Partners & Collaboratos </a>
-                </p>
-            </AccordionItemPanel>
-        </AccordionItem>
-      </Accordion>
-
-      <style jsx>{`
-      .received-on-weekend {
-        font-family: 'Campton-Bold', sans-serif;
-        color: #e79635
-      }
-        .list-item {
-          display: flex;
-          width: 100%;
-          margin: 10px 0;
-        }
-
-        .list-item span {
-          flex-basis: 50%;
-        }
-
-        .list-item .right {
-          text-align: right;
-          color: #15233C;
-        }
-
-        .list-item .left {
-          opacity: 0.7;
-        }
-
-        .instruction {
-          text-align: center;
-          max-width: 60%;
-          margin: 0 auto;
-        }
-
-        h2 {
-          width: 100%;
-          text-align: center;
-        }
-
-        .payment-details {
-          background-color: #EBF6FB;
-          padding: 10px 20px;
-          margin: 30px 0;
-          border-radius: 8px;
-        }
-
-        .btn-primary {
-          width: 100%;
-          padding: 15px 0;
-          margin : 20px 2;
-        }
-        .btn-danger {
-          background: transparent;
-          border: 2px solid #DC2020;
-          color: #DC2020;
-          padding: 8px 18px;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 16px;
-          border-radius: 4px;
-          transition: 0.2s;
-          width: 100%;
-          padding: 15px 0;
-          margin-top: 15px;
-        }
-
-        .btn-danger:hover {
-          transform: translateY(-1px);
-        }
-      `}</style>
-    </div>
-  )
-}
-
-function TransferBankBNI(props) {
-  return (
-    <div>
-      <div className="payment-details">
-        <div className="list-item">
-          <span className="left">Bank name</span>
-          <span className="right">BNI</span>
-        </div>
-
-        <div className="list-item">
-          <span className="left">Account Name</span>
-          <span className="right">Pelita Transfer Nusantara</span>
-        </div>
-
-        <div className="list-item">
-          <span className="left">Account number</span>
-          <span className="right">07 5555 4711</span>
-        </div>
-      </div>
-      {/* <div className="payment-details">
-        <p style={{margin:"0px !important"}}>Transfer Reference 
-      <br/>
-      "Your last name + Today's date" (E.g. Adi22)
-      <br/>
-       Note: Please state the reference number that allows us to identify you.
-      </p>
-      </div> */}
-      <p>Please check all of the details above are correct and check your email for the notification</p>
-      <p><span className="received-on-weekend" >Please pay with your own bank account. If you are paying from different account, your payment is considered invalid</span></p>
-
-      <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_bni')}>Continue</span>
-      <Accordion>
-        <AccordionItem>
-            <AccordionItemHeading>
-                <AccordionItemButton>
-                    Is it safe to use Transfree service?
-                </AccordionItemButton>
-            </AccordionItemHeading>
-            <AccordionItemPanel id={"isItSafe"}>
-                <p>
-                  Yes, you are in a trusted company. We are legally incorporated as PT Pelita Transfer Nusantara, office at Innovation Room Kemnaker RI. We are the official partner of Indonesian Community in several countries and collaborating with the governement.
-                  <a href="../index#row-footer" target="_blank"> See our Partners & Collaboratos </a>
-                </p>
-            </AccordionItemPanel>
-        </AccordionItem>
-      </Accordion>  
-      <style jsx>{`
-      .received-on-weekend {
-        font-family: 'Campton-Bold', sans-serif;
-        color: #e79635
-      }
-        .list-item {
-          display: flex;
-          width: 100%;
-          margin: 10px 0;
-        }
-
-        .list-item span {
-          flex-basis: 50%;
-        }
-
-        .list-item .right {
-          text-align: right;
-          color: #15233C;
-        }
-
-        .list-item .left {
-          opacity: 0.7;
-        }
-
-        .instruction {
-          text-align: center;
-          max-width: 60%;
-          margin: 0 auto;
-        }
-
-        h2 {
-          width: 100%;
-          text-align: center;
-        }
-
-        .payment-details {
-          background-color: #EBF6FB;
-          padding: 10px 20px;
-          margin: 30px 0;
-          border-radius: 8px;
-        }
-
-        .btn-primary {
-          width: 100%;
-          padding: 15px 0;
-          margin: 20px 2;
-        }
-        .btn-danger {
-          background: transparent;
-          border: 2px solid #DC2020;
-          color: #DC2020;
-          padding: 8px 18px;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 16px;
-          border-radius: 4px;
-          transition: 0.2s;
-          width: 100%;
-          padding: 15px 0;
-          margin-top: 15px;
-        }
-
-        .btn-danger:hover {
-          transform: translateY(-1px);
-        }
-      `}</style>
-    </div>
-  )
-}
-
-function TransferBankMandiri(props) {
+function RenderBankDetail(props){
   return(
     <div>
-    <div className="payment-details">
-      <div className="list-item">
-        <span className="left">Bank name</span>
-        <span className="right">Mandiri</span>
-      </div>
-
-      <div className="list-item">
-        <span className="left">Account Name</span>
-        <span className="right">Pelita Transfer Nusantara</span>
-      </div>
-
-      <div className="list-item">
-          <span className="left">Account number</span>
-          <span className="right">122 00 1025188 5</span>
-        </div>
+      <BankDetailContainer>
+          <ItemContainer>
+            <ItemRow>
+              <BankDetailColumn left>
+                Bank Name
+              </BankDetailColumn>
+              <BankDetailColumn right>
+                {props.bankName}
+              </BankDetailColumn>
+            </ItemRow>
+            <ItemRow>
+              <BankDetailColumn left>
+                Account Name
+              </BankDetailColumn>
+              <BankDetailColumn right>
+                Pelita Transfer Nusantara
+              </BankDetailColumn>
+            </ItemRow>
+            <ItemRow>
+              <BankDetailColumn left>
+                Account Number
+              </BankDetailColumn>
+              <BankDetailColumn right>
+                {props.accountNumber}
+              </BankDetailColumn>
+            </ItemRow>
+          </ItemContainer>
+        </BankDetailContainer>
+        <PaymentDetailContainer>
+          Please pay with your own bank account. If you are paying from different account, 
+          your payment is considered invalid.
+      </PaymentDetailContainer>
     </div>
-    {/* <div className="payment-details">
-    <p style={{margin:"0px !important"}}>Transfer Reference 
-      <br/>
-      "Your last name + Today's date" (E.g. Adi22)
-      <br/>
-      Note: Please state the reference number that allows us to identify you.
-      </p>
-      </div> */}
-      <p>Please check all of the details above are correct and check your email for the notification</p>
-      {/**
-      <p>Please check all of the details above are correct to speed up the process.
-      We also email you the instruction. We will notify you via email once your payment has been confirmed.</p>
-       */}
+  )
+}
 
-  
-      <p><span className="received-on-weekend" >Please pay with your own bank account. If you are paying from different account, your payment is considered invalid</span></p>
-      
-      <span style={{marginTop:"30px"}} className="btn-primary" onClick={() => props.addOrder('direct_transfer_via_mandiri')}>Continue</span>
-      <Accordion>  
-      <AccordionItem>
-        <AccordionItemHeading>
-            <AccordionItemButton>
-            Is it safe to use Transfree service?
-            </AccordionItemButton>
-        </AccordionItemHeading>
-        <AccordionItemPanel id={"isItSafe"}>
-                <p>
-                  Yes, you are in a trusted company. We are legally incorporated as PT Pelita Transfer Nusantara, office at Innovation Room Kemnaker RI. We are the official partner of Indonesian Community in several countries and collaborating with the governement.
-                  <a href="../index#row-footer" target="_blank"> See our Partners & Collaboratos </a>
-                </p>
-            </AccordionItemPanel>
-    </AccordionItem>
-</Accordion>
-      <style jsx>{`
-      .received-on-weekend {
-        font-family: 'Campton-Bold', sans-serif;
-        color: #e79635
-      }
-        .list-item {
-          display: flex;
-          width: 100%;
-          margin: 10px 0;
-        }
-
-        .list-item span {
-          flex-basis: 50%;
-        }
-
-        .list-item .right {
-          text-align: right;
-          color: #15233C;
-        }
-
-        .list-item .left {
-          opacity: 0.7;
-        }
-
-        .instruction {
-          text-align: center;
-          max-width: 60%;
-          margin: 0 auto;
-        }
-
-        h2 {
-          width: 100%;
-          text-align: center;
-        }
-
-        .payment-details {
-          background-color: #EBF6FB;
-          padding: 10px 20px;
-          margin: 30px 0;
-          border-radius: 8px;
-        }
-    
-        .check{
-          text-align:center;
-          background-color:  #EBF6FB;
-          padding: 10px 10px;
-          margin-top: 30px;
-          border-radius: 8px;
-        
-        }
-
-        .btn-primary {
-          width: 100%;
-          padding: 15px 0;
-          margin: 20px 2;
-        }
-        .btn-danger {
-          background: transparent;
-          border: 2px solid #DC2020;
-          color: #DC2020;
-          padding: 8px 18px;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 16px;
-          border-radius: 4px;
-          transition: 0.2s;
-          width: 100%;
-          padding: 15px 0;
-          margin-top: 15px;
-        }
-
-        .btn-danger:hover {
-          transform: translateY(-1px);
-        }
-    
-        }
-      `}</style>
+function RenderVaDetail(props){
+  return(
+    <div>
+      <BankDetailContainer>
+          <ItemContainer>
+            <ItemRow>
+              <BankDetailColumn left>
+                Bank Name
+              </BankDetailColumn>
+              <BankDetailColumn right>
+                {props.bankName}
+              </BankDetailColumn>
+            </ItemRow>
+            <ItemRow>
+              <BankDetailColumn left>
+                VA Number
+              </BankDetailColumn>
+              <BankDetailColumn right>
+                {props.vaNumber}
+              </BankDetailColumn>
+            </ItemRow>
+          </ItemContainer>
+        </BankDetailContainer>
+        <PaymentDetailContainer>
+          Please follow the instruction of your bank to transfer money into virtual account number
+          and please pay with your own bank account. If you are paying from different account, 
+          your payment is considered invalid.
+      </PaymentDetailContainer>
     </div>
   )
 }
@@ -574,6 +311,8 @@ class Pay extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      bankSelected: '',
+      method: '',
       isVAgenerated: false,
       isTransferBCA: false,
       isTransferBNI: false,
@@ -581,32 +320,19 @@ class Pay extends React.Component {
     };
 
     this.generateVA = this.generateVA.bind(this);
-    this.transferBankBNI = this.transferBankBNI.bind(this);
-    this.transferBankBCA = this.transferBankBCA.bind(this);
-    this.transferBankMandiri = this.transferBankMandiri.bind(this);
+    this.transferBank = this.transferBank.bind(this);
     this.addOrder = this.addOrder.bind(this);
   }
 
   generateVA(bankName) {
-    // console.log(bankName);
     this.props.generateVA(bankName);
   }
 
-  transferBankBCA(bankName) {
+  transferBank(bankName) {
+    this.generateVA(bankName);
     this.setState({
-      isTransferBCA: true
-    })
-  }
-
-  transferBankBNI(bankName) {
-    this.setState({
-      isTransferBNI: true
-    })
-  }
-
-  transferBankMandiri(bankName){
-    this.setState({
-      isTransferMandiri: true
+      bankSelected: bankName,
+      method: 'direct_transfer_via_' + bankName
     })
   }
 
@@ -619,15 +345,22 @@ class Pay extends React.Component {
   }
 
   addOrder(method) {
-    this.props.saveValues({paymentMethod: method});
-    this.props.nextStep();
+    if(method != ''){
+      this.props.saveValues({paymentMethod: method});
+      this.props.nextStep();
+    }
+    else{
+      alert("Please select the bank")
+    }
   }
 
   render() {
     let content;
+    let button;
 
     if (this.props.data.fromCurrency != 'idr') {
-      content = <EmailInstruction data={this.props.data} addOrder={this.addOrder}/>;
+      content = <p>We will send payment instruction to your email. Confirm by clicking the button below</p>;
+      button = <RenderButton data={this.props.data} addOrder = {this.addOrder} method='direct_transfer_via_email'/>
     } else {
       if (this.state.isVAgenerated) {
         content = <VAGenerated vaNumber={this.props.data.vaNumber} addOrder={this.addOrder}/>;
@@ -639,96 +372,98 @@ class Pay extends React.Component {
         } else if(this.state.isTransferBNI) {
           content = <TransferBankBNI addOrder={this.addOrder}/>;
         } else {
-          content = <BankOption generateVA={this.generateVA} transferBankMandiri={this.transferBankMandiri} transferBankBNI={this.transferBankBNI} transferBankBCA={this.transferBankBCA} />
+          content = 
+          <ItemContainer>
+            <BankList>
+              <BankItem style={{borderRadius: '4px 4px 0px 0px'}} active = {this.state.bankSelected == 'bni'} onClick = {() => this.transferBank('bni')}>
+                <RadioButton checked = {this.state.bankSelected == 'bni'}/><img className='bank-img' src="../static/images/bank_logos/bni.png" alt="BNI"/><span>Bank BNI</span>
+              </BankItem>
+              <BankDetail open = {this.state.bankSelected == 'bni'}>
+                {this.props.data.vaNumber != 0 ? <RenderVaDetail bankName={'BNI'} vaNumber={this.props.data.vaNumber}/> : <RenderBankDetail bankName={'BNI'} accountNumber={'07 5555 4711'}/>} 
+              </BankDetail>
+              <BankItem active = {this.state.bankSelected == 'bca'} onClick = {() => this.transferBank('bca')}>
+                <RadioButton checked = {this.state.bankSelected == 'bca'}/><img className='bank-img' src="../static/images/bank_logos/bca.png" alt="BCA"/><span>Bank BCA</span>
+              </BankItem>
+              <BankDetail open = {this.state.bankSelected == 'bca'}>
+                {this.props.data.vaNumber != 0 ? <RenderVaDetail bankName={'BCA'} vaNumber={this.props.data.vaNumber}/> : <RenderBankDetail bankName={'BCA'} accountNumber={'206 37 555 67'}/> } 
+              </BankDetail>
+              <BankItem style={{borderRadius: '0px 0px 4px 4px'}} active = {this.state.bankSelected == 'mandiri'} onClick = {() => this.transferBank('mandiri')}>
+                <RadioButton checked = {this.state.bankSelected == 'mandiri'}/><img className='bank-img' src="../static/images/bank_logos/mandiri.png" alt="Mandiri"/><span>Bank Mandiri</span>
+              </BankItem>  
+              <BankDetail open = {this.state.bankSelected == 'mandiri'}>
+                {this.props.data.vaNumber != 0 ? <RenderVaDetail bankName={'Mandiri'} vaNumber={this.props.data.vaNumber}/> : <RenderBankDetail bankName={'Mandiri'} accountNumber={'122 00 1025188 5'}/> } 
+              </BankDetail>      
+            </BankList>
+          </ItemContainer>
+          button = <RenderButton data={this.props.data} addOrder = {this.addOrder} method={this.state.method}/>
         }
       }
     }
     return (
       <div>
-        <h1 style={{textAlign: "center"}}>Payment</h1>
-        <form className="form-container">
-          <p className="instruction">Payment amount</p>
-          <h2><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value={this.props.data.fromAmount} /> {this.props.data.fromCurrency.toUpperCase()}</h2>
-          {content}
-        </form>
-        <style jsx>{`
-          .div-show {
-            display: block;
-          }
-
-          .div-hide {
-            display: none;
-          }
-
-          .list-item {
-            display: flex;
-            width: 100%;
-            margin: 10px 0;
-          }
-
-          .list-item span {
-            flex-basis: 50%;
-          }
-
-          .list-item .right {
-            text-align: right;
-            color: #15233C;
-          }
-
-
-
-          hr {
-            display: block;
-            height: 1px;
-            border: 0;
-            border-top: 1px solid #eaeaea;
-            margin: 30px 0;
-            padding: 0;
-          }
-
-          .list-item .left {
-            opacity: 0.7;
-          }
-
-          .instruction {
-            text-align: center;
-            max-width: 60%;
-            margin: 0 auto;
-          }
-
-          h2 {
-            width: 100%;
-            text-align: center;
-          }
-
-          .payment-details {
-            background-color: #EBF6FB;
-            padding: 10px 20px;
-            margin: 30px 0;
-            border-radius: 8px;
-          }
-
-          .btn-danger {
-            background: transparent;
-            border: 2px solid #DC2020;
-            color: #DC2020;
-            padding: 8px 18px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            border-radius: 4px;
-            transition: 0.2s;
-            width: 100%;
-            padding: 15px 0;
-            margin-top: 15px;
-          }
-
-          .btn-danger:hover {
-            transform: translateY(-1px);
-          }
-
-        `}</style>
+         <Row>
+          <Column>
+            <PaymentContainer>
+              <PaymentTitle>Payment Method</PaymentTitle>
+              <PaymentDetails>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt </PaymentDetails>
+               {content}
+                <AmountContainer>
+                <ItemContainer>
+                  <ItemRow>
+                      <AmountColumn left>
+                        You Send
+                      </AmountColumn> 
+                      <AmountColumn right>
+                        <NumberFormat displayType={'text'} decimalScale={2} thousandSeparator={true} value={this.props.data.fromAmount} /> {this.props.data.fromCurrency.toUpperCase()} 
+                      </AmountColumn>
+                  </ItemRow>
+                  <ItemRow>
+                      <AmountColumn left>
+                        {this.props.data.fromCurrency.toUpperCase()}/{this.props.data.toCurrency.toUpperCase()} Conversion Rates
+                      </AmountColumn> 
+                      <AmountColumn right>
+                        <NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value={this.props.data.rate}/>
+                      </AmountColumn>
+                  </ItemRow>
+                  <ItemRow>
+                      <AmountColumn left>
+                        Transfer Out Fee
+                      </AmountColumn> 
+                      <AmountColumn right>
+                        0
+                      </AmountColumn>
+                  </ItemRow>
+                  <ItemRow>
+                      <AmountColumn left>
+                        Recipient Gets
+                      </AmountColumn> 
+                      <AmountColumn right>
+                        <NumberFormat  displayType={'text'} decimalScale={2} thousandSeparator={true} value={this.props.data.toAmount} /> {this.props.data.toCurrency.toUpperCase()} 
+                      </AmountColumn>
+                  </ItemRow>
+                </ItemContainer>
+              </AmountContainer>
+              <p>Please check all of the details above are correct and check your email for the notification</p>
+              <ButtonContainer>
+                {button}
+                <Button secondary onClick={this.props.previousStep}>Previous</Button>
+              </ButtonContainer>
+            </PaymentContainer>
+          </Column>
+          <Column>
+            <PolicyContainer>
+              <PolicyTitle className = "bold">
+                Is it safe to use Transfree service?
+              </PolicyTitle>
+              <PolicyContent>
+                Yes, you are in a trusted company. We are legally incorporated as PT Pelita Transfer Nusantara, 
+                office at Innovation Room Kemnaker RI. We are the official partner of Indonesian Community 
+                in several countries and collaborating with the governement. <br/><br/>
+                <a className = "link" href="../index#row-footer" target = "_blank">See our Partners & Collaboratos</a>
+              </PolicyContent>
+            </PolicyContainer>
+          </Column>
+        </Row>
       </div>
     )
   }
