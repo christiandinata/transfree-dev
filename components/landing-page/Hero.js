@@ -3,7 +3,7 @@ import NumberFormat from 'react-number-format'
 import styled from 'styled-components'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { ScButton } from './Buttons'
+import { ScButton } from './Buttons'
 
 export const MapBackground = styled.div`
   background-image: url('../static/images/Asset Web/content/batik-world-map.png');
