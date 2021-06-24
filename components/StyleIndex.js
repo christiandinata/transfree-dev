@@ -24,9 +24,10 @@ const StyleIndex = () => (
        
       }
 
-    h2,h1,h3{
+    /* h2,h1,h3{
       color:#FFFFFF;
-    }
+    } */
+
     hr.line{
         border: 1px solid black;
         width:300px;
@@ -47,9 +48,10 @@ const StyleIndex = () => (
        flex-direction:column;
      }
 
-     .features .container{
+     .features .container {
        display:flex;
        flex-direction: column;
+       justify-content: center;
      }
 
      .features .container-image{
@@ -59,9 +61,10 @@ const StyleIndex = () => (
 
     }
 
-    .features .container-content{
+    .features .container-content {
       display:flex;
       flex-direction: column;
+      justify-content: center;
     }
 
      .features .container .benefit{
@@ -156,9 +159,8 @@ const StyleIndex = () => (
      
     }
 
-    .text h1,h2{
-      display:inline;
-      font-size:35px;
+    .text h1, h2{
+      display: inline;
     }
 
     .text{
@@ -237,20 +239,17 @@ const StyleIndex = () => (
      }
 
 
-     .benefit img{
-      width:7vw;
-      height:auto;
+     .benefit img {
+      width: 7vw;
+      height: auto;
      }
 
      .benefit h1{
-       font-size:2.8vw;
-      //  width:7vw;
-       height:auto;
-       text-align:center;
+       font-size: 2.8vw;
+       text-align: center;
+       color: #232933;
      }
 
-    
-  
      .benefit .btn-primary-start{
        padding:10px 10px 30px 10px;
        height:auto;
@@ -263,21 +262,17 @@ const StyleIndex = () => (
       color: #FFFFFF;
     }
 
-    .left-container img {
-      height:70px;
-      width:200px;
-    }
+    // .left-container img {
+    //   height:70px;
+    //   width:200px;
+    // }
 
     .application .left-container img {
-      height:auto;
-      width:23vw;
-      margin-left:auto;
-      margin-right:auto;
-      
-      text-align:center;
-      
-      
-      
+      // height: auto;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
     }
 
     .application .right-container img{
@@ -292,8 +287,8 @@ const StyleIndex = () => (
       //   width:20px;
       // }
 
-      .application{
-        display:flex;
+      .application {
+        display: flex;
         justify-content: center;
         align-items: center;
         margin-top:-100px;
@@ -301,14 +296,10 @@ const StyleIndex = () => (
       }
 
       .application .right-container{
-        justify-content:center;
-        text-align:center;
-        // margin-top:15%;
-        // background:blue;
-        display:flex;
-        flex-direction:column;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
         padding: 0px;
-       
       }
 
       .application .left-container{
@@ -322,13 +313,9 @@ const StyleIndex = () => (
         flex-direction:column;
       }
 
-      
-
       .application h1{
-      font-family: 800em ,'Open Sans', sans-serif;
-      font-weight: 900;
-      color: #000000;
-      text-shadow: 1px 1px 1px #000000;
+        font-family: 'Avenir LT Pro Black', sans-serif;
+        color: #232933;
       }
 
       .achievement{
@@ -539,19 +526,6 @@ const StyleIndex = () => (
           display: flex;
           max-width:1124px;
         }
-
-
-
-        .hero {
-          background-image:url('../static/images/Asset Web/content/Banner_Web.png');
-          background-repeat: no-repeat;
-          background-position: center;
-          background-size:100% 100%;
-          margin-top:0px;
-          
-        }
-
-       
 
         .left-container {
           flex-basis: 55%;
@@ -1071,10 +1045,6 @@ const StyleIndex = () => (
             font-size:20px;
           }
 
-          .application h1{
-            font-size:10vw;
-          }
-
           .testimonial .message p{
             font-size:vw;
           }
@@ -1300,10 +1270,6 @@ const StyleIndex = () => (
               font-weight: 900;
               color: #000000;
               font-size:15px;
-              // margin-top:90%;
-              text-shadow: 1px 1px 1px #000000;
-            
-              
               }
 
               

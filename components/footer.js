@@ -183,9 +183,9 @@ const Footer = () => (
           text-align:left;
         }
 
-	.container-partner{
-	  display:flex
-	}
+        .container-partner{
+          display:flex
+        }
         .menu {
           padding-top: 5px;
         }

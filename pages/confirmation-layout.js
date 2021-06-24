@@ -664,7 +664,7 @@ class ConfirmationLayout extends React.Component {
                 {/* </div> */}
                 <div className="box-benefit">
                   <img src="../static/images/features/time.png" alt="Time" style={{ width: "30%", height: "50%" }}></img>
-                  <h1>Quickly sent quickly arrived</h1>
+                  <h1 style={{ color: "#232933" }}>Quickly sent quickly arrived</h1>
                 </div>
                 <div className="box-benefit">
                   <img src="../static/images/features/search.png" alt="search"></img>
@@ -726,12 +726,13 @@ class ConfirmationLayout extends React.Component {
           text-align:center;
           margin-top:-10%;
         }
+        
         .pending-image img{
           width:25%;
           height:25%;
         }
 
-.cta-primary >p > a{
+        .cta-primary >p > a{
           border: none;
           margin-bottom:20px;
           color: #FAAF40;
