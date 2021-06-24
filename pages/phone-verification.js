@@ -109,6 +109,7 @@ function PhoneVerification(props) {
 								shouldAutoFocus={true}
 								hasErrored={errorMsg ? "true" : null}
 								errorStyle="errorStyling"
+								isInputNum={true}
 							/>
 							<BelowHeading>
 								<p>Didn't receive the code ?</p>
@@ -145,12 +146,15 @@ function PhoneVerification(props) {
 				}
 
 				.inputStyling {
+					font-size: 20px;
+					line-height: 24px;
 					font-weight: 700;
 					color: #232933;
 					width: 48px !important;
 					height: 54px;
-					margin: 8px;
+					margin: 4px;
 					border: 1px solid #e2e2e2;
+					border-radius: 4px;
 				}
 
 				.inputStyling.error {

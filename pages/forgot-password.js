@@ -4,29 +4,20 @@ import AuthLayout from "../components/AuthLayout";
 import { connect } from "react-redux";
 import actions from "../redux/actions";
 import initialize from "../utils/initialize";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import * as axios from "axios";
 import ENV from "../config";
 import Header from "../components/header";
 import { NavBar } from "../components/MenuComponents";
 import styled from "styled-components";
+import OtpInput from "react-otp-input";
 // import batik from "../static/images/Batik_World_Map_1.png";
 
 //Component yang ditampilkan saat user memilih opsi forgot password
-function Progress(props) {
-	const items = [];
-
-	for (let i = 1; i <= 3; i++) {
-		if (i === props.step) {
-			items.push(<img src="../../static/images/forgot/step1.svg" />);
-		} else {
-			items.push(<img src="../../static/images/forgot/step2.svg" />);
-		}
-	}
-
-	return items;
-}
-
 function ForgotPassword(props) {
+	const [step, setStep] = useState("email");
+
 	const [values, setValues] = useState({
 		email: "",
 		step: 1,
@@ -35,6 +26,29 @@ function ForgotPassword(props) {
 		code: "",
 		sid: "",
 	});
+
+	const [selected, setSelected] = useState({
+		email: false,
+		password: false,
+		confirmPassword: false,
+	});
+
+	const [filled, setFilled] = useState({
+		email: false,
+		password: false,
+		confirmPassword: false,
+	});
+
+	const [error, setError] = useState({
+		email: false,
+		password: false,
+		confirmPassword: false,
+	});
+
+	const [hiddenPass, setHiddenPass] = useState(true);
+	const [hiddenConfirmPass, setHiddenConfirmPass] = useState(true);
+	const [errorMsg, setErrorMsg] = useState(false);
+	const [verifyPassword, setVerifyPassword] = useState(true);
 
 	useEffect(() => {
 		// document.querySelector("#popup").style.display = "none";
@@ -52,6 +66,7 @@ function ForgotPassword(props) {
 		// document.querySelector("#button-continue").style.display = "none";
 		// document.querySelector("#button-verify").style.display = "none";
 	});
+
 	// componentDidMount() {
 	// document.querySelector("#popup").style.display = "none";
 	// document.querySelector("#text-valid").style.display = "none";
@@ -89,49 +104,6 @@ function ForgotPassword(props) {
 				} else {
 					document.querySelector("#text-number").innerHTML =
 						"Account Not Found";
-					document.querySelector("#text-number").style.display =
-						"block";
-				}
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}
-
-	function handleSend(event) {
-		event.preventDefault();
-		axios
-			.post(ENV.API + `/v1/sendotp`, { email: values.email })
-			.then(async (response) => {
-				if (response.data.success) {
-					document.querySelector("#text-email").style.display =
-						"block";
-					document.querySelector("#text-number").style.display =
-						"none";
-					document.querySelector("#text-number").style.display =
-						"none";
-					document.querySelector("#button-continue").style.display =
-						"block";
-					document.querySelector("#button-send").style.display =
-						"none";
-					document.querySelector("#img-tablet").style.display =
-						"none";
-					document.querySelector("#text-send").style.display = "none";
-					document.querySelector(
-						"#field-confirm-password"
-					).style.display = "block";
-					document.querySelector("#field-email").style.display =
-						"none";
-					document.querySelector("#field-password").style.display =
-						"block";
-					setValues({
-						...values,
-						step: 2,
-						sid: response.data.serviceSid,
-					});
-				} else {
-					document.querySelector("#text-number").innerHTML =
-						"Cannot send verification code";
 					document.querySelector("#text-number").style.display =
 						"block";
 				}
@@ -205,38 +177,154 @@ function ForgotPassword(props) {
 	}
 
 	//Component untuk mengirimkan email
-	function handleEmailChange(event) {
-		setValues({ ...values, email: event.target.value });
+	function handleChange(e) {
+		const { name, value } = e.target;
+		if (value) {
+			setFilled({
+				...filled,
+				[name]: true,
+			});
+		} else {
+			setFilled({
+				...filled,
+				[name]: false,
+			});
+		}
+		setValues({
+			...values,
+			[name]: value,
+		});
+		console.log(values);
 	}
 
-	//Componenet untuk mengirim ulang verification code
-	function handleResend() {
+	function handleOnFocus(e) {
+		const { name, value } = e.target;
+		if (errorMsg) {
+			if (name == "email") {
+				setValues({
+					...values,
+					email: "",
+				});
+			}
+		}
+		setSelected({
+			...selected,
+			[name]: true,
+		});
+		setError({
+			...error,
+			[name]: false,
+		});
+		console.log(error);
+	}
+
+	function handleOnBlur(e) {
+		const { name, value } = e.target;
+		if (!value) {
+			setFilled({
+				...filled,
+				[name]: false,
+			});
+		} else {
+			setFilled({
+				...filled,
+				[name]: true,
+			});
+		}
+		setSelected({
+			...selected,
+			[name]: false,
+		});
+	}
+
+	function handleCodeChange(value) {
+		setValues({ ...values, code: value });
+		console.log(values.code.toString().length);
+	}
+
+	function handleSend(event) {
+		event.preventDefault();
 		axios
 			.post(ENV.API + `/v1/sendotp`, { email: values.email })
 			.then(async (response) => {
 				if (response.data.success) {
-					document.querySelector("#text-number").innerHTML =
-						"Successfully resend verification code";
-					document.querySelector("#text-number").style.display =
-						"block";
-					setValues({ ...values, sid: response.data.serviceSid });
+					setValues({
+						...values,
+						sid: response.data.serviceSid,
+					});
 				} else {
-					document.querySelector("#text-number").innerHTML =
-						"Cannot resend verification code";
-					document.querySelector("#text-number").style.display =
-						"block";
+					console.log(props);
+					setErrorMsg(true);
+					setError({
+						...error,
+						email: true,
+					});
 				}
-			})
-			.catch((error) => {
-				console.log(error);
 			});
+		// .catch((error) => {
+		// 	console.log(error);
+		// 	console.log("foo");
+		// });
 	}
+
+	//Componenet untuk mengirim ulang verification code
+	function handleResend() {
+		// axios
+		// 	.post(ENV.API + `/v1/sendotp`, { email: values.email })
+		// 	.then(async (response) => {
+		// 		if (response.data.success) {
+		// 			setCountdown({
+		// 				...countdown,
+		// 				seconds: 59,
+		// 			});
+		// 			document.querySelector("#text-number").innerHTML =
+		// 				"Successfully resend verification code";
+		// 			document.querySelector("#text-number").style.display =
+		// 				"block";
+		// 			setValues({ ...values, sid: response.data.serviceSid });
+		// 		} else {
+		// 			document.querySelector("#text-number").innerHTML =
+		// 				"Cannot resend verification code";
+		// 			document.querySelector("#text-number").style.display =
+		// 				"block";
+		// 		}
+		// 	})
+		// 	.catch((error) => {
+		// 		console.log(error);
+		// 	});
+		setCountdown({
+			...countdown,
+			seconds: 59,
+		});
+	}
+
+	const [countdown, setCountdown] = useState({
+		minutes: "00",
+		seconds: 59,
+	});
+
+	useEffect(() => {
+		if (step == "otp") {
+			const counter = setTimeout(() => {
+				if (countdown.seconds > 0) {
+					setCountdown({
+						...countdown,
+						seconds: countdown.seconds - 1,
+					});
+				}
+			}, 1000);
+			return () => clearTimeout(counter);
+		}
+	});
 
 	return (
 		<>
 			<Header />
-			<NavBar />
+			<NavBar navChildColor="#fff" navText="Homepage" endpoint="/index" />
 			<RecoveryContainer>
+				{step == "otp" && errorMsg ? (
+					<ErrorDiv>Wrong Verification Code</ErrorDiv>
+				) : null}
 				<RecoveryForm
 					onKeyDown={(e) => {
 						if (e.key === "Enter") {
@@ -246,40 +334,312 @@ function ForgotPassword(props) {
 					<RecoveryFormInner>
 						<center>
 							<Heading>Account Recovery</Heading>
-							<BelowHeading>
-								Please enter your email address or phone number
-								here to reset your password
-							</BelowHeading>
+							{step == "email" && (
+								<>
+									<BelowHeading>
+										Please enter your email address or phone
+										number here to reset your password
+									</BelowHeading>
+								</>
+							)}
+							{step == "otp" && (
+								<>
+									<BelowHeading1>
+										Enter the Verification Code
+									</BelowHeading1>
+									<BelowHeading>
+										Transfree will send verification code to
+										your email <b>{values.email}</b>
+									</BelowHeading>
+								</>
+							)}
+							{step == "password" && (
+								<>
+									<BelowHeading1>
+										<b>Reset Your Password</b>
+									</BelowHeading1>
+									<BelowHeading step={step}>
+										Create a new password for{" "}
+										<b> {values.email} </b>
+									</BelowHeading>
+								</>
+							)}
 						</center>
-						{/* {selected.name || (filled.name && !error.name) ? (
-							<FormLabel
-								filled={filled.name}
-								selectedName={selected.name}>
-								Name
-							</FormLabel>
-						) : null} */}
-						<InputContainer
-						// selectedName={selected.name}
-						// filled={filled.name}
-						>
-							<FormInput
-								// type="text"
-								// name="name"
-								// autoComplete="new-name"
-								// value={values.name}
-								// required
-								// placeholder="Name"
-								// error={error.name}
-								onChange={handleEmailChange}
-								// onFocus={handleOnFocus}
-								// onBlur={handleOnBlur}
-							/>
-						</InputContainer>
-						<Button disabled={!values.email}>Send</Button>
-						<BelowButton>Back to Login</BelowButton>
+						{step == "email" && (
+							<>
+								{selected.email ||
+								(filled.email && !error.email) ? (
+									<FormLabel
+										errorMessage={errorMsg}
+										filled={filled.email}
+										selectedEmail={selected.email}>
+										Email
+									</FormLabel>
+								) : null}
+								<InputContainer
+									selectedEmail={selected.email}
+									error={error.email}
+									errorMessage={errorMsg}
+									filled={filled.email}>
+									<FormInput
+										type="email"
+										name="email"
+										value={values.email}
+										required
+										placeholder="e.g: timxx@gmail.com"
+										error={error.email}
+										onChange={handleChange}
+										onFocus={handleOnFocus}
+										onBlur={handleOnBlur}
+									/>
+								</InputContainer>
+								{error.email || (!filled.email && errorMsg) ? (
+									<ErrorText>
+										{error.email &&
+										!selected.email &&
+										errorMsg
+											? "Email is not registered"
+											: "Email address cannot be blank"}
+									</ErrorText>
+								) : null}
+							</>
+						)}
+						{step == "otp" && (
+							<>
+								<OtpInput
+									value={values.code}
+									onChange={(value) =>
+										handleCodeChange(value)
+									}
+									numInputs={6}
+									containerStyle="containerStyling"
+									inputStyle={
+										errorMsg
+											? "inputStyling error"
+											: values.code.toString().length == 6
+											? "inputStyling filled"
+											: "inputStyling"
+									}
+									isInputNum={true}
+									focusStyle="focusStyling"
+									shouldAutoFocus={true}
+									hasErrored={errorMsg ? "true" : null}
+									errorStyle="errorStyling"
+								/>
+								{countdown.seconds > 0 ? (
+									<ResendCodeDiv>
+										Resend in{" "}
+										<b>
+											{" "}
+											{countdown.minutes}:
+											{countdown.seconds < 10
+												? "0"
+												: null}
+											{countdown.seconds}{" "}
+										</b>
+									</ResendCodeDiv>
+								) : (
+									<ResendCodeDiv>
+										Not receiving code?{" "}
+										<span onClick={handleResend}>
+											Resend Code
+										</span>
+									</ResendCodeDiv>
+								)}
+							</>
+						)}
+						{step == "password" && (
+							<>
+								{selected.password ||
+								(filled.password && !error.password) ? (
+									<FormLabel
+										error={errorMsg}
+										errorMessage={!verifyPassword}
+										filled={filled.password}
+										selectedPass={selected.password}>
+										New Password
+									</FormLabel>
+								) : null}
+								<InputContainer
+									selectedPass={selected.password}
+									error={error.password}
+									errorMessage={!verifyPassword}
+									filled={filled.password}
+									step={step}>
+									<FormInput
+										type={hiddenPass ? "password" : "text"}
+										name="password"
+										value={values.password}
+										autoComplete="new-password"
+										required
+										placeholder="Password"
+										error={error.password}
+										onChange={handleChange}
+										onFocus={handleOnFocus}
+										onBlur={handleOnBlur}
+									/>
+
+									<EyeIcon>
+										{hiddenPass ? (
+											<FontAwesomeIcon
+												onClick={() =>
+													setHiddenPass(!hiddenPass)
+												}
+												icon={faEyeSlash}
+											/>
+										) : (
+											<FontAwesomeIcon
+												onClick={() =>
+													setHiddenPass(!hiddenPass)
+												}
+												icon={faEye}
+											/>
+										)}
+									</EyeIcon>
+								</InputContainer>
+								{error.password ||
+								(!filled.password && !verifyPassword) ? (
+									<ErrorText>
+										{!verifyPassword &&
+										!selected.password &&
+										filled.password
+											? "Password and confirmation password do not match"
+											: "Password cannot be blank"}
+									</ErrorText>
+								) : null}
+								{selected.confirmPassword ||
+								(filled.confirmPassword &&
+									!error.confirmPassword) ? (
+									<FormLabel
+										error={errorMsg}
+										errorMessage={!verifyPassword}
+										filled={filled.confirmPassword}
+										selectedConfirmPassword={
+											selected.confirmPassword
+										}>
+										Confirm New Password
+									</FormLabel>
+								) : null}
+								<InputContainer
+									selectedConfirmPassword={
+										selected.confirmPassword
+									}
+									error={error.confirmPassword}
+									errorMessage={!verifyPassword}
+									filled={filled.confirmPassword}
+									step={step}>
+									<FormInput
+										type={
+											hiddenConfirmPass
+												? "password"
+												: "text"
+										}
+										name="confirmPassword"
+										value={values.confirmPassword}
+										autoComplete="new-password"
+										required
+										placeholder="Confirm New Password"
+										error={error.confirmPassword}
+										onChange={handleChange}
+										onFocus={handleOnFocus}
+										onBlur={handleOnBlur}
+									/>
+									<EyeIcon>
+										{hiddenConfirmPass ? (
+											<FontAwesomeIcon
+												onClick={() =>
+													setHiddenConfirmPass(
+														!hiddenConfirmPass
+													)
+												}
+												icon={faEyeSlash}
+											/>
+										) : (
+											<FontAwesomeIcon
+												onClick={() =>
+													setHiddenConfirmPass(
+														!hiddenConfirmPass
+													)
+												}
+												icon={faEye}
+											/>
+										)}
+									</EyeIcon>
+								</InputContainer>
+								{error.confirmPassword ||
+								(!filled.confirmPassword && !verifyPassword) ? (
+									<ErrorText>
+										{!verifyPassword &&
+										!selected.confirmPassword &&
+										filled.confirmPassword
+											? "Password and confirmation password do not match"
+											: "Confirmation password cannot be blank"}
+									</ErrorText>
+								) : null}
+							</>
+						)}
+						{step == "email" && (
+							<Button
+								// disabled={!values.email}
+								onClick={handleSend}>
+								Send
+							</Button>
+						)}
+						{step == "otp" && (
+							<Button
+								// disabled={!values.email}
+								onClick={() => setStep("password")}>
+								Send
+							</Button>
+						)}
+						{step == "password" && (
+							<Button
+							// disabled={!values.email}
+							>
+								Send
+							</Button>
+						)}
+						<BelowButton>
+							<span>Back to Login</span>
+						</BelowButton>
 					</RecoveryFormInner>
 				</RecoveryForm>
 			</RecoveryContainer>
+			<style jsx global>{`
+				.containerStyling {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					margin-top: 56px;
+				}
+
+				.inputStyling {
+					font-size: 20px;
+					line-height: 24px;
+					color: #232933;
+					font-weight: 700;
+					width: 48px !important;
+					height: 54px;
+					margin: 4px;
+					border: 1px solid #e2e2e2;
+					border-radius: 4px;
+				}
+				.inputStyling.filled {
+					color: #009fe3;
+					border: 1px solid #009fe3;
+				}
+
+				.focusStyling {
+					border: 1px solid #009fe3 !important;
+					outline: none;
+				}
+				.errorStyling {
+					border: 1px solid #ff0000;
+				}
+				a {
+					color: #009fe3;
+				}
+			`}</style>
 		</>
 	);
 }
@@ -289,6 +649,8 @@ const RecoveryContainer = styled.div`
 	width: 100%;
 	display: flex;
 	justify-content: center;
+	background-image: url("../static/images/Batik_World_Map_1.png");
+	background-repeat: no-repeat;
 `;
 
 const RecoveryForm = styled.form`
@@ -317,14 +679,29 @@ const Heading = styled.p`
 	line-height: 38px;
 	letter-spacing: -0.02em;
 	color: #009fe3;
+	margin-bottom: 32px;
+`;
+
+const BelowHeading1 = styled.div`
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 17px;
+	text-align: center;
+	letter-spacing: -0.02em;
+	margin-bottom: 16px;
+	color: #232933;
+
+	p {
+		margin: 0;
+	}
 `;
 
 const BelowHeading = styled.div`
-	margin: 32px 0;
 	font-size: 14px;
 	line-height: 17px;
 	text-align: center;
 	letter-spacing: -0.02em;
+	margin-bottom: ${(props) => props.step && "8px"};
 
 	color: #232933;
 
@@ -333,13 +710,58 @@ const BelowHeading = styled.div`
 	}
 `;
 
+const ResendCodeDiv = styled.div`
+	margin-top: 32px;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 17px;
+	text-align: center;
+	letter-spacing: -0.02em;
+	color: #232933;
+
+	span {
+		color: #009fe3;
+		text-decoration: underline;
+		cursor: pointer;
+	}
+`;
+
+const FormLabel = styled.label`
+	font-size: 12px;
+	text-align: start;
+	margin-top: 32px;
+	margin-bottom: -30px;
+	margin-left: 2px;
+	color: ${({
+		errorMessage,
+		selectedConfirmPassword,
+		selectedEmail,
+		selectedPass,
+	}) => {
+		if (selectedEmail || selectedPass || selectedConfirmPassword) {
+			if (errorMessage) {
+				return "#F80202";
+			}
+			return "#068EC8";
+		} else {
+			// no error
+			if (selectedEmail || selectedPass || selectedConfirmPassword) {
+				return "#068EC8";
+			}
+			return "#626B79";
+		}
+	}};
+`;
+
 const InputContainer = styled.div`
+	margin-top: ${(props) => (props.step ? "16px" : "32px")};
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	height: 48px;
 	width: 100%;
 	background: #ffffff;
+	border-radius: 4px;
 	border: ${({
 		selectedName,
 		selectedPass,
@@ -387,8 +809,6 @@ const InputContainer = styled.div`
 		}
 	}};
 	// "2px solid #068EC8" : "1px solid #e2e2e2"
-	border-radius: 4px;
-	margin-bottom: 1rem;
 `;
 
 const FormInput = styled.input`
@@ -397,6 +817,7 @@ const FormInput = styled.input`
 	flex: 1;
 	margin-left: 16px;
 	margin-right: 16px;
+
 	font-size: 16px;
 	line-height: 24px;
 	color: ${({ error }) => (error ? "#FF0000" : "#232933")};
@@ -418,7 +839,7 @@ const FormInput = styled.input`
 `;
 
 const Button = styled.button`
-	margin-top: 50px;
+	margin-top: 136px;
 	margin-bottom: 16px;
 	height: 40px;
 	border-radius: 4px;
@@ -436,7 +857,7 @@ const Button = styled.button`
 	}
 `;
 
-const BelowButton = styled.a`
+const BelowButton = styled.div`
 	font-size: 14px;
 	line-height: 17px;
 	text-align: center;
@@ -444,6 +865,39 @@ const BelowButton = styled.a`
 	text-decoration-line: underline;
 	margin-bottom: 32px;
 	color: #009fe3;
+
+	span {
+		cursor: pointer;
+	}
+`;
+
+const ErrorDiv = styled.div`
+	background-color: #ff0000;
+	width: 528px;
+	height: 40px;
+	margin-top: 20px;
+	display: flex;
+	color: #fff;
+	font-weight: 500;
+	font-size: 16px;
+	letter-spacing: 0.2px;
+	margin-bottom: -60px;
+	line-height: 24px;
+	align-items: center;
+	justify-content: center;
+`;
+
+const ErrorText = styled.p`
+	color: #ff0000;
+	font-size: 12px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+`;
+
+const EyeIcon = styled.div`
+	height: 20px;
+	width: 20px;
+	margin-right: 16px;
 `;
 
 ForgotPassword.getInitialProps = async (ctx) => {
@@ -452,7 +906,7 @@ ForgotPassword.getInitialProps = async (ctx) => {
 };
 
 const mapStateToProps = (state) => {
-	return {};
+	return { errorMessage: state.authentication.errorMessage };
 };
 
 export default connect(mapStateToProps, actions)(ForgotPassword);

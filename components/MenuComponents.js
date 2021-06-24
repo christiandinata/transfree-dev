@@ -9,7 +9,7 @@ export function NavBarBlue(props) {
 		<>
 			<Nav>
 				<NavInner>
-					<a style={{ height: 17 }} href="/">
+					<a style={{ height: 17 }} href="/index">
 						<Logo
 							src="../static/images/transfree-logo.png"
 							homepage="false"
