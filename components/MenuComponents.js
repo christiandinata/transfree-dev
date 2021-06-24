@@ -141,7 +141,6 @@ export const NavigationChild = styled.a`
 		homepage ? "24px" : "19px")}; 
 	color: ${({ scrolled, homepage, navChildColor }) => (
 		homepage && scrolled ? "#000" : navChildColor)}; 
-	border-left: "none"
 
 	&:hover {
 		color: ${({ scrolled, navChildColor }) => (
