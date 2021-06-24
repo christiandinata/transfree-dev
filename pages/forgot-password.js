@@ -20,7 +20,6 @@ function ForgotPassword(props) {
 
 	const [values, setValues] = useState({
 		email: "",
-		step: 1,
 		password: "",
 		confirmPassword: "",
 		code: "",
@@ -49,69 +48,6 @@ function ForgotPassword(props) {
 	const [hiddenConfirmPass, setHiddenConfirmPass] = useState(true);
 	const [errorMsg, setErrorMsg] = useState(false);
 	const [verifyPassword, setVerifyPassword] = useState(true);
-
-	useEffect(() => {
-		// document.querySelector("#popup").style.display = "none";
-		// document.querySelector("#text-valid").style.display = "none";
-		// document.querySelector("#text-success-send").style.display = "none";
-		// document.querySelector("#text-email").style.display = "none";
-		// document.querySelector("#text-send").style.display = "none";
-		// document.querySelector("#text-number").style.display = "none";
-		// document.querySelector("#text-nocode").style.display = "none";
-		// document.querySelector("#field-password").style.display = "none";
-		// document.querySelector("#field-confirm-password").style.display =
-		// 	"none";
-		// document.querySelector("#field-code").style.display = "none";
-		// document.querySelector("#button-send").style.display = "none";
-		// document.querySelector("#button-continue").style.display = "none";
-		// document.querySelector("#button-verify").style.display = "none";
-	});
-
-	// componentDidMount() {
-	// document.querySelector("#popup").style.display = "none";
-	// document.querySelector("#text-valid").style.display = "none";
-	// document.querySelector("#text-success-send").style.display = "none";
-	// document.querySelector("#text-email").style.display = "none";
-	// document.querySelector("#text-send").style.display = "none";
-	// document.querySelector("#text-number").style.display = "none";
-	// document.querySelector("#text-nocode").style.display = "none";
-	// document.querySelector("#field-password").style.display = "none";
-	// document.querySelector("#field-confirm-password").style.display =
-	// 	"none";
-	// document.querySelector("#field-code").style.display = "none";
-	// document.querySelector("#button-send").style.display = "none";
-	// document.querySelector("#button-continue").style.display = "none";
-	// document.querySelector("#button-verify").style.display = "none";
-	// }
-
-	function handleCheck(event) {
-		event.preventDefault();
-		axios
-			.post(ENV.API + `/v1/checkNumber`, { email: values.email })
-			.then(async (response) => {
-				if (response.data.found) {
-					document.querySelector("#text-send").style.display =
-						"block";
-					document.querySelector("#text-email").innerHTML = "<b>"
-						.concat(response.data.email)
-						.concat("</b>");
-					document.querySelector("#text-number").style.display =
-						"block";
-					document.querySelector("#button-check").style.display =
-						"none";
-					document.querySelector("#button-send").style.display =
-						"block";
-				} else {
-					document.querySelector("#text-number").innerHTML =
-						"Account Not Found";
-					document.querySelector("#text-number").style.display =
-						"block";
-				}
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}
 
 	//Verifikasi password baru
 	function handlePassword(event) {
