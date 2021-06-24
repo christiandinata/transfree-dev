@@ -7,8 +7,7 @@ const TestimoniesBG = styled.div`
   max-width: 1280px;
   overflow: hidden;
   height: 400px;
-  margin: 0 auto;
-`
+  margin: 0 auto;`
 
 const TestimonyDiv = styled.div`
   align-items: flex-start;
