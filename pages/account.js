@@ -95,365 +95,8 @@ const PendingLayout = () => {
       `}</style>
     </div>
   )
-
 }
 
-class OrderItem extends React.Component {
-  constructor({props}) {
-    super(props);
-    this.state = {
-      key: null
-    }
-
-    this.toggleDetail = this.toggleDetail.bind(this);
-  }
-
-  toggleDetail(key) {
-    if(this.state.key == key) {
-      this.setState({
-        key: null
-      });
-    } else {
-      this.setState({
-        key: key
-      });
-    }
-
-  }
-  //Riwayat Transaksi
-
-  render() {
-    return (
-      this.props.ordersList.map((order, key) => {
-        return (
-          <div>
-            <ItemContainer>
-              <ItemRow>
-                <ItemColumn left>
-                  Transfer to <span style={{fontWeight: "bolder"}}>{order.name}</span>
-                </ItemColumn>
-                <ItemColumn right>
-                  <NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value={order.fromAmount} /> {order.fromCurrency.toUpperCase()}
-                </ItemColumn>
-              </ItemRow>
-              <ItemRow>
-                <ItemColumn left>
-                  <Date>
-                    <span className={order.completedAt == 0.0 ? 'processing' : 'completed'}>
-                      {order.completedAt == 0.0 ? 'Processing' : 'Completed on '+moment(order.completedAt).format("DD/MM/YYYY HH:mm")}
-                    </span>
-                  </Date>
-                </ItemColumn>
-                <ItemColumn right>
-                  <span className="bold"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value={order.toAmount} /> {order.toCurrency.toUpperCase()}</span>
-                </ItemColumn>
-              </ItemRow>
-              <ItemDetail open={true}>
-                hmmmm
-              </ItemDetail>
-            </ItemContainer>
-          <div key={key} >
-            
-            {/* <div className={'list-item '+ (this.state.key == key ? 'open' : '')} onClick={() => this.toggleDetail(key)} >
-              <div className="left">
-                <div className="date">{order.completedAt == 0.0 ? 'Processing' : 'Completed on '+moment(order.completedAt).format("DD/MM/YYYY HH:mm")}</div>
-                <div className="recipient">Transfer to <b>{order.name}</b></div>
-              </div>
-              <div className="right">
-                <div className="source"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value={order.fromAmount} /> {order.fromCurrency.toUpperCase()}</div>
-                <div className="destination bold"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value={order.toAmount} /> {order.toCurrency.toUpperCase()}</div>
-              </div>
-            </div> */}
-
-            <div className={'detail '+ (this.state.key == key ? 'open' : '')}>
-            <ul className="progress">
-              <li><div className="node blue"></div><p>Created on {moment(order.createdAt).format("DD/MM/YYYY HH:mm")}</p></li>
-              <li><div className={'divider '+ ((moment(moment().format("DD/MM/YYYY HH:mm")).isAfter(moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm"))) || order.receivedAt != 0.0 ? 'blue' : 'grey')}></div></li>
-              <li>
-              <div className={'node '+ (moment(moment().format("DD/MM/YYYY HH:mm")).isAfter(moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) || order.receivedAt != 0.0 ? 'blue' : 'grey')}>
-              </div>
-              <p style={{lineHeight:"25px"}}>
-              {(moment(moment().format("DD/MM/YYYY HH:mm"))
-              .isAfter
-              (moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) )
-              ||
-              (order.receivedAt != 0.0)
-              ?
-              ('We are processing your ' + order.toCurrency.toUpperCase() +' booking')
-               :
-               ('We are waiting to process your ') }
-              </p>
-              <br/>
-              <p style={{marginLeft:"35px",marginTop:"4px"}}>
-              {(moment(moment().format("DD/MM/YYYY HH:mm"))
-               .isAfter
-               (moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) )
-               ||
-               (order.receivedAt != 0.0)
-               ?
-               ('')
-               :
-               (order.toCurrency.toUpperCase() +' booking') }
-              </p>
-              </li>
-              {/*
-              <li><div className={'divider '+ (order.transferredAt == 0.0 ? 'grey' : 'blue')}></div></li>
-              <li><div className={'node '+ (order.transferredAt == 0.0 ? 'grey' : 'blue')}></div><p>{order.transferredAt == 0.0 ? ('We will transfer your '+order.toCurrency.toUpperCase()) :  ('Transferred on '+moment(order.transferredAt).format("DD/MM/YYYY HH:mm"))}</p></li>
-              */}
-              <li><div className={'divider '+ (order.completedAt == 0.0 ? 'grey' : 'blue')}></div></li>
-              <li><div className={'node '+ (order.completedAt == 0.0 ? 'grey' : 'blue')}></div><p>{order.completedAt == 0.0 ? ('We will complete your transfer') :  ('Completed on '+moment(order.completedAt).format("DD/MM/YYYY HH:mm"))}</p></li>
-            </ul>
-            </div>
-            </div>
-            <style jsx>{`
-              .detail {
-                height: 0;
-                overflow: hidden;
-                background-color: #F6F8FB;
-                text-align: left;
-                transition: all 0.2s ease;
-              }
-
-              .progress {
-                font-size: 13px;
-                margin: 50px;
-              }
-
-              .detail.open {
-                opacity: 1;
-                height: 300px;
-              }
-
-              .timeline {
-                display: absolute;
-                text-align: right;
-                margin-left: -100px;
-              }
-
-              .node {
-                height: 10px;
-                width: 10px;
-                border-radius: 50%;
-                display: inline-block;
-                transition: all 1000ms ease;
-              }
-
-              .activated {
-                box-shadow: 0px 0px 3px 2px rgba(194, 255, 194, 0.8);
-              }
-
-              .divider {
-                height: 40px;
-                width: 2px;
-                margin-left: 4px;
-                transition: all 800ms ease;
-              }
-
-              li p {
-                display: inline-block;
-                margin: 0 25px;
-              }
-
-              li {
-                list-style: none;
-                line-height: 1px;
-              }
-
-              .blue {
-                background-color: rgba(82, 165, 255, 1);
-              }
-              .grey {
-                background-color: rgba(201, 201, 201, 1);
-              }
-
-              .list-item {
-                display: flex;
-                width: 100%;
-                border-bottom: 1px solid #EAEAEA;
-                transition: all 0.2s ease;
-              }
-
-              .list-item.open {
-                background-color: #F6F8FB;
-              }
-
-              .list-item:hover {
-                cursor: pointer;
-                background-color: #F6F8FB;
-                transform: translateY(-1px);
-                box-shadow: 0 5px 30px 0 rgba(0,0,0,0.20);
-
-              }
-
-              .list-item div {
-                flex-basis: 50%;
-                margin: 10px 0;
-              }
-
-              .list-item .left {
-                text-align: left;
-                margin-left: 20px;
-              }
-
-              .list-item .right {
-                text-align: right;
-                margin-right: 20px;
-              }
-
-              .bold {
-                font-weight: 700;
-              }
-
-              hr {
-                display: block;
-                height: 1px;
-                border: 0;
-                border-top: 1px solid #eaeaea;
-                margin: 30px 0;
-                padding: 0;
-              }
-
-              .list-item .date {
-                opacity: 0.7;
-              }
-
-              input[type=text] {
-                border: 1px solid #EAEDF2;
-                font-size: 14px;
-                padding: 8px 8px 8px 30px;
-                border-bottom: 1px solid #eaeaea;
-                background-color: #EAEDF2;
-                border-radius: 8px;
-                transition: all 0.4s ease-in-out;
-                width: 200px;
-                background-image: url('../static/images/ic-search.svg');
-                background-position: 8px 8px;
-                background-repeat: no-repeat;
-              }
-
-              input[type=text]:focus {
-                outline: none;
-                border: 1px solid #469DDD;
-                background-color: #ECF3FA;
-                width: 300px;
-              }
-
-              ::placeholder {
-                color: #CACACA;
-              }
-
-              @media only screen and (max-width: 414px) {
-                .progress {
-                  margin: 30px 0;
-                }
-              }
-            `}</style>
-          </div>
-        )
-
-      })
-    )
-  }
-}
-//Layout Riwayat Transaksi
-const OrderLayout = ({ordersList}) => {
-  return (
-    <div>
-      <div>
-          <OrderItem ordersList={ordersList} />
-       
-      </div>
-      <style jsx>{`
-        .container-fixed {
-          max-width: 768px;
-          margin: 60px auto;
-        }
-
-        .form-container {
-          width: 708px;
-          height: auto;
-          margin: 30px auto;
-          padding: 0;
-          background: #FFFFFF;
-          box-shadow: 0 10px 30px 0 rgba(0,0,0,0.10);
-          border-radius: 8px;
-          text-align: center;
-        }
-
-        h2 {
-          margin: 0;
-        }
-
-        .list-header {
-          display: flex;
-          width: 100%;
-          font-size: 14px;
-          margin-bottom: 30px;
-        }
-
-        .list-header div {
-          flex-basis: 50%;
-        }
-
-        .list-header .right {
-          text-align: right;
-          align-self: flex-end;
-        }
-
-        .list-header a {
-          text-decoration: none;
-          color: #469DDD;
-        }
-
-        input[type=text] {
-          border: 1px solid #EAEDF2;
-          font-size: 14px;
-          padding: 8px 8px 8px 30px;
-          border-bottom: 1px solid #eaeaea;
-          background-color: #EAEDF2;
-          border-radius: 8px;
-          transition: all 0.4s ease-in-out;
-          width: 200px;
-          background-image: url('../static/images/ic-search.svg');
-          background-position: 8px 8px;
-          background-repeat: no-repeat;
-        }
-
-        input[type=text]:focus {
-          outline: none;
-          border: 1px solid #469DDD;
-          background-color: #ECF3FA;
-          width: 300px;
-        }
-
-        ::placeholder {
-          color: #CACACA;
-        }
-
-        .btn-tertiary {
-          margin: 20px auto;
-        }
-
-        @media only screen and (max-width: 414px) {
-          .container-fixed {
-            max-width: 355px;
-          }
-
-          .form-container {
-            width: 345px;
-            padding: 0;
-          }
-          .list-header {
-            flex-direction: column;
-          }
-          .list-header .right {
-            display: none;
-          }
-        }
-      `}</style>
-    </div>
-  )
-}
 
 const ContainerFluid = styled.div`
   min-height: 100vh;
@@ -464,8 +107,6 @@ const ContainerFluid = styled.div`
 `;
 
 const ContentContainer = styled.div`
-  // display: flex;
-  // flex-direction: column;
   margin-top: 10px;
 `;
 
@@ -554,24 +195,34 @@ const AllItemContainer = styled.div`
   height: auto;
   margin: 20px auto;
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 800px) {
     padding: 0px 10px 0px 10px;
   }
 `;
 
 const ItemContainer = styled.div`
   background: white;
-  padding: 15px 20px 15px 20px ;
+  padding: 20px 40px 20px 40px ;
   border: 1px solid #E9E9E9;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;
+  cursor: pointer;
 
-  transition: 0.2s;
+  transition: 0.4s;
 
   &:hover{
     box-shadow: 0px 18px 50px rgba(98, 107, 121, 0.15);
+  }
+
+  ${({ open }) => open && `
+    box-shadow: 0px 18px 50px rgba(98, 107, 121, 0.15);
+    border-color: #009FE3;
+  `}
+
+  @media only screen and (max-width: 600px) {
+    padding: 20px;
   }
   
 `;
@@ -602,14 +253,152 @@ const ItemDetail = styled.div`
   height: 0;
   overflow: hidden;
   text-align: left;
-  transition: all 0.5s ease;
+  transition: all 0.5s ease-in-out;
 
   ${({ open }) => open && `
     height: auto;
-    margin-top: 8px;
-    margin-bottom: 8px;
+    margin-top: 25px;
+    margin-bottom: 10px;
   `}
 `;
+
+const Bullet = styled.div`
+  border-radius: 50%;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  position: relative;
+
+  >.smallBullet{
+    width: 8px;
+    height: 8px;
+    background: #626B79;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  ${({ blue }) => blue && `
+    >.smallBullet{
+      background: #009FE3;
+    }
+  `}
+`;
+
+const Divider = styled.div`
+  height: 40px;
+  width: 2px;
+  margin: -10px 11px -5px;
+  background: #F2F4F7;
+`;
+
+const ListItem = styled.li`
+  list-style: none;
+  line-height: 1px;
+  padding-left: 4px;
+
+  >.textItem{
+    font-size: 14px;
+    display: inline-block;
+    margin-left: 20px;
+  }
+
+  @media only screen and (max-width: 400px) {
+    >.textItem{
+      font-size: 12.5px;
+      margin-left: 10px;
+    }
+  }
+`;
+
+class OrderItem extends React.Component {
+  constructor({props}) {
+    super(props);
+    this.state = {
+      key: null
+    }
+    this.toggleDetail = this.toggleDetail.bind(this);
+  }
+
+  toggleDetail(key) {
+    if(this.state.key == key) {
+      this.setState({
+        key: null
+      });
+    } else {
+      this.setState({
+        key: key
+      });
+    }
+  }
+
+  render() {
+    return (
+      this.props.ordersList.map((order, key) => {
+        return (
+          <div>
+            <ItemContainer key={key} open={this.state.key == key} onClick={()=>this.toggleDetail(key)}>
+              <ItemRow>
+                <ItemColumn left>
+                  Transfer to <span style={{fontWeight: "bolder"}}>{order.name}</span>
+                </ItemColumn>
+                <ItemColumn right>
+                  <NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value={order.fromAmount} /> {order.fromCurrency.toUpperCase()}
+                </ItemColumn>
+              </ItemRow>
+              <ItemRow>
+                <ItemColumn left>
+                  <Date>
+                    <span className={order.completedAt == 0.0 ? 'processing' : 'completed'}>
+                      {order.completedAt == 0.0 ? 'Processing' : 'Completed on '+moment(order.completedAt).format("DD/MM/YYYY HH:mm")}
+                    </span>
+                  </Date>
+                </ItemColumn>
+                <ItemColumn right>
+                  <span className="bold"><NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value={order.toAmount} /> {order.toCurrency.toUpperCase()}</span>
+                </ItemColumn>
+              </ItemRow>
+              <ItemDetail open={this.state.key == key}>
+                <ListItem>
+                  <Bullet blue={true}><div className="smallBullet"/></Bullet>
+                  <p className="textItem">
+                    Created on <span style={{fontWeight: "bolder"}}>{moment(order.createdAt).format("DD/MM/YYYY HH:mm")}</span>
+                  </p>
+                </ListItem>
+                <Divider/>
+                <ListItem>
+                  <Bullet blue={moment(moment().format("DD/MM/YYYY HH:mm")).isAfter(moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) || order.receivedAt != 0.0}><div className="smallBullet"/></Bullet>
+                  <p className="textItem">
+                    {(moment(moment().format("DD/MM/YYYY HH:mm"))
+                    .isAfter
+                    (moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) )
+                    ||
+                    (order.receivedAt != 0.0)
+                    ?
+                    ('We are processing your ' + order.toCurrency.toUpperCase() +' booking')
+                    :
+                    ('We are waiting to process your ' + order.toCurrency.toUpperCase() +' booking') }
+                  </p>
+                </ListItem>
+                <Divider/>
+                <ListItem>
+                  <Bullet blue={order.completedAt != 0.0}><div className="smallBullet"/></Bullet>
+                  <p className="textItem">
+                    {order.completedAt == 0.0 ? ('We will complete your transfer') :  ('Completed on ')}
+                    {order.completedAt == 0.0 ? '' : <span style={{fontWeight: "bolder"}}>{moment(order.completedAt).format("DD/MM/YYYY HH:mm")}</span>}
+                  </p>
+                </ListItem>
+              </ItemDetail>
+            </ItemContainer>
+          </div>
+        )
+      })
+    )
+  }
+}
 
 //Account Layout
 class Account extends React.Component {
@@ -627,7 +416,7 @@ class Account extends React.Component {
   renderContent() {
     if(this.props.isApproved) {
       if(this.props.orderArray.length > 0) {
-        return <OrderLayout ordersList={this.props.orderArray}/>
+        return <OrderItem ordersList={this.props.orderArray}/>
       } else {
         return <ApprovedLayout />
       }
@@ -652,16 +441,10 @@ class Account extends React.Component {
           <ContentContainer>
             <AllItemContainer>
               {this.renderContent()}
-            </AllItemContainer>
-            <p>heyooo</p>
-            
+            </AllItemContainer>          
           </ContentContainer>
         </ContainerFluid>
       </div>
-
-      // <AccountLayout isApproved={this.props.isApproved}>
-      //   {this.renderContent()}
-      // </AccountLayout>
     );
   }
 }
