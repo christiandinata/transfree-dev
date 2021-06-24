@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import NumberFormat from 'react-number-format'
 import styled from 'styled-components'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { PrButton, ScButton, WAButton } from './Buttons'
+import { ScButton } from './Buttons'
 
 export const MapBackground = styled.div`
   background-image: url('../static/images/Asset Web/content/batik-world-map.png');
@@ -94,9 +95,8 @@ const Currency = styled.div`
 const DropDownMenu = styled.div`
     position: absolute;
     right: 5%;
-    width: 300px;
     z-index: 1000;
-    padding: .5rem 0;
+    padding: 0 0 .5rem;
     margin: .125rem 0 0;
     font-size: 1rem;
     background-color: #fff;
@@ -113,31 +113,74 @@ const DropDownMenu = styled.div`
 const DropDownItem = styled.li`
     display: flex;
     align-items: center;
-    padding: 14px 20px 8px;
+    padding: 1rem 1rem;
     color: #15233C;
     transition: background-color 0.1s ease-out;
     &:hover {
-      background-color: #469DDD;
+      background: #009FE380;
       color: #FFFFFF;
       cursor: pointer;
     }`
 
+const SearchBar = styled.div`
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  background-color: #1E345B;
+  border-radius: 5px 5px 0 0;
+  width: 300px;
+  padding: 1rem 1.25rem 1rem 0.5rem;
+  input {
+    border: none;
+    background-color: transparent;
+    color: #FFFFFF;
+    font-family: "Avenir LT Pro";
+    outline: none;
+    padding: 0;
+  }
+  input:focus { border: none; }
+`
+
+const iconStyle = {
+  width: "3rem",
+  color: "#FFFFFF"
+}
+
+const flags = [
+  { country: "idr", cur: "Indonesian Rupiah" },
+  { country: "gbp", cur: "British Poundsterling" },
+  { country: "usd", cur: "US Dollar" },
+  { country: "aud", cur: "Australian Dollar" },
+  { country: "eur", cur: "European Euro" }
+]
+
 /* List of Flags */
 export function FlagOptions(props) {
   
-  const [flags, setFlags] = useState([
-    { country: "idr", cur: "Indonesian Rupiah" },
-    { country: "gbp", cur: "British Poundsterling" },
-    { country: "usd", cur: "US Dollar" },
-    { country: "aud", cur: "Australian Dollar" },
-    { country: "eur", cur: "European Euro" }
-  ])
+  const [displayedFlags, setDisplayedFlags] = useState(flags)
+
+  // Displays Country or Currency per the query
+  const filterFlag = (event) => {
+    let query = event.target.value
+    setDisplayedFlags(flags.filter(flag => 
+      flag.country.includes(query) || flag.cur.includes(query)
+    ))
+  }
 
   return (
     props.show ?
     <DropDownMenu>
+      <SearchBar>
+      <FontAwesomeIcon icon={faSearch} style={iconStyle}/>
+        <input
+          type="text"
+          pattern="[a-zA-Z]*"
+          placeholder="Enter a country or a currency"
+          onChange={(event) => filterFlag(event)}
+        />
+      </SearchBar>
       <ul>
-      {flags.map((flag, index) => (
+      {displayedFlags.map((flag, index) => (
         <DropDownItem
           key={index}
           onClick={() => props.onSelect(flag.country)}>
@@ -237,56 +280,5 @@ export function Title() {
         <ScButton>How it Works</ScButton>
       </a>
     </TitleDiv>
-  )
-}
-
-function Hero() {
-
-  // State
-  const [fromCurrency, setFromCurrency] = useState("gbp")
-  const [toCurrency, setToCurrency] = useState("idr")
-  const [fromAmount, setFromAmount] = useState(1000)
-  const [toAmount, setToAmount] = useState(0)
-  const [rate, setRate] = useState(0)
-
-  // componentDidMount()
-  // useEffect(() => {
-  //   setRate(props.rate - (props.rate * props.adjustedRates.lowerMargin / 100))
-  //   setToAmount(fromAmount * (props.rate - props.rate * props.adjustedRates.lowerMargin / 100))
-  // })
-
-  // Methods
-  const reverse = (from, to) => {
-    // Switch options
-    setFromCurrency(to)
-    setToCurrency(from)
-  }
-  
-  return (
-    <MapBackground>
-      <Overlay>
-        <HeroDiv>
-          <Title/>
-          <Converter>
-            <InputNumber
-              label={"You send"}
-              amount={fromAmount}
-              currency={fromCurrency}/>
-            <ReverseButton>
-              <img src="../../static/images/reverse.png" alt="rv"
-                onClick={() => reverse(fromCurrency, toCurrency)}/>
-            </ReverseButton>
-            <InputNumber label={"Recipient gets"} amount={toAmount} currency={toCurrency} />
-            <RateAndFee/>
-            <div style={{ padding: "1rem 1.25rem 0 1.25rem", fontSize: "0.75rem" }}>
-              Your transfer will be processed immediately. 
-              The recipient will get the money in next working day.
-              <PrButton style={{ marginTop: "1rem", width: "100%" }}>Try it For Free</PrButton>
-            </div>
-            <WAButton/>
-          </Converter>
-        </HeroDiv>
-      </Overlay>
-    </MapBackground>
   )
 }
