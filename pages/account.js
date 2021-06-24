@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import initialize from '../utils/initialize';
 import actions from '../redux/actions';
 import { getCookie } from '../utils/cookie';
+import { PendingLayout } from '../components/order/Pending'
 import moment from 'moment';
 
 //Setelah diapprove
@@ -57,43 +58,16 @@ const ApprovedLayout = () => {
 
 }
 
-//Waiting Approve
-const PendingLayout = () => {
+function HeaderTransaction(){
   return (
-    <div className="content">
-      <div className="big-icon">
-        <img src="../static/images/document.svg" alt="Document"/>
-      </div>
-      <h1>Awaiting confirmation</h1>
-      <p>We are now reviewing your account details. We will send you an email & WhatsApp message once the verification process is completed.</p>
-      <p>Please contact us by email (admin@transfree.id) or WhatsApp (+44 7490 090659) for faster process.</p>
-      <style jsx>{`
-        .logo {
-          width: 100%;
-          text-align: center;
-        }
-        .big-icon img {
-          margin: 50px auto;
-        }
-        p {
-          max-width: 600px;
-          text-align: justify;
-          margin-bottom: 10px;
-        }
-        h1 {
-          margin: 0;
-        }
-        .content {
-          display: flex;
-          flex-direction: column;
-          min-height: 70vh;
-          align-items: center;
-          justify-content: center;
-          margin-top:30px;
-          padding:15px;
-        }
-      `}</style>
-    </div>
+    <BackgroundContainer>
+      <img className="image" src = '../static/images/Asset Web/transaction/Batik_World_Map_cut.png'/>
+      <h1 className="title">History Transactions</h1>
+      <SearchContainer>
+        <SearchBar type="text" placeholder="Search transactions"/>
+        <Button>Search</Button>
+      </SearchContainer>
+    </BackgroundContainer>
   )
 }
 
@@ -126,61 +100,68 @@ const BackgroundContainer = styled.div`
   }
 
   >.title{
-    size: 40px;
+    font-size: 40px;
     color: white;
     position: absolute;
     top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
+    //TODO:
+    line-spacing: 0px;
   }
 `;
 
 const SearchContainer = styled.div`
   display: flex;
-  width: 100%;
-  // flex-direction: column;
+  width: 600px;
+  justify-contents: center; 
 
   position: absolute;
   top: 65%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -35%);
+
+  @media only screen and (max-width: 800px) {
+    flex-direction: column;
+    height: 110px;
+    align-items: center;
+
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+  }
 `;
 
 const SearchBar = styled.input`
-  // position: absolute;
-  // top: 70%;
-  // left: 40%;
-  // transform: translate(-50%, -50%);
   font-size: 16px;
-
   background: #FFFFFF;
   border: 1px solid #E2E2E2;
   border-radius: 4px;
-  height: 48px;
+
+  flex-basis: 70%;
+  height: 42px;
   padding-left: 50px;
-  width: 350px;
+  margin-right: 20px;
 
   background-image: url('../static/images/Asset Web/transaction/search.svg');
-  background-position: 12px 13px;
+  background-position: 12px 10px;
   background-repeat: no-repeat;
+
+  @media only screen and (max-width: 800px) {
+    flex-basis: 53%;
+    margin-bottom: 8px;
+    min-width: 250px;
+  }
 `;
 
 const Button = styled.button`
-  // position: absolute;
-  // top: 70%;
-  // left: 65%;
-  // transform: translate(-50%, -50%);
-
   border: 1px solid #009FE3;
   border-radius: 4px;
 
-  width: 184px;
-  height: 50px;
+  height: 45px;
   font-size: 16px;
+  flex-basis: 30%;
 
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
   padding: 8px 24px;
   margin-bottom: 10px;
@@ -188,6 +169,11 @@ const Button = styled.button`
 
   background-color: #009FE3;
   color: white;
+
+  @media only screen and (max-width: 800px) {
+    flex-basis: 47%;
+    min-width: 200px;
+  }
 `;
 
 const AllItemContainer = styled.div`
@@ -416,12 +402,21 @@ class Account extends React.Component {
   renderContent() {
     if(this.props.isApproved) {
       if(this.props.orderArray.length > 0) {
-        return <OrderItem ordersList={this.props.orderArray}/>
+        return (
+          <div>
+          <HeaderTransaction/>
+          <ContentContainer>
+            <AllItemContainer>
+              <OrderItem ordersList={this.props.orderArray}/>
+            </AllItemContainer>
+          </ContentContainer>
+          </div>
+        )
       } else {
         return <ApprovedLayout />
       }
     } else {
-      return <PendingLayout />
+      return <PendingLayout/>
     }
   }
 
@@ -430,19 +425,7 @@ class Account extends React.Component {
       <div>
         <Header/>
         <ContainerFluid>
-          <BackgroundContainer>
-            <img className="image" src = '../static/images/Asset Web/transaction/Batik_World_Map_cut.png'/>
-            <h1 className="title">History Transactions</h1>
-            <SearchContainer>
-              <SearchBar type="text" placeholder="Search transactions"/>
-              <Button>Search</Button>
-            </SearchContainer>
-          </BackgroundContainer>
-          <ContentContainer>
-            <AllItemContainer>
               {this.renderContent()}
-            </AllItemContainer>          
-          </ContentContainer>
         </ContainerFluid>
       </div>
     );
