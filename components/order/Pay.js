@@ -219,7 +219,7 @@ const BankDetail = styled.div`
   overflow: hidden;
   background-color: #F6F8FB;
   text-align: left;
-  transition: all 0.5s ease;
+  transition: 0.5s ease-in-out;
 
   ${({ open }) => open && `
     height: auto;

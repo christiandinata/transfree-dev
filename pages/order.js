@@ -143,7 +143,7 @@ class Order extends React.Component {
   constructor({ props }) {
     super(props);
     this.state = {
-      step: 5,
+      step: 1,
       uid: 0,
       senderName: '',
       senderEmail: '',
