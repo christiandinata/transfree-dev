@@ -9,10 +9,12 @@ export function NavBarBlue(props) {
 		<>
 			<Nav>
 				<NavInner>
-					<Logo
-						src = "../static/images/transfree-logo.png"
-						homepage = "false"
-					/>
+					<a style = {{ height: 17 }} href = "/">
+						<Logo
+							src = "../static/images/transfree-logo.png"
+							homepage = "false"
+						/>
+					</a>
 					<Navigation>
 						<NavigationChild
 							navChildColor = {props.navChildColor}
