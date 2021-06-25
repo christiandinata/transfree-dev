@@ -5,7 +5,12 @@ import { connect } from "react-redux";
 import actions from "../redux/actions";
 import initialize from "../utils/initialize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import {
+	faEye,
+	faEyeSlash,
+	faCheckCircle,
+} from "@fortawesome/free-solid-svg-icons";
+import Router from "next/router";
 import * as axios from "axios";
 import ENV from "../config";
 import Header from "../components/header";
@@ -48,69 +53,6 @@ function ForgotPassword(props) {
 	const [hiddenConfirmPass, setHiddenConfirmPass] = useState(true);
 	const [errorMsg, setErrorMsg] = useState(false);
 	const [verifyPassword, setVerifyPassword] = useState(true);
-
-	//Verifikasi password baru
-	function handlePassword(event) {
-		event.preventDefault();
-		if (
-			values.password !== "" &&
-			values.password !== undefined &&
-			values.password === values.confirmPassword
-		) {
-			// document.querySelector("#text-success-send").style.display =
-			// 	"block";
-			// document.querySelector("#text-number").style.display = "none";
-			// document.querySelector("#field-code").style.display = "block";
-			// document.querySelector("#text-valid").style.display = "block";
-			// document.querySelector("#text-nocode").style.display = "block";
-			// document.querySelector("#button-continue").style.display = "none";
-			// document.querySelector("#button-verify").style.display = "block";
-			// document.querySelector("#field-confirm-password").style.display =
-			// 	"none";
-			// document.querySelector("#field-password").style.display = "none";
-			// setValues({...values, step: 3 });
-		} else {
-			if (values.password !== values.confirmPassword) {
-				document.querySelector("#text-number").innerHTML =
-					"Password doesn't match";
-			} else {
-				document.querySelector("#text-number").innerHTML =
-					"Password may not be empty";
-			}
-
-			document.querySelector("#text-number").style.display = "block";
-		}
-	}
-
-	//Verifikasi untuk ganti password
-	function handleVerify(event) {
-		event.preventDefault();
-		document.querySelector("#text-number").style.display = "none";
-
-		axios
-			.post(ENV.API + `/v1/changePassword`, {
-				email: values.email,
-				password: values.password,
-				sid: values.sid,
-				code: values.code,
-			})
-			.then(async (response) => {
-				if (response.data.success) {
-					document.querySelector("#text-popup").innerHTML = "Hello "
-						.concat(response.data.name)
-						.concat("!");
-					document.querySelector("#popup").style.display = "block";
-				} else {
-					document.querySelector("#text-number").innerHTML =
-						"Wrong verification code";
-					document.querySelector("#text-number").style.display =
-						"block";
-				}
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}
 
 	//Component untuk mengirimkan email
 	function handleChange(e) {
@@ -199,47 +141,78 @@ function ForgotPassword(props) {
 					});
 				}
 			});
-		// .catch((error) => {
-		// 	console.log(error);
-		// 	console.log("foo");
-		// });
+	}
+
+	//Verifikasi untuk ganti password
+	function handleVerify(event) {
+		if (values.password != values.confirmPassword) {
+			event.preventDefault();
+			setVerifyPassword(false);
+			setError({
+				...error,
+				password: true,
+				confirmPassword: true,
+			});
+		} else {
+			event.preventDefault();
+			setVerifyPassword(true);
+			axios
+				.post(ENV.API + `/v1/changePassword`, {
+					email: values.email,
+					password: values.password,
+					sid: values.sid,
+					code: values.code,
+				})
+				.then(async (response) => {
+					if (response.data.success) {
+						setStep("success");
+					} else {
+						setStep("otp");
+						setErrorMsg(true);
+						setError({
+							...error,
+							email: true,
+							password: false,
+							confirmPassword: false,
+						});
+					}
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		}
 	}
 
 	//Componenet untuk mengirim ulang verification code
 	function handleResend() {
-		// axios
-		// 	.post(ENV.API + `/v1/sendotp`, { email: values.email })
-		// 	.then(async (response) => {
-		// 		if (response.data.success) {
-		// 			setCountdown({
-		// 				...countdown,
-		// 				seconds: 59,
-		// 			});
-		// 			document.querySelector("#text-number").innerHTML =
-		// 				"Successfully resend verification code";
-		// 			document.querySelector("#text-number").style.display =
-		// 				"block";
-		// 			setValues({ ...values, sid: response.data.serviceSid });
-		// 		} else {
-		// 			document.querySelector("#text-number").innerHTML =
-		// 				"Cannot resend verification code";
-		// 			document.querySelector("#text-number").style.display =
-		// 				"block";
-		// 		}
-		// 	})
-		// 	.catch((error) => {
-		// 		console.log(error);
-		// 	});
-		setCountdown({
-			...countdown,
-			seconds: 59,
-		});
+		axios
+			.post(ENV.API + `/v1/sendotp`, { email: values.email })
+			.then(async (response) => {
+				if (response.data.success) {
+					setCountdown({
+						...countdown,
+						seconds: 59,
+					});
+					setValues({ ...values, sid: response.data.serviceSid });
+				} else {
+					setStep(step);
+					setErrorMsg(true);
+					setError({
+						...error,
+						email: true,
+					});
+				}
+			});
 	}
 
 	const [countdown, setCountdown] = useState({
 		minutes: "00",
 		seconds: 59,
 	});
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [step]);
 
 	useEffect(() => {
 		if (step == "otp") {
@@ -252,6 +225,8 @@ function ForgotPassword(props) {
 				}
 			}, 1000);
 			return () => clearTimeout(counter);
+		} else {
+			countdown.seconds = 59;
 		}
 	});
 
@@ -260,13 +235,15 @@ function ForgotPassword(props) {
 			<Header />
 			<NavBarBlue
 				navChildColor="#fff"
-				navText="Homepage"
-				endpoint="/index"
+				navText="Account"
+				endpoint="/account"
 			/>
+			{step == "otp" && errorMsg ? (
+				<ErrorDiv>
+					<ErrorDivInner>Wrong Verification Code</ErrorDivInner>
+				</ErrorDiv>
+			) : null}
 			<RecoveryContainer>
-				{step == "otp" && errorMsg ? (
-					<ErrorDiv>Wrong Verification Code</ErrorDiv>
-				) : null}
 				<RecoveryForm
 					onKeyDown={(e) => {
 						if (e.key === "Enter") {
@@ -275,7 +252,14 @@ function ForgotPassword(props) {
 					}}>
 					<RecoveryFormInner>
 						<center>
-							<Heading>Account Recovery</Heading>
+							{step != "success" ? (
+								<Heading>Account Recovery</Heading>
+							) : (
+								<SuccessHeading>
+									Account Recovery Success
+								</SuccessHeading>
+							)}
+
 							{step == "email" && (
 								<>
 									<BelowHeading>
@@ -363,7 +347,9 @@ function ForgotPassword(props) {
 											: "inputStyling"
 									}
 									isInputNum={true}
-									focusStyle="focusStyling"
+									focusStyle={
+										errorMsg ? "focusError" : "focusStyling"
+									}
 									shouldAutoFocus={true}
 									hasErrored={errorMsg ? "true" : null}
 									errorStyle="errorStyling"
@@ -520,6 +506,26 @@ function ForgotPassword(props) {
 								) : null}
 							</>
 						)}
+						{step == "success" && (
+							<>
+								<center>
+									<FontAwesomeIcon
+										icon={faCheckCircle}
+										style={{
+											color: "green",
+											width: 48,
+											height: 48,
+											marginTop: 32,
+											marginBottom: 32,
+										}}
+									/>
+								</center>
+								<SuccessText>
+									Successfully reset password for account with
+									email <b>{values.email}</b>
+								</SuccessText>
+							</>
+						)}
 						{step == "email" && (
 							<Button
 								// disabled={!values.email}
@@ -535,18 +541,28 @@ function ForgotPassword(props) {
 							</Button>
 						)}
 						{step == "password" && (
+							<Button onClick={handleVerify}>Send</Button>
+						)}
+						{step != "success" ? (
+							<BelowButton>
+								<span onClick={() => Router.push("/login")}>
+									Back to Login
+								</span>
+							</BelowButton>
+						) : (
 							<Button
-							// disabled={!values.email}
-							>
-								Send
+								success={true}
+								onClick={() => Router.push("/login")}>
+								Login
 							</Button>
 						)}
-						<BelowButton>
-							<span>Back to Login</span>
-						</BelowButton>
 					</RecoveryFormInner>
 				</RecoveryForm>
 			</RecoveryContainer>
+			<CopyrightDiv>
+				Transfree © Copyright {new Date().getFullYear()}. All rights
+				reserved.
+			</CopyrightDiv>
 			<style jsx global>{`
 				.containerStyling {
 					display: flex;
@@ -566,6 +582,10 @@ function ForgotPassword(props) {
 					border: 1px solid #e2e2e2;
 					border-radius: 4px;
 				}
+				.inputStyling.error {
+					color: #ff0000;
+					font-weight: 700;
+				}
 				.inputStyling.filled {
 					color: #009fe3;
 					border: 1px solid #009fe3;
@@ -575,6 +595,12 @@ function ForgotPassword(props) {
 					border: 1px solid #009fe3 !important;
 					outline: none;
 				}
+
+				.focusError {
+					border: 2px solid #f80202 !important;
+					outline: none;
+				}
+
 				.errorStyling {
 					border: 1px solid #ff0000;
 				}
@@ -622,6 +648,7 @@ const Heading = styled.p`
 	letter-spacing: -0.02em;
 	color: #009fe3;
 	margin-bottom: 32px;
+	margin-top: 32px;
 `;
 
 const BelowHeading1 = styled.div`
@@ -650,6 +677,27 @@ const BelowHeading = styled.div`
 	p {
 		margin: 0;
 	}
+`;
+
+const SuccessHeading = styled.p`
+	font-style: normal;
+	font-weight: bold;
+	font-size: 20px;
+	line-height: 24px;
+	letter-spacing: -0.02em;
+	margin-top: 32px;
+	margin-bottom: 0;
+	color: #009fe3;
+`;
+
+const SuccessText = styled.div`
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 19px;
+	text-align: center;
+	letter-spacing: -0.02em;
+
+	color: #626b79;
 `;
 
 const ResendCodeDiv = styled.div`
@@ -781,7 +829,7 @@ const FormInput = styled.input`
 `;
 
 const Button = styled.button`
-	margin-top: 136px;
+	margin-top: ${(props) => (props.success ? "40px" : "136px")};
 	margin-bottom: 16px;
 	height: 40px;
 	border-radius: 4px;
@@ -814,17 +862,26 @@ const BelowButton = styled.div`
 `;
 
 const ErrorDiv = styled.div`
+	position: absolute;
+	width: 100%;
+	height: 40px;
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: -60px;
+	line-height: 24px;
+`;
+
+const ErrorDivInner = styled.div`
 	background-color: #ff0000;
 	width: 528px;
 	height: 40px;
-	margin-top: 20px;
 	display: flex;
 	color: #fff;
 	font-weight: 500;
 	font-size: 16px;
 	letter-spacing: 0.2px;
-	margin-bottom: -60px;
-	line-height: 24px;
 	align-items: center;
 	justify-content: center;
 `;
@@ -840,6 +897,21 @@ const EyeIcon = styled.div`
 	height: 20px;
 	width: 20px;
 	margin-right: 16px;
+`;
+
+const CopyrightDiv = styled.div`
+	width: 100%;
+	height: 72px;
+	background: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 24px;
+	text-align: center;
+	letter-spacing: 0.2px;
+	color: #232933;
 `;
 
 ForgotPassword.getInitialProps = async (ctx) => {

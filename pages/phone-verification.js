@@ -109,7 +109,9 @@ function PhoneVerification(props) {
 										? "inputStyling error"
 										: "inputStyling"
 								}
-								focusStyle="focusStyling"
+								focusStyle={
+									errorMsg ? "focusError" : "focusStyling"
+								}
 								shouldAutoFocus={true}
 								hasErrored={errorMsg ? "true" : null}
 								errorStyle="errorStyling"
@@ -168,6 +170,11 @@ function PhoneVerification(props) {
 
 				.focusStyling {
 					border: 1px solid #009fe3 !important;
+					outline: none;
+				}
+
+				.focusError {
+					border: 2px solid #f80202 !important;
 					outline: none;
 				}
 
