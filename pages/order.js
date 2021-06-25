@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import styled from "styled-components";
 import Header from '../components/header';
-import Menu from '../components/menu';
 import OrderAmount from '../components/order/OrderAmount';
 import Recipient from '../components/order/Recipient';
 import Review from '../components/order/Review';
@@ -12,6 +11,8 @@ import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { getCookie } from '../utils/cookie';
 import { PendingLayout } from '../components/order/Pending'
+import { NavBarBlue } from '../components/MenuComponents'
+import Footer from '../components/footer'
 import shortid from 'shortid';
 
 const ContainerFluid = styled.div`
@@ -289,8 +290,11 @@ class Order extends React.Component {
     return (
       <div>
         <Header />
-        {/* <NavBar/> */}
-        {/* <Menu isApproved={this.props.isApproved} /> */}
+        <NavBarBlue 
+          navChildColor = {"white"}
+          navText = {"Homepage"} 
+          endpoint={"/home"}
+        />
         <ContainerFluid>
           <ProgressContainer>
             <ProgressList>
@@ -304,13 +308,19 @@ class Order extends React.Component {
             {this.renderContent(this.state.step)}
           </ContentContainer>
         </ContainerFluid>
+        <Footer/>
       </div>
     )} else {
       return (
         <div>
           <Header />
-          <Menu />
+          <NavBarBlue 
+            navChildColor = {"white"}
+            navText = {"Homepage"} 
+            endpoint={"/home"}
+          />
           <PendingLayout/>
+          <Footer/>
         </div>
       )
     }
