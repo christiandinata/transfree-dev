@@ -1,7 +1,6 @@
 import Header from '../components/header.js';
 import Menu from '../components/menu.js';
 import Link from 'next/link';
-import AccountLayout from '../components/AccountLayout';
 import NumberFormat from 'react-number-format';
 import styled from "styled-components";
 import { connect } from 'react-redux';
@@ -58,20 +57,6 @@ const ApprovedLayout = () => {
 
 }
 
-function HeaderTransaction(){
-  return (
-    <BackgroundContainer>
-      <img className="image" src = '../static/images/Asset Web/transaction/Batik_World_Map_cut.png'/>
-      <h1 className="title">History Transactions</h1>
-      <SearchContainer>
-        <SearchBar type="text" placeholder="Search transactions"/>
-        <Button>Search</Button>
-      </SearchContainer>
-    </BackgroundContainer>
-  )
-}
-
-
 const ContainerFluid = styled.div`
   min-height: 100vh;
   align-items: center;
@@ -106,8 +91,7 @@ const BackgroundContainer = styled.div`
     top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
-    //TODO:
-    line-spacing: 0px;
+    line-height: 55px;
   }
 `;
 
@@ -126,9 +110,9 @@ const SearchContainer = styled.div`
     height: 110px;
     align-items: center;
 
-    top: 70%;
+    top: 72%;
     left: 50%;
-    transform: translate(-50%, -30%);
+    transform: translate(-50%, -28%);
   }
 `;
 
@@ -146,6 +130,13 @@ const SearchBar = styled.input`
   background-image: url('../static/images/Asset Web/transaction/search.svg');
   background-position: 12px 10px;
   background-repeat: no-repeat;
+
+  transition: all 0.5s linear;
+
+  &:focus{
+    box-shadow: 0px 0px 0px 2px solid #009FE3;
+    background-image: url('../static/images/Asset Web/transaction/search-blue.svg');
+  }
 
   @media only screen and (max-width: 800px) {
     flex-basis: 53%;
@@ -339,7 +330,7 @@ class OrderItem extends React.Component {
                 <ItemColumn left>
                   <Date>
                     <span className={order.completedAt == 0.0 ? 'processing' : 'completed'}>
-                      {order.completedAt == 0.0 ? 'Processing' : 'Completed on '+moment(order.completedAt).format("DD/MM/YYYY HH:mm")}
+                      {order.completedAt == 0.0 ? 'Processing' : 'Completed on '+ moment(order.completedAt).format("DD/MM/YYYY HH:mm")}
                     </span>
                   </Date>
                 </ItemColumn>
@@ -390,6 +381,12 @@ class OrderItem extends React.Component {
 class Account extends React.Component {
   constructor({props}) {
     super(props);
+    this.state = {
+      orders: undefined
+    }
+
+    this.searchInput = React.createRef();
+    this.resetTransaction = this.resetTransaction.bind(this);
   }
 
   static async getInitialProps(ctx) {
@@ -399,15 +396,60 @@ class Account extends React.Component {
     return {};
   };
 
+  componentWillReceiveProps(nextProps) {
+    this.updateState();
+  }
+
+  componentDidMount(){
+    this.setState({orders: this.props.orderArray});
+    console.log(this.state.orders);
+  }
+
+  resetTransaction(){
+    if(this.searchInput.current.value == ""){
+      this.setState({orders: this.props.orderArray});
+    }
+  }
+
+  searchTransaction(){
+    let searchResult = [];
+    let filter = this.searchInput.current.value.toLowerCase();
+    for(const order in this.props.orderArray){
+      if(this.props.orderArray[order].name.toLowerCase().indexOf(filter) > -1 || moment(this.props.orderArray[order].completedAt).format("DD/MM/YYYY HH:mm").indexOf(filter) > -1 ){
+        searchResult.push(this.props.orderArray[order])
+      }
+    }
+    this.setState({orders: searchResult});
+  }
+
+  headerTransaction(){
+    return (
+      <BackgroundContainer>
+        <img className="image" src = '../static/images/Asset Web/transaction/Batik_World_Map_cut.png'/>
+        <h1 className="title">History Transactions</h1>
+        <SearchContainer>
+          <SearchBar 
+            type="text" 
+            ref={this.searchInput} 
+            onChange={this.resetTransaction}
+            placeholder="Search transactions"
+          />
+          <Button onClick={() => this.searchTransaction()}>Search</Button>
+        </SearchContainer>
+      </BackgroundContainer>
+    )
+  }
+
   renderContent() {
     if(this.props.isApproved) {
       if(this.props.orderArray.length > 0) {
         return (
           <div>
-          <HeaderTransaction/>
+          {this.headerTransaction()}
           <ContentContainer>
             <AllItemContainer>
-              <OrderItem ordersList={this.props.orderArray}/>
+              <h3 style={{textAlign: "center", display: this.state.orders.length == 0 ? "block" : "none" }}>No results found.</h3>
+              <OrderItem ordersList={this.state.orders}/>
             </AllItemContainer>
           </ContentContainer>
           </div>
@@ -421,14 +463,19 @@ class Account extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <Header/>
-        <ContainerFluid>
-              {this.renderContent()}
-        </ContainerFluid>
-      </div>
-    );
+    if(this.state.orders != undefined){
+      return (
+        <div>
+          <Header/>
+          <ContainerFluid>
+                {this.renderContent()}
+          </ContainerFluid>
+        </div>
+      );
+    }
+    else{
+      return null;
+    }
   }
 }
 
