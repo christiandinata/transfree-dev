@@ -14,7 +14,7 @@ import Header from "../components/header.js";
 import { useState, useEffect } from "react";
 import { set } from "react-ga";
 import Footer from "../components/footer";
-import { NavBar } from "../components/MenuComponents";
+import { NavBarBlue } from "../components/MenuComponents";
 
 //Component untuk login
 function Login(props) {
@@ -114,7 +114,11 @@ function Login(props) {
 	return (
 		<>
 			<Header />
-			<NavBar navChildColor="#fff" navText="Homepage" endpoint="/index" />
+			<NavBarBlue
+				navChildColor="#fff"
+				navText="Homepage"
+				endpoint="/index"
+			/>
 			<FormContainer>
 				<Form onSubmit={handleSubmit}>
 					<FormInner>

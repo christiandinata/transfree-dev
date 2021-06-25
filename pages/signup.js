@@ -10,7 +10,7 @@ import Header from "../components/header";
 import { Form, FormContainer } from "../components/FormComponents";
 import styled from "styled-components";
 import Footer from "../components/footer";
-import { NavBar } from "../components/MenuComponents";
+import { NavBarBlue } from "../components/MenuComponents";
 
 //Menerima Argumen dari luar
 function Signup(props) {
@@ -230,7 +230,11 @@ function Signup(props) {
 	return (
 		<>
 			<Header />
-			<NavBar navChildColor="#fff" navText="Homepage" endpoint="/index" />
+			<NavBarBlue
+				navChildColor="#fff"
+				navText="Homepage"
+				endpoint="/index"
+			/>
 			<FormContainer>
 				<Form onSubmit={handleSubmit}>
 					<FormInner>

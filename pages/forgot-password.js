@@ -9,7 +9,7 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import * as axios from "axios";
 import ENV from "../config";
 import Header from "../components/header";
-import { NavBar } from "../components/MenuComponents";
+import { NavBarBlue } from "../components/MenuComponents";
 import styled from "styled-components";
 import OtpInput from "react-otp-input";
 // import batik from "../static/images/Batik_World_Map_1.png";
@@ -188,7 +188,9 @@ function ForgotPassword(props) {
 						...values,
 						sid: response.data.serviceSid,
 					});
+					setStep("otp");
 				} else {
+					setStep(step);
 					console.log(props);
 					setErrorMsg(true);
 					setError({
@@ -256,7 +258,11 @@ function ForgotPassword(props) {
 	return (
 		<>
 			<Header />
-			<NavBar navChildColor="#fff" navText="Homepage" endpoint="/index" />
+			<NavBarBlue
+				navChildColor="#fff"
+				navText="Homepage"
+				endpoint="/index"
+			/>
 			<RecoveryContainer>
 				{step == "otp" && errorMsg ? (
 					<ErrorDiv>Wrong Verification Code</ErrorDiv>

@@ -10,7 +10,7 @@ import { Form, FormContainer } from "../components/FormComponents";
 import styled from "styled-components";
 import OtpInput from "react-otp-input";
 import Footer from "../components/footer";
-import { NavBar } from "../components/MenuComponents";
+import { NavBarBlue } from "../components/MenuComponents";
 
 //Verifikasi nomor handphone saat user register
 function PhoneVerification(props) {
@@ -80,7 +80,11 @@ function PhoneVerification(props) {
 		<>
 			<Header />
 
-			<NavBar navChildColor="#fff" navText="Homepage" endpoint="/index" />
+			<NavBarBlue
+				navChildColor="#fff"
+				navText="Homepage"
+				endpoint="/index"
+			/>
 
 			<FormContainer>
 				{errorMsg ? <ErrorDiv>Wrong Verification Code</ErrorDiv> : null}
