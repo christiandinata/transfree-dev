@@ -1,6 +1,4 @@
-import Link from "next/link";
 import { useState, useEffect } from "react";
-import AuthLayout from "../components/AuthLayout";
 import { connect } from "react-redux";
 import actions from "../redux/actions";
 import initialize from "../utils/initialize";
@@ -17,10 +15,10 @@ import Header from "../components/header";
 import { NavBarBlue } from "../components/MenuComponents";
 import styled from "styled-components";
 import OtpInput from "react-otp-input";
-// import batik from "../static/images/Batik_World_Map_1.png";
 
 //Component yang ditampilkan saat user memilih opsi forgot password
 function ForgotPassword(props) {
+	// states used in this page
 	const [step, setStep] = useState("email");
 
 	const [values, setValues] = useState({
@@ -54,7 +52,7 @@ function ForgotPassword(props) {
 	const [errorMsg, setErrorMsg] = useState(false);
 	const [verifyPassword, setVerifyPassword] = useState(true);
 
-	//Component untuk mengirimkan email
+	// function that handles form inputs
 	function handleChange(e) {
 		const { name, value } = e.target;
 		if (value) {
@@ -120,6 +118,7 @@ function ForgotPassword(props) {
 		console.log(values.code.toString().length);
 	}
 
+	// function to send an otp code to your email
 	function handleSend(event) {
 		event.preventDefault();
 		axios
@@ -924,159 +923,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, actions)(ForgotPassword);
-
-{
-	/* <form
-				className="form-container"
-				>
-				<p
-					id="text-email"
-					style={{ marginTop: "15px", marginBottom: "15px" }}>
-					<b>{values.email}</b>
-				</p>
-				<p
-					id="text-success-send"
-					style={{ fontSize: 13, marginTop: "20px" }}>
-					We have successfully sent the code
-				</p>
-				<p id="text-valid" style={{ fontSize: 13 }}>
-					Your code valid for <b>60 seconds</b>
-				</p>
-
-				<input
-					type="email"
-					id="field-email"
-					placeholder="Email"
-					autoComplete="username"
-					value={values.email}
-					onChange={handleEmailChange}
-				/>
-
-				<input
-					style={{ marginTop: 0 }}
-					type="password"
-					id="field-password"
-					placeholder="Your Password"
-					value={values.password}
-					onChange={(e) =>
-						setValues({ ...values, password: e.target.value })
-					}
-				/>
-
-				<input
-					style={{ marginTop: 0 }}
-					type="password"
-					id="field-confirm-password"
-					placeholder="Confirm your password"
-					value={values.confirmPassword}
-					onChange={(e) =>
-						setValues({
-							...values,
-							confirmPassword: e.target.value,
-						})
-					}
-				/>
-
-				<input
-					style={{ marginTop: 0, textAlign: "center" }}
-					type="text"
-					id="field-code"
-					placeholder="Enter 6-Digit Code"
-					value={values.code}
-					onChange={(e) =>
-						setValues({ ...values, code: e.target.value })
-					}
-				/>
-
-				<img
-					id="img-tablet"
-					src="../../static/images/forgot/tablet.svg"
-				/>
-				<p id="text-nocode" style={{ fontSize: 13 }}>
-					No code showing on your email?
-					<a
-						href="#"
-						onClick={handleResend}
-						style={{ color: "#469DDD" }}>
-						{" "}
-						Resend Code
-					</a>
-				</p>
-				<p id="text-send" style={{ fontSize: 13 }}>
-					Transfree will send verification code to your email
-				</p>
-				<p id="text-number" style={{ fontSize: 13 }}>
-					<b>{values.email}</b>
-				</p>
-				<button
-					id="button-check"
-					onClick={handleCheck}
-					className="btn-primary">
-					Check
-				</button>
-				<button
-					id="button-send"
-					onClick={handleSend}
-					className="btn-primary">
-					Send
-				</button>
-				<button
-					id="button-continue"
-					onClick={handlePassword}
-					className="btn-primary">
-					Continue
-				</button>
-				<button
-					id="button-verify"
-					onClick={handleVerify}
-					className="btn-primary">
-					Verify Code
-				</button>
-			</form>
-			<div
-				className="new-user-progress"
-				style={{
-					display: "flex",
-					width: 435,
-					justifyContent: "space-between",
-				}}>
-				<div style={{ width: "max-content" }}>
-					<Progress step={values.step} />
-				</div>
-				<a
-					style={{
-						fontSize: 13,
-						marginRight: "40%",
-						marginTop: "10px",
-					}}
-					className="link"
-					href="/login">
-					{" "}
-					&lt; Back to Login
-				</a>
-			</div>
-			<style jsx>{`
-          .form-container input{
-            margin-bottom:20px;
-            margin-top:50px;
-          }
-
-          @media only screen and (max-width: 414px) {
-            .form-container input{
-              margin-bottom:10px;
-              margin-top:-10px;
-            }
-
-            .form-container label {
-              font-size: 19px;
-              text-transform: uppercase;
-              display:flex;
-              margin-top:20px;
-              
-            }
-
-            .new-user-progress{
-                width:380px !important;
-            }
-        `}</style> */
-}
