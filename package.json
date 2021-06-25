@@ -25,6 +25,8 @@
     "@trendmicro/react-sidenav": "^0.5.0",
     "@zeit/next-css": "^1.0.1",
     "axios": "^0.19.2",
+    "babel-plugin-styled-components": "^1.12.0",
+    "babel-preset-next": "^1.4.0",
     "cheerio": "^1.0.0-rc.3",
     "cookie-parser": "^1.4.5",
     "crypto-hash": "^1.2.1",
@@ -49,6 +51,7 @@
     "react-dropzone": "^11.2.4",
     "react-ga": "^3.2.1",
     "react-js-pagination": "^3.0.3",
+    "react-modal": "^3.14.3",
     "react-number-format": "^4.4.1",
     "react-phone-input": "^1.2.1",
     "react-phone-number-input": "^2.5.3",
@@ -69,7 +72,9 @@
   "babel": {
     "env": {
       "development": {
-        "presets": ["next/babel"],
+        "presets": [
+          "next/babel"
+        ],
         "plugins": [
           [
             "styled-components",
@@ -81,7 +86,9 @@
         ]
       },
       "production": {
-        "presets": ["next/babel"],
+        "presets": [
+          "next/babel"
+        ],
         "plugins": [
           [
             "styled-components",

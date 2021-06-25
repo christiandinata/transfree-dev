@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import styled from "styled-components";
 import Header from '../components/header';
 import Menu from '../components/menu';
 import OrderAmount from '../components/order/OrderAmount';
@@ -10,50 +11,91 @@ import { connect } from 'react-redux';
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { getCookie } from '../utils/cookie';
-import NumberFormat from 'react-number-format';
-import orderid from 'order-id';
+import { PendingLayout } from '../components/order/Pending'
 import shortid from 'shortid';
 
-//Component untuk menampilkan saat order diproses
-const PendingLayout = () => {
-  return (
-    <div className="content">
-      <div className="big-icon">
-        <img src="../static/images/document.svg"/>
-      </div>
-      <h1>Awaiting confirmation</h1>
-      <p>We are now reviewing your account details. We will send you an email & WhatsApp message once the verification process is completed.</p>
-      <p>Please contact us by email (admin@transfree.id) or WhatsApp (+44 7490 090659) for faster process.</p>
-      <style jsx>{`
-        .logo {
-          width: 100%;
-          text-align: center;
-        }
-        .big-icon img {
-          margin: 50px auto;
-        }
-        p {
-          max-width: 600px;
-          text-align: justify;
-          margin-bottom: 20px;
-        }
-        h1 {
-          margin: 0;
-        }
-        .content {
-          display: flex;
-          flex-direction: column;
-          min-height: 100vh;
-          align-items: center;
-          justify-content: justify;
-          margin-top:30px;
-          padding:15px;
-        }
-      `}</style>
-    </div>
-  )
+const ContainerFluid = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+  margin-top: -20px;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  width: 100%;
+`;
 
-}
+const ContentContainer = styled.div`
+  margin-top: 140px;
+`;
+
+const ProgressContainer = styled.div`
+  width: 100%;
+  height: 82px;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0px 5px 20px rgba(98, 107, 121, 0.15);
+  position: fixed;
+  z-index: 1;
+
+
+  @media only screen and (max-width: 500px) {
+    // width: 400px;
+    // font-size: 12px;
+    margin: 16px 0 10px;
+  }
+`;
+
+const ProgressList = styled.ol`
+  align-items: center;
+  padding: 0;
+  list-style-type: none;
+
+`;
+
+const ProgressItem = styled.li`
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  line-height: 50px;
+  font-size: 16px;
+  color: #626B79;
+
+  > .step-box{
+    display: inline-block;
+    margin-right: 10px;
+    border: 0.613102px solid #626B79;
+    color: #626B79;
+    border-radius: 2.45px;
+    width: 50px;
+    font-family: 'Avenir LT Pro Bold', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  >.step-line{
+    display: inline-block;
+    height: 1px;
+    width: 76px;
+    background-color: #B4B4B4;
+    margin-bottom: 3.5px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  ${({ active }) => active && `
+    color: #009FE3;
+
+    >.step-box{
+      color: white;
+      background: #009FE3;
+      border-color: #009FE3;
+    }
+  `}
+`;
 
 //Component yang ditampilkan saat order dilakukan
 class Order extends React.Component {
@@ -155,12 +197,14 @@ class Order extends React.Component {
       case 1:
         return <OrderAmount
                   nextStep={this.nextStep}
-                  saveValues={this.saveValues} />;
+                  saveValues={this.saveValues}
+                  data={this.state}/>
       case 2:
         return <Recipient
                   nextStep={this.nextStep}
+                  previousStep={this.previousStep}
                   saveValues={this.saveValues}
-                  data={this.state} />
+                  data={this.state}/>
       case 3:
         return <Review
                   nextStep={this.nextStep}
@@ -171,6 +215,7 @@ class Order extends React.Component {
       case 4:
         return <Pay
                   nextStep={this.nextStep}
+                  previousStep={this.previousStep}
                   saveValues={this.saveValues}
                   data={this.state}
                   generateVA={this.generateVA}/>
@@ -182,12 +227,14 @@ class Order extends React.Component {
   }
 
   nextStep() {
+    window.scrollTo(0, 0);
     this.setState((state) => {
       return {step: state.step + 1}
     })
   }
 
   previousStep() {
+    window.scrollTo(0, 0);
     this.setState((state) => {
       return {step: state.step - 1}
     })
@@ -242,125 +289,28 @@ class Order extends React.Component {
     return (
       <div>
         <Header />
-        <Menu isApproved={this.props.isApproved} />
-        <div className="container-fluid">
-          <div className="header-progress-container">
-            <ol className="header-progress-list">
-              <li className={"header-progress-item " + (this.state.step>=1 ? 'done' : 'todo')}>Amount</li>
-              <li className={"header-progress-item " + (this.state.step>=2 ? 'done' : 'todo')}>Recipient</li>
-              <li className={"header-progress-item " + (this.state.step>=3 ? 'done' : 'todo')}>Review</li>
-              <li className={"header-progress-item " + (this.state.step>=4 ? 'done' : 'todo')}>Pay</li>
-            </ol>
-          </div>
-          {this.renderContent(this.state.step)}
-        </div>
-        <style jsx>{`
-          .container-fluid {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            align-items: center;
-            margin-top:40px;
-          }
-
-          // Progress Bar
-          .header-progress-container {
-            width: 550px;
-            margin: 50px auto;
-          }
-
-          .header-progress-list {
-            margin: 0 auto;
-            padding: 0;
-            list-style-type: none;
-          }
-
-          .header-progress-item {
-            position: relative;
-            display: inline-block;
-            width: 135px;
-            text-align: center;
-            line-height: 3em;
-          }
-            //Lines
-          .header-progress-item:after {
-            position: absolute;
-            display: block;
-            z-index: 1;
-            top: -2px;
-            left: -65px;
-            height: 2px;
-            width: 135px;
-            content: "";
-            background-color: #469DDD;
-            transition: all 0.3s ease;
-          }
-
-          // Bullets/Balls
-          .header-progress-item:before {
-            position: absolute;
-            z-index: 2;
-            top: -6px;
-            left: 65px;
-            height: 10px;
-            width: 10px;
-            border-radius: 1.2em;
-            border: none;
-            line-height: 1.2em;
-            content: " ";
-            background-color: #469DDD;
-            transition: all 0.3s ease;
-          }
-
-          .header-progress-item:first-child:after {
-            display: none;
-          }
-
-          .header-progress-item.done {
-            color: #469DDD;
-            transition: all 0.3s ease;
-          }
-
-          .header-progress-item.todo {
-            color: #DDDADD;
-          }
-
-          //Lines
-          .header-progress-item.todo:after {
-            background: #F1F1F1;
-          }
-
-          // Bullets/Balls
-          .header-progress-item.todo:before {
-            background-color: #DADADA;
-          }
-
-          @media only screen and (max-width: 414px) {
-            .header-progress-container {
-              width: 375px;
-              font-size: 10px;
-              margin: 14px 0 10px;
-            }
-            .header-progress-item {
-              width: 80px;
-              left: 20px;
-            }
-            .header-progress-item:before {
-              left: 40px;
-            }
-            .header-progress-item:after {
-              width: 80px;
-              left: -40px;
-            }
-          }
-        `}</style>
+        {/* <NavBar/> */}
+        {/* <Menu isApproved={this.props.isApproved} /> */}
+        <ContainerFluid>
+          <ProgressContainer>
+            <ProgressList>
+              <ProgressItem active={this.state.step>=1? true : false}><div className="step-box">1</div>Amount</ProgressItem>
+              <ProgressItem active={this.state.step>=2? true : false}><div className="step-line"></div><div className="step-box">2</div>Recipient</ProgressItem>
+              <ProgressItem active={this.state.step>=3? true : false}><div className="step-line"></div><div className="step-box">3</div>Review</ProgressItem>
+              <ProgressItem active={this.state.step>=4? true : false}><div className="step-line"></div><div className="step-box">4</div>Pay</ProgressItem>
+            </ProgressList>
+          </ProgressContainer>
+          <ContentContainer>
+            {this.renderContent(this.state.step)}
+          </ContentContainer>
+        </ContainerFluid>
       </div>
     )} else {
       return (
         <div>
           <Header />
           <Menu />
-          <PendingLayout />
+          <PendingLayout/>
         </div>
       )
     }

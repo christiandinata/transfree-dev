@@ -25,6 +25,10 @@ const Header = () => (
         src: url('../static/fonts/AvenirLTProHeavy.otf');
       }
 
+      @font-face {
+        font-family: 'Avenir LT Pro Black';
+        src: url('../static/fonts/AvenirLTProBlack.otf');
+      }
       body {
         font-family: "Avenir LT Pro", sans-serif; 
         line-height: 1.6;
@@ -36,13 +40,18 @@ const Header = () => (
         -moz-osx-font-smoothing: grayscale;
         background-color: #F3F5F7;
       }
+
+      input, button{
+        font-family: "Avenir LT Pro", sans-serif; 
+      }
       
-      h1, h2, h3, h4, b, .bold, button{
-        font-family: 'Avenir LT Pro Heavy', sans-serif;
+      h1, h2, h3, h4, b, .bold{
+        font-family: 'Avenir LT Pro Bold', sans-serif;
       }
       
       button:hover {
         cursor: pointer;
+        opacity: 0.8;
       }
       .container {
         width: auto;
