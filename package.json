@@ -50,6 +50,7 @@
     "react-dropzone": "^11.2.4",
     "react-ga": "^3.2.1",
     "react-js-pagination": "^3.0.3",
+    "react-modal": "^3.14.3",
     "react-number-format": "^4.4.1",
     "react-otp-input": "^2.3.1",
     "react-phone-input": "^1.2.1",
