@@ -131,10 +131,11 @@ const SearchBar = styled.input`
   background-position: 12px 10px;
   background-repeat: no-repeat;
 
-  transition: all 0.5s linear;
+  transition: all 0.3s linear;
 
   &:focus{
-    box-shadow: 0px 0px 0px 2px solid #009FE3;
+    box-shadow: 0 0 0 2px #068EC8;
+    outline: none;
     background-image: url('../static/images/Asset Web/transaction/search-blue.svg');
   }
 
