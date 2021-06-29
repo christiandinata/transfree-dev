@@ -26,7 +26,7 @@ const ContentContainer = styled.div`
 `;
 
 const BackgroundContainer = styled.div`
-  margin-top: 20px;
+  margin-top: 73px;
   width: 100%;
   height: 290px;
   background: #1E345B;
@@ -248,6 +248,7 @@ const ListItem = styled.li`
   }
 `;
 
+/* Displays order item list and each details */
 class OrderItem extends React.Component {
   constructor({props}) {
     super(props);
@@ -334,7 +335,7 @@ class OrderItem extends React.Component {
   }
 }
 
-//Account Layout
+/* Account transaction icludes header, searchbar, and order list */
 class Account extends React.Component {
   constructor({props}) {
     super(props);
@@ -362,12 +363,14 @@ class Account extends React.Component {
     console.log(this.state.orders);
   }
 
+  /* Resets transaction order items (display all order items after search)*/
   resetTransaction(){
     if(this.searchInput.current.value == ""){
       this.setState({orders: this.props.orderArray});
     }
   }
 
+  /* Function to search transaction from order name or order clompeted date */
   searchTransaction(){
     let searchResult = [];
     let filter = this.searchInput.current.value.toLowerCase();
@@ -379,6 +382,7 @@ class Account extends React.Component {
     this.setState({orders: searchResult});
   }
 
+  /* Header includes banner and searchbar */
   headerTransaction(){
     return (
       <BackgroundContainer>
@@ -397,9 +401,10 @@ class Account extends React.Component {
     )
   }
 
+  /* Render page content based on condition */
   renderContent() {
-    if(this.props.isApproved) {
-      if(this.props.orderArray.length > 0) {
+    if(this.props.isApproved) { // Account has been approved
+      if(this.props.orderArray.length > 0) { // Transaction is not empty
         return (
           <div>
             {NavBarWhite(this.props.username, this.props.id)}
