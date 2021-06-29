@@ -1,4 +1,4 @@
-import Header from '../components/header.js';
+import Header from '../components/header';
 import Menu from '../components/menu.js';
 import Link from 'next/link';
 import NumberFormat from 'react-number-format';

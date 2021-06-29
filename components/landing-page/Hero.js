@@ -54,7 +54,7 @@ const Exchange = styled.div`
       width: 100%;
       border: 0.5px solid #E2E2E2;
       border-radius: 5px;
-      font-family: "Avenir LT Pro Black";
+      font-family: "Avenir LT Pro Black" !important;
       font-size: 1.25rem;
       padding: 0.75rem 1.25rem;
     }
@@ -134,7 +134,7 @@ const SearchBar = styled.div`
     border: none;
     background-color: transparent;
     color: #FFFFFF;
-    font-family: "Avenir LT Pro";
+    font-family: "Avenir LT Pro" !important;
     outline: none;
     padding: 0;
   }

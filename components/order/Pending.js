@@ -20,6 +20,7 @@ const ContentContainer = styled.div`
 
   h2{
     font-size: 32px;
+    // font-family: "Avenir LT Pro Bold";
   }
 `;
 

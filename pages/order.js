@@ -285,6 +285,19 @@ class Order extends React.Component {
     this.props.generateVA(merchantId, shortid.generate(), secretWord, this.state.name, this.state.email, this.state.fromAmount);
   }
 
+  progressBar(){
+    return(
+      <ProgressContainer>
+        <ProgressList>
+          <ProgressItem active={this.state.step>=1? true : false}><div className="step-box">1</div>Amount</ProgressItem>
+          <ProgressItem active={this.state.step>=2? true : false}><div className="step-line"></div><div className="step-box">2</div>Recipient</ProgressItem>
+          <ProgressItem active={this.state.step>=3? true : false}><div className="step-line"></div><div className="step-box">3</div>Review</ProgressItem>
+          <ProgressItem active={this.state.step>=4? true : false}><div className="step-line"></div><div className="step-box">4</div>Pay</ProgressItem>
+        </ProgressList>
+      </ProgressContainer>
+    )
+  }
+
   render() {
     if (this.props.isApproved){
     return (
@@ -296,14 +309,7 @@ class Order extends React.Component {
           endpoint={"/home"}
         />
         <ContainerFluid>
-          <ProgressContainer>
-            <ProgressList>
-              <ProgressItem active={this.state.step>=1? true : false}><div className="step-box">1</div>Amount</ProgressItem>
-              <ProgressItem active={this.state.step>=2? true : false}><div className="step-line"></div><div className="step-box">2</div>Recipient</ProgressItem>
-              <ProgressItem active={this.state.step>=3? true : false}><div className="step-line"></div><div className="step-box">3</div>Review</ProgressItem>
-              <ProgressItem active={this.state.step>=4? true : false}><div className="step-line"></div><div className="step-box">4</div>Pay</ProgressItem>
-            </ProgressList>
-          </ProgressContainer>
+          {this.progressBar()}
           <ContentContainer>
             {this.renderContent(this.state.step)}
           </ContentContainer>
@@ -319,7 +325,10 @@ class Order extends React.Component {
             navText = {"Homepage"} 
             endpoint={"/home"}
           />
-          <AwaitingConfirmation/>
+          <ContainerFluid>
+            {this.progressBar()}
+            <AwaitingConfirmation/>
+          </ContainerFluid>
           <Footer/>
         </div>
       )
