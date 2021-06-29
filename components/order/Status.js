@@ -9,15 +9,20 @@ const ContentContainer = styled.div`
   flex-direction: column;
   max-width: 600px;
 
-  >.paragraph{
+  p{
     text-align: center;
     margin-top: -10px;
     margin-bottom: 35px;
+  }
+
+  h2{
+    font-size: 32px;
   }
 `;
 
 const IconContainer = styled.div`
   margin-top: 30px;
+  margin-bottom: -20px;
   
   >.icon{
     max-width: 96px;
@@ -29,7 +34,7 @@ const Button = styled.button`
   border-radius: 4px;
 
   max-width: 212px;
-  height: 50px;
+  height: 40px;
   font-size: 16px;
 
   left: 50%;
@@ -58,8 +63,8 @@ class Status extends React.Component {
           <IconContainer>
             <img className="icon" src="../static/images/Asset Web/send money/ic-check.svg" alt="checked"/>
           </IconContainer>
-          <h2>Awaiting Payment confirmation</h2>
-          <p className="paragraph">Thank you, we are now reviewing your order details. We will send you an email regarding your payment instruction. Please check your email.</p>
+          <h2>Awaiting Payment Confirmation</h2>
+          <p>Thank you, we are now reviewing your order details. We will send you an email regarding your payment instruction. Please check your email.</p>
 
           <Button onClick={(e) => {e.preventDefault();
                             window.location.href='/account';
