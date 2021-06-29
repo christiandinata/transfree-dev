@@ -1,6 +1,4 @@
 import Header from '../components/header';
-import Menu from '../components/menu.js';
-import Link from 'next/link';
 import NumberFormat from 'react-number-format';
 import styled from "styled-components";
 import { connect } from 'react-redux';
