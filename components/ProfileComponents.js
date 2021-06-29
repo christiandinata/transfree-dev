@@ -34,7 +34,6 @@ export const ChoiceImg = styled.img`
     width: 24px;
     height: 24px;
     object-fit: scale-down;
-    // margin: 16px 24px 16px 16px;
     display: inline;
     float: left;
     margin-right: 16px;
@@ -53,10 +52,6 @@ export const ProfileSect = styled.section`
 export const ProfileAction = styled.div`
     background-color: #F39200;
     overflow: hidden;
-`;
-
-export const ProfilDetails = styled.div`
-    // margin: 48px 24px;
 `;
 
 export const Data = styled.section`
@@ -107,7 +102,6 @@ export const TableDetailPersonal = styled(TableDetail)`
 `;
 
 export const AccountLink = styled.p`
-    // margin-left: 24px;
     display: inline;
     font-weight: 400;
     font-style: normal;

@@ -82,7 +82,7 @@ function UserProfile(props) {
                         <Profile.LogOutButton href = "/logout">Log Out</Profile.LogOutButton>
                     </Profile.ProfileAction>
 
-                    <Profile.ProfilDetails>
+                    <div>
                         <Profile.Data>
                             <Profile.DataSubPersonal>
                                 <Profile.SectionName>Personal Data</Profile.SectionName>
@@ -154,11 +154,107 @@ function UserProfile(props) {
                         
                         <Profile.Divider></Profile.Divider>
 
-                    </Profile.ProfilDetails>
+                    </div>
                 </Profile.ProfileSect>
             </Profile.Wrapper> 
         : 
-        null}
+            <Profile.Wrapper>
+                <Profile.ActionSect>
+                    <Profile.ActionChoice onClick = {handleChoiceChange} value = "detail">
+                        <Profile.ChoiceImg src = "../static/images/profile/detail-profile-white.png"/>
+                        <Profile.AccountLink>Detail Profile</Profile.AccountLink>
+                        <Profile.ArrowRightImg src = "../static/images/profile/arrow-right-white.png"/> 
+                    </Profile.ActionChoice>
+
+                    <Profile.ActionChoiceActive onClick = {handleChoiceChange} value = "edit">
+                        <Profile.ChoiceImg src = "../static/images/profile/edit-profile-blue.png"/>
+                        <Profile.AccountLinkActive>Edit Profile</Profile.AccountLinkActive>
+                        <Profile.ArrowRightImg src = "../static/images/profile/arrow-right-blue.png"/>
+                    </Profile.ActionChoiceActive>
+                </Profile.ActionSect>
+
+                <Profile.ProfileSect>
+                    <Profile.ProfileAction>
+                        <Profile.AccountText>Edit Profile</Profile.AccountText>
+                        <Profile.LogOutButton href = "/logout">Log Out</Profile.LogOutButton>
+                    </Profile.ProfileAction>
+
+                    <div>
+                        <Profile.Data>
+                            <Profile.DataSubPersonal>
+                                <Profile.SectionName>Personal Data</Profile.SectionName>
+                                <Profile.SectionExp>Your personal basic information.</Profile.SectionExp>
+                            </Profile.DataSubPersonal>
+
+                            <Profile.Table>
+                                <tbody>
+                                    <Profile.TableRow>
+                                        <Profile.TableHeading>Full Name</Profile.TableHeading>
+                                        <Profile.TableDetailPersonal>Joshua</Profile.TableDetailPersonal>
+                                    </Profile.TableRow>
+
+                                    <Profile.TableRow>
+                                        <Profile.TableHeading>ID Number</Profile.TableHeading>
+                                        <Profile.TableDetailPersonal>ID5627</Profile.TableDetailPersonal>
+                                    </Profile.TableRow>
+
+                                    <Profile.TableRow>
+                                        <Profile.TableHeading>Gender</Profile.TableHeading>
+                                        <Profile.TableDetailPersonal>Male</Profile.TableDetailPersonal>
+                                    </Profile.TableRow>
+
+                                    <Profile.TableRow>
+                                        <Profile.TableHeading>Place of Birth</Profile.TableHeading>
+                                        <Profile.TableDetailPersonal>Bogor</Profile.TableDetailPersonal>
+                                    </Profile.TableRow>
+
+                                    <Profile.TableRow>
+                                        <Profile.TableHeading>Date of Birth</Profile.TableHeading>
+                                        <Profile.TableDetailPersonal>1999</Profile.TableDetailPersonal>
+                                    </Profile.TableRow>
+
+                                    <Profile.TableRow>
+                                        <Profile.TableHeading>Address</Profile.TableHeading>
+                                        <Profile.TableDetailPersonal>Jalan</Profile.TableDetailPersonal>
+                                    </Profile.TableRow>
+                                </tbody>
+                            </Profile.Table>
+                        </Profile.Data>
+
+                        <Profile.Divider></Profile.Divider>
+
+                        <Profile.Data>
+                            <Profile.DataSubAccount>
+                                <Profile.SectionName>Account</Profile.SectionName>
+                                <Profile.SectionExp>Your personal account information.</Profile.SectionExp>
+                            </Profile.DataSubAccount>
+
+                            <Profile.Table>
+                                <tbody>
+                                    <Profile.TableRow>
+                                        <Profile.TableHeading>Email Address</Profile.TableHeading>
+                                        <Profile.TableDetail>blabla</Profile.TableDetail>
+                                    </Profile.TableRow>
+
+                                    <Profile.TableRow>
+                                        <Profile.TableHeading>Password</Profile.TableHeading>
+                                        <Profile.TableDetail>bintang bintang</Profile.TableDetail>
+                                    </Profile.TableRow>
+
+                                    <Profile.TableRow>
+                                        <Profile.TableHeading>Phone Number</Profile.TableHeading>
+                                        <Profile.TableDetail>0812</Profile.TableDetail>
+                                    </Profile.TableRow>
+                                </tbody>
+                            </Profile.Table>
+                        </Profile.Data>
+                        
+                        <Profile.Divider></Profile.Divider>
+
+                    </div>
+                </Profile.ProfileSect>
+            </Profile.Wrapper> 
+            }
         </React.Fragment>
     )
 }
