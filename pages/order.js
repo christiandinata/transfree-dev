@@ -325,7 +325,10 @@ class Order extends React.Component {
             navText = {"Homepage"} 
             endpoint={"/home"}
           />
-          <PendingLayout/>
+          <ContainerFluid>
+            {this.progressBar()}
+            <PendingLayout/>
+          </ContainerFluid>
           <Footer/>
         </div>
       )

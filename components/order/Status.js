@@ -69,7 +69,7 @@ class Status extends React.Component {
           <Button onClick={(e) => {e.preventDefault();
                             window.location.href='/account';
                           }}>
-            Check My Transaction
+            Check Transactions
           </Button>
         </ContentContainer>
       </div>
