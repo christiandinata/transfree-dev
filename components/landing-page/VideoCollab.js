@@ -10,12 +10,18 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 90%;
   max-width: 1124px;
   margin 0 auto;
+  @media only screen and (max-width: 800px) {
+    flex-direction: column;
+  }
 `
 
 const SubtitleContainer = styled.div`
   flex-basis: 55%;
+  margin-bottom: 1rem;
+  h2 { margin-bottom: 0; }
 `
 
 const Collaborators = styled.div`
@@ -24,7 +30,11 @@ const Collaborators = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: row;
-`
+  @media only screen and (max-width: 800px) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    
+  }`
 
 const videoStyle = {
   width: "100%",
@@ -38,7 +48,7 @@ export function VideoCollab() {
     <>
       <iframe
         style={videoStyle}
-        src="https://www.youtube.com/embed/8RzCs_sQ8Ak?wmode=opague&autoplay=1&controls=0&modestbranding=1"
+        src="https://www.youtube.com/embed/8RzCs_sQ8Ak?wmode=opague&autoplay=0&controls=0&modestbranding=1"
         title="How it Works - Transfree"
         frameborder="0"
         allowfullscreen/>

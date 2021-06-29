@@ -24,7 +24,9 @@ const TestimonyDiv = styled.div`
     height: 17rem;
     object-fit: cover;
   }
-`
+  @media only screen and (max-width: 800px) {
+    img { width: auto; height: auto; }
+  }`
 
 const Arrow = styled.img`
   width: 2.75rem;
@@ -52,6 +54,28 @@ const carouselStyle = {
   margin: "3% 0 0.5rem 6%",
   width: "110%",
   columnGap: "1rem"
+}
+
+const carouselStyleMobile = {
+  margin: "3% 0 0.5rem 6%",
+  width: "95%",
+  columnGap: "1rem"
+}
+
+const settings = {
+  style: carouselStyle,
+  arrows: false,
+  slidesToShow: 2,
+  slidesToScroll: 1,
+  responsive: [
+    {
+      breakpoint: 1000,
+      settings: {
+        slidesToShow: 1,
+        style: carouselStyleMobile
+      }
+    }
+  ]
 }
 
 const left = { marginLeft: "10.2%" }
@@ -101,8 +125,7 @@ const listTestimonies = [
   {
     img: "../../static/images/zhabrinna.png",
     name: "Zhabrinna",
-    review: `Fast Response and gives a better rate. 
-    I get my money transferred in less than 24 hours`
+    review: `It is simple and I get a better rate than Transferwise with of course a very fast transfer system!`
   },
   {
     img: "../../static/images/mukti.png",
@@ -147,11 +170,8 @@ export function Testmonies() {
       </Subtitle>
       <TestimoniesBG>
         <Slider
-          arrows={false}
           ref={refSlider => setSlider(refSlider)}
-          style={carouselStyle}
-          slidesToShow={2}
-          slidesToScroll={1}>
+          {...settings}>
           {listTestimonies.map((test, index) => (
             <div key={index}>
               <Testimony 

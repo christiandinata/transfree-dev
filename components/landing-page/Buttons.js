@@ -28,7 +28,6 @@ export const PrButton = styled.button`
 
   &:hover {
     background-color: #068EC8;
-    transform: translateY(-3px);
   }
 `
 
@@ -60,7 +59,6 @@ export const ScButton = styled.button`
 
   &:hover {
     background-color: #FA9A0B;
-    transform: translateY(-3px);
   }
 `
 

@@ -8,10 +8,12 @@ const CenterDiv = styled.div`
   align-items: center;
   margin: 0 auto;
   text-align: center;
+  width: 95%;
   max-width: 1124px;
   color: #FFFFFF;
   transition: all 0.2s ease-in;
   h2 {
+    font-size: 1.75rem;
     color: #FFFFFF;
     margin-bottom: 0;
   }
@@ -29,6 +31,9 @@ const CenterDiv = styled.div`
   }
   button:hover {
     background-color: #FFFFFF55;
+  }
+  @media only screen and (max-width: 800px) {
+    p { width: 90%; }
   }
 `
 
@@ -58,6 +63,13 @@ const FlagsDisplay = styled.div`
     width: 1.25rem;
     height: 1.25rem;
   }
+
+  @media only screen and (max-width: 800px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1rem;
+    row-gap: 1rem;
+    div { padding-right: 1.75rem; }
+  }
 `
 
 const flags = [
@@ -67,7 +79,15 @@ const flags = [
   { id: "us", name: "United States" },
   { id: "gb", name: "England" },
   { id: "au", name: "Australia" },
-  { id: "kr", name: "South Korea" }
+  { id: "kr", name: "South Korea" },
+  { id: "jp", name: "Japan" },
+  { id: "eu", name: "Europe" },
+  { id: "id", name: "Indonesia" },
+  { id: "sg", name: "Singapore" },
+  { id: "cn", name: "China" },
+  { id: "us", name: "United States" },
+  { id: "gb", name: "England" },
+  { id: "au", name: "Australia" }
 ]
 
 export function CountriesDisplay() {

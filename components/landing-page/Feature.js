@@ -6,8 +6,14 @@ const FeatureRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 95%;
   max-width: 1124px;
   margin: 1rem auto;
+  transition: all 0.3s ease-in;
+  @media only screen and (max-width: 800px) {
+    flex-direction: ${ props => props.left ? "column" : "column-reverse" };
+    text-align: center;
+  }
 `
 
 const ImageContainer = styled.div`
@@ -24,7 +30,7 @@ const TextContainer = styled.div`
 
 export function LeftFeatureRow() {
   return (
-    <FeatureRow>
+    <FeatureRow left>
       <ImageContainer>
         <img src="../static/images/ASSET/mockup-new-1.svg" alt="transfree"/>
       </ImageContainer>

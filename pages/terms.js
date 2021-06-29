@@ -1,35 +1,8 @@
 import Header from '../components/header.js';
-import Menu from '../components/menu.js';
 import Footer from '../components/footer.js';
 import styled from 'styled-components';
-
-const HeaderBg = styled.div`
-  background: linear-gradient(to bottom, #1E345B 0, #1E345B 289px, #F3F5F7 289px, #F3F5F7 100%);
-  height: auto;
-  padding-bottom: 2rem;
-`
-
-const BatikOverlay = styled.div`
-  background: url('../static/images/Asset Web/content/batik-world-map.png');
-  background-repeat: no-repeat;
-  height: auto;
-`
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 1124px;
-  width: 95%;
-  align-items: center;
-  justify-content: center;
-  margin: 3rem auto;
-  font-family: "Avenir LT Pro";
-  h1 {
-    margin-top: 4rem;
-    margin-bottom: 3rem;
-    color: #FFFFFF;
-    font-family: "Avenir LT Pro Black";
-  }`
+import * as Info from '../components/Info.js';
+import { NavBarWhite } from '../components/MenuComponents.js';
 
 const Paper = styled.div`
   background: ${ props => props.bg || "#FFFFFF" };
@@ -41,20 +14,49 @@ const Paper = styled.div`
     margin-top: 0;
   }`
 
+const OrangeSq = styled.div`
+  position: absolute;
+  background: #F39200;
+  width: 30%;
+  height: 10%;
+  @media only screen and (max-width: 800px) {
+    height: 2%;
+  }
+`
+
+const WithImage = styled.div`
+  display: flex;
+  flex-direction: row; 
+  column-gap: 2rem;
+  margin-bottom: 2rem;
+  img {
+    object-fit: cover;
+    filter: drop-shadow(12px 20px 40px rgba(12, 12, 12, 0.1));
+    padding-bottom: 2rem;
+    width: 75%;
+  }
+
+  @media only screen and (max-width: 800px) {
+    flex-direction: column;
+    img { width: 100%; }
+  }
+`
+
 const noMargin = { marginBottom: "0.25rem" }
-const paperShadow = { boxShadow: "12px 0px 40px rgba(12, 12, 12, 0.1)" }
 
 //Menampilkan tulisan dibawah
 const Terms = () => (
   <div>
     <Header />
-    <Menu/>
-    <HeaderBg>
-      <BatikOverlay>
-        <Container>
-          <h1>Terms and Conditions</h1>
-          <div style={paperShadow}>
-            <Paper>
+    <NavBarWhite />
+    <Info.BlueHeader>
+      <Info.Batik>
+        <h1>Terms and Conditions</h1>
+      </Info.Batik>
+    </Info.BlueHeader>
+      <Info.Container>
+          <div style={Info.paperShadow}>
+            <Info.Paper>
               <p>Fund Transfer Conditions ("<b>Agreement</b>") this set up the transfer service ("<b>Transfer</b>") between the Customers 
               mentioned above ("<b>Customer</b>") and PT Pelita Transfer Nusantara ("<b>Transfree</b>") who conducts business as Transfree. 
               This agreement is governed by Indonesian law and any State law that regulates the agreement of Customer accounts for registered 
@@ -119,12 +121,13 @@ const Terms = () => (
                 has no obligation to) record, electronically or otherwise and without further notice, telephone calls related to any transfer request. 
                 Transfree can hold or close Customer accounts if things are found that violate these agreement or the agreement of the authorities in 
                 Indonesia and other countries which constitute the origin or destination of the transfer of funds .</p>
-            </Paper>
-            <Paper bg="#F3F5F7">
-            <div style={{ display: "flex", flexDirection: "row", columnGap: "2rem", marginBottom: "2rem" }}>
-              <img src="../static/images/ASSET/phone.png" alt="phone" style={{ 
-                filter: "drop-shadow(12px 20px 40px rgba(12, 12, 12, 0.1))", objectFit: "cover",
-                paddingBottom: "2rem", width: "75%" }}/>
+            </Info.Paper>
+            <Info.Paper bg="#F3F5F7" style={{ position: "relative", padding: 0 }}>
+            <OrangeSq/>
+            <div style={{ padding: "2rem" }}>
+
+            <WithImage>
+              <img src="../static/images/ASSET/phone.png" alt="phone"/>
               <div>
                 <p><b>A. Every transfer request must be made through the website Transfree.</b> The customer must state the details of the transfer of funds 
                 required by Transfree to execute the request (including customer account number, the amount, and the beneficiary account number). 
@@ -134,7 +137,7 @@ const Terms = () => (
                 <p>(3) Declare the Customer name listed at the top of these Conditions; and</p>
                 <p>(4) Stipulates that transfers are made from a Customer account (identified with an account number).</p>
               </div>
-            </div>
+            </WithImage>
 
             <p><b>B. Other than that:</b></p>
             <p><b>(1) Amount money from transfer requests will not exceed "Standard Initiation Limit" or equivalent to other currencies</b>; and</p>
@@ -215,11 +218,10 @@ const Terms = () => (
             owned by the Customer (or that the account is jointly owned entirely by the Customer and others, both of them entitled as the joint 
             owner of the world database Transfree ).
             </p>
-          </Paper>
+            </div>
+          </Info.Paper>
           </div>
-        </Container>
-      </BatikOverlay>
-    </HeaderBg>
+      </Info.Container>
     <Footer />
   </div>
 );

@@ -3,27 +3,42 @@ import styled from 'styled-components'
 
 const MobileDiv = styled.div`
   display: grid;
-  grid-template-columns: repeat(2,minmax(0,1fr));
+  grid-template-columns: repeat(2, minmax(0,1fr));
   margin-left: auto;
   margin-right: auto;
   padding-top: 4rem;
   max-width: 1124px;
   align-items: center;
-
   img {
     display: block;
     max-width: 320px;
     margin: 0 auto; 
   }
-  h2, p { width: 80%; }
+  h2 { 
+    font-size: 1.75rem;
+    width: 80%;
+  }
+  p { 
+    width: 80%; 
+  }
+  @media only screen and (max-width: 800px) {
+    display: flex;
+    flex-direction: column-reverse;
+    row-gap: 2rem;
+    width: 90%;
+    text-align: center;
+    h2, p {
+      margin: 1rem auto;
+    }
+  }
 `
 
 const StoreBadge = styled.div`
   display: flex;
   flex-direction: row;
-  column-gap: 1rem;
-  img {
-    height: 3rem;
+  gap: 1rem;
+  @media only screen and (max-width: 800px) {
+    flex-direction: column;
   }
 `
 

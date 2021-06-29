@@ -7,12 +7,19 @@ import { ScButton } from './Buttons'
 
 export const MapBackground = styled.div`
   background-image: url('../static/images/Asset Web/content/batik-world-map.png');
+  background-size: cover;
   background-repeat: no-repeat;
-  height: 750px;`
+  height: 750px;
+  @media only screen and (max-width: 800px) {
+    height: 1120px;
+  }`
 
 export const Overlay = styled.div`
   background: linear-gradient(178.43deg, #009FE3 1.26%, rgba(0, 159, 227, 0) 96.85%);
-  height: 780px;`
+  height: 780px;
+  @media only screen and (max-width: 800px) {
+    height: 1120px;
+  }`
 
 export const HeroDiv = styled.div`
   display: flex;
@@ -20,14 +27,25 @@ export const HeroDiv = styled.div`
   align-items: center;
   justify-content: space-around;
   margin: 0 auto;
-  padding-top: 6rem;
+  padding-top: 8rem;
+  width: 95%;
   max-width: 1124px;
-  z-index: 2;
   color: #FFFFFF;
   h1 {
     color: #FFFFFF;
     font-size: 2.5rem;
     line-height: 140%;
+  }
+  transition: all 0.5s ease-in;
+  @media only screen and (max-width: 800px) {
+    flex-direction: column;
+    row-gap: 2rem;
+    margin-bottom: 4rem;
+    padding-bottom: 4rem;
+    text-align: center;
+    p {
+      margin: 1rem auto;
+    }
   }`
 
 export const Converter = styled.div`
@@ -35,7 +53,10 @@ export const Converter = styled.div`
   border-radius: 16px;
   color: #626B79;
   padding: 15px 0 23px;
-  flex-basis: 35%;`
+  flex-basis: 35%;
+  @media only screen and (max-width: 800px) {
+    text-align: left;
+  }`
 
 export const ReverseButton = styled.div`
   text-align: right;
@@ -43,7 +64,8 @@ export const ReverseButton = styled.div`
     width: 1.25rem;
     height: 1.25rem; 
     margin: 0.5rem 3.5rem 0 0;
-    cursor: pointer; }`
+    cursor: pointer; 
+  }`
 
 const Exchange = styled.div`
     display: flex;
@@ -140,6 +162,9 @@ const SearchBar = styled.div`
   }
   input:focus { border: none; }
 `
+const TitleDiv = styled.div`
+    flex-basis: 60%;
+    p { width: 90%; }`
 
 const iconStyle = {
   width: "3rem",
@@ -263,10 +288,6 @@ export function RateAndFee(props) {
 }
 
 export function Title() {
-  
-  const TitleDiv = styled.div`
-    flex-basis: 60%;
-    p { width: 90%; }`
 
   return (
     <TitleDiv>
