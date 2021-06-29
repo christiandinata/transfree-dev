@@ -7,56 +7,8 @@ import { connect } from 'react-redux';
 import initialize from '../utils/initialize';
 import actions from '../redux/actions';
 import { getCookie } from '../utils/cookie';
-import { PendingLayout } from '../components/order/Pending'
-import { EmptyTransaction } from '../components/transaction/EmptyTransaction'
+import { AwaitingConfirmation, EmptyTransaction } from '../components/order/Pending'
 import moment from 'moment';
-
-//Setelah diapprove
-const ApprovedLayout = () => {
-  return (
-    <div className="content">
-      <div className="big-icon">
-        <img src="../static/images/happy.svg" alt="Happy"/>
-      </div>
-      <h1>No transactions</h1>
-      <p>You haven’t sent money using Transfree. Get started now and enjoy fast and cheap international money transfer. </p>
-
-      <Link href="/order">
-        <a className="btn-primary">Send money now</a>
-      </Link>
-      <style jsx>{`
-        .logo {
-          width: 100%;
-          text-align: center;
-        }
-        .big-icon img {
-          height: 300px;
-          margin: 0px auto 50px;
-        }
-
-        p {
-          max-width: 600px;
-          text-align: center;
-          margin-bottom: 10px;
-        }
-
-        h1 {
-          margin: 0;
-        }
-
-        .content {
-          display: flex;
-          flex-direction: column;
-          min-height: 100vh;
-          align-items: center;
-          justify-content: center;
-          margin-top:30px;
-        }
-      `}</style>
-    </div>
-  )
-
-}
 
 const ContainerFluid = styled.div`
   min-height: 100vh;
@@ -444,7 +396,7 @@ class Account extends React.Component {
 
   renderContent() {
     if(this.props.isApproved) {
-      if(!this.props.orderArray.length > 0) {
+      if(this.props.orderArray.length > 0) {
         return (
           <div>
           {this.headerTransaction()}
@@ -457,10 +409,15 @@ class Account extends React.Component {
           </div>
         )
       } else {
-        return <EmptyTransaction/>
+        return (
+          <div>
+            {this.headerTransaction()}
+            <EmptyTransaction/>
+          </div>
+        )
       }
     } else {
-      return <PendingLayout/>
+      return <AwaitingConfirmation/>
     }
   }
 
