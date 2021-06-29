@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { getCookie } from '../utils/cookie';
-import { PendingLayout } from '../components/order/Pending'
+import { AwaitingConfirmation } from '../components/order/Pending'
 import { NavBarBlue } from '../components/MenuComponents'
 import Footer from '../components/footer'
 import shortid from 'shortid';
@@ -319,7 +319,7 @@ class Order extends React.Component {
             navText = {"Homepage"} 
             endpoint={"/home"}
           />
-          <PendingLayout/>
+          <AwaitingConfirmation/>
           <Footer/>
         </div>
       )

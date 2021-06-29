@@ -40,17 +40,22 @@ const Header = () => (
 				src: url("../static/fonts/AvenirLTProHeavy.otf");
 			}
 
-			body {
-				font-family: "Avenir LT Pro", sans-serif;
-				line-height: 1.6;
-				letter-spacing: 0.2px;
-				color: #3e495e;
-				margin: 0px;
-				text-rendering: optimizeLegibility;
-				-webkit-font-smoothing: antialiased;
-				-moz-osx-font-smoothing: grayscale;
-				background-color: #f3f5f7;
-			}
+      @font-face {
+        font-family: 'Avenir LT Pro Black';
+        src: url('../static/fonts/AvenirLTProBlack.otf');
+      }
+
+      body {
+        font-family: "Avenir LT Pro", sans-serif; 
+        line-height: 1.6;
+        letter-spacing: 0.2px;
+        color: #3E495E;
+        margin: 0px ;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: #F3F5F7;
+      }
 
 			h1,
 			h2,
