@@ -7,7 +7,9 @@ import { connect } from 'react-redux';
 import initialize from '../utils/initialize';
 import actions from '../redux/actions';
 import { getCookie } from '../utils/cookie';
-import { AwaitingConfirmation, EmptyTransaction } from '../components/order/Pending'
+import { AwaitingConfirmation, EmptyTransaction } from '../components/order/Pending';
+import { NavBarWhite } from '../components/MenuComponents';
+import Footer from '../components/footer';
 import moment from 'moment';
 
 const ContainerFluid = styled.div`
@@ -16,6 +18,7 @@ const ContainerFluid = styled.div`
   margin-top: -20px;
   margin-bottom: 40px;
   padding-bottom: 20px;
+  background: white;
 `;
 
 const ContentContainer = styled.div`
@@ -399,25 +402,35 @@ class Account extends React.Component {
       if(this.props.orderArray.length > 0) {
         return (
           <div>
-          {this.headerTransaction()}
-          <ContentContainer>
-            <AllItemContainer>
-              <h3 style={{textAlign: "center", display: this.state.orders.length == 0 ? "block" : "none" }}>No results found.</h3>
-              <OrderItem ordersList={this.state.orders}/>
-            </AllItemContainer>
-          </ContentContainer>
+            {NavBarWhite(this.props.username, this.props.id)}
+            {this.headerTransaction()}
+            <ContentContainer>
+              <AllItemContainer>
+                <h3 style={{textAlign: "center", display: this.state.orders.length == 0 ? "block" : "none" }}>No results found.</h3>
+                <OrderItem ordersList={this.state.orders}/>
+              </AllItemContainer>
+            </ContentContainer>
+            <Footer/>
           </div>
         )
       } else {
         return (
           <div>
+            {NavBarWhite(this.props.username, this.props.id)}
             {this.headerTransaction()}
             <EmptyTransaction/>
+            <Footer/>
           </div>
         )
       }
     } else {
-      return <AwaitingConfirmation/>
+      return (
+        <div>
+          {NavBarWhite(this.props.username, this.props.id)}
+          <AwaitingConfirmation/>
+          <Footer/>
+        </div>
+      )
     }
   }
 
@@ -442,7 +455,9 @@ const mapStateToProps = (state) => {
   return {
     isApproved: !!state.user.user_data.isApproved,
     userData: state.user.user_data,
-    orderArray: state.order.orders
+    orderArray: state.order.orders,
+    username: state.user.user_data ? state.user.user_data.fullname : "",
+    id: state.user.user_data ? state.user.user_data.idNumber : ""
   }
 }
 

@@ -8,7 +8,8 @@ const ContentContainer = styled.div`
   flex-direction: column;
   max-width: 600px;
   margin: 0 auto;
-  margin-top: 40px;
+  margin-top: 90px;
+  margin-bottom: 40px;
 
   p{
     text-align: center;
