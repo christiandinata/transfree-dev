@@ -8,6 +8,7 @@ import initialize from '../utils/initialize';
 import actions from '../redux/actions';
 import { getCookie } from '../utils/cookie';
 import { PendingLayout } from '../components/order/Pending'
+import { EmptyTransaction } from '../components/transaction/EmptyTransaction'
 import moment from 'moment';
 
 //Setelah diapprove
@@ -443,7 +444,7 @@ class Account extends React.Component {
 
   renderContent() {
     if(this.props.isApproved) {
-      if(this.props.orderArray.length > 0) {
+      if(!this.props.orderArray.length > 0) {
         return (
           <div>
           {this.headerTransaction()}
@@ -456,7 +457,7 @@ class Account extends React.Component {
           </div>
         )
       } else {
-        return <ApprovedLayout />
+        return <EmptyTransaction/>
       }
     } else {
       return <PendingLayout/>

@@ -26,15 +26,14 @@ const IconContainer = styled.div`
   }
 `;
 
-export function PendingLayout(){
+export function EmptyTransaction(){
     return (
       <ContentContainer>
         <IconContainer>
           <img className="icon" src="../static/images/Asset Web/send money/ic-check.svg" alt="checked"/>
         </IconContainer>
-        <h2>Awaiting Confirmation</h2>
-        <p>We are now reviewing your account details. We will send you an email & WhatsApp message once the verification process is completed.</p>
-        <p>Please contact us by email (admin@transfree.id) or WhatsApp (+44 7490 090659) for faster process.</p>
+        <h2>No transactions</h2>
+        <p>You haven’t sent money using Transfree. Get started now and enjoy fast and cheap international money transfer. </p>
       </ContentContainer>
     )
   
