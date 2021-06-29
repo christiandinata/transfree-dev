@@ -37,9 +37,9 @@ export function NavBarBlue(props) {
 }
 
 // Navbar for white background (the same one as the navbar at homepage when scrolled, with profile info)
-export function NavBarWhite(username, id) {
+export function NavBarWhite(props) {
 	return(
-		<Nav scrolled = "true" homepage = "true">
+		<Nav scrolled = "true" homepage = "true" marginTop = "0px">
 			<NavInner>
 				<a href = "/"><Logo src="../static/images/transfree-logo.png" scrolled = "true"/></a>
 				<React.Fragment>
@@ -59,10 +59,10 @@ export function NavBarWhite(username, id) {
 						</NavigationCenter>
 						<NavigationChild href = "/user-profile" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
 						<ProfileInfo scrolled = "true" name = "true">
-							{username}
+							{props.username}
 						</ProfileInfo>
 						<ProfileInfo scrolled = "true" id = "true">
-							{id}
+							{props.id}
 						</ProfileInfo>
 					</NavigationChild>
 			</React.Fragment>
@@ -92,8 +92,7 @@ export const Nav = styled.div`
 	position: sticky;
 	top: 0;
 	z-index: 10;
-	margin-top: ${({ homepage }) => (
-		homepage ? "-72px" : "null")};
+	margin-top: ${({ marginTop }) => ( marginTop )};
 	box-shadow: ${({ scrolled, homepage }) => (
 		homepage && scrolled ? "0px 10px 35px rgba(98, 107, 121, 0.15)" : "none")}; 
 `;

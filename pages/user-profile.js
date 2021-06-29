@@ -1,6 +1,8 @@
 import CustomDatePicker from '../components/CustomDatePicker';
 import Header from "../components/header";
 import Menu from "../components/menu";
+import { NavBarWhite } from '../components/MenuComponents';
+import * as Profile from '../components/ProfileComponents';
 import '../styles/components/new-user/CreateProfile.css';
 import '../styles/new-user.css';
 import '../styles/user-profile.css';
@@ -11,325 +13,160 @@ import {getCookie} from "../utils/cookie";
 import Link from 'next/link';
 import ENV from "../config";
 import * as axios from "axios";
-//Menerima argumen dari luar
-class UserProfile extends React.Component {
-    constructor(props) {
-        super(props)
-        //Mendeklarasikan state
-        this.state = {
-            emailUser: this.props.user.email ? this.props.user.email : "",
-            fullname: this.props.user.fullname ? this.props.user.fullname : "",
-            idNumber: this.props.user.idNumber ? this.props.user.idNumber : "",
-            gender: this.props.user.gender ? this.props.user.gender : "Male",
-            dob: this.props.user.dob ? this.props.user.dob : new Date(),
-            pob: this.props.user.pob ? this.props.user.pob : "",
-            address: this.props.user.address ? this.props.user.address : "",
-            password: "123456",
-            confirmPassword: "123456",
-        };
+import React, { useEffect, useState } from 'react';
+
+function UserProfile(props) {
+    const [info, setInfo] = useState({
+		emailUser: "",
+        fullname: "aaa",
+        idNumber: "bbb",
+        gender: "",
+        dob: "",
+        pob: "",
+        address: "",
+        password: "",
+        confirmPassword: "",
+	});
+
+    const [choice, setChoice] = useState('detail')
+
+    // useEffect(() => {
+    //     setProfile({
+    //         ...profile,
+    //         emailUser: props.user.email,
+    //         fullname: props.user.fullname,
+    //         idNumber: props.user.idNumber,
+    //         gender: props.user.gender,
+    //         dob: props.user.dob,
+    //         pob: props.user.pob,
+    //         address: props.user.address,
+    //         password: "123456",
+    //         confirmPassword: "123456"            
+    //     })
+    // }, [props.user])
+
+    useEffect(() => {
+        console.log(props)
+    })
+
+    const handleChoiceChange = (e) => {
+        e.preventDefault()
+        e.currentTarget.value == 'detail' ? setChoice('detail') : setChoice('edit')
     }
 
-    static async getInitialProps(ctx) {
-        initialize(ctx);
-        await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req), 'user', ctx.req));
-        return {};
-    };
-//Memperbarui state react
-    handleChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-        this.checkIdNumber();
-        this.checkAddress();
-        this.checkPOB();
-        this.checkEmailAddress();
-        this.checkPassword();
-    }
+    return(
+        <React.Fragment>
+            <Header/>
+            <NavBarWhite username = {info.fullname} id = {info.idNumber}/>
 
-    startEdit() {
-        document.querySelector('#email-address').disabled = false;
-        document.querySelector('#address').disabled = false;
-        document.querySelector('#gender').disabled = false;
-        document.querySelector('#password').disabled = false;
-        document.querySelector('#confirm-password').disabled = false;
-        document.querySelector('#confirm-password').style.display = 'block';
-        document.querySelector('#confirm-password-label').style.display = 'block';
-        document.querySelector('#cancel-button').style.display = 'block';
-        document.querySelector('#save-button').style.display = 'block';
-        document.querySelector('#edit-button').style.display = 'none';
-        document.querySelector('#logout-button').style.display = 'none';
-        this.setState({password: ""});
-        this.setState({confirmPassword: ""});
-    }
+            {choice == 'detail' ? 
 
-    stopEdit() {
-        document.querySelectorAll('input').forEach(element => element.disabled = true)
-        document.querySelectorAll('select').forEach(element => element.disabled = true)
-        document.querySelector('#confirm-password').style.display = 'none';
-        document.querySelector('#confirm-password-label').style.display = 'none';
-        document.querySelector('#cancel-button').style.display = 'none';
-        document.querySelector('#save-button').style.display = 'none';
-        document.querySelector('#edit-button').style.display = 'block';
-        document.querySelector('#logout-button').style.display = 'block';
-        this.setState({password: "123456"});
-        document.querySelector("#error-password").className = "form-error-label-hidden";
-    }
+            <Profile.Wrapper>
+                <Profile.ActionSect>
+                    <Profile.ActionChoiceActive onClick = {handleChoiceChange} value = "detail">
+                        <Profile.ChoiceImg src = "../static/images/profile/detail-profile-blue.png"/>
+                        <Profile.AccountLinkActive>Detail Profile</Profile.AccountLinkActive>
+                        <Profile.ArrowRightImg src = "../static/images/profile/arrow-right-blue.png"/> 
+                    </Profile.ActionChoiceActive>
 
-    componentDidMount() {
-        this.stopEdit();
-    }
-//Untuk memperbarui info user
-    updateUser = async () => {
-        if (this.checkData()) {
-            axios.post(ENV.API + `/v1/user/checkEmail`, {"email": this.state.emailUser},
-                {
-                    headers: {
-                        Authorization: `Bearer ${getCookie('token')}`
-                    }
-                }
-            ).then(async (response) => {
-                if (response.data.duplicate) {
-                    alert("Email already used");
-                } else {
-                    let urlFetch = ENV.API + `/v1/user/editProfile`;
-                    let data;
-                    if (this.state.password != "") {
-                        data = {
-                            "email": this.state.emailUser,
-                            "gender": this.state.gender,
-                            "address": this.state.address,
-                            "password": this.state.password,
-                        }
-                    } else {
-                        data = {
-                            "email": this.state.emailUser,
-                            "gender": this.state.gender,
-                            "address": this.state.address,
-                        }
-                    }
+                    <Profile.ActionChoice onClick = {handleChoiceChange} value = "edit">
+                        <Profile.ChoiceImg src = "../static/images/profile/edit-profile-white.png"/>
+                        <Profile.AccountLink>Edit Profile</Profile.AccountLink>
+                        <Profile.ArrowRightImg src = "../static/images/profile/arrow-right-white.png"/>
+                    </Profile.ActionChoice>
+                </Profile.ActionSect>
 
-                    await axios.post(urlFetch, data, {
-                        headers: {
-                            Authorization: `Bearer ${getCookie('token')}`
-                        }
-                    }).then(async () => {
-                        let user_data = this.props.user;
+                <Profile.ProfileSect>
+                    <Profile.ProfileAction>
+                        <Profile.AccountText>Account Profile</Profile.AccountText>
+                        <Profile.LogOutButton href = "/logout">Log Out</Profile.LogOutButton>
+                    </Profile.ProfileAction>
 
-                        user_data.email = this.state.emailUser;
-                        user_data.gender = this.state.gender;
-                        user_data.address = this.state.address;
+                    <Profile.ProfilDetails>
+                        <Profile.Data>
+                            <Profile.DataSubPersonal>
+                                <Profile.SectionName>Personal Data</Profile.SectionName>
+                                <Profile.SectionExp>Your personal basic information.</Profile.SectionExp>
+                            </Profile.DataSubPersonal>
 
-                        this.stopEdit();
-                        // window.location.reload();
-                    }).catch((error) => {
-                        console.log(error)
-                        alert("Please check your data");
-                    });
+                            <Profile.Table>
+                                <tbody>
+                                    <Profile.TableRow>
+                                        <Profile.TableHeading>Full Name</Profile.TableHeading>
+                                        <Profile.TableDetailPersonal>Joshua</Profile.TableDetailPersonal>
+                                    </Profile.TableRow>
 
-                }
-            }).catch((error) => {
-                console.log(error)
-            });
-        } else {
-            alert("Please check your data");
-        }
+                                    <Profile.TableRow>
+                                        <Profile.TableHeading>ID Number</Profile.TableHeading>
+                                        <Profile.TableDetailPersonal>ID5627</Profile.TableDetailPersonal>
+                                    </Profile.TableRow>
 
-    }
-//Untuk memerika nomer identitas
-    checkIdNumber() {
-        if (document.querySelector("#id-number").value === "") {
-            document.querySelector("#error-idnumber").className = "form-error-label";
-        } else {
-            document.querySelector("#error-idnumber").className = "form-error-label-hidden";
-        }
-    }
-//Untuk memerika POB
-    checkPOB() {
-        if (document.querySelector("#pob").value === "") {
-            document.querySelector("#error-pob").className = "form-error-label";
-        } else {
-            document.querySelector("#error-pob").className = "form-error-label-hidden";
-        }
-    }
-//Untuk memeriksa alamat
-    checkAddress() {
-        if (document.querySelector("#address").value === "") {
-            document.querySelector("#error-address").className = "form-error-label";
-        } else {
-            document.querySelector("#error-address").className = "form-error-label-hidden";
-        }
-    }
-//Untuk memeriksa alamat email
-    checkEmailAddress() {
-        if (document.querySelector("#email-address").value === "") {
-            document.querySelector("#error-email").className = "form-error-label";
-        } else {
-            document.querySelector("#error-email").className = "form-error-label-hidden";
-        }
-    }
-//Untuk memeriksa kata sandi
-    checkPassword() {
-        if (document.querySelector("#password").value !== document.querySelector("#confirm-password").value) {
-            document.querySelector("#error-password").className = "form-error-label";
-        } else {
-            document.querySelector("#error-password").className = "form-error-label-hidden";
-        }
-    }
-//Untuk memeriksa data (nomer identitas, pob, alamat, alamat email, dan password)
-    checkData() {
-        return document.querySelector("#id-number").value !== "" &&
-            document.querySelector("#pob").value !== "" &&
-            document.querySelector("#address").value !== "" &&
-            document.querySelector("#email-address").value !== "" &&
-            document.querySelector("#password").value === document.querySelector("#confirm-password").value;
-    }
-//Menampilkan tulisan dibawah
-    render() {
-        return (
-            <div>
-                <Header/>
-                <Menu/>
-                <div className="new-user-page">
-                    <div className="new-user-container">
-                        <div className="new-user-header">
-                            <div className="new-user-title" id="user-profile-title">Profile Detail</div>
-                            <div className="new-user-close">
-                                <a href="/home">
-                                    <img src="../../static/images/close.svg"/>
-                                </a>
-                            </div>
-                        </div>
-                        <div className="create-profile-form-body-heading">
-                            <div className="create-profile-profile-picture">
-                                <img style={{marginTop: "2%"}} src="../../static/images/profile.svg"/>
-                            </div>
-                        </div>
-                        <div className="create-profile-form-body">
-                            <div className="create-profile-form-box" style={{flexDirection: "column"}}>
-                                <div className="create-profile-form-field-container">
-                                    <div className="create-profile-form-field-container-column">
-                                        <div className="create-profile-form-field">
-                                            <label className="create-profile-form-label" htmlFor="full-name">Full
-                                                Name</label>
-                                            <input name="fullname" id="full-name" placeholder="Enter Full Name"
-                                                   value={this.state.fullname} onChange={this.handleChange.bind(this)}/>
-                                        </div>
-                                        <div className="create-profile-form-field">
-                                            <label className="create-profile-form-label" htmlFor="id-number">ID
-                                                Number</label>
-                                            <input name="idNumber" id="id-number" placeholder="Enter ID number"
-                                                   value={this.state.idNumber} onChange={this.handleChange.bind(this)}/>
-                                            <span className="form-error-label-hidden" id="error-idnumber"
-                                            >You must input your ID Number (KTP/Passport/SIM)!</span>
-                                        </div>
-                                        <div className="create-profile-form-field">
-                                            <label className="create-profile-form-label" htmlFor="gender">Gender</label>
-                                            <select name="gender" id="gender" placeholder="Choose your gender"
-                                                    value={this.state.gender} onChange={this.handleChange.bind(this)}>
-                                                <option value="Male">Male</option>
-                                                <option value="Female">Female</option>
-                                                <option value="Others">Others</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div className="create-profile-form-field-container-column">
-                                        <div className="create-profile-form-field">
-                                            <label className="create-profile-form-label" htmlFor="pob">Place of
-                                                Birth</label>
-                                            <input name="pob" id="pob" placeholder="Enter the city (e.g. Jakarta)"
-                                                   value={this.state.pob} onChange={this.handleChange.bind(this)}/>
-                                            <span
-                                                className="form-error-label-hidden" id="error-pob">Your Place of Birth may not be empty.</span>
-                                        </div>
-                                        <div className="create-profile-form-field">
-                                            <label className="create-profile-form-label" htmlFor="dob">Date of
-                                                Birth</label>
-                                            <CustomDatePicker date={this.state.dob} name="dob" id="dob"
-                                                              onChange={(value) => this.setState({dob: value})}/>
-                                        </div>
-                                        <div className="create-profile-form-field">
-                                            <label className="create-profile-form-label"
-                                                   htmlFor="address">Address</label>
-                                            <input id="address" name="address" placeholder="Enter your full address"
-                                                   value={this.state.address} onChange={this.handleChange.bind(this)}/>
-                                            <span
-                                                className="form-error-label-hidden" id="error-address">Your address may not be empty.</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <h2 className="user-profile-subheader">Account</h2>
-                                <div className="create-profile-form-field-container">
-                                    <div className="create-profile-form-field-container-column">
-                                        <div className="create-profile-form-field">
-                                            <label className="create-profile-form-label" htmlFor="email-address">
-                                                Email Address</label>
-                                            <input name="emailUser" id="email-address" placeholder="Enter Email Address"
-                                                   value={this.state.emailUser}
-                                                   onChange={this.handleChange.bind(this)}/>
-                                            <span className="form-error-label-hidden" id="error-email">
-                                                Your Email may not be empty.</span>
+                                    <Profile.TableRow>
+                                        <Profile.TableHeading>Gender</Profile.TableHeading>
+                                        <Profile.TableDetailPersonal>Male</Profile.TableDetailPersonal>
+                                    </Profile.TableRow>
 
-                                        </div>
-                                        <div className="create-profile-form-field">
-                                            <label className="create-profile-form-label"
-                                                   htmlFor="password">Password</label>
-                                            <input name="password" id="password" type="password"
-                                                   placeholder="Enter New Password" value={this.state.password}
-                                                   onChange={this.handleChange.bind(this)}/>
-                                        </div>
-                                        <div className="create-profile-form-field">
-                                            <label
-                                                className="create-profile-form-label"
-                                                htmlFor="confirm-password"
-                                                id="confirm-password-label"
-                                            >Confirm New Password</label>
-                                            <input id="confirm-password" type="password"
-                                                   placeholder="Confirm your new password"
-                                                   value={this.state.confirmPassword} name="confirmPassword"
-                                                   onChange={this.handleChange.bind(this)}/>
-                                            <span
-                                                className="form-error-label-hidden"
-                                                id="error-password">
-                                                Password must be match.</span>
-                                        </div>
-                                    </div>
-                                    <div className="create-profile-form-field-container-column"
-                                         id="user-profile-field-button">
-                                        <div className="create-profile-form-field" id="user-profile-buttons">
-                                            <button className='form-submit-button'
-                                                    onClick={this.startEdit.bind(this)}
-                                                    id="edit-button"
-                                            >Edit
-                                            </button>
-                                            <button className='form-submit-button'
-                                                    style={{backgroundColor: '#ea5252'}}
-                                                    id="logout-button"
-                                            >
-                                                <Link href="/logout">Log out</Link>
-                                            </button>
-                                            <button
-                                                className='form-submit-button'
-                                                style={{backgroundColor: '#ea5252'}}
-                                                onClick={this.stopEdit.bind(this)}
-                                                id="cancel-button"
-                                            >
-                                                Cancel
-                                            </button>
-                                            <button className='form-submit-button'
-                                                    onClick={this.updateUser}
-                                                    id="save-button"
-                                            >Save
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        )
-    }
+                                    <Profile.TableRow>
+                                        <Profile.TableHeading>Place of Birth</Profile.TableHeading>
+                                        <Profile.TableDetailPersonal>Bogor</Profile.TableDetailPersonal>
+                                    </Profile.TableRow>
+
+                                    <Profile.TableRow>
+                                        <Profile.TableHeading>Date of Birth</Profile.TableHeading>
+                                        <Profile.TableDetailPersonal>1999</Profile.TableDetailPersonal>
+                                    </Profile.TableRow>
+
+                                    <Profile.TableRow>
+                                        <Profile.TableHeading>Address</Profile.TableHeading>
+                                        <Profile.TableDetailPersonal>Jalan</Profile.TableDetailPersonal>
+                                    </Profile.TableRow>
+                                </tbody>
+                            </Profile.Table>
+                        </Profile.Data>
+
+                        <Profile.Divider></Profile.Divider>
+
+                        <Profile.Data>
+                            <Profile.DataSubAccount>
+                                <Profile.SectionName>Account</Profile.SectionName>
+                                <Profile.SectionExp>Your personal account information.</Profile.SectionExp>
+                            </Profile.DataSubAccount>
+
+                            <Profile.Table>
+                                <tbody>
+                                    <Profile.TableRow>
+                                        <Profile.TableHeading>Email Address</Profile.TableHeading>
+                                        <Profile.TableDetail>blabla</Profile.TableDetail>
+                                    </Profile.TableRow>
+
+                                    <Profile.TableRow>
+                                        <Profile.TableHeading>Password</Profile.TableHeading>
+                                        <Profile.TableDetail>bintang bintang</Profile.TableDetail>
+                                    </Profile.TableRow>
+
+                                    <Profile.TableRow>
+                                        <Profile.TableHeading>Phone Number</Profile.TableHeading>
+                                        <Profile.TableDetail>0812</Profile.TableDetail>
+                                    </Profile.TableRow>
+                                </tbody>
+                            </Profile.Table>
+                        </Profile.Data>
+                        
+                        <Profile.Divider></Profile.Divider>
+
+                    </Profile.ProfilDetails>
+                </Profile.ProfileSect>
+            </Profile.Wrapper> 
+        : 
+        null}
+        </React.Fragment>
+    )
+}
+
+UserProfile.getInitialProps = async (ctx) => {
+    initialize(ctx)
+    await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req), 'user', ctx.req))
+    return {}
 }
 
 const mapStateToProps = (state) => ({

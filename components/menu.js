@@ -24,7 +24,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username, id, homepa
   }, [])
 
   return(
-    <Navbar.Nav scrolled = {scrolled} homepage = {homepage}>
+    <Navbar.Nav scrolled = {scrolled} homepage = {homepage} marginTop = "-72px">
       <Navbar.NavInner scrolled = {scrolled} homepage = {homepage}>
         <a href = "/"><Navbar.Logo src="../static/images/transfree-logo.png" scrolled = {scrolled} homepage = {homepage}/></a>
         
