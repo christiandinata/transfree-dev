@@ -25,6 +25,11 @@ const Header = () => (
         src: url('../static/fonts/AvenirLTProHeavy.otf');
       }
 
+      @font-face {
+        font-family: 'Avenir LT Pro Black';
+        src: url('../static/fonts/AvenirLTProBlack.otf');
+      }
+
       body {
         font-family: "Avenir LT Pro", sans-serif; 
         line-height: 1.6;

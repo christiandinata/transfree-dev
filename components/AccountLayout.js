@@ -5,7 +5,7 @@ import Link from 'next/link';
 const AccountLayout = ({children, isApproved}) => (
   <div>
     <Header />
-    <Menu isApproved={isApproved}/>
+    <Menu isApproved={isApproved} homepage = "true"/>
     <div className="container-fluid">
       {children}
     </div>
