@@ -94,7 +94,6 @@ const AmountContainer = styled.div`
   margin: 45px -30px 30px -30px;
   padding: 0px 20px 0px 20px; 
 
-
   @media only screen and (max-width: 800px) {
     margin: 45px -20px 30px -20px;
     padding: 0px 10px 0px 10px;

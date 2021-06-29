@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import styled from "styled-components";
 import Header from '../components/header';
 import OrderAmount from '../components/order/OrderAmount';
@@ -44,8 +43,6 @@ const ProgressContainer = styled.div`
 
 
   @media only screen and (max-width: 500px) {
-    // width: 400px;
-    // font-size: 12px;
     margin: 16px 0 10px;
   }
 `;
@@ -98,7 +95,7 @@ const ProgressItem = styled.li`
   `}
 `;
 
-//Component yang ditampilkan saat order dilakukan
+/* Order page layout */
 class Order extends React.Component {
   constructor({ props }) {
     super(props);
@@ -193,6 +190,7 @@ class Order extends React.Component {
     );
   }
 
+  /* Render order page content based on current step */
   renderContent(step) {
     switch(step) {
       case 1:
@@ -227,6 +225,7 @@ class Order extends React.Component {
     }
   }
 
+  /* Move to next step (increment step) */
   nextStep() {
     window.scrollTo(0, 0);
     this.setState((state) => {
@@ -234,17 +233,20 @@ class Order extends React.Component {
     })
   }
 
+  /* Move to previous step (decrement step) */
   previousStep() {
     window.scrollTo(0, 0);
     this.setState((state) => {
       return {step: state.step - 1}
     })
   }
+
   backToAmount() {
     this.setState((state) => {
       return {step: state.step - 2}
     })
   }
+
   saveValues(data) {
     Object.entries(data).map(([key,value])=>{
       this.setState({
@@ -285,6 +287,7 @@ class Order extends React.Component {
     this.props.generateVA(merchantId, shortid.generate(), secretWord, this.state.name, this.state.email, this.state.fromAmount);
   }
 
+  /* Progress bar on the top of order page to show current step */
   progressBar(){
     return(
       <ProgressContainer>

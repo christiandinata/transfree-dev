@@ -142,7 +142,7 @@ const SearchBar = styled.div`
 `
 
 const iconStyle = {
-  width: "3rem",
+  width: "2.5rem",
   color: "#FFFFFF"
 }
 
@@ -212,7 +212,7 @@ export function InputNumber(props) {
           <button onClick={() => props.onClick()}>
             <span className={"flag-icon flag-icon-"+ props.currency.substring(0,2) +" flag-icon-squared"}/>
             { props.currency }
-            <FontAwesomeIcon className="caret" icon="caret-down" />
+            <FontAwesomeIcon className="caret" icon="caret-down" style = {{width: "10px"}}/>
           </button>
           <FlagOptions
             show={props.show}

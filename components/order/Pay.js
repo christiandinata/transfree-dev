@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import styled from "styled-components";
 import NumberFormat from 'react-number-format';
 
@@ -228,6 +227,7 @@ const BankDetail = styled.div`
   `}
 `;
 
+/* Render button based on payment method*/
 function RenderButton(props){
   return(
     props.method == 'direct_transfer_via_email' ?
@@ -236,6 +236,7 @@ function RenderButton(props){
   )
 }
 
+/* Render one item of bank detail  */
 function RenderBankDetail(props){
   return(
     <div>

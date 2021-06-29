@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { connect } from 'react-redux';
 import rateActions from '../../redux/actions';
 import styled from 'styled-components';
@@ -132,6 +131,7 @@ class OrderAmount extends React.Component {
     this.reverse = this.reverse.bind(this);
     this.checkDuration = this.checkDuration.bind(this);
   }
+  
   reverse(country,country2) {
 	this.setState({
             
