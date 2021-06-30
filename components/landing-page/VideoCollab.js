@@ -43,6 +43,8 @@ const videoStyle = {
   marginTop: "2rem"
 }
 
+const imagePath = "../static/images/new-ui/"
+
 export function VideoCollab() {
   return (
     <>
@@ -61,10 +63,10 @@ export function VideoCollab() {
             incididunt ut labore et dolore magna aliqua</p>
         </SubtitleContainer>
         <Collaborators>
-          <img src="../static/images/ASSET/kemnaker.svg" alt="kemnaker"/>
-          <img src="../static/images/ASSET/ristekdikti.svg" alt="ristekdikti"/>
-          <img src="../static/images/ASSET/kemnaker.svg" alt="kemnaker"/>
-          <img src="../static/images/ASSET/ristekdikti.svg" alt="ristekdikti"/>
+          <img src={imagePath + "kemnaker.svg"} alt="kemnaker"/>
+          <img src={imagePath + "ristekdikti.svg"} alt="ristekdikti"/>
+          <img src={imagePath + "kemnaker.svg"} alt="kemnaker"/>
+          <img src={imagePath + "ristekdikti.svg"} alt="ristekdikti"/>
         </Collaborators>
       </Container>
       </GreyBg>

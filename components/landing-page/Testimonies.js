@@ -23,9 +23,6 @@ const TestimonyDiv = styled.div`
     width: 15rem;
     height: 17rem;
     object-fit: cover;
-  }
-  @media only screen and (max-width: 800px) {
-    img { width: auto; height: auto; }
   }`
 
 const Arrow = styled.img`
@@ -141,9 +138,9 @@ function Testimony(props) {
   return(
     <TestimonyDiv>
       <img src={ props.img } alt="image"/>
-      <div style={{ fontSize: "2.5rem", fontFamily: "Avenir LT Pro Black" }}>“</div>
+      <div style={{ fontSize: "2.5rem", fontFamily: "Avenir LT Pro Black", lineHeight: 1 }}>“</div>
       <div>
-        <p>{ props.review }</p>
+        <p style={{ maxHeight: 300, overflow: "hidden", textOverflow: "ellipsis" }}>{ props.review }</p>
         <div style={{ fontSize: "1.25rem", fontFamily: "Avenir LT Pro Black" }}>{ props.name }</div>
         <div style={{ fontWeight: 600 }}>{ props.place || "" }</div>
       </div>

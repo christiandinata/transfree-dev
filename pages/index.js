@@ -15,16 +15,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import {
-  MapBackground,
-  Overlay,
-  HeroDiv,
-  Title,
-  Converter,
-  InputNumber,
-  ReverseButton,
-  RateAndFee
-} from '../components/landing-page/Hero.js';
+import * as Hero from '../components/landing-page/Hero';
 import { PrButton, PrLineButton, WAButton } from '../components/landing-page/Buttons.js';
 import { Primary } from '../components/landing-page/Primary.js';
 import { CountriesDisplay } from '../components/landing-page/CountriesDisplay.js';
@@ -60,7 +51,7 @@ class Index extends React.Component {
   static async getInitialProps(ctx) {
     initialize(ctx);
     await ctx.store.dispatch(actions.getAdjustedRates('IDR', 'getAdjustedRates'));
-    await ctx.store.dispatch(actions.getRates('GBP', 'IDR'));
+    // await ctx.store.dispatch(actions.getRates('GBP', 'IDR'));
     return {}
   };
 
@@ -256,11 +247,11 @@ class Index extends React.Component {
         <Menu isApproved={this.props.isApproved} homepage = "true"/>
 
         {/* Hero Component */}
-        <MapBackground><Overlay>
-          <HeroDiv>
-            <Title/>
-            <Converter>
-              <InputNumber
+        <Hero.MapBackground><Hero.Overlay>
+          <Hero.HeroDiv>
+            <Hero.Title/>
+            <Hero.Converter>
+              <Hero.InputNumber
                 label={"You send"}
                 amount={this.state.fromAmount}
                 currency={this.state.fromCurrency}
@@ -268,11 +259,11 @@ class Index extends React.Component {
                 onSelect={this.selectSource} 
                 onClick={this.toggleSource}
                 show={this.state.isSourceActive}/>
-              <ReverseButton>
+              <Hero.ReverseButton>
                 <img src="../../static/images/reverse.png" alt="rv"
                   onClick={() => this.reverse(this.state.fromCurrency, this.state.toCurrency)}/>
-              </ReverseButton>
-              <InputNumber
+              </Hero.ReverseButton>
+              <Hero.InputNumber
                 label={"Recipient gets"}
                 amount={this.state.toAmount}
                 currency={this.state.toCurrency}
@@ -280,7 +271,7 @@ class Index extends React.Component {
                 onSelect={this.selectDestination} 
                 onClick={this.toggleDestination}
                 show={this.state.isDestinationActive}/>
-              <RateAndFee
+              <Hero.RateAndFee
                 rate={this.state.rate}
                 fee={0}/>
               <div style={{ padding: "1rem 1.25rem 0 1.25rem", fontSize: "0.75rem" }}>
@@ -294,9 +285,9 @@ class Index extends React.Component {
                 </a>
               </div>
               <WAButton/>
-            </Converter>
-          </HeroDiv>
-        </Overlay></MapBackground>
+            </Hero.Converter>
+          </Hero.HeroDiv>
+        </Hero.Overlay></Hero.MapBackground>
 
         {/* Features */}
         <div className="row">

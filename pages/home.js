@@ -225,7 +225,7 @@ class Home extends React.Component{
       await ctx.store.dispatch(actions.getOrderByUid(getCookie('_id', ctx.req),'getOrderByUid',ctx.req));
       await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
       await ctx.store.dispatch(actions.getAdjustedRates('IDR', 'getAdjustedRates'));
-      await ctx.store.dispatch(actions.getRates('GBP', 'IDR'));
+      // await ctx.store.dispatch(actions.getRates('GBP', 'IDR'));
       return {};
     };
 
@@ -234,6 +234,7 @@ class Home extends React.Component{
         rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
         toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
       })
+      console.log(this.props)
     }
 
   togglePopup() {

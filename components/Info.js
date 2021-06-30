@@ -8,7 +8,7 @@ export const BlueHeader = styled.div`
   
 export const Batik = styled.div`
   position: absolute;
-  background: url('../static/images/Asset Web/content/batik-world-map.png');
+  background: url('../static/images/new-ui/batik-world-map.png');
   background-repeat: no-repeat;
   background-position: center top;
   width: 100%;

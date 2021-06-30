@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ScButton } from './Buttons'
 
 export const MapBackground = styled.div`
-  background-image: url('../static/images/Asset Web/content/batik-world-map.png');
+  background-image: url('../static/images/new-ui/batik-world-map.png');
   background-size: cover;
   background-repeat: no-repeat;
   height: 750px;
@@ -27,7 +27,7 @@ export const HeroDiv = styled.div`
   align-items: center;
   justify-content: space-around;
   margin: 0 auto;
-  padding-top: 8rem;
+  padding-top: 7rem;
   width: 95%;
   max-width: 1124px;
   color: #FFFFFF;

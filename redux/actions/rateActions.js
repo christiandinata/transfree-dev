@@ -17,7 +17,7 @@ const getRates = (from, to) => {
   };
 };
 
-const getMultipleRates = (idr,myr, krw, gbp, usd, eur, hkd) => {
+const getMultipleRates = (idr, myr, krw, gbp, usd, eur, hkd) => {
   return async (dispatch) => {
     await axios.get('https://data.fixer.io/latest?access_key=1c2c1df7d16f7d0e30bb25aebd730a22&base='+
                                                       idr.toUpperCase()+'&symbols='+myr.toUpperCase()+

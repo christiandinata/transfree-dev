@@ -1,9 +1,13 @@
 import Header from '../components/header.js';
-import Menu from '../components/menu.js';
 import Footer from '../components/footer.js';
 import styled from 'styled-components';
 
 import * as Info from '../components/Info.js';
+import { Component } from 'react';
+import { connect } from 'react-redux';
+import initialize from '../utils/initialize.js';
+import actions from '../redux/actions/index.js';
+import { getCookie } from '../utils/cookie';
 import { NavBarWhite } from '../components/MenuComponents.js';
 import { MobilePlatform } from '../components/landing-page/MobilePlatform.js';
 
@@ -60,87 +64,118 @@ const Accomplishments = styled.div`
   h3, p { margin: 0; }
 `
 
+const imagePath = "../../static/images/new-ui/"
+
 const listAcc = [
   {
-    img: "../static/images/ASSET/customer.svg",
+    img: "customer.svg",
     head: "1.2 Million",
     subHead: "All Customers"
   },
   {
-    img: "../static/images/ASSET/employee.svg",
+    img: "employee.svg",
     head: "50+",
     subHead: "Employees"
   },
   {
-    img: "../static/images/ASSET/currencies.svg",
+    img: "currencies.svg",
     head: "24+",
     subHead: "Currencies"
   },
   {
-    img: "../static/images/ASSET/countries.svg",
+    img: "countries.svg",
     head: "124",
     subHead: "Countries Covered"
   }
 ]
 
-// About Page
-const About = () => (
-  <div>
-    <Header />
-    <NavBarWhite />
-    <Info.BlueHeader>
-      <Info.Batik>
-        <h1>About Transfree</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim 
-          ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-      </Info.Batik>
-    </Info.BlueHeader>
-    <Story>
-      <StoryFlex>
-        <img src="../static/images/ASSET/story.png" alt="story" style={{ flexBasis: "200px" }}/>
-        <div>
-          <h2>Our Story</h2>
-          <p>There are a lot of difficulties when you sending or receiving money from Indonesia. 
-            Starting from the total transfer time, the complexity of the procedure, to the limitations 
-            of existing regulations. Some also being scammed and lost their money. These are the problem 
-            that often arise in systems that already exist. We feels the same way when living abroad. From 
-            students who receive money from home or workers who send money to their families.</p>
-          <p>Because of that, we try to find a new way to eliminate the problems with a more efficient way 
-          yet secure and reliable. Transfree make the process of international money transfer feels like local 
-          transfer. We understand your problem and will simplify your process to transfer money. Till today, 
-          we are improving our service to be better.</p>
-          <p>Now that you know our story, let’s give it a try using our service to feel the difference.</p>
-        </div>
-      </StoryFlex>
-    </Story>
-    <Story>
-      <HowWeDoing>
-        <h2>How are we doing so far?</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-          quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, 
-          consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et 
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
-          ullamco laboris.</p>
-        <Accomplishments>
-          {
-            listAcc.map((acc, index) => (
-              <div key={index}>
-                <img src={ acc.img } alt="icon"/>
-                <h3>{ acc.head }</h3>
-                <p>{ acc.subHead }</p>
-              </div>
-            ))
-          }
-        </Accomplishments>
-      </HowWeDoing>
-    </Story>
-    <div style={{ background: "#F3F5F7" }}>
-      <MobilePlatform />
-    </div>
-    <Footer />
-  </div>
-);
+class About extends Component {
 
-export default About;
+  constructor(props) {
+    super(props)
+  }
+
+  static async getInitialProps(ctx) {
+    initialize(ctx)
+    if(getCookie('_id', ctx.req)) {
+      await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
+    }
+    return {}
+  }
+
+  render() {
+    return (
+      <div>
+        <Header />
+        <NavBarWhite isAuthenticated={this.props.isAuthenticated} username={this.props.username} />
+        <Info.BlueHeader>
+          <Info.Batik>
+            <h1>About Transfree</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim 
+              ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+          </Info.Batik>
+        </Info.BlueHeader>
+        <Story>
+          <StoryFlex>
+            <img src={imagePath + "story.png"} alt="story" style={{ flexBasis: "200px" }}/>
+            <div>
+              <h2>Our Story</h2>
+              <p>There are a lot of difficulties when you sending or receiving money from Indonesia. 
+                Starting from the total transfer time, the complexity of the procedure, to the limitations 
+                of existing regulations. Some also being scammed and lost their money. These are the problem 
+                that often arise in systems that already exist. We feels the same way when living abroad. From 
+                students who receive money from home or workers who send money to their families.</p>
+              <p>Because of that, we try to find a new way to eliminate the problems with a more efficient way 
+              yet secure and reliable. Transfree make the process of international money transfer feels like local 
+              transfer. We understand your problem and will simplify your process to transfer money. Till today, 
+              we are improving our service to be better.</p>
+              <p>Now that you know our story, let’s give it a try using our service to feel the difference.</p>
+            </div>
+          </StoryFlex>
+        </Story>
+        <Story>
+          <HowWeDoing>
+            <h2>How are we doing so far?</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+              quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, 
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et 
+              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+              ullamco laboris.</p>
+            <Accomplishments>
+              {
+                listAcc.map((acc, index) => (
+                  <div key={index}>
+                    <img src={ imagePath + acc.img } alt="icon"/>
+                    <h3>{ acc.head }</h3>
+                    <p>{ acc.subHead }</p>
+                  </div>
+                ))
+              }
+            </Accomplishments>
+          </HowWeDoing>
+        </Story>
+        <div style={{ background: "#F3F5F7" }}>
+          <MobilePlatform />
+        </div>
+        <Footer />
+      </div>
+    )
+  }
+}
+
+const mapStateToProps = (state) => {
+  if (state.user.user_data != null) {
+    return {
+      isAuthenticated: true,
+      username: state.user.user_data.fullname
+    }
+  } else {
+    return {
+      isAuthenticated: false
+    }
+  }
+}
+
+export default connect(mapStateToProps, actions)(About);

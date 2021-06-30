@@ -13,6 +13,9 @@ const Features = styled.div`
   h2 {
     font-size: 1.75rem;
     font-family: "Avenir LT Pro Black";
+  }
+  @media only screen and (max-width: 800px) {
+    margin-top: -4rem;
   }`
 
 const Benefit = styled.div`
@@ -39,6 +42,8 @@ const BoxBenefit = styled.div`
   }
 `
 
+const imagePath = "../../static/images/new-ui/"
+
 export function Primary() {
   return (
     <Features>
@@ -49,19 +54,19 @@ export function Primary() {
       </p>
       <Benefit>
         <BoxBenefit>
-          <img src="../../static/images/features/rate.png" />
+          <img src={imagePath + "rate.png"} />
           <h3>Better rate for Transfree</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
             eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
         </BoxBenefit>
         <BoxBenefit>
-          <img src="../../static/images/features/time.png" />
+          <img src={imagePath + "time.png"} />
           <h3>Quickly sent quickly arrived</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
             eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
         </BoxBenefit>
         <BoxBenefit>
-          <img src="../../static/images/features/uncharge.png" />
+          <img src={imagePath + "uncharge.png"} />
           <h3>Unchargeable for Transfer</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
             eiusmod tempor incididunt ut labore et dolore magna aliqua</p>

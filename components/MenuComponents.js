@@ -38,35 +38,63 @@ export function NavBarBlue(props) {
 
 
 // Navbar for white background (the same one as the navbar at homepage when scrolled, with profile info)
-export function NavBarWhite(props) {
+export function NavBarWhite({ isAuthenticated, username, id }) {
 	return(
 		<Nav scrolled = "true" homepage = "true" marginTop = "0px">
 			<NavInner>
 				<a href = "/"><Logo src="../static/images/transfree-logo.png" scrolled = "true"/></a>
-				<React.Fragment>
-					<NavigationCenter>
-						<NavigationChild href = "/order" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
-							Send Money
-						</NavigationChild>
-						<NavigationChild href = "/account" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
-							Transactions
-						</NavigationChild>
-						<NavigationChild href = "https://www.youtube.com/watch?v=8RzCs_sQ8Ak" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
-							How It Works
-						</NavigationChild>
-						<NavigationChild href = "/about" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
-							About Us
-						</NavigationChild>
+				
+				{
+					isAuthenticated ?
+					<React.Fragment>
+						<NavigationCenter>
+							<NavigationChild href = "/order" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
+								Send Money
+							</NavigationChild>
+							<NavigationChild href = "/account" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
+								Transactions
+							</NavigationChild>
+							<NavigationChild href = "https://www.youtube.com/watch?v=8RzCs_sQ8Ak" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
+								How It Works
+							</NavigationChild>
+							<NavigationChild href = "/about" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
+								About Us
+							</NavigationChild>
 						</NavigationCenter>
 						<NavigationChild href = "/user-profile" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
-						<ProfileInfo scrolled = "true" name = "true">
-							{props.username}
-						</ProfileInfo>
-						<ProfileInfo scrolled = "true" id = "true">
-							{props.id}
-						</ProfileInfo>
-					</NavigationChild>
-			</React.Fragment>
+							<ProfileInfo scrolled = "true" name = "true">
+								{username}
+							</ProfileInfo>
+							<ProfileInfo scrolled = "true" id = "true">
+								{id}
+							</ProfileInfo>
+						</NavigationChild>
+					</React.Fragment>
+					:
+					null
+				}
+
+				{
+					!isAuthenticated ?
+					<React.Fragment>
+						<Navigation>
+							<NavigationChild href="/about" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
+								How It Works
+							</NavigationChild>
+							<NavigationChild href="/faq" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
+								About Us
+							</NavigationChild>
+							<SignInButton href = "/login" scrolled = "true" homepage = "true">
+								Sign In
+							</SignInButton>
+							<RegisterButton href = "/signup" scrolled = "true" homepage = "true">
+								Register
+							</RegisterButton>
+						</Navigation>
+        	</React.Fragment> 
+					:
+					null
+				}
 			</NavInner>
 		</Nav>
 	)
