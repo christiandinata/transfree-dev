@@ -1,7 +1,7 @@
 {
   "name": "transfree",
   "version": "1.0.0",
-  "description": "",
+  "description": "Follow this step-by-step to deploy the app",
   "main": "index.js",
   "scripts": {
     "dev": "node server.js",
@@ -50,7 +50,9 @@
     "react-dropzone": "^11.2.4",
     "react-ga": "^3.2.1",
     "react-js-pagination": "^3.0.3",
+    "react-modal": "^3.14.3",
     "react-number-format": "^4.4.1",
+    "react-otp-input": "^2.3.1",
     "react-phone-input": "^1.2.1",
     "react-phone-number-input": "^2.5.3",
     "react-preview-image": "^1.0.5",
@@ -92,11 +94,12 @@
             "styled-components",
             {
               "ssr": true,
-              "displayName": true
+              "displayName": false
             }
           ]
         ]
       }
     }
-  }
+  },
+  "devDependencies": {}
 }
