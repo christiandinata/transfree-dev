@@ -1,22 +1,17 @@
 import Menu from '../components/menu.js';
 import Header from '../components/header.js';
 import Footer from '../components/footer.js';
-import Link from 'next/link';
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
-import { getCookie } from '../utils/cookie';
-import NumberFormat from 'react-number-format';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import * as Hero from '../components/landing-page/Hero';
-import { PrButton, PrLineButton, WAButton } from '../components/landing-page/Buttons.js';
+import { PrButton, WAButton } from '../components/landing-page/Buttons.js';
 import { Primary } from '../components/landing-page/Primary.js';
 import { CountriesDisplay } from '../components/landing-page/CountriesDisplay.js';
 import { Testmonies } from '../components/landing-page/Testimonies.js';

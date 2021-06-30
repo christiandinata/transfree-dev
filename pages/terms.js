@@ -54,7 +54,6 @@ class Terms extends Component {
     return {}
   }
 
-
   render() {
     return (
       <div>
@@ -238,6 +237,7 @@ class Terms extends Component {
     )
   }
 }
+
 const mapStateToProps = (state) => {
   if (state.user.user_data != null) {
     return {
