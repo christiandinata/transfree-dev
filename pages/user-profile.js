@@ -2,6 +2,7 @@ import CustomDatePicker from '../components/CustomDatePicker';
 import Header from "../components/header";
 import Menu from "../components/menu";
 import { NavBarWhite } from '../components/MenuComponents';
+import Phone from "react-phone-number-input";
 import * as Profile from '../components/ProfileComponents';
 import '../styles/components/new-user/CreateProfile.css';
 import '../styles/new-user.css';
@@ -28,7 +29,7 @@ function UserProfile(props) {
         confirmPassword: "",
 	});
 
-    const [choice, setChoice] = useState('detail')
+    const [choice, setChoice] = useState('edit')
 
     // useEffect(() => {
     //     setProfile({
@@ -175,95 +176,126 @@ function UserProfile(props) {
 
                 <Profile.ProfileSect>
                     <Profile.ProfileAction>
-                        <Profile.AccountText>Edit Profile</Profile.AccountText>
+                        <Profile.AccountText>Account Profile</Profile.AccountText>
                         <Profile.LogOutButton href = "/logout">Log Out</Profile.LogOutButton>
                     </Profile.ProfileAction>
+                    
+                    <Profile.EditWrapper>
+                        <div>
+                            <Profile.EditData>
+                                <Profile.SectionType>
+                                    <Profile.SectionTitle>Personal Data</Profile.SectionTitle>
+                                    <Profile.SectionExp>Your personal basic information.</Profile.SectionExp>
+                                </Profile.SectionType>
 
-                    <div>
-                        <Profile.Data>
-                            <Profile.DataSubPersonal>
-                                <Profile.SectionName>Personal Data</Profile.SectionName>
-                                <Profile.SectionExp>Your personal basic information.</Profile.SectionExp>
-                            </Profile.DataSubPersonal>
+                                <form>
+                                    <Profile.FormRow>
+                                        <Profile.FormLabel>Full Name</Profile.FormLabel>
+                                        <Profile.InputText type = "text" dis = "true" disabled/>
+                                    </Profile.FormRow>
 
-                            <Profile.Table>
-                                <tbody>
-                                    <Profile.TableRow>
-                                        <Profile.TableHeading>Full Name</Profile.TableHeading>
-                                        <Profile.TableDetailPersonal>Joshua</Profile.TableDetailPersonal>
-                                    </Profile.TableRow>
+                                    <Profile.FormRow>
+                                        <Profile.FormLabel>ID Number</Profile.FormLabel>
+                                        <Profile.InputText type = "text" dis = "true" disabled/>
+                                    </Profile.FormRow>
 
-                                    <Profile.TableRow>
-                                        <Profile.TableHeading>ID Number</Profile.TableHeading>
-                                        <Profile.TableDetailPersonal>ID5627</Profile.TableDetailPersonal>
-                                    </Profile.TableRow>
+                                    <Profile.FormRow>
+                                        <Profile.FormLabel>Date of Birth</Profile.FormLabel>
+                                        <Profile.InputText type = "text" dis = "true" disabled/>
+                                    </Profile.FormRow>
 
-                                    <Profile.TableRow>
-                                        <Profile.TableHeading>Gender</Profile.TableHeading>
-                                        <Profile.TableDetailPersonal>Male</Profile.TableDetailPersonal>
-                                    </Profile.TableRow>
+                                    <Profile.FormRow>
+                                        <Profile.FormLabel>Place of Birth</Profile.FormLabel>
+                                        <Profile.InputText type = "text" dis = "true" disabled/>
+                                    </Profile.FormRow>
 
-                                    <Profile.TableRow>
-                                        <Profile.TableHeading>Place of Birth</Profile.TableHeading>
-                                        <Profile.TableDetailPersonal>Bogor</Profile.TableDetailPersonal>
-                                    </Profile.TableRow>
+                                    <Profile.FormRow>
+                                        <Profile.FormLabel>Gender</Profile.FormLabel>
+                                        <Profile.InputText type = "text" dis = "true"disabled/>
+                                    </Profile.FormRow>
 
-                                    <Profile.TableRow>
-                                        <Profile.TableHeading>Date of Birth</Profile.TableHeading>
-                                        <Profile.TableDetailPersonal>1999</Profile.TableDetailPersonal>
-                                    </Profile.TableRow>
+                                    <Profile.FormRow>
+                                        <Profile.RadioWrapper>
+                                            <Profile.InputRadio type = "radio" name = "radio_gender" disabled/>
+                                            <Profile.LabelRadio>Male</Profile.LabelRadio>
+                                        </Profile.RadioWrapper>
 
-                                    <Profile.TableRow>
-                                        <Profile.TableHeading>Address</Profile.TableHeading>
-                                        <Profile.TableDetailPersonal>Jalan</Profile.TableDetailPersonal>
-                                    </Profile.TableRow>
-                                </tbody>
-                            </Profile.Table>
-                        </Profile.Data>
+                                        <Profile.RadioWrapper>
+                                            <Profile.InputRadio type = "radio" name = "radio_gender" disabled/>
+                                            <Profile.LabelRadio>Female</Profile.LabelRadio>
+                                        </Profile.RadioWrapper>
+                                    </Profile.FormRow>
 
-                        <Profile.Divider></Profile.Divider>
+                                    <Profile.FormRow>
+                                        <Profile.FormLabel>Address</Profile.FormLabel>
+                                        <Profile.InputText type = "text"/>
+                                    </Profile.FormRow>
+                                </form>
+                            </Profile.EditData>
 
-                        <Profile.Data>
-                            <Profile.DataSubAccount>
-                                <Profile.SectionName>Account</Profile.SectionName>
-                                <Profile.SectionExp>Your personal account information.</Profile.SectionExp>
-                            </Profile.DataSubAccount>
+                            <Profile.EditData>
+                                <Profile.SectionType>
+                                    <Profile.SectionTitle>Account Data</Profile.SectionTitle>
+                                    <Profile.SectionExp>Your personal account information.</Profile.SectionExp>
+                                </Profile.SectionType>
 
-                            <Profile.Table>
-                                <tbody>
-                                    <Profile.TableRow>
-                                        <Profile.TableHeading>Email Address</Profile.TableHeading>
-                                        <Profile.TableDetail>blabla</Profile.TableDetail>
-                                    </Profile.TableRow>
+                                <form>
+                                    <Profile.FormRow>
+                                        <Profile.FormLabel>Email Address</Profile.FormLabel>
+                                        <Profile.InputText type = "text"/>
+                                    </Profile.FormRow>
 
-                                    <Profile.TableRow>
-                                        <Profile.TableHeading>Password</Profile.TableHeading>
-                                        <Profile.TableDetail>bintang bintang</Profile.TableDetail>
-                                    </Profile.TableRow>
+                                    <Profile.FormRow>
+                                        <Profile.FormLabel>Password</Profile.FormLabel>
+                                        <Profile.InputText type = "password"/>
+                                    </Profile.FormRow>
 
-                                    <Profile.TableRow>
-                                        <Profile.TableHeading>Phone Number</Profile.TableHeading>
-                                        <Profile.TableDetail>0812</Profile.TableDetail>
-                                    </Profile.TableRow>
-                                </tbody>
-                            </Profile.Table>
-                        </Profile.Data>
-                        
-                        <Profile.Divider></Profile.Divider>
+                                    <Profile.FormRow>
+                                        <Profile.FormLabel>Confirm New Password</Profile.FormLabel>
+                                        <Profile.InputText type = "password"/>
+                                    </Profile.FormRow>
 
-                    </div>
+                                    <Profile.FormRow>
+                                        <Profile.FormLabel>Phone Number</Profile.FormLabel>
+                                        {/* Dropdown */}
+                                        <Profile.PhoneInput
+                                            country = "ID"
+                                        />
+                                    </Profile.FormRow>
+                                </form>
+                            </Profile.EditData>
+
+                            <Profile.ButtonSection>
+                                <Profile.SaveButton>Save</Profile.SaveButton>
+                                <Profile.CancelButton>Cancel</Profile.CancelButton>
+                            </Profile.ButtonSection>
+                        </div>
+                    </Profile.EditWrapper>
                 </Profile.ProfileSect>
+
+                <style jsx global>{`
+                    .react-phone-number-input__input {
+                        padding: 5px;
+                        height: 35px;
+                        border: none;
+                        font-family: "Avenir LT Pro", sans-serif;
+                        font-size: 16px;
+                    }
+
+                `}
+                    
+                </style>
             </Profile.Wrapper> 
             }
         </React.Fragment>
     )
 }
 
-UserProfile.getInitialProps = async (ctx) => {
-    initialize(ctx)
-    await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req), 'user', ctx.req))
-    return {}
-}
+// UserProfile.getInitialProps = async (ctx) => {
+//     initialize(ctx)
+//     await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req), 'user', ctx.req))
+//     return {}
+// }
 
 const mapStateToProps = (state) => ({
     user: state.user.user_data,
