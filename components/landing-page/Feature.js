@@ -25,7 +25,10 @@ const ImageContainer = styled.div`
 
 const TextContainer = styled.div`
   flex-basis: 50%;
-  h2 { font-size: 1.75rem; }
+  h2 { 
+    font-size: 1.75rem; 
+    font-family: "Avenir LT Pro Black", sans-serif !important;
+  }
 `
 
 export function LeftFeatureRow() {

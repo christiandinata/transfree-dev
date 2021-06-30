@@ -288,14 +288,9 @@ class Index extends React.Component {
         <div className="row">
           <Primary/>
         </div>
-
-        <div className="row">
-          <LeftFeatureRow/>
-        </div>
         
-        <div className="row">
-          <RightFeatureRow/>
-        </div>
+        <LeftFeatureRow/>
+        <RightFeatureRow/>
 
         {/* Video and Collaborators */}
         <div className="row">

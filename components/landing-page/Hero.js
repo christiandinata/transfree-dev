@@ -34,6 +34,7 @@ export const HeroDiv = styled.div`
   h1 {
     color: #FFFFFF;
     font-size: 2.5rem;
+    font-family: "Avenir LT Pro Black", sans-serif !important;
     line-height: 140%;
   }
   transition: all 0.5s ease-in;
@@ -76,7 +77,7 @@ const Exchange = styled.div`
       width: 100%;
       border: 0.5px solid #E2E2E2;
       border-radius: 5px;
-      font-family: "Avenir LT Pro Black";
+      font-family: "Avenir LT Pro Black", sans-serif !important;
       font-size: 1.25rem;
       padding: 0.75rem 1.25rem;
     }
@@ -96,6 +97,7 @@ const Currency = styled.div`
       background-color: #1F345A;
       color: #FFFFFF;
       display: flex;
+      font-family: "Avenir LT Pro Black", sans-serif !important;
       font-size: 1.25rem;
       text-transform: uppercase;
       transition: background-color 0.2s ease-in;
@@ -156,15 +158,33 @@ const SearchBar = styled.div`
     border: none;
     background-color: transparent;
     color: #FFFFFF;
-    font-family: "Avenir LT Pro";
+    font-family: "Avenir LT Pro", sans-serif !important;
     outline: none;
     padding: 0;
   }
   input:focus { border: none; }
 `
+
+const ResultConversion = styled.div`
+background-color: #1E345B;
+color: #FFFFFF;
+margin-top: 2rem;
+padding: 1rem 1.25rem;`
+
+const ResultFlex = styled.div`
+display: flex;
+flex-direction: row;
+align-items: center;
+span {
+  width: 50%;
+}`
+
 const TitleDiv = styled.div`
     flex-basis: 60%;
-    p { width: 90%; }`
+    p { 
+      width: 90%;
+      text-align: left !important; 
+    }`
 
 const iconStyle = {
   width: "3rem",
@@ -249,20 +269,6 @@ export function InputNumber(props) {
 }
 
 export function RateAndFee(props) {
-  
-  const ResultConversion = styled.div`
-    background-color: #1E345B;
-    color: #FFFFFF;
-    margin-top: 2rem;
-    padding: 1rem 1.25rem;`
-
-  const ResultFlex = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    span {
-      width: 50%;
-    }`
 
   return (
     <ResultConversion>

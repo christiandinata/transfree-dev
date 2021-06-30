@@ -21,7 +21,10 @@ const Container = styled.div`
 const SubtitleContainer = styled.div`
   flex-basis: 55%;
   margin-bottom: 1rem;
-  h2 { margin-bottom: 0; }
+  h2 {
+    margin-bottom: 0;
+    font-family: "Avenir LT Pro Black", sans-serif !important;
+ }
 `
 
 const Collaborators = styled.div`

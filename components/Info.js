@@ -19,6 +19,7 @@ export const Batik = styled.div`
   h1 {
     margin: 4rem 0 0;
     color: #FFFFFF;
+    font-family: "Avenir LT Pro Black", sans-serif !important;
   }
   p {
     width: 50%;

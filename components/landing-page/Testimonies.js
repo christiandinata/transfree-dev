@@ -44,7 +44,12 @@ const Subtitle = styled.div`
   text-align: center;
   max-width: 1124px;
   padding: 2rem 0;
-  h2 { font-size: 1.75rem; margin: 0; }
+  h2 { 
+    font-size: 1.75rem; 
+    margin: 0;
+    color: black;
+    font-family: "Avenir LT Pro Black", sans-serif !important; 
+  }
   p { width: 60%; color: #3E495E; }`
 
 const carouselStyle = {
@@ -154,7 +159,7 @@ export function Testmonies() {
   const [slider, setSlider] = useState()
 
   useEffect(() => {
-    console.log(refSlider.current)
+    // console.log(refSlider.current)
   }, [])
   
   return (

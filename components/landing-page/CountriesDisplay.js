@@ -13,6 +13,7 @@ const CenterDiv = styled.div`
   color: #FFFFFF;
   transition: all 0.2s ease-in;
   h2 {
+    font-family: "Avenir LT Pro Black", sans-serif !important;
     font-size: 1.75rem;
     color: #FFFFFF;
     margin-bottom: 0;

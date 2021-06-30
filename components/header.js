@@ -41,7 +41,7 @@ const Header = () => (
 			}
 
       @font-face {
-        font-family: 'Avenir LT Pro Black';
+        font-family: "Avenir LT Pro Black";
         src: url("../static/fonts/AvenirLTProBlack.otf");
       }
 
@@ -54,7 +54,6 @@ const Header = () => (
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        background-color: #F3F5F7;
       }
 
       input, button{
@@ -62,7 +61,7 @@ const Header = () => (
       }
 
       h1, h2, h3, h4, b, .bold{
-        font-family: 'Avenir LT Pro Bold', sans-serif !important;
+        font-family: "Avenir LT Pro Bold", sans-serif !important;
       }
       
       button:hover {
@@ -264,18 +263,6 @@ const Header = () => (
 				font-size: 30px;
 				font-family: "Avenir LT Pro", sans-serif;
 				font-weight: 700;
-			}
-
-			body {
-				font-family: "Avenir LT Pro", sans-serif;
-				line-height: 1.6;
-				letter-spacing: 0.2px;
-				color: #3e495e;
-				margin: 0px;
-				text-rendering: optimizeLegibility;
-				-webkit-font-smoothing: antialiased;
-				-moz-osx-font-smoothing: grayscale;
-				background-color: #f3f5f7;
 			}
 
 			h1,
@@ -755,6 +742,7 @@ const Header = () => (
 				.form-container .btn-primary {
 					padding: 18px;
 				}
+				
 			}
 		`}</style>
 	</div>

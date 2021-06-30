@@ -14,7 +14,8 @@ const MobileDiv = styled.div`
     max-width: 320px;
     margin: 0 auto; 
   }
-  h2 { 
+  h2 {
+    font-family: "Avenir LT Pro Black", sans-serif !important; 
     font-size: 1.75rem;
     width: 80%;
   }

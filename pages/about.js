@@ -17,6 +17,9 @@ const Story = styled.div`
   p {
     color: #626B79;
   }
+  h2 {
+    font-family: "Avenir LT Pro Black", sans-serif !important;
+  }
 `
 
 const StoryFlex = styled.div`

@@ -234,7 +234,6 @@ class Home extends React.Component{
         rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
         toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
       })
-      console.log(this.props)
     }
 
   togglePopup() {
