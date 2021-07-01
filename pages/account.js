@@ -47,6 +47,13 @@ const BackgroundContainer = styled.div`
     transform: translate(-50%, -50%);
     line-height: 55px;
   }
+
+  @media only screen and (max-width: 774px) {
+    >.title{
+      top: 20%;
+    }
+  }
+
 `;
 
 const SearchContainer = styled.div`
@@ -59,12 +66,12 @@ const SearchContainer = styled.div`
   left: 50%;
   transform: translate(-50%, -35%);
 
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 774px) {
     flex-direction: column;
     height: 110px;
     align-items: center;
 
-    top: 72%;
+    top: 65%;
     left: 50%;
     transform: translate(-50%, -28%);
   }
@@ -93,10 +100,11 @@ const SearchBar = styled.input`
     background-image: url('../static/images/Asset Web/transaction/search-blue.svg');
   }
 
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 774px) {
     flex-basis: 53%;
     margin-bottom: 8px;
     min-width: 250px;
+    margin-right: 0px;
   }
 `;
 
@@ -116,7 +124,7 @@ const Button = styled.button`
   background-color: #009FE3;
   color: white;
 
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 774px) {
     flex-basis: 47%;
     min-width: 200px;
   }
@@ -405,7 +413,7 @@ class Account extends React.Component {
       if(this.props.orderArray.length > 0) { // Transaction is not empty
         return (
           <div>
-            {NavBarWhite(this.props.username, this.props.id)}
+            {NavBarWhite(true, this.props.username, this.props.id)}
             {this.headerTransaction()}
             <ContentContainer>
               <AllItemContainer>
@@ -419,7 +427,7 @@ class Account extends React.Component {
       } else {
         return (
           <div>
-            {NavBarWhite(this.props.username, this.props.id)}
+            {NavBarWhite(true, this.props.username, this.props.id)}
             {this.headerTransaction()}
             <EmptyTransaction/>
             <Footer/>
@@ -429,7 +437,7 @@ class Account extends React.Component {
     } else {
       return (
         <div>
-          {NavBarWhite(this.props.username, this.props.id)}
+          {NavBarWhite(true, this.props.username, this.props.id)}
           <AwaitingConfirmation/>
           <Footer/>
         </div>
