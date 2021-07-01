@@ -23,21 +23,18 @@ const SubtitleContainer = styled.div`
   margin-bottom: 1rem;
   h2 {
     margin-bottom: 0;
+    font-size: 1.75rem;
     font-family: "Avenir LT Pro Black", sans-serif !important;
  }
-`
+ @media only screen and (max-width: 800px) {
+    text-align: center;
+ }`
 
 const Collaborators = styled.div`
   column-gap: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  @media only screen and (max-width: 800px) {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0,1fr));
-    
-  }`
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  img { width: 100%; }`
 
 const videoStyle = {
   width: "100%",

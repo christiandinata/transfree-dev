@@ -46,11 +46,8 @@ const StoreBadge = styled.div`
 export function MobilePlatform() {
   return (
     <MobileDiv>
-      <div>
-        <img 
-          src="../static/images/ASSET/mockup-new-3.svg" 
+      <img src="../static/images/ASSET/mockup-new-3.svg" 
           alt="mobile" />
-      </div>
       <div>
         <h2>Does your family need it for an emergency?</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 

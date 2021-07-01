@@ -7,7 +7,11 @@ const TestimoniesBG = styled.div`
   max-width: 1280px;
   overflow: hidden;
   height: 400px;
-  margin: 0 auto;`
+  margin: 0 auto;
+  @media only screen and (max-width: 800px) {
+    background: #F39200;
+    height: 30%;
+  }`
 
 const TestimonyDiv = styled.div`
   align-items: flex-start;
@@ -17,12 +21,29 @@ const TestimonyDiv = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   color: #FFFFFF;
-  overflow: hidden;
   img {
     border-radius: 5px;
     width: 15rem;
     height: 17rem;
     object-fit: cover;
+  }
+  @media only screen and (max-width: 800px) {
+    flex-direction: column;
+    align-items: center;
+    img {
+      width: 85%;
+      height: 85%;
+    }
+  }`
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  overflow: hidden;
+  column-gap: 0.75rem;
+  @media only screen and (max-width: 800px) {
+    margin-top: 1.5rem;
   }`
 
 const Arrow = styled.img`
@@ -32,6 +53,9 @@ const Arrow = styled.img`
   cursor: pointer;
   &:hover {
     transform: translateY(-3px);
+  }
+  @media only screen and (max-width: 800px) {
+    display: none;
   }`
 
 const Subtitle = styled.div`
@@ -143,12 +167,14 @@ function Testimony(props) {
   return(
     <TestimonyDiv>
       <img src={ props.img } alt="image"/>
-      <div style={{ fontSize: "2.5rem", fontFamily: "Avenir LT Pro Black", lineHeight: 1 }}>“</div>
-      <div>
-        <p style={{ maxHeight: 300, overflow: "hidden", textOverflow: "ellipsis" }}>{ props.review }</p>
-        <div style={{ fontSize: "1.25rem", fontFamily: "Avenir LT Pro Black" }}>{ props.name }</div>
-        <div style={{ fontWeight: 600 }}>{ props.place || "" }</div>
-      </div>
+      <Content>
+        <div style={{ fontSize: "2.5rem", fontFamily: "Avenir LT Pro Black", lineHeight: 1 }}>“</div>
+        <div>
+          <p style={{ maxHeight: 300, overflow: "hidden", textOverflow: "ellipsis", marginTop: 0 }}>{ props.review }</p>
+          <div style={{ fontSize: "1.25rem", fontFamily: "Avenir LT Pro Black" }}>{ props.name }</div>
+          <div style={{ fontWeight: 600, marginBottom: "1rem" }}>{ props.place || " " }</div>
+        </div>
+      </Content>
     </TestimonyDiv>
   )
 }

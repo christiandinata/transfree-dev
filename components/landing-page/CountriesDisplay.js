@@ -6,6 +6,7 @@ const CenterDiv = styled.div`
   flex-direction: column;
   flex-grow: 0;
   align-items: center;
+  justify-content: center;
   margin: 0 auto;
   text-align: center;
   width: 95%;
@@ -35,7 +36,7 @@ const CenterDiv = styled.div`
     background-color: #FFFFFF55;
   }
   @media only screen and (max-width: 800px) {
-    p { width: 90%; }
+    p { width: 100%; }
   }
 `
 
@@ -53,9 +54,11 @@ const FlagsDisplay = styled.div`
   }
 
   @media only screen and (max-width: 800px) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 1rem;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
     row-gap: 1rem;
+    align-items: center;
+    width: 75%;
+    max-width: 360px;
   }`
 
 const FlagDiv = styled.div`
