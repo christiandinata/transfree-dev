@@ -31,6 +31,7 @@
     "crypto-hash": "^1.2.1",
     "dateformat": "^3.0.3",
     "express": "^4.17.1",
+    "framer-motion": "^4.1.17",
     "fstream": "^1.0.12",
     "i": "^0.3.6",
     "js-cookie": "^2.2.0",
@@ -100,6 +101,5 @@
         ]
       }
     }
-  },
-  "devDependencies": {}
+  }
 }

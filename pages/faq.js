@@ -13,21 +13,26 @@ import {
 	AccordionItemHeading,
 	AccordionItemButton,
 	AccordionItemPanel,
+	AccordionItemState,
 } from "react-accessible-accordion";
 import "react-accessible-accordion/dist/fancy-example.css";
 import { NavBarWhite } from "../components/MenuComponents.js";
 import { List } from "../components/FAQData";
 import initialize from "../utils/initialize";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 //Long text untuk FAQ
 
 const FAQ = () => {
 	const [listDetail, setListDetail] = useState(false);
 	const [clicked, setClicked] = useState(false);
+	// const [changed, setChanged] = useState(false);
+	const [searchWord, setSearchWord] = useState("");
 
 	function toggleClick(index) {
+		window.scrollTo(0, 0);
 		setClicked(!clicked);
+		setSearchWord("");
 		if (listDetail === index) {
 			// if listDetail question is already active, then close it
 			return setListDetail(null);
@@ -35,8 +40,6 @@ const FAQ = () => {
 			return setListDetail(index);
 		}
 	}
-
-	console.log(listDetail);
 
 	return (
 		<>
@@ -50,7 +53,8 @@ const FAQ = () => {
 						if (e.key === "Enter") {
 							e.preventDefault();
 						}
-					}}>
+					}}
+					onSubmit={(e) => e.preventDefault()}>
 					<InputContainer>
 						{/* icon */}
 						<img
@@ -60,14 +64,29 @@ const FAQ = () => {
 							height="23"
 							style={{ marginLeft: 16, marginRight: 16 }}
 						/>
-						<FormInput placeholder="Ask a question..." />
+						<FormInput
+							type="text"
+							value={searchWord}
+							placeholder="Ask a question..."
+							onChange={(e) => setSearchWord(e.target.value)}
+						/>
 					</InputContainer>
-					<FormButton>Search</FormButton>
+					<FormButton type="submit">Search</FormButton>
 				</SearchForm>
 			</HeroContainer>
 
 			<ListContainer clicked={clicked}>
-				{List.map((item, index) => {
+				{List.filter((filtered) => {
+					if (searchWord == "") {
+						return filtered;
+					} else if (
+						filtered.iconTitle
+							.toLowerCase()
+							.includes(searchWord.toLowerCase())
+					) {
+						return filtered;
+					}
+				}).map((item, index) => {
 					return (
 						<>
 							<Card
@@ -92,27 +111,44 @@ const FAQ = () => {
 										</LeftButton>
 									</Left>
 									<Right>
-										<Accordion allowZeroExpanded>
+										<StyledAccordion allowZeroExpanded>
 											{item.accordion.map((items) => (
-												<AccordionItem>
+												<AccordionStyledItem
+													key={items.uuid}>
 													<AccordionItemHeading>
 														<AccordionButton>
 															{items.heading}
-															<FontAwesomeIcon
-																icon={
-																	faChevronRight
+															<AccordionItemState>
+																{({
+																	expanded,
+																}) =>
+																	expanded ? (
+																		<FontAwesomeIcon
+																			icon={
+																				faTimes
+																			}
+																			width="24"
+																			height="24"
+																		/>
+																	) : (
+																		<FontAwesomeIcon
+																			icon={
+																				faChevronRight
+																			}
+																			width="24"
+																			height="24"
+																		/>
+																	)
 																}
-																width="24"
-																height="24"
-															/>
+															</AccordionItemState>
 														</AccordionButton>
 													</AccordionItemHeading>
-													<AccordionItemPanel>
+													<AccordionPanel>
 														{items.belowHeading}
-													</AccordionItemPanel>
-												</AccordionItem>
+													</AccordionPanel>
+												</AccordionStyledItem>
 											))}
-										</Accordion>
+										</StyledAccordion>
 									</Right>
 								</>
 							)}
@@ -135,6 +171,11 @@ const FAQ = () => {
 				</QuestionInner>
 			</QuestionContainer>
 			<Footer />
+			<style jsx global>{`
+				.accordion {
+					border: none;
+				}
+			`}</style>
 		</>
 	);
 };
@@ -233,20 +274,23 @@ const ListContainer = styled.div`
 	justify-content: center;
 	grid-column-gap: 24px;
 	grid-row-gap: 40px;
-	padding: 80px 108px;
+	padding: ${(props) => (props.clicked ? "64px 108px" : "80px 108px")};
 	background: #fff;
 `;
 
 const Left = styled.div`
-	max-width: 392px;
+	width: 392px;
 	display: flex;
 	flex-direction: column;
+	margin-right: 128px;
 `;
 
 const LeftCardTitle = styled.div`
 	font-weight: bold;
 	font-size: 32px;
 	line-height: 40px;
+	margin-top: 24px;
+	margin-bottom: 16px;
 
 	/* Neutral/Primary Text */
 	color: #232933;
@@ -262,12 +306,13 @@ const LeftCardText = styled.div`
 
 	/* Neutral/ Slate */
 	color: #626b79;
+	margin-bottom: 32px;
 `;
 
 const LeftButton = styled.button`
 	padding: 8px 24px;
 	background: #ffffff;
-
+	width: fit-content;
 	/* Primary/Blue */
 	border: 1px solid #009fe3;
 	border-radius: 4px;
@@ -275,11 +320,16 @@ const LeftButton = styled.button`
 	font-weight: normal;
 	font-size: 16px;
 	line-height: 24px;
-
+	transition: 0.1s all ease-in;
 	text-align: center;
 
 	/* Primary/Blue */
 	color: #009fe3;
+
+	&:hover {
+		background: #009fe3;
+		color: #fff;
+	}
 `;
 
 const Right = styled.div`
@@ -288,9 +338,49 @@ const Right = styled.div`
 	flex-direction: column;
 `;
 
+const StyledAccordion = styled(Accordion)``;
+
+const AccordionStyledItem = styled(AccordionItem)`
+	background: #ffffff;
+	/* UI/Info */
+	border: 2px solid #e9e9e9;
+	box-shadow: 0px 18px 50px rgba(98, 107, 121, 0.15);
+	border-radius: 4px;
+	padding: 24px 16px 24px 24px;
+	min-width: 560px;
+	margin-bottom: 16px;
+`;
+
 const AccordionButton = styled(AccordionItemButton)`
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 24px;
+	cursor: pointer;
+	/* Neutral/Primary Text */
+	color: #232933;
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
+`;
+
+const FadeIn = keyframes`
+	0% {
+    opacity: 0;
+	}
+	100% {
+    opacity: 1;
+	}
+`;
+
+const AccordionPanel = styled(AccordionItemPanel)`
+	margin-top: 16px;
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 24px;
+	max-width: 500px;
+	/* Neutral/Secondary Text */
+	color: #626b79;
+	animation: ${FadeIn} 0.35s ease-in;
 `;
 
 const Card = styled.div`
@@ -401,13 +491,13 @@ const QuestionInner = styled.div`
 	margin: 40px auto;
 `;
 
-FAQ.getInitialProps = async (ctx) => {
-	initialize(ctx);
-	await ctx.store.dispatch(
-		actions.getUser(getCookie("_id", ctx.req), "user", ctx.req)
-	);
-	return {};
-};
+// FAQ.getInitialProps = async (ctx) => {
+// 	initialize(ctx);
+// 	await ctx.store.dispatch(
+// 		actions.getUser(getCookie("_id", ctx.req), "user", ctx.req)
+// 	);
+// 	return {};
+// };
 
 const mapStateToProps = (state) => {
 	return {};

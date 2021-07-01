@@ -108,6 +108,7 @@ function Login(props) {
 		if (props.errorMessage) {
 			setError(true);
 			console.log(error);
+			console.log(props.errorMessage);
 		}
 	}, [props.errorMessage]);
 
