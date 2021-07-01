@@ -413,7 +413,7 @@ class Account extends React.Component {
       if(this.props.orderArray.length > 0) { // Transaction is not empty
         return (
           <div>
-            {NavBarWhite(true, this.props.username, this.props.id)}
+            <NavBarWhite isAuthenticated={true} username={this.props.username} id={this.props.id}/>
             {this.headerTransaction()}
             <ContentContainer>
               <AllItemContainer>
@@ -427,7 +427,7 @@ class Account extends React.Component {
       } else {
         return (
           <div>
-            {NavBarWhite(true, this.props.username, this.props.id)}
+            <NavBarWhite isAuthenticated={true} username={this.props.username} id={this.props.id}/>
             {this.headerTransaction()}
             <EmptyTransaction/>
             <Footer/>
@@ -437,7 +437,7 @@ class Account extends React.Component {
     } else {
       return (
         <div>
-          {NavBarWhite(true, this.props.username, this.props.id)}
+          <NavBarWhite isAuthenticated={true} username={this.props.username} id={this.props.id}/>
           <AwaitingConfirmation/>
           <Footer/>
         </div>

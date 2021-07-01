@@ -31,10 +31,10 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username, id, homepa
         {!isAuthenticated ? 
         <React.Fragment>
           <Navbar.Navigation>
-            <Navbar.NavigationChild href="/about" scrolled = {scrolled} homepage = {homepage} navChildColor = "#f5f5f5">
+            <Navbar.NavigationChild href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" scrolled = {scrolled} homepage = {homepage} navChildColor = "#f5f5f5">
               How It Works
             </Navbar.NavigationChild>
-            <Navbar.NavigationChild href="/faq" scrolled = {scrolled} homepage = {homepage} navChildColor = "#f5f5f5">
+            <Navbar.NavigationChild href="/about" scrolled = {scrolled} homepage = {homepage} navChildColor = "#f5f5f5">
               About Us
             </Navbar.NavigationChild>
             <Navbar.SignInButton href = "/login" scrolled = {scrolled} homepage = {homepage}>

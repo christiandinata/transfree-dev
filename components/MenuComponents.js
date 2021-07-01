@@ -78,10 +78,10 @@ export function NavBarWhite({ isAuthenticated, username, id }) {
 					!isAuthenticated ?
 					<React.Fragment>
 						<Navigation>
-							<NavigationChild href="/about" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
+							<NavigationChild href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
 								How It Works
 							</NavigationChild>
-							<NavigationChild href="/faq" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
+							<NavigationChild href="/about" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
 								About Us
 							</NavigationChild>
 							<SignInButton href = "/login" scrolled = "true" homepage = "true">
