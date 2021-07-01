@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import Phone from "react-phone-number-input";
+import styled from "styled-components";
 
 export const Wrapper = styled.div`
     display: flex;
@@ -197,6 +197,10 @@ export const FormRow = styled.div`
     margin-bottom: 16px;
 `;
 
+export const FormRowPhone = styled(FormRow)`
+    width: 450px;
+`;
+
 export const ButtonSection = styled.section`
     margin-top: 40px;
 `;
@@ -253,15 +257,12 @@ export const InputText = styled.input`
 		dis ? "#E9E9E9" : "#FFFFFF")}; 
     width: 415px;   
     outline: none;
-    
-    ::placeholder {
-        color: #9A9A9A;
-    }
+    color: #9A9A9A;
 
     &:focus {
         background: #fff;
         border: 2px solid #068EC8;
-
+        color: #232933;
     }
 `;
 
@@ -289,10 +290,17 @@ export const PhoneInput = styled(Phone)`
     border: 1px solid #E2E2E2;
     border-radius: 4px;
     outline: none;
+    font-family: 'Avenir LT Pro';
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
     line-height: 24px;
     height: 48px;
     padding: 0 16px;
+`;
+
+export const EyePic = styled.span`
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
 `;
