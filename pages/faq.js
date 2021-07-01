@@ -16,7 +16,6 @@ import {
 	AccordionItemState,
 } from "react-accessible-accordion";
 import "react-accessible-accordion/dist/fancy-example.css";
-import { NavBarWhite } from "../components/MenuComponents.js";
 import { List } from "../components/FAQData";
 import initialize from "../utils/initialize";
 import styled, { keyframes } from "styled-components";
@@ -32,7 +31,6 @@ const FAQ = () => {
 	function toggleClick(index) {
 		window.scrollTo(0, 0);
 		setClicked(!clicked);
-		setSearchWord("");
 		if (listDetail === index) {
 			// if listDetail question is already active, then close it
 			return setListDetail(null);
@@ -398,7 +396,7 @@ const Card = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	padding: 24px 53px;
+	padding: 24px 48px;
 	background: #ffffff;
 	transition: 0.2s all ease-in;
 	border: 1px solid #e9e9e9;
@@ -426,10 +424,10 @@ const CardTitle = styled.div`
 	display: flex;
 	align-items: center;
 	text-align: center;
-
+	width: fit-content;
 	/* Neutral/Primary Text */
 	color: #232933;
-	margin: 16px 0;
+	margin-top: 16px;
 `;
 
 const QuestionContainer = styled.div`
@@ -505,13 +503,15 @@ const QuestionInner = styled.div`
 	margin: 40px auto;
 `;
 
-// FAQ.getInitialProps = async (ctx) => {
-// 	initialize(ctx);
-// 	await ctx.store.dispatch(
-// 		actions.getUser(getCookie("_id", ctx.req), "user", ctx.req)
-// 	);
-// 	return {};
-// };
+FAQ.getInitialProps = async (ctx) => {
+	initialize(ctx);
+	if (getCookie("_id", ctx.req)) {
+		await ctx.store.dispatch(
+			actions.getUser(getCookie("_id", ctx.req), "user", ctx.req)
+		);
+	}
+	return {};
+};
 
 const mapStateToProps = (state) => {
 	return {};
