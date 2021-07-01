@@ -46,7 +46,7 @@ class Index extends React.Component {
   static async getInitialProps(ctx) {
     initialize(ctx);
     await ctx.store.dispatch(actions.getAdjustedRates('IDR', 'getAdjustedRates'));
-    // await ctx.store.dispatch(actions.getRates('GBP', 'IDR'));
+    await ctx.store.dispatch(actions.getRates('GBP', 'IDR'));
     return {}
   };
 
