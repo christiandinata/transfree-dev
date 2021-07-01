@@ -5,7 +5,7 @@ import actions from "../redux/actions";
 import Menu from "../components/menu.js";
 import Footer from "../components/footer.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fa } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { getCookie } from "../utils/cookie";
 import {
 	Accordion,
@@ -24,14 +24,19 @@ import styled from "styled-components";
 
 const FAQ = () => {
 	const [listDetail, setListDetail] = useState(false);
+	const [clicked, setClicked] = useState(false);
 
 	function toggleClick(index) {
+		setClicked(!clicked);
 		if (listDetail === index) {
+			// if listDetail question is already active, then close it
 			return setListDetail(null);
 		} else {
 			return setListDetail(index);
 		}
 	}
+
+	console.log(listDetail);
 
 	return (
 		<>
@@ -61,16 +66,56 @@ const FAQ = () => {
 				</SearchForm>
 			</HeroContainer>
 
-			<ListContainer>
+			<ListContainer clicked={clicked}>
 				{List.map((item, index) => {
 					return (
 						<>
 							<Card
+								clicked={clicked}
 								key={index}
 								onClick={() => toggleClick(index)}>
 								<CardIcon src={item.icon} />
 								<CardTitle>{item.iconTitle}</CardTitle>
 							</Card>
+							{listDetail === index && (
+								<>
+									<Left>
+										<CardIcon src={item.icon} />
+										<LeftCardTitle>
+											{item.iconTitle}
+										</LeftCardTitle>
+										<LeftCardText>
+											{item.iconText}
+										</LeftCardText>
+										<LeftButton onClick={toggleClick}>
+											Back to List
+										</LeftButton>
+									</Left>
+									<Right>
+										<Accordion allowZeroExpanded>
+											{item.accordion.map((items) => (
+												<AccordionItem>
+													<AccordionItemHeading>
+														<AccordionButton>
+															{items.heading}
+															<FontAwesomeIcon
+																icon={
+																	faChevronRight
+																}
+																width="24"
+																height="24"
+															/>
+														</AccordionButton>
+													</AccordionItemHeading>
+													<AccordionItemPanel>
+														{items.belowHeading}
+													</AccordionItemPanel>
+												</AccordionItem>
+											))}
+										</Accordion>
+									</Right>
+								</>
+							)}
 						</>
 					);
 				})}
@@ -182,7 +227,7 @@ const FormButton = styled.button`
 `;
 
 const ListContainer = styled.div`
-	display: grid;
+	display: ${(props) => (props.clicked ? "flex" : "grid")};
 	grid-template-columns: repeat(auto-fill, 243px);
 	/* grid-template-columns: repeat(auto-fill, minmax(186px, 1fr)); */
 	justify-content: center;
@@ -192,9 +237,65 @@ const ListContainer = styled.div`
 	background: #fff;
 `;
 
+const Left = styled.div`
+	max-width: 392px;
+	display: flex;
+	flex-direction: column;
+`;
+
+const LeftCardTitle = styled.div`
+	font-weight: bold;
+	font-size: 32px;
+	line-height: 40px;
+
+	/* Neutral/Primary Text */
+	color: #232933;
+`;
+
+const LeftCardText = styled.div`
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 24px;
+
+	display: flex;
+	align-items: center;
+
+	/* Neutral/ Slate */
+	color: #626b79;
+`;
+
+const LeftButton = styled.button`
+	padding: 8px 24px;
+	background: #ffffff;
+
+	/* Primary/Blue */
+	border: 1px solid #009fe3;
+	border-radius: 4px;
+
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 24px;
+
+	text-align: center;
+
+	/* Primary/Blue */
+	color: #009fe3;
+`;
+
+const Right = styled.div`
+	max-width: 704px;
+	display: flex;
+	flex-direction: column;
+`;
+
+const AccordionButton = styled(AccordionItemButton)`
+	display: flex;
+	justify-content: space-between;
+`;
+
 const Card = styled.div`
 	height: 152px;
-	display: flex;
+	display: ${(props) => (props.clicked ? "none" : "flex")};
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
