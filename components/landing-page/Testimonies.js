@@ -10,12 +10,12 @@ const TestimoniesBG = styled.div`
   margin: 0 auto;`
 
 const TestimonyDiv = styled.div`
-  align-items: flex-start;
+  align-items: center;
   column-gap: 0.75rem;
   margin-right: 2rem;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   color: #FFFFFF;
   overflow: hidden;
   img {
