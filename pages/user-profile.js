@@ -22,6 +22,29 @@ import ENV from "../config";
 import * as axios from "axios";
 import React, { useEffect, useState } from 'react';
 
+const Modal = () => {
+    return(
+        <Profile.ModalContainer>
+            <Profile.ModalWrapper>
+                <Profile.ModalTitle>
+                    Save the information you have changed?
+                </Profile.ModalTitle>
+
+                <Profile.ModalText>
+                    <Profile.ModalExp>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+                    </Profile.ModalExp>
+                </Profile.ModalText>
+
+                <Profile.ModalButtonSect>
+                    <Profile.CancelActionButton onClick = {UserProfile.handleCancelClick}>No, Cancel</Profile.CancelActionButton>
+                    <Profile.SaveActionButton onClick = {UserProfile.updateUser}>Yes, Change</Profile.SaveActionButton>
+                </Profile.ModalButtonSect>
+            </Profile.ModalWrapper>
+        </Profile.ModalContainer>
+    )
+}
+
 function UserProfile(props) {
     // console.log(props)
     const [info, setInfo] = useState({
@@ -40,6 +63,12 @@ function UserProfile(props) {
     const [choice, setChoice] = useState('edit')
     const [hiddenPass, setHidden] = useState(true)
     const [hiddenConfirm, setConfirm] = useState(true)
+    const [popup, setPopup] = useState(false)
+    const [focus, setFocus] = useState({
+        password: false,
+        confirmPassword: false,
+        phone: false
+    })
 
     useEffect(() => {
         // console.log(props)
@@ -52,7 +81,32 @@ function UserProfile(props) {
 
     const handleInputChange = (e) => {
         const {name, value} = e.target
-        setInfo({...info, [name]: value})
+        setInfo({
+            ...info, 
+            [name]: value
+        })
+    }
+
+    const handlePhoneChange = (value) => {
+        setInfo({
+            ...info, 
+            phone: value
+        })
+    }
+
+    const handleFocusChange = (e) => {
+        const {name, value} = e.target
+        setFocus({
+            ...focus,
+            [name]: true
+        })
+    }
+
+    const handlePhoneFocusChange = (value) => {
+        setFocus({
+            ...focus,
+            phone: value
+        })
     }
 
     const toggleHiddenPass = () => {
@@ -61,6 +115,14 @@ function UserProfile(props) {
 
     const toggleHiddenConfirm = () => {
         setConfirm(!hiddenConfirm)
+    }
+
+    const handleSaveClick = () => {
+        setPopup(true)
+    }
+
+    const handleCancelClick = () => {
+        setPopup(false)
     }
 
     const updateUser = async () => {
@@ -212,7 +274,13 @@ function UserProfile(props) {
 
                                     <Profile.TableRow>
                                         <Profile.TableHeading>Password</Profile.TableHeading>
-                                        <Profile.TableDetail>{info.password}</Profile.TableDetail>
+                                        <Profile.TableDetail>
+                                            <Profile.PasswordText
+                                                type = "password"
+                                                value = {info.password}
+                                                disabled
+                                            />
+                                        </Profile.TableDetail>
                                     </Profile.TableRow>
 
                                     <Profile.TableRow>
@@ -375,9 +443,9 @@ function UserProfile(props) {
                                         />
                                     </Profile.FormRow>
 
-                                    <Profile.FormRow>
-                                        <Profile.FormLabel>Password</Profile.FormLabel>
-                                        <Profile.InputText 
+                                    <Profile.FormLabel>Password</Profile.FormLabel>
+                                    <Profile.FormRowPassword>
+                                        <Profile.InputTextPassword 
                                             type = {hiddenPass ? "password" : "text"}
                                             name = "password"
                                             value = {info.password}
@@ -396,13 +464,14 @@ function UserProfile(props) {
                                                 />
                                             }
                                         </Profile.EyePic>
-                                    </Profile.FormRow>
+                                    </Profile.FormRowPassword>
 
-                                    <Profile.FormRow>
-                                        <Profile.FormLabel>Confirm New Password</Profile.FormLabel>
-                                        <Profile.InputText 
+                                    <Profile.FormLabel>Confirm New Password</Profile.FormLabel>
+                                    <Profile.FormRowPassword>
+                                        <Profile.InputTextPassword 
                                             type = {hiddenPass ? "password" : "text"}
                                             name = "confirmPassword"
+                                            value = {info.confirmPassword}
                                             onChange = {handleInputChange}
                                         />
                                         <Profile.EyePic>
@@ -418,7 +487,7 @@ function UserProfile(props) {
                                                 />
                                             }
                                         </Profile.EyePic>
-                                    </Profile.FormRow>
+                                    </Profile.FormRowPassword>
 
                                     <Profile.FormRowPhone>
                                         <Profile.FormLabel>Phone Number</Profile.FormLabel>
@@ -426,18 +495,41 @@ function UserProfile(props) {
                                             country = "ID"
                                             value = {info.phone}
                                             name = "phone"
-                                            onChange = {(value) => handleInputChange(value)}
+                                            onChange = {(value) => handlePhoneChange(value)}
                                         />
                                     </Profile.FormRowPhone>
                                 </form>
                             </Profile.EditData>
 
                             <Profile.ButtonSection>
-                                <Profile.SaveButton type = "submit" onClick = {updateUser}>Save</Profile.SaveButton>
-                                <Profile.CancelButton onClick = {cancelEdit}>Cancel</Profile.CancelButton>
+                                <Profile.SaveEditButton type = "submit" onClick = {handleSaveClick}>Save</Profile.SaveEditButton>
+                                <Profile.CancelEditButton onClick = {cancelEdit}>Cancel</Profile.CancelEditButton>
                             </Profile.ButtonSection>
                         </div>
                     </Profile.EditWrapper>
+
+                    {popup ? 
+                    <Profile.ModalContainer>
+                        <Profile.ModalWrapper>
+                            <Profile.ModalTitle>
+                                Save the information you have changed?
+                            </Profile.ModalTitle>
+            
+                            <Profile.ModalText>
+                                <Profile.ModalExp>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+                                </Profile.ModalExp>
+                            </Profile.ModalText>
+            
+                            <Profile.ModalButtonSect>
+                                <Profile.CancelActionButton onClick = {handleCancelClick}>No, Cancel</Profile.CancelActionButton>
+                                <Profile.SaveActionButton onClick = {updateUser}>Yes, Change</Profile.SaveActionButton>
+                            </Profile.ModalButtonSect>
+                        </Profile.ModalWrapper>
+                    </Profile.ModalContainer>
+                    : 
+                    null}
+
                 </Profile.ProfileSect>
 
                 <style jsx global>{`
@@ -447,14 +539,9 @@ function UserProfile(props) {
                         border: none;
                         font-family: "Avenir LT Pro", sans-serif;
                         font-size: 16px;
+                        color: #626B79;
                     }
-
-                    .react-phone-number-input__div {
-                        // width: 415px;
-                    }
-
                 `}
-                    
                 </style>
             </Profile.Wrapper> 
             }
@@ -462,13 +549,13 @@ function UserProfile(props) {
     )
 }
 
-// UserProfile.getInitialProps = async (ctx) => {
-//     initialize(ctx)
-//     await ctx.store.dispatch(
-//         actions.getUser(getCookie('_id', ctx.req), 'user', ctx.req)
-//     )
-//     return {}
-// }
+UserProfile.getInitialProps = async (ctx) => {
+    initialize(ctx)
+    await ctx.store.dispatch(
+        actions.getUser(getCookie('_id', ctx.req), 'user', ctx.req)
+    )
+    return {}
+}
 
 const mapStateToProps = (state) => ({
     user: state.user.user_data,

@@ -50,6 +50,7 @@ export const ArrowRightImg = styled.img`
 export const ProfileSect = styled.section`
     // width: 75%;
     flex-grow: 1;
+    background: #fff;
 `;
 
 export const ProfileAction = styled.div`
@@ -145,6 +146,10 @@ export const LogOutButton = styled.a`
     text-decoration: none;
     border: 1px solid #F39200;
     border-radius: 4px;
+
+    &:hover {
+        background: #EAEAEA;
+    }
 `;
 
 export const SectionName = styled.h4`
@@ -158,6 +163,7 @@ export const SectionName = styled.h4`
 `;
 
 export const SectionExp = styled.p`
+    margin: 0;
     font-style: normal:
     font-weight: normal;
     font-size: 16px;
@@ -179,6 +185,7 @@ export const EditWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    // background-color #000;
 `;
 
 export const EditData = styled.section`
@@ -199,6 +206,12 @@ export const FormRow = styled.div`
 
 export const FormRowPhone = styled(FormRow)`
     width: 450px;
+`;
+
+export const FormRowPassword = styled(FormRow)`
+    border: 1px solid #E2E2E2;
+    border-radius: 4px;
+    width: 447px;
 `;
 
 export const ButtonSection = styled.section`
@@ -222,18 +235,28 @@ export const EditProfileButton = styled.button`
     width: 450px;
 `;
 
-export const SaveButton = styled(EditProfileButton)`
+export const SaveEditButton = styled(EditProfileButton)`
     color: #fff;
     background-color: #009FE3;
     letter-spacing: 0.2px;
     font-weight: 500;
     margin-bottom: 16px;
+
+    &:hover {
+        background-color: #068EC8;
+        border: 1px solid #068EC8;
+    }
 `;
 
-export const CancelButton = styled(EditProfileButton)`
+export const CancelEditButton = styled(EditProfileButton)`
     color: #009FE3;
     background-color: #fff;
     font-weight: normal;
+
+    &:hover {
+        background-color: #EAEAEA;
+        border: 1px solid #9A9A9A;
+    }
 `;
 
 export const FormLabel = styled.label`
@@ -264,6 +287,16 @@ export const InputText = styled.input`
         border: 2px solid #068EC8;
         color: #232933;
     }
+`;
+
+export const InputTextPassword = styled(InputText)`
+    border: none;
+    width: 380px;
+`;
+
+export const PasswordText = styled(InputText)`
+    border: none;
+    padding: 0;
 `;
 
 export const RadioWrapper = styled.div`
@@ -297,10 +330,107 @@ export const PhoneInput = styled(Phone)`
     line-height: 24px;
     height: 48px;
     padding: 0 16px;
+    background: #fff;
+
+    &:focus {
+        border: 2px solid #068EC8;
+        color: #232933;
+    }
 `;
 
 export const EyePic = styled.span`
     height: 24px;
     width: 24px;
     cursor: pointer;
+`;
+
+export const ModalContainer = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+`;
+
+export const ModalWrapper = styled.div`
+    position: fixed;
+    height: auto;
+    top: 30%;
+    left: 40%;
+    border: 1px solid #E2E2E2;
+    border-radius: 4px;
+    background: #fff;
+    width: 450px;
+`;
+
+export const ModalTitle = styled.section`
+    border-bottom: 1px solid #E2E2E2;
+    border-radius: 4px 4px 0px 0px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 24px;
+    font-family: 'Avenir LT Pro';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.2px;
+    color: #232933;
+`;
+
+export const ModalText = styled.section`
+    margin-top: 19px;
+    margin-left: 24px;
+    font-family: 'Avenir LT Pro';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #626B79;
+`;
+
+export const ModalExp = styled.p`
+    padding-right: 24px;
+`;
+
+export const ModalButtonSect = styled.section`
+    margin-top: 40px;
+    margin-bottom: 24px;
+    margin-right: 24px;
+    float: right;   
+`;
+
+export const ActionButton = styled.button`
+    border: none;
+    outline: none;
+    text-decoration: none;
+    padding: 8px 24px;
+    font-family: 'Avenir LT Pro';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;    
+    text-align: right;
+`;
+
+export const CancelActionButton = styled(ActionButton)`
+    color: #9A9A9A;
+    background: transparent;
+
+    &:hover {
+        border: 1px solid #9a9a9a;
+    }
+`;
+
+export const SaveActionButton = styled(ActionButton)`
+    letter-spacing: 0.2px;
+    color: #FFFFFF;
+    background: #009FE3;
+    border: 1px solid #009FE3;
+    border-radius: 4px;
+
+    &:hover {
+        background: #068EC8;
+        border: 1px solid #068EC8;
+    }
 `;
