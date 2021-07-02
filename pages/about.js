@@ -26,8 +26,8 @@ const StoryFlex = styled.div`
   width: 95%;
   max-width: 1124px;
   display: flex;
-  flex-direction: row;  
-  column-gap: 2.5rem;
+  flex-direction: row;
+  column-gap: 2rem;
   margin: 0 auto;
   transition: all 0.5s ease-in;
   img {
@@ -39,9 +39,15 @@ const StoryFlex = styled.div`
   }
   @media only screen and (max-width: 800px) {
     flex-direction: column;
-    text-align: center;
+    text-align: justify;
+    text-align-last: center;
     align-items: center;
     row-gap: 1rem;
+    h2, p {
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
     img { width: 90%; height: auto; }
   }`
 
@@ -54,18 +60,29 @@ const HowWeDoing = styled.div`
   text-align: center;
   @media only screen and (max-width: 800px) {
     width: 90%;
+    p { width: 90%; margin: 0 auto; }
+    text-align: justify;
+    text-align-last: center;
   }
 `
 
 const Accomplishments = styled.div`
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   padding: 2rem 0;
   column-gap: 2rem;
   align-items: center;
   justify-content: space-between;
-  h3, p { margin: 0; }
-`
+  h3 {
+    margin: 0 auto;
+  }
+  p {
+    margin-top: 0;
+  }
+  @media only screen and (max-width: 800px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 2rem;
+  }`
 
 const imagePath = "../../static/images/new-ui/"
 

@@ -184,6 +184,9 @@ const TitleDiv = styled.div`
     p { 
       width: 90%;
       text-align: left !important; 
+    }
+    @media only screen and (max-width: 800px) {
+      p { text-align: center !important; }
     }`
 
 const iconStyle = {

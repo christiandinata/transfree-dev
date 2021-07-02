@@ -39,13 +39,13 @@ class Privacy extends Component {
             <p>If you require any more information or have any questions about our privacy policy, 
               please feel free to contact us by email at <a href="mailto:admin@transfree.id"> Admin </a></p>
     
-            <p><a href="https://www.transfree.id">At www.transfree.id</a> we consider the privacy of our visitors to be extremely important. 
+            <p>At <a href="https://www.transfree.id">www.transfree.id</a> we consider the privacy of our visitors to be extremely important. 
               This privacy policy document describes in detail the types of personal information is collected and recorded 
-              by <a href="https://www.transfree.id">At www.transfree.id</a> and how we use it.</p>
+              by <a href="https://www.transfree.id">www.transfree.id</a> and how we use it.</p>
               
             <h2>Log Files</h2>
     
-            <p>Like many other Web sites, <a href="https://www.transfree.id">At www.transfree.id</a> makes use of log files. These files merely logs visitors 
+            <p>Like many other Web sites, <a href="https://www.transfree.id">www.transfree.id</a> makes use of log files. These files merely logs visitors 
               to the site - usually a standard procedure for hosting companies and a part of hosting services's analytics. The information inside 
               the log files includes internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date/time stamp, 
               referring/exit pages, and possibly the number of clicks. This information is used to analyze trends, administer the site, 
@@ -54,15 +54,15 @@ class Privacy extends Component {
     
             <h2> Cookies and Web Beacons </h2>
     
-            <p> <a href="https://www.transfree.id">At www.transfree.id</a> uses cookies to store information about visitors' preferences, to record user-specific information 
+            <p> <a href="https://www.transfree.id">www.transfree.id</a> uses cookies to store information about visitors' preferences, to record user-specific information 
                 on which pages the site visitor accesses or visits, and to personalize or customize our web page content based upon 
                 visitors' browser type or other information that the visitor sends via their browser.</p>
     
             <h2> DoubleClick DART Cookie </h2>
     
-            <p> Google, as a third party vendor, uses cookies to serve ads on <a href="https://www.transfree.id">At www.transfree.id</a>.
+            <p> Google, as a third party vendor, uses cookies to serve ads on <a href="https://www.transfree.id">www.transfree.id</a>.
                 Google's use of the DART cookie enables it to serve ads to our site's visitors based upon their visit to  
-                <a href="https://www.transfree.id">At www.transfree.id</a> and other sites on the Internet. </p>     
+                <a href="https://www.transfree.id"> www.transfree.id</a> and other sites on the Internet. </p>     
     
             <p>Users may opt out of the use of the DART cookie by visiting the Google ad and content network 
                 privacy policy at the following URL <a href=" https://policies.google.com/technologies/ads">  http://www.google.com/privacy_ads.html </a></p>
@@ -71,7 +71,7 @@ class Privacy extends Component {
     
             <p> You should consult the respective privacy policies of these third-party ad servers for more 
                 detailed information on their practices as well as for instructions about how to opt-out of certain practices. 
-                <a href="https://www.transfree.id">At www.transfree.id</a>'s privacy policy does not apply to, and we cannot control the activities of, such other advertisers
+                <a href="https://www.transfree.id"> www.transfree.id</a>'s privacy policy does not apply to, and we cannot control the activities of, such other advertisers
                 or web sites. You may find a comprehensive listing of these privacy policies and their links here : 
                 <a href="http://www.privacypolicyonline.com/privacy-policies/"> Privacy Policy Links</a>.</p> 
     
@@ -84,8 +84,8 @@ class Privacy extends Component {
     
             <p> We believe it is important to provide added protection for children online. We encourage parents and 
                 guardians to spend time online with their children to observe, participate in and/or monitor and guide their online activity. 
-                <a href="https://www.transfree.id">At www.transfree.id</a> does not knowingly collect any personally identifiable information from children under the age of 13. If a 
-                parent or guardian believes that <a href="https://www.transfree.id">At www.transfree.id</a> has in its database the personally-identifiable information of a child under 
+                <a href="https://www.transfree.id"> www.transfree.id</a> does not knowingly collect any personally identifiable information from children under the age of 13. If a 
+                parent or guardian believes that <a href="https://www.transfree.id">www.transfree.id</a> has in its database the personally-identifiable information of a child under 
                 the age of 13, please contact us immediately (using the contact in the first paragraph) and we will use our best efforts to 
                 promptly remove such information from our records.</p>
     

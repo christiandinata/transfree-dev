@@ -6,11 +6,10 @@ const TestimoniesBG = styled.div`
   background: linear-gradient(to right, #009FE3 0%, #009FE3 15%, #F39200 15%, #F39200 100%);
   max-width: 1280px;
   overflow: hidden;
-  height: 400px;
   margin: 0 auto;
-  @media only screen and (max-width: 800px) {
+  padding-bottom: 1rem;
+  @media only screen and (max-width: 720px) {
     background: #F39200;
-    height: 30%;
   }`
 
 const TestimonyDiv = styled.div`
@@ -27,7 +26,7 @@ const TestimonyDiv = styled.div`
     height: 17rem;
     object-fit: cover;
   }
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 720px) {
     flex-direction: column;
     align-items: center;
     img {
@@ -42,7 +41,7 @@ const Content = styled.div`
   justify-content: flex-start;
   overflow: hidden;
   column-gap: 0.75rem;
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 720px) {
     margin-top: 1.5rem;
   }`
 
@@ -54,7 +53,7 @@ const Arrow = styled.img`
   &:hover {
     transform: translateY(-3px);
   }
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 720px) {
     display: none;
   }`
 

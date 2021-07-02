@@ -24,7 +24,7 @@ const MobileDiv = styled.div`
   }
   @media only screen and (max-width: 800px) {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     row-gap: 2rem;
     width: 90%;
     text-align: center;
@@ -40,6 +40,7 @@ const StoreBadge = styled.div`
   gap: 1rem;
   @media only screen and (max-width: 800px) {
     flex-direction: column;
+    margin-bottom: 5rem;
   }
 `
 
