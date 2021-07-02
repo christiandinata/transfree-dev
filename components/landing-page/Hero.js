@@ -97,7 +97,7 @@ const Currency = styled.div`
       background-color: #1F345A;
       color: #FFFFFF;
       display: flex;
-      font-family: "Avenir LT Pro Black", sans-serif !important;
+      font-family: "Avenir LT Pro", sans-serif !important;
       font-size: 1.25rem;
       text-transform: uppercase;
       transition: background-color 0.2s ease-in;

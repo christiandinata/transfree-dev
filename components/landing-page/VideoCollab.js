@@ -25,7 +25,11 @@ const SubtitleContainer = styled.div`
     margin-bottom: 0;
     font-size: 1.75rem;
     font-family: "Avenir LT Pro Black", sans-serif !important;
- }
+  }
+  p {
+    margin: 16px auto;
+    width: 70%;
+  }
  @media only screen and (max-width: 800px) {
     text-align: center;
  }`

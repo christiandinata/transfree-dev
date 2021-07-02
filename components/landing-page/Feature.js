@@ -10,11 +10,12 @@ const FeatureRow = styled.div`
   max-width: 1124px;
   margin: 1rem auto;
   transition: all 0.3s ease-in;
+  button { margin-top: 2rem; }
   @media only screen and (max-width: 800px) {
     flex-direction: ${ props => props.left ? "column" : "column-reverse" };
     text-align: center;
-  }
-`
+    margin-bottom: 4rem;
+  }`
 
 const ImageContainer = styled.div`
   display: flex;
@@ -26,9 +27,11 @@ const ImageContainer = styled.div`
 const TextContainer = styled.div`
   flex-basis: 50%;
   h2 { 
-    font-size: 1.75rem; 
+    font-size: 1.75rem;
     font-family: "Avenir LT Pro Black", sans-serif !important;
+    margin-bottom: 16px;
   }
+  p { margin-top: 0; }
 `
 
 export function LeftFeatureRow() {

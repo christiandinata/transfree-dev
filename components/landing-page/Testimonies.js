@@ -13,7 +13,7 @@ const TestimoniesBG = styled.div`
   }`
 
 const TestimonyDiv = styled.div`
-  align-items: flex-start;
+  align-items: center;
   column-gap: 0.75rem;
   margin-right: 2rem;
   display: flex;

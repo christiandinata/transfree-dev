@@ -70,7 +70,7 @@ const FlagDiv = styled.div`
   background: ${ props => props.transparent ? 
     "transparent" : "#FFFFFF66" };
   border: ${ props => props.transparent ? "0.5px solid #FFFFFF" : "none" };
-  border-radius: 0.25rem;
+  border-radius: 4px;
   padding: 0.75rem 2rem 0.75rem 1.5rem;
   text-align: left;
   font-size: 1rem;

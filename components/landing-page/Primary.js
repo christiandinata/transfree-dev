@@ -12,6 +12,7 @@ const Features = styled.div`
   max-width: 1124px;
   h2 {
     font-size: 1.75rem;
+    margin-bottom: 0;
     font-family: "Avenir LT Pro Black", sans-serif !important;
   }
   @media only screen and (max-width: 800px) {

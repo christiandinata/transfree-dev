@@ -17,10 +17,12 @@ const MobileDiv = styled.div`
   h2 {
     font-family: "Avenir LT Pro Black", sans-serif !important; 
     font-size: 1.75rem;
+    line-height: 125%;
     width: 80%;
   }
   p { 
-    width: 80%; 
+    width: 80%;
+    margin-bottom: 2.5rem;
   }
   @media only screen and (max-width: 800px) {
     display: flex;
@@ -38,9 +40,16 @@ const StoreBadge = styled.div`
   display: flex;
   flex-direction: row;
   gap: 1rem;
+  width: 80%;
+  margin-top: 2rem;
+  img {
+    width: 100%;
+    max-width: 216px;
+  }
   @media only screen and (max-width: 800px) {
     flex-direction: column;
-    margin-bottom: 5rem;
+    margin-bottom: 4rem;
+    width: 100%;
   }
 `
 
