@@ -62,7 +62,7 @@ const Header = () => (
       }
 
       h1, h2, h3, h4, b, .bold{
-        font-family: 'Avenir LT Pro Bold', sans-serif !important;
+        font-family: 'Avenir LT Pro Black', sans-serif !important;
       }
       
       button:hover {

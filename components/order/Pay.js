@@ -136,7 +136,7 @@ const AmountColumn = styled.span`
   flex-basis: ${props => props.left ? '60%' : '40%'};
   text-align: ${props => props.left ? 'left' : 'right'};
   font-size: ${props => props.left ? '16px' : '20px'};
-  font-weight: ${props => props.left ? 'normal' : 'bold'};
+  font-family: ${props => props.left ? 'Avenir LT Pro' : 'Avenir LT Pro Black'};
 `;
 
 
@@ -146,7 +146,7 @@ const BankDetailColumn = styled.span`
   padding-top: 2.5px;
   flex-basis: ${props => props.left ? '40%' : '60%'};
   text-align: ${props => props.left ? 'left' : 'right'};
-  font-weight: ${props => props.left ? 'normal' : 'bold'};
+  font-weight: ${props => props.left ? 'normal' : 'bolder'};
 `;
 
 const ButtonContainer = styled.div`
@@ -330,7 +330,6 @@ class Pay extends React.Component {
   }
 
   transferBank(bankName) {
-    this.generateVA(bankName);
     this.setState({
       bankSelected: bankName,
       method: 'direct_transfer_via_' + bankName
@@ -376,26 +375,53 @@ class Pay extends React.Component {
           content = 
           <ItemContainer>
             <BankList>
-              <BankItem style={{borderRadius: '4px 4px 0px 0px'}} active = {this.state.bankSelected == 'bni'} onClick = {() => this.transferBank('bni')}>
-                <RadioButton checked = {this.state.bankSelected == 'bni'}/><img className='bank-img' src="../static/images/bank_logos/bni.png" alt="BNI"/><span>Bank BNI</span>
+              <BankItem 
+                style={{borderRadius: '4px 4px 0px 0px'}} 
+                active = {this.state.bankSelected == 'bni'} 
+                onClick = {() => this.transferBank('bni')}>
+                  <RadioButton checked = {this.state.bankSelected == 'bni'}/>
+                  <img className='bank-img' src="../static/images/bank_logos/bni.png" alt="BNI"/>
+                  <span>Bank BNI</span>
               </BankItem>
               <BankDetail open = {this.state.bankSelected == 'bni'}>
-                {this.props.data.vaNumber != 0 ? <RenderVaDetail bankName={'BNI'} vaNumber={this.props.data.vaNumber}/> : <RenderBankDetail bankName={'BNI'} accountNumber={'07 5555 4711'}/>} 
+                {this.props.data.vaNumber != 0 ? 
+                <RenderVaDetail bankName={'BNI'} vaNumber={this.props.data.vaNumber}/> 
+                : 
+                <RenderBankDetail bankName={'BNI'} accountNumber={'07 5555 4711'}/>} 
               </BankDetail>
-              <BankItem active = {this.state.bankSelected == 'bca'} onClick = {() => this.transferBank('bca')}>
-                <RadioButton checked = {this.state.bankSelected == 'bca'}/><img className='bank-img' src="../static/images/bank_logos/bca.png" alt="BCA"/><span>Bank BCA</span>
+
+              <BankItem 
+                style={{marginTop: '-0.5px'}} 
+                active = {this.state.bankSelected == 'bca'} 
+                onClick = {() => this.transferBank('bca')}>
+                  <RadioButton checked = {this.state.bankSelected == 'bca'}/>
+                  <img className='bank-img' src="../static/images/bank_logos/bca.png" alt="BCA"/>
+                  <span>Bank BCA</span>
               </BankItem>
               <BankDetail open = {this.state.bankSelected == 'bca'}>
-                {this.props.data.vaNumber != 0 ? <RenderVaDetail bankName={'BCA'} vaNumber={this.props.data.vaNumber}/> : <RenderBankDetail bankName={'BCA'} accountNumber={'206 37 555 67'}/> } 
+                {this.props.data.vaNumber != 0 ? 
+                <RenderVaDetail bankName={'BCA'} vaNumber={this.props.data.vaNumber}/> 
+                : 
+                <RenderBankDetail bankName={'BCA'} accountNumber={'206 37 555 67'}/> } 
               </BankDetail>
-              <BankItem style={{borderRadius: '0px 0px 4px 4px'}} active = {this.state.bankSelected == 'mandiri'} onClick = {() => this.transferBank('mandiri')}>
-                <RadioButton checked = {this.state.bankSelected == 'mandiri'}/><img className='bank-img' src="../static/images/bank_logos/mandiri.png" alt="Mandiri"/><span>Bank Mandiri</span>
+
+              <BankItem 
+                style={{borderRadius: '0px 0px 4px 4px', marginTop: '-1px'}} 
+                active = {this.state.bankSelected == 'mandiri'} 
+                onClick = {() => this.transferBank('mandiri')}>
+                  <RadioButton checked = {this.state.bankSelected == 'mandiri'}/>
+                  <img className='bank-img' src="../static/images/bank_logos/mandiri.png" alt="Mandiri"/>
+                  <span>Bank Mandiri</span>
               </BankItem>  
               <BankDetail open = {this.state.bankSelected == 'mandiri'}>
-                {this.props.data.vaNumber != 0 ? <RenderVaDetail bankName={'Mandiri'} vaNumber={this.props.data.vaNumber}/> : <RenderBankDetail bankName={'Mandiri'} accountNumber={'122 00 1025188 5'}/> } 
+                {this.props.data.vaNumber != 0 ? 
+                <RenderVaDetail bankName={'Mandiri'} vaNumber={this.props.data.vaNumber}/> 
+                :
+                <RenderBankDetail bankName={'Mandiri'} accountNumber={'122 00 1025188 5'}/> } 
               </BankDetail>      
             </BankList>
           </ItemContainer>
+          
           button = <RenderButton data={this.props.data} addOrder = {this.addOrder} method={this.state.method}/>
         }
       }

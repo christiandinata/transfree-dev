@@ -62,7 +62,7 @@ const ProgressItem = styled.li`
   font-size: 16px;
   color: #626B79;
 
-  > .step-box{
+  >.step-box{
     display: inline-block;
     margin-right: 10px;
     border: 0.613102px solid #626B79;
