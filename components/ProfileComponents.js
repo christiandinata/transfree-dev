@@ -84,9 +84,6 @@ export const Table = styled.table`
 `;
 
 export const TableRow = styled.tr`
-    font-style: normal;
-    font-size: 16px;
-    line-height: 24px;
     text-align: left;
     word-wrap: break-word;
 `;
@@ -94,12 +91,20 @@ export const TableRow = styled.tr`
 export const TableHeading = styled.th`
     padding-right: 48px;
     color: #232933;  
-    font-weight: 500;
     letter-spacing: 0.2px;
+    font-family: 'Avenir LT Pro';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
 `;
 
 export const TableDetail = styled.td`
+    font-family: 'Avenir LT Pro';
+    font-style: normal;
     font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;  
     color: #626B79;
 `;
 
@@ -206,12 +211,16 @@ export const FormRow = styled.div`
 
 export const FormRowPhone = styled(FormRow)`
     width: 450px;
+    border: ${({ filled }) => (
+		filled ? "2px solid #068EC8" : "null")}; 
+    border-radius: 4px;
 `;
 
 export const FormRowPassword = styled(FormRow)`
-    border: 1px solid #E2E2E2;
     border-radius: 4px;
     width: 447px;
+    border: ${({ filled }) => (
+		filled ? "2px solid #068EC8" : "1px solid #E2E2E2")}; 
 `;
 
 export const ButtonSection = styled.section`
@@ -267,7 +276,9 @@ export const FormLabel = styled.label`
     font-weight: normal;
     font-size: 12px;
     line-height: 16px;
-    color: #9A9A9A;
+    // color: #9A9A9A;
+    color: ${({ filled }) => (
+		filled ? "#068EC8" : "#9A9A9A")}; 
 `;
 
 export const InputText = styled.input`
@@ -292,6 +303,11 @@ export const InputText = styled.input`
 export const InputTextPassword = styled(InputText)`
     border: none;
     width: 380px;
+    &:focus {
+        background: #fff;
+        border: none;
+        color: #232933;
+    }
 `;
 
 export const PasswordText = styled(InputText)`
@@ -350,6 +366,8 @@ export const ModalContainer = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
+    background-color: ${({ pop }) => (
+		pop ? "rgba(35, 41, 51, 0.8)" : "#fff")}; 
 `;
 
 export const ModalWrapper = styled.div`

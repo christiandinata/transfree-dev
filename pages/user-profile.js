@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faEye,
 	faEyeSlash,
-	faArrowCircleLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import * as Profile from '../components/ProfileComponents';
 import '../styles/components/new-user/CreateProfile.css';
@@ -22,42 +21,19 @@ import ENV from "../config";
 import * as axios from "axios";
 import React, { useEffect, useState } from 'react';
 
-const Modal = () => {
-    return(
-        <Profile.ModalContainer>
-            <Profile.ModalWrapper>
-                <Profile.ModalTitle>
-                    Save the information you have changed?
-                </Profile.ModalTitle>
-
-                <Profile.ModalText>
-                    <Profile.ModalExp>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-                    </Profile.ModalExp>
-                </Profile.ModalText>
-
-                <Profile.ModalButtonSect>
-                    <Profile.CancelActionButton onClick = {UserProfile.handleCancelClick}>No, Cancel</Profile.CancelActionButton>
-                    <Profile.SaveActionButton onClick = {UserProfile.updateUser}>Yes, Change</Profile.SaveActionButton>
-                </Profile.ModalButtonSect>
-            </Profile.ModalWrapper>
-        </Profile.ModalContainer>
-    )
-}
-
 function UserProfile(props) {
     // console.log(props)
     const [info, setInfo] = useState({
-		emailUser: props.user.email,
-        fullName: props.user.fullname,
-        idNumber: props.user.idNumber,
-        gender: props.user.gender,
-        dob: moment(props.user.dob).format('LL'),
-        pob: props.user.pob,
-        address: props.user.address,
+		emailUser: props.user.email ? props.user.email : "",
+        fullName: props.user.fullname ? props.user.fullname : "",
+        idNumber: props.user.idNumber ? props.user.idNumber : "",
+        gender: props.user.gender ? props.user.gender : "",
+        dob: props.user.dob ? moment(props.user.dob).format('LL') : "",
+        pob: props.user.pob ? props.user.pob : "",
+        address: props.user.address ? props.user.address : "",
         password: "123",
         confirmPassword: "123",
-        phone: "+" + props.user.phone
+        phone: props.user.phone ? "+" + props.user.phone : ""
 	});
 
     const [choice, setChoice] = useState('edit')
@@ -65,13 +41,16 @@ function UserProfile(props) {
     const [hiddenConfirm, setConfirm] = useState(true)
     const [popup, setPopup] = useState(false)
     const [focus, setFocus] = useState({
+        emailUser: false,
+        fullName: false,
+        idNumber: false,
+        gender: false,
+        dob: false,
+        pob: false,
+        address: false,
         password: false,
         confirmPassword: false,
         phone: false
-    })
-
-    useEffect(() => {
-        // console.log(props)
     })
 
     const handleChoiceChange = (e) => {
@@ -102,10 +81,25 @@ function UserProfile(props) {
         })
     }
 
+    const handleBlurChange = (e) => {
+        const {name, value} = e.target
+        setFocus({
+            ...focus,
+            [name]: false
+        })
+    }
+
     const handlePhoneFocusChange = (value) => {
         setFocus({
             ...focus,
-            phone: value
+            phone: true
+        })
+    }
+
+    const handlePhoneBlurChange = (value) => {
+        setFocus({
+            ...focus,
+            phone: false
         })
     }
 
@@ -328,7 +322,7 @@ function UserProfile(props) {
 
                                 <form>
                                     <Profile.FormRow>
-                                        <Profile.FormLabel>Full Name</Profile.FormLabel>
+                                        <Profile.FormLabel filled = {focus.fullName}>Full Name</Profile.FormLabel>
                                         <Profile.InputText 
                                             type = "text" 
                                             name = "fullName"
@@ -336,11 +330,13 @@ function UserProfile(props) {
                                             dis = "true" 
                                             disabled
                                             onChange = {handleInputChange}
+                                            onFocus = {handleFocusChange}
+                                            onBlur = {handleBlurChange}
                                         />
                                     </Profile.FormRow>
 
                                     <Profile.FormRow>
-                                        <Profile.FormLabel>ID Number</Profile.FormLabel>
+                                        <Profile.FormLabel filled = {focus.idNumber}>ID Number</Profile.FormLabel>
                                         <Profile.InputText 
                                             type = "text" 
                                             name = "idNumber"
@@ -348,11 +344,13 @@ function UserProfile(props) {
                                             dis = "true" 
                                             disabled
                                             onChange = {handleInputChange}
+                                            onFocus = {handleFocusChange}
+                                            onBlur = {handleBlurChange}
                                         />
                                     </Profile.FormRow>
 
                                     <Profile.FormRow>
-                                        <Profile.FormLabel>Date of Birth</Profile.FormLabel>
+                                        <Profile.FormLabel filled = {focus.dob}>Date of Birth</Profile.FormLabel>
                                         <Profile.InputText 
                                             type = "text" 
                                             name = "dob"
@@ -361,11 +359,13 @@ function UserProfile(props) {
                                             disabled
                                             required
                                             onChange = {handleInputChange}
+                                            onFocus = {handleFocusChange}
+                                            onBlur = {handleBlurChange}
                                         />
                                     </Profile.FormRow>
 
                                     <Profile.FormRow>
-                                        <Profile.FormLabel>Place of Birth</Profile.FormLabel>
+                                        <Profile.FormLabel filled = {focus.pob}>Place of Birth</Profile.FormLabel>
                                         <Profile.InputText 
                                             type = "text" 
                                             name = "pob"
@@ -374,11 +374,13 @@ function UserProfile(props) {
                                             disabled
                                             required
                                             onChange = {handleInputChange}
+                                            onFocus = {handleFocusChange}
+                                            onBlur = {handleBlurChange}
                                         />
                                     </Profile.FormRow>
 
                                     <Profile.FormRow>
-                                        <Profile.FormLabel>Gender</Profile.FormLabel>
+                                        <Profile.FormLabel filled = {focus.gender}>Gender</Profile.FormLabel>
                                         <Profile.InputText 
                                             type = "text" 
                                             name = "gender"
@@ -387,6 +389,8 @@ function UserProfile(props) {
                                             disabled
                                             required
                                             onChange = {handleInputChange}
+                                            onFocus = {handleFocusChange}
+                                            onBlur = {handleBlurChange}
                                         />
                                     </Profile.FormRow>
 
@@ -413,13 +417,15 @@ function UserProfile(props) {
                                     </Profile.FormRow>
 
                                     <Profile.FormRow>
-                                        <Profile.FormLabel>Address</Profile.FormLabel>
+                                        <Profile.FormLabel filled = {focus.address}>Address</Profile.FormLabel>
                                         <Profile.InputText 
                                             type = "text" 
                                             name = "address"
                                             value = {info.address}
                                             required
                                             onChange = {handleInputChange}
+                                            onFocus = {handleFocusChange}
+                                            onBlur = {handleBlurChange}
                                         />
                                     </Profile.FormRow>
                                 </form>
@@ -433,23 +439,27 @@ function UserProfile(props) {
 
                                 <form>
                                     <Profile.FormRow>
-                                        <Profile.FormLabel>Email Address</Profile.FormLabel>
+                                        <Profile.FormLabel filled = {focus.emailUser}>Email Address</Profile.FormLabel>
                                         <Profile.InputText 
                                             type = "text" 
                                             name = "emailUser"
                                             value = {info.emailUser}
                                             required
                                             onChange = {handleInputChange}
+                                            onFocus = {handleFocusChange}
+                                            onBlur = {handleBlurChange}
                                         />
                                     </Profile.FormRow>
 
-                                    <Profile.FormLabel>Password</Profile.FormLabel>
-                                    <Profile.FormRowPassword>
+                                    <Profile.FormLabel filled = {focus.password}>Password</Profile.FormLabel>
+                                    <Profile.FormRowPassword filled = {focus.password}>
                                         <Profile.InputTextPassword 
                                             type = {hiddenPass ? "password" : "text"}
                                             name = "password"
                                             value = {info.password}
                                             onChange = {handleInputChange}
+                                            onFocus = {handleFocusChange}
+                                            onBlur = {handleBlurChange}
                                         />
                                         <Profile.EyePic>
                                             {hiddenPass ? 
@@ -466,13 +476,15 @@ function UserProfile(props) {
                                         </Profile.EyePic>
                                     </Profile.FormRowPassword>
 
-                                    <Profile.FormLabel>Confirm New Password</Profile.FormLabel>
-                                    <Profile.FormRowPassword>
+                                    <Profile.FormLabel filled = {focus.confirmPassword}>Confirm New Password</Profile.FormLabel>
+                                    <Profile.FormRowPassword filled = {focus.confirmPassword}>
                                         <Profile.InputTextPassword 
                                             type = {hiddenPass ? "password" : "text"}
                                             name = "confirmPassword"
                                             value = {info.confirmPassword}
                                             onChange = {handleInputChange}
+                                            onFocus = {handleFocusChange}
+                                            onBlur = {handleBlurChange}
                                         />
                                         <Profile.EyePic>
                                             {hiddenConfirm ? 
@@ -489,13 +501,15 @@ function UserProfile(props) {
                                         </Profile.EyePic>
                                     </Profile.FormRowPassword>
 
-                                    <Profile.FormRowPhone>
-                                        <Profile.FormLabel>Phone Number</Profile.FormLabel>
+                                    <Profile.FormLabel filled = {focus.phone}>Phone Number</Profile.FormLabel>
+                                    <Profile.FormRowPhone filled = {focus.phone}>
                                         <Profile.PhoneInput
                                             country = "ID"
                                             value = {info.phone}
                                             name = "phone"
                                             onChange = {(value) => handlePhoneChange(value)}
+                                            onFocus = {(value) => handlePhoneFocusChange(value)}
+                                            onBlur = {(value) => handlePhoneBlurChange(value)}
                                         />
                                     </Profile.FormRowPhone>
                                 </form>
@@ -509,7 +523,7 @@ function UserProfile(props) {
                     </Profile.EditWrapper>
 
                     {popup ? 
-                    <Profile.ModalContainer>
+                    <Profile.ModalContainer pop = {popup}>
                         <Profile.ModalWrapper>
                             <Profile.ModalTitle>
                                 Save the information you have changed?
