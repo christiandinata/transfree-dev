@@ -21,6 +21,33 @@ import ENV from "../config";
 import * as axios from "axios";
 import React, { useEffect, useState } from 'react';
 
+const SuccessModal = (props) => {
+    const [visible, setVisible] = useState(true)
+
+    useEffect(() => {
+        console.log("haii")
+        setTimeout(() => 
+            setVisible(false), props.delay)
+    }, [props.delay])
+
+    return (
+        visible ? 
+        <Profile.ModalSuccessContainer>
+            <Profile.ModalSuccessWrapper>
+                <Profile.ModalSuccessText>
+                    <Profile.ModalSuccessImg src = "../static/images/profile/check.png"/>
+
+                    <Profile.ModalSuccessTitle>
+                        Your profile has been saved
+                    </Profile.ModalSuccessTitle>
+                </Profile.ModalSuccessText>
+            </Profile.ModalSuccessWrapper>
+        </Profile.ModalSuccessContainer>
+        :
+        null
+    )
+}
+
 function UserProfile(props) {
     // console.log(props)
     const [info, setInfo] = useState({
@@ -36,10 +63,6 @@ function UserProfile(props) {
         phone: props.user.phone ? "+" + props.user.phone : ""
 	});
 
-    const [choice, setChoice] = useState('edit')
-    const [hiddenPass, setHidden] = useState(true)
-    const [hiddenConfirm, setConfirm] = useState(true)
-    const [popup, setPopup] = useState(false)
     const [focus, setFocus] = useState({
         emailUser: false,
         fullName: false,
@@ -52,6 +75,12 @@ function UserProfile(props) {
         confirmPassword: false,
         phone: false
     })
+
+    const [choice, setChoice] = useState('detail')
+    const [hiddenPass, setHidden] = useState(true)
+    const [hiddenConfirm, setConfirm] = useState(true)
+    const [popup, setPopup] = useState(false)
+    const [success, setSuccess] = useState(false)
 
     const handleChoiceChange = (e) => {
         e.preventDefault()
@@ -165,6 +194,10 @@ function UserProfile(props) {
                             user_data.email = info.emailUser;
                             user_data.gender = info.gender;
                             user_data.address = info.address;
+
+                            setSuccess(true)
+                            setChoice('detail')
+                            setPopup(false)
                         })
                         .catch((error) => {
                             console.log(error);
@@ -183,6 +216,7 @@ function UserProfile(props) {
 
     return(
         <React.Fragment>
+            {console.log(success)}
             <Header/>
             <NavBarWhite username = {info.fullName} id = {info.idNumber}/>
 
@@ -287,6 +321,13 @@ function UserProfile(props) {
                         
                         <Profile.Divider></Profile.Divider>
 
+                        {success ? 
+                            <div>
+                                <SuccessModal delay = "5000"></SuccessModal>
+                            </div>
+                            :
+                        null}
+                        {/* <SuccessModal delay = "1000"></SuccessModal> */}
                     </div>
                 </Profile.ProfileSect>
             </Profile.Wrapper> 

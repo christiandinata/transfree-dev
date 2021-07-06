@@ -1,5 +1,5 @@
 import Phone from "react-phone-number-input";
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 
 export const Wrapper = styled.div`
     display: flex;
@@ -16,7 +16,7 @@ export const ActionSect = styled.section`
 export const ActionChoice = styled.button`
     display: block;
     margin: 0 24px;
-    margin-top: 42px;
+    margin-top: 24px;
     background: transparent;
     text-decoration: none;
     outline: none;
@@ -451,4 +451,48 @@ export const SaveActionButton = styled(ActionButton)`
         background: #068EC8;
         border: 1px solid #068EC8;
     }
+`;
+
+export const ModalSuccessContainer = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+`;
+
+export const ModalSuccessWrapper = styled.div`
+    position: fixed;
+    height: auto;
+    top: 14%;
+    left: 50%;
+    background: #FFFFFF;
+    border: 1px solid #00A000;
+    box-shadow: 0px 4px 8px rgba(119, 119, 119, 0.1), 0px 12px 20px rgba(119, 119, 119, 0.2);
+    border-radius: 4px;
+`;
+
+export const ModalSuccessText = styled.section`
+    margin: 12px;
+    vertical-align: middle;
+`;
+
+export const ModalSuccessImg = styled.img`
+    width: 24px;
+    height: 24px;
+    object-fit: scale-down;
+    float: left;
+    margin-right: 8px;
+`;
+
+export const ModalSuccessTitle = styled.p`
+    font-family: 'Avenir LT Pro';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #232933;
+    margin: 0;
+    display: inline-block;
 `;
