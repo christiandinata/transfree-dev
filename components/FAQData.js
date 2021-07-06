@@ -1,5 +1,6 @@
 export const List = [
 	{
+		id: 0,
 		icon: "../static/images/manage-account.png",
 		iconTitle: "Managing your account",
 		iconText:
@@ -23,6 +24,7 @@ export const List = [
 		],
 	},
 	{
+		id: 1,
 		icon: "../static/images/safe-and-secure.png",
 		iconTitle: "Safe and Secure",
 		iconText:
@@ -47,6 +49,7 @@ export const List = [
 		],
 	},
 	{
+		id: 2,
 		icon: "../static/images/sending-money.png",
 		iconTitle: "Sending Money",
 		iconText:
@@ -96,6 +99,7 @@ export const List = [
 		],
 	},
 	{
+		id: 3,
 		icon: "../static/images/cut-off-time.png",
 		iconTitle: "Cut Off Time",
 		iconText:
@@ -113,6 +117,7 @@ export const List = [
 		],
 	},
 	{
+		id: 4,
 		icon: "../static/images/pay-transfer.png",
 		iconTitle: "Pay for My Transfer",
 		iconText:
@@ -137,6 +142,7 @@ export const List = [
 		],
 	},
 	{
+		id: 5,
 		icon: "../static/images/operational-hours.png",
 		iconTitle: "Operational Hours",
 		iconText:
@@ -155,6 +161,7 @@ export const List = [
 		],
 	},
 	{
+		id: 6,
 		icon: "../static/images/receiving-money.png",
 		iconTitle: "Receiving Money",
 		iconText:
@@ -183,6 +190,7 @@ export const List = [
 		],
 	},
 	{
+		id: 7,
 		icon: "../static/images/complain-inquiries.png",
 		iconTitle: "Complaint & Other Inquiries",
 		iconText:

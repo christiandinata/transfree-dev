@@ -1,3 +1,4 @@
+import latinize from "latinize";
 import Header from "../components/header.js";
 import { useState, useEffect } from "react";
 import { connect } from "react-redux";
@@ -7,15 +8,7 @@ import Footer from "../components/footer.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { getCookie } from "../utils/cookie";
-// import {
-// 	Accordion,
-// 	AccordionItem,
-// 	AccordionItemHeading,
-// 	AccordionItemButton,
-// 	AccordionItemPanel,
-// 	AccordionItemState,
-// } from "react-accessible-accordion";
-// import "react-accessible-accordion/dist/fancy-example.css";
+import Highlighter from "react-highlight-words";
 import { List } from "../components/FAQData";
 import initialize from "../utils/initialize";
 import styled, { keyframes } from "styled-components";
@@ -26,12 +19,13 @@ const FAQ = () => {
 	const [listDetail, setListDetail] = useState(false);
 	const [clicked, setClicked] = useState(false);
 	// const [changed, setChanged] = useState(false);
-	const [searchWord, setSearchWord] = useState("");
+	const [searchText, setSearchText] = useState("");
 	const [activeIndex, setActiveIndex] = useState(0);
+	const searchWords = searchText.split(/\s/).filter((word) => word);
 
 	function toggleClick(index) {
 		window.scrollTo(0, 0);
-		setClicked(!clicked);
+		setClicked(true);
 		if (listDetail === index) {
 			// if listDetail question is already active, then close it
 			return setListDetail(null);
@@ -39,6 +33,50 @@ const FAQ = () => {
 			return setListDetail(index);
 		}
 	}
+
+	// click function for "Back to List" button
+	function returningClick(index) {
+		window.scrollTo(0, 0);
+		setClicked(false);
+		if (listDetail === index) {
+			// if listDetail question is already active, then close it
+			return setListDetail(null);
+		} else {
+			return setListDetail(index);
+		}
+	}
+
+	// function to get index of list and index of accordion based on searchWords
+	function getIndex(listItems, searchWords) {
+		for (var i = 0; i < 8; i++) {
+			for (var j = 0; j < listItems[i].accordion.length; j++) {
+				if (
+					listItems[i].accordion[j].heading.includes(searchWords) ||
+					listItems[i].accordion[j].belowHeading.includes(searchWords)
+				) {
+					return [i, j];
+				}
+			}
+		}
+		return -1; //to handle the case where the value doesn't exist
+	}
+
+	var ListItems = List;
+	var searchedID = getIndex(ListItems, searchText);
+
+	useEffect(() => {
+		if (searchText == "" || searchText == undefined) {
+			setListDetail(null);
+			setClicked(false);
+		} else {
+			var searchedID = getIndex(ListItems, searchText);
+			if (searchedID[0] !== -1 || searchedID[1] !== -1) {
+				setListDetail(searchedID[0]);
+				setActiveIndex(searchedID[1]);
+				setClicked(true);
+			}
+		}
+	}, [searchText]);
 
 	return (
 		<>
@@ -65,37 +103,27 @@ const FAQ = () => {
 						/>
 						<FormInput
 							type="text"
-							value={searchWord}
+							value={searchText}
 							placeholder="Ask a question..."
-							onChange={(e) => setSearchWord(e.target.value)}
+							onChange={(e) => setSearchText(e.target.value)}
 						/>
 					</InputContainer>
 					<FormButton type="submit">Search</FormButton>
 				</SearchForm>
 			</HeroContainer>
-
 			<ListContainer clicked={clicked}>
-				{List.filter((filtered) => {
-					if (searchWord == "") {
-						return filtered;
-					} else if (
-						filtered.iconTitle
-							.toLowerCase()
-							.includes(searchWord.toLowerCase())
-					) {
-						return filtered;
-					}
-				}).map((item, index) => {
+				{searchedID == -1 ? <>{/* search not found */}</> : null}
+				{List.map((item, index) => {
 					return (
 						<>
 							<Card
 								clicked={clicked}
-								key={index}
-								onClick={() => toggleClick(index)}>
+								key={item.id}
+								onClick={() => toggleClick(item.id)}>
 								<CardIcon src={item.icon} />
 								<CardTitle>{item.iconTitle}</CardTitle>
 							</Card>
-							{listDetail === index && (
+							{listDetail === item.id && clicked && (
 								<>
 									<Left>
 										<CardIcon src={item.icon} />
@@ -105,7 +133,7 @@ const FAQ = () => {
 										<LeftCardText>
 											{item.iconText}
 										</LeftCardText>
-										<LeftButton onClick={toggleClick}>
+										<LeftButton onClick={returningClick}>
 											Back to List
 										</LeftButton>
 									</Left>
@@ -115,15 +143,13 @@ const FAQ = () => {
 												id === activeIndex
 													? "box-shadowed"
 													: "";
-											console.log(
-												"boxshadowed: ",
-												boxShadowed
-											);
-											console.log("id: ", id);
-											console.log(
-												"activeIndex: ",
-												activeIndex
-											);
+
+											const headingToHighlight =
+												items.heading;
+
+											const textToHighlight =
+												items.belowHeading;
+
 											return (
 												<AccordionContainer
 													key={id}
@@ -132,7 +158,17 @@ const FAQ = () => {
 														onClick={() =>
 															setActiveIndex(id)
 														}>
-														{items.heading}
+														<Highlighter
+															highlightClassName="Highlight"
+															sanitize={latinize}
+															searchWords={
+																searchWords
+															}
+															autoEscape={true}
+															textToHighlight={
+																headingToHighlight
+															}
+														/>
 														{activeIndex === id ? (
 															<FontAwesomeIcon
 																icon={faTimes}
@@ -151,7 +187,21 @@ const FAQ = () => {
 													</AccordionButton>
 													{activeIndex === id ? (
 														<AccordionPanel>
-															{items.belowHeading}
+															<Highlighter
+																highlightClassName="Highlight"
+																sanitize={
+																	latinize
+																}
+																autoEscape={
+																	true
+																}
+																searchWords={
+																	searchWords
+																}
+																textToHighlight={
+																	textToHighlight
+																}
+															/>
 														</AccordionPanel>
 													) : null}
 												</AccordionContainer>
@@ -186,6 +236,10 @@ const FAQ = () => {
 			<style jsx global>{`
 				.accordion {
 					border: none;
+				}
+
+				.Highlight {
+					background-color: rgba(0, 159, 227, 0.4);
 				}
 
 				.box-Shadowed {
@@ -371,7 +425,7 @@ const AccordionContainer = styled.div`
 	transition: 0.1s all ease-in;
 
 	&:hover {
-		transform: scale(1.03);
+		transform: scale(1.02);
 	}
 `;
 
