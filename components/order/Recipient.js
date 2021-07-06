@@ -1,7 +1,4 @@
-import Link from 'next/link';
 import styled from "styled-components";
-import actions from '../../redux/actions';
-import { connect } from 'react-redux';
 import NumberFormat from 'react-number-format';
 import 'react-tabs/style/react-tabs.css';
 import { API } from '../../config';
