@@ -1,7 +1,4 @@
-import Link from 'next/link';
 import styled from "styled-components";
-import actions from '../../redux/actions';
-import { connect } from 'react-redux';
 import NumberFormat from 'react-number-format';
 import 'react-tabs/style/react-tabs.css';
 import { API } from '../../config';
@@ -82,12 +79,12 @@ const RecipientLabel = styled.label`
   color: #626B79;
   transition: 0.2s;
 
-  ${({ iserror }) => iserror && `
-    color: #F80202;
-  `}
-
   ${({ active }) => active && `
     color: #068EC8;
+  `}
+
+  ${({ iserror }) => iserror && `
+    color: #F80202;
   `}
 `;
 
@@ -103,9 +100,12 @@ const RecipientInput = styled.input`
   transition: 0.2s linear;
 
   &:focus{
-    box-shadow: 0 0 0 2px #068EC8;
     outline: none;
   }
+
+  ${({ active }) => active && `
+    box-shadow: 0 0 0 2px #068EC8;
+  `}
 
   ${({ iserror }) => iserror && `
     box-shadow: 0 0 0 2px #F80202;
@@ -124,9 +124,12 @@ const RecipientInputNumber = styled(NumberFormat)`
   transition: 0.2s linear;
 
   &:focus{
-    box-shadow: 0 0 0 2px #068EC8;
     outline: none;
   }
+
+  ${({ active }) => active && `
+    box-shadow: 0 0 0 2px #068EC8;
+  `}
 
   ${({ iserror }) => iserror && `
     box-shadow: 0 0 0 2px #F80202;
@@ -167,7 +170,7 @@ const ErrorLabel = styled.span`
 
 const TransactionTitle = styled.div `
   font-size: 16px;
-  font-weight: bold;
+  font-weight: bolder;
   border: 0.5px solid #B4B4B4;
   border-radius: 4px 4px 0px 0px;
   padding: 20px;
@@ -186,11 +189,16 @@ const TransItemRow = styled.div`
   padding: 2.5px 0px 2.5px;
 `;
 
-
 const TransColumn = styled.span`
   flex-basis: ${props => props.left ? '60%' : '40%'};
   text-align: ${props => props.left ? 'left' : 'right'};
   color: ${props => props.left ? '#9A9A9A' : '#232933;'};
+  font-weight: ${props => props.left ? 'normal' : 'bolder;'};
+
+
+  >.grey{
+    color: '#9A9A9A';
+  }
 `
 
 const ButtonContainer = styled.div`
@@ -319,8 +327,6 @@ class Recipient extends React.Component {
         purposeTransfer: this.purposeTransfer.current.value ? this.purposeTransfer.current.value : null,
         isSaveRecipient: this.state.isSaveRecipient
       }
-
-      console.log(this.accountNumber.current.value);
   
       if (this.name.current.value == '') {
         this.setState({isNameValid: false});
@@ -408,7 +414,7 @@ class Recipient extends React.Component {
   }
 
   checkName(){
-    if (this.name.current.value == '') {
+    if (!this.name.current.value) {
       this.setState({isNameValid: false})
     } else {
       this.setState({isNameValid: true})
@@ -466,7 +472,7 @@ class Recipient extends React.Component {
   }
   
   checkBankName(){
-    if (this.bankName.current.value == '') {
+    if (!this.bankName.current.value) {
       this.setState({isBankNameValid: false})
     } else {
       this.setState({isBankNameValid: true})
@@ -477,7 +483,7 @@ class Recipient extends React.Component {
   }
 
   checkBankAccountNumber(){
-    if (this.bankAccountNumber.current.value == '') {
+    if (!this.bankAccountNumber.current.value) {
       this.setState({isBankAccountNumberValid: false})
     } else {
       this.setState({isBankAccountNumberValid: true})
@@ -486,7 +492,7 @@ class Recipient extends React.Component {
   }
 
   checkAccountNumber(){
-    if (this.accountNumber.current.value == '') {
+    if (!this.accountNumber.current.value) {
       this.setState({isAccountNumberValid: false})
     } else {
       this.setState({isAccountNumberValid: true})
@@ -507,7 +513,7 @@ class Recipient extends React.Component {
 
   checkSortCodeValid(){
     let sortcodeTemp = '';
-    if (this.sortcode.current.value == '') {
+    if (!this.sortcode.current.value) {
       this.setState({isSortCodeValid: false})
     } else {
       this.setState({isSortCodeValid: true})
@@ -527,7 +533,7 @@ class Recipient extends React.Component {
   }
 
   checkIBAN(){
-    if (this.iban.current.value == '') {
+    if (!this.iban.current.value) {
       this.setState({isIBANValid: false})
     } else {
       this.setState({isIBANValid: true})
@@ -536,7 +542,7 @@ class Recipient extends React.Component {
   }
 
   checkBsbCode(){
-    if (this.bsbCode.current.value == '') {
+    if (!this.bsbCode.current.value) {
       this.setState({isBsbCodeValid: false})
     } else {
       this.setState({isBsbCodeValid: true})
@@ -546,7 +552,7 @@ class Recipient extends React.Component {
 
   checkRoutingNumber(){
     let routingNumberTemp = '';
-    if (this.routingNumber.current.value == '') {
+    if (!this.routingNumber.current.value) {
       this.setState({isRoutingNumberValid: false})
     }
     else {
@@ -643,6 +649,7 @@ class Recipient extends React.Component {
               <RecipientLabel active = {this.state.activeElement == 'email'} iserror={!this.state.isEmailValid}>Email</RecipientLabel>
               <RecipientInput 
                 iserror={!this.state.isEmailValid}
+                active={this.state.activeElement=='email'}
                 type="email" 
                 id="email"
                 placeholder="e.g. johndoe@gmail.com"
@@ -657,6 +664,7 @@ class Recipient extends React.Component {
               <RecipientLabel active = {this.state.activeElement == 'bankName'} iserror={!this.state.isBankNameValid || !this.state.isBankNameVirtual}>Bank Name</RecipientLabel>
               <RecipientInput 
                 iserror={!this.state.isBankNameValid || !this.state.isBankNameVirtual}
+                active = {this.state.activeElement == 'bankName'}
                 type="text" 
                 id="bankName"
                 placeholder="e.g. BCA"
@@ -672,6 +680,7 @@ class Recipient extends React.Component {
               <RecipientLabel active = {this.state.activeElement == 'bankAccount'} iserror={!this.state.isBankAccountNumberValid}>Bank Account Name</RecipientLabel>
               <RecipientInput 
                 iserror={!this.state.isBankAccountNumberValid}
+                active = {this.state.activeElement == 'bankAccount'}
                 type="text" 
                 id="bankAccount"
                 placeholder="e.g. John Doe"
@@ -686,6 +695,7 @@ class Recipient extends React.Component {
               <RecipientLabel active = {this.state.activeElement == 'name'} iserror={!this.state.isNameValid}>Recipient's Name</RecipientLabel>
               <RecipientInput 
                 iserror={!this.state.isNameValid}
+                active = {this.state.activeElement == 'name'}
                 type="text" 
                 id="name"
                 placeholder="e.g. John Doe Taslim"
@@ -706,6 +716,7 @@ class Recipient extends React.Component {
               <RecipientLabel active = {this.state.activeElement == 'account'} iserror={!this.state.isAccountNumberValid}>Bank account number</RecipientLabel>
               <RecipientInputNumber
                 iserror={!this.state.isAccountNumberValid}
+                active = {this.state.activeElement == 'account'}
                 type="tel" 
                 allowNegative={false}
                 allowLeadingZeros={true}
@@ -723,6 +734,7 @@ class Recipient extends React.Component {
               <RecipientLabel active = {this.state.activeElement == 'sortcode'} iserror={!this.state.isSortCodeValid || !this.state.isSortCodeVirtual || !this.state.isSortCodeLength}>Sort code</RecipientLabel>
               <RecipientInputNumber
                 iserror={!this.state.isSortCodeValid || !this.state.isSortCodeVirtual || !this.state.isSortCodeLength}
+                active = {this.state.activeElement == 'sortcode'}
                 type="tel" 
                 id="sortcode"
                 placeholder="e.g. 02 32 24"
@@ -741,6 +753,7 @@ class Recipient extends React.Component {
               <RecipientLabel active = {this.state.activeElement == 'iban'} iserror={!this.state.isIBANValid}>IBAN</RecipientLabel>
               <RecipientInput
                 iserror={!this.state.isIBANValid}
+                active = {this.state.activeElement == 'iban'}
                 type="text" 
                 id="iban"
                 placeholder="e.g. NO 93 8601 1117947"
@@ -755,6 +768,7 @@ class Recipient extends React.Component {
               <RecipientLabel active = {this.state.activeElement == 'bsbCode'} iserror={!this.state.isBsbCodeValid}>BSB Code</RecipientLabel>
               <RecipientInputNumber
                 iserror={!this.state.isBsbCodeValid}
+                active = {this.state.activeElement == 'bsbCode'}
                 type="tel" 
                 id="bsbCode"
                 allowNegative={false}
@@ -772,6 +786,7 @@ class Recipient extends React.Component {
               <RecipientLabel active = {this.state.activeElement == 'routingNumber'} iserror={!this.state.isRoutingNumberValid || !this.state.isRoutingNumberLength}>Routing number</RecipientLabel>
               <RecipientInputNumber
                 iserror={!this.state.isRoutingNumberValid || !this.state.isRoutingNumberLength}
+                active = {this.state.activeElement == 'routingNumber'}
                 type="tel" 
                 id="routingNumber"
                 placeholder="e.g. 122105155"
@@ -832,7 +847,7 @@ class Recipient extends React.Component {
                 <TransColumn left>
                   Amount to be exchange
                 </TransColumn> 
-                <TransColumn right>
+                <TransColumn right style={{color: '#9A9A9A'}}>
                   {this.props.data.fromCurrency.toUpperCase()} <NumberFormat displayType={'text'} decimalScale={2} thousandSeparator={true} value={this.props.data.fromAmount} />
                 </TransColumn>
               </TransItemRow>
@@ -841,7 +856,7 @@ class Recipient extends React.Component {
                 <TransColumn left>
                   Exchange rate
                 </TransColumn> 
-                <TransColumn right>
+                <TransColumn right style={{color: '#9A9A9A'}}>
                   <NumberFormat displayType={'text'} thousandSeparator={true} decimalScale={2} value={this.props.data.rate}/>
                 </TransColumn>
               </TransItemRow>

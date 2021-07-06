@@ -58,6 +58,7 @@ const TransColumn = styled.span`
   flex-basis: ${props => props.left ? '40%' : '60%'};
   text-align: ${props => props.left ? 'left' : 'right'};
   color: ${props => props.left ? '#9A9A9A' : '#232933'};
+  font-weight: ${props => props.left ? 'normal' : 'bolder'};
 
   >.link {
     color: #009FE3;
@@ -71,7 +72,7 @@ const AmountColumn = styled.span`
   flex-basis: ${props => props.left ? '60%' : '40%'};
   text-align: ${props => props.left ? 'left' : 'right'};
   font-size: ${props => props.left ? '16px' : '20px'};
-  font-weight: ${props => props.left ? 'normal' : 'bold'};
+  font-family: ${props => props.left ? 'Avenir LT Pro' : 'Avenir LT Pro Black'};
 `;
 
 const BottomColumn = styled.span`
@@ -261,7 +262,7 @@ class Review extends React.Component {
                       You Send
                     </AmountColumn> 
                     <AmountColumn right>
-                      <NumberFormat displayType={'text'} decimalScale={2} thousandSeparator={true} value={this.props.data.fromAmount} /> {this.props.data.fromCurrency.toUpperCase()} 
+                      <NumberFormat className="bolder" displayType={'text'} decimalScale={2} thousandSeparator={true} value={this.props.data.fromAmount} /> {this.props.data.fromCurrency.toUpperCase()} 
                     </AmountColumn>
                 </ItemRow>
                 <ItemRow>
@@ -296,7 +297,7 @@ class Review extends React.Component {
                 <img src="../static/images/Asset Web/send money/ic-calendar.svg"/>
               </BottomColumn>
               <BottomColumn right>
-                Estimated Delivery - <span style = {{color : "#232933"}}>{this.props.data.duration == 1 ? 'Next Working Day' : '24 Hours'}</span><br/>
+                Estimated Delivery - <span style = {{color : "#232933", fontWeight: "bold"}}>{this.props.data.duration == 1 ? 'Next Working Day' : '24 Hours'}</span><br/>
                 <NoteSpan hide = {this.props.data.duration != 2}>
                   But kindly note, there is a chance that the money will arrive in more than 36 hours.
                 </NoteSpan>

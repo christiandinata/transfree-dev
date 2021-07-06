@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import rateActions from '../../redux/actions';
 import styled from 'styled-components';
 import Modal from 'react-modal';
-import {Converter, InputNumber, ReverseButton, RateAndFee} from '../landing-page/Hero'
+import {Converter, InputNumber, RateAndFee} from '../order/Converter'
 
 const OrderContainer = styled.div`
   background: #FFFFFF;
@@ -115,11 +115,14 @@ class OrderAmount extends React.Component {
       toAmount: 0,
       currentDay: new Date(),
       duration: '',
-      oos: false
+      oos: false,
+      activeElement: ''
     };
 
     this.receiveOn = React.createRef();
 
+    this.updateActiveElement = this.updateActiveElement.bind(this);
+    this.updateDeactiveElement = this.updateDeactiveElement.bind(this);
     this.toggleSource = this.toggleSource.bind(this);
     this.selectSource = this.selectSource.bind(this);
     this.hideSource = this.hideSource.bind(this);
@@ -128,49 +131,9 @@ class OrderAmount extends React.Component {
     this.selectDestination = this.selectDestination.bind(this);
     this.handleSourceChange = this.handleSourceChange.bind(this);
     this.handleDestinationChange = this.handleDestinationChange.bind(this);
-    this.reverse = this.reverse.bind(this);
     this.checkDuration = this.checkDuration.bind(this);
   }
   
-  reverse(country,country2) {
-	this.setState({
-            
-    fromCurrency: country2,
-    toCurrency: country,
-    });
-    if (country == 'idr') {
-      this.props.getRates(country2, country).then(() => {
-        if (this.state.fromCurrency == 'idr') {
-          this.setState({
-            rate: 1,
-            
-          });
-        } else {
-          this.setState({
-            rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
-            toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
-          });
-        }
-      });
-    } else {
-      if (country2 == 'idr') {
-        this.props.getRates(country, country2).then(() => {
-          this.setState({
-            rate: this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100),
-            toAmount: this.state.fromAmount / (this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100))
-          });
-        });
-      } else {
-        this.props.getRates(country2,country).then(() => {
-          this.setState({
-            rate: this.props.rate,
-            toAmount: this.state.fromAmount * this.props.rate
-          });
-        });
-      }
-    }
-  }
-
   componentDidMount() {
     if(this.props.data.fromAmount != 0){
       this.setState({
@@ -189,6 +152,14 @@ class OrderAmount extends React.Component {
         currentDay : this.state.currentDay
       })
     }
+  }
+
+  updateActiveElement = () => {
+    this.setState({activeElement : document.activeElement.id});
+  }
+
+  updateDeactiveElement = () => {
+    this.setState({activeElement : ''});
   }
 
   toggleSource() {
@@ -298,17 +269,10 @@ class OrderAmount extends React.Component {
   handleSourceChange(e) {
     const fromAmount = e.target.value.replace(/,/g, '');
     if (this.state.fromCurrency == 'idr') {
-      if (fromAmount < 100000) {
-        this.setState({
-          fromAmount: fromAmount,
-          toAmount: 0
-        })
-      } else {
         this.setState({
           fromAmount: fromAmount,
           toAmount: fromAmount / this.state.rate
         })
-      }
     } else {
       this.setState({
         fromAmount: fromAmount,
@@ -374,7 +338,7 @@ class OrderAmount extends React.Component {
     if(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr'){
       this.setState({oos:true});
     }
-    else if(this.state.fromCurrency == 'idr' && (this.state.toAmount == 0 || this.state.fromAmount <100000)){
+    else if(this.state.fromCurrency == 'idr' && (this.state.fromAmount <100000)){
       alert("Plase send minimum 100,000 IDR")
     }
     else if(this.state.fromAmount == 0){
@@ -405,23 +369,27 @@ class OrderAmount extends React.Component {
             <Converter>
                 <InputNumber
                   label={"You send"}
+                  id={"send"}
+                  activeCondition={this.state.activeElement == 'send'}
                   amount={this.state.fromAmount}
                   currency={this.state.fromCurrency}
                   onChange={this.handleSourceChange}
                   onSelect={this.selectSource} 
                   onClick={this.toggleSource}
+                  onFocus={this.updateActiveElement}
+                  onBlur={this.updateDeactiveElement}
                   show={this.state.isSourceActive}/>
-                <ReverseButton>
-                  <img src="../../static/images/reverse.png" alt="rv"
-                    onClick={() => this.reverse(this.state.fromCurrency, this.state.toCurrency)}/>
-                </ReverseButton>
                 <InputNumber
                   label={"Recipient gets"}
+                  id={"receive"}
+                  activeCondition={this.state.activeElement == 'receive'}
                   amount={this.state.toAmount}
                   currency={this.state.toCurrency}
                   onChange={this.handleDestinationChange}
                   onSelect={this.selectDestination} 
                   onClick={this.toggleDestination}
+                  onFocus={this.updateActiveElement}
+                  onBlur={this.updateDeactiveElement}
                   show={this.state.isDestinationActive}/>
               <div style={{marginLeft: "20px", marginRight:"20px"}}>
                 <RateAndFee

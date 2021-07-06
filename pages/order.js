@@ -62,7 +62,7 @@ const ProgressItem = styled.li`
   font-size: 16px;
   color: #626B79;
 
-  > .step-box{
+  >.step-box{
     display: inline-block;
     margin-right: 10px;
     border: 0.613102px solid #626B79;
@@ -129,7 +129,6 @@ class Order extends React.Component {
 
     this.nextStep = this.nextStep.bind(this);
     this.previousStep = this.previousStep.bind(this);
-    this.backToAmount = this.backToAmount.bind(this);
     this.saveValues = this.saveValues.bind(this);
     this.generateVA = this.generateVA.bind(this);
     this.addOrder = this.addOrder.bind(this);
@@ -140,6 +139,7 @@ class Order extends React.Component {
     await ctx.store.dispatch(actions.getAdjustedRates('IDR','getAdjustedRates'));
     await ctx.store.dispatch(actions.getRates('GBP','IDR'));
     await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
+    await ctx.store.dispatch(actions.getOrderByUid(getCookie('_id', ctx.req),'getOrderByUid',ctx.req));
     return {};
   };
 
@@ -209,10 +209,10 @@ class Order extends React.Component {
                   nextStep={this.nextStep}
                   previousStep={this.previousStep}
                   saveValues={this.saveValues}
-                  backToAmount={this.backToAmount}
                   data={this.state} />
       case 4:
         return <Pay
+                  addOrder={this.addOrder}
                   nextStep={this.nextStep}
                   previousStep={this.previousStep}
                   saveValues={this.saveValues}
@@ -220,7 +220,6 @@ class Order extends React.Component {
                   generateVA={this.generateVA}/>
       case 5:
         return <Status
-                  addOrder={this.addOrder}
                   data={this.state}/>
     }
   }
@@ -241,13 +240,7 @@ class Order extends React.Component {
     })
   }
 
-  backToAmount() {
-    this.setState((state) => {
-      return {step: state.step - 2}
-    })
-  }
-
-  saveValues(data) {
+  async saveValues(data) {
     Object.entries(data).map(([key,value])=>{
       this.setState({
         [key]: value
@@ -319,7 +312,8 @@ class Order extends React.Component {
         </ContainerFluid>
         <Footer/>
       </div>
-    )} else {
+    )} 
+    else {
       return (
         <div>
           <Header />
@@ -330,7 +324,9 @@ class Order extends React.Component {
           />
           <ContainerFluid>
             {this.progressBar()}
-            <AwaitingConfirmation/>
+            <div style={{marginTop: "30px"}}>
+              <AwaitingConfirmation/>
+            </div>
           </ContainerFluid>
           <Footer/>
         </div>
@@ -345,7 +341,8 @@ const mapStateToProps = (state) => {
     userData: state.user.user_data,
     rate: state.rate.rates,
     vaNumber: state.va.vaNumber,
-    adjustedRates: state.fx.adjustedRates
+    adjustedRates: state.fx.adjustedRates,
+    orderArray: state.order.orders
   }
 }
 
