@@ -239,7 +239,9 @@ function Signup(props) {
 				<Form onSubmit={handleSubmit}>
 					<FormInner>
 						<center>
-							<Heading>Welcome to Transfree</Heading>
+							<Heading className="bold">
+								Welcome to Transfree
+							</Heading>
 							<BelowHeading>
 								Already have an account ?{" "}
 								<Link href="/login">

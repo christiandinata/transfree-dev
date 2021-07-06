@@ -7,15 +7,15 @@ import Footer from "../components/footer.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { getCookie } from "../utils/cookie";
-import {
-	Accordion,
-	AccordionItem,
-	AccordionItemHeading,
-	AccordionItemButton,
-	AccordionItemPanel,
-	AccordionItemState,
-} from "react-accessible-accordion";
-import "react-accessible-accordion/dist/fancy-example.css";
+// import {
+// 	Accordion,
+// 	AccordionItem,
+// 	AccordionItemHeading,
+// 	AccordionItemButton,
+// 	AccordionItemPanel,
+// 	AccordionItemState,
+// } from "react-accessible-accordion";
+// import "react-accessible-accordion/dist/fancy-example.css";
 import { List } from "../components/FAQData";
 import initialize from "../utils/initialize";
 import styled, { keyframes } from "styled-components";
@@ -27,6 +27,7 @@ const FAQ = () => {
 	const [clicked, setClicked] = useState(false);
 	// const [changed, setChanged] = useState(false);
 	const [searchWord, setSearchWord] = useState("");
+	const [activeIndex, setActiveIndex] = useState(0);
 
 	function toggleClick(index) {
 		window.scrollTo(0, 0);
@@ -109,44 +110,53 @@ const FAQ = () => {
 										</LeftButton>
 									</Left>
 									<Right>
-										<StyledAccordion allowZeroExpanded>
-											{item.accordion.map((items) => (
-												<AccordionStyledItem
-													key={items.uuid}>
-													<AccordionItemHeading>
-														<AccordionButton>
-															{items.heading}
-															<AccordionItemState>
-																{({
-																	expanded,
-																}) =>
-																	expanded ? (
-																		<FontAwesomeIcon
-																			icon={
-																				faTimes
-																			}
-																			width="24"
-																			height="24"
-																		/>
-																	) : (
-																		<FontAwesomeIcon
-																			icon={
-																				faChevronRight
-																			}
-																			width="24"
-																			height="24"
-																		/>
-																	)
+										{item.accordion.map((items, id) => {
+											const boxShadowed =
+												id === activeIndex
+													? "box-shadowed"
+													: "";
+											console.log(
+												"boxshadowed: ",
+												boxShadowed
+											);
+											console.log("id: ", id);
+											console.log(
+												"activeIndex: ",
+												activeIndex
+											);
+											return (
+												<AccordionContainer
+													key={id}
+													boxShadowed={boxShadowed}>
+													<AccordionButton
+														onClick={() =>
+															setActiveIndex(id)
+														}>
+														{items.heading}
+														{activeIndex === id ? (
+															<FontAwesomeIcon
+																icon={faTimes}
+																width="24"
+																height="24"
+															/>
+														) : (
+															<FontAwesomeIcon
+																icon={
+																	faChevronRight
 																}
-															</AccordionItemState>
-														</AccordionButton>
-													</AccordionItemHeading>
-													<AccordionPanel>
-														{items.belowHeading}
-													</AccordionPanel>
-												</AccordionStyledItem>
-											))}
-										</StyledAccordion>
+																width="24"
+																height="24"
+															/>
+														)}
+													</AccordionButton>
+													{activeIndex === id ? (
+														<AccordionPanel>
+															{items.belowHeading}
+														</AccordionPanel>
+													) : null}
+												</AccordionContainer>
+											);
+										})}
 									</Right>
 								</>
 							)}
@@ -176,6 +186,11 @@ const FAQ = () => {
 			<style jsx global>{`
 				.accordion {
 					border: none;
+				}
+
+				.box-Shadowed {
+					border: 2px solid #e9e9e9;
+					box-shadow: 0px 18px 50px rgba(98, 107, 121, 0.15);
 				}
 			`}</style>
 		</>
@@ -271,7 +286,7 @@ const FormButton = styled.button`
 
 const ListContainer = styled.div`
 	display: ${(props) => (props.clicked ? "flex" : "grid")};
-	grid-template-columns: repeat(auto-fill, 243px);
+	grid-template-columns: repeat(auto-fill, 240px);
 	/* grid-template-columns: repeat(auto-fill, minmax(186px, 1fr)); */
 	justify-content: center;
 	grid-column-gap: 24px;
@@ -340,13 +355,15 @@ const Right = styled.div`
 	flex-direction: column;
 `;
 
-const StyledAccordion = styled(Accordion)``;
+// const StyledAccordion = styled(Accordion)``;
 
-const AccordionStyledItem = styled(AccordionItem)`
+const AccordionContainer = styled.div`
 	background: #ffffff;
 	/* UI/Info */
-	border: 2px solid #e9e9e9;
-	box-shadow: 0px 18px 50px rgba(98, 107, 121, 0.15);
+	border: ${({ boxShadowed }) =>
+		boxShadowed ? "2px solid #e9e9e9" : "1px solid #e9e9e9"};
+	box-shadow: ${({ boxShadowed }) =>
+		boxShadowed ? "0px 18px 50px rgba(98, 107, 121, 0.15)" : null};
 	border-radius: 4px;
 	padding: 24px 16px 24px 24px;
 	min-width: 560px;
@@ -358,7 +375,7 @@ const AccordionStyledItem = styled(AccordionItem)`
 	}
 `;
 
-const AccordionButton = styled(AccordionItemButton)`
+const AccordionButton = styled.div`
 	font-weight: 500;
 	font-size: 16px;
 	line-height: 24px;
@@ -379,7 +396,7 @@ const FadeIn = keyframes`
 	}
 `;
 
-const AccordionPanel = styled(AccordionItemPanel)`
+const AccordionPanel = styled.div`
 	margin-top: 16px;
 	font-weight: normal;
 	font-size: 16px;

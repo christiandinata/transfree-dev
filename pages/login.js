@@ -124,7 +124,7 @@ function Login(props) {
 				<Form onSubmit={handleSubmit}>
 					<FormInner>
 						<center>
-							<Heading>Welcome back</Heading>
+							<Heading className="bold">Welcome back</Heading>
 							<BelowHeading>
 								New user ?{" "}
 								<Link href="/signup">
@@ -269,7 +269,7 @@ const BelowHeading = styled.p`
 const FormLabel = styled.label`
 	font-size: 12px;
 	text-align: start;
-	margin-bottom: 2px;
+	margin-bottom: 4px;
 	margin-left: 2px;
 	color: ${({ error, errorMessage, filled, selectedEmail, selectedPass }) => {
 		if (selectedEmail || selectedPass) {
@@ -321,7 +321,7 @@ const InputContainer = styled.div`
 	}};
 	// "2px solid #068EC8" : "1px solid #e2e2e2"
 	border-radius: 4px;
-	margin-bottom: 1rem;
+	margin-bottom: 16px;
 `;
 
 const ErrorText = styled.p`

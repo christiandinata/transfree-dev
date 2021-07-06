@@ -8,7 +8,7 @@ import {
 	faEyeSlash,
 	faCheckCircle,
 } from "@fortawesome/free-solid-svg-icons";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import * as axios from "axios";
 import ENV from "../config";
 import Header from "../components/header";
@@ -18,6 +18,7 @@ import OtpInput from "react-otp-input";
 
 //Component yang ditampilkan saat user memilih opsi forgot password
 function ForgotPassword(props) {
+	const Router = useRouter();
 	// states used in this page
 	const [step, setStep] = useState("email");
 
@@ -130,6 +131,7 @@ function ForgotPassword(props) {
 						sid: response.data.serviceSid,
 					});
 					setStep("otp");
+					setErrorMsg(false);
 				} else {
 					setStep(step);
 					console.log(props);
@@ -165,6 +167,7 @@ function ForgotPassword(props) {
 				.then(async (response) => {
 					if (response.data.success) {
 						setStep("success");
+						setErrorMsg(false);
 					} else {
 						setStep("otp");
 						setErrorMsg(true);
@@ -193,6 +196,7 @@ function ForgotPassword(props) {
 						seconds: 59,
 					});
 					setValues({ ...values, sid: response.data.serviceSid });
+					setErrorMsg(false);
 				} else {
 					setStep(step);
 					setErrorMsg(true);
@@ -252,7 +256,9 @@ function ForgotPassword(props) {
 					<RecoveryFormInner>
 						<center>
 							{step != "success" ? (
-								<Heading>Account Recovery</Heading>
+								<Heading className="bold">
+									Account Recovery
+								</Heading>
 							) : (
 								<SuccessHeading>
 									Account Recovery Success
@@ -272,7 +278,7 @@ function ForgotPassword(props) {
 									<BelowHeading1>
 										Enter the Verification Code
 									</BelowHeading1>
-									<BelowHeading>
+									<BelowHeading step="otp">
 										Transfree will send verification code to
 										your email <b>{values.email}</b>
 									</BelowHeading>
@@ -527,20 +533,28 @@ function ForgotPassword(props) {
 						)}
 						{step == "email" && (
 							<Button
-								// disabled={!values.email}
+								disabled={!values.email}
 								onClick={handleSend}>
 								Send
 							</Button>
 						)}
 						{step == "otp" && (
 							<Button
-								// disabled={!values.email}
+								disabled={!values.code}
+								step="otp"
 								onClick={() => setStep("password")}>
 								Send
 							</Button>
 						)}
 						{step == "password" && (
-							<Button onClick={handleVerify}>Send</Button>
+							<Button
+								disabled={
+									!values.password && !values.confirmPassword
+								}
+								error={error.password || error.confirmPassword}
+								onClick={handleVerify}>
+								Send
+							</Button>
 						)}
 						{step != "success" ? (
 							<BelowButton>
@@ -550,6 +564,7 @@ function ForgotPassword(props) {
 							</BelowButton>
 						) : (
 							<Button
+								type="submit"
 								success={true}
 								onClick={() => Router.push("/login")}>
 								Login
@@ -567,7 +582,6 @@ function ForgotPassword(props) {
 					display: flex;
 					justify-content: center;
 					align-items: center;
-					margin-top: 56px;
 				}
 
 				.inputStyling {
@@ -669,7 +683,15 @@ const BelowHeading = styled.div`
 	line-height: 17px;
 	text-align: center;
 	letter-spacing: -0.02em;
-	margin-bottom: ${(props) => props.step && "8px"};
+	margin-bottom: ${(props) => {
+		if (props.step == "email") {
+			return "32px";
+		} else if (props.step == "otp") {
+			return "56px";
+		} else {
+			return "24px";
+		}
+	}};
 
 	color: #232933;
 
@@ -718,8 +740,7 @@ const ResendCodeDiv = styled.div`
 const FormLabel = styled.label`
 	font-size: 12px;
 	text-align: start;
-	margin-top: 32px;
-	margin-bottom: -30px;
+	margin-bottom: 4px;
 	margin-left: 2px;
 	color: ${({
 		errorMessage,
@@ -743,7 +764,7 @@ const FormLabel = styled.label`
 `;
 
 const InputContainer = styled.div`
-	margin-top: ${(props) => (props.step ? "16px" : "32px")};
+	margin-bottom: 16px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -828,7 +849,15 @@ const FormInput = styled.input`
 `;
 
 const Button = styled.button`
-	margin-top: ${(props) => (props.success ? "40px" : "136px")};
+	margin-top: ${(props) => {
+		if (props.success) {
+			return "40px";
+		} else if (props.step == "otp") {
+			return "136px";
+		} else {
+			return "120px";
+		}
+	}};
 	margin-bottom: 16px;
 	height: 40px;
 	border-radius: 4px;
@@ -888,8 +917,8 @@ const ErrorDivInner = styled.div`
 const ErrorText = styled.p`
 	color: #ff0000;
 	font-size: 12px;
-	margin-top: 0px;
-	margin-bottom: 0px;
+	margin-top: -12px;
+	margin-bottom: 16px;
 `;
 
 const EyeIcon = styled.div`
