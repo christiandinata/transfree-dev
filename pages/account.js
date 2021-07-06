@@ -94,6 +94,10 @@ const SearchBar = styled.input`
 
   transition: all 0.3s linear;
 
+  ::placeholder {
+    color: #232933;
+  }
+
   &:focus{
     box-shadow: 0 0 0 2px #068EC8;
     outline: none;
@@ -360,13 +364,8 @@ class Account extends React.Component {
     return {};
   };
 
-  componentWillReceiveProps(nextProps) {
-    this.updateState();
-  }
-
   componentDidMount(){
     this.setState({orders: this.props.orderArray});
-    console.log(this.state.orders);
   }
 
   /* Resets transaction order items (display all order items after search)*/
@@ -381,7 +380,13 @@ class Account extends React.Component {
     let searchResult = [];
     let filter = this.searchInput.current.value.toLowerCase();
     for(const order in this.props.orderArray){
-      if(this.props.orderArray[order].name.toLowerCase().indexOf(filter) > -1 || moment(this.props.orderArray[order].completedAt).format("DD/MM/YYYY HH:mm").indexOf(filter) > -1 ){
+      if(this.props.orderArray[order].name.toLowerCase().indexOf(filter) > -1 ||
+        this.props.orderArray[order].toCurrency.toLowerCase().indexOf(filter) > -1 ||
+        this.props.orderArray[order].fromCurrency.toLowerCase().indexOf(filter) > -1 ||
+        moment(this.props.orderArray[order].completedAt).format("DD/MM/YYYY HH:mm").indexOf(filter) > -1|| 
+        ("processing".indexOf(filter) > -1 && this.props.orderArray[order].completedAt == 0) ||
+        ("completed".indexOf(filter) > -1 && this.props.orderArray[order].completedAt > 0)
+        ){
         searchResult.push(this.props.orderArray[order])
       }
     }
@@ -399,7 +404,7 @@ class Account extends React.Component {
             type="text" 
             ref={this.searchInput} 
             onChange={this.resetTransaction}
-            placeholder="Search transactions"
+            placeholder="Search transactions..."
           />
           <Button onClick={() => this.searchTransaction()}>Search</Button>
         </SearchContainer>
@@ -451,7 +456,7 @@ class Account extends React.Component {
         <div>
           <Header/>
           <ContainerFluid>
-                {this.renderContent()}
+              {this.renderContent()}
           </ContainerFluid>
         </div>
       );
