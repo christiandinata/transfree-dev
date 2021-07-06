@@ -330,8 +330,6 @@ class Recipient extends React.Component {
         purposeTransfer: this.purposeTransfer.current.value ? this.purposeTransfer.current.value : null,
         isSaveRecipient: this.state.isSaveRecipient
       }
-
-      console.log(this.accountNumber.current.value);
   
       if (this.name.current.value == '') {
         this.setState({isNameValid: false});

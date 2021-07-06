@@ -1,5 +1,7 @@
-import Link from 'next/link';
 import styled from "styled-components";
+import { connect } from 'react-redux';
+import actions from '../../redux/actions';
+import { getCookie } from '../../utils/cookie';
 
 const ContentContainer = styled.div`
   padding: 0px 20px 0px 20px;
@@ -51,30 +53,84 @@ const Button = styled.button`
 
 `;
 
+function StatusTemplate(props){
+  return(
+    <div>
+      <ContentContainer>
+        <IconContainer>
+          <img className="icon" src={props.icon} alt="checked"/>
+        </IconContainer>
+        <h2>{props.title}</h2>
+        <p>{props.desc}</p>
+
+        <Button onClick={(e) => {e.preventDefault();
+                          window.location.href= props.buttonAction;
+                        }}>
+          {props.buttonText}
+        </Button>
+      </ContentContainer>
+    </div>
+  )
+}
+
 class Status extends React.Component {
-  componentWillMount() {
-    this.props.addOrder();
+  constructor({props}) {
+    super(props);
+    this.state = {
+      finish: false
+    }
+    this.timer = this.timer.bind(this);
+  }
+
+  timer() {
+    this.props.getOrderByUid(getCookie('_id', null),'getOrderByUid', null);
+
+    if(this.props.orderArray){
+      if(this.props.orderArray[0].receivedAt > 0) { 
+        this.setState({finish: true});
+        clearInterval(this.intervalId);
+      }
+    }
+  }
+
+  componentDidMount() {
+    this.props.getOrderByUid(getCookie('_id', null),'getOrderByUid', null);
+    this.intervalId = setInterval(this.timer.bind(this), 15000);
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.intervalId);
   }
 
   render() {
     return (
-      <div>
-        <ContentContainer>
-          <IconContainer>
-            <img className="icon" src="../static/images/Asset Web/send money/ic-check.svg" alt="checked"/>
-          </IconContainer>
-          <h2>Awaiting Payment Confirmation</h2>
-          <p>Thank you, we are now reviewing your order details. We will send you an email regarding your payment instruction. Please check your email.</p>
+      !this.state.finish ?
 
-          <Button onClick={(e) => {e.preventDefault();
-                            window.location.href='/account';
-                          }}>
-            Check Transactions
-          </Button>
-        </ContentContainer>
+      <div>
+        <StatusTemplate
+          icon={"../static/images/Asset Web/send money/ic-check.svg"}
+          title={"Awaiting Payment Confirmation"}
+          desc={"Thank you, we are now reviewing your order details. We will send you an email regarding your payment instruction. Please check your email."}
+          buttonAction={"/account"}
+          buttonText={"Check Transactions"}/>
+      </div>
+      :
+      <div>
+        <StatusTemplate
+          icon={"../static/images/Asset Web/send money/ic-check-green.svg"}
+          title={"Transaction Success"}
+          desc={"Thank you lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"}
+          buttonAction={"/home"}
+          buttonText={"Back to Homepage"}/>
       </div>
     )
   }
 }
 
-export default Status
+const mapStateToProps = (state) => {
+  return {
+    orderArray: state.order.orders
+  }
+}
+
+export default connect(mapStateToProps, actions)(Status)
