@@ -38,7 +38,6 @@ class Index extends React.Component {
     this.hideDestination = this.hideDestination.bind(this);
     this.handleSourceChange = this.handleSourceChange.bind(this);
     this.handleDestinationChange = this.handleDestinationChange.bind(this);
-    this.reverse = this.reverse.bind(this);
     this.selectDestination = this.selectDestination.bind(this);
     this.selectSource = this.selectSource.bind(this);
   }
@@ -55,43 +54,6 @@ class Index extends React.Component {
       rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
       toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
     })
-  }
-
-  reverse(country, country2) {
-    this.setState({
-      fromCurrency: country2,
-      toCurrency: country,
-      toAmount: 0,
-      fromAmount: 0
-    });
-
-    if (country == 'idr') {
-      this.props.getRates(country2, country).then(() => {
-        if (this.state.fromCurrency == 'idr') {
-          this.setState({
-            rate: 1
-          });
-        } else {
-          this.setState({
-            rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
-          });
-        }
-      });
-    } else {
-      if (country2 == 'idr') {
-        this.props.getRates(country, country2).then(() => {
-          this.setState({
-            rate: this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100),
-          });
-        });
-      } else {
-        this.props.getRates(country2, country).then(() => {
-          this.setState({
-            rate: this.props.rate
-          });
-        });
-      }
-    }
   }
 
   toggleSource() {
@@ -254,10 +216,6 @@ class Index extends React.Component {
                 onSelect={this.selectSource} 
                 onClick={this.toggleSource}
                 show={this.state.isSourceActive}/>
-              <Hero.ReverseButton>
-                <img src="../../static/images/reverse.png" alt="rv"
-                  onClick={() => this.reverse(this.state.fromCurrency, this.state.toCurrency)}/>
-              </Hero.ReverseButton>
               <Hero.InputNumber
                 label={"Recipient gets"}
                 amount={this.state.toAmount}

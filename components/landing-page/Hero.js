@@ -71,7 +71,7 @@ export const ReverseButton = styled.div`
 const Exchange = styled.div`
     display: flex;
     flex-direction: column;
-    margin: 0 1.25rem;
+    margin: 0 1.25rem 1rem 1.25rem;
 
     input {
       width: 100%;
