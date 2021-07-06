@@ -53,7 +53,6 @@ const BackgroundContainer = styled.div`
       top: 20%;
     }
   }
-
 `;
 
 const SearchContainer = styled.div`
@@ -168,7 +167,6 @@ const ItemContainer = styled.div`
   @media only screen and (max-width: 600px) {
     padding: 20px;
   }
-  
 `;
 
 const ItemRow = styled.div`
@@ -368,6 +366,16 @@ class Account extends React.Component {
     this.setState({orders: this.props.orderArray});
   }
 
+  navbarTransaction(){
+    return(
+      <NavBarWhite 
+        isAuthenticated={true} 
+        username={this.props.username} 
+        id={this.props.id}
+        current={"transactions"}/>
+    )
+  }
+
   /* Resets transaction order items (display all order items after search)*/
   resetTransaction(){
     if(this.searchInput.current.value == ""){
@@ -418,7 +426,7 @@ class Account extends React.Component {
       if(this.props.orderArray.length > 0) { // Transaction is not empty
         return (
           <div>
-            <NavBarWhite isAuthenticated={true} username={this.props.username} id={this.props.id}/>
+            {this.navbarTransaction()}
             {this.headerTransaction()}
             <ContentContainer>
               <AllItemContainer>
@@ -432,7 +440,7 @@ class Account extends React.Component {
       } else {
         return (
           <div>
-            <NavBarWhite isAuthenticated={true} username={this.props.username} id={this.props.id}/>
+            {this.navbarTransaction()}
             {this.headerTransaction()}
             <EmptyTransaction/>
             <Footer/>
@@ -442,7 +450,7 @@ class Account extends React.Component {
     } else {
       return (
         <div>
-          <NavBarWhite isAuthenticated={true} username={this.props.username} id={this.props.id}/>
+          {this.navbarTransaction()}
           <AwaitingConfirmation/>
           <Footer/>
         </div>

@@ -38,35 +38,35 @@ export function NavBarBlue(props) {
 
 
 // Navbar for white background (the same one as the navbar at homepage when scrolled, with profile info)
-export function NavBarWhite({ isAuthenticated, username, id }) {
+export function NavBarWhite(props) {
 	return(
 		<Nav scrolled = "true" homepage = "true" marginTop = "0px">
 			<NavInner>
 				<a href = "/"><Logo src="../static/images/transfree-logo.png" scrolled = "true"/></a>
 				
 				{
-					isAuthenticated ?
+					props.isAuthenticated ?
 					<React.Fragment>
 						<NavigationCenter>
 							<NavigationChild href = "/order" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
 								Send Money
 							</NavigationChild>
-							<NavigationChild href = "/account" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
+							<NavigationChild href = "/account" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5" active={props.current == "transactions"}>
 								Transactions
 							</NavigationChild>
 							<NavigationChild href = "https://www.youtube.com/watch?v=8RzCs_sQ8Ak" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
 								How It Works
 							</NavigationChild>
-							<NavigationChild href = "/about" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
+							<NavigationChild href = "/about" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5" active={props.current == "aboutus"}>
 								About Us
 							</NavigationChild>
 						</NavigationCenter>
 						<NavigationChild href = "/user-profile" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
 							<ProfileInfo scrolled = "true" name = "true">
-								{username}
+								{props.username}
 							</ProfileInfo>
 							<ProfileInfo scrolled = "true" id = "true">
-								{id}
+								{props.id}
 							</ProfileInfo>
 						</NavigationChild>
 					</React.Fragment>
@@ -75,7 +75,7 @@ export function NavBarWhite({ isAuthenticated, username, id }) {
 				}
 
 				{
-					!isAuthenticated ?
+					!props.isAuthenticated ?
 					<React.Fragment>
 						<Navigation>
 							<NavigationChild href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
@@ -174,6 +174,11 @@ export const NavigationChild = styled.a`
 			scrolled ? "#009fe3" : navChildColor};
 		font-weight: 500;
 	}
+
+	${({ active }) => active && `
+		color: #009fe3;
+		font-weight: 500;
+  	`}
 `;
 
 export const SignInButton = styled.a`
