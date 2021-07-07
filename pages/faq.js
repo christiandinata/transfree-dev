@@ -38,6 +38,7 @@ const FAQ = () => {
 	function returningClick(index) {
 		window.scrollTo(0, 0);
 		setClicked(false);
+		setActiveIndex(0);
 		if (listDetail === index) {
 			// if listDetail question is already active, then close it
 			return setListDetail(null);
@@ -51,8 +52,12 @@ const FAQ = () => {
 		for (var i = 0; i < 8; i++) {
 			for (var j = 0; j < listItems[i].accordion.length; j++) {
 				if (
-					listItems[i].accordion[j].heading.includes(searchWords) ||
-					listItems[i].accordion[j].belowHeading.includes(searchWords)
+					listItems[i].accordion[j].heading
+						.toLowerCase()
+						.includes(searchWords.toLowerCase()) ||
+					listItems[i].accordion[j].belowHeading
+						.toLowerCase()
+						.includes(searchWords.toLowerCase())
 				) {
 					return [i, j];
 				}
@@ -84,7 +89,9 @@ const FAQ = () => {
 			{/* <NavBarWhite /> */}
 			<Menu />
 			<HeroContainer>
-				<HeroHeading>Hello, How Can We Help You?</HeroHeading>
+				<HeroHeading className="bold">
+					Hello, How Can We Help You?
+				</HeroHeading>
 				<SearchForm
 					onKeyDown={(e) => {
 						if (e.key === "Enter") {
@@ -108,11 +115,35 @@ const FAQ = () => {
 							onChange={(e) => setSearchText(e.target.value)}
 						/>
 					</InputContainer>
-					<FormButton type="submit">Search</FormButton>
+					<FormButton>Search</FormButton>
 				</SearchForm>
 			</HeroContainer>
-			<ListContainer clicked={clicked}>
-				{searchedID == -1 ? <>{/* search not found */}</> : null}
+			<ListContainer
+				clicked={clicked}
+				notFound={searchedID == -1 && true}>
+				{searchedID == -1 ? (
+					<center>
+						<IconNotFound src="../static/images/file_2.png" />
+						<QuestionInner>
+							<center>
+								<Heading className="bold">
+									Your Search is Not Found
+								</Heading>
+								<BelowHeading notFound={true}>
+									We’ve searched every keyword that you
+									typing, but did not match any keyword. If
+									you still can't find it, you can contact us
+									directly
+								</BelowHeading>
+								<a
+									href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree"
+									target="_blank">
+									<Button>Contact Us</Button>
+								</a>
+							</center>
+						</QuestionInner>
+					</center>
+				) : null}
 				{List.map((item, index) => {
 					return (
 						<>
@@ -120,14 +151,20 @@ const FAQ = () => {
 								clicked={clicked}
 								key={item.id}
 								onClick={() => toggleClick(item.id)}>
-								<CardIcon src={item.icon} />
+								<CardIcon
+									src={item.icon}
+									className={item.autoSize}
+								/>
 								<CardTitle>{item.iconTitle}</CardTitle>
 							</Card>
 							{listDetail === item.id && clicked && (
 								<>
 									<Left>
-										<CardIcon src={item.icon} />
-										<LeftCardTitle>
+										<CardIcon
+											src={item.icon}
+											className={item.autoSize}
+										/>
+										<LeftCardTitle className="bold">
 											{item.iconTitle}
 										</LeftCardTitle>
 										<LeftCardText>
@@ -165,6 +202,9 @@ const FAQ = () => {
 																searchWords
 															}
 															autoEscape={true}
+															caseSensitive={
+																false
+															}
 															textToHighlight={
 																headingToHighlight
 															}
@@ -195,6 +235,9 @@ const FAQ = () => {
 																autoEscape={
 																	true
 																}
+																caseSensitive={
+																	false
+																}
 																searchWords={
 																	searchWords
 																}
@@ -218,16 +261,18 @@ const FAQ = () => {
 			<QuestionContainer>
 				<QuestionInner>
 					<center>
-						<h1>Still have a question?</h1>
-						<p>
+						<Heading className="bold">
+							Still have a question?
+						</Heading>
+						<BelowHeading>
 							Lorem ipsum dolor sit amet, consectetur adipiscing
 							elit, sed do eiusmod tempor incididunt ut labore et
 							dolore magna aliqua
-						</p>
+						</BelowHeading>
 						<a
 							href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree"
 							target="_blank">
-							<button>Contact Us</button>
+							<Button>Contact Us</Button>
 						</a>
 					</center>
 				</QuestionInner>
@@ -246,10 +291,21 @@ const FAQ = () => {
 					border: 2px solid #e9e9e9;
 					box-shadow: 0px 18px 50px rgba(98, 107, 121, 0.15);
 				}
+
+				.autoSize {
+					width: 64px;
+					height: auto !important;
+				}
 			`}</style>
 		</>
 	);
 };
+
+const IconNotFound = styled.img`
+	width: 96px;
+	height: 120px;
+	margin-bottom: 24px;
+`;
 
 const HeroContainer = styled.div`
 	display: flex;
@@ -342,10 +398,20 @@ const ListContainer = styled.div`
 	display: ${(props) => (props.clicked ? "flex" : "grid")};
 	grid-template-columns: repeat(auto-fill, 240px);
 	/* grid-template-columns: repeat(auto-fill, minmax(186px, 1fr)); */
+	flex-direction: ${(props) => (props.notFound ? "column" : "row")};
 	justify-content: center;
 	grid-column-gap: 24px;
 	grid-row-gap: 40px;
-	padding: ${(props) => (props.clicked ? "64px 108px" : "80px 108px")};
+	padding: ${({ clicked, notFound }) => {
+		if (clicked) {
+			if (notFound) {
+				return "80px 120px 120px 120px";
+			}
+			return "64px 108px";
+		} else {
+			return "80px 108px";
+		}
+	}};
 	background: #fff;
 `;
 
@@ -502,67 +568,12 @@ const CardTitle = styled.div`
 `;
 
 const QuestionContainer = styled.div`
-	min-height: 248px;
 	background: #f3f5f7;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-
-	h1 {
-		&&& {
-			font-weight: bold;
-			font-size: 32px;
-			line-height: 40px;
-
-			/* identical to box height, or 125% */
-			display: flex;
-			align-items: center;
-
-			/* Neutral/Primary Text */
-			color: #232933;
-		}
-		margin: 0;
-	}
-
-	p {
-		&&& {
-			font-weight: normal;
-			font-size: 16px;
-			line-height: 24px;
-
-			/* or 150% */
-			text-align: center;
-
-			/* Neutral/ Slate */
-			color: #626b79;
-			margin: 0;
-		}
-	}
-
-	button {
-		background: #009fe3;
-
-		/* Brand/ Primary */
-		border: 1px solid #009fe3;
-		border-radius: 4px;
-		font-weight: 500;
-		font-size: 16px;
-		line-height: 24px;
-		padding: 8px 24px;
-		/* identical to box height, or 150% */
-		text-align: center;
-		letter-spacing: 0.2px;
-
-		/* Neutral/ White */
-		color: #ffffff;
-		margin: 0;
-		transition: 0.4s ease all;
-
-		&:hover {
-			background-color: #068ec8;
-		}
-	}
+	padding: 40px;
 `;
 
 const QuestionInner = styled.div`
@@ -571,7 +582,54 @@ const QuestionInner = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin: 40px auto;
+`;
+
+const Heading = styled.div`
+	font-weight: bold;
+	font-size: 32px;
+	line-height: 40px;
+
+	/* identical to box height, or 125% */
+
+	color: #232933;
+	margin-bottom: 16px;
+`;
+
+const BelowHeading = styled.div`
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 24px;
+
+	/* or 150% */
+	text-align: center;
+
+	/* Neutral/ Slate */
+	color: #626b79;
+	margin-bottom: ${({ notFound }) => (notFound ? "40px" : "24px")};
+`;
+
+const Button = styled.button`
+	background: #009fe3;
+
+	/* Brand/ Primary */
+	border: 1px solid #009fe3;
+	border-radius: 4px;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 24px;
+	padding: 8px 24px;
+	/* identical to box height, or 150% */
+	text-align: center;
+	letter-spacing: 0.2px;
+
+	/* Neutral/ White */
+	color: #ffffff;
+	margin: 0;
+	transition: 0.4s ease all;
+
+	&:hover {
+		background-color: #068ec8;
+	}
 `;
 
 FAQ.getInitialProps = async (ctx) => {

@@ -51,6 +51,7 @@ export const List = [
 	{
 		id: 2,
 		icon: "../static/images/sending-money.png",
+		autoSize: "autoSize",
 		iconTitle: "Sending Money",
 		iconText:
 			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -119,6 +120,7 @@ export const List = [
 	{
 		id: 4,
 		icon: "../static/images/pay-transfer.png",
+		autoSize: "autoSize",
 		iconTitle: "Pay for My Transfer",
 		iconText:
 			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -163,6 +165,7 @@ export const List = [
 	{
 		id: 6,
 		icon: "../static/images/receiving-money.png",
+		autoSize: "autoSize",
 		iconTitle: "Receiving Money",
 		iconText:
 			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
