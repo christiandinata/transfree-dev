@@ -3,7 +3,6 @@ import Header from "../components/header.js";
 import { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import actions from "../redux/actions";
-import Menu from "../components/menu.js";
 import Footer from "../components/footer.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -12,10 +11,11 @@ import Highlighter from "react-highlight-words";
 import { List } from "../components/FAQData";
 import initialize from "../utils/initialize";
 import styled, { keyframes } from "styled-components";
+import { NavBarWhite } from "../components/MenuComponents.js";
 
 //Long text untuk FAQ
 
-const FAQ = () => {
+const FAQ = (props) => {
 	const [listDetail, setListDetail] = useState(false);
 	const [clicked, setClicked] = useState(false);
 	const [searchText, setSearchText] = useState("");
@@ -84,11 +84,16 @@ const FAQ = () => {
 		}
 	}, [searchText]);
 
+	console.log(props.username);
+
 	return (
 		<>
 			<Header />
-			{/* <NavBarWhite /> */}
-			<Menu />
+			<NavBarWhite
+				username={props.username}
+				id={props.id}
+				isAuthenticated={true}
+			/>
 			<HeroContainer>
 				<HeroHeading className="bold">
 					Hello, How Can We Help You?
@@ -309,6 +314,7 @@ const IconNotFound = styled.img`
 `;
 
 const HeroContainer = styled.div`
+	margin-top: 72px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -644,7 +650,10 @@ FAQ.getInitialProps = async (ctx) => {
 };
 
 const mapStateToProps = (state) => {
-	return {};
+	return {
+		username: state.user.user_data ? state.user.user_data.fullname : "",
+		id: state.user.user_data ? state.user.user_data.idNumber : "",
+	};
 };
 
 export default connect(mapStateToProps, actions)(FAQ);

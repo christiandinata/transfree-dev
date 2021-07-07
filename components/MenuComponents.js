@@ -36,68 +36,100 @@ export function NavBarBlue(props) {
 	);
 }
 
-
 // Navbar for white background (the same one as the navbar at homepage when scrolled, with profile info)
 export function NavBarWhite({ isAuthenticated, username, id }) {
-	return(
-		<Nav scrolled = "true" homepage = "true">
+	return (
+		<Nav scrolled="true" homepage="true">
 			<NavInner>
-				<a href = "/"><Logo src="../static/images/transfree-logo.png" scrolled = "true"/></a>
-				
-				{
-					isAuthenticated ?
+				<a href="/">
+					<Logo
+						src="../static/images/transfree-logo.png"
+						scrolled="true"
+					/>
+				</a>
+
+				{isAuthenticated ? (
 					<React.Fragment>
 						<NavigationCenter>
-							<NavigationChild href = "/order" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
+							<NavigationChild
+								href="/order"
+								scrolled="true"
+								homepage="true"
+								navChildColor="#f5f5f5">
 								Send Money
 							</NavigationChild>
-							<NavigationChild href = "/account" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
+							<NavigationChild
+								href="/account"
+								scrolled="true"
+								homepage="true"
+								navChildColor="#f5f5f5">
 								Transactions
 							</NavigationChild>
-							<NavigationChild href = "https://www.youtube.com/watch?v=8RzCs_sQ8Ak" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
+							<NavigationChild
+								href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak"
+								scrolled="true"
+								homepage="true"
+								navChildColor="#f5f5f5">
 								How It Works
 							</NavigationChild>
-							<NavigationChild href = "/about" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
+							<NavigationChild
+								href="/about"
+								scrolled="true"
+								homepage="true"
+								navChildColor="#f5f5f5">
 								About Us
 							</NavigationChild>
 						</NavigationCenter>
-						<NavigationChild href = "/user-profile" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
-							<ProfileInfo scrolled = "true" name = "true">
+						<NavigationChild
+							href="/user-profile"
+							scrolled="true"
+							homepage="true"
+							navChildColor="#f5f5f5">
+							<ProfileInfo scrolled="true" name="true">
 								{username}
 							</ProfileInfo>
-							<ProfileInfo scrolled = "true" id = "true">
+							<ProfileInfo scrolled="true" id="true">
 								{id}
 							</ProfileInfo>
 						</NavigationChild>
 					</React.Fragment>
-					:
-					null
-				}
+				) : null}
 
-				{
-					!isAuthenticated ?
+				{!isAuthenticated ? (
 					<React.Fragment>
 						<Navigation>
-							<NavigationChild href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
+							<NavigationChild
+								href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak"
+								scrolled="true"
+								homepage="true"
+								navChildColor="#f5f5f5">
 								How It Works
 							</NavigationChild>
-							<NavigationChild href="/about" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
+							<NavigationChild
+								href="/about"
+								scrolled="true"
+								homepage="true"
+								navChildColor="#f5f5f5">
 								About Us
 							</NavigationChild>
-							<SignInButton href = "/login" scrolled = "true" homepage = "true">
+							<SignInButton
+								href="/login"
+								scrolled="true"
+								homepage="true">
 								Sign In
 							</SignInButton>
-							<RegisterButton href = "/signup" scrolled = "true" homepage = "true">
+							<RegisterButton
+								href="/signup"
+								scrolled="true"
+								homepage="true">
 								Register
 							</RegisterButton>
 						</Navigation>
-        	</React.Fragment> 
-					:
-					null
-				}
+					</React.Fragment>
+				) : null}
 			</NavInner>
 		</Nav>
-	)
+	);
 }
 
 export const Nav = styled.div`
@@ -169,13 +201,18 @@ export const NavigationChild = styled.a`
 	line-height: ${({ homepage }) => (homepage ? "24px" : "19px")};
 	color: ${({ scrolled, homepage, navChildColor }) =>
 		homepage && scrolled ? "#000" : navChildColor};
-
 	&:hover {
 		color: ${({ scrolled, navChildColor }) =>
 			scrolled ? "#009fe3" : navChildColor};
 		font-weight: 500;
 		letter-spacing: 0.2px;
 	}
+	${({ active }) =>
+		active &&
+		`
+		color: #009fe3;
+		font-weight: 500;
+  	`}
 `;
 
 export const SignInButton = styled.a`
@@ -217,11 +254,10 @@ export const RegisterButton = styled.a`
 	line-height: 24px;
 	font-style: normal;
 	font-weight: normal;
-
 	&:hover {
-		background-color: ${({ scrolled, homepage }) => (
-			homepage && scrolled ? "#068EC8" : "#eaeaea")}; 
-		border: 1px solid #068EC8;
+		background-color: ${({ scrolled, homepage }) =>
+			homepage && scrolled ? "#068EC8" : "#eaeaea"};
+		border: 1px solid #068ec8;
 	}
 `;
 
