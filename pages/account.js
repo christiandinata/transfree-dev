@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import initialize from '../utils/initialize';
 import actions from '../redux/actions';
 import { getCookie } from '../utils/cookie';
-import { AwaitingConfirmation, EmptyTransaction } from '../components/order/Pending';
+import { AwaitingConfirmation } from '../components/order/Pending';
+import { EmptyTransaction, EmptySearch } from '../components/transactions/EmptyTransaction';
 import { NavBarWhite } from '../components/MenuComponents';
 import Footer from '../components/footer';
 import moment from 'moment';
@@ -386,16 +387,27 @@ class Account extends React.Component {
   /* Function to search transaction from order name or order clompeted date */
   searchTransaction(){
     let searchResult = [];
-    let filter = this.searchInput.current.value.toLowerCase();
+    let words = this.searchInput.current.value.toLowerCase().split(" ");
     for(const order in this.props.orderArray){
-      if(this.props.orderArray[order].name.toLowerCase().indexOf(filter) > -1 ||
-        this.props.orderArray[order].toCurrency.toLowerCase().indexOf(filter) > -1 ||
-        this.props.orderArray[order].fromCurrency.toLowerCase().indexOf(filter) > -1 ||
-        moment(this.props.orderArray[order].completedAt).format("DD/MM/YYYY HH:mm").indexOf(filter) > -1|| 
-        ("processing".indexOf(filter) > -1 && this.props.orderArray[order].completedAt == 0) ||
-        ("completed".indexOf(filter) > -1 && this.props.orderArray[order].completedAt > 0)
-        ){
-        searchResult.push(this.props.orderArray[order])
+      let count = 0;
+      for(const word in words){
+        if(this.props.orderArray[order].name.toLowerCase().indexOf(words[word]) > -1 ||
+          this.props.orderArray[order].toCurrency.toLowerCase().indexOf(words[word]) > -1 ||
+          this.props.orderArray[order].fromCurrency.toLowerCase().indexOf(words[word]) > -1 ||
+          String(this.props.orderArray[order].fromAmount).indexOf(words[word]) > -1 ||
+          String(this.props.orderArray[order].toAmount).indexOf(words[word]) > -1 ||
+          moment(this.props.orderArray[order].completedAt).format("DD/MM/YYYY HH:mm").indexOf(words[word]) > -1|| 
+          ("processing".indexOf(words[word]) > -1 && this.props.orderArray[order].completedAt == 0) ||
+          ("completed".indexOf(words[word]) > -1 && this.props.orderArray[order].completedAt > 0)
+          ){
+            count++;
+        }
+        else{
+          break;
+        }
+      }
+      if(count == words.length){
+        searchResult.push(this.props.orderArray[order]);
       }
     }
     this.setState({orders: searchResult});
@@ -430,7 +442,9 @@ class Account extends React.Component {
             {this.headerTransaction()}
             <ContentContainer>
               <AllItemContainer>
-                <h3 style={{textAlign: "center", display: this.state.orders.length == 0 ? "block" : "none" }}>No results found.</h3>
+                <div style = {{display: this.state.orders.length == 0 ? "block" : "none"}}>
+                  <EmptySearch style = {{display: this.state.orders.length == 0 ? "block" : "none"}}/>
+                </div>
                 <OrderItem ordersList={this.state.orders}/>
               </AllItemContainer>
             </ContentContainer>
