@@ -258,10 +258,6 @@ class Dashboard extends React.Component {
                 onSelect={this.selectSource} 
                 onClick={this.toggleSource}
                 show={this.state.isSourceActive}/>
-              <Hero.ReverseButton>
-                <img src="../../static/images/reverse.png" alt="rv"
-                  onClick={() => this.reverse(this.state.fromCurrency, this.state.toCurrency)}/>
-              </Hero.ReverseButton>
               <Hero.InputNumber
                 label={"Recipient gets"}
                 amount={this.state.toAmount}

@@ -15,8 +15,10 @@ const Features = styled.div`
     margin-bottom: 0;
     font-family: "Avenir LT Pro Black", sans-serif !important;
   }
+  p { width: 60%; }
   @media only screen and (max-width: 800px) {
-    margin-top: -4rem;
+    margin-top: -12rem;
+    p { width: 95%; }
   }`
 
 const Benefit = styled.div`
@@ -40,8 +42,11 @@ const BoxBenefit = styled.div`
   }
   h3 {
     font-family: "Avenir LT Pro Black", sans-serif !important;
+    margin-bottom: 0;
   }
   p {
+    margin-top: 16px;
+    width: 100%;
     color: #626B79;
   }
 `
@@ -52,7 +57,7 @@ export function Primary() {
   return (
     <Features>
       <h2>Why Should you use Transfree?</h2>
-      <p style={{ width: "60%" }}>
+      <p>
         Does your family need it for an emergency? And when you use a cheaper option, 
         it sometimes takes longer for your money to arrive Don't worry, we are here now
       </p>

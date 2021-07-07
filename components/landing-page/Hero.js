@@ -11,14 +11,14 @@ export const MapBackground = styled.div`
   background-repeat: no-repeat;
   height: 750px;
   @media only screen and (max-width: 800px) {
-    height: 1120px;
+    height: 1280px;
   }`
 
 export const Overlay = styled.div`
   background: linear-gradient(178.43deg, #009FE3 1.26%, rgba(0, 159, 227, 0) 96.85%);
   height: 780px;
   @media only screen and (max-width: 800px) {
-    height: 1120px;
+    height: 1280px;
   }`
 
 export const HeroDiv = styled.div`
@@ -36,6 +36,7 @@ export const HeroDiv = styled.div`
     font-size: 2.5rem;
     font-family: "Avenir LT Pro Black", sans-serif !important;
     line-height: 140%;
+    margin-bottom: 0;
   }
   transition: all 0.5s ease-in;
   @media only screen and (max-width: 800px) {
@@ -53,19 +54,10 @@ export const Converter = styled.div`
   background: #FFFFFF;
   border-radius: 16px;
   color: #626B79;
-  padding: 15px 0 23px;
+  padding: 2rem 0;
   flex-basis: 35%;
   @media only screen and (max-width: 800px) {
     text-align: left;
-  }`
-
-export const ReverseButton = styled.div`
-  text-align: right;
-  img {
-    width: 1.25rem;
-    height: 1.25rem; 
-    margin: 0.5rem 3.5rem 0 0;
-    cursor: pointer; 
   }`
 
 const Exchange = styled.div`
@@ -182,16 +174,28 @@ span {
 const TitleDiv = styled.div`
     flex-basis: 60%;
     p { 
-      width: 90%;
+      width: 80%;
       text-align: left !important; 
     }
     @media only screen and (max-width: 800px) {
       p { text-align: center !important; }
     }`
 
+const InputFlex = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 0.75rem;`
+
 const iconStyle = {
   width: "3rem",
   color: "#FFFFFF"
+}
+
+const alignRight = {
+  textAlign: "right",
+  fontSize: "1.25rem",
+  fontFamily: "Avenir LT Pro Black, sans-serif"
 }
 
 const flags = [
@@ -248,7 +252,7 @@ export function InputNumber(props) {
   return (
     <Exchange>
       <span>{props.label}</span>
-      <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", gap: "0.75rem" }}>
+      <InputFlex>
         <NumberFormat
         type="text"
         thousandSeparator={true}
@@ -266,7 +270,7 @@ export function InputNumber(props) {
             show={props.show}
             onSelect={(c) => props.onSelect(c)} />
         </Currency>
-      </div>
+      </InputFlex>
     </Exchange>
   )
 }
@@ -278,19 +282,15 @@ export function RateAndFee(props) {
       <ResultFlex>
         <span>Conversion Rate</span>
         <NumberFormat
-          style={{ 
-            textAlign: "right", 
-            fontSize: "1.25rem", 
-            fontFamily: "Avenir LT Pro Black" 
-          }}
-          displayType={'text'}
+          style={alignRight}
+          displayType='text'
           thousandSeparator={true}
           decimalScale={2}
           value={props.rate}/>
       </ResultFlex>
       <ResultFlex>
         <span>Transfer fee</span>
-        <span style={{ textAlign: "right", fontSize: "1.25rem", fontFamily: "Avenir LT Pro Black" }}>{props.fee}</span>
+        <span style={alignRight}>{props.fee}</span>
       </ResultFlex>
     </ResultConversion>
   )

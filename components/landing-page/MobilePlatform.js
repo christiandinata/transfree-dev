@@ -33,6 +33,9 @@ const MobileDiv = styled.div`
     h2, p {
       margin: 1rem auto;
     }
+    img {
+      max-width: 90%;
+    }
   }
 `
 

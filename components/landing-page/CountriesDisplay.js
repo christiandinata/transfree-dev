@@ -81,6 +81,10 @@ const FlagDiv = styled.div`
   
   ${ props => props.transparent ? "&:hover { background: #FFFFFF55; }" : null }`
 
+const Strong = styled.span`
+  font-size: 2.25rem;
+`
+
 const flags = [
   { id: "id", name: "Indonesia" },
   { id: "sg", name: "Singapore" },
@@ -105,7 +109,7 @@ export function CountriesDisplay() {
 
   return(
     <CenterDiv>
-      <h2>Send money to over 80 countries worldwide and choose from over 20 currencies</h2>
+      <h2>Send money to over <Strong>80</Strong> countries worldwide and choose from over <Strong>20</Strong> currencies</h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
         incididunt ut labore et dolore magna aliqua</p>
       <FlagsDisplay>

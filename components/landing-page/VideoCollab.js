@@ -10,7 +10,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 90%;
+  width: 80%;
   max-width: 1124px;
   margin 0 auto;
   @media only screen and (max-width: 800px) {
@@ -22,16 +22,20 @@ const SubtitleContainer = styled.div`
   flex-basis: 55%;
   margin-bottom: 1rem;
   h2 {
-    margin-bottom: 0;
+    margin: 0 auto;
     font-size: 1.75rem;
     font-family: "Avenir LT Pro Black", sans-serif !important;
   }
   p {
-    margin: 16px auto 0 0;
-    width: 70%;
+    margin: 12px auto 0 0;
+    width: 80%;
   }
  @media only screen and (max-width: 800px) {
     text-align: center;
+    p {
+      margin 16px auto;
+      width: 90%;
+    }
  }`
 
 const Collaborators = styled.div`
@@ -53,11 +57,14 @@ const ImageBg = styled.div`
   img:hover {
     filter: drop-shadow(0 0 0.75rem lightgray);
     cursor: pointer;
-  }
-`
+  }`
 
 const GreyOverlay = styled.div`
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   z-index: 3;
   width: 100%;
   max-width: 1280px;
@@ -69,7 +76,6 @@ const GreyOverlay = styled.div`
     color: #FFFFFF;
     font-size: 1.75rem;
     font-family: "Avenir LT Pro Black", sans-serif !important;
-    margin-top: 6rem;
     margin-bottom: 0;
   }`
 
@@ -114,20 +120,20 @@ export function VideoCollab() {
           allowFullScreen />
       }
       <GreyBg>
-      <Container>
-        <SubtitleContainer>
-          <h2>Our Collaborators</h2>
-          <p>Lorem ipsum dolor sit amet, 
-            consectetur adipiscing elit, sed do eiusmod tempor 
-            incididunt ut labore et dolore magna aliqua</p>
-        </SubtitleContainer>
-        <Collaborators>
-          <img src={imagePath + "kemnaker.svg"} alt="kemnaker"/>
-          <img src={imagePath + "ristekdikti.svg"} alt="ristekdikti"/>
-          <img src={imagePath + "kemnaker.svg"} alt="kemnaker"/>
-          <img src={imagePath + "ristekdikti.svg"} alt="ristekdikti"/>
-        </Collaborators>
-      </Container>
+        <Container>
+          <SubtitleContainer>
+            <h2>Our Collaborators</h2>
+            <p>Lorem ipsum dolor sit amet, 
+              consectetur adipiscing elit, sed do eiusmod tempor 
+              incididunt ut labore et dolore magna aliqua</p>
+          </SubtitleContainer>
+          <Collaborators>
+            <img src={imagePath + "kemnaker.svg"} alt="kemnaker"/>
+            <img src={imagePath + "ristekdikti.svg"} alt="ristekdikti"/>
+            <img src={imagePath + "kemnaker.svg"} alt="kemnaker"/>
+            <img src={imagePath + "ristekdikti.svg"} alt="ristekdikti"/>
+          </Collaborators>
+        </Container>
       </GreyBg>
     </>
   )

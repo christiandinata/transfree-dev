@@ -15,7 +15,7 @@ import { PrButton, WAButton } from '../components/landing-page/Buttons.js';
 import { Primary } from '../components/landing-page/Primary.js';
 import { CountriesDisplay } from '../components/landing-page/CountriesDisplay.js';
 import { Testmonies } from '../components/landing-page/Testimonies.js';
-import { LeftFeatureRow, RightFeatureRow } from '../components/landing-page/Feature.js';
+import { LeftFeatureRow, RightFeatureRow, FeatureCarousel, listFeatures } from '../components/landing-page/Feature.js';
 import { MobilePlatform } from '../components/landing-page/MobilePlatform.js';
 import { VideoCollab } from '../components/landing-page/VideoCollab.js';
 
@@ -30,7 +30,8 @@ class Index extends React.Component {
       fromCurrency: 'gbp',
       toCurrency: 'idr',
       fromAmount: 1000,
-      toAmount: 0
+      toAmount: 0,
+      isMobile: false
     };
     this.toggleSource = this.toggleSource.bind(this);
     this.hideSource = this.hideSource.bind(this);
@@ -52,7 +53,17 @@ class Index extends React.Component {
   componentDidMount() {
     this.setState({
       rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
-      toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
+      toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100)),
+      isMobile: window.innerWidth <= 800
+    })
+    window.addEventListener('resize', () => {
+      this.setState({ isMobile: window.innerWidth <= 800 })
+    })
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', () => {
+      this.setState({ isMobile: window.innerWidth <= 800 })
     })
   }
 
@@ -247,8 +258,21 @@ class Index extends React.Component {
           <Primary/>
         </div>
         
-        <LeftFeatureRow/>
-        <RightFeatureRow/>
+        { this.state.isMobile ?
+          <>
+            <FeatureCarousel listFeatures={listFeatures}/>
+          </>
+          :
+          <>
+            {
+              listFeatures.map((ftr, idx) => (
+                idx % 2 == 0 ? 
+                <LeftFeatureRow {...ftr}/> :
+                <RightFeatureRow {...ftr}/>
+              ))
+            } 
+          </>
+        }
 
         {/* Video and Collaborators */}
         <div className="row">
