@@ -18,11 +18,11 @@ import styled, { keyframes } from "styled-components";
 const FAQ = () => {
 	const [listDetail, setListDetail] = useState(false);
 	const [clicked, setClicked] = useState(false);
-	// const [changed, setChanged] = useState(false);
 	const [searchText, setSearchText] = useState("");
 	const [activeIndex, setActiveIndex] = useState(0);
 	const searchWords = searchText.split(/\s/).filter((word) => word);
 
+	// click function for card's onClick
 	function toggleClick(index) {
 		window.scrollTo(0, 0);
 		setClicked(true);
@@ -69,6 +69,7 @@ const FAQ = () => {
 	var ListItems = List;
 	var searchedID = getIndex(ListItems, searchText);
 
+	// change index based on search input text
 	useEffect(() => {
 		if (searchText == "" || searchText == undefined) {
 			setListDetail(null);
