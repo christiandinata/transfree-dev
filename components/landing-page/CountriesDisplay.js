@@ -6,6 +6,7 @@ const CenterDiv = styled.div`
   flex-direction: column;
   flex-grow: 0;
   align-items: center;
+  justify-content: center;
   margin: 0 auto;
   text-align: center;
   width: 95%;
@@ -35,7 +36,7 @@ const CenterDiv = styled.div`
     background-color: #FFFFFF55;
   }
   @media only screen and (max-width: 800px) {
-    p { width: 90%; }
+    p { width: 100%; }
   }
 `
 
@@ -53,9 +54,11 @@ const FlagsDisplay = styled.div`
   }
 
   @media only screen and (max-width: 800px) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 1rem;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
     row-gap: 1rem;
+    align-items: center;
+    width: 75%;
+    max-width: 360px;
   }`
 
 const FlagDiv = styled.div`
@@ -67,7 +70,7 @@ const FlagDiv = styled.div`
   background: ${ props => props.transparent ? 
     "transparent" : "#FFFFFF66" };
   border: ${ props => props.transparent ? "0.5px solid #FFFFFF" : "none" };
-  border-radius: 0.25rem;
+  border-radius: 4px;
   padding: 0.75rem 2rem 0.75rem 1.5rem;
   text-align: left;
   font-size: 1rem;
@@ -77,6 +80,10 @@ const FlagDiv = styled.div`
   }
   
   ${ props => props.transparent ? "&:hover { background: #FFFFFF55; }" : null }`
+
+const Strong = styled.span`
+  font-size: 2.25rem;
+`
 
 const flags = [
   { id: "id", name: "Indonesia" },
@@ -102,7 +109,7 @@ export function CountriesDisplay() {
 
   return(
     <CenterDiv>
-      <h2>Send money to over 80 countries worldwide and choose from over 20 currencies</h2>
+      <h2>Send money to over <Strong>80</Strong> countries worldwide and choose from over <Strong>20</Strong> currencies</h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
         incididunt ut labore et dolore magna aliqua</p>
       <FlagsDisplay>

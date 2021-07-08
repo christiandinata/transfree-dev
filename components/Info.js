@@ -2,9 +2,8 @@ import styled from 'styled-components'
 
 export const BlueHeader = styled.div`
   background: #1E345B;
-  height: 250px;
-  margin-top: 72px;
-  padding-bottom: 2rem;`
+  height: 270px;
+  margin-top: 72px;`
   
 export const Batik = styled.div`
   position: absolute;
@@ -12,10 +11,9 @@ export const Batik = styled.div`
   background-repeat: no-repeat;
   background-position: center top;
   width: 100%;
-  height: 250px;
+  height: 270px;
   color: #FFFFFF;
   text-align: center;
-  padding-bottom: 2rem;
   h1 {
     margin: 4rem 0 0;
     color: #FFFFFF;
@@ -28,6 +26,7 @@ export const Batik = styled.div`
   }
   @media only screen and (max-width: 800px) {
     p { width: 95%; }
+    h1 { font-size: 1.75rem; }
   }`
 
 export const Container = styled.div`

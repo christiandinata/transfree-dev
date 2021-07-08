@@ -12,10 +12,13 @@ const Features = styled.div`
   max-width: 1124px;
   h2 {
     font-size: 1.75rem;
+    margin-bottom: 0;
     font-family: "Avenir LT Pro Black", sans-serif !important;
   }
+  p { width: 60%; }
   @media only screen and (max-width: 800px) {
-    margin-top: -4rem;
+    margin-top: -12rem;
+    p { width: 95%; }
   }`
 
 const Benefit = styled.div`
@@ -37,7 +40,13 @@ const BoxBenefit = styled.div`
     margin-top: 1rem;
     width: 80px !important;
   }
+  h3 {
+    font-family: "Avenir LT Pro Black", sans-serif !important;
+    margin-bottom: 0;
+  }
   p {
+    margin-top: 16px;
+    width: 100%;
     color: #626B79;
   }
 `
@@ -48,25 +57,25 @@ export function Primary() {
   return (
     <Features>
       <h2>Why Should you use Transfree?</h2>
-      <p style={{ width: "60%" }}>
+      <p>
         Does your family need it for an emergency? And when you use a cheaper option, 
         it sometimes takes longer for your money to arrive Don't worry, we are here now
       </p>
       <Benefit>
         <BoxBenefit>
-          <img src={imagePath + "rate.png"} />
+          <img src={imagePath + "ic-better rate.svg"} />
           <h3>Better rate for Transfree</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
             eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
         </BoxBenefit>
         <BoxBenefit>
-          <img src={imagePath + "time.png"} />
+          <img src={imagePath + "ic-time.svg"} />
           <h3>Quickly sent quickly arrived</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
             eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
         </BoxBenefit>
         <BoxBenefit>
-          <img src={imagePath + "uncharge.png"} />
+          <img src={imagePath + "ic-uncharge.svg"} />
           <h3>Unchargeable for Transfer</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
             eiusmod tempor incididunt ut labore et dolore magna aliqua</p>

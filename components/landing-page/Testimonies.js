@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useState } from "react"
 import Slider from "react-slick"
 import styled from "styled-components"
 
@@ -6,8 +6,11 @@ const TestimoniesBG = styled.div`
   background: linear-gradient(to right, #009FE3 0%, #009FE3 15%, #F39200 15%, #F39200 100%);
   max-width: 1280px;
   overflow: hidden;
-  height: 400px;
-  margin: 0 auto;`
+  margin: 0 auto;
+  padding-bottom: 1rem;
+  @media only screen and (max-width: 800px) {
+    background: #F39200;
+  }`
 
 const TestimonyDiv = styled.div`
   align-items: center;
@@ -17,12 +20,29 @@ const TestimonyDiv = styled.div`
   flex-direction: row;
   justify-content: center;
   color: #FFFFFF;
-  overflow: hidden;
   img {
     border-radius: 5px;
     width: 15rem;
     height: 17rem;
     object-fit: cover;
+  }
+  @media only screen and (max-width: 800px) {
+    flex-direction: column;
+    align-items: center;
+    img {
+      width: 85%;
+      height: 85%;
+    }
+  }`
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  overflow: hidden;
+  column-gap: 0.75rem;
+  @media only screen and (max-width: 800px) {
+    margin-top: 1.5rem;
   }`
 
 const Arrow = styled.img`
@@ -32,6 +52,9 @@ const Arrow = styled.img`
   cursor: pointer;
   &:hover {
     transform: translateY(-3px);
+  }
+  @media only screen and (max-width: 800px) {
+    display: none;
   }`
 
 const Subtitle = styled.div`
@@ -50,7 +73,34 @@ const Subtitle = styled.div`
     color: black;
     font-family: "Avenir LT Pro Black", sans-serif !important; 
   }
-  p { width: 60%; color: #3E495E; }`
+  p { width: 60%; color: #3E495E; }
+  @media only screen and (max-width: 800px) {
+    p { width: 90%; }
+  }`
+
+const Quote = styled.div`
+  font-size: 2.5rem;
+  font-family: "Avenir LT Pro Black", sans-serif;
+  line-height: 1;
+`
+
+const Review = styled.p`
+  max-height: 250;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 0;
+`
+
+const Reviewer = styled.div`
+  font-size: 1.25rem;
+  font-family: "Avenir LT Pro Black";
+  text-transform: uppercase;
+`
+
+const Place = styled.div`
+  font-weight: 600;
+  margin-bottom: 1rem;
+`
 
 const carouselStyle = {
   margin: "3% 0 0.5rem 6%",
@@ -143,24 +193,21 @@ function Testimony(props) {
   return(
     <TestimonyDiv>
       <img src={ props.img } alt="image"/>
-      <div style={{ fontSize: "2.5rem", fontFamily: "Avenir LT Pro Black", lineHeight: 1 }}>“</div>
-      <div>
-        <p style={{ maxHeight: 300, overflow: "hidden", textOverflow: "ellipsis" }}>{ props.review }</p>
-        <div style={{ fontSize: "1.25rem", fontFamily: "Avenir LT Pro Black" }}>{ props.name }</div>
-        <div style={{ fontWeight: 600 }}>{ props.place || "" }</div>
-      </div>
+      <Content>
+        <Quote>“</Quote>
+        <div>
+          <Review>{ props.review }</Review>
+          <Reviewer>{ props.name }</Reviewer>
+          <Place>{ props.place || " " }</Place>
+        </div>
+      </Content>
     </TestimonyDiv>
   )
 }
 
 export function Testmonies() {
 
-  const refSlider = useRef()
   const [slider, setSlider] = useState()
-
-  useEffect(() => {
-    // console.log(refSlider.current)
-  }, [])
   
   return (
     <>
