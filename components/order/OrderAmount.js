@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import rateActions from '../../redux/actions';
 import styled from 'styled-components';
 import Modal from 'react-modal';
-import {Converter, InputNumber, ReverseButton, RateAndFee} from '../landing-page/Hero'
+import {Converter, InputNumber, RateAndFee} from '../landing-page/Hero'
 
 const OrderContainer = styled.div`
   background: #FFFFFF;
@@ -411,10 +411,6 @@ class OrderAmount extends React.Component {
                   onSelect={this.selectSource} 
                   onClick={this.toggleSource}
                   show={this.state.isSourceActive}/>
-                <ReverseButton>
-                  <img src="../../static/images/reverse.png" alt="rv"
-                    onClick={() => this.reverse(this.state.fromCurrency, this.state.toCurrency)}/>
-                </ReverseButton>
                 <InputNumber
                   label={"Recipient gets"}
                   amount={this.state.toAmount}
