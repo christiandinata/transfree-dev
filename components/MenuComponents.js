@@ -116,6 +116,7 @@ export const Nav = styled.div`
 			return "#009fe3";
 		}
 	}};
+	transition: background 0.5s;
 	position: sticky;
 	top: 0;
 	z-index: 10;
@@ -149,20 +150,20 @@ export const Navigation = styled.div`
 	height: 72px;
 	display: flex;
 	align-items: center;
-	gap: 40px;
 `;
 
 export const NavigationCenter = styled.div`
 	height: 72px;
 	display: flex;
-	gap: 40px;
 `;
 
 export const NavigationChild = styled.a`
 	// height: 72px;
 	display: flex;
 	align-items: center;
+	margin-right: 40px;
 	text-decoration: none;
+	font-style: normal;
 	font-size: 16px;
 	font-weight: normal;
 	line-height: ${({ homepage }) => (homepage ? "24px" : "19px")};
@@ -173,6 +174,7 @@ export const NavigationChild = styled.a`
 		color: ${({ scrolled, navChildColor }) =>
 			scrolled ? "#009fe3" : navChildColor};
 		font-weight: 500;
+		letter-spacing: 0.2px;
 	}
 `;
 
@@ -191,12 +193,12 @@ export const SignInButton = styled.a`
 	font-style: normal;
 	font-weight: normal;
 	padding: 8px 24px;
+	margin-right: 17px;
 
 	&:hover {
 		// color: ${({ scrolled }) => (scrolled ? "#009fe3" : "#fff")};
 		// font-weight: 500;
 		border: 1px solid #9a9a9a;
-		padding-right: 24px;
 	}
 `;
 

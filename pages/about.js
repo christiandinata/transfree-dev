@@ -26,23 +26,38 @@ const StoryFlex = styled.div`
   width: 95%;
   max-width: 1124px;
   display: flex;
-  flex-direction: row;  
-  column-gap: 2.5rem;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 2rem;
   margin: 0 auto;
   transition: all 0.5s ease-in;
   img {
     border-radius: 5px;
     object-fit: cover;
-    width: 45%;
-    height: auto;
-    margin: auto 0;
+    width: 500px;
+    height: 400px;
+  }
+  h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0;
+  }
+  p {
+    margin-top: 16px;
   }
   @media only screen and (max-width: 800px) {
     flex-direction: column;
     text-align: center;
     align-items: center;
     row-gap: 1rem;
-    img { width: 90%; height: auto; }
+    h2, p {
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    img { 
+      width: 95%;
+      height: auto;
+    }
   }`
 
 const HowWeDoing = styled.div`
@@ -52,20 +67,35 @@ const HowWeDoing = styled.div`
   max-width: 800px;
   margin: 0 auto;
   text-align: center;
+  h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0;
+  }
   @media only screen and (max-width: 800px) {
     width: 90%;
+    p { margin: 16px auto; }
+    text-align: center;
   }
 `
 
 const Accomplishments = styled.div`
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   padding: 2rem 0;
   column-gap: 2rem;
   align-items: center;
   justify-content: space-between;
-  h3, p { margin: 0; }
-`
+  h3 {
+    margin: 0 auto;
+    font-family: "Avenir LT Pro Black", sans-serif !important;
+  }
+  p {
+    margin-top: 0;
+  }
+  @media only screen and (max-width: 800px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 2rem;
+  }`
 
 const imagePath = "../../static/images/new-ui/"
 
@@ -121,7 +151,7 @@ class About extends Component {
         </Info.BlueHeader>
         <Story>
           <StoryFlex>
-            <img src={imagePath + "story.png"} alt="story" style={{ flexBasis: "200px" }}/>
+            <img src={imagePath + "story.png"} alt="story"/>
             <div>
               <h2>Our Story</h2>
               <p>There are a lot of difficulties when you sending or receiving money from Indonesia. 

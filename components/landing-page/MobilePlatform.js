@@ -17,19 +17,24 @@ const MobileDiv = styled.div`
   h2 {
     font-family: "Avenir LT Pro Black", sans-serif !important; 
     font-size: 1.75rem;
+    line-height: 125%;
     width: 80%;
   }
   p { 
-    width: 80%; 
+    width: 80%;
+    margin-bottom: 2.5rem;
   }
   @media only screen and (max-width: 800px) {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     row-gap: 2rem;
     width: 90%;
     text-align: center;
     h2, p {
       margin: 1rem auto;
+    }
+    img {
+      max-width: 90%;
     }
   }
 `
@@ -38,19 +43,24 @@ const StoreBadge = styled.div`
   display: flex;
   flex-direction: row;
   gap: 1rem;
+  width: 80%;
+  margin-top: 2rem;
+  img {
+    width: 100%;
+    max-width: 216px;
+  }
   @media only screen and (max-width: 800px) {
     flex-direction: column;
+    margin-bottom: 4rem;
+    width: 100%;
   }
 `
 
 export function MobilePlatform() {
   return (
     <MobileDiv>
-      <div>
-        <img 
-          src="../static/images/ASSET/mockup-new-3.svg" 
+      <img src="../static/images/ASSET/mockup-new-3.svg" 
           alt="mobile" />
-      </div>
       <div>
         <h2>Does your family need it for an emergency?</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
