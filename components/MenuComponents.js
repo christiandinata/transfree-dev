@@ -155,7 +155,6 @@ export const Navigation = styled.div`
 export const NavigationCenter = styled.div`
 	height: 72px;
 	display: flex;
-	gap: 40px;
 `;
 
 export const NavigationChild = styled.a`
