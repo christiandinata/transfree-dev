@@ -102,7 +102,7 @@ export const TableHeading = styled.th`
 export const TableDetail = styled.td`
     font-family: 'Avenir LT Pro';
     font-style: normal;
-    font-weight: normal;
+    font-weight: 400;
     font-size: 16px;
     line-height: 24px;  
     color: #626B79;
@@ -434,9 +434,11 @@ export const ActionButton = styled.button`
 export const CancelActionButton = styled(ActionButton)`
     color: #9A9A9A;
     background: transparent;
+    margin-right: 8px;
 
     &:hover {
         border: 1px solid #9a9a9a;
+        border-radius: 4px;
     }
 `;
 

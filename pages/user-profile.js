@@ -25,7 +25,6 @@ const SuccessModal = (props) => {
     const [visible, setVisible] = useState(true)
 
     useEffect(() => {
-        console.log("haii")
         setTimeout(() => 
             setVisible(false), props.delay)
     }, [props.delay])
@@ -49,7 +48,6 @@ const SuccessModal = (props) => {
 }
 
 function UserProfile(props) {
-    // console.log(props)
     const [info, setInfo] = useState({
 		emailUser: props.user.email ? props.user.email : "",
         fullName: props.user.fullname ? props.user.fullname : "",
@@ -58,8 +56,8 @@ function UserProfile(props) {
         dob: props.user.dob ? moment(props.user.dob).format('LL') : "",
         pob: props.user.pob ? props.user.pob : "",
         address: props.user.address ? props.user.address : "",
-        password: "123",
-        confirmPassword: "123",
+        password: "",
+        confirmPassword: "",
         phone: props.user.phone ? "+" + props.user.phone : ""
 	});
 
@@ -149,65 +147,70 @@ function UserProfile(props) {
     }
 
     const updateUser = async () => {
-        axios
-            .post(
-                ENV.API + `/v1/user/checkEmail`,
-                { email: info.emailUser },
-                {
-                    headers: {
-                        Authorization: `Bearer ${getCookie("token")}`,
-                    },
-                }
-            )
-            .then(async (response) => {
-                if (response.data.duplicate) {
-                    alert("Email already used");
-                } else {
-                    let urlFetch = ENV.API + `/v1/user/editProfile`;
-                    let data;
-                    if (info.password != "") {
-                        data = {
-                            email: info.emailUser,
-                            gender: info.gender,
-                            address: info.address,
-                            password: info.password,
-                        };
-                    } else {
-                        data = {
-                            email: info.emailUser,
-                            gender: info.gender,
-                            address: info.address,
-                        };
+        if(info.password == info.confirmPassword) {
+            axios
+                .post(
+                    ENV.API + `/v1/user/checkEmail`,
+                    { email: info.emailUser },
+                    {
+                        headers: {
+                            Authorization: `Bearer ${getCookie("token")}`,
+                        },
                     }
-
-                    await axios
-                        .post(urlFetch, data, {
-                            headers: {
-                                Authorization: `Bearer ${getCookie(
-                                    "token"
-                                )}`,
-                            },
-                        })
-                        .then(async () => {
-                            let user_data = props.user;
-
-                            user_data.email = info.emailUser;
-                            user_data.gender = info.gender;
-                            user_data.address = info.address;
-
-                            setSuccess(true)
-                            setChoice('detail')
-                            setPopup(false)
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                            alert("Please check your data");
-                        });
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+                )
+                .then(async (response) => {
+                    if (response.data.duplicate) {
+                        alert("Email already used");
+                    } else {
+                        let urlFetch = ENV.API + `/v1/user/editProfile`;
+                        let data;
+                        if (info.password != "") {
+                            data = {
+                                email: info.emailUser,
+                                gender: info.gender,
+                                address: info.address,
+                                password: info.password,
+                            };
+                        } else {
+                            data = {
+                                email: info.emailUser,
+                                gender: info.gender,
+                                address: info.address,
+                            };
+                        }
+    
+                        await axios
+                            .post(urlFetch, data, {
+                                headers: {
+                                    Authorization: `Bearer ${getCookie(
+                                        "token"
+                                    )}`,
+                                },
+                            })
+                            .then(async () => {
+                                let user_data = props.user;
+    
+                                user_data.email = info.emailUser;
+                                user_data.gender = info.gender;
+                                user_data.address = info.address;
+    
+                                setSuccess(true)
+                                setChoice('detail')
+                                setPopup(false)
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                                alert("Please check your data");
+                            });
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+        else {
+            alert("Please check your data")
+        }
     }
 
     const cancelEdit = () => {
@@ -323,11 +326,10 @@ function UserProfile(props) {
 
                         {success ? 
                             <div>
-                                <SuccessModal delay = "5000"></SuccessModal>
+                                <SuccessModal delay = "3000"></SuccessModal>
                             </div>
                             :
                         null}
-                        {/* <SuccessModal delay = "1000"></SuccessModal> */}
                     </div>
                 </Profile.ProfileSect>
             </Profile.Wrapper> 
@@ -520,7 +522,7 @@ function UserProfile(props) {
                                     <Profile.FormLabel filled = {focus.confirmPassword}>Confirm New Password</Profile.FormLabel>
                                     <Profile.FormRowPassword filled = {focus.confirmPassword}>
                                         <Profile.InputTextPassword 
-                                            type = {hiddenPass ? "password" : "text"}
+                                            type = {hiddenConfirm ? "password" : "text"}
                                             name = "confirmPassword"
                                             value = {info.confirmPassword}
                                             onChange = {handleInputChange}
