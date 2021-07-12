@@ -40,7 +40,7 @@ export function NavBarBlue(props) {
 // Navbar for white background (the same one as the navbar at homepage when scrolled, with profile info)
 export function NavBarWhite({ isAuthenticated, username, id }) {
 	return(
-		<Nav scrolled = "true" homepage = "true" marginTop = "0px">
+		<Nav scrolled = "true" homepage = "true">
 			<NavInner>
 				<a href = "/"><Logo src="../static/images/transfree-logo.png" scrolled = "true"/></a>
 				
