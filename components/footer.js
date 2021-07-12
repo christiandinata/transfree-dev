@@ -9,6 +9,10 @@ const Base = styled.div`
   justify-content: center;
   padding-top: 80px;
   padding-bottom: 80px;
+
+  @media only screen and (max-width: 800px) {
+    padding-top: 49.31px;
+  }
 `;
 
 const Copyright = styled.div`
@@ -22,6 +26,11 @@ const Row = styled.div`
     minmax(184px, 1fr));
   grid-gap: 24px;
   padding-right: 50px;
+
+  @media only screen and (max-width: 800px) {
+    grid-template-columns: repeat(auto-fill, 
+                           minmax(200px, 1fr));
+  }
 `;
 
 const Column = styled.section`
@@ -35,6 +44,11 @@ const Contacts = styled.div`
   padding-top: 45px;
   padding-left: 50px;
   padding-right: 36px;
+
+  @media only screen and (max-width: 800px) {
+    display: flex;
+    margin: 0 16px 25.31px 4px;
+  }
 `;
 
 const Brand = styled.img`
@@ -42,6 +56,13 @@ const Brand = styled.img`
   height: 47.14px;
   object-fit: scale-down;
   margin-bottom: 27.43px;
+
+  @media only screen and (max-width: 800px) {
+    width: 125px;
+    height: 38.39px;
+    margin-left: 4px;
+    margin-right: 86px;
+  }
 `;
 
 const LogoDiv = styled.div`
@@ -100,6 +121,11 @@ const CopyrightText = styled(FooterText)`
   display: block;
   margin-top: 1em;
   margin-bottom: 1em;
+
+  @media only screen and (max-width: 800px) {
+    padding: 24px 16px;
+    margin-bottom: -5em;
+  }
 `;
 
 const TrademarkText = styled(FooterText)`
@@ -107,6 +133,10 @@ const TrademarkText = styled(FooterText)`
   display: block;
   margin-top: 1em;
   margin-bottom: 1em;
+
+  @media only screen and (max-width: 800px) {
+    display: none;
+  }
 `;
 
 const Footer = () => (
