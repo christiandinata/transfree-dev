@@ -243,7 +243,9 @@ function UserProfile(props) {
                 <Profile.ProfileSect>
                     <Profile.ProfileAction>
                         <Profile.AccountText>Account Profile</Profile.AccountText>
-                        <Profile.LogOutButton href = "/logout">Log Out</Profile.LogOutButton>
+                        <Link href="/logout" passHref>
+                            <Profile.LogOutButton>Log Out</Profile.LogOutButton>
+                        </Link>
                     </Profile.ProfileAction>
 
                     <div>
