@@ -9,9 +9,9 @@ import { connect } from 'react-redux';
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { getCookie } from '../utils/cookie';
-import { AwaitingConfirmation } from '../components/order/Pending'
-import { NavBarBlue } from '../components/MenuComponents'
-import Footer from '../components/footer'
+import { AwaitingConfirmation } from '../components/order/Pending';
+import { NavBarBlue } from '../components/MenuComponents';
+import Footer from '../components/footer';
 import shortid from 'shortid';
 
 const ContainerFluid = styled.div`
