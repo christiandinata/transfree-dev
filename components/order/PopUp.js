@@ -52,7 +52,6 @@ const Button = styled.button`
   border-radius: 4px;
   border: none;
 
-  width: auto;
   height: 40px;
   font-size: 16px;
 
@@ -60,11 +59,12 @@ const Button = styled.button`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 8px 24px 8px 24px;
+  margin-left: 20px;
   transition: 0.2s;
 
   background-color: ${props => props.secondary ? 'white' : '#009FE3'};
   color: ${props => props.secondary ? '#9A9A9A' : 'white'};
+  padding: ${props => props.secondary ? '0' : '8px 20px 8px 20px'};
 `;
 
 export class ModalPopUp extends React.Component{

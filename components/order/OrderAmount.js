@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import rateActions from '../../redux/actions';
-import {Converter, InputNumber, RateAndFee} from '../order/Converter';
+import { Converter, InputNumber, RateAndFee } from '../order/Converter';
 import { ModalPopUp } from './PopUp';
 
 
@@ -12,7 +12,6 @@ const OrderContainer = styled.div`
   border-radius: 16px;
   padding: 10px 30px 30px 30px;
   max-width: 586px;
-  margin: 0px 15px 0px 15px;
 
   @media only screen and (max-width: 800px) {
     padding: 10px 20px 30px 20px;

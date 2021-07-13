@@ -3,6 +3,7 @@ import styled from  'styled-components';
 import NumberFormat from 'react-number-format';
 import { connect } from 'react-redux';
 import orderActions from '../../redux/actions';
+import { ModalPopUp } from './PopUp';
 
 const ReviewContainer = styled.div `
   background: #FFFFFF;
@@ -129,22 +130,29 @@ class Review extends React.Component {
   constructor({ props }) {
     super(props);
     this.state = {
-     isCanceled:false
+     isCheck:false,
+     errorCheck: false
     };
   }
 
   saveAndContinue = (e) => {
     e.preventDefault();
-    if (this.state.isCanceled) {
+    if (this.state.isCheck) {
       this.props.nextStep();
     } else {
-      alert("Please check the terms")
+      this.toggleModalError();
     }
   }
 
-  isCanceled = (e) => {
+  toggleCheck = (e) => {
     this.setState({
-      isCanceled : !this.state.isCanceled
+      isCheck : !this.state.isCheck
+    })
+  }
+
+  toggleModalError = (e) => {
+    this.setState({
+      errorCheck : !this.state.errorCheck
     })
   }
 
@@ -309,7 +317,7 @@ class Review extends React.Component {
                 <input
                   type="checkbox"
                   id="isAgree"
-                  onChange={ () => this.isCanceled()}/>
+                  onChange={ () => this.toggleCheck()}/>
               </BottomColumn>
               <BottomColumn right>
                 I understand that my order will be canceled if no payment is made within the next 3 hours
@@ -321,6 +329,16 @@ class Review extends React.Component {
               <Button secondary onClick={this.props.previousStep}>Previous</Button>
             </ButtonContainer>
         </ReviewContainer>
+        <ModalPopUp
+          open={this.state.errorCheck}
+          toggleModal={this.toggleModalError}
+          icon={'../static/images/Asset Web/send money/ic-error.svg'}
+          title={"Transaction Error"}
+          content={
+            <p>Please check the terms</p>
+          }
+          buttonText={"OK"}
+        />
       </div>
     )
   }

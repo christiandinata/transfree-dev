@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import NumberFormat from 'react-number-format';
+import { ModalPopUp } from './PopUp';
 
 const Row = styled.div`
   display: flex;
@@ -315,14 +316,17 @@ class Pay extends React.Component {
       bankSelected: '',
       method: '',
       isVAgenerated: false,
-      isTransferBCA: false,
-      isTransferBNI: false,
-      isTransferMandiri: false
+      errorBank: false
     };
-
     this.generateVA = this.generateVA.bind(this);
     this.transferBank = this.transferBank.bind(this);
     this.addOrder = this.addOrder.bind(this);
+  }
+
+  toggleModalError = (e) => {
+    this.setState({
+      errorBank : !this.state.errorBank
+    })
   }
 
   generateVA(bankName) {
@@ -352,7 +356,7 @@ class Pay extends React.Component {
       this.props.nextStep();
     }
     else{
-      alert("Please select the bank")
+      this.toggleModalError();
     }
   }
 
@@ -486,6 +490,16 @@ class Pay extends React.Component {
             </PolicyContainer>
           </Column>
         </Row>
+        <ModalPopUp
+          open={this.state.errorBank}
+          toggleModal={this.toggleModalError}
+          icon={'../static/images/Asset Web/send money/ic-error.svg'}
+          title={"Transaction Error"}
+          content={
+            <p>Please select the bank</p>
+          }
+          buttonText={"OK"}
+        />
       </div>
     )
   }
