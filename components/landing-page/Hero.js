@@ -111,7 +111,7 @@ const Currency = styled.div`
 const DropDownMenu = styled.div`
     position: absolute;
     right: 5%;
-    z-index: 1000;
+    z-index: 5;
     padding: 0 0 .5rem;
     margin: .125rem 0 0;
     font-size: 1rem;
