@@ -51,7 +51,7 @@ const BackgroundContainer = styled.div`
 
   @media only screen and (max-width: 774px) {
     >.title{
-      top: 20%;
+      top: 25%;
     }
   }
 `;
@@ -59,21 +59,21 @@ const BackgroundContainer = styled.div`
 const SearchContainer = styled.div`
   display: flex;
   width: 600px;
-  justify-contents: center; 
+  justify-content: center; 
 
   position: absolute;
   top: 65%;
   left: 50%;
   transform: translate(-50%, -35%);
 
-  @media only screen and (max-width: 774px) {
-    flex-direction: column;
-    height: 110px;
-    align-items: center;
+  @media only screen and (max-width: 640px) {
+    width: auto;
+    // height: 110px;
+    // align-items: center;
 
-    top: 65%;
-    left: 50%;
-    transform: translate(-50%, -28%);
+    // top: 65%;
+    // left: 50%;
+    // transform: translate(-50%, -28%);
   }
 `;
 
@@ -104,11 +104,8 @@ const SearchBar = styled.input`
     background-image: url('../static/images/Asset Web/transaction/search-blue.svg');
   }
 
-  @media only screen and (max-width: 774px) {
-    flex-basis: 53%;
-    margin-bottom: 8px;
-    min-width: 250px;
-    margin-right: 0px;
+  @media only screen and (max-width: 640px) {
+    margin-right: 10px;
   }
 `;
 
@@ -128,10 +125,10 @@ const Button = styled.button`
   background-color: #009FE3;
   color: white;
 
-  @media only screen and (max-width: 774px) {
-    flex-basis: 47%;
-    min-width: 200px;
-  }
+  // @media only screen and (max-width: 774px) {
+  //   flex-basis: 47%;
+  //   min-width: 200px;
+  // }
 `;
 
 const AllItemContainer = styled.div`
