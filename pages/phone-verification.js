@@ -91,7 +91,9 @@ function PhoneVerification(props) {
 				<Form onSubmit={handleSubmit} type="verif">
 					<FormInner>
 						<center>
-							<Heading>Verification code in your email</Heading>
+							<Heading className="bold">
+								Verification code in your email
+							</Heading>
 
 							<BelowHeading>
 								<p>Enter 6-digit code we sent to the email.</p>
