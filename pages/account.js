@@ -68,12 +68,6 @@ const SearchContainer = styled.div`
 
   @media only screen and (max-width: 640px) {
     width: auto;
-    // height: 110px;
-    // align-items: center;
-
-    // top: 65%;
-    // left: 50%;
-    // transform: translate(-50%, -28%);
   }
 `;
 
@@ -124,11 +118,6 @@ const Button = styled.button`
 
   background-color: #009FE3;
   color: white;
-
-  // @media only screen and (max-width: 774px) {
-  //   flex-basis: 47%;
-  //   min-width: 200px;
-  // }
 `;
 
 const AllItemContainer = styled.div`
