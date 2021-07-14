@@ -17,20 +17,20 @@ class Home extends React.Component{
   }
 
   static async getInitialProps(ctx) {
-      initialize(ctx);
-      await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
-      await ctx.store.dispatch(actions.getOrderByUid(getCookie('_id', ctx.req),'getOrderByUid',ctx.req));
-      await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
-      await ctx.store.dispatch(actions.getAdjustedRates('IDR', 'getAdjustedRates'));
-      await ctx.store.dispatch(actions.getRates('GBP', 'IDR'));
-      return {};
+    initialize(ctx);
+    await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
+    await ctx.store.dispatch(actions.getOrderByUid(getCookie('_id', ctx.req),'getOrderByUid',ctx.req));
+    await ctx.store.dispatch(actions.getUser(getCookie('_id', ctx.req),'user',ctx.req));
+    await ctx.store.dispatch(actions.getAdjustedRates('IDR', 'getAdjustedRates'));
+    await ctx.store.dispatch(actions.getRates('GBP', 'IDR'));
+    return {};
   };
 
   componentDidMount() {
-      this.setState({
-        rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
-        toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
-      })
+    this.setState({
+      rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
+      toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
+    })
   }
 
   togglePopup() {
