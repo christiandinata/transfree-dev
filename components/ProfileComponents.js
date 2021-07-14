@@ -93,7 +93,7 @@ export const TableHeading = styled.th`
     padding-right: 48px;
     color: #232933;  
     letter-spacing: 0.2px;
-    font-family: 'Avenir LT Pro';
+    font-family: 'Avenir Next LT Pro';
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
@@ -101,7 +101,7 @@ export const TableHeading = styled.th`
 `;
 
 export const TableDetail = styled.td`
-    font-family: 'Avenir LT Pro';
+    font-family: 'Avenir Next LT Pro';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -115,7 +115,7 @@ export const TableDetailPersonal = styled(TableDetail)`
 
 export const AccountLink = styled.p`
     display: inline;
-    font-family: 'Avenir LT Pro';
+    font-family: 'Avenir Next LT Pro';
     font-weight: 400;
     font-style: normal;
     font-size: 14px;
@@ -237,7 +237,7 @@ export const EditProfileButton = styled.button`
     border-radius: 4px;
     padding: 8px 24px;
     margin-bottom: 29px;
-    font-family: 'Avenir LT Pro';
+    font-family: 'Avenir Next LT Pro';
     font-style: normal;
     font-size: 16px;
     line-height: 24px;
@@ -340,7 +340,7 @@ export const PhoneInput = styled(Phone)`
     border: 1px solid #E2E2E2;
     border-radius: 4px;
     outline: none;
-    font-family: 'Avenir LT Pro';
+    font-family: 'Avenir Next LT Pro';
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -388,7 +388,7 @@ export const ModalTitle = styled.section`
     padding-top: 16px;
     padding-bottom: 16px;
     padding-left: 24px;
-    font-family: 'Avenir LT Pro';
+    font-family: 'Avenir Next LT Pro';
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
@@ -400,7 +400,7 @@ export const ModalTitle = styled.section`
 export const ModalText = styled.section`
     margin-top: 19px;
     margin-left: 24px;
-    font-family: 'Avenir LT Pro';
+    font-family: 'Avenir Next LT Pro';
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -424,7 +424,7 @@ export const ActionButton = styled.button`
     outline: none;
     text-decoration: none;
     padding: 8px 24px;
-    font-family: 'Avenir LT Pro';
+    font-family: 'Avenir Next LT Pro';
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
@@ -490,7 +490,7 @@ export const ModalSuccessImg = styled.img`
 `;
 
 export const ModalSuccessTitle = styled.p`
-    font-family: 'Avenir LT Pro';
+    font-family: 'Avenir Next LT Pro';
     font-style: normal;
     font-weight: normal;
     font-size: 16px;

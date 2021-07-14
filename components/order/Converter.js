@@ -23,7 +23,7 @@ const Exchange = styled.div`
       height: 52px;
       border: 0.5px solid #E2E2E2;
       border-radius: 5px;
-      font-family: "Avenir LT Pro Black" !important;
+      font-family: "Avenir Next LT Pro Bold" !important;
       font-size: 20px;
       padding: 0 20px;
       transition: 0.3s;
@@ -56,6 +56,7 @@ const Currency = styled.div`
       color: #FFFFFF;
       display: flex;
       font-size: 1.25rem;
+      justify-content: space-between;
       text-transform: uppercase;
       transition: background-color 0.2s ease-in;
       padding: 0.75rem 0.75rem;
@@ -71,7 +72,6 @@ const Currency = styled.div`
       width: 1.5rem;
       height: 1.5rem;
       border-radius: 50%;
-      margin-right: 0.5rem;
     }`
 
 const DropDownMenu = styled.div`
@@ -123,14 +123,18 @@ const SearchBar = styled.div`
     border: none;
     background-color: transparent;
     color: #FFFFFF;
-    font-family: "Avenir LT Pro" !important;
+    font-family: "Avenir Next LT Pro" !important;
     outline: none;
     padding-left: 10px;
   }
   input:focus { 
-      box-shadow: none;
-      border: none; 
-    }
+    box-shadow: none;
+    border: none; 
+  }
+  input::placeholder {
+    color: #FFFFFF;
+  }
+
 
   @media only screen and (max-width: 600px) {
     max-width: 240px;
@@ -251,7 +255,7 @@ export function RateAndFee(props) {
           style={{ 
             textAlign: "right", 
             fontSize: "20px", 
-            fontFamily: "Avenir LT Pro Black" 
+            fontFamily: "Avenir Next LT Pro Bold" 
           }}
           displayType={'text'}
           thousandSeparator={true}
@@ -260,7 +264,7 @@ export function RateAndFee(props) {
       </ResultFlex>
       <ResultFlex>
         <span>Transfer fee</span>
-        <span style={{ textAlign: "right", fontSize: "1.25rem", fontFamily: "Avenir LT Pro Black" }}>{props.fee}</span>
+        <span style={{ textAlign: "right", fontSize: "1.25rem", fontFamily: "Avenir Next LT Pro Bold" }}>{props.fee}</span>
       </ResultFlex>
     </ResultConversion>
   )

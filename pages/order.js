@@ -69,7 +69,7 @@ const ProgressItem = styled.li`
     color: #626B79;
     border-radius: 2.45px;
     width: 50px;
-    font-family: 'Avenir LT Pro Bold', sans-serif;
+    font-family: 'Avenir Next LT Pro Bold', sans-serif;
     font-size: 24px;
     font-weight: 700;
   }
