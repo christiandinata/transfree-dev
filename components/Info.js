@@ -17,7 +17,6 @@ export const Batik = styled.div`
   h1 {
     margin: 4rem 0 0;
     color: #FFFFFF;
-    font-family: "Avenir LT Pro Black", sans-serif !important;
   }
   p {
     width: 50%;
@@ -37,12 +36,10 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   margin: -7rem auto 3rem auto;
-  font-family: "Avenir LT Pro";
   h1 {
     margin-top: 4rem;
     margin-bottom: 3rem;
     color: #FFFFFF;
-    font-family: "Avenir LT Pro Black";
   }`
 
 export const Paper = styled.div`
@@ -50,7 +47,8 @@ export const Paper = styled.div`
   padding: 2rem;
   text-align: justify;
   color: #626B79;
-  h2 { 
+  h2 {
+    color: #232933;
     margin-bottom: 0;
     font-size: 16px; 
   }
@@ -61,6 +59,9 @@ export const Paper = styled.div`
   a {
     text-decoration: none;
     color: #009FE3;
+  }
+  b {
+    color: #232933;
   }`
 
 export const paperShadow = { boxShadow: "12px 0px 40px rgba(12, 12, 12, 0.1)", zIndex: 2 }

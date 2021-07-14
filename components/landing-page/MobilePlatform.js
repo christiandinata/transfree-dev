@@ -15,7 +15,6 @@ const MobileDiv = styled.div`
     margin: 0 auto; 
   }
   h2 {
-    font-family: "Avenir LT Pro Black", sans-serif !important; 
     font-size: 1.75rem;
     line-height: 125%;
     width: 80%;

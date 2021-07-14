@@ -10,7 +10,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80%;
+  width: 85%;
   max-width: 1124px;
   margin 0 auto;
   @media only screen and (max-width: 800px) {
@@ -24,7 +24,6 @@ const SubtitleContainer = styled.div`
   h2 {
     margin: 0 auto;
     font-size: 1.75rem;
-    font-family: "Avenir LT Pro Black", sans-serif !important;
   }
   p {
     margin: 12px auto 0 0;
@@ -75,7 +74,6 @@ const GreyOverlay = styled.div`
   h2 {
     color: #FFFFFF;
     font-size: 1.75rem;
-    font-family: "Avenir LT Pro Black", sans-serif !important;
     margin-bottom: 0;
   }`
 

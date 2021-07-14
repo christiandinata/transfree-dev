@@ -14,7 +14,6 @@ const CenterDiv = styled.div`
   color: #FFFFFF;
   transition: all 0.2s ease-in;
   h2 {
-    font-family: "Avenir LT Pro Black", sans-serif !important;
     font-size: 1.75rem;
     color: #FFFFFF;
     margin-bottom: 0;
@@ -24,7 +23,6 @@ const CenterDiv = styled.div`
   }
   button {
     background-color: transparent;
-    font-family: "Avenir LT Pro";
     font-size: 1rem;
     border: 0.5px solid white;
     border-radius: 0.25rem;

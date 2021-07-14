@@ -37,7 +37,6 @@ const TextContainer = styled.div`
   flex-basis: 50%;
   h2 { 
     font-size: 1.75rem;
-    font-family: "Avenir LT Pro Black", sans-serif !important;
     margin-bottom: 16px;
     color: #232933;
   }

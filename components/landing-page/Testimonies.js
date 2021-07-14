@@ -71,7 +71,6 @@ const Subtitle = styled.div`
     font-size: 1.75rem; 
     margin: 0;
     color: black;
-    font-family: "Avenir LT Pro Black", sans-serif !important; 
   }
   p { width: 60%; color: #3E495E; }
   @media only screen and (max-width: 800px) {
@@ -80,7 +79,7 @@ const Subtitle = styled.div`
 
 const Quote = styled.div`
   font-size: 2.5rem;
-  font-family: "Avenir LT Pro Black", sans-serif;
+  font-family: "Avenir Next LT Pro Bold", sans-serif;
   line-height: 1;
 `
 
@@ -93,7 +92,7 @@ const Review = styled.p`
 
 const Reviewer = styled.div`
   font-size: 1.25rem;
-  font-family: "Avenir LT Pro Black";
+  font-family: "Avenir Next LT Pro Bold";
   text-transform: uppercase;
 `
 

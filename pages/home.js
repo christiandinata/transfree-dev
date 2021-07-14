@@ -39,7 +39,6 @@ class Home extends React.Component{
     });
   }
 
-
   renderDashboard(){
     return(
       <div>

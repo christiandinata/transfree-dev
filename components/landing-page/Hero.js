@@ -34,7 +34,6 @@ export const HeroDiv = styled.div`
   h1 {
     color: #FFFFFF;
     font-size: 2.5rem;
-    font-family: "Avenir LT Pro Black", sans-serif !important;
     line-height: 140%;
     margin-bottom: 0;
   }
@@ -69,8 +68,8 @@ const Exchange = styled.div`
       width: 100%;
       border: 0.5px solid #E2E2E2;
       border-radius: 5px;
-      font-family: "Avenir LT Pro Black", sans-serif !important;
       font-size: 1.25rem;
+      font-family: "Avenir Next LT Pro Bold", sans-serif !important;
       padding: 0.75rem 1.25rem;
     }
 
@@ -89,9 +88,9 @@ const Currency = styled.div`
       background-color: #1F345A;
       color: #FFFFFF;
       display: flex;
-      font-family: "Avenir LT Pro", sans-serif !important;
       font-size: 1.25rem;
       text-transform: uppercase;
+      justify-content: space-between;
       transition: background-color 0.2s ease-in;
       padding: 0.75rem 0.75rem;
       width: 120px;
@@ -105,7 +104,6 @@ const Currency = styled.div`
       width: 1.5rem;
       height: 1.5rem;
       border-radius: 50%;
-      margin-right: 0.5rem;
     }`
 
 const DropDownMenu = styled.div`
@@ -150,11 +148,14 @@ const SearchBar = styled.div`
     border: none;
     background-color: transparent;
     color: #FFFFFF;
-    font-family: "Avenir LT Pro", sans-serif !important;
+    font-family: "Avenir Next LT Pro", sans-serif !important;
     outline: none;
     padding: 0;
   }
   input:focus { border: none; }
+  input::placeholder {
+    color: #FFFFFF;
+  }
 `
 
 const ResultConversion = styled.div`
@@ -195,7 +196,7 @@ const iconStyle = {
 const alignRight = {
   textAlign: "right",
   fontSize: "1.25rem",
-  fontFamily: "Avenir LT Pro Black, sans-serif"
+  fontFamily: "Avenir Next LT Pro Bold, sans-serif"
 }
 
 const flags = [

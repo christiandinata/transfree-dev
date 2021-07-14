@@ -17,9 +17,6 @@ const Story = styled.div`
   p {
     color: #626B79;
   }
-  h2 {
-    font-family: "Avenir LT Pro Black", sans-serif !important;
-  }
 `
 
 const StoryFlex = styled.div`
@@ -87,7 +84,6 @@ const Accomplishments = styled.div`
   justify-content: space-between;
   h3 {
     margin: 0 auto;
-    font-family: "Avenir LT Pro Black", sans-serif !important;
   }
   p {
     margin-top: 0;
