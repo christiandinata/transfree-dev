@@ -10,8 +10,10 @@ const Base = styled.div`
   padding-top: 80px;
   padding-bottom: 80px;
 
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 900px) {
     padding-top: 49.31px;
+    display: block;
+    // justify-content: space-between;
   }
 `;
 
@@ -27,9 +29,34 @@ const Row = styled.div`
   grid-gap: 24px;
   padding-right: 50px;
 
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 900px) {
     grid-template-columns: repeat(auto-fill, 
-                           minmax(200px, 1fr));
+                           minmax(150px, 1fr));
+    grid-gap: 17px;
+  }
+
+  // @media only screen and (min-width: 100px) {
+  //   grid-template-columns: repeat(auto-fill, 
+  //                          minmax(100px, 1fr));
+  //   grid-gap: 17px;
+  // }
+
+  // @media only screen and (min-width: 401px) {
+  //   grid-template-columns: repeat(auto-fill, 
+  //                          minmax(160px, 1fr));
+  //   grid-gap: 17px;
+  // }
+
+  // @media only screen and (min-width: 581px) {
+  //   grid-template-columns: repeat(auto-fill, 
+  //                          minmax(180px, 1fr));
+  //   grid-gap: 17px;
+  // }
+
+  // @media only screen and (min-width: 641px) {
+  //   grid-template-columns: repeat(auto-fill, 
+  //                          minmax(190px, 1fr));
+  //   grid-gap: 17px;
   }
 `;
 
@@ -38,6 +65,10 @@ const Column = styled.section`
   flex-direction: column;
   text-align: left;
   margin-left: 24px;
+
+  @media only screen and (max-width: 900px) {
+    margin-left: 16px;
+  }
 `;
 
 const Contacts = styled.div`
@@ -45,9 +76,12 @@ const Contacts = styled.div`
   padding-left: 50px;
   padding-right: 36px;
 
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 900px) {
     display: flex;
-    margin: 0 16px 25.31px 4px;
+    // margin: 0 16px 36px 20px;
+    margin-bottom: 36px;
+    padding: 0;
+    justify-content: space-between;
   }
 `;
 
@@ -57,11 +91,11 @@ const Brand = styled.img`
   object-fit: scale-down;
   margin-bottom: 27.43px;
 
-  @media only screen and (max-width: 800px) {
-    width: 125px;
-    height: 38.39px;
-    margin-left: 4px;
-    margin-right: 86px;
+  @media only screen and (max-width: 900px) {
+    max-width: 30%;
+    height: auto;
+    margin-bottom: 0;
+    margin-left: 20px;
   }
 `;
 
@@ -70,11 +104,26 @@ const LogoDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media only screen and (max-width: 900px) {
+    // margin-left: 86px;
+    // margin-right: 0;
+    margin-right: 16px;
+  }
 `;
 
 const SocialLogo = styled.a`
   margin-left: 20px;
   text-decoration: none;
+
+  @media only screen and (max-width: 900px) {
+    // max-width: 100%;
+    // height: auto;
+    width: 16px;
+    height: 16px;
+    margin-left: 24px;
+    align-items: center;
+  }
 `;
 
 const LicensePhoto = styled.img`
@@ -122,7 +171,7 @@ const CopyrightText = styled(FooterText)`
   margin-top: 1em;
   margin-bottom: 1em;
 
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 900px) {
     padding: 24px 16px;
     margin-bottom: -5em;
   }
@@ -134,7 +183,7 @@ const TrademarkText = styled(FooterText)`
   margin-top: 1em;
   margin-bottom: 1em;
 
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 900px) {
     display: none;
   }
 `;
