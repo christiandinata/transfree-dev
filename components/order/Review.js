@@ -73,7 +73,7 @@ const AmountColumn = styled.span`
   flex-basis: ${props => props.left ? '60%' : '40%'};
   text-align: ${props => props.left ? 'left' : 'right'};
   font-size: ${props => props.left ? '16px' : '20px'};
-  font-family: ${props => props.left ? 'Avenir LT Pro' : 'Avenir LT Pro Black'};
+  font-family: ${props => props.left ? 'Avenir Next LT Pro' : 'Avenir Next LT Pro Bold'};
 `;
 
 const BottomColumn = styled.span`

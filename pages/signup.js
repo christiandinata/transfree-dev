@@ -490,7 +490,7 @@ function Signup(props) {
 					padding: 0;
 					height: 48px;
 					border: none;
-					font-family: "Avenir LT Pro", sans-serif;
+					font-family: "Avenir Next LT Pro", sans-serif;
 					font-size: 16px;
 				}
 

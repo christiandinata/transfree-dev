@@ -138,7 +138,7 @@ const RecipientInputNumber = styled(NumberFormat)`
 `;
 
 const RecipientInputSelect = styled.select`
-  font-family: "Avenir LT Pro", sans-serif; 
+  font-family: "Avenir Next LT Pro", sans-serif; 
   background: #FFFFFF;
   border: 1px solid #E2E2E2;
   border-radius: 4px;

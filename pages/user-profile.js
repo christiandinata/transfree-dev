@@ -597,7 +597,7 @@ function UserProfile(props) {
                         padding: 5px;
                         height: 35px;
                         border: none;
-                        font-family: "Avenir LT Pro", sans-serif;
+                        font-family: "Avenir Next LT Pro", sans-serif;
                         font-size: 16px;
                         color: #626B79;
                     }

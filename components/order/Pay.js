@@ -137,7 +137,7 @@ const AmountColumn = styled.span`
   flex-basis: ${props => props.left ? '60%' : '40%'};
   text-align: ${props => props.left ? 'left' : 'right'};
   font-size: ${props => props.left ? '16px' : '20px'};
-  font-family: ${props => props.left ? 'Avenir LT Pro' : 'Avenir LT Pro Black'};
+  font-family: ${props => props.left ? 'Avenir Next LT Pro' : 'Avenir Next LT Pro Bold'};
 `;
 
 const BankDetailColumn = styled.span`
@@ -363,7 +363,7 @@ class Pay extends React.Component {
     let content;
     let button;
 
-    if (this.props.data.fromCurrency == 'idr') {
+    if (this.props.data.fromCurrency != 'idr') {
       content = <p>We will send payment instruction to your email. Confirm by clicking the button below</p>;
       button = <RenderButton data={this.props.data} addOrder = {this.addOrder} method='direct_transfer_via_email'/>
     } else {

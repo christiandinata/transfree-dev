@@ -193,7 +193,7 @@ export function FlagOptions(props) {
         <DropDownItem
           key={index}
           onClick={() => props.onSelect(flag.country)}>
-          <span className={"flag-icon flag-icon-" + flag.country.substring(0,2) + " flag-icon-squared" }/>
+          <span style={{marginRight: "10px"}}className={"flag-icon flag-icon-" + flag.country.substring(0,2) + " flag-icon-squared" }/>
           { `(${flag.country.toUpperCase()}) ${flag.cur}` }
         </DropDownItem>
       ))}

@@ -24,6 +24,7 @@ const ContainerFluid = styled.div`
   padding-bottom: 20px;
   width: 100%;
   overflow: hidden;
+  background: #F3F5F7;
 `;
 
 const ContentContainer = styled.div`
@@ -45,7 +46,6 @@ const ProgressContainer = styled.div`
 
   @media only screen and (max-width: 760px) {
     min-width: 800px;
-    // justify-content: flex-start;
 
     ${({ step }) => step == 1 && `
       padding-left: 15px;

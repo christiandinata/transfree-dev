@@ -9,7 +9,7 @@ const ModalLayout = styled(Modal)`
     }
 
     h3{
-        font-family: 'Avenir LT Pro Bold' !important;
+        font-family: 'Avenir Next LT Pro Bold' !important;
         font-size: 20px;
         margin-left: 20px;
     }
@@ -35,7 +35,7 @@ const Row = styled.div`
     margin-bottom: -10px;
 
     span{
-        font-family: 'Avenir LT Pro Bold';
+        font-family: 'Avenir Next LT Pro Bold';
         font-size: 20px;
         margin-left: 20px;
         margin-top: 0px !important;
