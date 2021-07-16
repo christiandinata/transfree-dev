@@ -17,7 +17,7 @@ export function EmptySearch(){
         <IconTextLayout
             icon = {"../static/images/Asset Web/transaction/file.svg"}
             title = {"Your Search is Not Found"}
-            desc = {<p>Lorem ipsum dolor sit amet</p>}
+            desc = {<p>We’ve searched every keyword that you typing, but did not match any keyword.</p>}
             location = {"/order"}
             buttonText = {"Send Money"}
         />   
