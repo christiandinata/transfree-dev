@@ -12,7 +12,7 @@ const ReviewContainer = styled.div `
   border-radius: 16px;
   padding: 10px 30px 30px 30px;
   max-width: 495px;
-  margin: 0px 15px 0px 15px;
+  margin: 0px;
 
   @media only screen and (max-width: 800px) {
     padding: 10px 20px 30px 20px;

@@ -12,7 +12,7 @@ const Row = styled.div`
 `;
 
 const Column = styled.div`
-  padding: 10px;
+  padding: 10px 0px 10px 0px;
 `;
 
 const PaymentContainer = styled.div `
@@ -32,7 +32,7 @@ const PaymentContainer = styled.div `
   @media only screen and (max-width: 800px) {
     min-width: 300px;
     max-width: 495px;
-    margin: 0px 15px 0px 15px;
+    margin: 0px;
     padding: 10px 20px 30px 20px;
   }
 `;
@@ -53,7 +53,7 @@ const PolicyContainer = styled.div `
 
   @media only screen and (max-width: 800px) {
     max-width: 495px;
-    margin: 0px 15px 0px 15px;
+    margin: 0px;
   }
 `;
 
@@ -113,12 +113,12 @@ const PaymentDetailContainer = styled.div`
 `;
 
 const ItemContainer = styled.div`
-  padding: 15px;
+  padding: ${props => props.wide ? '15px' : '0px'};
   display: flex;
   flex-direction: column;
 
   @media only screen and (max-width: 800px) {
-    padding: 15px 8px 15px 8px ;
+    padding: ${props => props.wide ? '15px 8px 15px 8px' : '0px'};
   }
 `;
 
@@ -139,7 +139,6 @@ const AmountColumn = styled.span`
   font-size: ${props => props.left ? '16px' : '20px'};
   font-family: ${props => props.left ? 'Avenir LT Pro' : 'Avenir LT Pro Black'};
 `;
-
 
 const BankDetailColumn = styled.span`
   color: white;
@@ -242,7 +241,7 @@ function RenderBankDetail(props){
   return(
     <div>
       <BankDetailContainer>
-          <ItemContainer>
+          <ItemContainer wide>
             <ItemRow>
               <BankDetailColumn left>
                 Bank Name
@@ -364,7 +363,7 @@ class Pay extends React.Component {
     let content;
     let button;
 
-    if (this.props.data.fromCurrency != 'idr') {
+    if (this.props.data.fromCurrency == 'idr') {
       content = <p>We will send payment instruction to your email. Confirm by clicking the button below</p>;
       button = <RenderButton data={this.props.data} addOrder = {this.addOrder} method='direct_transfer_via_email'/>
     } else {
@@ -434,7 +433,7 @@ class Pay extends React.Component {
               <PaymentDetails>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt </PaymentDetails>
                {content}
                 <AmountContainer>
-                <ItemContainer>
+                <ItemContainer wide>
                   <ItemRow>
                       <AmountColumn left>
                         You Send

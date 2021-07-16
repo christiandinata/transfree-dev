@@ -44,20 +44,20 @@ const ProgressContainer = styled.div`
   z-index: 1;
 
   @media only screen and (max-width: 760px) {
-    min-width: 780px;
-    justify-content: flex-start;
+    min-width: 800px;
+    // justify-content: flex-start;
 
     ${({ step }) => step == 1 && `
       padding-left: 15px;
-      left: 0px;
+      left: -85px;
     `}
 
     ${({ step }) => step == 2 && `
-      left: -150px;
+      left: -230px;
     `}
 
-    ${({ step }) => step==3 && `
-      left: -300px;
+    ${({ step }) => step >=3 && `
+      right: -40px;
     `}
   }
 `;
@@ -330,7 +330,9 @@ class Order extends React.Component {
             {this.renderContent(this.state.step)}
           </ContentContainer>
         </ContainerFluid>
-        <Footer/>
+        <div style={{overflow: "hidden"}}>
+          <Footer/>
+        </div>
       </div>
     )} 
     else {
@@ -348,7 +350,7 @@ class Order extends React.Component {
               <AwaitingConfirmation/>
             </div>
           </ContainerFluid>
-          <Footer/>
+          {/* <Footer/> */}
         </div>
       )
     }
