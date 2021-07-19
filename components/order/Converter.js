@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import NumberFormat from 'react-number-format'
-import styled from 'styled-components'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, { useState } from 'react';
+import NumberFormat from 'react-number-format';
+import styled from 'styled-components';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const Converter = styled.div`
   background: #FFFFFF;
@@ -44,7 +44,6 @@ const Exchange = styled.div`
       }
     `}`
     
-
 const Currency = styled.div`
     position: relative;
 
@@ -137,7 +136,6 @@ const SearchBar = styled.div`
   input::placeholder {
     color: #FFFFFF;
   }
-
 
   @media only screen and (max-width: 380px) {
     max-width: 301px;

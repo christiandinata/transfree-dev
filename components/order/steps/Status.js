@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { connect } from 'react-redux';
-import actions from '../../redux/actions';
-import { getCookie } from '../../utils/cookie';
+import actions from '../../../redux/actions';
+import { getCookie } from '../../../utils/cookie';
 
 const ContentContainer = styled.div`
   padding: 0px 20px 0px 20px;

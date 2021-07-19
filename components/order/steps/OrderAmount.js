@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import rateActions from '../../redux/actions';
-import { Converter, InputNumber, RateAndFee } from '../order/Converter';
-import { ModalPopUp } from './PopUp';
+import rateActions from '../../../redux/actions';
+import { Converter, InputNumber, RateAndFee } from '../Converter';
+import { ModalPopUp } from '../PopUp';
+import { Button, ButtonContainer } from '../Buttons';
 
 const OrderContainer = styled.div`
   background: #FFFFFF;
@@ -26,37 +27,6 @@ const OrderDetails = styled.p`
   color: #626B79;
 `;
 
-const ButtonContainer = styled.div`
-  padding-top: 40px;
-`;
-
-const Button = styled.button`
-  border: 1px solid #009FE3;
-  border-radius: 4px;
-
-  width: 100%;
-  height: 50px;
-  font-size: 16px;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 8px 24px;
-  margin-bottom: 10px;
-  transition: 0.2s;
-
-  background-color: ${props => props.secondary ? 'white' : '#009FE3'};
-  color: ${props => props.secondary ? '#009FE3' : 'white'};
-
-  ${({ disabled }) => disabled && `
-    opacity: 0.8;
-    background: grey;
-    border-color: grey;
-    cursor: default;
-  `}
-`;
-
 class OrderAmount extends React.Component {
   constructor({ props }) {
     super(props);
@@ -69,14 +39,13 @@ class OrderAmount extends React.Component {
       toAmount: 0,
       currentDay: new Date(),
       duration: '',
+      receivedOn: '',
       oos: false,
       errorOos: false,
       errorTransaction: false,
       errorMessage: '',
       activeElement: ''
     };
-
-    this.receiveOn = React.createRef();
 
     this.updateActiveElement = this.updateActiveElement.bind(this);
     this.updateDeactiveElement = this.updateDeactiveElement.bind(this);
@@ -286,6 +255,7 @@ class OrderAmount extends React.Component {
       ( this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' && 
         this.state.currentDay.getDay() == '7'))
       {
+        this.setState({receivedOn: 'Next Working Day'})
         return 1;
       }
 
@@ -367,20 +337,19 @@ class OrderAmount extends React.Component {
               </div>
               </Converter>
             </div>
-
+            <p style={{maxWidth: "100%", marginBottom: "0"}}><span style={{color: '#FF9800'}}>*</span>
+            <span> Your transfer will be processed immediately. </span>
             {             
                 this.checkDuration() == 1 ?
-                 <p style={{maxWidth: "100%", marginBottom: "0"}}><span style={{color: '#FF9800'}}>*</span> Your transfer will be processed immediately.
-                 The recipient will get the money on the <span ref = {this.receiveOn} className="received-on-weekend">next Working Day</span></p>  
+                 <span>The recipient will get the money on the next Working Day</span>
                  :
                  (this.checkDuration() == 2) ?
-                 <p style={{maxWidth: "100%", marginBottom: "0"}}><span style={{color: '#FF9800'}}>*</span> Your transfer will be processed immediately.
-                 The recipient will get the money in less than <span ref = {this.receiveOn} className="received-on" value = "2">24 hours</span>, 
-                 but kindly note, there is a chance that the money will arrive in more than <span id="exception" className="received-on">36 hours</span>.</p>
+                 <span>The recipient will get the money in less than 24 hours, 
+                 but kindly note, there is a chance that the money will arrive in more than 36 hours.</span>
                  :
-                 <p style={{maxWidth: "100%", marginBottom: "0"}}><span style={{color: '#FF9800'}}>*</span> Your transfer will be processed immediately.
-                 The recipient will get the money in less than <span ref = {this.receiveOn} className="received-on" value = "3">24 hours.</span></p> 
+                 <span>The recipient will get the money in less than 24 hours.</span>
               }
+            </p>
             
             <ButtonContainer>
 		          {((this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' && this.props.adjustedRates.idrToGbpOos == 'true') ||

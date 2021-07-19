@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import NumberFormat from 'react-number-format';
-import { ModalPopUp } from './PopUp';
+import { ModalPopUp } from '../PopUp';
+import { Button, ButtonContainer } from '../Buttons';
+import { AmountColumn, AmountContainer, ItemRow } from '../AmountContainer';
 
 const Row = styled.div`
   display: flex;
@@ -83,17 +85,6 @@ const PolicyContent = styled.div`
   }
 `;
 
-const AmountContainer = styled.div`
-  background: #1E345B;
-  color: white;
-  margin: 20px -30px 30px -30px;
-  padding: 0px 20px 0px 20px; 
-
-  @media only screen and (max-width: 800px) {
-    margin: 20px -20px 30px -20px;
-  }
-`;
-
 const BankDetailContainer = styled.div`
   background: #009FE3;
   color: white;
@@ -121,24 +112,6 @@ const ItemContainer = styled.div`
   }
 `;
 
-const ItemRow = styled.div`
-  display: flex;
-  padding: 2.5px 0px 2.5px;
-  
-  ${({ hide }) => hide && `
-    display: none;
-  `}
-`;
-
-const AmountColumn = styled.span`
-  color: white;
-  padding-top: ${props => props.left ? '4.75px' : '2.5px'};
-  flex-basis: ${props => props.left ? '60%' : '40%'};
-  text-align: ${props => props.left ? 'left' : 'right'};
-  font-size: ${props => props.left ? '16px' : '20px'};
-  font-family: ${props => props.left ? 'Avenir Next LT Pro' : 'Avenir Next LT Pro Bold'};
-`;
-
 const BankDetailColumn = styled.span`
   color: white;
   font-size: 16px;
@@ -146,30 +119,6 @@ const BankDetailColumn = styled.span`
   flex-basis: ${props => props.left ? '40%' : '60%'};
   text-align: ${props => props.left ? 'left' : 'right'};
   font-weight: ${props => props.left ? 'normal' : 'bolder'};
-`;
-
-const ButtonContainer = styled.div`
-  padding-top: 20px;
-`;
-
-const Button = styled.button`
-  border: 1px solid #009FE3;
-  border-radius: 4px;
-
-  width: 100%;
-  height: 50px;
-  font-size: 16px;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 8px 24px;
-  margin-bottom: 10px;
-  transition: 0.2s;
-
-  background-color: ${props => props.secondary ? 'white' : '#009FE3'};
-  color: ${props => props.secondary ? '#009FE3' : 'white'};
 `;
 
 const BankList = styled.ul`
@@ -364,7 +313,7 @@ class Pay extends React.Component {
     let content;
     let button;
 
-    if (this.props.data.fromCurrency == 'idr') {
+    if (this.props.data.fromCurrency != 'idr') {
       content = <p>We will send payment instruction to your email. Confirm by clicking the button below</p>;
       button = <RenderButton data={this.props.data} addOrder = {this.addOrder} method='direct_transfer_via_email'/>
     } else {
@@ -505,4 +454,4 @@ class Pay extends React.Component {
   }
 }
 
-export default Pay
+export default Pay;
