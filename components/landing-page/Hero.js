@@ -128,6 +128,7 @@ const DropDownItem = styled.li`
     display: flex;
     align-items: center;
     padding: 1rem 1rem;
+    column-gap: 1rem;
     color: #15233C;
     transition: background-color 0.1s ease-out;
     &:hover {
