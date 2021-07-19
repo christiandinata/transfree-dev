@@ -20,7 +20,11 @@ const ContentContainer = styled.div`
 
   h2{
     font-size: 32px;
-    // font-family: "Avenir Next LT Pro Bold";
+  }
+
+  span{
+    color: #009FE3;
+    cursor: pointer;
   }
 `;
 
@@ -50,35 +54,31 @@ const Button = styled.button`
   color: white;
 `;
 
+export function IconTextLayout(props){
+  return( 
+    <ContentContainer>
+      <IconContainer>
+        <img className="icon" src={props.icon}/>
+      </IconContainer>
+      <h2>{props.title}</h2>
+      {props.desc}
+      <Button onClick={() => window.location.href=props.location}>
+        {props.buttonText}
+      </Button>
+    </ContentContainer>
+    )
+};
+
 export function AwaitingConfirmation(){
     return (
-      <ContentContainer>
-        <IconContainer>
-          <img className="icon" src="../static/images/Asset Web/send money/ic-wait.svg" alt="checked"/>
-        </IconContainer>
-        <h2>Awaiting Account Confirmation</h2>
-        <p>We are now reviewing your account details. We will send you an email & WhatsApp message once the verification process is completed.
-        <br/>Please contact us by email <span style={{color:'#009FE3'}}>admin@transfree.id</span> or 
-        WhatsApp <span style={{color:'#009FE3'}}>+44 7490 090659</span> for faster process.</p>
-        <Button onClick={(e) => {e.preventDefault();
-                            window.location.href='/home';
-                          }}>Back to Homepage</Button>
-      </ContentContainer>
+      <IconTextLayout
+        icon = {"../static/images/Asset Web/send money/ic-wait.svg"}
+        title = {"Awaiting Account Confirmation"}
+        desc = {<p>We are now reviewing your account details. We will send you an email & WhatsApp message once the verification process is completed.
+                <br/>Please contact us by email <span onClick={()=>window.open("mailto:admin@transfree.id")}>admin@transfree.id</span> or 
+                WhatsApp <span onClick={()=>window.open("https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree")}>+44 7490 090659</span> for faster process.</p>}
+        location = {"/home"}
+        buttonText = {"Back to Homepage"}
+      />
     )
-  };
-
-export function EmptyTransaction(){
-    return (
-      <ContentContainer>
-        <IconContainer>
-          <img className="icon" src="../static/images/Asset Web/transaction/file.svg" alt="checked"/>
-        </IconContainer>
-        <h2>No transactions</h2>
-        <p>You haven’t sent money using Transfree. Get started now and enjoy fast and cheap international money transfer. </p>
-        <Button onClick={(e) => {e.preventDefault();
-                            window.location.href='/order';
-                          }}>Send Money</Button>
-      </ContentContainer>
-    )
-  
   };

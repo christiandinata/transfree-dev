@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import initialize from '../utils/initialize';
 import actions from '../redux/actions';
 import { getCookie } from '../utils/cookie';
-import { AwaitingConfirmation, EmptyTransaction } from '../components/order/Pending';
+import { AwaitingConfirmation } from '../components/order/Pending';
+import { EmptyTransaction, EmptySearch } from '../components/transactions/EmptyTransaction';
 import { NavBarWhite } from '../components/MenuComponents';
 import Footer from '../components/footer';
 import moment from 'moment';
@@ -50,30 +51,27 @@ const BackgroundContainer = styled.div`
 
   @media only screen and (max-width: 774px) {
     >.title{
-      top: 20%;
+      top: 25%;
+    }
+
+    >.image{
+      display: none;
     }
   }
-
 `;
 
 const SearchContainer = styled.div`
   display: flex;
   width: 600px;
-  justify-contents: center; 
+  justify-content: center; 
 
   position: absolute;
   top: 65%;
   left: 50%;
   transform: translate(-50%, -35%);
 
-  @media only screen and (max-width: 774px) {
-    flex-direction: column;
-    height: 110px;
-    align-items: center;
-
-    top: 65%;
-    left: 50%;
-    transform: translate(-50%, -28%);
+  @media only screen and (max-width: 640px) {
+    width: auto;
   }
 `;
 
@@ -94,17 +92,18 @@ const SearchBar = styled.input`
 
   transition: all 0.3s linear;
 
+  ::placeholder {
+    color: #232933;
+  }
+
   &:focus{
     box-shadow: 0 0 0 2px #068EC8;
     outline: none;
     background-image: url('../static/images/Asset Web/transaction/search-blue.svg');
   }
 
-  @media only screen and (max-width: 774px) {
-    flex-basis: 53%;
-    margin-bottom: 8px;
-    min-width: 250px;
-    margin-right: 0px;
+  @media only screen and (max-width: 640px) {
+    margin-right: 10px;
   }
 `;
 
@@ -123,11 +122,6 @@ const Button = styled.button`
 
   background-color: #009FE3;
   color: white;
-
-  @media only screen and (max-width: 774px) {
-    flex-basis: 47%;
-    min-width: 200px;
-  }
 `;
 
 const AllItemContainer = styled.div`
@@ -164,7 +158,6 @@ const ItemContainer = styled.div`
   @media only screen and (max-width: 600px) {
     padding: 20px;
   }
-  
 `;
 
 const ItemRow = styled.div`
@@ -173,7 +166,7 @@ const ItemRow = styled.div`
 `;
 
 const ItemColumn = styled.span`
-  flex-basis: ${props => props.left ? '60%' : '40%'};
+  flex-basis: ${props => props.left ? '50%' : '50%'};
   text-align: ${props => props.left ? 'left' : 'right'};
   font-size: ${props => props.left ? '16px' : '20px'};
   padding-top: ${props => props.left ? '2.5px' : '0px'};
@@ -360,13 +353,18 @@ class Account extends React.Component {
     return {};
   };
 
-  componentWillReceiveProps(nextProps) {
-    this.updateState();
-  }
-
   componentDidMount(){
     this.setState({orders: this.props.orderArray});
-    console.log(this.state.orders);
+  }
+
+  navbarTransaction(){
+    return(
+      <NavBarWhite 
+        isAuthenticated={true} 
+        username={this.props.username} 
+        id={this.props.id}
+        current={"transactions"}/>
+    )
   }
 
   /* Resets transaction order items (display all order items after search)*/
@@ -379,10 +377,27 @@ class Account extends React.Component {
   /* Function to search transaction from order name or order clompeted date */
   searchTransaction(){
     let searchResult = [];
-    let filter = this.searchInput.current.value.toLowerCase();
+    let words = this.searchInput.current.value.toLowerCase().split(" ");
     for(const order in this.props.orderArray){
-      if(this.props.orderArray[order].name.toLowerCase().indexOf(filter) > -1 || moment(this.props.orderArray[order].completedAt).format("DD/MM/YYYY HH:mm").indexOf(filter) > -1 ){
-        searchResult.push(this.props.orderArray[order])
+      let count = 0;
+      for(const word in words){
+        if(this.props.orderArray[order].name.toLowerCase().indexOf(words[word]) > -1 ||
+          this.props.orderArray[order].toCurrency.toLowerCase().indexOf(words[word]) > -1 ||
+          this.props.orderArray[order].fromCurrency.toLowerCase().indexOf(words[word]) > -1 ||
+          String(this.props.orderArray[order].fromAmount).indexOf(words[word]) > -1 ||
+          String(this.props.orderArray[order].toAmount).indexOf(words[word]) > -1 ||
+          moment(this.props.orderArray[order].completedAt).format("DD/MM/YYYY HH:mm").indexOf(words[word]) > -1|| 
+          ("processing".indexOf(words[word]) > -1 && this.props.orderArray[order].completedAt == 0) ||
+          ("completed".indexOf(words[word]) > -1 && this.props.orderArray[order].completedAt > 0)
+          ){
+            count++;
+        }
+        else{
+          break;
+        }
+      }
+      if(count == words.length){
+        searchResult.push(this.props.orderArray[order]);
       }
     }
     this.setState({orders: searchResult});
@@ -399,7 +414,7 @@ class Account extends React.Component {
             type="text" 
             ref={this.searchInput} 
             onChange={this.resetTransaction}
-            placeholder="Search transactions"
+            placeholder="Search transactions..."
           />
           <Button onClick={() => this.searchTransaction()}>Search</Button>
         </SearchContainer>
@@ -413,11 +428,13 @@ class Account extends React.Component {
       if(this.props.orderArray.length > 0) { // Transaction is not empty
         return (
           <div>
-            <NavBarWhite isAuthenticated={true} username={this.props.username} id={this.props.id}/>
+            {this.navbarTransaction()}
             {this.headerTransaction()}
             <ContentContainer>
               <AllItemContainer>
-                <h3 style={{textAlign: "center", display: this.state.orders.length == 0 ? "block" : "none" }}>No results found.</h3>
+                <div style = {{display: this.state.orders.length == 0 ? "block" : "none"}}>
+                  <EmptySearch style = {{display: this.state.orders.length == 0 ? "block" : "none"}}/>
+                </div>
                 <OrderItem ordersList={this.state.orders}/>
               </AllItemContainer>
             </ContentContainer>
@@ -427,7 +444,7 @@ class Account extends React.Component {
       } else {
         return (
           <div>
-            <NavBarWhite isAuthenticated={true} username={this.props.username} id={this.props.id}/>
+            {this.navbarTransaction()}
             {this.headerTransaction()}
             <EmptyTransaction/>
             <Footer/>
@@ -437,7 +454,7 @@ class Account extends React.Component {
     } else {
       return (
         <div>
-          <NavBarWhite isAuthenticated={true} username={this.props.username} id={this.props.id}/>
+          {this.navbarTransaction()}
           <AwaitingConfirmation/>
           <Footer/>
         </div>
@@ -451,7 +468,7 @@ class Account extends React.Component {
         <div>
           <Header/>
           <ContainerFluid>
-                {this.renderContent()}
+              {this.renderContent()}
           </ContainerFluid>
         </div>
       );
