@@ -33,30 +33,7 @@ const Row = styled.div`
     grid-template-columns: repeat(auto-fill, 
                            minmax(150px, 1fr));
     grid-gap: 17px;
-  }
-
-  // @media only screen and (min-width: 100px) {
-  //   grid-template-columns: repeat(auto-fill, 
-  //                          minmax(100px, 1fr));
-  //   grid-gap: 17px;
-  // }
-
-  // @media only screen and (min-width: 401px) {
-  //   grid-template-columns: repeat(auto-fill, 
-  //                          minmax(160px, 1fr));
-  //   grid-gap: 17px;
-  // }
-
-  // @media only screen and (min-width: 581px) {
-  //   grid-template-columns: repeat(auto-fill, 
-  //                          minmax(180px, 1fr));
-  //   grid-gap: 17px;
-  // }
-
-  // @media only screen and (min-width: 641px) {
-  //   grid-template-columns: repeat(auto-fill, 
-  //                          minmax(190px, 1fr));
-  //   grid-gap: 17px;
+    padding-right: 20px;
   }
 `;
 
@@ -83,6 +60,10 @@ const Contacts = styled.div`
     padding: 0;
     justify-content: space-between;
   }
+
+  @media only screen and (max-width: 450px) {
+    display: block;
+  }
 `;
 
 const Brand = styled.img`
@@ -106,24 +87,18 @@ const LogoDiv = styled.div`
   justify-content: space-between;
 
   @media only screen and (max-width: 900px) {
-    // margin-left: 86px;
-    // margin-right: 0;
     margin-right: 16px;
+  }
+
+  @media only screen and (max-width: 450px) {
+    justify-content: flex-start;
+    margin-top: 20px;
   }
 `;
 
 const SocialLogo = styled.a`
   margin-left: 20px;
   text-decoration: none;
-
-  @media only screen and (max-width: 900px) {
-    // max-width: 100%;
-    // height: auto;
-    width: 16px;
-    height: 16px;
-    margin-left: 24px;
-    align-items: center;
-  }
 `;
 
 const LicensePhoto = styled.img`
@@ -225,7 +200,7 @@ const Footer = () => (
 
         <Column>
           <Title>License</Title>
-          <LicensePhoto src = "../static/images/partners/bank-indonesia.png"></LicensePhoto>
+          <LicensePhoto src = "../static/images/partners/logo-bank-indonesia.png"></LicensePhoto>
         </Column>
       </Row>
     </Base>

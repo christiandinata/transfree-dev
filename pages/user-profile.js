@@ -550,7 +550,7 @@ function UserProfile(props) {
                                     <Profile.FormLabel filled = {focus.phone}>Phone Number</Profile.FormLabel>
                                     <Profile.FormRowPhone filled = {focus.phone}>
                                         <Profile.PhoneInput
-                                            country = "ID"
+                                            // country = "ID"
                                             value = {info.phone}
                                             name = "phone"
                                             onChange = {(value) => handlePhoneChange(value)}
