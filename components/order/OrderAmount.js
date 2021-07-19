@@ -4,7 +4,6 @@ import rateActions from '../../redux/actions';
 import { Converter, InputNumber, RateAndFee } from '../order/Converter';
 import { ModalPopUp } from './PopUp';
 
-
 const OrderContainer = styled.div`
   background: #FFFFFF;
   border: 0.5px solid #B4B4B4;
@@ -54,6 +53,7 @@ const Button = styled.button`
     opacity: 0.8;
     background: grey;
     border-color: grey;
+    cursor: default;
   `}
 `;
 
@@ -70,6 +70,7 @@ class OrderAmount extends React.Component {
       currentDay: new Date(),
       duration: '',
       oos: false,
+      errorOos: false,
       errorTransaction: false,
       errorMessage: '',
       activeElement: ''
@@ -113,7 +114,7 @@ class OrderAmount extends React.Component {
   }
 
   toggleModalOOS() {
-    this.setState({ oos: !this.state.oos })
+    this.setState({ errorOos: !this.state.errorOos })
   }
 
   toggleModalError() {
@@ -302,7 +303,7 @@ class OrderAmount extends React.Component {
   saveAndContinue = (e) => {
     e.preventDefault();
     if(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr'){
-      this.setState({oos:true});
+      this.setState({oos:true, errorOos: true});
     }
     else if(this.state.fromCurrency == 'idr' && (this.state.fromAmount <100000)){
       this.setState({ errorTransaction:true,
@@ -382,22 +383,21 @@ class OrderAmount extends React.Component {
               }
             
             <ButtonContainer>
-		          {(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' && this.props.adjustedRates.idrToGbpOos == 'true')
-                  ||
-                  (this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr' && this.props.adjustedRates.gbpToIdrOos == 'true')
-                  ||
-                  (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur' && this.props.adjustedRates.idrToEurOos == 'true')
-                  ||
-                  (this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr' && this.props.adjustedRates.eurToIdrOos == 'true')
-                  ?
-                  <Button disabled={true}>Out Of Stock</Button>
-                  :
-                  <Button onClick={this.saveAndContinue}>Continue</Button>
+		          {((this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' && this.props.adjustedRates.idrToGbpOos == 'true') ||
+                (this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr' && this.props.adjustedRates.gbpToIdrOos == 'true') ||
+                (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur' && this.props.adjustedRates.idrToEurOos == 'true') ||
+                (this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr' && this.props.adjustedRates.eurToIdrOos == 'true') ||
+                (this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr' && this.state.oos))
+                ?
+                <Button disabled={true}>Out Of Stock</Button>
+                :
+                <Button onClick={this.saveAndContinue}>Continue</Button>
               }
             </ButtonContainer>           
         </OrderContainer>
+
         <ModalPopUp
-          open={this.state.oos}
+          open={this.state.errorOos}
           toggleModal={this.toggleModalOOS}
           icon={'../static/images/Asset Web/send money/ic-error.svg'}
           title={"We are out of stock"}

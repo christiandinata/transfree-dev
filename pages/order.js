@@ -350,7 +350,9 @@ class Order extends React.Component {
               <AwaitingConfirmation/>
             </div>
           </ContainerFluid>
-          {/* <Footer/> */}
+          <div style={{overflow: "hidden"}}>
+            <Footer/>
+          </div>
         </div>
       )
     }

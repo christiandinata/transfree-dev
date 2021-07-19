@@ -89,7 +89,6 @@ const AmountContainer = styled.div`
   margin: 20px -30px 30px -30px;
   padding: 0px 20px 0px 20px; 
 
-
   @media only screen and (max-width: 800px) {
     margin: 20px -20px 30px -20px;
   }
@@ -188,7 +187,6 @@ const RadioButton = styled.input.attrs({
   border: 10px solid #90DDD0 !important;
   margin-right: 20px; 
   pointer-events: none;
-
 `;
 
 const BankItem = styled.li`
@@ -201,10 +199,13 @@ const BankItem = styled.li`
   font-size: 16px;
   z-index: 1;
 
+  border-bottom-width: ${props => props.bottom ? '0.5px' : '0'};
+
   ${({ active }) => active && `
     box-shadow: 0 0 1px 1px #068EC8;
     border-color: #068EC8;
     outline: none;
+    border-bottom-width: 0.5px;
   `}
 
   >.bank-img{
@@ -363,7 +364,7 @@ class Pay extends React.Component {
     let content;
     let button;
 
-    if (this.props.data.fromCurrency != 'idr') {
+    if (this.props.data.fromCurrency == 'idr') {
       content = <p>We will send payment instruction to your email. Confirm by clicking the button below</p>;
       button = <RenderButton data={this.props.data} addOrder = {this.addOrder} method='direct_transfer_via_email'/>
     } else {
@@ -390,7 +391,6 @@ class Pay extends React.Component {
             </BankDetail>
 
             <BankItem 
-              style={{marginTop: '-0.5px'}} 
               active = {this.state.bankSelected == 'bca'} 
               onClick = {() => this.transferBank('bca')}>
                 <RadioButton checked = {this.state.bankSelected == 'bca'}/>
@@ -405,7 +405,8 @@ class Pay extends React.Component {
             </BankDetail>
 
             <BankItem 
-              style={{borderRadius: '0px 0px 4px 4px', marginTop: '-1px'}} 
+              bottom={true}
+              style={{borderRadius: '0px 0px 4px 4px'}} 
               active = {this.state.bankSelected == 'mandiri'} 
               onClick = {() => this.transferBank('mandiri')}>
                 <RadioButton checked = {this.state.bankSelected == 'mandiri'}/>
