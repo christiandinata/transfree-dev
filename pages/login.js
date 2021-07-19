@@ -7,6 +7,7 @@ import {
 	faEye,
 	faEyeSlash,
 	faArrowCircleLeft,
+	faBullseye,
 } from "@fortawesome/free-solid-svg-icons";
 import { FormContainer, Form } from "../components/FormComponents";
 import styled from "styled-components";
@@ -35,6 +36,7 @@ function Login(props) {
 	});
 
 	const [error, setError] = useState(false);
+	const [spaceEntered, setSpaceEntered] = useState(false);
 	const [hiddenPass, setHiddenPass] = useState(true);
 
 	// functions used on this page
@@ -51,7 +53,6 @@ function Login(props) {
 			[name]: true,
 		});
 		setError(false);
-		console.log(error);
 	}
 
 	function handleOnBlur(e) {
@@ -74,7 +75,7 @@ function Login(props) {
 	}
 
 	function handleChange(e) {
-		const { name, value } = e.target;
+		const { name, value, onKeyDown } = e.target;
 		if (value) {
 			setFilled({
 				...filled,
@@ -86,6 +87,7 @@ function Login(props) {
 				[name]: false,
 			});
 		}
+
 		setValues({
 			...values,
 			[name]: value,
@@ -184,7 +186,16 @@ function Login(props) {
 								required
 								placeholder="Password"
 								error={error}
-								onChange={handleChange}
+								// prevent users to enter "space" as their password
+								onKeyDown={(e) => {
+									if (e.keyCode == 32) {
+										setSpaceEntered(true);
+										alert("Password doens't allow a space");
+									} else {
+										setSpaceEntered(false);
+									}
+								}}
+								onChange={!spaceEntered && handleChange}
 								onFocus={handleOnFocus}
 								onBlur={handleOnBlur}
 							/>

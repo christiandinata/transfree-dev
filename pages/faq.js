@@ -471,7 +471,7 @@ const ListContainer = styled.div`
 	}
 
 	@media (max-width: 660px) {
-		grid-template-columns: repeat(auto-fill, 299px);
+		grid-template-columns: repeat(auto-fill, 288px);
 		flex-direction: column;
 
 		padding: 40px 16px 120px 16px;

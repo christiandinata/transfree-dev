@@ -48,6 +48,7 @@ function ForgotPassword(props) {
 		confirmPassword: false,
 	});
 
+	const [spaceEntered, setSpaceEntered] = useState(false);
 	const [hiddenPass, setHiddenPass] = useState(true);
 	const [hiddenConfirmPass, setHiddenConfirmPass] = useState(true);
 	const [errorMsg, setErrorMsg] = useState(false);
@@ -407,7 +408,17 @@ function ForgotPassword(props) {
 										required
 										placeholder="Password"
 										error={error.password}
-										onChange={handleChange}
+										onKeyDown={(e) => {
+											if (e.keyCode == 32) {
+												setSpaceEntered(true);
+												alert(
+													"Password doens't allow a space"
+												);
+											} else {
+												setSpaceEntered(false);
+											}
+										}}
+										onChange={!spaceEntered && handleChange}
 										onFocus={handleOnFocus}
 										onBlur={handleOnBlur}
 									/>
@@ -473,7 +484,17 @@ function ForgotPassword(props) {
 										required
 										placeholder="Confirm New Password"
 										error={error.confirmPassword}
-										onChange={handleChange}
+										onKeyDown={(e) => {
+											if (e.keyCode == 32) {
+												setSpaceEntered(true);
+												alert(
+													"Password doens't allow a space"
+												);
+											} else {
+												setSpaceEntered(false);
+											}
+										}}
+										onChange={!spaceEntered && handleChange}
 										onFocus={handleOnFocus}
 										onBlur={handleOnBlur}
 									/>
