@@ -53,6 +53,10 @@ const BackgroundContainer = styled.div`
     >.title{
       top: 25%;
     }
+
+    >.image{
+      display: none;
+    }
   }
 `;
 
