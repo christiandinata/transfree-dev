@@ -166,7 +166,7 @@ const ItemRow = styled.div`
 `;
 
 const ItemColumn = styled.span`
-  flex-basis: ${props => props.left ? '60%' : '40%'};
+  flex-basis: ${props => props.left ? '50%' : '50%'};
   text-align: ${props => props.left ? 'left' : 'right'};
   font-size: ${props => props.left ? '16px' : '20px'};
   padding-top: ${props => props.left ? '2.5px' : '0px'};
