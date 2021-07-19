@@ -28,7 +28,7 @@ class Privacy extends Component {
     return (
       <div>
         <Header />
-        <NavBarWhite isAuthenticated={this.props.isAuthenticated} username={this.props.username} />
+        <NavBarWhite isAuthenticated={this.props.isAuthenticated} username={this.props.username} id={this.props.id} />
         <Info.BlueHeader>
           <Info.Batik>
             <h1>Privacy Policy</h1>
@@ -116,7 +116,8 @@ const mapStateToProps = (state) => {
   if (state.user.user_data != null) {
     return {
       isAuthenticated: true,
-      username: state.user.user_data.fullname
+      username: state.user.user_data.fullname,
+      id: state.user.user_data.idNumber
     }
   } else {
     return {

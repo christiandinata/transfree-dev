@@ -116,7 +116,7 @@ function StyledDropzone (props) {
             </p>
         </div>
          <aside style={thumbsContainer}>
-                {thumbs}
+          {thumbs}
          </aside>
       </div>
      

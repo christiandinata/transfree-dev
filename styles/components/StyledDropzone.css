@@ -10,9 +10,9 @@
 }
 
 .styled-dropzone-title {
-  font-family: 'Open Sans', sans-serif;
   font-size: 1rem;
-  font-weight: 400;
+  font-family: "Avenir Next LT Pro Bold", sans-serif;
+  font-weight: 100;
   text-align: center;
 }
 
@@ -30,17 +30,16 @@
   justify-content: center;
   width: 280px;
   height: auto;
-  margin: 10px 30px 30px;
-  border-width: 3;
-  border-color: #5BB7DE;
-  border-style: dashed;
+  margin: 0 30px 24px;
+  border: 1px solid #B4B4B4;
+  box-sizing: border-box;
+  border-radius: 4px;
   outline: none;
   transition: border .24s ease-in-out;
 }
 
 @media only screen and (min-width: 1024px) {
   .styled-dropzone-container {
-    margin: 30px 30px 10px 0px;
     min-height: 190px;
   }
 }
@@ -50,14 +49,11 @@
 }
 
 .styled-dropzone-placeholder img{
-  min-width: 60%;
-  max-width: 60%;
-  min-height: 60%;
-  max-height: 60%;
+  width: 30%;
+  height: 30%
 }
 
 .styled-dropzone-instruction {
-  font-family: 'Open Sans', sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
   text-align: center;

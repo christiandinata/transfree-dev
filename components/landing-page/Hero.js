@@ -165,7 +165,9 @@ const SearchBar = styled.div`
     outline: none;
     padding: 0;
   }
-  input:focus { border: none; }
+  input:focus { 
+    box-shadow: none;
+  }
   input::placeholder {
     color: #FFFFFF;
   }

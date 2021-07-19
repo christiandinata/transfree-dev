@@ -15,7 +15,6 @@ const Features = styled.div`
     line-height: 1;
     margin-bottom: 0;
     color: #232933;
-    font-family: "Avenir Next LT Pro Bold", sans-serif !important;
   }
   p { width: 60%; }
   @media only screen and (max-width: 800px) {
