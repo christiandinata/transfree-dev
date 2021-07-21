@@ -622,6 +622,13 @@ function ForgotPassword(props) {
 					align-items: center;
 				}
 
+				.containerStyling > div {
+					width: 48px;
+					height: 54px;
+					margin-left: 4px;
+					margin-right: 4px;
+				}
+
 				.inputStyling {
 					font-size: 20px;
 					line-height: 24px;
@@ -629,9 +636,9 @@ function ForgotPassword(props) {
 					font-weight: 700;
 					width: 48px !important;
 					height: 54px;
-					margin: 4px;
 					border: 1px solid #e2e2e2;
 					border-radius: 4px;
+					margin-left: -3px;
 				}
 				.inputStyling.error {
 					color: #ff0000;
@@ -683,6 +690,20 @@ const RecoveryForm = styled.form`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+
+	transition: 0.4s all ease-in;
+
+	@media (max-width: 620px) {
+		width: 344px;
+		margin-right: 16px;
+		margin-left: 16px;
+		border: none;
+		border-radius: 4px;
+	}
+
+	@media (max-width: 375px) {
+		width: 90vw;
+	}
 `;
 
 const RecoveryFormInner = styled.div`
@@ -690,6 +711,15 @@ const RecoveryFormInner = styled.div`
 	display: flex;
 	height: 100%;
 	flex-direction: column;
+	transition: 0.4s all ease-in;
+
+	@media (max-width: 620px) {
+		width: 312px;
+	}
+
+	@media (max-width: 375px) {
+		width: 80vw;
+	}
 `;
 
 const Heading = styled.p`
@@ -700,6 +730,7 @@ const Heading = styled.p`
 	color: #009fe3;
 	margin-bottom: 32px;
 	margin-top: 32px;
+	word-wrap: break-word;
 `;
 
 const BelowHeading1 = styled.div`

@@ -32,4 +32,8 @@ export const Form = styled.form`
 		border: none;
 		border-radius: 4px;
 	}
+
+	@media (max-width: 375px) {
+		width: 90vw;
+	}
 `;

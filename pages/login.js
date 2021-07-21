@@ -265,6 +265,10 @@ const FormInner = styled.div`
 	@media (max-width: 620px) {
 		width: 312px;
 	}
+
+	@media (max-width: 375px) {
+		width: 80vw;
+	}
 `;
 
 const Heading = styled.p`
@@ -273,6 +277,7 @@ const Heading = styled.p`
 	line-height: 40px;
 	margin-bottom: 16px;
 	color: #009fe3;
+	word-wrap: break-word;
 `;
 
 const BelowHeading = styled.p`

@@ -170,6 +170,7 @@ function PhoneVerification(props) {
 					border: 1px solid #e2e2e2;
 					border-radius: 4px;
 					padding: 0 !important;
+					margin-left: -3px;
 				}
 
 				.inputStyling.error {
@@ -254,6 +255,10 @@ const Button = styled.button`
 
 	@media (max-width: 620px) {
 		width: 296px;
+	}
+
+	@media (max-width: 375px) {
+		width: 70vw;
 	}
 `;
 
