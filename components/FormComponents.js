@@ -29,5 +29,7 @@ export const Form = styled.form`
 		width: 344px;
 		margin-right: 16px;
 		margin-left: 16px;
+		border: none;
+		border-radius: 4px;
 	}
 `;

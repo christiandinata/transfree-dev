@@ -526,10 +526,15 @@ function Signup(props) {
 
 const FormInner = styled.div`
 	height: 100%;
-	width: 480px;
+	width: 470px;
 	margin: 0 4px;
 	display: flex;
 	flex-direction: column;
+	transition: 0.4s all ease-in;
+
+	@media (max-width: 620px) {
+		width: 312px;
+	}
 `;
 
 const Heading = styled.p`
