@@ -10,7 +10,7 @@ const Row = styled.div`
   display: flex;
   width: 100%;
 
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 768px) {
     flex-direction: column;
   }
 `;
@@ -33,7 +33,7 @@ const RecipientContainer = styled.div `
     margin: 0px 10px 0px 10px;
   }
 
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 768px) {
     min-width: 300px;
     max-width: 495px;
     margin: 0px;
@@ -53,8 +53,7 @@ const AmountContainer = styled.div `
   }
 
   @media only screen and (max-width: 800px) {
-    max-width: 495px;
-    margin: 0px;
+    display: none;
   }
 `;
 

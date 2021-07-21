@@ -44,20 +44,21 @@ const ProgressContainer = styled.div`
   position: fixed;
   z-index: 1;
 
-  @media only screen and (max-width: 760px) {
+  @media only screen and (max-width: 660px) {
     min-width: 800px;
+    justify-content: flex-start;
 
     ${({ step }) => step == 1 && `
       padding-left: 15px;
-      left: -85px;
+      left: 0px;
     `}
 
     ${({ step }) => step == 2 && `
-      left: -230px;
-    `}
+      left: -150px;
+    `} 
 
     ${({ step }) => step >=3 && `
-      right: -40px;
+      right: -100px;
     `}
   }
 `;
