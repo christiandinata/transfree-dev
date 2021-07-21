@@ -92,7 +92,7 @@ const FAQ = (props) => {
 			<NavBarWhite
 				username={props.username}
 				id={props.id}
-				isAuthenticated={true}
+				isAuthenticated={props.isAuthenticated}
 			/>
 			<HeroContainer>
 				<HeroHeading className="bold">
@@ -732,6 +732,7 @@ const mapStateToProps = (state) => {
 	return {
 		username: state.user.user_data ? state.user.user_data.fullname : "",
 		id: state.user.user_data ? state.user.user_data.idNumber : "",
+		isAuthenticated: !!state.authentication.token,
 	};
 };
 

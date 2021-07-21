@@ -195,6 +195,7 @@ function ForgotPassword(props) {
 					setCountdown({
 						...countdown,
 						seconds: 59,
+						minutes: 4,
 					});
 					setValues({ ...values, sid: response.data.serviceSid });
 					setErrorMsg(false);
@@ -210,7 +211,7 @@ function ForgotPassword(props) {
 	}
 
 	const [countdown, setCountdown] = useState({
-		minutes: "00",
+		minutes: 2,
 		seconds: 59,
 	});
 
@@ -226,11 +227,26 @@ function ForgotPassword(props) {
 						...countdown,
 						seconds: countdown.seconds - 1,
 					});
+				} else {
+					if (countdown.minutes == 0) {
+						setCountdown({
+							...countdown,
+							seconds: 0,
+							minutes: 0,
+						});
+					} else {
+						setCountdown({
+							...countdown,
+							minutes: countdown.minutes - 1,
+							seconds: 59,
+						});
+					}
 				}
 			}, 1000);
 			return () => clearTimeout(counter);
 		} else {
 			countdown.seconds = 59;
+			countdown.minutes = 4;
 		}
 	});
 
@@ -276,7 +292,7 @@ function ForgotPassword(props) {
 							)}
 							{step == "otp" && (
 								<>
-									<BelowHeading1>
+									<BelowHeading1 className="bold">
 										Enter the Verification Code
 									</BelowHeading1>
 									<BelowHeading step="otp">
@@ -360,12 +376,13 @@ function ForgotPassword(props) {
 									hasErrored={errorMsg ? "true" : null}
 									errorStyle="errorStyling"
 								/>
-								{countdown.seconds > 0 ? (
+								{countdown.minutes > 0 ||
+								countdown.seconds > 0 ? (
 									<ResendCodeDiv>
 										Resend in{" "}
 										<b>
 											{" "}
-											{countdown.minutes}:
+											0{countdown.minutes}:
 											{countdown.seconds < 10
 												? "0"
 												: null}

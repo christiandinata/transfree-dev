@@ -45,25 +45,31 @@ const Header = () => (
 				src: url("../static/fonts/AvenirNextLTPro-Medium.otf");
 			}
 
-      body {
-        font-family: "Avenir Next LT Pro", sans-serif; 
-        line-height: 1.6;
-        letter-spacing: 0.2px;
-        color: #3E495E;
-        margin: 0px ;
-        text-rendering: optimizeLegibility;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
+			body {
+				font-family: "Avenir Next LT Pro", sans-serif;
+				line-height: 1.6;
+				letter-spacing: 0.2px;
+				color: #3e495e;
+				margin: 0px;
+				text-rendering: optimizeLegibility;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+			}
 
-      input, button{
-        font-family: "Avenir Next LT Pro", sans-serif; 
-      }
+			input,
+			button {
+				font-family: "Avenir Next LT Pro", sans-serif;
+			}
 
-      h1, h2, h3, h4, b, .bold{
-        font-family: "Avenir Next LT Pro Bold", sans-serif !important;
+			h1,
+			h2,
+			h3,
+			h4,
+			b,
+			.bold {
+				font-family: "Avenir Next LT Pro Bold", sans-serif !important;
 				font-weight: 100;
-      }
+			}
 
 			button:hover {
 				cursor: pointer;
@@ -85,12 +91,16 @@ const Header = () => (
 				clear: both;
 			}
 
-			.react-phone-number-input__country {
-				background-color: #f3f5f7;
-				padding: 0 12px;
-				margin-left: -16px;
+			.react-phone-number-input__row {
+				width: 100%;
+				margin-bottom: 30px;
+				border: none;
 			}
-
+			.react-phone-number-input__input {
+				padding: 15px 0;
+				font-family: "Avenir LT Pro", sans-serif;
+				font-size: 16px;
+			}
 			.react-phone-number-input__icon {
 				margin-top: 5px;
 				height: initial;
