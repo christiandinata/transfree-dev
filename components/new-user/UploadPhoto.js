@@ -103,7 +103,7 @@ function UploadPhoto (props) {
 const mapStateToProps = (state) => {
   return {
     isInProgress: state.photo.inProgress,
-    errorMessage: state.photo.errorMessage,
+    errorMessage: state.photo.errorMessage
   }
 }
 

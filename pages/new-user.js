@@ -1,19 +1,19 @@
-import Router from 'next/router';
-import { useState, useEffect, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { getCookie } from '../utils/cookie';
-import { NavBarWhite } from '../components/MenuComponents.js';
-import StyledDropzone from '../components/StyledDropzone';
-import initialize from '../utils/initialize';
-import Header from '../components/header';
-import styled from 'styled-components';
-import CreateProfile from '../components/new-user/CreateProfile';
-import UploadPhoto from '../components/new-user/UploadPhoto';
-import * as Profile from '../components/ProfileComponents';
-import userActions from '../redux/actions/userActions';
-import '../styles/new-user.css';
-import Link from 'next/link';
-import { PrButton } from '../components/landing-page/Buttons.js';
+import Router from 'next/router'
+import { useState, useEffect, Fragment } from 'react'
+import { connect } from 'react-redux'
+import { getCookie } from '../utils/cookie'
+import { NavBarWhite } from '../components/MenuComponents.js'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import StyledDropzone from '../components/StyledDropzone'
+import initialize from '../utils/initialize'
+import Header from '../components/header'
+import styled from 'styled-components'
+import CreateProfile from '../components/new-user/CreateProfile'
+import UploadPhoto from '../components/new-user/UploadPhoto'
+import * as Profile from '../components/ProfileComponents'
+import userActions from '../redux/actions/userActions'
+import photoActions from '../redux/actions/photoActions'
+import { PrButton } from '../components/landing-page/Buttons.js'
 
 //Component yang menampilkan opsi pengisian detail dari user baru 
 function Progress (props) {
@@ -42,15 +42,17 @@ function CurrentStepWindow (props) {
 }
 
 const SectionTitle = styled.h2`
-  color: #FFFFFF;
+  color: white;
   text-align: center;
-  margin: 1rem auto;
+  margin: 24px auto;
 `
 
-const Steps = styled.div`
-  margin: 1rem auto;
-  text-align: center;
-`
+const Actions = styled.section`
+  background: #1687e5;
+  padding-top: 38px;
+  @media only screen and (max-width: 800px) {
+    display: none;
+  }`
 
 const CheckDiv = styled.div`
   margin-bottom: 45px;
@@ -59,12 +61,64 @@ const CheckDiv = styled.div`
     height: 1.5rem;
     vertical-align: middle;
     margin-right: 1rem;
+  }`
+
+const DropzonesDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  column-gap: 3%;
+  row-gap: 3rem;
+  justify-content: center;
+  align-items: center;
+  max-width: 95%;
+  margin: 0 auto;
+  @media only screen and (max-width: 1100px) {
+    flex-direction: column;
+  }`
+
+const InstructionDiv = styled.div`
+  margin: 40px auto;
+  text-align: center;
+  @media only screen and (max-width: 800px) {
+    text-align: left;
+    width: 95%;
+  }`
+
+const ConsentDiv = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 40px auto;
+  text-align: center;
+  width: 75%;
+  a {
+    text-decoration: none;
+    color: #009FE3;
   }
+  button {
+    width: 28rem;
+  }
+  @media only screen and (max-width: 800px) {
+    width: 95%;
+    button {
+      width: 95%;
+    }
+  }`
+
+const Warning = styled.p`
+  color: #FF0000;
+  font-size: 0.9rem;
+  text-align: left;
+  margin-bottom: 0.5rem;
 `
 
 function NewUser (props) {
-  const totalSteps = 2
+
+  const [errorMsg, setErrorMsg] = useState('')
+  const [isTermsAgreed, setIsTermsAgreed] = useState(false)
   const [photoId, setPhotoId] = useState('')
+  const [photoFace, setPhotoFace] = useState('')
   const [currentStep, setCurrentStep] = useState(props.userData.registrationStep - 1)
 
   useEffect(() => {
@@ -78,13 +132,54 @@ function NewUser (props) {
     }
   })
 
+  const checkPhotoValid = () => {
+    if (photoId === '' || photoFace === '') {
+      setErrorMsg('Neither photo can be empty!')
+      return false
+    }
+    return true
+  }
+
+  const checkTermsAgreed = () => {
+    if (!isTermsAgreed) {
+      setErrorMsg('You can continue if you agree with our Terms and Condition!')
+      return false
+    }
+    return true
+  }
+
+  const handleOnClick = (e) => {
+    e.preventDefault()
+    if (!checkPhotoValid() || !checkTermsAgreed()) {
+      return
+    }
+
+    if (props.userData.registrationStep === 2) {
+      props.uploadPhotoFillAdmin({
+        photoId: photoId,
+        photoFace: photoFace,
+        email: props.userData.email,
+        },
+        'uploadPhotoFillAdmin'
+      )
+    } else if (props.userData.registrationStep === 3) {
+      props.uploadPhoto({
+        photoId: photoId,
+        photoFace: photoFace,
+        email: props.userData.email,
+        },
+        'uploadPhoto'
+      )
+    }
+  }
+
   return (
     <Fragment>
       <Header />
       <NavBarWhite isAuthenticated={props.isAuthenticated} username={props.username} id={props.id}/>
       <Profile.Wrapper>
         {/* Blue BG Sidebar */}
-        <Profile.ActionSect>
+        <Actions>
           <Profile.ActionChoiceActive>
             <Profile.ChoiceImg src = "../static/images/profile/detail-profile-blue.png"/>
             <Profile.AccountLinkActive>Detail Profile</Profile.AccountLinkActive>
@@ -95,55 +190,37 @@ function NewUser (props) {
             <Profile.AccountLink>Edit Profile</Profile.AccountLink>
             <Profile.ArrowRightImg src = "../static/images/profile/arrow-right-white.png"/>
           </Profile.ActionChoice>
-        </Profile.ActionSect>
-
+        </Actions>
         {/* Profile */}
         <Profile.ProfileSect>
           <Profile.ProfileAction>
-            <h2 style={{
-              color: "white",
-              textAlign: "center",
-              margin: "24px auto"
-            }}>Information Detail</h2>
+            <SectionTitle>Information Detail</SectionTitle>
           </Profile.ProfileAction>
-
-          <div style={{
-            margin: "40px auto",
-            textAlign: "center"
-          }}>
+          <InstructionDiv>
             <Profile.SectionName>Please upload 2 pictures for the verification purpose:</Profile.SectionName>
             <p>1. ID Card picture (Passport/ ID Card/ SIM) Make sure we can read the ID number clearly.</p>
             <p>2. Selfie with the ID Card. Make sure we can read the ID number clearly </p>
-          </div>
-
-          <div style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center"
-          }}>
-            <StyledDropzone title='Your ID Card' id='card' image='../static/images/Sign Up ASSET WEB/ktp.png' onDrop={ setPhotoId } />
-            <StyledDropzone title='Selfie with ID Card' id='photo' image='../static/images/Sign Up ASSET WEB/selfie.png' onDrop={ setPhotoId } />
-          </div>
-
-          <div style={{
-            display: "flex",
-            flexDirection: "column",
-            margin: "40px auto",
-            width: "75%",
-            alignItems: "center",
-            justifyContent: "center",
-            textAlign: "center"
-          }}>
+          </InstructionDiv>
+          <DropzonesDiv>
+            <StyledDropzone title='Your ID Card' id='card' image='../static/images/new-ui/ic-id-card.svg' onDrop={ setPhotoId } />
+            <StyledDropzone title='Selfie with ID Card' id='photo' image='../static/images/new-ui/ic-employee.svg' onDrop={ setPhotoFace } />
+          </DropzonesDiv>
+          <ConsentDiv>
             <p>We will not under any circumstances, use your personal information irresponsibly. 
-              For more information see our <Link href="/privacy-policy">Privacy Policy </Link> </p>
+              For more information see our <a href="/privacy-policy">Privacy Policy</a></p>
             <CheckDiv>
-                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-                <label for="vehicle1">I agree to the Terms and Condition</label>
+                <input type="checkbox" id="agree" checked={ isTermsAgreed } onChange={ () => setIsTermsAgreed(!isTermsAgreed) }/>
+                <label for="agree">I agree to the <a href="/terms">Terms and Condition</a></label>
             </CheckDiv>
-            <PrButton style={{ width: "45%" }}>Send Profile</PrButton>
-          </div>  
-        
+            <Warning>{ errorMsg ?  `*) ${ errorMsg }` : null }</Warning>
+            <PrButton onClick={ handleOnClick }>
+              {
+                props.isInProgress ?
+                (<FontAwesomeIcon icon='sync-alt' spin/>)
+                :
+                "Send Profile"
+              }</PrButton>
+          </ConsentDiv>
         </Profile.ProfileSect>
       </Profile.Wrapper>
     </Fragment>
@@ -162,14 +239,18 @@ const mapStateToProps = (state) => {
       userData: state.user.user_data,
       isAuthenticated: true,
       username: state.user.user_data.fullname,
-      id: state.user.user_data.idNumber
+      id: state.user.user_data.idNumber,
+      isInProgress: state.photo.inProgress,
+      errorMessage: state.photo.errorMessage
     }
   } else {
     return {
       userData: state.user.user_data,
-      isAuthenticated: false
+      isAuthenticated: false,
+      isInProgress: state.photo.inProgress,
+      errorMessage: state.photo.errorMessage
     }
   }
 }
 
-export default connect(mapStateToProps)(NewUser);
+export default connect(mapStateToProps, photoActions)(NewUser);
