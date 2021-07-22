@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
-import rateActions from '../../redux/actions';
 import styled from 'styled-components';
-import Modal from 'react-modal';
-import {Converter, InputNumber, RateAndFee} from '../order/Converter'
+import rateActions from '../../redux/actions';
+import { Converter, InputNumber, RateAndFee } from '../order/Converter';
+import { ModalPopUp } from './PopUp';
+
 
 const OrderContainer = styled.div`
   background: #FFFFFF;
@@ -11,7 +12,6 @@ const OrderContainer = styled.div`
   border-radius: 16px;
   padding: 10px 30px 30px 30px;
   max-width: 586px;
-  margin: 0px 15px 0px 15px;
 
   @media only screen and (max-width: 800px) {
     padding: 10px 20px 30px 20px;
@@ -57,52 +57,6 @@ const Button = styled.button`
   `}
 `;
 
-const ButtonLink = styled.a`
-  border: 1px solid #009FE3;
-  border-radius: 4px;
-
-  width: 100%;
-  height: 50px;
-  font-size: 16px;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 10px;
-  transition: 0.2s;
-
-  text-decoration: none;
-
-  background-color: #009FE3;
-  color: white;
-`;
-
-const PopUpModal = styled(Modal)`
-  position: fixed;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 3;
-
-  border: 1px solid #ccc;
-  background: #fff;
-  overflow: auto;
-  border-radius: 4px;
-  outline: none;
-  padding: 10px;
-  max-width: 500px;
-  text-align: center;
-
-  @media only screen and (max-width: 800px) {
-    min-width: 500px;
-  }
-
-  @media only screen and (max-width: 540px) {
-    min-width: 280px;
-  }
-`;
-
 class OrderAmount extends React.Component {
   constructor({ props }) {
     super(props);
@@ -116,6 +70,8 @@ class OrderAmount extends React.Component {
       currentDay: new Date(),
       duration: '',
       oos: false,
+      errorTransaction: false,
+      errorMessage: '',
       activeElement: ''
     };
 
@@ -124,6 +80,8 @@ class OrderAmount extends React.Component {
     this.updateActiveElement = this.updateActiveElement.bind(this);
     this.updateDeactiveElement = this.updateDeactiveElement.bind(this);
     this.toggleSource = this.toggleSource.bind(this);
+    this.toggleModalOOS = this.toggleModalOOS.bind(this);
+    this.toggleModalError = this.toggleModalError.bind(this);
     this.selectSource = this.selectSource.bind(this);
     this.hideSource = this.hideSource.bind(this);
     this.toggleDestination = this.toggleDestination.bind(this);
@@ -152,6 +110,14 @@ class OrderAmount extends React.Component {
         currentDay : this.state.currentDay
       })
     }
+  }
+
+  toggleModalOOS() {
+    this.setState({ oos: !this.state.oos })
+  }
+
+  toggleModalError() {
+    this.setState({ errorTransaction: !this.state.errorTransaction })
   }
 
   updateActiveElement = () => {
@@ -339,10 +305,12 @@ class OrderAmount extends React.Component {
       this.setState({oos:true});
     }
     else if(this.state.fromCurrency == 'idr' && (this.state.fromAmount <100000)){
-      alert("Plase send minimum 100,000 IDR")
+      this.setState({ errorTransaction:true,
+                      errorMessage: "Please send minimum 100,000 IDR" });
     }
     else if(this.state.fromAmount == 0){
-      alert("Plase enter amount of money you want to send ")
+      this.setState({ errorTransaction:true,
+        errorMessage: "Please enter amount of money you want to send" });
     }
     else{
       var data = {
@@ -427,24 +395,33 @@ class OrderAmount extends React.Component {
                   <Button onClick={this.saveAndContinue}>Continue</Button>
               }
             </ButtonContainer>           
-
         </OrderContainer>
-        <PopUpModal isOpen={this.state.oos}>
-          <h2>WE ARE OUT OF STOCK</h2>
-          <div className="content" >
+        <ModalPopUp
+          open={this.state.oos}
+          toggleModal={this.toggleModalOOS}
+          icon={'../static/images/Asset Web/send money/ic-error.svg'}
+          title={"We are out of stock"}
+          content={
             <p> But don't worry, we got you. If you still want your GBP to IDR transfer,
-              <b> we will happily buy your GBP </b> with our IDR , of course <b> with Special Price </b>   .
-                <br/> <br/>
+            <span className="bold"> we will happily buy your GBP </span> with our IDR , of course <span className="bold"> with Special Price </span>   .
+              <br/>
               Click the button below to Sell Your GBP
             </p>
-            <ButtonContainer style = {{paddingTop: '10px'}}>
-              <ButtonLink target="_blank" href="https://www.transfree.co.uk/currency-seller-to-idr">Sell My GBP</ButtonLink>
-              <Button secondary onClick={() => this.setState({oos:false})}>
-                Close
-              </Button>
-            </ButtonContainer>
-          </div>
-        </PopUpModal>
+          }
+          buttonText={"Sell My GPB"}
+          buttonLink={"https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree"}
+        />
+
+        <ModalPopUp
+          open={this.state.errorTransaction}
+          toggleModal={this.toggleModalError}
+          icon={'../static/images/Asset Web/send money/ic-error.svg'}
+          title={"Transaction Error"}
+          content={
+            <p> {this.state.errorMessage} </p>
+          }
+          buttonText={"Change Transaction"}
+        />
       </div>
     )
   }

@@ -83,6 +83,18 @@ const Header = () => (
 				display: table;
 				clear: both;
 			}
+
+			.react-phone-number-input__country {
+				background-color: #f3f5f7;
+				padding: 0 12px;
+				margin-left: -16px;
+			}
+
+			.react-phone-number-input__icon {
+				margin-top: 5px;
+				height: initial;
+				border: 0;
+			}
 		`}</style>
 	</div>
 );

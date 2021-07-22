@@ -10,12 +10,13 @@ const Row = styled.div`
   width: 100%;
 
   @media only screen and (max-width: 800px) {
-    flex-direction: column-reverse;
+    // flex-direction: column-reverse;
+    flex-direction: column;
   }
 `;
 
 const Column = styled.div`
-  padding: 10px;
+  padding: 10px 0px 10px 0px;
 `
 
 const RecipientContainer = styled.div `
@@ -35,7 +36,7 @@ const RecipientContainer = styled.div `
   @media only screen and (max-width: 800px) {
     min-width: 300px;
     max-width: 495px;
-    margin: 0px 15px 0px 15px;
+    margin: 0px;
     padding: 10px 20px 30px 20px;
   }
 `;
@@ -53,7 +54,7 @@ const AmountContainer = styled.div `
 
   @media only screen and (max-width: 800px) {
     max-width: 495px;
-    margin: 0px 15px 0px 15px;
+    margin: 0px;
   }
 `;
 
@@ -137,7 +138,7 @@ const RecipientInputNumber = styled(NumberFormat)`
 `;
 
 const RecipientInputSelect = styled.select`
-  font-family: "Avenir LT Pro", sans-serif; 
+  font-family: "Avenir Next LT Pro", sans-serif; 
   background: #FFFFFF;
   border: 1px solid #E2E2E2;
   border-radius: 4px;
@@ -194,7 +195,6 @@ const TransColumn = styled.span`
   text-align: ${props => props.left ? 'left' : 'right'};
   color: ${props => props.left ? '#9A9A9A' : '#232933;'};
   font-weight: ${props => props.left ? 'normal' : 'bolder;'};
-
 
   >.grey{
     color: '#9A9A9A';

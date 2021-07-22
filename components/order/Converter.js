@@ -92,11 +92,13 @@ const DropDownMenu = styled.div`
       margin: 0;
       padding: 0;
     }
-    
-    @media only screen and (max-width: 600px) {
-      max-width: 260px;
-      min-width: 240px;
-    }`
+
+    @media only screen and (max-width: 380px) {
+      width: 310px;
+      min-width: 0px;
+    }
+  
+  `;
 
 const DropDownItem = styled.li`
     display: flex;
@@ -108,7 +110,8 @@ const DropDownItem = styled.li`
       background: #009FE380;
       color: #FFFFFF;
       cursor: pointer;
-    }`
+    }
+    `
 
 const SearchBar = styled.div`
   align-items: center;
@@ -136,12 +139,13 @@ const SearchBar = styled.div`
   }
 
 
-  @media only screen and (max-width: 600px) {
-    max-width: 240px;
-    min-width: 240px;
-
+  @media only screen and (max-width: 380px) {
+    max-width: 301px;
+    min-width: 0px;
+    padding-right: 0px;
+    
     input{
-      font-size: 15px;
+      font-size: 18px;
     }
   }
 `
@@ -189,7 +193,7 @@ export function FlagOptions(props) {
         <DropDownItem
           key={index}
           onClick={() => props.onSelect(flag.country)}>
-          <span className={"flag-icon flag-icon-" + flag.country.substring(0,2) + " flag-icon-squared" }/>
+          <span style={{marginRight: "10px"}}className={"flag-icon flag-icon-" + flag.country.substring(0,2) + " flag-icon-squared" }/>
           { `(${flag.country.toUpperCase()}) ${flag.cur}` }
         </DropDownItem>
       ))}

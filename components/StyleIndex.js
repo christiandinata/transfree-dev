@@ -314,7 +314,7 @@ const StyleIndex = () => (
       }
 
       .application h1{
-        font-family: 'Avenir LT Pro Black', sans-serif;
+        font-family: 'Avenir Next LT Pro Black', sans-serif;
         color: #232933;
       }
 

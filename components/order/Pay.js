@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import NumberFormat from 'react-number-format';
+import { ModalPopUp } from './PopUp';
 
 const Row = styled.div`
   display: flex;
@@ -11,7 +12,7 @@ const Row = styled.div`
 `;
 
 const Column = styled.div`
-  padding: 10px;
+  padding: 10px 0px 10px 0px;
 `;
 
 const PaymentContainer = styled.div `
@@ -31,7 +32,7 @@ const PaymentContainer = styled.div `
   @media only screen and (max-width: 800px) {
     min-width: 300px;
     max-width: 495px;
-    margin: 0px 15px 0px 15px;
+    margin: 0px;
     padding: 10px 20px 30px 20px;
   }
 `;
@@ -52,7 +53,7 @@ const PolicyContainer = styled.div `
 
   @media only screen and (max-width: 800px) {
     max-width: 495px;
-    margin: 0px 15px 0px 15px;
+    margin: 0px;
   }
 `;
 
@@ -112,12 +113,12 @@ const PaymentDetailContainer = styled.div`
 `;
 
 const ItemContainer = styled.div`
-  padding: 15px;
+  padding: ${props => props.wide ? '15px' : '0px'};
   display: flex;
   flex-direction: column;
 
   @media only screen and (max-width: 800px) {
-    padding: 15px 8px 15px 8px ;
+    padding: ${props => props.wide ? '15px 8px 15px 8px' : '0px'};
   }
 `;
 
@@ -136,9 +137,8 @@ const AmountColumn = styled.span`
   flex-basis: ${props => props.left ? '60%' : '40%'};
   text-align: ${props => props.left ? 'left' : 'right'};
   font-size: ${props => props.left ? '16px' : '20px'};
-  font-family: ${props => props.left ? 'Avenir LT Pro' : 'Avenir LT Pro Black'};
+  font-family: ${props => props.left ? 'Avenir Next LT Pro' : 'Avenir Next LT Pro Bold'};
 `;
-
 
 const BankDetailColumn = styled.span`
   color: white;
@@ -241,7 +241,7 @@ function RenderBankDetail(props){
   return(
     <div>
       <BankDetailContainer>
-          <ItemContainer>
+          <ItemContainer wide>
             <ItemRow>
               <BankDetailColumn left>
                 Bank Name
@@ -315,14 +315,17 @@ class Pay extends React.Component {
       bankSelected: '',
       method: '',
       isVAgenerated: false,
-      isTransferBCA: false,
-      isTransferBNI: false,
-      isTransferMandiri: false
+      errorBank: false
     };
-
     this.generateVA = this.generateVA.bind(this);
     this.transferBank = this.transferBank.bind(this);
     this.addOrder = this.addOrder.bind(this);
+  }
+
+  toggleModalError = (e) => {
+    this.setState({
+      errorBank : !this.state.errorBank
+    })
   }
 
   generateVA(bankName) {
@@ -352,7 +355,7 @@ class Pay extends React.Component {
       this.props.nextStep();
     }
     else{
-      alert("Please select the bank")
+      this.toggleModalError();
     }
   }
 
@@ -430,7 +433,7 @@ class Pay extends React.Component {
               <PaymentDetails>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt </PaymentDetails>
                {content}
                 <AmountContainer>
-                <ItemContainer>
+                <ItemContainer wide>
                   <ItemRow>
                       <AmountColumn left>
                         You Send
@@ -486,6 +489,16 @@ class Pay extends React.Component {
             </PolicyContainer>
           </Column>
         </Row>
+        <ModalPopUp
+          open={this.state.errorBank}
+          toggleModal={this.toggleModalError}
+          icon={'../static/images/Asset Web/send money/ic-error.svg'}
+          title={"Transaction Error"}
+          content={
+            <p>Please select the bank</p>
+          }
+          buttonText={"OK"}
+        />
       </div>
     )
   }
