@@ -233,22 +233,21 @@ export function InputNumber(props) {
   )
 }
 
+const ResultConversion = styled.div`
+  background-color: #1E345B;
+  color: #FFFFFF;
+  margin-top: 10px;
+  padding: 1rem 1.25rem;`
+
+const ResultFlex = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  span {
+    width: 50%;
+  }`
+
 export function RateAndFee(props) {
-  
-  const ResultConversion = styled.div`
-    background-color: #1E345B;
-    color: #FFFFFF;
-    margin-top: 10px;
-    padding: 1rem 1.25rem;`
-
-  const ResultFlex = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    span {
-      width: 50%;
-    }`
-
   return (
     <ResultConversion>
       <ResultFlex>
