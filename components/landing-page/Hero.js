@@ -12,6 +12,7 @@ export const MapBackground = styled.div`
   height: 750px;
   @media only screen and (max-width: 800px) {
     height: 1280px;
+    background: none;
   }`
 
 export const Overlay = styled.div`

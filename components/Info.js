@@ -24,6 +24,7 @@ export const Batik = styled.div`
     margin: 1rem auto;
   }
   @media only screen and (max-width: 800px) {
+    background: none;
     p { width: 95%; }
     h1 { font-size: 1.75rem; }
   }`
