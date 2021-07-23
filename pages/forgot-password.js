@@ -211,7 +211,7 @@ function ForgotPassword(props) {
 	}
 
 	const [countdown, setCountdown] = useState({
-		minutes: 2,
+		minutes: 4,
 		seconds: 59,
 	});
 
