@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 
 const Menu = ({isAuthenticated, isApproved, deauthenticate, username, id, homepage}) => {
   const [scrolled, setScrolled] = useState(false)
-  const [clicked, setClicked] = useState(true)
+  const [clicked, setClicked] = useState(false)
 
   const handleScrolled = () => {
     if(window.scrollY >= 20) {
@@ -29,7 +29,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username, id, homepa
   }, [])
 
   return(
-    <Navbar.Nav scrolled = {scrolled} homepage = {homepage} marginTop = "-72px" clicked = {clicked}>
+    <Navbar.Nav scrolled = {scrolled} homepage = {homepage} marginTop = "-72px" clicked = {clicked} isAuth = {isAuthenticated}>
       <Navbar.NavInner scrolled = {scrolled} homepage = {homepage} clicked = {clicked}>
 		<Navbar.HeaderWrapper clicked = {clicked}>
 			<a href = "/"><Navbar.Logo src="../static/images/transfree-logo.png" scrolled = {scrolled} homepage = {homepage}/></a>
@@ -60,28 +60,32 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username, id, homepa
 
         {isAuthenticated ? 
           <React.Fragment>
-            <Navbar.NavigationCenter>
-              <Navbar.NavigationChild href = "/order" scrolled = {scrolled} homepage = {homepage} navChildColor = "#f5f5f5">
-                Send Money
-              </Navbar.NavigationChild>
-              <Navbar.NavigationChild href = "/account" scrolled = {scrolled} homepage = {homepage} navChildColor = "#f5f5f5">
-                Transactions
-              </Navbar.NavigationChild>
-              <Navbar.NavigationChild href = "https://www.youtube.com/watch?v=8RzCs_sQ8Ak" scrolled = {scrolled} homepage = {homepage} navChildColor = "#f5f5f5">
-                How It Works
-              </Navbar.NavigationChild>
-              <Navbar.NavigationChild href = "/about" scrolled = {scrolled} homepage = {homepage} navChildColor = "#f5f5f5">
-                About Us
-              </Navbar.NavigationChild>
+            <Navbar.NavigationCenter clicked = {clicked}>
+				<Navbar.NavigationChild href = "/order" scrolled = {scrolled} homepage = {homepage} navChildColor = "#f5f5f5">
+					Send Money
+				</Navbar.NavigationChild>
+
+				<Navbar.NavigationChild href = "/account" scrolled = {scrolled} homepage = {homepage} navChildColor = "#f5f5f5">
+					Transactions
+				</Navbar.NavigationChild>
+
+				<Navbar.NavigationChild href = "https://www.youtube.com/watch?v=8RzCs_sQ8Ak" scrolled = {scrolled} homepage = {homepage} navChildColor = "#f5f5f5">
+					How It Works
+				</Navbar.NavigationChild>
+
+				<Navbar.NavigationChild href = "/about" scrolled = {scrolled} homepage = {homepage} navChildColor = "#f5f5f5">
+					About Us
+				</Navbar.NavigationChild>
+				
+				<Navbar.NavigationChild href = "/user-profile" scrolled = {scrolled} homepage = {homepage} navChildColor = "#f5f5f5">
+					<Navbar.ProfileInfo scrolled = {scrolled} name = "true" clicked = {clicked}>
+						{username}
+					</Navbar.ProfileInfo>
+					<Navbar.ProfileInfo scrolled = {scrolled} id = "true" clicked = {clicked}>
+						{id}
+					</Navbar.ProfileInfo>
+				</Navbar.NavigationChild>
             </Navbar.NavigationCenter>
-            <Navbar.NavigationChild href = "/user-profile" scrolled = {scrolled} homepage = {homepage} navChildColor = "#f5f5f5">
-              <Navbar.ProfileInfo scrolled = {scrolled} name = "true">
-                {username}
-              </Navbar.ProfileInfo>
-              <Navbar.ProfileInfo scrolled = {scrolled} id = "true">
-                {id}
-              </Navbar.ProfileInfo>
-            </Navbar.NavigationChild>
         </React.Fragment>
         :
         null}

@@ -155,7 +155,18 @@ export const Nav = styled.div`
 	@media only screen and (max-width: 900px) {
 		background: #fff;
 		display: block;
-		height: ${({ clicked }) => (clicked ? "350px" : "72px")};
+		height: ${({ clicked, isAuth }) => {
+			if (clicked) {
+				if (isAuth) {
+					return "450px";
+				} else {
+					return "350px";
+				}
+			}
+			else {
+				return "72px";
+			}
+		}};
 	}
 `;
 
@@ -250,6 +261,15 @@ export const Navigation = styled.div`
 export const NavigationCenter = styled.div`
 	height: 72px;
 	display: flex;
+	
+	@media only screen and (max-width: 900px) {
+		display: ${({ clicked }) =>
+			clicked ? "flex" : "none"};
+		flex-direction: column;
+		background-color: #fff;
+		align-items: stretch;
+		margin: 16px 16px 16px 16px;
+	};
 `;
 
 export const NavigationChild = styled.a`
@@ -357,16 +377,16 @@ export const ProfileInfo = styled.p`
 	line-height: 24px;
 	letter-spacing: ${({ name }) => (name ? "0.002em" : "0.2px")};
 	border-left: ${({ id }) => (id ? "1px solid #e9e9e9" : "none")};
-	color: ${({ name, id, scrolled }) => {
+	color: ${({ name, id, scrolled, clicked }) => {
 		if (name) {
-			if (scrolled) {
+			if (scrolled || clicked) {
 				return "#2B2A35";
 			} else {
 				return "#fff";
 			}
 		}
 		if (id) {
-			if (scrolled) {
+			if (scrolled || clicked) {
 				return "#B4B4B4";
 			} else {
 				return "#F5F5F5";
