@@ -203,15 +203,15 @@ function NewUser (props) {
             <p>2. Selfie with the ID Card. Make sure we can read the ID number clearly </p>
           </InstructionDiv>
           <DropzonesDiv>
-            <StyledDropzone title='Your ID Card' id='card' image='../static/images/new-ui/ic-id-card.svg' onDrop={ setPhotoId } />
-            <StyledDropzone title='Selfie with ID Card' id='photo' image='../static/images/new-ui/ic-employee.svg' onDrop={ setPhotoFace } />
+            <StyledDropzone title='Your ID Card' id='card' image='../static/images/new-ui/ic-id-card.svg' onDrop={ setPhotoId } onError={ setErrorMsg } />
+            <StyledDropzone title='Selfie with ID Card' id='photo' image='../static/images/new-ui/ic-employee.svg' onDrop={ setPhotoFace } onError={ setErrorMsg } />
           </DropzonesDiv>
           <ConsentDiv>
             <p>We will not under any circumstances, use your personal information irresponsibly. 
               For more information see our <a href="/privacy-policy">Privacy Policy</a></p>
             <CheckDiv>
                 <input type="checkbox" id="agree" checked={ isTermsAgreed } onChange={ () => setIsTermsAgreed(!isTermsAgreed) }/>
-                <label for="agree">I agree to the <a href="/terms">Terms and Condition</a></label>
+                <label htmlFor="agree">I agree to the <a href="/terms">Terms and Condition</a></label>
             </CheckDiv>
             <Warning>{ errorMsg ?  `*) ${ errorMsg }` : null }</Warning>
             <PrButton onClick={ handleOnClick }>
