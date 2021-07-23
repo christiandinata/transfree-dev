@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import styled from 'styled-components'
+import Compressor from 'compressorjs'
 
 const DropzoneDiv = styled.div`
   display: flex;
@@ -110,6 +111,25 @@ function StyledDropzone (props) {
   //Menerima file yang diupload user
   const onDrop = useCallback(acceptedFiles => {
     const file = acceptedFiles[0]
+    const fileSize = file.size / (1024*1024) 
+
+    // Handle file size more than 2MB
+    if (fileSize > 2) {
+      new Compressor(file, {
+        quality: 0.6,
+        convertSize: 2000000,
+        success(result) {
+          const n = new File([result], result.name, { lastModified: new Date() })
+          console.log(n.size / (1024 * 1024))
+        },
+        error(e) {
+          console.log(e.message)
+        }
+      })
+    } else {
+
+    }
+
     const reader = new FileReader()
     reader.readAsDataURL(file)
     reader.onload = (event) => {

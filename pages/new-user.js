@@ -79,6 +79,7 @@ const DropzonesDiv = styled.div`
 const InstructionDiv = styled.div`
   margin: 40px auto;
   text-align: center;
+  max-width: 95%;
   @media only screen and (max-width: 800px) {
     text-align: left;
     width: 95%;
