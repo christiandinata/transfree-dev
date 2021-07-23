@@ -52,7 +52,7 @@ const ImageBg = styled.div`
   height: 460px;
   margin-top: 2rem;
   opacity: ${ props => props.fadeOut ? '0' : '1' };
-  transition: opacity 0.5s ease-in;
+  transition: all 0.5s ease-in;
   img:hover {
     filter: drop-shadow(0 0 0.75rem lightgray);
     cursor: pointer;

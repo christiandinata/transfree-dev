@@ -92,21 +92,6 @@ function CreateProfile (props) {
   return(
     // Menanyakan apakah user ingin mengisi profile sendiri atau tidak
     <Fragment>
-      {
-        isSkipPopupVisible
-        ? <MobilePopup
-            title='Confirmation'
-            message='Do you want us to fill the form for you?'
-            isChoice
-            confirmMessage='Yes'
-            onConfirm= { props.nextStep }
-            onReject= { () => setIsSkipPopupVisible(false) }
-            rejectMessage='No'
-           
-            
-          />
-        : ''
-      }
       <div className='create-profile-form-body-heading'>
         <div className='create-profile-form-skip'>
           <a onClick={ props.nextStep } >

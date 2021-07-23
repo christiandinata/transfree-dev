@@ -62,6 +62,7 @@ const Header = () => (
 
       h1, h2, h3, h4, b, .bold{
         font-family: "Avenir Next LT Pro Bold", sans-serif !important;
+				font-weight: 100;
       }
 
 			button:hover {
@@ -81,6 +82,18 @@ const Header = () => (
 				content: "";
 				display: table;
 				clear: both;
+			}
+
+			.react-phone-number-input__country {
+				background-color: #f3f5f7;
+				padding: 0 12px;
+				margin-left: -16px;
+			}
+
+			.react-phone-number-input__icon {
+				margin-top: 5px;
+				height: initial;
+				border: 0;
 			}
 		`}</style>
 	</div>

@@ -22,7 +22,7 @@ export const PrButton = styled.button`
   border-radius: 5px;
   color: #FFFFFF;
   font-family: "Avenir Next LT Pro";
-  font-size: 0.9rem;
+  font-size: 1rem;
   transition: all 0.2s ease-in-out;
   padding: 0.75rem 1.5rem;
 
@@ -53,7 +53,7 @@ export const ScButton = styled.button`
   border-radius: 5px;
   color: #FFFFFF;
   font-family: "Avenir Next LT Pro";
-  font-size: 0.9rem;
+  font-size: 1rem;
   transition: all 0.2s ease-in-out;
   padding: 0.75rem 1.5rem;
 

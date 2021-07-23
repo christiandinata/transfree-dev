@@ -71,12 +71,24 @@ const Exchange = styled.div`
       font-size: 1.25rem;
       font-family: "Avenir Next LT Pro Bold", sans-serif !important;
       padding: 0.75rem 1.25rem;
+      transition: box-shadow 0.2s linear;
     }
 
     input:focus {
-      border: 1.5px solid #068EC8;
+      box-shadow: 0 0 0 2px #068EC8;
       outline: none;
-    }`
+    }
+
+    .label {
+      transition: color 0.2s linear;
+    }
+    
+    ${({ active }) => active && `
+      > .label {
+        color: #068EC8;
+      }
+    `}
+    `
 
 const Currency = styled.div`
     position: relative;
@@ -128,6 +140,7 @@ const DropDownItem = styled.li`
     display: flex;
     align-items: center;
     padding: 1rem 1rem;
+    column-gap: 1rem;
     color: #15233C;
     transition: background-color 0.1s ease-out;
     &:hover {
@@ -152,7 +165,9 @@ const SearchBar = styled.div`
     outline: none;
     padding: 0;
   }
-  input:focus { border: none; }
+  input:focus { 
+    box-shadow: none;
+  }
   input::placeholder {
     color: #FFFFFF;
   }
@@ -250,9 +265,11 @@ export function FlagOptions(props) {
 
 export function InputNumber(props) {
 
+  const [isFocus, setIsFocus] = useState(false)
+
   return (
-    <Exchange>
-      <span>{props.label}</span>
+    <Exchange active={isFocus}>
+      <span className="label">{props.label}</span>
       <InputFlex>
         <NumberFormat
         type="text"
@@ -260,7 +277,9 @@ export function InputNumber(props) {
         decimalScale={2}
         allowNegative={false}
         value={props.amount}
-        onChange={(e) => props.onChange(e)} />
+        onChange={(e) => props.onChange(e)}
+        onFocus={() => setIsFocus(true)}
+        onBlur={() => setIsFocus(false)} />
         <Currency>
           <button onClick={() => props.onClick()}>
             <span className={"flag-icon flag-icon-"+ props.currency.substring(0,2) +" flag-icon-squared"}/>
