@@ -38,18 +38,14 @@ export function NavBarBlue(props) {
 
 // Navbar for white background (the same one as the navbar at homepage when scrolled, with profile info)
 export function NavBarWhite(props) {
-	return (
-		<Nav scrolled="true" homepage="true" marginTop="0px">
-			<Line />
+	return(
+		<Nav scrolled = "true" homepage = "true" marginTop = "0px">
 			<NavInner>
-				<a href="/">
-					<Logo
-						src="../static/images/transfree-logo.png"
-						scrolled="true"
-					/>
-				</a>
-				{props.isAuthenticated ? (
-					<React.Fragment>
+				<a href = "/"><Logo src="../static/images/transfree-logo.png" scrolled = "true"/></a>
+				
+				{
+					props.isAuthenticated ?
+					(<React.Fragment>
 						<NavigationCenter>
 							<NavigationChild
 								href="/order"
@@ -58,11 +54,11 @@ export function NavBarWhite(props) {
 								navChildColor="#f5f5f5">
 								Send Money
 							</NavigationChild>
-							<NavigationChild
-								href="/account"
-								scrolled="true"
-								homepage="true"
-								navChildColor="#f5f5f5"
+							<NavigationChild 
+								href = "/account"
+								scrolled = "true"
+								homepage = "true"
+								navChildColor = "#f5f5f5"
 								active={props.current == "transactions"}>
 								Transactions
 							</NavigationChild>
@@ -73,32 +69,28 @@ export function NavBarWhite(props) {
 								navChildColor="#f5f5f5">
 								How It Works
 							</NavigationChild>
-							<NavigationChild
-								href="/about"
-								scrolled="true"
-								homepage="true"
-								navChildColor="#f5f5f5"
+							<NavigationChild 
+								href = "/about" scrolled = "true"
+								homepage = "true"
+								navChildColor = "#f5f5f5"
 								active={props.current == "aboutus"}>
 								About Us
 							</NavigationChild>
 						</NavigationCenter>
-						<NavigationChild
-							href="/user-profile"
-							scrolled="true"
-							homepage="true"
-							navChildColor="#f5f5f5">
-							<ProfileInfo scrolled="true" name="true">
+						<NavigationChild href = "/user-profile" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
+							<ProfileInfo scrolled = "true" name = "true">
 								{props.username}
 							</ProfileInfo>
-							<ProfileInfo scrolled="true" id="true">
+							<ProfileInfo scrolled = "true" id = "true">
 								{props.id}
 							</ProfileInfo>
 						</NavigationChild>
 					</React.Fragment>
 				) : null}
 
-				{!props.isAuthenticated ? (
-					<React.Fragment>
+				{
+					!props.isAuthenticated ?
+					(<React.Fragment>
 						<Navigation>
 							<NavigationChild
 								href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak"
@@ -134,65 +126,11 @@ export function NavBarWhite(props) {
 	);
 }
 
-export const Line = styled.div`
-	position: absolute;
-	display: ${({ scrolled }) => (scrolled ? "none" : "flex")};
-	/* height: 72px; */
-	z-index: 11;
-	border-bottom: 1px solid white;
-	max-width: 1095px; // sesuaikan
-	width: 100%;
-	top: 72px;
-	/* margin-top: 72px; */
-	background-color: transparent;
-	justify-content: center;
-	place-self: center;
-
-	@media only screen and (max-width: 900px) {
-		display: none;
-	}
-`;
-
-// wrap Nav
-export const Outer = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: sticky;
-	height: 72px;
-	top: 0;
-	margin-top: -72px;
-	z-index: 10;
-	background-color: ${({ scrolled, homepage }) => {
-		if (homepage) {
-			if (scrolled) {
-				return "#fff";
-			} else {
-				return "transparent";
-			}
-		} else {
-			return "#009fe3";
-		}
-	}};
-
-	@media only screen and (max-width: 900px) {
-		background-color: #fff;
-		display: block;
-		padding-left: 20px;
-		height: ${({ clicked }) => (clicked ? "350px" : "72px")};
-	}
-`;
-
 export const Nav = styled.div`
 	height: 72px;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
 	width: 100%;
-	transition: background 0.5s;
-	position: sticky;
-	top: 0;
-	z-index: 10;
 	background-color: ${({ scrolled, homepage }) => {
 		if (homepage) {
 			if (scrolled) {
@@ -204,39 +142,49 @@ export const Nav = styled.div`
 			return "#009fe3";
 		}
 	}};
+	transition: background 0.5s;
+	position: sticky;
+	top: 0;
+	z-index: 10;
 	margin-top: ${({ homepage }) => (homepage ? "-72px" : "null")};
 	box-shadow: ${({ scrolled, homepage }) =>
 		homepage && scrolled
 			? "0px 10px 35px rgba(98, 107, 121, 0.15)"
 			: "none"};
-	padding: 0 106px; // sesuaikan
-	background-color: transparent;
 
 	@media only screen and (max-width: 900px) {
-		background-color: #fff;
+		background: #fff;
 		display: block;
-		padding: 0;
-		margin-left: ${({ clicked }) => (clicked ? "-20px" : "null")};
-		padding-left: ${({ clicked }) => (clicked ? "20px" : "null")};
-		box-shadow: ${({ clicked }) => (clicked ? 
-			"0px 2px 8px rgba(119, 119, 119, 0.2)"
-			: "none")};
+		height: ${({ clicked }) => (clicked ? "350px" : "72px")};
 	}
 `;
 
 export const NavInner = styled.div`
-	/* width: 1224px; */
-	// display: flex;
-	// justify-content: space-between;
-	// align-items: center;
-	/* margin: 0 106px; */
-	/* border-bottom: ${({ scrolled, homepage }) =>
-		homepage && !scrolled ? "1px solid white" : "none"}; */
-	margin-left: -20px;
+	width: 1224px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 106px;
+	border-bottom: ${({ scrolled, homepage }) =>
+		homepage && !scrolled ? "1px solid white" : "none"};
+
+	@media only screen and (max-width: 900px) {
+		display: block;
+		margin: 0;
+		background-color: #fff;
+		width: 100%;
+	}
 `;
 
-export const LogoRef = styled.a`
+export const HeaderWrapper = styled.div`
+	display: flex;
 
+	@media only screen and (max-width: 900px) {
+		justify-content: space-between;
+		box-shadow: ${({ clicked }) => (clicked ? 
+			"0px 2px 8px rgba(119, 119, 119, 0.2)"
+			: "none")};
+	}
 `;
 
 export const Logo = styled.img`
@@ -250,7 +198,8 @@ export const Logo = styled.img`
 	@media only screen and (max-width: 900px) {
 		-webkit-filter: none;
 		filter: none;
-		padding: 20px 0;
+		padding: 20px;
+		padding-bottom: 0;
 	}
 `;
 
@@ -294,7 +243,7 @@ export const Navigation = styled.div`
 		flex-direction: column;
 		background-color: #fff;
 		align-items: stretch;
-		margin: 16px;
+		margin: 16px 16px 16px 16px;
 	}
 `;
 
@@ -322,13 +271,11 @@ export const NavigationChild = styled.a`
 		letter-spacing: 0.2px;
 	}
 
-	${({ active }) =>
-		active &&
-		`
+	${({ active }) => active && `
 		color: #009fe3;
 		font-weight: 500;
   	`}
-
+	
 	@media only screen and (max-width: 900px) {
 		color: #2B2A35;
 		// margin: 16px 16px 0 16px;
@@ -389,17 +336,10 @@ export const RegisterButton = styled.a`
 	font-weight: normal;
 
 	&:hover {
-		background-color: ${({ scrolled, homepage }) =>
-			homepage && scrolled ? "#068EC8" : "#eaeaea"};
+		background-color: ${({ scrolled, homepage, clicked }) =>
+			(homepage && scrolled) || clicked ? "#068EC8" : "#eaeaea"};
 		border: 1px solid #068ec8;
 	}
-
-	${({ active }) =>
-		active &&
-		`
-		color: #009fe3;
-		font-weight: 500;
-  	`}
 
 	@media only screen and (max-width: 900px) {
 		padding-left: 0;
