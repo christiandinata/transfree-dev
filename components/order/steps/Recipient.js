@@ -1,23 +1,23 @@
 import styled from "styled-components";
 import NumberFormat from 'react-number-format';
 import 'react-tabs/style/react-tabs.css';
-import { API } from '../../config';
+import { API } from '../../../config';
 import axios from 'axios';
-import { getCookie } from '../../utils/cookie';
+import { getCookie } from '../../../utils/cookie';
+import { Button, ButtonContainer } from '../Buttons';
 
 const Row = styled.div`
   display: flex;
   width: 100%;
 
-  @media only screen and (max-width: 800px) {
-    // flex-direction: column-reverse;
+  @media only screen and (max-width: 768px) {
     flex-direction: column;
   }
 `;
 
 const Column = styled.div`
   padding: 10px 0px 10px 0px;
-`
+`;
 
 const RecipientContainer = styled.div `
   background: #FFFFFF;
@@ -33,7 +33,7 @@ const RecipientContainer = styled.div `
     margin: 0px 10px 0px 10px;
   }
 
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 768px) {
     min-width: 300px;
     max-width: 495px;
     margin: 0px;
@@ -53,8 +53,7 @@ const AmountContainer = styled.div `
   }
 
   @media only screen and (max-width: 800px) {
-    max-width: 495px;
-    margin: 0px;
+    display: none;
   }
 `;
 
@@ -199,31 +198,6 @@ const TransColumn = styled.span`
   >.grey{
     color: '#9A9A9A';
   }
-`
-
-const ButtonContainer = styled.div`
-  padding-top: 40px;
-`;
-
-const Button = styled.button`
-  border: 1px solid #009FE3;
-  border-radius: 4px;
-
-  width: 100%;
-  height: 50px;
-  font-size: 16px;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 8px 24px;
-  margin-bottom: 10px;
-  transition: 0.2s;
-
-  background-color: ${props => props.secondary ? 'white' : '#009FE3'};
-  color: ${props => props.secondary ? '#009FE3' : 'white'};
-
 `;
 
 class Recipient extends React.Component {

@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import NumberFormat from 'react-number-format'
-import styled from 'styled-components'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, { useState } from 'react';
+import NumberFormat from 'react-number-format';
+import styled from 'styled-components';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const Converter = styled.div`
   background: #FFFFFF;
@@ -44,7 +44,6 @@ const Exchange = styled.div`
       }
     `}`
     
-
 const Currency = styled.div`
     position: relative;
 
@@ -137,7 +136,6 @@ const SearchBar = styled.div`
   input::placeholder {
     color: #FFFFFF;
   }
-
 
   @media only screen and (max-width: 380px) {
     max-width: 301px;
@@ -235,22 +233,21 @@ export function InputNumber(props) {
   )
 }
 
+const ResultConversion = styled.div`
+  background-color: #1E345B;
+  color: #FFFFFF;
+  margin-top: 10px;
+  padding: 1rem 1.25rem;`
+
+const ResultFlex = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  span {
+    width: 50%;
+  }`
+
 export function RateAndFee(props) {
-  
-  const ResultConversion = styled.div`
-    background-color: #1E345B;
-    color: #FFFFFF;
-    margin-top: 10px;
-    padding: 1rem 1.25rem;`
-
-  const ResultFlex = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    span {
-      width: 50%;
-    }`
-
   return (
     <ResultConversion>
       <ResultFlex>
