@@ -21,7 +21,7 @@ const ContainerFluid = styled.div`
 `;
 
 const ContentContainer = styled.div`
-  margin-top: 10px;
+  margin: 10px;
 `;
 
 const BackgroundContainer = styled.div`
@@ -49,9 +49,10 @@ const BackgroundContainer = styled.div`
     line-height: 55px;
   }
 
-  @media only screen and (max-width: 774px) {
+  @media only screen and (max-width: 768px) {
     >.title{
-      top: 25%;
+      min-width: 400px;
+      font-size: 32px;
     }
 
     >.image{
@@ -72,6 +73,7 @@ const SearchContainer = styled.div`
 
   @media only screen and (max-width: 640px) {
     width: auto;
+    margin-left: 2px;
   }
 `;
 
@@ -103,7 +105,7 @@ const SearchBar = styled.input`
   }
 
   @media only screen and (max-width: 640px) {
-    margin-right: 10px;
+    margin-right: 8px;
   }
 `;
 
@@ -128,10 +130,6 @@ const AllItemContainer = styled.div`
   max-width: 1020px;
   height: auto;
   margin: 20px auto;
-
-  @media only screen and (max-width: 800px) {
-    padding: 0px 10px 0px 10px;
-  }
 `;
 
 const ItemContainer = styled.div`
@@ -155,8 +153,8 @@ const ItemContainer = styled.div`
     border-color: #009FE3;
   `}
 
-  @media only screen and (max-width: 600px) {
-    padding: 20px;
+  @media only screen and (max-width: 768px) {
+    padding: 15px;
   }
 `;
 
@@ -226,6 +224,10 @@ const Divider = styled.div`
   width: 2px;
   margin: -10px 11px -5px;
   background: #F2F4F7;
+
+  @media only screen and (max-width: 768px) {
+    margin-left: 9px;
+  }
 `;
 
 const ListItem = styled.li`
@@ -239,10 +241,13 @@ const ListItem = styled.li`
     margin-left: 20px;
   }
 
-  @media only screen and (max-width: 400px) {
+  @media only screen and (max-width: 768px) {
+    padding-left: 2px;
+
     >.textItem{
-      font-size: 12.5px;
+      font-size: 13.5px;
       margin-left: 10px;
+      margin-right: -5px;
     }
   }
 `;
