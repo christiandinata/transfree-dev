@@ -54,8 +54,10 @@ export const Converter = styled.div`
   background: #FFFFFF;
   border-radius: 16px;
   color: #626B79;
+  position: relative;
   padding: 2rem 0;
-  flex-basis: 35%;
+  flex-basis: 55%;
+  max-width: 400px;
   @media only screen and (max-width: 800px) {
     text-align: left;
   }`
@@ -92,8 +94,6 @@ const Exchange = styled.div`
     `
 
 const Currency = styled.div`
-    position: relative;
-
     button {
       align-items: center;
       border: none;
@@ -121,7 +121,7 @@ const Currency = styled.div`
 
 const DropDownMenu = styled.div`
     position: absolute;
-    right: 5%;
+    right: 3%;
     z-index: 5;
     padding: 0 0 .5rem;
     margin: .125rem 0 0;
@@ -260,7 +260,7 @@ export function FlagOptions(props) {
       </ul>
     </DropDownMenu>
     :
-    ""
+    null
   )
 }
 
@@ -282,7 +282,7 @@ export function InputNumber(props) {
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)} />
         <Currency>
-          <button onClick={() => props.onClick()}>
+          <button className="input-country" onClick={() => props.onClick()}>
             <span className={"flag-icon flag-icon-"+ props.currency.substring(0,2) +" flag-icon-squared"}/>
             { props.currency }
             <FontAwesomeIcon className="caret" icon="caret-down" />

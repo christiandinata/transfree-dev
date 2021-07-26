@@ -1,7 +1,7 @@
 import Menu from '../components/menu.js';
 import Header from '../components/header.js';
 import Footer from '../components/footer.js';
-import React from 'react';
+import React, { createRef } from 'react';
 import { connect } from 'react-redux';
 
 import actions from '../redux/actions';
@@ -41,6 +41,7 @@ class Index extends React.Component {
     this.handleDestinationChange = this.handleDestinationChange.bind(this);
     this.selectDestination = this.selectDestination.bind(this);
     this.selectSource = this.selectSource.bind(this);
+    this.node = createRef();
   }
 
   static async getInitialProps(ctx) {
@@ -59,12 +60,14 @@ class Index extends React.Component {
     window.addEventListener('resize', () => {
       this.setState({ isMobile: window.innerWidth <= 800 })
     })
+    document.addEventListener('mousedown', this.handleClick)
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', () => {
       this.setState({ isMobile: window.innerWidth <= 800 })
     })
+    document.addEventListener('mousedown', this.handleClick)
   }
 
   toggleSource() {
@@ -208,9 +211,20 @@ class Index extends React.Component {
     }
   }
 
+  handleClick = (e) => {
+    if(e.target.className != "input-country") {
+      if(this.state.isSourceActive) {
+        this.toggleSource()
+      }
+      if(this.state.isDestinationActive) {
+        this.toggleDestination()
+      }
+    }
+  }
+
   render() {
     return (
-      <div>
+      <div ref={node => this.node = node}>
         <Header />
         <Menu isApproved={this.props.isApproved} homepage = "true"/>
 
@@ -267,8 +281,8 @@ class Index extends React.Component {
             {
               listFeatures.map((ftr, idx) => (
                 idx % 2 == 0 ? 
-                <LeftFeatureRow {...ftr}/> :
-                <RightFeatureRow {...ftr}/>
+                <LeftFeatureRow key={idx} {...ftr}/> :
+                <RightFeatureRow key={idx} {...ftr}/>
               ))
             } 
           </>

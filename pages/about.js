@@ -41,7 +41,7 @@ const StoryFlex = styled.div`
   p {
     margin-top: 16px;
   }
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 960px) {
     flex-direction: column;
     text-align: center;
     align-items: center;

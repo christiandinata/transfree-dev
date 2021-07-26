@@ -31,7 +31,6 @@ class Dashboard extends React.Component {
       fromAmount: 1000,
       toAmount: 0
     };
-
     this.toggleSource = this.toggleSource.bind(this);
     this.hideSource = this.hideSource.bind(this);
     this.toggleDestination = this.toggleDestination.bind(this);
@@ -56,6 +55,11 @@ class Dashboard extends React.Component {
       rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
       toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
     })
+    document.addEventListener('mousedown', this.handleClick)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClick)
   }
 
   reverse(country, country2) {
@@ -95,7 +99,6 @@ class Dashboard extends React.Component {
         });
       }
     }
-
   }
 
   toggleSource() {
@@ -237,6 +240,17 @@ class Dashboard extends React.Component {
         fromAmount: toAmount / this.state.rate,
         toAmount: toAmount
       })
+    }
+  }
+
+  handleClick = (e) => {
+    if(e.target.className != "input-country") {
+      if(this.state.isSourceActive) {
+        this.toggleSource()
+      }
+      if(this.state.isDestinationActive) {
+        this.toggleDestination()
+      }
     }
   }
 

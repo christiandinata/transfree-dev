@@ -2,9 +2,9 @@ import {useCallback, useEffect, useMemo, useState} from 'react'
 import {useDropzone} from 'react-dropzone'
 import '../styles/components/StyledDropzone.css'
 
-//Untuk styling saat user memasukkan foto
+// Untuk styling saat user memasukkan foto
 
-//Styling
+// Styling
 const thumbsContainer = {
   display: 'flex',
   flexDirection: 'row',
@@ -60,20 +60,15 @@ function StyledDropzone (props) {
     files.forEach(file => URL.revokeObjectURL(file.preview))
   }, [files])
 
-
-
-  
   const thumbs = files.map(file => (
     <div style={thumb} key={file.name}>
-        <img
-            src={file.preview}
-            style={img}
-        />  
-        {hideInstruction()}     
+      <img
+        src={file.preview}
+        style={img}
+      />  
+      {hideInstruction()}     
     </div>
-    
-));
-
+  ));
 
   const {
     getRootProps,
@@ -106,14 +101,14 @@ function StyledDropzone (props) {
       <div className='styled-dropzone-container' { ...getRootProps({ style }) } style={{textAlign:"center"}}>
         <input { ...getInputProps() }/>
         <div id={props.id} style={{textAlign:"center"}}>
-            <div className="styled-dropzone-placeholder">
-                <img src={props.image}></img>
-            </div>
+          <div className="styled-dropzone-placeholder">
+            <img src={props.image}></img>
+          </div>
 
-            <p className='styled-dropzone-instruction' >
+          <p className='styled-dropzone-instruction' >
               {/* <b>Drag and Drop</b> or <b>Browse Files</b><br/>
               Max 10 MB */}
-            </p>
+          </p>
         </div>
          <aside style={thumbsContainer}>
           {thumbs}
