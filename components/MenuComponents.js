@@ -38,16 +38,6 @@ export function NavBarBlue(props) {
 
 // Navbar for white background (the same one as the navbar at homepage when scrolled, with profile info)
 export function NavBarWhite(props) {
-<<<<<<< HEAD
-	return(
-		<Nav scrolled = "true" homepage = "true" marginTop = "0px">
-			<NavInner>
-				<a href = "/"><Logo src="../static/images/transfree-logo.png" scrolled = "true"/></a>
-				
-				{
-					props.isAuthenticated ?
-					(<React.Fragment>
-=======
 	return (
 		<Nav scrolled="true" homepage="true" marginTop="0px">
 			<NavInner>
@@ -60,7 +50,6 @@ export function NavBarWhite(props) {
 
 				{props.isAuthenticated ? (
 					<React.Fragment>
->>>>>>> d4f8180 (fixed phone number, updated resend code timeout)
 						<NavigationCenter>
 							<NavigationChild
 								href="/order"
@@ -69,19 +58,11 @@ export function NavBarWhite(props) {
 								navChildColor="#f5f5f5">
 								Send Money
 							</NavigationChild>
-<<<<<<< HEAD
-							<NavigationChild 
-								href = "/account"
-								scrolled = "true"
-								homepage = "true"
-								navChildColor = "#f5f5f5"
-=======
 							<NavigationChild
 								href="/account"
 								scrolled="true"
 								homepage="true"
 								navChildColor="#f5f5f5"
->>>>>>> d4f8180 (fixed phone number, updated resend code timeout)
 								active={props.current == "transactions"}>
 								Transactions
 							</NavigationChild>
@@ -92,29 +73,15 @@ export function NavBarWhite(props) {
 								navChildColor="#f5f5f5">
 								How It Works
 							</NavigationChild>
-<<<<<<< HEAD
-							<NavigationChild 
-								href = "/about" scrolled = "true"
-								homepage = "true"
-								navChildColor = "#f5f5f5"
-=======
 							<NavigationChild
 								href="/about"
 								scrolled="true"
 								homepage="true"
 								navChildColor="#f5f5f5"
->>>>>>> d4f8180 (fixed phone number, updated resend code timeout)
 								active={props.current == "aboutus"}>
 								About Us
 							</NavigationChild>
 						</NavigationCenter>
-<<<<<<< HEAD
-						<NavigationChild href = "/user-profile" scrolled = "true" homepage = "true" navChildColor = "#f5f5f5">
-							<ProfileInfo scrolled = "true" name = "true">
-								{props.username}
-							</ProfileInfo>
-							<ProfileInfo scrolled = "true" id = "true">
-=======
 						<NavigationChild
 							href="/user-profile"
 							scrolled="true"
@@ -124,21 +91,14 @@ export function NavBarWhite(props) {
 								{props.username}
 							</ProfileInfo>
 							<ProfileInfo scrolled="true" id="true">
->>>>>>> d4f8180 (fixed phone number, updated resend code timeout)
 								{props.id}
 							</ProfileInfo>
 						</NavigationChild>
 					</React.Fragment>
 				) : null}
 
-<<<<<<< HEAD
-				{
-					!props.isAuthenticated ?
-					(<React.Fragment>
-=======
 				{!props.isAuthenticated ? (
 					<React.Fragment>
->>>>>>> d4f8180 (fixed phone number, updated resend code timeout)
 						<Navigation>
 							<NavigationChild
 								href="https://www.youtube.com/watch?v=8RzCs_sQ8Ak"
@@ -250,13 +210,9 @@ export const NavigationChild = styled.a`
 		letter-spacing: 0.2px;
 	}
 
-<<<<<<< HEAD
-	${({ active }) => active && `
-=======
 	${({ active }) =>
 		active &&
 		`
->>>>>>> d4f8180 (fixed phone number, updated resend code timeout)
 		color: #009fe3;
 		font-weight: 500;
   	`}
