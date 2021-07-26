@@ -222,7 +222,7 @@ function Signup(props) {
 				password: true,
 				confirmPassword: true,
 			});
-		} else if (values.phone?.length < 8) {
+		} else if (values.phone?.length < 8 || values.phone?.length > 15) {
 			// min length 8 includes (2 from country code and 1 from "+" sign)
 			setError({
 				...error,
@@ -282,7 +282,7 @@ function Signup(props) {
 							<BelowHeading>
 								Already have an account ?{" "}
 								<Link href="/login">
-									<a>Login</a>
+									<a>Sign In</a>
 								</Link>
 							</BelowHeading>
 						</center>
@@ -529,7 +529,7 @@ function Signup(props) {
 								(props.errorMessage?.includes("phone") ||
 									shortPhone)
 									? shortPhone
-										? "Phone number minimum length is 5"
+										? "Phone number should be around 5 - 15 digits"
 										: "Phone number is already registered"
 									: "Phone number cannot be blank"}
 							</ErrorText>
