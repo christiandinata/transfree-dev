@@ -10,13 +10,13 @@ export function NavBarBlue(props) {
 			<Nav>
 				<NavInner>
 					<a style={{ height: 17 }} href="/index">
-						<Logo
+						<LogoBlue
 							src="../static/images/transfree-logo.png"
 							homepage="false"
 						/>
 					</a>
-					<Navigation>
-						<NavigationChild
+					<NavigationBlue clicked = "true">
+						<NavigationChildBlue
 							navChildColor={props.navChildColor}
 							href={props.endpoint}>
 							<FontAwesomeIcon
@@ -27,9 +27,11 @@ export function NavBarBlue(props) {
 									marginRight: "8px",
 								}}
 							/>
-							Back to {props.navText}
-						</NavigationChild>
-					</Navigation>
+							<NavigationBackText>
+								Back to {props.navText}
+							</NavigationBackText>
+						</NavigationChildBlue>
+					</NavigationBlue>
 				</NavInner>
 			</Nav>
 		</>
@@ -40,7 +42,7 @@ export function NavBarBlue(props) {
 export function NavBarWhite(props) {
 	return(
 		<Nav scrolled = "true" homepage = "true" marginTop = "0px">
-			<NavInner>
+			<NavInner homepage = "true">
 				<a href = "/"><Logo src="../static/images/transfree-logo.png" scrolled = "true"/></a>
 				
 				{
@@ -153,7 +155,7 @@ export const Nav = styled.div`
 			: "none"};
 
 	@media only screen and (max-width: 900px) {
-		background: #fff;
+		background-color: ${({ homepage }) => (homepage ? "#fff" : "#009fe3")};
 		display: block;
 		height: ${({ clicked, isAuth }) => {
 			if (clicked) {
@@ -180,9 +182,10 @@ export const NavInner = styled.div`
 		homepage && !scrolled ? "1px solid white" : "none"};
 
 	@media only screen and (max-width: 900px) {
-		display: block;
+		display: ${({ homepage }) =>
+			homepage ? "block" : "flex"};
 		margin: 0;
-		background-color: #fff;
+		// background-color: #fff;
 		width: 100%;
 	}
 `;
@@ -207,10 +210,28 @@ export const Logo = styled.img`
 		homepage && !scrolled ? "brightness(0) invert(1)" : "none"};
 
 	@media only screen and (max-width: 900px) {
-		-webkit-filter: none;
-		filter: none;
+		-webkit-filter: ${({ homepage }) =>
+			homepage ? "none" : "brightness(0) invert(1)"};
+		filter: ${({ homepage }) =>
+			homepage ? "none" : "brightness(0) invert(1)"};
 		padding: 20px;
 		padding-bottom: 0;
+	}
+`;
+
+// The Logo component for NavBarBlue()
+export const LogoBlue = styled.img`
+	width: 88px;
+	height: 17px;
+	-webkit-filter: ${({ scrolled, homepage }) =>
+		homepage && !scrolled ? "brightness(0) invert(1)" : "none"};
+	filter: ${({ scrolled, homepage }) =>
+		homepage && !scrolled ? "brightness(0) invert(1)" : "none"};
+	-webkit-filter: brightness(0) invert(1);
+	filter: brightness(0) invert(1);
+
+	@media only screen and (max-width: 900px) {
+		padding: 0 20px;
 	}
 `;
 
@@ -252,9 +273,9 @@ export const Navigation = styled.div`
 		display: ${({ clicked }) =>
 			clicked ? "flex" : "none"};
 		flex-direction: column;
-		background-color: #fff;
+		// background-color: #fff;
 		align-items: stretch;
-		margin: 16px 16px 16px 16px;
+		// margin: 16px 16px 16px 16px;
 	}
 `;
 
@@ -270,6 +291,17 @@ export const NavigationCenter = styled.div`
 		align-items: stretch;
 		margin: 16px 16px 16px 16px;
 	};
+`;
+
+// The Navigation component for NavBarBlue() function
+export const NavigationBlue = styled.div`
+	height: 72px;
+	display: flex;
+	align-items: center;
+
+	@media only screen and (max-width: 900px) {
+		display: ${({ clicked }) =>
+			clicked ? "flex" : "none"};
 `;
 
 export const NavigationChild = styled.a`
@@ -303,6 +335,44 @@ export const NavigationChild = styled.a`
 		margin-right: 0;
 		padding-bottom: 16px;
 		border-bottom: 1px solid #E2E2E2;
+	}
+`;
+
+// The NavigationChild for NavBarBlue()
+export const NavigationChildBlue = styled.a`
+	// height: 72px;
+	display: flex;
+	align-items: center;
+	margin-right: 40px;
+	text-decoration: none;
+	font-style: normal;
+	font-size: 16px;
+	font-weight: normal;
+	line-height: 19px;
+	color: #fff;
+	&:hover {
+		color: #fff;
+		font-weight: 500;
+		letter-spacing: 0.2px;
+	}
+
+	${({ active }) => active && `
+		color: #009fe3;
+		font-weight: 500;
+  	`}
+	
+	@media only screen and (max-width: 900px) {
+		color: #2B2A35;
+		// margin: 16px 16px 0 16px;
+		margin-top: 16px;
+		margin-right: 0;
+		padding-bottom: 16px;
+	}
+`;
+
+export const NavigationBackText = styled.p`
+	@media only screen and (max-width: 900px) {
+		display: none;
 	}
 `;
 
