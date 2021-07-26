@@ -9,13 +9,13 @@ export function NavBarBlue(props) {
 		<>
 			<Nav>
 				<NavInner>
-					<a style={{ height: 17 }} href="/index">
+					<LogoLinkBlue style={{ height: 17 }} href="/index">
 						<LogoBlue
 							src="../static/images/transfree-logo.png"
 							homepage="false"
 						/>
-					</a>
-					<NavigationBlue clicked = "true">
+					</LogoLinkBlue>
+					<NavigationBlue clicked="true">
 						<NavigationChildBlue
 							navChildColor={props.navChildColor}
 							href={props.endpoint}>
@@ -24,6 +24,7 @@ export function NavBarBlue(props) {
 								style={{
 									width: 24,
 									height: 24,
+									color: "white",
 									marginRight: "8px",
 								}}
 							/>
@@ -67,15 +68,16 @@ export const Nav = styled.div`
 	@media only screen and (max-width: 900px) {
 		background-color: ${({ homepage }) => (homepage ? "#fff" : "#009fe3")};
 		display: block;
-		height: ${({ clicked, isAuth }) => {
+		height: ${({ clicked, isAuth, profile }) => {
 			if (clicked) {
-				if (isAuth) {
-					return "450px";
+				if (isAuth && profile) {
+					return "605px";
+				} else if (isAuth) {
+					return "459px";
 				} else {
 					return "350px";
 				}
-			}
-			else {
+			} else {
 				return "72px";
 			}
 		}};
@@ -92,11 +94,11 @@ export const NavInner = styled.div`
 		homepage && !scrolled ? "1px solid white" : "none"};
 
 	@media only screen and (max-width: 900px) {
-		display: ${({ homepage }) =>
-			homepage ? "block" : "flex"};
+		display: ${({ homepage }) => (homepage ? "block" : "flex")};
 		margin: 0;
 		// background-color: #fff;
 		width: 100%;
+		border-bottom: none;
 	}
 `;
 
@@ -105,15 +107,15 @@ export const HeaderWrapper = styled.div`
 
 	@media only screen and (max-width: 900px) {
 		justify-content: space-between;
-		box-shadow: ${({ clicked }) => (clicked ? 
-			"0px 2px 8px rgba(119, 119, 119, 0.2)"
-			: "none")};
+		box-shadow: ${({ clicked }) =>
+			clicked ? "0px 2px 8px rgba(119, 119, 119, 0.2)" : "none"};
 	}
 `;
 
 export const Logo = styled.img`
-	width: 88px;
-	height: 17px;
+	width: 110px;
+	height: 30px;
+	object-fit: scale-down;
 	-webkit-filter: ${({ scrolled, homepage }) =>
 		homepage && !scrolled ? "brightness(0) invert(1)" : "none"};
 	filter: ${({ scrolled, homepage }) =>
@@ -131,8 +133,9 @@ export const Logo = styled.img`
 
 // The Logo component for NavBarBlue()
 export const LogoBlue = styled.img`
-	width: 88px;
-	height: 17px;
+	width: 100px;
+	height: 30px;
+	object-fit: scale-down;
 	-webkit-filter: ${({ scrolled, homepage }) =>
 		homepage && !scrolled ? "brightness(0) invert(1)" : "none"};
 	filter: ${({ scrolled, homepage }) =>
@@ -145,12 +148,15 @@ export const LogoBlue = styled.img`
 	}
 `;
 
+export const LogoLinkBlue = styled.a`
+	margin-top: -15px;
+`;
+
 export const ExpandButton = styled.button`
 	display: none;
 
 	@media only screen and (max-width: 900px) {
-		display: ${({ clicked }) =>
-			clicked ? "inline" : "inline"};
+		display: ${({ clicked }) => (clicked ? "inline" : "inline")};
 		float: right;
 		padding: 21.25px 20.25px 21.25px 0;
 		outline: none;
@@ -162,15 +168,13 @@ export const ExpandButton = styled.button`
 
 export const ExpandImage = styled.img`
 	@media only screen and (max-width: 900px) {
-		display: ${({ clicked }) =>
-			clicked ? "none" : "inline"};
+		display: ${({ clicked }) => (clicked ? "none" : "inline")};
 	}
 `;
 
 export const ExpandClose = styled.img`
 	@media only screen and (max-width: 900px) {
-		display: ${({ clicked }) =>
-			clicked ? "inline" : "none"};
+		display: ${({ clicked }) => (clicked ? "inline" : "none")};
 	}
 `;
 
@@ -180,8 +184,7 @@ export const Navigation = styled.div`
 	align-items: center;
 
 	@media only screen and (max-width: 900px) {
-		display: ${({ clicked }) =>
-			clicked ? "flex" : "none"};
+		display: ${({ clicked }) => (clicked ? "flex" : "none")};
 		flex-direction: column;
 		// background-color: #fff;
 		align-items: stretch;
@@ -192,15 +195,14 @@ export const Navigation = styled.div`
 export const NavigationCenter = styled.div`
 	height: 72px;
 	display: flex;
-	
+
 	@media only screen and (max-width: 900px) {
-		display: ${({ clicked }) =>
-			clicked ? "flex" : "none"};
+		display: ${({ clicked }) => (clicked ? "flex" : "none")};
 		flex-direction: column;
 		background-color: #fff;
 		align-items: stretch;
-		margin: 16px 16px 16px 16px;
-	};
+		// margin: 16px 16px 16px 16px;
+	} ;
 `;
 
 // The Navigation component for NavBarBlue() function
@@ -210,8 +212,7 @@ export const NavigationBlue = styled.div`
 	align-items: center;
 
 	@media only screen and (max-width: 900px) {
-		display: ${({ clicked }) =>
-			clicked ? "flex" : "none"};
+		display: ${({ clicked }) => (clicked ? "flex" : "none")};
 `;
 
 export const NavigationChild = styled.a`
@@ -233,18 +234,21 @@ export const NavigationChild = styled.a`
 		letter-spacing: 0.2px;
 	}
 
-	${({ active }) => active && `
+	${({ active }) =>
+		active &&
+		`
 		color: #009fe3;
 		font-weight: 500;
   	`}
-	
+
 	@media only screen and (max-width: 900px) {
-		color: #2B2A35;
+		color: #2b2a35;
 		// margin: 16px 16px 0 16px;
-		margin-top: 16px;
-		margin-right: 0;
+		margin: 16px 0 16px 16px;
+		// margin-top: 16px;
+		// margin-right: 0;
 		padding-bottom: 16px;
-		border-bottom: 1px solid #E2E2E2;
+		border-bottom: 1px solid #e2e2e2;
 	}
 `;
 
@@ -266,13 +270,15 @@ export const NavigationChildBlue = styled.a`
 		letter-spacing: 0.2px;
 	}
 
-	${({ active }) => active && `
+	${({ active }) =>
+		active &&
+		`
 		color: #009fe3;
 		font-weight: 500;
   	`}
-	
+
 	@media only screen and (max-width: 900px) {
-		color: #2B2A35;
+		color: #fff;
 		// margin: 16px 16px 0 16px;
 		margin-top: 16px;
 		margin-right: 0;
@@ -313,7 +319,7 @@ export const SignInButton = styled.a`
 		padding-left: 0;
 		margin-top: 40px;
 		margin-right: 0;
-		color: #009FE3;
+		color: #009fe3;
 		border: 1px solid #009fe3;
 		border-radius: 4px;
 	}
@@ -374,4 +380,75 @@ export const ProfileInfo = styled.p`
 	}};
 	padding-left: ${({ id }) => (id ? "8px" : "0")};
 	margin-right: ${({ name }) => (name ? "8px" : "0")};
+`;
+
+export const ActionSect = styled.section`
+	// width: 25%;
+	background: #1687e5;
+	padding-top: 38px;
+
+	@media only screen and (max-width: 900px) {
+		padding-top: 16px;
+		padding-bottom: 16px;
+	}
+`;
+
+export const ActionChoice = styled.button`
+	display: block;
+	margin: 0 24px;
+	margin-top: 24px;
+	background: transparent;
+	text-decoration: none;
+	outline: none;
+	border: none;
+	border-radius: 4px;
+	padding: 16px 23.3px 16px 16px;
+	vertical-align: middle;
+	width: 260px;
+
+	@media only screen and (max-width: 900px) {
+		margin-top: 0;
+		padding: 16px;
+		width: 90%;
+		text-align: left;
+	}
+`;
+
+export const ActionChoiceActive = styled(ActionChoice)`
+	background: #fff;
+	border: 1px solid #fff;
+`;
+
+export const ChoiceImg = styled.img`
+	width: 24px;
+	height: 24px;
+	object-fit: scale-down;
+	display: inline;
+	float: left;
+	margin-right: 16px;
+`;
+
+export const ArrowRightImg = styled.img`
+	display: inline;
+	float: right;
+	margin-left: 71.3px;
+`;
+
+export const AccountLink = styled.p`
+	display: inline;
+	font-family: "Avenir Next LT Pro";
+	font-weight: 400;
+	font-style: normal;
+	font-size: 14px;
+	line-height: 26px;
+	color: #ffffff;
+
+	@media only screen and (max-width: 900px) {
+		font-weight: 500;
+		line-height: 20px;
+	}
+`;
+
+export const AccountLinkActive = styled(AccountLink)`
+	color: #009fe3 !important;
 `;
