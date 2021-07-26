@@ -20,6 +20,41 @@ function PhoneVerification(props) {
 		isValidCode: true,
 	});
 
+	const size = useWindowSize();
+
+	function useWindowSize() {
+		// Initialize state with undefined width/height so server and client renders match
+		// Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
+		const [windowSize, setWindowSize] = useState({
+			width: undefined,
+			height: undefined,
+		});
+
+		useEffect(() => {
+			// only execute all the code below in client side
+			if (typeof window !== "undefined") {
+				// Handler to call on window resize
+				function handleResize() {
+					// Set window width/height to state
+					setWindowSize({
+						width: window.innerWidth,
+						height: window.innerHeight,
+					});
+				}
+
+				// Add event listener
+				window.addEventListener("resize", handleResize);
+
+				// Call handler right away so state gets updated with initial window size
+				handleResize();
+
+				// Remove event listener on cleanup
+				return () => window.removeEventListener("resize", handleResize);
+			}
+		}, []); // Empty array ensures that effect is only run on mount
+		return windowSize;
+	}
+
 	const [filledCode, setFilledCode] = useState(false);
 	const [error, setError] = useState(false);
 	const [errorMsg, setErrorMsg] = useState(false);
@@ -105,10 +140,16 @@ function PhoneVerification(props) {
 								value={state.code}
 								onChange={(value) => handleChange(value)}
 								numInputs={6}
-								containerStyle="containerStyling"
+								containerStyle={
+									size.width < 375
+										? "smallscreen"
+										: "containerStyling"
+								}
 								inputStyle={
 									errorMsg
 										? "inputStyling error"
+										: size.width < 375
+										? "inputStyling-smallscreen"
 										: "inputStyling"
 								}
 								focusStyle={
@@ -160,6 +201,13 @@ function PhoneVerification(props) {
 					margin-right: 4px;
 				}
 
+				.smallscreen {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					margin: 80px 4px;
+				}
+
 				.inputStyling {
 					font-size: 20px;
 					line-height: 24px;
@@ -170,12 +218,27 @@ function PhoneVerification(props) {
 					border: 1px solid #e2e2e2;
 					border-radius: 4px;
 					padding: 0 !important;
-					margin-left: -3px;
+					margin-left: -2px;
+					margin-right: 4px;
 				}
 
 				.inputStyling.error {
 					color: #ff0000;
 					font-weight: 700;
+				}
+
+				.inputStyling-smallscreen {
+					font-size: 20px;
+					line-height: 24px;
+					font-weight: 700;
+					color: #232933;
+					width: 40px !important;
+					height: 48px;
+					border: 1px solid #e2e2e2;
+					border-radius: 4px;
+					padding: 0 !important;
+					margin-left: 4px;
+					margin-right: 4px;
 				}
 
 				.focusStyling {
