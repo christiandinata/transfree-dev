@@ -5,7 +5,11 @@ import actions from "../redux/actions";
 import initialize from "../utils/initialize";
 import PhoneInput from "react-phone-number-input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import {
+	faBullseye,
+	faEye,
+	faEyeSlash,
+} from "@fortawesome/free-solid-svg-icons";
 import Header from "../components/header";
 import { Form, FormContainer } from "../components/FormComponents";
 import styled from "styled-components";
@@ -48,6 +52,7 @@ function Signup(props) {
 	});
 
 	const [spaceEntered, setSpaceEntered] = useState(false);
+	const [shortPassword, setShortPassword] = useState(false);
 	const [hiddenPass, setHiddenPass] = useState(true);
 	const [hiddenConfirmPass, setHiddenConfirmPass] = useState(true);
 	const [verifyPassword, setVerifyPassword] = useState(true);
@@ -71,7 +76,7 @@ function Signup(props) {
 			...values,
 			[name]: value,
 		});
-		console.log(values);
+		console.log(value);
 	}
 
 	function handleOnFocus(e) {
@@ -187,8 +192,27 @@ function Signup(props) {
 
 	function handleSubmit(e) {
 		e.preventDefault();
+		setShortPassword(false);
 		if (values.password != values.confirmPassword) {
+			if (values.password.length < 8) {
+				setVerifyPassword(false);
+				setShortPassword(true);
+				setError({
+					...error,
+					password: true,
+					confirmPassword: true,
+				});
+			} else {
+				setVerifyPassword(false);
+				setError({
+					...error,
+					password: true,
+					confirmPassword: true,
+				});
+			}
+		} else if (values.password.length < 8) {
 			setVerifyPassword(false);
+			setShortPassword(true);
 			setError({
 				...error,
 				password: true,
@@ -197,6 +221,7 @@ function Signup(props) {
 		} else {
 			e.preventDefault();
 			setVerifyPassword(true);
+			setShortPassword(false);
 			props.verify(
 				{
 					phone: values.phone,
@@ -368,12 +393,15 @@ function Signup(props) {
 							</EyeIcon>
 						</InputContainer>
 						{error.password ||
-						(!filled.password && !verifyPassword) ? (
+						(!filled.password &&
+							(!verifyPassword || shortPassword)) ? (
 							<ErrorText>
 								{!verifyPassword &&
 								!selected.password &&
 								filled.password
-									? "Password and confirmation password do not match"
+									? shortPassword
+										? "Password minimum length is 8"
+										: "Password and confirmation password do not match"
 									: "Password cannot be blank"}
 							</ErrorText>
 						) : null}
@@ -437,12 +465,15 @@ function Signup(props) {
 							</EyeIcon>
 						</InputContainer>
 						{error.confirmPassword ||
-						(!filled.confirmPassword && !verifyPassword) ? (
+						(!filled.confirmPassword &&
+							(!verifyPassword || shortPassword)) ? (
 							<ErrorText>
 								{!verifyPassword &&
 								!selected.confirmPassword &&
 								filled.confirmPassword
-									? "Password and confirmation password do not match"
+									? shortPassword
+										? "Password minimum length is 8"
+										: "Password and confirmation password do not match"
 									: "Confirmation password cannot be blank"}
 							</ErrorText>
 						) : null}

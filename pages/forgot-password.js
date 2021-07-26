@@ -49,6 +49,7 @@ function ForgotPassword(props) {
 	});
 
 	const [spaceEntered, setSpaceEntered] = useState(false);
+	const [shortPassword, setShortPassword] = useState(false);
 	const [hiddenPass, setHiddenPass] = useState(true);
 	const [hiddenConfirmPass, setHiddenConfirmPass] = useState(true);
 	const [errorMsg, setErrorMsg] = useState(false);
@@ -82,6 +83,18 @@ function ForgotPassword(props) {
 				setValues({
 					...values,
 					email: "",
+				});
+			}
+		} else if (!verifyPassword) {
+			if (name == "password") {
+				setValues({
+					...values,
+					password: "",
+				});
+			} else if (name == "confirmPassword") {
+				setValues({
+					...values,
+					confirmPassword: "",
 				});
 			}
 		}
@@ -147,9 +160,28 @@ function ForgotPassword(props) {
 
 	//Verifikasi untuk ganti password
 	function handleVerify(event) {
+		event.preventDefault();
+		setShortPassword(false);
 		if (values.password != values.confirmPassword) {
-			event.preventDefault();
+			if (values.password.length < 8) {
+				setVerifyPassword(false);
+				setShortPassword(true);
+				setError({
+					...error,
+					password: true,
+					confirmPassword: true,
+				});
+			} else {
+				setVerifyPassword(false);
+				setError({
+					...error,
+					password: true,
+					confirmPassword: true,
+				});
+			}
+		} else if (values.password.length < 8) {
 			setVerifyPassword(false);
+			setShortPassword(true);
 			setError({
 				...error,
 				password: true,
@@ -459,12 +491,15 @@ function ForgotPassword(props) {
 									</EyeIcon>
 								</InputContainer>
 								{error.password ||
-								(!filled.password && !verifyPassword) ? (
+								(!filled.password &&
+									(!verifyPassword || shortPassword)) ? (
 									<ErrorText>
 										{!verifyPassword &&
 										!selected.password &&
 										filled.password
-											? "Password and confirmation password do not match"
+											? shortPassword
+												? "Password minimum length is 8"
+												: "Password and confirmation password do not match"
 											: "Password cannot be blank"}
 									</ErrorText>
 								) : null}
@@ -538,12 +573,15 @@ function ForgotPassword(props) {
 									</EyeIcon>
 								</InputContainer>
 								{error.confirmPassword ||
-								(!filled.confirmPassword && !verifyPassword) ? (
+								(!filled.confirmPassword &&
+									(!verifyPassword || shortPassword)) ? (
 									<ErrorText>
 										{!verifyPassword &&
 										!selected.confirmPassword &&
 										filled.confirmPassword
-											? "Password and confirmation password do not match"
+											? shortPassword
+												? "Password minimum length is 8"
+												: "Password and confirmation password do not match"
 											: "Confirmation password cannot be blank"}
 									</ErrorText>
 								) : null}
