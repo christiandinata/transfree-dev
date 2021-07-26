@@ -134,7 +134,18 @@ const DropDownItem = styled.li`
       background: #009FE380;
       color: #FFFFFF;
       cursor: pointer;
-    }`
+    }
+
+    ${({ disabled }) => disabled && `
+    opacity: 0.6;
+
+    &:hover {
+      background: grey;
+      color: #FFFFFF;
+      cursor: default;
+    }
+  `}    
+`
 
 const SearchBar = styled.div`
   align-items: center;
@@ -236,6 +247,7 @@ export function FlagOptions(props) {
       {displayedFlags.map((flag, index) => (
         <DropDownItem
           key={index}
+          disabled={props.disabled(flag.country)}
           onClick={() => props.onSelect(flag.country)}>
           <span className={"flag-icon flag-icon-" + flag.country.substring(0,2) + " flag-icon-squared" }/>
           { `(${flag.country.toUpperCase()}) ${flag.cur}` }
@@ -269,6 +281,7 @@ export function InputNumber(props) {
           </button>
           <FlagOptions
             show={props.show}
+            disabled={(c) => props.disabled(c)}
             onSelect={(c) => props.onSelect(c)} />
         </Currency>
       </InputFlex>
