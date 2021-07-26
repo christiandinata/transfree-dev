@@ -590,14 +590,14 @@ const AccordionButton = styled.div`
 	align-items: center;
 `;
 
-// const FadeIn = keyframes`
-// 	0% {
-//     opacity: 0;
-// 	}
-// 	100% {
-//     opacity: 1;
-// 	}
-// `;
+const FadeIn = keyframes`
+	from {
+    opacity: 0;
+	}
+	to {
+    opacity: 1;
+	}
+`;
 
 const AccordionPanel = styled.div`
 	margin-top: 16px;
@@ -607,7 +607,7 @@ const AccordionPanel = styled.div`
 	max-width: 504px;
 	/* Neutral/Secondary Text */
 	color: #626b79;
-	/* animation: ${FadeIn} 0.35s ease-in; */
+	animation: ${FadeIn} 0.35s ease-in;
 
 	@media (max-width: 932px) {
 		max-width: none;
