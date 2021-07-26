@@ -197,7 +197,12 @@ const FAQ = (props) => {
 													boxShadowed={boxShadowed}>
 													<AccordionButton
 														onClick={() =>
-															setActiveIndex(id)
+															setActiveIndex(
+																activeIndex ==
+																	id
+																	? -1
+																	: id
+															)
 														}>
 														<Highlighter
 															highlightClassName="Highlight"
@@ -567,10 +572,6 @@ const AccordionContainer = styled.div`
 	margin-bottom: 16px;
 	transition: 0.4s all ease-in;
 
-	&:hover {
-		transform: scale(1.02);
-	}
-
 	@media (max-width: 932px) {
 		padding: 24px 24px 24px 24px;
 		width: 344px;
@@ -589,14 +590,14 @@ const AccordionButton = styled.div`
 	align-items: center;
 `;
 
-const FadeIn = keyframes`
-	0% {
-    opacity: 0;
-	}
-	100% {
-    opacity: 1;
-	}
-`;
+// const FadeIn = keyframes`
+// 	0% {
+//     opacity: 0;
+// 	}
+// 	100% {
+//     opacity: 1;
+// 	}
+// `;
 
 const AccordionPanel = styled.div`
 	margin-top: 16px;
@@ -606,7 +607,7 @@ const AccordionPanel = styled.div`
 	max-width: 504px;
 	/* Neutral/Secondary Text */
 	color: #626b79;
-	animation: ${FadeIn} 0.35s ease-in;
+	/* animation: ${FadeIn} 0.35s ease-in; */
 
 	@media (max-width: 932px) {
 		max-width: none;
