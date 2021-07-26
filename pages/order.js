@@ -42,7 +42,7 @@ const ProgressContainer = styled.div`
   background-color: white;
   box-shadow: 0px 5px 20px rgba(98, 107, 121, 0.15);
   position: fixed;
-  z-index: 1;
+  z-index: 10;
 
   @media only screen and (max-width: 660px) {
     min-width: 800px;
