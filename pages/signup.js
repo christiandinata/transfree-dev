@@ -53,6 +53,7 @@ function Signup(props) {
 
 	const [spaceEntered, setSpaceEntered] = useState(false);
 	const [shortPassword, setShortPassword] = useState(false);
+	const [shortPhone, setShortPhone] = useState(false);
 	const [hiddenPass, setHiddenPass] = useState(true);
 	const [hiddenConfirmPass, setHiddenConfirmPass] = useState(true);
 	const [verifyPassword, setVerifyPassword] = useState(true);
@@ -150,8 +151,10 @@ function Signup(props) {
 		console.log(value, values);
 	}
 
-	function handlePhoneOnFocus(value) {
-		if (props.errorMessage?.includes("phone")) {
+	function handlePhoneOnFocus(e) {
+		e.target.placeholder = "";
+		if (props.errorMessage?.includes("phone") || shortPhone) {
+			e.target.placeholder = "";
 			setValues({
 				...values,
 				phone: "",
@@ -193,6 +196,7 @@ function Signup(props) {
 	function handleSubmit(e) {
 		e.preventDefault();
 		setShortPassword(false);
+		setShortPhone(false);
 		if (values.password != values.confirmPassword) {
 			if (values.password.length < 8) {
 				setVerifyPassword(false);
@@ -218,6 +222,13 @@ function Signup(props) {
 				password: true,
 				confirmPassword: true,
 			});
+		} else if (values.phone?.length < 8) {
+			// min length 8 includes (2 from country code and 1 from "+" sign)
+			setError({
+				...error,
+				phone: true,
+			});
+			setShortPhone(true);
 		} else {
 			e.preventDefault();
 			setVerifyPassword(true);
@@ -479,9 +490,10 @@ function Signup(props) {
 						) : null}
 						{selected.phone || (filled.phone && !error.phone) ? (
 							<FormLabel
-								errorMessage={props.errorMessage?.includes(
-									"phone"
-								)}
+								errorMessage={
+									props.errorMessage?.includes("phone") ||
+									shortPhone
+								}
 								filled={filled.phone}
 								selectedPhone={selected.phone}>
 								Phone
@@ -490,7 +502,10 @@ function Signup(props) {
 						<InputContainer
 							selectedPhone={selected.phone}
 							error={error.phone}
-							errorMessage={props.errorMessage?.includes("phone")}
+							errorMessage={
+								props.errorMessage?.includes("phone") ||
+								shortPhone
+							}
 							filled={filled.phone}>
 							<InputPhone
 								placeholder="Phone"
@@ -498,21 +513,24 @@ function Signup(props) {
 								// country="ID"
 								className={error.phone ? "phone-error" : null}
 								required
-								error={props.errorMessage?.includes("phone")}
 								value={values.phone}
 								onChange={(value) => handlePhoneChange(value)}
-								onFocus={(value) => handlePhoneOnFocus(value)}
-								onBlur={(value) => handlePhoneOnBlur(value)}
+								onFocus={(e) => handlePhoneOnFocus(e)}
+								onBlur={(value, e) => handlePhoneOnBlur(value)}
 							/>
 						</InputContainer>
 						{error.phone ||
 						(!filled.phone &&
-							props.errorMessage?.includes("phone")) ? (
+							(props.errorMessage?.includes("phone") ||
+								shortPhone)) ? (
 							<ErrorText>
 								{error.phone &&
 								!selected.phone &&
-								props.errorMessage?.includes("phone")
-									? "Phone number is already registered"
+								(props.errorMessage?.includes("phone") ||
+									shortPhone)
+									? shortPhone
+										? "Phone number minimum length is 5"
+										: "Phone number is already registered"
 									: "Phone number cannot be blank"}
 							</ErrorText>
 						) : null}
@@ -735,6 +753,10 @@ const InputPhone = styled(PhoneInput)`
 		margin-left: 16px;
 		margin-right: 16px;
 		height: 48px;
+
+		:focus ::placeholder {
+			color: transparent;
+		}
 	}
 `;
 
