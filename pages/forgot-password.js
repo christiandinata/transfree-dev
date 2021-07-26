@@ -715,6 +715,14 @@ const RecoveryContainer = styled.div`
 	justify-content: center;
 	background-image: url("../static/images/Batik_World_Map_1.png");
 	background-repeat: no-repeat;
+	background-color: #f3f5f7;
+
+	@media (max-width: 620px) {
+		background-image: none;
+		background-repeat: none;
+		background-color: #f3f5f7;
+		min-height: 620px;
+	}
 `;
 
 const RecoveryForm = styled.form`
@@ -1047,6 +1055,10 @@ const CopyrightDiv = styled.div`
 	text-align: center;
 	letter-spacing: 0.2px;
 	color: #232933;
+
+	@media (max-width: 629px) {
+		height: 96px;
+	}
 `;
 
 ForgotPassword.getInitialProps = async (ctx) => {
