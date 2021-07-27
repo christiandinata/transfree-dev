@@ -245,11 +245,7 @@ const mapStateToProps = (state) => {
     return {
       isAuthenticated: true,
       username: state.user.user_data.fullname,
-<<<<<<< HEAD
-      id: state.user.user_data.idNumber
-=======
       idNumber: state.user.user_data.idNumber
->>>>>>> navbar-footer
     }
   } else {
     return {
