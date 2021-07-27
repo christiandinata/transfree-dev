@@ -340,7 +340,7 @@ class OrderItem extends React.Component {
                   <Bullet blue={order.completedAt != 0.0 || order.canceledAt}><div className="smallBullet"/></Bullet>
                   <p className="textItem">
                     {order.canceledAt ? ('Canceled on ') : order.completedAt == 0.0 ? ('We will complete your transfer') :  ('Completed on ')}
-                    {order.canceledAt ? (moment(order.canceledAt).format("DD/MM/YYYY HH:mm")) :
+                    {order.canceledAt ? <span style={{fontWeight: "bolder"}}>{(moment(order.canceledAt).format("DD/MM/YYYY HH:mm"))} </span> :
                       order.completedAt == 0.0 ? '' : <span style={{fontWeight: "bolder"}}>{moment(order.completedAt).format("DD/MM/YYYY HH:mm")}</span>}
                   </p>
                 </ListItem>
