@@ -124,6 +124,10 @@ const FooterLink = styled.a`
   font-weight: normal;
   text-decoration: none;
   margin-bottom: 16px;
+
+  &:hover {
+    color: #009fe3;
+  }
 `;
 
 const FooterText = styled.span`
@@ -188,7 +192,7 @@ const Footer = () => (
 
         <Column>
           <Title>Contacts</Title>
-          <FooterText>+44 7985 497391</FooterText>
+          <FooterLink href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree" target="_blank">+44 7985 497391</FooterLink>
           <FooterText>admin@transfree.id</FooterText>
           <FooterLink href = "/complaint_feefback">Complaint and Feedback</FooterLink>
         </Column>

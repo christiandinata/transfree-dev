@@ -224,7 +224,7 @@ function UserProfile(props) {
     }
 
     const updateUser = async () => {
-        if(checkAllData) {
+        if(checkAllData()) {
             axios
                 .post(
                     ENV.API + `/v1/user/checkEmail`,

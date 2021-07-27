@@ -251,7 +251,7 @@ class Index extends React.Component {
                   }}>Try it For Free</PrButton>
                 </a>
               </div>
-              {/* <WAButton/> */}
+              <WAButton/>
             </Hero.Converter>
           </Hero.HeroDiv>
         </Hero.Overlay></Hero.MapBackground>
