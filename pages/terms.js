@@ -61,7 +61,7 @@ class Terms extends Component {
         <NavBarWhite isAuthenticated={this.props.isAuthenticated} username={this.props.username} id={this.props.id}/>
         <Info.BlueHeader>
           <Info.Batik>
-            <h1>Terms and Conditions</h1>
+            <h1>Terms & Conditions</h1>
           </Info.Batik>
         </Info.BlueHeader>
           <Info.Container>
