@@ -12,6 +12,7 @@ import { List } from "../components/FAQData";
 import initialize from "../utils/initialize";
 import styled, { keyframes } from "styled-components";
 import { NavBarWhite } from "../components/MenuComponents.js";
+import Menu from '../components/menu';
 
 //Long text untuk FAQ
 
@@ -89,11 +90,12 @@ const FAQ = (props) => {
 	return (
 		<>
 			<Header />
-			<NavBarWhite
-				username={props.username}
-				id={props.id}
-				isAuthenticated={props.isAuthenticated}
-			/>
+            <Menu 
+                isAuthenticated = {props.isAuthenticated} 
+                username = {props.username} 
+                scrolled_props = "true" 
+                is_homepage = "false"
+            />
 			<HeroContainer>
 				<HeroHeading className="bold">
 					Hello, How Can We Help You?

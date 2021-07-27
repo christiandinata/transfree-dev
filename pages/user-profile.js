@@ -220,7 +220,8 @@ function UserProfile(props) {
     return(
         <React.Fragment>
             <Header/>
-            <NavBarWhite isAuthenticated = {true} username = {info.fullName} id = {info.idNumber}/>
+            {/* <NavBarWhite isAuthenticated = {true} username = {info.fullName} id = {info.idNumber}/> */}
+            <Menu isAuthenticated = {true} username = {info.fullName} id = {info.idNumber} scrolled_props = "true" is_homepage = "false"/>
 
             {choice == 'detail' ? 
 
@@ -550,7 +551,7 @@ function UserProfile(props) {
                                     <Profile.FormLabel filled = {focus.phone}>Phone Number</Profile.FormLabel>
                                     <Profile.FormRowPhone filled = {focus.phone}>
                                         <Profile.PhoneInput
-                                            country = "ID"
+                                            // country = "ID"
                                             value = {info.phone}
                                             name = "phone"
                                             onChange = {(value) => handlePhoneChange(value)}

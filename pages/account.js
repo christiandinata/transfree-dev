@@ -8,6 +8,7 @@ import { getCookie } from '../utils/cookie';
 import { AwaitingConfirmation } from '../components/order/Pending';
 import { EmptyTransaction, EmptySearch } from '../components/transactions/EmptyTransaction';
 import { NavBarWhite } from '../components/MenuComponents';
+import Menu from '../components/menu.js';
 import Footer from '../components/footer';
 import moment from 'moment';
 
@@ -364,10 +365,17 @@ class Account extends React.Component {
 
   navbarTransaction(){
     return(
-      <NavBarWhite 
-        isAuthenticated={true} 
-        username={this.props.username} 
-        id={this.props.id}
+      // <NavBarWhite 
+      //   isAuthenticated={true} 
+      //   username={this.props.username} 
+      //   id={this.props.id}
+      //   current={"transactions"}/>
+      <Menu 
+        isAuthenticated = {true} 
+        username = {this.props.username} 
+        id = {this.props.id} 
+        scrolled_props = "true" 
+        is_homepage = "false"
         current={"transactions"}/>
     )
   }
