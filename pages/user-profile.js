@@ -221,6 +221,7 @@ function UserProfile(props) {
         <React.Fragment>
             <Header/>
             <NavBarWhite isAuthenticated = {true} username = {info.fullName} id = {info.idNumber}/>
+            <Menu isAuthenticated = {true} username = {info.fullName} id = {info.idNumber} scrolled_props = "true"/>
 
             {choice == 'detail' ? 
 

@@ -9,6 +9,7 @@ import initialize from '../utils/initialize.js';
 import actions from '../redux/actions/index.js';
 import { getCookie } from '../utils/cookie';
 import { NavBarWhite } from '../components/MenuComponents.js';
+import Menu from '../components/menu.js';
 import { MobilePlatform } from '../components/landing-page/MobilePlatform.js';
 
 const Story = styled.div`
@@ -140,7 +141,9 @@ class About extends Component {
     return (
       <div>
         <Header />
-        <NavBarWhite isAuthenticated={this.props.isAuthenticated} username={this.props.username} />
+        {/* <NavBarWhite isAuthenticated={this.props.isAuthenticated} username={this.props.username} /> */}
+        {console.log("masuk about")}
+        <Menu isAuthenticated = {this.props.isAuthenticated} username = {this.props.username} scrolled_props = "true" is_homepage = "false"/>
         <Info.BlueHeader>
           <Info.Batik>
             <h1>About Transfree</h1>

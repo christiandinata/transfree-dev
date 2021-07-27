@@ -52,8 +52,8 @@ class Index extends React.Component {
 
   componentDidMount() {
     this.setState({
-      // rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
-      // toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100)),
+      rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
+      toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100)),
       isMobile: window.innerWidth <= 800
     })
     window.addEventListener('resize', () => {
@@ -212,7 +212,7 @@ class Index extends React.Component {
     return (
       <div>
         <Header />
-        <Menu isApproved={this.props.isApproved} homepage = "true"/>
+        <Menu isApproved={this.props.isApproved} is_homepage = "true"/>
 
         {/* Hero Component */}
         <Hero.MapBackground><Hero.Overlay>
