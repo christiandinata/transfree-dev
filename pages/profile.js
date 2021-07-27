@@ -5,6 +5,7 @@ import actions from "../redux/actions";
 import initialize from "../utils/initialize";
 import { getCookie } from "../utils/cookie";
 import Link from "next/link";
+
 class Profile extends React.Component {
 	constructor() {
 		super();

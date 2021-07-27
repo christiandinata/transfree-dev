@@ -1,22 +1,69 @@
-import { useState, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import CustomDatePicker from '../CustomDatePicker';
-import MobilePopup from '../MobilePopup';
-import profileActions from '../../redux/actions/profileActions';
-import '../../styles/components/new-user/CreateProfile.css';
+import { useState, Fragment } from 'react'
+import { connect } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import DatePicker from 'react-datepicker'
+import CustomDatePicker from '../CustomDatePicker'
+import MobilePopup from '../MobilePopup'
+import profileActions from '../../redux/actions/profileActions'
+import * as Profile from '../ProfileComponents'
+import { PrButton } from '../landing-page/Buttons'
+import styled from 'styled-components'
+
+const InfoFlex = styled.div`
+  margin: 2rem auto;
+  width: 55%;
+  input, select {
+    box-sizing: border-box;
+    padding: 12px 16px;
+    margin-bottom: 1rem;
+    border: 1px solid #E2E2E2; 
+    border-radius: 4px;
+    background: #FFFFFF;
+    font-family: "Avenir Next LT Pro", sans-serif;
+    outline: none;
+    width: 100%;
+    color: #9A9A9A;
+    &:focus {
+      background: #fff;
+      border: 2px solid #068EC8;
+      color: #232933;
+    }
+  }
+  .react-datepicker {
+    font-family: "Avenir Next LT Pro", sans-serif;
+  }
+  .react-datepicker-wrapper {
+    display: block;
+  }
+  .react-datepicker__header {
+    background: #FFFFFF;
+  }
+  @media only screen and (max-width: 720px) {
+    width: 95%;
+  } 
+`
 
 function CreateProfile (props) {
-  const [idType, setIdType] = useState('KTP');
-  const [idNumber, setIdNumber] = useState('');
-  const [gender, setGender] = useState('Male');
-  const [placeOfBirth, setPlaceOfBirth] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState(new Date());
-  const [address, setAddress] = useState('');
-  const [isIdNumberValid, setIsIdNumberValid] = useState(true);
-  const [isPobValid, setIsPobValid] = useState(true);
-  const [isAddressValid, setIsAddressValid] = useState(true);
-  const [isSkipPopupVisible, setIsSkipPopupVisible] = useState(true);
+
+  const [focus, setFocus] = useState({
+    idType: false,
+    idNumber: false,
+    gender: false,
+    dateOfBirth: false,
+    placeOfBirth: false,
+    address: false
+  })
+
+  const [idType, setIdType] = useState('KTP')
+  const [idNumber, setIdNumber] = useState('')
+  const [gender, setGender] = useState('Male')
+  const [placeOfBirth, setPlaceOfBirth] = useState('')
+  const [dateOfBirth, setDateOfBirth] = useState()
+  const [address, setAddress] = useState('')
+  const [isIdNumberValid, setIsIdNumberValid] = useState(true)
+  const [isPobValid, setIsPobValid] = useState(true)
+  const [isAddressValid, setIsAddressValid] = useState(true)
+  const [isSkipPopupVisible, setIsSkipPopupVisible] = useState(true)
 
   if (props.response && !props.errorMessage) {
     props.nextStep()
@@ -45,7 +92,6 @@ function CreateProfile (props) {
       setIsAddressValid(true)
     }
   }
-  
 
   function handleOnClickButton(e) {
     e.preventDefault()
@@ -89,127 +135,108 @@ function CreateProfile (props) {
     return isValid
   }
 
+  function handleOnFocus(e) {
+    const { name } = e.target
+    setFocus({
+      ...focus,
+      [name]: true
+    })
+  }
+
+  function handleOnBlur(e) {
+    const { name } = e.target
+    setFocus({
+      ...focus,
+      [name]: false
+    })
+  }
+
   return(
     // Menanyakan apakah user ingin mengisi profile sendiri atau tidak
-    <Fragment>
-      <div className='create-profile-form-body-heading'>
+    <InfoFlex>
+      <Profile.EditData>
+        <Profile.SectionType>
+          <Profile.SectionTitle>
+            Please provide your identity.
+          </Profile.SectionTitle>
+          <Profile.SectionExp>
+            According to the regulation from Bank Indonesia, 
+            we have to verify your identity.
+          </Profile.SectionExp>
+        </Profile.SectionType>
+      </Profile.EditData>
+      
+      {/* <div className='create-profile-form-body-heading'>
         <div className='create-profile-form-skip'>
           <a onClick={ props.nextStep } >
             Do you want us to fill the form for you?
           </a>
         </div>
-        <div className='create-profile-profile-picture'>
-          <img src='../../static/images/profile.svg' alt="Profile"/>
-        </div>
-      </div>
-      <div className='create-profile-form-body'>
-        <div className='create-profile-form-box'>
-          <p className="create-profile-form-description">
-            According to the regulation from Bank Indonesia,<br/>we have to verify your identity. Please provide your identity.
-          </p>
-          <div className='create-profile-form-field-container'>
-            <div classname='create-profile-form-field-container-column'>
-              <div className='create-profile-form-field'>
-                <label className='create-profile-form-label' htmlFor='id-type'>
-                  ID Type
-                </label>
-                <select
-                  id='id-type'
-                  value={ idType }
-                  onChange={ (e) => setIdType(e.target.value) }
-                >
-                  <option value='KTP'>KTP</option>
-                  <option value='Passport'>Passport</option>
-                  <option value='SIM'>SIM</option>
-                </select>
-              </div>
-              <div className='create-profile-form-field'>
-                <label className='create-profile-form-label' htmlFor='id-number'>
-                  ID Number
-                </label>
-                <input
-                  id='id-number'
-                  placeholder='Enter ID number'
-                  value={ idNumber }
-                  onChange={ (e) => setIdNumber(e.target.value) }
-                  onBlur={ checkIdnumber }
-                />
-                <span className={ isIdNumberValid ? 'form-error-label-hidden' : 'form-error-label' }>
-                  You must input your ID Number (KTP/Passport/SIM)!
-                </span>
-              </div>
-              <div className='create-profile-form-field'>
-                <label className='create-profile-form-label' htmlFor='gender'>
-                  Gender
-                </label>
-                <select
-                  id='gender'
-                  placeholder='Choose your gender'
-                  value={ gender }
-                  onChange={ (e) => setGender(e.target.value) }
-                >
-                  <option value='Male'>Male</option>
-                  <option value='Female'>Female</option>
-                  <option value='Others'>Others</option>
-                </select>
-              </div>
-            </div>
-            <div classname='create-profile-form-field-container-column'>
-              <div className='create-profile-form-field'>
-                <label className='create-profile-form-label' htmlFor='pob'>
-                  Place of Birth
-                </label>
-                <input
-                  id='pob'
-                  placeholder='Enter the city (e.g. Jakarta)'
-                  value={ placeOfBirth }
-                  onChange={ (e) => setPlaceOfBirth(e.target.value) }
-                  onBlur={ checkPob }
-                />
-                <span className={ isPobValid ? 'form-error-label-hidden' : 'form-error-label' }>
-                  Your Place of Birth may not be empty.
-                </span>
-              </div>
-              <div className='create-profile-form-field'>
-                <label className='create-profile-form-label' htmlFor='dob'>
-                  Date of Birth
-                </label>
-                <CustomDatePicker date={ dateOfBirth } onChange={ setDateOfBirth } />
-              </div>
-              <div className='create-profile-form-field'>
-                <label className='create-profile-form-label' htmlFor='address'>
-                  Address
-                </label>
-                <input
-                  id='address'
-                  placeholder='Enter your full address'
-                  value={ address }
-                  onChange={ (e) => setAddress(e.target.value) }
-                  onBlur={ checkAddress }/>
-                <span className={ isAddressValid ? 'form-error-label-hidden' : 'form-error-label' }>
-                  Your address may not be empty.
-                </span> 
-              </div>
-            </div>
-          </div>
-          <p className="create-profile-form-note">
-            *data must match to your id card
-          </p>
-        </div>
-        {
-          props.errorMessage
-          ? <div className='create-profile-error-message'>{ props.errorMessage }</div>
-          : ''
-        }
-        <button className='form-submit-button' onClick={ handleOnClickButton }>
-          {
-            props.isInProgress
-              ? ( <FontAwesomeIcon icon='sync-alt' spin/> )
-              : 'Continue'
-          }
-        </button>
-      </div>
-    </Fragment>
+      </div> */}
+
+      <form>
+        <Profile.FormLabel filled={ focus.idType }>ID Type</Profile.FormLabel>
+        <select
+          name="idType"
+          onFocus={ handleOnFocus }
+          onBlur={ handleOnBlur }>
+            <option value="KTP">KTP</option>
+            <option value="Passport">Passport</option>
+            <option value="SIM">SIM</option>
+        </select>
+        <Profile.FormLabel filled={ focus.idNumber }>ID Number</Profile.FormLabel>
+        <input
+          type="text"
+          name="idNumber"
+          onFocus={ handleOnFocus }
+          onBlur={ handleOnBlur }
+        />
+        <Profile.FormLabel filled={ focus.gender }>Gender</Profile.FormLabel>
+        <select
+          name="gender"
+          onFocus={ handleOnFocus }
+          onBlur={ handleOnBlur }>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+        <Profile.FormLabel filled={ focus.placeOfBirth }>Place of Birth</Profile.FormLabel>
+        <input
+          type="text"
+          name="placeOfBirth"
+          onFocus ={ handleOnFocus }
+          onBlur={ handleOnBlur }
+        />
+        <Profile.FormLabel filled={ focus.dateOfBirth }>Date of Birth</Profile.FormLabel>
+          <DatePicker
+            name="dateOfBirth"
+            dateFormat="dd-MM-yyyy"
+            selected={ dateOfBirth }
+            onChange={ (date) => {
+              setDateOfBirth(date); 
+              setFocus({
+                dateOfBirth: false
+              })
+            }}
+            onFocus ={ handleOnFocus }
+            onBlur={ handleOnBlur }/>
+        <Profile.FormLabel filled={ focus.address }>Address</Profile.FormLabel>
+        <input
+          type="text"
+          name="address"
+          onFocus ={ handleOnFocus }
+          onBlur={ handleOnBlur }/>
+        <Profile.ButtonSection>
+          <PrButton 
+            type="submit"
+            style={{ width: '100%' }}
+            onClick={ handleOnClickButton }>
+              Continue
+          </PrButton>
+        </Profile.ButtonSection>
+      </form>
+      
+    </InfoFlex>
   )
 }
 

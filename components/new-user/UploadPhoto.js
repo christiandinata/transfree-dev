@@ -1,10 +1,80 @@
 import { useState, Fragment } from 'react'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
+import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import StyledDropzone from '../StyledDropzone'
-import photoActions from '../../redux/actions/photoActions';
-import '../../styles/components/new-user/UploadPhoto.css'
-import PopupUpload from '../PopupUpload';
+import photoActions from '../../redux/actions/photoActions'
+import { PrButton } from '../landing-page/Buttons'
+
+const CheckDiv = styled.div`
+  margin-bottom: 45px;
+  label, input[type=checkbox] {
+    width: 1.5rem;
+    height: 1.5rem;
+    vertical-align: middle;
+    margin-right: 1rem;
+  }`
+
+const DropzonesDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  column-gap: 3%;
+  row-gap: 3rem;
+  justify-content: center;
+  align-items: center;
+  max-width: 95%;
+  margin: 0 auto;
+  @media only screen and (max-width: 1100px) {
+    flex-direction: column;
+  }`
+
+const InstructionDiv = styled.div`
+  margin: 40px auto;
+  text-align: center;
+  max-width: 95%;
+  @media only screen and (max-width: 800px) {
+    text-align: left;
+    width: 95%;
+  }`
+
+const ConsentDiv = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 40px auto;
+  text-align: center;
+  width: 75%;
+  a {
+    text-decoration: none;
+    color: #009FE3;
+  }
+  button {
+    width: 28rem;
+  }
+  @media only screen and (max-width: 800px) {
+    width: 95%;
+    button {
+      width: 95%;
+    }
+  }`
+
+const SectionName = styled.div`
+  margin-top: 0;
+  margin-bottom: 4px;
+  font-style: normal
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 28px;
+  color: #232933;
+`
+
+const Warning = styled.p`
+  color: #FF0000;
+  font-size: 0.9rem;
+  text-align: left;
+  margin-bottom: 0.5rem;
+`
 
 function UploadPhoto (props) {
   const [photoId, setPhotoId] = useState('')
@@ -58,43 +128,31 @@ function UploadPhoto (props) {
 
   return (
     <Fragment>
-      {/* <PopupUpload></PopupUpload> */}
-      <p className='upload-photo-description-mobile'>
-      We need to verify your information detail.<br/>
-      Please send us your ID Picture and Your Selfie with the ID Card (Make sure we can read the ID number clearly)
-      </p>
-      <p className="description-uploadphoto" style={{textAlign:"center"}}>
-      Please Upload 2 pictures for the verification purpose:<br/>
-      1. ID Card Picture (Passport/ KTP/ SIM. Make sure we can read the ID number clearly)<br></br>
-      2. Selfie with the ID Card (Make sure we can read the ID number clearly)
-      </p>
-      {/* Memberi kesempatan pada user untuk upload foto */}
-      <div className='upload-photo-dropboxes-container'>
-        <StyledDropzone title='Your ID Card' id='card' image='../static/images/Sign Up ASSET WEB/ktp.png' onDrop={ setPhotoId } />
-        <StyledDropzone title='Your Selfie holding the ID Card' id='photo' image='../static/images/Sign Up ASSET WEB/selfie.png' onDrop={ setPhotoFace } />
-      </div>
-      <label class="upload-photo-terms-agreement">
-        <input type="checkbox" checked={ isTermsAgreed } onChange={ () => setIsTermsAgreed(!isTermsAgreed) } />
-        I agree to the <a className='upload-photo-terms-link' href='/terms'>Terms and Condition</a>
-      </label>
-      <p className='upload-photo-privacy-policy-statement'>
-        We will not under any circumstances,<br/>use your personal information irresponsibly.<br/>
-        For more information see our <a className='upload-photo-privacy-policy-link' href='/privacy-policy'>Privacy Policy</a>
-      </p>
-      {
-        errorMessage
-        ? <div className='upload-photo-error-message'>{ errorMessage }</div>
-        : props.errorMessage
-          ? <div className='upload-photo-error-message'>{ props.errorMessage }</div>
-          : ''
-      }
-      <button className='form-submit-button' onClick={ handleOnClickButton }>
+      <InstructionDiv>
+        <SectionName>Please upload 2 pictures for the verification purpose:</SectionName>
+        <p>1. ID Card picture (Passport/ ID Card/ SIM) Make sure we can read the ID number clearly.</p>
+        <p>2. Selfie with the ID Card. Make sure we can read the ID number clearly </p>
+      </InstructionDiv>
+      <DropzonesDiv>
+        <StyledDropzone title='Your ID Card' id='card' image='../static/images/new-ui/ic-id-card.svg' onDrop={ setPhotoId } onError={ setErrorMessage } />
+        <StyledDropzone title='Selfie with ID Card' id='photo' image='../static/images/new-ui/ic-employee.svg' onDrop={ setPhotoFace } onError={ setErrorMessage } />
+      </DropzonesDiv>
+      <ConsentDiv>
+        <p>We will not under any circumstances, use your personal information irresponsibly. 
+          For more information see our <a href="/privacy-policy">Privacy Policy</a></p>
+        <CheckDiv>
+          <input type="checkbox" id="agree" checked={ isTermsAgreed } onChange={ () => setIsTermsAgreed(!isTermsAgreed) }/>
+          <label htmlFor="agree">I agree to the <a href="/terms">Terms and Condition</a></label>
+        </CheckDiv>
+        <Warning>{ errorMessage ? errorMessage : null }</Warning>
+        <PrButton onClick={ handleOnClickButton }>
         {
-          props.isInProgress
-            ? ( <FontAwesomeIcon icon='sync-alt' spin/> )
-            : 'Send'
-        }
-      </button>
+          props.isInProgress ?
+          (<FontAwesomeIcon icon='sync-alt' spin/>)
+          :
+          "Send Profile"
+        }</PrButton>
+      </ConsentDiv>
     </Fragment>
   )
 }
