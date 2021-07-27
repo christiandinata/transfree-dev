@@ -15,8 +15,8 @@ import '../styles/user-profile.css';
 import {connect} from "react-redux";
 import initialize from "../utils/initialize";
 import actions from "../redux/actions";
-import { getCookie } from "../utils/cookie";
-import Link from "next/link";
+import {getCookie} from "../utils/cookie";
+import Link from 'next/link';
 import ENV from "../config";
 import * as axios from "axios";
 import React, { useEffect, useState } from 'react';
@@ -74,7 +74,7 @@ function UserProfile(props) {
         phone: false
     })
 
-    const [choice, setChoice] = useState('detail')
+    const [choice, setChoice] = useState('edit')
     const [hiddenPass, setHidden] = useState(true)
     const [hiddenConfirm, setConfirm] = useState(true)
     const [popup, setPopup] = useState(false)
@@ -220,7 +220,6 @@ function UserProfile(props) {
     return(
         <React.Fragment>
             <Header/>
-            {/* <NavBarWhite isAuthenticated = {true} username = {info.fullName} id = {info.idNumber}/> */}
             <Menu isAuthenticated = {true} username = {info.fullName} id = {info.idNumber} scrolled_props = "true" is_homepage = "false"/>
 
             {choice == 'detail' ? 
@@ -354,9 +353,7 @@ function UserProfile(props) {
                 <Profile.ProfileSect>
                     <Profile.ProfileAction>
                         <Profile.AccountText>Account Profile</Profile.AccountText>
-                        <Link href="/logout" passHref>
-                            <Profile.LogOutButton>Log Out</Profile.LogOutButton>
-                        </Link>
+                        <Profile.LogOutButton href = "/logout">Log Out</Profile.LogOutButton>
                     </Profile.ProfileAction>
                     
                     <Profile.EditWrapper>
@@ -551,7 +548,7 @@ function UserProfile(props) {
                                     <Profile.FormLabel filled = {focus.phone}>Phone Number</Profile.FormLabel>
                                     <Profile.FormRowPhone filled = {focus.phone}>
                                         <Profile.PhoneInput
-                                            // country = "ID"
+                                            country = "ID"
                                             value = {info.phone}
                                             name = "phone"
                                             onChange = {(value) => handlePhoneChange(value)}
@@ -598,7 +595,7 @@ function UserProfile(props) {
                         padding: 5px;
                         height: 35px;
                         border: none;
-                        font-family: "Avenir Next LT Pro", sans-serif;
+                        font-family: "Avenir LT Pro", sans-serif;
                         font-size: 16px;
                         color: #626B79;
                     }
@@ -619,7 +616,7 @@ UserProfile.getInitialProps = async (ctx) => {
 }
 
 const mapStateToProps = (state) => ({
-	user: state.user.user_data,
-});
+    user: state.user.user_data,
+})
 //Mengirimkan user profile
 export default connect(mapStateToProps)(UserProfile);

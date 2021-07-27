@@ -219,9 +219,9 @@ export const FormRowPhone = styled(FormRow)`
 
 export const FormRowPassword = styled(FormRow)`
     border-radius: 4px;
-    width: 447px;
+    width: 450px;
     border: ${({ filled }) => (
-		filled ? "2px solid #068EC8" : "1px solid #E2E2E2")}; 
+        filled ? "2px solid #068EC8" : "1px solid #E2E2E2")}; 
 `;
 
 export const ButtonSection = styled.section`
@@ -232,7 +232,7 @@ export const EditProfileButton = styled.button`
     display: block;
     text-decoration: none;
     outline: none;
-    border: none;
+    border: none !important;
     border: 1px solid #009FE3;
     border-radius: 4px;
     padding: 8px 24px;
@@ -290,7 +290,7 @@ export const InputText = styled.input`
     border-radius: 4px;
     background: ${({ dis }) => (
 		dis ? "#E9E9E9" : "#FFFFFF")}; 
-    width: 415px;   
+    width: 418px;   
     outline: none;
     color: #9A9A9A;
 
@@ -302,8 +302,8 @@ export const InputText = styled.input`
 `;
 
 export const InputTextPassword = styled(InputText)`
-    border: none;
-    width: 380px;
+    border: none !important;
+    width: 380px !important;
     &:focus {
         background: #fff;
         border: none;
@@ -348,6 +348,7 @@ export const PhoneInput = styled(Phone)`
     height: 48px;
     padding: 0 16px;
     background: #fff;
+    width: 420px;
 
     &:focus {
         border: 2px solid #068EC8;
