@@ -212,16 +212,38 @@ export const FormRow = styled.div`
 
 export const FormRowPhone = styled(FormRow)`
     width: 450px;
-    border: ${({ filled }) => (
-		filled ? "2px solid #068EC8" : "null")}; 
+    border: ${({ filled, error }) => {
+        if (filled) {
+            if (error) {
+                return "2px solid #F80202";
+            } else {
+                return "2px solid #068EC8";
+            }
+        } else {
+            return "null";
+        }
+    }};
     border-radius: 4px;
+    margin-bottom: ${({ error }) => (
+		error ? "2px" : "0px")}; 
 `;
 
-export const FormRowPassword = styled(FormRow)`
+export const FormRowAccount = styled(FormRow)`
     border-radius: 4px;
     width: 450px;
-    border: ${({ filled }) => (
-        filled ? "2px solid #068EC8" : "1px solid #E2E2E2")}; 
+    margin-bottom: ${({ error }) => (
+        error ? "2px" : "16px")}; 
+    border: ${({ filled, error }) => {
+        if (filled) {
+            if (error) {
+                return "2px solid #F80202";
+            } else {
+                return "2px solid #068EC8";
+            }
+        } else {
+            return "1px solid #E2E2E2";
+        }
+    }};
 `;
 
 export const ButtonSection = styled.section`
@@ -499,4 +521,11 @@ export const ModalSuccessTitle = styled.p`
     color: #232933;
     margin: 0;
     display: inline-block;
+`;
+
+export const ErrorMessage = styled.div`
+    color: #F80202;
+    font-size: 12px;
+    margin-bottom: 14px;
+    margin-left: 8px;
 `;
