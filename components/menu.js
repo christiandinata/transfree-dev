@@ -12,29 +12,21 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username, id, is_hom
   const [isHomepage, setIsHomepage] = useState(is_homepage)
 
   const handleScrolled = () => {
-    // if(isHomepage === undefined) {
-    //   console.log("4")
-    //   setIsHomepage(true)
-    // }
     if(isHomepage == true) {
       if(window.scrollY >= 20) {
-        console.log("1")
         setScrolled(true)
       }
       else {
-        console.log("2")
         setScrolled(false)
       }
     }
     else {
-      console.log("3")
       setScrolled(true)
     }
   }
 
   const checkIsHomepage =() => {
     if(isHomepage === undefined) {
-      console.log("4")
       setIsHomepage(true)
     }
   }
@@ -51,10 +43,6 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username, id, is_hom
 
   return(
     <Navbar.Nav scrolled = {scrolled} homepage = "true" marginTop = "-72px" clicked = {clicked} isAuth = {isAuthenticated}>
-      {/* {console.log("scrolled")}
-      {console.log(scrolled)}
-      {console.log("ishomepage")}
-      {console.log(isHomepage)} */}
       <Navbar.NavInner scrolled = {scrolled} homepage = "true" clicked = {clicked}>
         <Navbar.HeaderWrapper clicked = {clicked}>
           <a href = "/"><Navbar.Logo src="../static/images/transfree-logo.png" scrolled = {scrolled} homepage = "true"/></a>

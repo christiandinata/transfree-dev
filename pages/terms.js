@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Component } from 'react';
 import * as Info from '../components/Info.js';
 import { NavBarWhite } from '../components/MenuComponents.js';
+import Menu from '../components/menu';
 import initialize from '../utils/initialize.js';
 import actions from '../redux/actions/index.js';
 import { getCookie } from '../utils/cookie';
@@ -58,7 +59,8 @@ class Terms extends Component {
     return (
       <div>
         <Header />
-        <NavBarWhite isAuthenticated={this.props.isAuthenticated} username={this.props.username} />
+        {/* <NavBarWhite isAuthenticated={this.props.isAuthenticated} username={this.props.username} /> */}
+        <Menu isAuthenticated = {this.props.isAuthenticated} username = {this.props.username} id = {this.props.idNumber} scrolled_props = "true" is_homepage = "false"/>
         <Info.BlueHeader>
           <Info.Batik>
             <h1>Terms and Conditions</h1>
@@ -242,7 +244,8 @@ const mapStateToProps = (state) => {
   if (state.user.user_data != null) {
     return {
       isAuthenticated: true,
-      username: state.user.user_data.fullname
+      username: state.user.user_data.fullname,
+      idNumber: state.user.user_data.idNumber
     }
   } else {
     return {

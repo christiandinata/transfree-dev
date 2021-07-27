@@ -7,6 +7,7 @@ import actions from '../redux/actions';
 import { getCookie } from '../utils/cookie';
 import { AwaitingConfirmation, EmptyTransaction } from '../components/order/Pending';
 import { NavBarWhite } from '../components/MenuComponents';
+import Menu from '../components/menu.js';
 import Footer from '../components/footer';
 import moment from 'moment';
 
@@ -413,7 +414,8 @@ class Account extends React.Component {
       if(this.props.orderArray.length > 0) { // Transaction is not empty
         return (
           <div>
-            <NavBarWhite isAuthenticated={true} username={this.props.username} id={this.props.id}/>
+            {/* <NavBarWhite isAuthenticated={true} username={this.props.username} id={this.props.id}/> */}
+            <Menu isAuthenticated = {true} username = {info.fullName} id = {info.idNumber} scrolled_props = "true" is_homepage = "false"/>
             {this.headerTransaction()}
             <ContentContainer>
               <AllItemContainer>

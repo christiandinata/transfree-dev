@@ -5,7 +5,7 @@ import Menu from '../components/menu.js';
 const AccountLayout = ({children, isApproved}) => (
   <div>
     <Header />
-    <Menu isApproved={isApproved} homepage={true}/>
+    <Menu isApproved={isApproved}/>
     <div className="container-fluid">
       {children}
     </div>

@@ -142,7 +142,6 @@ class About extends Component {
       <div>
         <Header />
         {/* <NavBarWhite isAuthenticated={this.props.isAuthenticated} username={this.props.username} /> */}
-        {console.log("masuk about")}
         <Menu isAuthenticated = {this.props.isAuthenticated} username = {this.props.username} scrolled_props = "true" is_homepage = "false"/>
         <Info.BlueHeader>
           <Info.Batik>

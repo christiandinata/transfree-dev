@@ -212,7 +212,7 @@ class Index extends React.Component {
     return (
       <div>
         <Header />
-        <Menu isApproved={this.props.isApproved} is_homepage = "true"/>
+        <Menu isApproved={this.props.isApproved}/>
 
         {/* Hero Component */}
         <Hero.MapBackground><Hero.Overlay>
