@@ -2,7 +2,10 @@ import Phone from "react-phone-number-input";
 import styled from "styled-components";
 
 export const MainWrapper = styled.div`
-    width: 100%;
+    @media only screen and (max-width: 900px) {
+        width: 100%;
+        overflow-x: hidden;
+    }
 `;
 
 export const Wrapper = styled.div`
@@ -111,9 +114,8 @@ export const Table = styled.table`
     border-spacing: 0 12px;
     
     @media only screen and (max-width: 900px) {
-        margin-left: 0;
-        padding-left: 15px;
-        margin-top: 0;
+        margin: 0;
+        padding: 0 16px;
         width: 100%;
         table-layout: fixed;
     }
@@ -268,6 +270,7 @@ export const EditWrapper = styled.div`
         margin-left: 15px;
         margin-right: 15px;
         display: block;
+        width: 100%;
     }
 `;
 

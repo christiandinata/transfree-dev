@@ -80,7 +80,7 @@ function UserProfile(props) {
         phone: false
     })
 
-    const [choice, setChoice] = useState('edit')
+    const [choice, setChoice] = useState('detail')
     const [hiddenPass, setHidden] = useState(true)
     const [hiddenConfirm, setConfirm] = useState(true)
     const [space, setSpace] = useState(false)
@@ -302,7 +302,7 @@ function UserProfile(props) {
             {choice == 'detail' ? 
 
             <Profile.Wrapper>
-                <Profile.ActionSect>
+                {/* <Profile.ActionSect>
                     <Profile.ActionChoiceActive onClick = {handleChoiceChange} value = "detail">
                         <Profile.ChoiceImg src = "../static/images/profile/detail-profile-blue.png"/>
                         <Profile.AccountLinkActive>Detail Profile</Profile.AccountLinkActive>
@@ -314,7 +314,7 @@ function UserProfile(props) {
                         <Profile.AccountLink>Edit Profile</Profile.AccountLink>
                         <Profile.ArrowRightImg src = "../static/images/profile/arrow-right-white.png"/>
                     </Profile.ActionChoice>
-                </Profile.ActionSect>
+                </Profile.ActionSect> */}
 
                 <Profile.ProfileSect>
                     <Profile.ProfileAction>
