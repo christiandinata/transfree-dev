@@ -212,7 +212,7 @@ class Index extends React.Component {
   }
 
   handleClick = (e) => {
-    if(e.target.className != "input-country") {
+    if(e.target.className != "input-country" && e.target.className != "currency-search-bar") {
       if(this.state.isSourceActive) {
         this.toggleSource()
       }

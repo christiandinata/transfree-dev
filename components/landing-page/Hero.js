@@ -253,6 +253,7 @@ export function FlagOptions(props) {
       <SearchBar>
       <FontAwesomeIcon icon={faSearch} style={iconStyle}/>
         <input
+          className="currency-search-bar"
           type="text"
           pattern="[a-zA-Z]*"
           placeholder="Enter a country or a currency"
