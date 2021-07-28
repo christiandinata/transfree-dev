@@ -1,36 +1,11 @@
-.styled-dropzone {
-  display: flex;
-  flex-direction: column;
-}
-
-@media only screen and (min-width: 1024px) {
-  .styled-dropzone {
-    flex-direction: column-reverse;
-  }
-}
-
-.styled-dropzone-title {
-  font-size: 1rem;
-  font-family: "Avenir Next LT Pro Bold", sans-serif;
-  font-weight: 100;
-  text-align: center;
-}
-
-@media only screen and (min-width: 1024px) {
-  .styled-dropzone-title {
-    font-weight: 700;
-  }
-}
-
 .styled-dropzone-container {
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 280px;
   height: auto;
-  margin: 0 30px 24px;
+  margin: 0 24px 24px;
   border: 1px solid #B4B4B4;
   box-sizing: border-box;
   border-radius: 4px;
@@ -40,7 +15,7 @@
 
 @media only screen and (min-width: 1024px) {
   .styled-dropzone-container {
-    min-height: 190px;
+    min-height: 240px;
   }
 }
 
@@ -49,20 +24,6 @@
 }
 
 .styled-dropzone-placeholder img{
-  width: 30%;
-  height: 30%
-}
-
-.styled-dropzone-instruction {
-  font-size: 0.9rem;
-  font-weight: 400;
-  text-align: center;
-  margin: 0.25rem 1rem 1rem;
-}
-
-.styled-dropzone-instruction b {
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: 600;
-  text-align: inherit;
+  width: auto;
+  height: 40%;
 }

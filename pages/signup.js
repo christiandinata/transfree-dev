@@ -5,7 +5,11 @@ import actions from "../redux/actions";
 import initialize from "../utils/initialize";
 import PhoneInput from "react-phone-number-input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import {
+	faBullseye,
+	faEye,
+	faEyeSlash,
+} from "@fortawesome/free-solid-svg-icons";
 import Header from "../components/header";
 import { Form, FormContainer } from "../components/FormComponents";
 import styled from "styled-components";
@@ -47,6 +51,9 @@ function Signup(props) {
 		phone: false,
 	});
 
+	const [spaceEntered, setSpaceEntered] = useState(false);
+	const [shortPassword, setShortPassword] = useState(false);
+	const [shortPhone, setShortPhone] = useState(false);
 	const [hiddenPass, setHiddenPass] = useState(true);
 	const [hiddenConfirmPass, setHiddenConfirmPass] = useState(true);
 	const [verifyPassword, setVerifyPassword] = useState(true);
@@ -70,7 +77,7 @@ function Signup(props) {
 			...values,
 			[name]: value,
 		});
-		console.log(values);
+		console.log(value);
 	}
 
 	function handleOnFocus(e) {
@@ -144,8 +151,10 @@ function Signup(props) {
 		console.log(value, values);
 	}
 
-	function handlePhoneOnFocus(value) {
-		if (props.errorMessage?.includes("phone")) {
+	function handlePhoneOnFocus(e) {
+		e.target.placeholder = "";
+		if (props.errorMessage?.includes("phone") || shortPhone) {
+			e.target.placeholder = "";
 			setValues({
 				...values,
 				phone: "",
@@ -186,16 +195,44 @@ function Signup(props) {
 
 	function handleSubmit(e) {
 		e.preventDefault();
+		setShortPassword(false);
+		setShortPhone(false);
 		if (values.password != values.confirmPassword) {
+			if (values.password.length < 8) {
+				setVerifyPassword(false);
+				setShortPassword(true);
+				setError({
+					...error,
+					password: true,
+					confirmPassword: true,
+				});
+			} else {
+				setVerifyPassword(false);
+				setError({
+					...error,
+					password: true,
+					confirmPassword: true,
+				});
+			}
+		} else if (values.password.length < 8) {
 			setVerifyPassword(false);
+			setShortPassword(true);
 			setError({
 				...error,
 				password: true,
 				confirmPassword: true,
 			});
+		} else if (values.phone?.length < 8 || values.phone?.length > 15) {
+			// min length 8 includes (2 from country code and 1 from "+" sign)
+			setError({
+				...error,
+				phone: true,
+			});
+			setShortPhone(true);
 		} else {
 			e.preventDefault();
 			setVerifyPassword(true);
+			setShortPassword(false);
 			props.verify(
 				{
 					phone: values.phone,
@@ -245,7 +282,7 @@ function Signup(props) {
 							<BelowHeading>
 								Already have an account ?{" "}
 								<Link href="/login">
-									<a>Login</a>
+									<a>Sign In</a>
 								</Link>
 							</BelowHeading>
 						</center>
@@ -339,7 +376,15 @@ function Signup(props) {
 								required
 								placeholder="Password"
 								error={error.password}
-								onChange={handleChange}
+								onKeyDown={(e) => {
+									if (e.keyCode == 32) {
+										setSpaceEntered(true);
+										alert("Password doens't allow a space");
+									} else {
+										setSpaceEntered(false);
+									}
+								}}
+								onChange={!spaceEntered && handleChange}
 								onFocus={handleOnFocus}
 								onBlur={handleOnBlur}
 							/>
@@ -359,12 +404,15 @@ function Signup(props) {
 							</EyeIcon>
 						</InputContainer>
 						{error.password ||
-						(!filled.password && !verifyPassword) ? (
+						(!filled.password &&
+							(!verifyPassword || shortPassword)) ? (
 							<ErrorText>
 								{!verifyPassword &&
 								!selected.password &&
 								filled.password
-									? "Password and confirmation password do not match"
+									? shortPassword
+										? "Password minimum length is 8"
+										: "Password and confirmation password do not match"
 									: "Password cannot be blank"}
 							</ErrorText>
 						) : null}
@@ -393,7 +441,15 @@ function Signup(props) {
 								required
 								placeholder="Confirm Password"
 								error={error.confirmPassword}
-								onChange={handleChange}
+								onKeyDown={(e) => {
+									if (e.keyCode == 32) {
+										setSpaceEntered(true);
+										alert("Password doens't allow a space");
+									} else {
+										setSpaceEntered(false);
+									}
+								}}
+								onChange={!spaceEntered && handleChange}
 								onFocus={handleOnFocus}
 								onBlur={handleOnBlur}
 							/>
@@ -420,20 +476,24 @@ function Signup(props) {
 							</EyeIcon>
 						</InputContainer>
 						{error.confirmPassword ||
-						(!filled.confirmPassword && !verifyPassword) ? (
+						(!filled.confirmPassword &&
+							(!verifyPassword || shortPassword)) ? (
 							<ErrorText>
 								{!verifyPassword &&
 								!selected.confirmPassword &&
 								filled.confirmPassword
-									? "Password and confirmation password do not match"
+									? shortPassword
+										? "Password minimum length is 8"
+										: "Password and confirmation password do not match"
 									: "Confirmation password cannot be blank"}
 							</ErrorText>
 						) : null}
 						{selected.phone || (filled.phone && !error.phone) ? (
 							<FormLabel
-								errorMessage={props.errorMessage?.includes(
-									"phone"
-								)}
+								errorMessage={
+									props.errorMessage?.includes("phone") ||
+									shortPhone
+								}
 								filled={filled.phone}
 								selectedPhone={selected.phone}>
 								Phone
@@ -442,7 +502,10 @@ function Signup(props) {
 						<InputContainer
 							selectedPhone={selected.phone}
 							error={error.phone}
-							errorMessage={props.errorMessage?.includes("phone")}
+							errorMessage={
+								props.errorMessage?.includes("phone") ||
+								shortPhone
+							}
 							filled={filled.phone}>
 							<InputPhone
 								placeholder="Phone"
@@ -450,21 +513,24 @@ function Signup(props) {
 								// country="ID"
 								className={error.phone ? "phone-error" : null}
 								required
-								error={props.errorMessage?.includes("phone")}
 								value={values.phone}
 								onChange={(value) => handlePhoneChange(value)}
-								onFocus={(value) => handlePhoneOnFocus(value)}
-								onBlur={(value) => handlePhoneOnBlur(value)}
+								onFocus={(e) => handlePhoneOnFocus(e)}
+								onBlur={(value, e) => handlePhoneOnBlur(value)}
 							/>
 						</InputContainer>
 						{error.phone ||
 						(!filled.phone &&
-							props.errorMessage?.includes("phone")) ? (
+							(props.errorMessage?.includes("phone") ||
+								shortPhone)) ? (
 							<ErrorText>
 								{error.phone &&
 								!selected.phone &&
-								props.errorMessage?.includes("phone")
-									? "Phone number is already registered"
+								(props.errorMessage?.includes("phone") ||
+									shortPhone)
+									? shortPhone
+										? "Phone number should be around 5 - 15 digits"
+										: "Phone number is already registered"
 									: "Phone number cannot be blank"}
 							</ErrorText>
 						) : null}
@@ -490,7 +556,7 @@ function Signup(props) {
 					padding: 0;
 					height: 48px;
 					border: none;
-					font-family: "Avenir LT Pro", sans-serif;
+					font-family: "Avenir Next LT Pro", sans-serif;
 					font-size: 16px;
 				}
 
@@ -509,10 +575,19 @@ function Signup(props) {
 
 const FormInner = styled.div`
 	height: 100%;
-	width: 480px;
+	width: 470px;
 	margin: 0 4px;
 	display: flex;
 	flex-direction: column;
+	transition: 0.4s all ease-in;
+
+	@media (max-width: 620px) {
+		width: 312px;
+	}
+
+	@media (max-width: 375px) {
+		width: 80vw;
+	}
 `;
 
 const Heading = styled.p`
@@ -521,6 +596,7 @@ const Heading = styled.p`
 	line-height: 40px;
 	margin-bottom: 16px;
 	color: #009fe3;
+	word-wrap: break-word;
 `;
 
 const BelowHeading = styled.p`
@@ -677,6 +753,10 @@ const InputPhone = styled(PhoneInput)`
 		margin-left: 16px;
 		margin-right: 16px;
 		height: 48px;
+
+		:focus ::placeholder {
+			color: transparent;
+		}
 	}
 `;
 

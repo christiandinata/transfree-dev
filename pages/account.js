@@ -5,8 +5,10 @@ import { connect } from 'react-redux';
 import initialize from '../utils/initialize';
 import actions from '../redux/actions';
 import { getCookie } from '../utils/cookie';
-import { AwaitingConfirmation, EmptyTransaction } from '../components/order/Pending';
+import { AwaitingConfirmation } from '../components/order/Pending';
+import { EmptyTransaction, EmptySearch } from '../components/transactions/EmptyTransaction';
 import { NavBarWhite } from '../components/MenuComponents';
+import Menu from '../components/menu.js';
 import Footer from '../components/footer';
 import moment from 'moment';
 
@@ -20,7 +22,7 @@ const ContainerFluid = styled.div`
 `;
 
 const ContentContainer = styled.div`
-  margin-top: 10px;
+  margin: 10px;
 `;
 
 const BackgroundContainer = styled.div`
@@ -48,32 +50,31 @@ const BackgroundContainer = styled.div`
     line-height: 55px;
   }
 
-  @media only screen and (max-width: 774px) {
+  @media only screen and (max-width: 768px) {
     >.title{
-      top: 20%;
+      min-width: 400px;
+      font-size: 32px;
+    }
+
+    >.image{
+      display: none;
     }
   }
-
 `;
 
 const SearchContainer = styled.div`
   display: flex;
   width: 600px;
-  justify-contents: center; 
+  justify-content: center; 
 
   position: absolute;
   top: 65%;
   left: 50%;
   transform: translate(-50%, -35%);
 
-  @media only screen and (max-width: 774px) {
-    flex-direction: column;
-    height: 110px;
-    align-items: center;
-
-    top: 65%;
-    left: 50%;
-    transform: translate(-50%, -28%);
+  @media only screen and (max-width: 640px) {
+    width: auto;
+    margin-left: 2px;
   }
 `;
 
@@ -94,17 +95,18 @@ const SearchBar = styled.input`
 
   transition: all 0.3s linear;
 
+  ::placeholder {
+    color: #232933;
+  }
+
   &:focus{
     box-shadow: 0 0 0 2px #068EC8;
     outline: none;
     background-image: url('../static/images/Asset Web/transaction/search-blue.svg');
   }
 
-  @media only screen and (max-width: 774px) {
-    flex-basis: 53%;
-    margin-bottom: 8px;
-    min-width: 250px;
-    margin-right: 0px;
+  @media only screen and (max-width: 640px) {
+    margin-right: 8px;
   }
 `;
 
@@ -123,21 +125,12 @@ const Button = styled.button`
 
   background-color: #009FE3;
   color: white;
-
-  @media only screen and (max-width: 774px) {
-    flex-basis: 47%;
-    min-width: 200px;
-  }
 `;
 
 const AllItemContainer = styled.div`
   max-width: 1020px;
   height: auto;
   margin: 20px auto;
-
-  @media only screen and (max-width: 800px) {
-    padding: 0px 10px 0px 10px;
-  }
 `;
 
 const ItemContainer = styled.div`
@@ -161,10 +154,9 @@ const ItemContainer = styled.div`
     border-color: #009FE3;
   `}
 
-  @media only screen and (max-width: 600px) {
-    padding: 20px;
+  @media only screen and (max-width: 768px) {
+    padding: 15px;
   }
-  
 `;
 
 const ItemRow = styled.div`
@@ -173,7 +165,7 @@ const ItemRow = styled.div`
 `;
 
 const ItemColumn = styled.span`
-  flex-basis: ${props => props.left ? '60%' : '40%'};
+  flex-basis: ${props => props.left ? '50%' : '50%'};
   text-align: ${props => props.left ? 'left' : 'right'};
   font-size: ${props => props.left ? '16px' : '20px'};
   padding-top: ${props => props.left ? '2.5px' : '0px'};
@@ -186,6 +178,10 @@ const Date = styled.span`
 
   >.completed{
     color: #00A000;
+  }
+
+  >.canceled{
+    color: #FF0000;
   }
 `;
 
@@ -233,6 +229,14 @@ const Divider = styled.div`
   width: 2px;
   margin: -10px 11px -5px;
   background: #F2F4F7;
+
+  @media only screen and (max-width: 768px) {
+    margin-left: 9px;
+  }
+
+  ${({ hide }) => hide && `
+    display: none;
+  `}
 `;
 
 const ListItem = styled.li`
@@ -246,12 +250,19 @@ const ListItem = styled.li`
     margin-left: 20px;
   }
 
-  @media only screen and (max-width: 400px) {
+  @media only screen and (max-width: 768px) {
+    padding-left: 2px;
+
     >.textItem{
-      font-size: 12.5px;
+      font-size: 13.5px;
       margin-left: 10px;
+      margin-right: -5px;
     }
   }
+
+  ${({ hide }) => hide && `
+    display: none;
+  `}
 `;
 
 /* Displays order item list and each details */
@@ -293,8 +304,8 @@ class OrderItem extends React.Component {
               <ItemRow>
                 <ItemColumn left>
                   <Date>
-                    <span className={order.completedAt == 0.0 ? 'processing' : 'completed'}>
-                      {order.completedAt == 0.0 ? 'Processing' : 'Completed on '+ moment(order.completedAt).format("DD/MM/YYYY HH:mm")}
+                    <span className={order.canceledAt? 'canceled' : order.completedAt == 0.0 ? 'processing' : 'completed'}>
+                      {order.canceledAt? 'Canceled on ' + moment(order.canceledAt).format("DD/MM/YYYY HH:mm") : order.completedAt == 0.0 ? 'Processing' : 'Completed on '+ moment(order.completedAt).format("DD/MM/YYYY HH:mm")}
                     </span>
                   </Date>
                 </ItemColumn>
@@ -311,25 +322,27 @@ class OrderItem extends React.Component {
                 </ListItem>
                 <Divider/>
                 <ListItem>
-                  <Bullet blue={moment(moment().format("DD/MM/YYYY HH:mm")).isAfter(moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) || order.receivedAt != 0.0}><div className="smallBullet"/></Bullet>
+                  <Bullet blue={moment(moment().format("DD/MM/YYYY HH:mm")).isAfter(moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) || order.receivedAt != 0.0 || order.canceledAt}><div className="smallBullet"/></Bullet>
                   <p className="textItem">
-                    {(moment(moment().format("DD/MM/YYYY HH:mm"))
-                    .isAfter
-                    (moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) )
-                    ||
-                    (order.receivedAt != 0.0)
+                    { (moment(moment().format("DD/MM/YYYY HH:mm")).isAfter(moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) ) ||
+                      (order.receivedAt != 0.0)
                     ?
-                    ('We are processing your ' + order.toCurrency.toUpperCase() +' booking')
+                      ('We are processing your ' + order.toCurrency.toUpperCase() +' booking')
+                    :
+                    (order.canceledAt)
+                    ?
+                      ('Canceled on ' + moment(order.canceledAt).format("DD/MM/YYYY HH:mm"))
                     :
                     ('We are waiting to process your ' + order.toCurrency.toUpperCase() +' booking') }
                   </p>
                 </ListItem>
-                <Divider/>
-                <ListItem>
-                  <Bullet blue={order.completedAt != 0.0}><div className="smallBullet"/></Bullet>
+                <Divider hide={order.canceledAt && !(moment(moment().format("DD/MM/YYYY HH:mm")).isAfter(moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) || order.receivedAt != 0)}/>
+                <ListItem hide={order.canceledAt && !(moment(moment().format("DD/MM/YYYY HH:mm")).isAfter(moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) || order.receivedAt != 0)}>
+                  <Bullet blue={order.completedAt != 0.0 || order.canceledAt}><div className="smallBullet"/></Bullet>
                   <p className="textItem">
-                    {order.completedAt == 0.0 ? ('We will complete your transfer') :  ('Completed on ')}
-                    {order.completedAt == 0.0 ? '' : <span style={{fontWeight: "bolder"}}>{moment(order.completedAt).format("DD/MM/YYYY HH:mm")}</span>}
+                    {order.canceledAt ? ('Canceled on ') : order.completedAt == 0.0 ? ('We will complete your transfer') :  ('Completed on ')}
+                    {order.canceledAt ? <span style={{fontWeight: "bolder"}}>{(moment(order.canceledAt).format("DD/MM/YYYY HH:mm"))} </span> :
+                      order.completedAt == 0.0 ? '' : <span style={{fontWeight: "bolder"}}>{moment(order.completedAt).format("DD/MM/YYYY HH:mm")}</span>}
                   </p>
                 </ListItem>
               </ItemDetail>
@@ -360,13 +373,25 @@ class Account extends React.Component {
     return {};
   };
 
-  componentWillReceiveProps(nextProps) {
-    this.updateState();
-  }
-
   componentDidMount(){
     this.setState({orders: this.props.orderArray});
-    console.log(this.state.orders);
+  }
+
+  navbarTransaction(){
+    return(
+      // <NavBarWhite 
+      //   isAuthenticated={true} 
+      //   username={this.props.username} 
+      //   id={this.props.id}
+      //   current={"transactions"}/>
+      <Menu 
+        isAuthenticated = {true} 
+        username = {this.props.username} 
+        id = {this.props.id} 
+        scrolled_props = "true" 
+        is_homepage = "false"
+        current={"transactions"}/>
+    )
   }
 
   /* Resets transaction order items (display all order items after search)*/
@@ -379,10 +404,29 @@ class Account extends React.Component {
   /* Function to search transaction from order name or order clompeted date */
   searchTransaction(){
     let searchResult = [];
-    let filter = this.searchInput.current.value.toLowerCase();
+    let words = this.searchInput.current.value.toLowerCase().split(" ");
     for(const order in this.props.orderArray){
-      if(this.props.orderArray[order].name.toLowerCase().indexOf(filter) > -1 || moment(this.props.orderArray[order].completedAt).format("DD/MM/YYYY HH:mm").indexOf(filter) > -1 ){
-        searchResult.push(this.props.orderArray[order])
+      let count = 0;
+      for(const word in words){
+        if(this.props.orderArray[order].name.toLowerCase().indexOf(words[word]) > -1 ||
+          this.props.orderArray[order].toCurrency.toLowerCase().indexOf(words[word]) > -1 ||
+          this.props.orderArray[order].fromCurrency.toLowerCase().indexOf(words[word]) > -1 ||
+          String(this.props.orderArray[order].fromAmount).indexOf(words[word]) > -1 ||
+          String(this.props.orderArray[order].toAmount).indexOf(words[word]) > -1 ||
+          moment(this.props.orderArray[order].completedAt).format("DD/MM/YYYY HH:mm").indexOf(words[word]) > -1|| 
+          (this.props.orderArray[order].canceledAt && moment(this.props.orderArray[order].canceledAt).format("DD/MM/YYYY HH:mm").indexOf(words[word]) > -1) || 
+          ("processing".indexOf(words[word]) > -1 && this.props.orderArray[order].completedAt == 0 && !this.props.orderArray[order].canceledAt) ||
+          ("completed".indexOf(words[word]) > -1 && this.props.orderArray[order].completedAt > 0 && !this.props.orderArray[order].canceledAt) ||
+          ("canceled".indexOf(words[word]) > -1 && this.props.orderArray[order].canceledAt)
+          ){
+            count++;
+        }
+        else{
+          break;
+        }
+      }
+      if(count == words.length){
+        searchResult.push(this.props.orderArray[order]);
       }
     }
     this.setState({orders: searchResult});
@@ -399,7 +443,7 @@ class Account extends React.Component {
             type="text" 
             ref={this.searchInput} 
             onChange={this.resetTransaction}
-            placeholder="Search transactions"
+            placeholder="Search transactions..."
           />
           <Button onClick={() => this.searchTransaction()}>Search</Button>
         </SearchContainer>
@@ -413,11 +457,13 @@ class Account extends React.Component {
       if(this.props.orderArray.length > 0) { // Transaction is not empty
         return (
           <div>
-            <NavBarWhite isAuthenticated={true} username={this.props.username} id={this.props.id}/>
+            {this.navbarTransaction()}
             {this.headerTransaction()}
             <ContentContainer>
               <AllItemContainer>
-                <h3 style={{textAlign: "center", display: this.state.orders.length == 0 ? "block" : "none" }}>No results found.</h3>
+                <div style = {{display: this.state.orders.length == 0 ? "block" : "none"}}>
+                  <EmptySearch style = {{display: this.state.orders.length == 0 ? "block" : "none"}}/>
+                </div>
                 <OrderItem ordersList={this.state.orders}/>
               </AllItemContainer>
             </ContentContainer>
@@ -427,7 +473,7 @@ class Account extends React.Component {
       } else {
         return (
           <div>
-            <NavBarWhite isAuthenticated={true} username={this.props.username} id={this.props.id}/>
+            {this.navbarTransaction()}
             {this.headerTransaction()}
             <EmptyTransaction/>
             <Footer/>
@@ -437,7 +483,7 @@ class Account extends React.Component {
     } else {
       return (
         <div>
-          <NavBarWhite isAuthenticated={true} username={this.props.username} id={this.props.id}/>
+          {this.navbarTransaction()}
           <AwaitingConfirmation/>
           <Footer/>
         </div>
@@ -451,7 +497,7 @@ class Account extends React.Component {
         <div>
           <Header/>
           <ContainerFluid>
-                {this.renderContent()}
+              {this.renderContent()}
           </ContainerFluid>
         </div>
       );

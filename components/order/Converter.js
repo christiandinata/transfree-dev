@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import NumberFormat from 'react-number-format'
-import styled from 'styled-components'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, { useState } from 'react';
+import NumberFormat from 'react-number-format';
+import styled from 'styled-components';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const Converter = styled.div`
   background: #FFFFFF;
@@ -23,7 +23,7 @@ const Exchange = styled.div`
       height: 52px;
       border: 0.5px solid #E2E2E2;
       border-radius: 5px;
-      font-family: "Avenir Next LT Pro Bold" !important;
+      font-family: "Avenir Next LT Pro Bold";
       font-size: 20px;
       padding: 0 20px;
       transition: 0.3s;
@@ -44,7 +44,6 @@ const Exchange = styled.div`
       }
     `}`
     
-
 const Currency = styled.div`
     position: relative;
 
@@ -77,7 +76,7 @@ const Currency = styled.div`
 const DropDownMenu = styled.div`
     position: absolute;
     right: 5%;
-    z-index: 1000;
+    z-index: 5;
     padding: 0 0 .5rem;
     margin: .125rem 0 0;
     font-size: 1rem;
@@ -92,11 +91,13 @@ const DropDownMenu = styled.div`
       margin: 0;
       padding: 0;
     }
-    
-    @media only screen and (max-width: 600px) {
-      max-width: 260px;
-      min-width: 240px;
-    }`
+
+    @media only screen and (max-width: 380px) {
+      width: 310px;
+      min-width: 0px;
+    }
+  
+  `;
 
 const DropDownItem = styled.li`
     display: flex;
@@ -108,7 +109,18 @@ const DropDownItem = styled.li`
       background: #009FE380;
       color: #FFFFFF;
       cursor: pointer;
-    }`
+    }
+
+    ${({ disabled }) => disabled && `
+      opacity: 0.6;
+
+      &:hover {
+        background: grey;
+        color: #FFFFFF;
+        cursor: default;
+      }
+    `}  
+  `
 
 const SearchBar = styled.div`
   align-items: center;
@@ -120,28 +132,28 @@ const SearchBar = styled.div`
   padding: 0px 10px 0px 10px;
 
   input {
-    border: none;
+    border: none !important;
     background-color: transparent;
     color: #FFFFFF;
     font-family: "Avenir Next LT Pro" !important;
-    outline: none;
+    outline: none !important;
     padding-left: 10px;
   }
   input:focus { 
-    box-shadow: none;
+    box-shadow: none !important;
     border: none; 
   }
   input::placeholder {
     color: #FFFFFF;
   }
 
-
-  @media only screen and (max-width: 600px) {
-    max-width: 240px;
-    min-width: 240px;
-
+  @media only screen and (max-width: 380px) {
+    max-width: 301px;
+    min-width: 0px;
+    padding-right: 0px;
+    
     input{
-      font-size: 15px;
+      font-size: 18px !important;
     }
   }
 `
@@ -188,8 +200,9 @@ export function FlagOptions(props) {
       {displayedFlags.map((flag, index) => (
         <DropDownItem
           key={index}
+          disabled={props.disabled(flag.country)}
           onClick={() => props.onSelect(flag.country)}>
-          <span className={"flag-icon flag-icon-" + flag.country.substring(0,2) + " flag-icon-squared" }/>
+          <span style={{marginRight: "10px"}}className={"flag-icon flag-icon-" + flag.country.substring(0,2) + " flag-icon-squared" }/>
           { `(${flag.country.toUpperCase()}) ${flag.cur}` }
         </DropDownItem>
       ))}
@@ -224,6 +237,7 @@ export function InputNumber(props) {
           </button>
           <FlagOptions
             show={props.show}
+            disabled={(c) => props.disabled(c)}
             onSelect={(c) => props.onSelect(c)} />
         </Currency>
       </div>
@@ -231,22 +245,21 @@ export function InputNumber(props) {
   )
 }
 
+const ResultConversion = styled.div`
+  background-color: #1E345B;
+  color: #FFFFFF;
+  margin-top: 10px;
+  padding: 1rem 1.25rem;`
+
+const ResultFlex = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  span {
+    width: 50%;
+  }`
+
 export function RateAndFee(props) {
-  
-  const ResultConversion = styled.div`
-    background-color: #1E345B;
-    color: #FFFFFF;
-    margin-top: 10px;
-    padding: 1rem 1.25rem;`
-
-  const ResultFlex = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    span {
-      width: 50%;
-    }`
-
   return (
     <ResultConversion>
       <ResultFlex>

@@ -12,6 +12,7 @@ import { List } from "../components/FAQData";
 import initialize from "../utils/initialize";
 import styled, { keyframes } from "styled-components";
 import { NavBarWhite } from "../components/MenuComponents.js";
+import Menu from '../components/menu';
 
 //Long text untuk FAQ
 
@@ -89,11 +90,12 @@ const FAQ = (props) => {
 	return (
 		<>
 			<Header />
-			<NavBarWhite
-				username={props.username}
-				id={props.id}
-				isAuthenticated={true}
-			/>
+            <Menu 
+                isAuthenticated = {props.isAuthenticated} 
+                username = {props.username} 
+                scrolled_props = "true" 
+                is_homepage = "false"
+            />
 			<HeroContainer>
 				<HeroHeading className="bold">
 					Hello, How Can We Help You?
@@ -107,11 +109,9 @@ const FAQ = (props) => {
 					onSubmit={(e) => e.preventDefault()}>
 					<InputContainer>
 						{/* icon */}
-						<img
+						<MagnifyingIcon
 							src="../static/images/magnifying-glass.png"
 							alt=""
-							width="23"
-							height="23"
 							style={{ marginLeft: 16, marginRight: 16 }}
 						/>
 						<FormInput
@@ -199,7 +199,12 @@ const FAQ = (props) => {
 													boxShadowed={boxShadowed}>
 													<AccordionButton
 														onClick={() =>
-															setActiveIndex(id)
+															setActiveIndex(
+																activeIndex ==
+																	id
+																	? -1
+																	: id
+															)
 														}>
 														<Highlighter
 															highlightClassName="Highlight"
@@ -315,14 +320,22 @@ const IconNotFound = styled.img`
 
 const HeroContainer = styled.div`
 	margin-top: 72px;
+	padding-top: 80px;
+	padding-bottom: 80px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	min-height: 289px;
+	/* min-height: 289px; */
 	width: 100%;
 	background-image: url("../static/images/batik-world-map-faq-page.png");
 	background-color: #1e345b;
+
+	@media (max-width: 670px) {
+		padding-top: 40px;
+		padding-bottom: 80px;
+		background-image: none;
+	}
 `;
 
 const HeroHeading = styled.div`
@@ -335,12 +348,19 @@ const HeroHeading = styled.div`
 	/* Neutral/White */
 	color: #fff;
 	margin-bottom: 32px;
+	transition: 0.4s ease all;
+
+	@media (max-width: 670px) {
+		font-size: 32px;
+		line-height: 40px;
+	}
 `;
 const SearchForm = styled.form`
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 48px;
+	margin: 0 16px;
 `;
 const InputContainer = styled.div`
 	background: #ffffff;
@@ -354,7 +374,25 @@ const InputContainer = styled.div`
 	align-items: center;
 	width: 391px;
 	height: 48px;
+	transition: 0.4s ease all;
+
+	@media (max-width: 670px) {
+		width: 224px;
+		height: 42px;
+		margin-right: 16px;
+	}
 `;
+
+const MagnifyingIcon = styled.img`
+	width: 23px;
+	height: 23px;
+
+	@media (max-width: 670px) {
+		width: 21px;
+		height: 21px;
+	}
+`;
+
 const FormInput = styled.input`
 	outline: none;
 	border: none;
@@ -376,6 +414,11 @@ const FormInput = styled.input`
 		box-shadow: 0 0 0 30px white inset !important;
 		-webkit-text-fill-color: ${({ error }) =>
 			error ? "#FF0000" : "#232933"};
+	}
+
+	@media (max-width: 670px) {
+		font-size: 14px;
+		line-height: 21px;
 	}
 `;
 const FormButton = styled.button`
@@ -399,6 +442,13 @@ const FormButton = styled.button`
 	&:hover {
 		background-color: #068ec8;
 	}
+
+	@media (max-width: 670px) {
+		width: 104px;
+		height: 42px;
+		font-size: 14px;
+		line-height: 21px;
+	}
 `;
 
 const ListContainer = styled.div`
@@ -407,8 +457,8 @@ const ListContainer = styled.div`
 	/* grid-template-columns: repeat(auto-fill, minmax(186px, 1fr)); */
 	flex-direction: ${(props) => (props.notFound ? "column" : "row")};
 	justify-content: center;
-	grid-column-gap: 24px;
-	grid-row-gap: 40px;
+	grid-column-gap: ${(props) => (props.clicked ? "null" : "24px")};
+	grid-row-gap: ${(props) => (props.clicked ? "null" : "40px")};
 	padding: ${({ clicked, notFound }) => {
 		if (clicked) {
 			if (notFound) {
@@ -420,6 +470,19 @@ const ListContainer = styled.div`
 		}
 	}};
 	background: #fff;
+	transition: 0.4s all ease-in;
+
+	@media (min-width: 480px) and (max-width: 660px) {
+		justify-content: center;
+		align-items: center;
+	}
+
+	@media (max-width: 660px) {
+		grid-template-columns: repeat(auto-fill, 288px);
+		flex-direction: column;
+
+		padding: 40px 16px 120px 16px;
+	}
 `;
 
 const Left = styled.div`
@@ -427,6 +490,15 @@ const Left = styled.div`
 	display: flex;
 	flex-direction: column;
 	margin-right: 128px;
+
+	@media (max-width: 660px) {
+		margin-right: 0;
+		width: 344px;
+	}
+
+	@media (min-width: 660px) and (max-width: 932px) {
+		margin-right: 64px;
+	}
 `;
 
 const LeftCardTitle = styled.div`
@@ -480,6 +552,11 @@ const Right = styled.div`
 	max-width: 704px;
 	display: flex;
 	flex-direction: column;
+
+	@media (max-width: 660px) {
+		width: 344px;
+		margin-top: 40px;
+	}
 `;
 
 // const StyledAccordion = styled(Accordion)``;
@@ -493,12 +570,13 @@ const AccordionContainer = styled.div`
 		boxShadowed ? "0px 18px 50px rgba(98, 107, 121, 0.15)" : null};
 	border-radius: 4px;
 	padding: 24px 16px 24px 24px;
-	min-width: 560px;
+	width: 560px;
 	margin-bottom: 16px;
-	transition: 0.1s all ease-in;
+	transition: 0.4s all ease-in;
 
-	&:hover {
-		transform: scale(1.02);
+	@media (max-width: 932px) {
+		padding: 24px 24px 24px 24px;
+		width: 344px;
 	}
 `;
 
@@ -515,10 +593,10 @@ const AccordionButton = styled.div`
 `;
 
 const FadeIn = keyframes`
-	0% {
+	from {
     opacity: 0;
 	}
-	100% {
+	to {
     opacity: 1;
 	}
 `;
@@ -528,10 +606,14 @@ const AccordionPanel = styled.div`
 	font-weight: normal;
 	font-size: 16px;
 	line-height: 24px;
-	max-width: 500px;
+	max-width: 504px;
 	/* Neutral/Secondary Text */
 	color: #626b79;
 	animation: ${FadeIn} 0.35s ease-in;
+
+	@media (max-width: 932px) {
+		max-width: none;
+	}
 `;
 
 const Card = styled.div`
@@ -653,6 +735,7 @@ const mapStateToProps = (state) => {
 	return {
 		username: state.user.user_data ? state.user.user_data.fullname : "",
 		id: state.user.user_data ? state.user.user_data.idNumber : "",
+		isAuthenticated: !!state.authentication.token,
 	};
 };
 

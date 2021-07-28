@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
-    "start": "set NODE_ENV=production && node server.js",
+    "start": "set NEXT_PUBLIC_APP_ENV=production&& node server.js",
     "heroku-postbuild": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,13 +19,16 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/adhiwie/transfree#readme",
   "dependencies": {
+    "@babel/plugin-transform-react-jsx": "^7.14.5",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/react-fontawesome": "^0.1.12",
     "@trendmicro/react-sidenav": "^0.5.0",
     "@zeit/next-css": "^1.0.1",
     "axios": "^0.19.2",
-    "babel-plugin-styled-components": "^1.12.0",
+    "babel-plugin-styled-components": "^1.13.2",
     "cheerio": "^1.0.0-rc.3",
     "cookie-parser": "^1.4.5",
     "crypto-hash": "^1.2.1",
@@ -71,37 +74,5 @@
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.0",
     "tar": "^4.4.10"
-  },
-  "babel": {
-    "env": {
-      "development": {
-        "presets": [
-          "next/babel"
-        ],
-        "plugins": [
-          [
-            "styled-components",
-            {
-              "ssr": true,
-              "displayName": true
-            }
-          ]
-        ]
-      },
-      "production": {
-        "presets": [
-          "next/babel"
-        ],
-        "plugins": [
-          [
-            "styled-components",
-            {
-              "ssr": true,
-              "displayName": false
-            }
-          ]
-        ]
-      }
-    }
   }
 }

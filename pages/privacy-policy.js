@@ -2,7 +2,7 @@ import Header from '../components/header.js';
 import { Component } from 'react';
 import Footer from '../components/footer.js';
 import { NavBarWhite } from '../components/MenuComponents.js';
-
+import Menu from '../components/menu';
 import * as Info from '../components/Info.js';
 import initialize from '../utils/initialize.js';
 import actions from '../redux/actions/index.js';
@@ -28,7 +28,8 @@ class Privacy extends Component {
     return (
       <div>
         <Header />
-        <NavBarWhite isAuthenticated={this.props.isAuthenticated} username={this.props.username} id={this.props.id} />
+        {/* <NavBarWhite isAuthenticated={this.props.isAuthenticated} username={this.props.username} /> */}
+        <Menu isAuthenticated = {this.props.isAuthenticated} username = {this.props.username} id = {this.props.idNumber} scrolled_props = "true" is_homepage = "false"/>
         <Info.BlueHeader>
           <Info.Batik>
             <h1>Privacy Policy</h1>
@@ -117,7 +118,7 @@ const mapStateToProps = (state) => {
     return {
       isAuthenticated: true,
       username: state.user.user_data.fullname,
-      id: state.user.user_data.idNumber
+      idNumber: state.user.user_data.idNumber
     }
   } else {
     return {

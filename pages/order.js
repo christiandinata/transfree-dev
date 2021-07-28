@@ -1,17 +1,17 @@
 import styled from "styled-components";
 import Header from '../components/header';
-import OrderAmount from '../components/order/OrderAmount';
-import Recipient from '../components/order/Recipient';
-import Review from '../components/order/Review';
-import Pay from '../components/order/Pay';
-import Status from '../components/order/Status';
+import OrderAmount from '../components/order/steps/OrderAmount';
+import Recipient from '../components/order/steps/Recipient';
+import Review from '../components/order/steps/Review';
+import Pay from '../components/order/steps/Pay';
+import Status from '../components/order/steps/Status';
 import { connect } from 'react-redux';
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import { getCookie } from '../utils/cookie';
-import { AwaitingConfirmation } from '../components/order/Pending'
-import { NavBarBlue } from '../components/MenuComponents'
-import Footer from '../components/footer'
+import { AwaitingConfirmation } from '../components/order/Pending';
+import { NavBarBlue } from '../components/MenuComponents';
+import Footer from '../components/footer';
 import shortid from 'shortid';
 
 const ContainerFluid = styled.div`
@@ -23,6 +23,8 @@ const ContainerFluid = styled.div`
   margin-bottom: 40px;
   padding-bottom: 20px;
   width: 100%;
+  overflow: hidden;
+  background: #F3F5F7;
 `;
 
 const ContentContainer = styled.div`
@@ -36,14 +38,28 @@ const ProgressContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
   background-color: white;
   box-shadow: 0px 5px 20px rgba(98, 107, 121, 0.15);
   position: fixed;
-  z-index: 1;
+  z-index: 10;
 
+  @media only screen and (max-width: 660px) {
+    min-width: 800px;
+    justify-content: flex-start;
 
-  @media only screen and (max-width: 500px) {
-    margin: 16px 0 10px;
+    ${({ step }) => step == 1 && `
+      padding-left: 15px;
+      left: 0px;
+    `}
+
+    ${({ step }) => step == 2 && `
+      left: -150px;
+    `} 
+
+    ${({ step }) => step >=3 && `
+      right: -100px;
+    `}
   }
 `;
 
@@ -51,7 +67,6 @@ const ProgressList = styled.ol`
   align-items: center;
   padding: 0;
   list-style-type: none;
-
 `;
 
 const ProgressItem = styled.li`
@@ -93,6 +108,12 @@ const ProgressItem = styled.li`
       border-color: #009FE3;
     }
   `}
+
+  @media only screen and (max-width: 760px) {
+    >.step-line{
+      width: 40px;
+    }
+  }
 `;
 
 /* Order page layout */
@@ -283,7 +304,7 @@ class Order extends React.Component {
   /* Progress bar on the top of order page to show current step */
   progressBar(){
     return(
-      <ProgressContainer>
+      <ProgressContainer step={this.state.step}>
         <ProgressList>
           <ProgressItem active={this.state.step>=1? true : false}><div className="step-box">1</div>Amount</ProgressItem>
           <ProgressItem active={this.state.step>=2? true : false}><div className="step-line"></div><div className="step-box">2</div>Recipient</ProgressItem>
@@ -310,7 +331,9 @@ class Order extends React.Component {
             {this.renderContent(this.state.step)}
           </ContentContainer>
         </ContainerFluid>
-        <Footer/>
+        <div style={{overflow: "hidden"}}>
+          <Footer/>
+        </div>
       </div>
     )} 
     else {
@@ -328,7 +351,9 @@ class Order extends React.Component {
               <AwaitingConfirmation/>
             </div>
           </ContainerFluid>
-          <Footer/>
+          <div style={{overflow: "hidden"}}>
+            <Footer/>
+          </div>
         </div>
       )
     }

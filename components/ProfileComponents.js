@@ -212,16 +212,38 @@ export const FormRow = styled.div`
 
 export const FormRowPhone = styled(FormRow)`
     width: 450px;
-    border: ${({ filled }) => (
-		filled ? "2px solid #068EC8" : "null")}; 
+    border: ${({ filled, error }) => {
+        if (filled) {
+            if (error) {
+                return "2px solid #F80202";
+            } else {
+                return "2px solid #068EC8";
+            }
+        } else {
+            return "null";
+        }
+    }};
     border-radius: 4px;
+    margin-bottom: ${({ error }) => (
+		error ? "2px" : "0px")}; 
 `;
 
-export const FormRowPassword = styled(FormRow)`
+export const FormRowAccount = styled(FormRow)`
     border-radius: 4px;
-    width: 447px;
-    border: ${({ filled }) => (
-		filled ? "2px solid #068EC8" : "1px solid #E2E2E2")}; 
+    width: 450px;
+    margin-bottom: ${({ error }) => (
+        error ? "2px" : "16px")}; 
+    border: ${({ filled, error }) => {
+        if (filled) {
+            if (error) {
+                return "2px solid #F80202";
+            } else {
+                return "2px solid #068EC8";
+            }
+        } else {
+            return "1px solid #E2E2E2";
+        }
+    }};
 `;
 
 export const ButtonSection = styled.section`
@@ -232,7 +254,7 @@ export const EditProfileButton = styled.button`
     display: block;
     text-decoration: none;
     outline: none;
-    border: none;
+    border: none !important;
     border: 1px solid #009FE3;
     border-radius: 4px;
     padding: 8px 24px;
@@ -290,7 +312,7 @@ export const InputText = styled.input`
     border-radius: 4px;
     background: ${({ dis }) => (
 		dis ? "#E9E9E9" : "#FFFFFF")}; 
-    width: 415px;   
+    width: 418px;   
     outline: none;
     color: #9A9A9A;
 
@@ -302,8 +324,8 @@ export const InputText = styled.input`
 `;
 
 export const InputTextPassword = styled(InputText)`
-    border: none;
-    width: 380px;
+    border: none !important;
+    width: 380px !important;
     &:focus {
         background: #fff;
         border: none;
@@ -348,6 +370,7 @@ export const PhoneInput = styled(Phone)`
     height: 48px;
     padding: 0 16px;
     background: #fff;
+    width: 420px;
 
     &:focus {
         border: 2px solid #068EC8;
@@ -498,4 +521,11 @@ export const ModalSuccessTitle = styled.p`
     color: #232933;
     margin: 0;
     display: inline-block;
+`;
+
+export const ErrorMessage = styled.div`
+    color: #F80202;
+    font-size: 12px;
+    margin-bottom: 14px;
+    margin-left: 8px;
 `;
