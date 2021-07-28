@@ -295,7 +295,7 @@ function UserProfile(props) {
     }
 
     return(
-        <React.Fragment>
+        <Profile.MainWrapper>
             <Header/>
             <Menu isAuthenticated = {true} username = {info.fullName} id = {info.idNumber} scrolled_props = "true" is_homepage = "false"/>
 
@@ -710,6 +710,10 @@ function UserProfile(props) {
                 </Profile.ProfileSect>
 
                 <style jsx global>{`
+                    .react-phone-number-input {
+                        width: 100%;
+                    }
+
                     .react-phone-number-input__input {
                         padding: 5px;
                         height: 35px;
@@ -718,11 +722,15 @@ function UserProfile(props) {
                         font-size: 16px;
                         color: #626B79;
                     }
+
+                    .react-phone-number-input__country {
+                        margin-left: 0.5em; 
+                    }
                 `}
                 </style>
             </Profile.Wrapper> 
             }
-        </React.Fragment>
+        </Profile.MainWrapper>
     )
 }
 
