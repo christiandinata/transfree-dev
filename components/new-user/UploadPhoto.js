@@ -139,10 +139,10 @@ function UploadPhoto (props) {
       </DropzonesDiv>
       <ConsentDiv>
         <p>We will not under any circumstances, use your personal information irresponsibly. 
-          For more information see our <a href="/privacy-policy">Privacy Policy</a></p>
+          For more information see our <a href="/privacy-policy" target="_blank">Privacy Policy</a></p>
         <CheckDiv>
           <input type="checkbox" id="agree" checked={ isTermsAgreed } onChange={ () => setIsTermsAgreed(!isTermsAgreed) }/>
-          <label htmlFor="agree">I agree to the <a href="/terms">Terms and Condition</a></label>
+          <label htmlFor="agree">I agree to the <a href="/terms" target="_blank">Terms and Condition</a></label>
         </CheckDiv>
         <Warning>{ errorMessage ? errorMessage : null }</Warning>
         <PrButton onClick={ handleOnClickButton }>

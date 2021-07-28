@@ -1,9 +1,7 @@
-import { useState, Fragment } from 'react'
+import { useState, Fragment, forwardRef } from 'react'
 import { connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import DatePicker from 'react-datepicker'
-import CustomDatePicker from '../CustomDatePicker'
-import MobilePopup from '../MobilePopup'
 import profileActions from '../../redux/actions/profileActions'
 import * as Profile from '../ProfileComponents'
 import { PrButton } from '../landing-page/Buttons'
@@ -12,11 +10,12 @@ import styled from 'styled-components'
 const InfoFlex = styled.div`
   margin: 2rem auto;
   width: 55%;
+  select {
+    border: 1px solid #e2e2e2;
+  }
   input, select {
     box-sizing: border-box;
     padding: 12px 16px;
-    margin-bottom: 1rem;
-    border: 1px solid #E2E2E2; 
     border-radius: 4px;
     background: #FFFFFF;
     font-family: "Avenir Next LT Pro", sans-serif;
@@ -34,105 +33,111 @@ const InfoFlex = styled.div`
   }
   .react-datepicker-wrapper {
     display: block;
+    input {
+      border: ${ props => props.dateError ? "2px solid red" : "1px solid #E2E2E2"};
+      &:focus {
+        border: 2px solid #068EC8;
+        color: #232933;
+      }
+    }
   }
   .react-datepicker__header {
-    background: #FFFFFF;
+    background-color: #FFFFFF;
+  }
+  img {
+    position: absolute;
+    bottom: 0.6rem;
+    right: 0.75rem;
+  }
+  a {
+    font-size: 1rem;
+    color: #068EC8;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
   }
   @media only screen and (max-width: 720px) {
     width: 95%;
   } 
 `
 
-function CreateProfile (props) {
+const InfoInput = styled.input`
+  border: ${ props => props.error ? "2px solid red" : "1px solid #E2E2E2" };
+`
+
+const InfoLabel = styled.label`
+  margin-top: 1.5rem;
+  display: block;
+  margin-left: 8px;
+  margin-bottom: 4px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  color: ${ props => props.filled ? "#068EC8" : (props.error ? "red" : "#9A9A9A") };
+`
+
+const ErrorSpan = styled.span`
+  margin: 4px auto 0 8px;
+  font-size: 12px;
+  color: red;
+`
+
+function CreateProfile(props) {
 
   const [focus, setFocus] = useState({
     idType: false,
     idNumber: false,
     gender: false,
-    dateOfBirth: false,
-    placeOfBirth: false,
+    dob: false,
+    pob: false,
     address: false
   })
 
-  const [idType, setIdType] = useState('KTP')
-  const [idNumber, setIdNumber] = useState('')
-  const [gender, setGender] = useState('Male')
-  const [placeOfBirth, setPlaceOfBirth] = useState('')
-  const [dateOfBirth, setDateOfBirth] = useState()
-  const [address, setAddress] = useState('')
-  const [isIdNumberValid, setIsIdNumberValid] = useState(true)
-  const [isPobValid, setIsPobValid] = useState(true)
-  const [isAddressValid, setIsAddressValid] = useState(true)
-  const [isSkipPopupVisible, setIsSkipPopupVisible] = useState(true)
+  const [formData, setFormData] = useState({
+    idType: "KTP",
+    idNumber: "",
+    gender: "Male",
+    dob: "",
+    pob: "",
+    address: ""
+  })
 
-  if (props.response && !props.errorMessage) {
+  const [error, setError] = useState({
+    idType: false,
+    idNumber: false,
+    gender: false,
+    dob: false,
+    pob: false,
+    address: false
+  })
+
+  if (props.response) {
     props.nextStep()
-  }
-  //Function cek validitas nomer identitas
-  function checkIdnumber(e) {
-    if (e.target.value === '') {
-      setIsIdNumberValid(false)
-    } else {
-      setIsIdNumberValid(true)
-    }
-  }
-  //Function cek validitas tempat lahir
-  function checkPob(e) {
-    if (e.target.value === '') {
-      setIsPobValid(false)
-    } else {
-      setIsPobValid(true)
-    }
-  }
-  //Function cek validitas alamat
-  function checkAddress(e) {
-    if (e.target.value === '') {
-      setIsAddressValid(false)
-    } else {
-      setIsAddressValid(true)
-    }
   }
 
   function handleOnClickButton(e) {
     e.preventDefault()
-
-    if (!checkIdDataValid()) {
-      return
-    }
-    //setelah data valid, data disimpan dalam profile
-    props.createProfile({
-        idType: idType,
-        idNumber: idNumber,
-        gender: gender,
-        pob: placeOfBirth,
-        dob: dateOfBirth,
-        address: address,
+    
+    if(isDataValid()) {
+      props.createProfile({
+        ...formData,
         email: props.userData.email,
       },
       'createProfile'
-    )
+      )
+    }
   }
 
-  //Pengecakan validitas data, disini hanya periksa apakah kosong atau tidak
-  function checkIdDataValid() {
-    let isValid = true
-
-    if (idNumber === '') {
-      isValid = false
-      setIsIdNumberValid(false)
+  // Pengecakan validitas data, disini hanya periksa apakah kosong atau tidak
+  function isDataValid() {
+    for (let input in formData) {
+      if(!formData[input]) {
+        return formData[input]
+      }
     }
-
-    if (placeOfBirth === '') {
-      isValid = false
-      setIsPobValid(false)
-    }
-
-    if (address === '') {
-      isValid = false
-      setIsAddressValid(false)
-    }
-
-    return isValid
+    return true
   }
 
   function handleOnFocus(e) {
@@ -144,16 +149,53 @@ function CreateProfile (props) {
   }
 
   function handleOnBlur(e) {
-    const { name } = e.target
+    const { name, value } = e.target
     setFocus({
       ...focus,
       [name]: false
     })
+
+    if(!value) {
+      console.log(name)
+      setError({
+        ...error,
+        [name]: true
+      })
+    } else {
+      setError({
+        ...error,
+        [name]: false
+      })
+    }
+  }
+
+  function handleOnChange(e) {
+    const { name, value } = e.target
+    if( name == "idNumber" && /^[A-za-z0-9]*$/.test(value)) {
+      setFormData({
+        ...formData,
+        [name]: value.replace(/[\[\]^`_\\]/gi, '')
+      })
+    } else if (
+      (name == "address" || name == "pob") &&
+      /^[A-z]*((-|\s)*[A-z\s])*$/.test(value)
+    ) {
+      setFormData({
+        ...formData,
+        [name]: value
+      })
+    } else if ( name == "dob" || name == "gender" 
+    || name == "idType" ) {
+      setFormData({
+        ...formData,
+        [name]: value
+      })
+    }
   }
 
   return(
     // Menanyakan apakah user ingin mengisi profile sendiri atau tidak
-    <InfoFlex>
+    <InfoFlex dateError={ error.dob }>
       <Profile.EditData>
         <Profile.SectionType>
           <Profile.SectionTitle>
@@ -166,72 +208,95 @@ function CreateProfile (props) {
         </Profile.SectionType>
       </Profile.EditData>
       
-      {/* <div className='create-profile-form-body-heading'>
-        <div className='create-profile-form-skip'>
-          <a onClick={ props.nextStep } >
-            Do you want us to fill the form for you?
-          </a>
-        </div>
-      </div> */}
+      <a onClick={ props.nextStep }>
+        Do you want us to fill the form for you?
+      </a>
 
       <form>
-        <Profile.FormLabel filled={ focus.idType }>ID Type</Profile.FormLabel>
+        <InfoLabel filled={ focus.idType } error={ error.idType }>ID Type</InfoLabel>
         <select
           name="idType"
+          value={ formData.idType }
           onFocus={ handleOnFocus }
-          onBlur={ handleOnBlur }>
+          onBlur={ handleOnBlur }
+          onChange={ handleOnChange }>
             <option value="KTP">KTP</option>
             <option value="Passport">Passport</option>
             <option value="SIM">SIM</option>
         </select>
-        <Profile.FormLabel filled={ focus.idNumber }>ID Number</Profile.FormLabel>
-        <input
+        <InfoLabel filled={ focus.idNumber } error={ error.idNumber }>ID Number</InfoLabel>
+        <InfoInput
           type="text"
           name="idNumber"
+          value={ formData.idNumber }
           onFocus={ handleOnFocus }
           onBlur={ handleOnBlur }
-        />
-        <Profile.FormLabel filled={ focus.gender }>Gender</Profile.FormLabel>
+          onChange={ handleOnChange }
+          error={ error.idNumber } />
+        { error.idNumber ? (<ErrorSpan>ID Number cannot be blank</ErrorSpan>) : null }
+        <InfoLabel filled={ focus.gender } error={ error.gender }>Gender</InfoLabel>
         <select
           name="gender"
+          value={ formData.gender }
           onFocus={ handleOnFocus }
-          onBlur={ handleOnBlur }>
+          onBlur={ handleOnBlur }
+          onChange={ handleOnChange }>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
             <option value="Other">Other</option>
         </select>
-        <Profile.FormLabel filled={ focus.placeOfBirth }>Place of Birth</Profile.FormLabel>
-        <input
+        <InfoLabel filled={ focus.pob } error={ error.pob }>Place of Birth</InfoLabel>
+        <InfoInput
           type="text"
-          name="placeOfBirth"
+          name="pob"
+          value={ formData.pob }
           onFocus ={ handleOnFocus }
           onBlur={ handleOnBlur }
-        />
-        <Profile.FormLabel filled={ focus.dateOfBirth }>Date of Birth</Profile.FormLabel>
-          <DatePicker
-            name="dateOfBirth"
-            dateFormat="dd-MM-yyyy"
-            selected={ dateOfBirth }
-            onChange={ (date) => {
-              setDateOfBirth(date); 
-              setFocus({
-                dateOfBirth: false
-              })
-            }}
-            onFocus ={ handleOnFocus }
-            onBlur={ handleOnBlur }/>
-        <Profile.FormLabel filled={ focus.address }>Address</Profile.FormLabel>
-        <input
+          onChange={ handleOnChange }
+          error={ error.pob } />
+        { error.pob ? (<ErrorSpan>Place of birth cannot be blank</ErrorSpan>) : null }
+        <InfoLabel filled={ focus.dob } error={ error.dob }>Date of Birth</InfoLabel>
+          <div style={{ position: "relative" }}>
+            <DatePicker
+              name="dob"
+              dateFormat="dd-MM-yyyy"
+              error={ error.dob }
+              selected={ formData.dob }
+              onChange={ (date) => {
+                setFormData({
+                  ...formData,
+                  dob: date
+                }) 
+                setFocus({
+                  dob: false
+                })
+              }}
+              onFocus ={ handleOnFocus }
+              onBlur={ handleOnBlur } />
+            <img src="../../static/images/new-ui/ic-calendar.svg" alt="ic-cal"/>
+          </div>
+        { error.dob ? (<ErrorSpan>Date of birth cannot be blank</ErrorSpan>) : null }
+        <InfoLabel filled={ focus.address } error={ error.address }>Address</InfoLabel>
+        <InfoInput
           type="text"
           name="address"
+          value={ formData.address }
           onFocus ={ handleOnFocus }
-          onBlur={ handleOnBlur }/>
+          onBlur={ handleOnBlur }
+          onChange={ handleOnChange }
+          error={ error.address } />
+        { error.address ? (<ErrorSpan>Address cannot be blank</ErrorSpan>) : null }
         <Profile.ButtonSection>
           <PrButton 
             type="submit"
             style={{ width: '100%' }}
             onClick={ handleOnClickButton }>
-              Continue
+              {
+                props.isInProgress ?
+                (<FontAwesomeIcon icon='sync-alt' spin/>)
+                :
+                "Continue"
+              }
           </PrButton>
         </Profile.ButtonSection>
       </form>
@@ -246,6 +311,7 @@ const mapStateToProps = (state) => {
     isInProgress: state.profile.inProgress,
     response: state.profile.response,
     errorMessage: state.profile.errorMessage,
+    userData: state.user.user_data
   }
 }
 

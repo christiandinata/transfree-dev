@@ -15,21 +15,7 @@ import userActions from '../redux/actions/userActions'
 import photoActions from '../redux/actions/photoActions'
 import { PrButton } from '../components/landing-page/Buttons.js'
 
-//Component yang menampilkan opsi pengisian detail dari user baru 
-function Progress (props) {
-  const items = []
-
-  for (let i = 1; i <= props.totalSteps; i++) {
-    if (i === props.currentStep) {
-      items.push(<img src='../../static/images/step_round_filled.svg' />)
-    } else {
-      items.push(<img src='../../static/images/step_round.svg' />)
-    }
-  }
-
-  return items
-}
-
+// Component yang menampilkan opsi pengisian detail dari user baru 
 function CurrentStepWindow (props) {
   switch(props.currentStep) {
     case 1:
@@ -92,8 +78,11 @@ function NewUser (props) {
           <Profile.ProfileAction>
             <SectionTitle>Information Detail</SectionTitle>
           </Profile.ProfileAction>
-          {/* <UploadPhoto/> */}
-          <CreateProfile nextStep={1}/>
+          <CurrentStepWindow 
+            userData={ props.userData }
+            currentStep={ props.currentStep ? props.currentStep : currentStep }
+            onNextStep={ () => setCurrentStep(currentStep+1) }
+          />
         </Profile.ProfileSect>
       </Profile.Wrapper>
     </Fragment>
