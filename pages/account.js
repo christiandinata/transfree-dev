@@ -179,6 +179,10 @@ const Date = styled.span`
   >.completed{
     color: #00A000;
   }
+
+  >.canceled{
+    color: #FF0000;
+  }
 `;
 
 const ItemDetail = styled.div`
@@ -229,6 +233,10 @@ const Divider = styled.div`
   @media only screen and (max-width: 768px) {
     margin-left: 9px;
   }
+
+  ${({ hide }) => hide && `
+    display: none;
+  `}
 `;
 
 const ListItem = styled.li`
@@ -251,6 +259,10 @@ const ListItem = styled.li`
       margin-right: -5px;
     }
   }
+
+  ${({ hide }) => hide && `
+    display: none;
+  `}
 `;
 
 /* Displays order item list and each details */
@@ -292,8 +304,8 @@ class OrderItem extends React.Component {
               <ItemRow>
                 <ItemColumn left>
                   <Date>
-                    <span className={order.completedAt == 0.0 ? 'processing' : 'completed'}>
-                      {order.completedAt == 0.0 ? 'Processing' : 'Completed on '+ moment(order.completedAt).format("DD/MM/YYYY HH:mm")}
+                    <span className={order.canceledAt? 'canceled' : order.completedAt == 0.0 ? 'processing' : 'completed'}>
+                      {order.canceledAt? 'Canceled on ' + moment(order.canceledAt).format("DD/MM/YYYY HH:mm") : order.completedAt == 0.0 ? 'Processing' : 'Completed on '+ moment(order.completedAt).format("DD/MM/YYYY HH:mm")}
                     </span>
                   </Date>
                 </ItemColumn>
@@ -310,25 +322,27 @@ class OrderItem extends React.Component {
                 </ListItem>
                 <Divider/>
                 <ListItem>
-                  <Bullet blue={moment(moment().format("DD/MM/YYYY HH:mm")).isAfter(moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) || order.receivedAt != 0.0}><div className="smallBullet"/></Bullet>
+                  <Bullet blue={moment(moment().format("DD/MM/YYYY HH:mm")).isAfter(moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) || order.receivedAt != 0.0 || order.canceledAt}><div className="smallBullet"/></Bullet>
                   <p className="textItem">
-                    {(moment(moment().format("DD/MM/YYYY HH:mm"))
-                    .isAfter
-                    (moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) )
-                    ||
-                    (order.receivedAt != 0.0)
+                    { (moment(moment().format("DD/MM/YYYY HH:mm")).isAfter(moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) ) ||
+                      (order.receivedAt != 0.0)
                     ?
-                    ('We are processing your ' + order.toCurrency.toUpperCase() +' booking')
+                      ('We are processing your ' + order.toCurrency.toUpperCase() +' booking')
+                    :
+                    (order.canceledAt)
+                    ?
+                      ('Canceled on ' + moment(order.canceledAt).format("DD/MM/YYYY HH:mm"))
                     :
                     ('We are waiting to process your ' + order.toCurrency.toUpperCase() +' booking') }
                   </p>
                 </ListItem>
-                <Divider/>
-                <ListItem>
-                  <Bullet blue={order.completedAt != 0.0}><div className="smallBullet"/></Bullet>
+                <Divider hide={order.canceledAt && !(moment(moment().format("DD/MM/YYYY HH:mm")).isAfter(moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) || order.receivedAt != 0)}/>
+                <ListItem hide={order.canceledAt && !(moment(moment().format("DD/MM/YYYY HH:mm")).isAfter(moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) || order.receivedAt != 0)}>
+                  <Bullet blue={order.completedAt != 0.0 || order.canceledAt}><div className="smallBullet"/></Bullet>
                   <p className="textItem">
-                    {order.completedAt == 0.0 ? ('We will complete your transfer') :  ('Completed on ')}
-                    {order.completedAt == 0.0 ? '' : <span style={{fontWeight: "bolder"}}>{moment(order.completedAt).format("DD/MM/YYYY HH:mm")}</span>}
+                    {order.canceledAt ? ('Canceled on ') : order.completedAt == 0.0 ? ('We will complete your transfer') :  ('Completed on ')}
+                    {order.canceledAt ? <span style={{fontWeight: "bolder"}}>{(moment(order.canceledAt).format("DD/MM/YYYY HH:mm"))} </span> :
+                      order.completedAt == 0.0 ? '' : <span style={{fontWeight: "bolder"}}>{moment(order.completedAt).format("DD/MM/YYYY HH:mm")}</span>}
                   </p>
                 </ListItem>
               </ItemDetail>
@@ -400,8 +414,10 @@ class Account extends React.Component {
           String(this.props.orderArray[order].fromAmount).indexOf(words[word]) > -1 ||
           String(this.props.orderArray[order].toAmount).indexOf(words[word]) > -1 ||
           moment(this.props.orderArray[order].completedAt).format("DD/MM/YYYY HH:mm").indexOf(words[word]) > -1|| 
-          ("processing".indexOf(words[word]) > -1 && this.props.orderArray[order].completedAt == 0) ||
-          ("completed".indexOf(words[word]) > -1 && this.props.orderArray[order].completedAt > 0)
+          (this.props.orderArray[order].canceledAt && moment(this.props.orderArray[order].canceledAt).format("DD/MM/YYYY HH:mm").indexOf(words[word]) > -1) || 
+          ("processing".indexOf(words[word]) > -1 && this.props.orderArray[order].completedAt == 0 && !this.props.orderArray[order].canceledAt) ||
+          ("completed".indexOf(words[word]) > -1 && this.props.orderArray[order].completedAt > 0 && !this.props.orderArray[order].canceledAt) ||
+          ("canceled".indexOf(words[word]) > -1 && this.props.orderArray[order].canceledAt)
           ){
             count++;
         }
