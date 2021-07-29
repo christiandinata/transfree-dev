@@ -27,8 +27,7 @@ export const ActionSect = styled.section`
     padding-top: 38px;
 
     @media only screen and (max-width: 900px) {
-        padding-top: 16px;
-        padding-bottom: 16px;
+        display: none;
     }
 `;
 
@@ -46,16 +45,17 @@ export const ActionChoice = styled.button`
     width: 260px;
 
     @media only screen and (max-width: 900px) {
-        margin-top: 0;
-        padding: 16px;
-        width: 90%;
-        text-align: left;
+        display: none;
     }
 `;
 
 export const ActionChoiceActive = styled(ActionChoice)`
     background: #fff;
     border: 1px solid #fff;
+
+    @media only screen and (max-width: 900px) {
+        display: none;
+    }
 `;
 
 export const ChoiceImg = styled.img`
@@ -65,12 +65,20 @@ export const ChoiceImg = styled.img`
     display: inline;
     float: left;
     margin-right: 16px;
+
+    @media only screen and (max-width: 900px) {
+        display: none;
+    }
 `;
 
 export const ArrowRightImg = styled.img`
     display: inline;
     float: right;
     margin-left: 71.3px;
+
+    @media only screen and (max-width: 900px) {
+        display: none;
+    }
 `;
 
 export const ProfileSect = styled.section`
@@ -182,8 +190,7 @@ export const AccountLink = styled.p`
     color: #ffffff;
 
     @media only screen and (max-width: 900px) {
-        font-weight: 500;
-        line-height: 20px;
+        display: none;
     }
 `;
 

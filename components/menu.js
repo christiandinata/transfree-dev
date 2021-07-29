@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import authActions from '../redux/actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as Navbar from './MenuComponents';
-import * as Profile from './ProfileComponents';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { useEffect, useState } from 'react';
 
@@ -79,35 +78,35 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username, id, is_hom
         <React.Fragment>
           <Navbar.NavigationCenter clicked = {clicked}>
             {is_profile && clicked && choice == 'detail' ?
-              <Profile.ActionSect>
-                <Profile.ActionChoiceActive onClick = {() => setChoice("detail")} value = "detail">
-                    <Profile.ChoiceImg src = "../static/images/profile/detail-profile-blue.png"/>
-                    <Profile.AccountLinkActive>Detail Profile</Profile.AccountLinkActive>
-                    <Profile.ArrowRightImg src = "../static/images/profile/arrow-right-blue.png"/> 
-                </Profile.ActionChoiceActive>
+              <Navbar.ActionSect>
+                <Navbar.ActionChoiceActive onClick = {() => setChoice("detail")} value = "detail">
+                    <Navbar.ChoiceImg src = "../static/images/profile/detail-profile-blue.png"/>
+                    <Navbar.AccountLinkActive>Detail Profile</Navbar.AccountLinkActive>
+                    <Navbar.ArrowRightImg src = "../static/images/profile/arrow-right-blue.png"/> 
+                </Navbar.ActionChoiceActive>
 
-                <Profile.ActionChoice onClick = {() => setChoice("edit")} value = "edit">
-                    <Profile.ChoiceImg src = "../static/images/profile/edit-profile-white.png"/>
-                    <Profile.AccountLink>Edit Profile</Profile.AccountLink>
-                    <Profile.ArrowRightImg src = "../static/images/profile/arrow-right-white.png"/>
-                </Profile.ActionChoice>
-              </Profile.ActionSect>
+                <Navbar.ActionChoice onClick = {() => setChoice("edit")} value = "edit">
+                    <Navbar.ChoiceImg src = "../static/images/profile/edit-profile-white.png"/>
+                    <Navbar.AccountLink>Edit Profile</Navbar.AccountLink>
+                    <Navbar.ArrowRightImg src = "../static/images/profile/arrow-right-white.png"/>
+                </Navbar.ActionChoice>
+              </Navbar.ActionSect>
           : null}
 
             {is_profile && clicked && choice == 'edit' ?
-              <Profile.ActionSect>
-                <Profile.ActionChoice onClick = {() => setChoice("detail")} value = "detail">
-                    <Profile.ChoiceImg src = "../static/images/profile/detail-profile-white.png"/>
-                    <Profile.AccountLink>Detail Profile</Profile.AccountLink>
-                    <Profile.ArrowRightImg src = "../static/images/profile/arrow-right-white.png"/> 
-                </Profile.ActionChoice>
+              <Navbar.ActionSect>
+                <Navbar.ActionChoice onClick = {() => setChoice("detail")} value = "detail">
+                    <Navbar.ChoiceImg src = "../static/images/profile/detail-profile-white.png"/>
+                    <Navbar.AccountLink>Detail Profile</Navbar.AccountLink>
+                    <Navbar.ArrowRightImg src = "../static/images/profile/arrow-right-white.png"/> 
+                </Navbar.ActionChoice>
 
-                <Profile.ActionChoiceActive onClick = {() => setChoice("edit")} value = "edit">
-                    <Profile.ChoiceImg src = "../static/images/profile/edit-profile-blue.png"/>
-                    <Profile.AccountLinkActive>Edit Profile</Profile.AccountLinkActive>
-                    <Profile.ArrowRightImg src = "../static/images/profile/arrow-right-blue.png"/>
-                </Profile.ActionChoiceActive>
-              </Profile.ActionSect>
+                <Navbar.ActionChoiceActive onClick = {() => setChoice("edit")} value = "edit">
+                    <Navbar.ChoiceImg src = "../static/images/profile/edit-profile-blue.png"/>
+                    <Navbar.AccountLinkActive>Edit Profile</Navbar.AccountLinkActive>
+                    <Navbar.ArrowRightImg src = "../static/images/profile/arrow-right-blue.png"/>
+                </Navbar.ActionChoiceActive>
+              </Navbar.ActionSect>
           : null}
 
             <Navbar.NavigationChild href = "/order" scrolled = {scrolled} homepage = "true" navChildColor = "#f5f5f5">
