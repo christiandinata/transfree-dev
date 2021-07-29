@@ -1,4 +1,4 @@
-import { useState, Fragment, forwardRef } from 'react'
+import { useState } from 'react'
 import { connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import DatePicker from 'react-datepicker'
@@ -127,17 +127,20 @@ function CreateProfile(props) {
       },
       'createProfile'
       )
+    } else {
+      setError({
+        ...error,
+        'dob': !(!!formData['dob']),
+        'pob': !(!!formData['pob']),
+        'idNumber': !(!!formData['idNumber']),
+        'address': !(!!formData['address'])
+      })
     }
   }
 
   // Pengecakan validitas data, disini hanya periksa apakah kosong atau tidak
   function isDataValid() {
-    for (let input in formData) {
-      if(!formData[input]) {
-        return formData[input]
-      }
-    }
-    return true
+    return !Object.values(formData).includes('')
   }
 
   function handleOnFocus(e) {
@@ -220,7 +223,7 @@ function CreateProfile(props) {
       </a>
 
       <form>
-        <InfoLabel filled={ focus.idType } error={ error.idType }>ID Type</InfoLabel>
+        <InfoLabel filled={ focus.idType } error={ false }>ID Type</InfoLabel>
         <select
           name="idType"
           value={ formData.idType }
@@ -241,7 +244,7 @@ function CreateProfile(props) {
           onChange={ handleOnChange }
           error={ error.idNumber } />
         { error.idNumber ? (<ErrorSpan>ID Number cannot be blank</ErrorSpan>) : null }
-        <InfoLabel filled={ focus.gender } error={ error.gender }>Gender</InfoLabel>
+        <InfoLabel filled={ focus.gender } error={ false }>Gender</InfoLabel>
         <select
           name="gender"
           value={ formData.gender }
