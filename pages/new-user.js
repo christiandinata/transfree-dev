@@ -2,7 +2,7 @@ import Router from 'next/router'
 import { useState, useEffect, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { getCookie } from '../utils/cookie'
-import { NavBarWhite } from '../components/MenuComponents.js'
+import Menu from '../components/menu.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import StyledDropzone from '../components/StyledDropzone'
 import initialize from '../utils/initialize'
@@ -176,7 +176,7 @@ function NewUser (props) {
   return (
     <Fragment>
       <Header />
-      <NavBarWhite isAuthenticated={props.isAuthenticated} username={props.username} id={props.id}/>
+      <Menu isAuthenticated = {props.isAuthenticated} username = {props.username} scrolled_props = "true" is_homepage = "false"/>
       <Profile.Wrapper>
         {/* Blue BG Sidebar */}
         <Actions>
