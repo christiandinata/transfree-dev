@@ -173,6 +173,7 @@ function CreateProfile(props) {
 
   function handleOnChange(e) {
     const { name, value } = e.target
+    console.log(name + " " + value)
     if( name == "idNumber" && /^[A-za-z0-9]*$/.test(value) ){
       setFormData({
         ...formData,
@@ -194,13 +195,27 @@ function CreateProfile(props) {
         ...formData,
         [name]: value
       })
-    } else if ( name == "dob" || name == "gender" 
-    || name == "idType" ) {
+    } else if ( name == "gender" || name == "idType" ) {
       setFormData({
         ...formData,
         [name]: value
       })
     }
+  }
+
+  function handleDateChange(date) {
+    setFormData({
+      ...formData,
+      dob: date
+    }) 
+    setFocus({
+      ...focus,
+      dob: false
+    })
+    setError({
+      ...error,
+      dob: false
+    })
   }
 
   return(
@@ -272,15 +287,7 @@ function CreateProfile(props) {
               dateFormat="dd-MM-yyyy"
               error={ error.dob }
               selected={ formData.dob }
-              onChange={ (date) => {
-                setFormData({
-                  ...formData,
-                  dob: date
-                }) 
-                setFocus({
-                  dob: false
-                })
-              }}
+              onChange={ (date) => handleDateChange(date) }
               showMonthDropdown
               showYearDropdown
               maxDate={ new Date() }
