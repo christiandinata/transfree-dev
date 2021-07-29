@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import authActions from '../redux/actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as Navbar from './MenuComponents';
+import * as Profile from './ProfileComponents';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { useEffect, useState } from 'react';
 
-const Menu = ({isAuthenticated, isApproved, deauthenticate, username, id, is_homepage}) => {
+const Menu = ({isAuthenticated, isApproved, deauthenticate, username, id, is_homepage, is_profile, choice, setChoice}) => {
   const [scrolled, setScrolled] = useState(false)
   const [clicked, setClicked] = useState(false)
   const [isHomepage, setIsHomepage] = useState(is_homepage)
@@ -42,7 +43,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username, id, is_hom
   }, [isHomepage])
 
   return(
-    <Navbar.Nav scrolled = {scrolled} homepage = "true" marginTop = "-72px" clicked = {clicked} isAuth = {isAuthenticated}>
+    <Navbar.Nav scrolled = {scrolled} homepage = "true" marginTop = "-72px" clicked = {clicked} isAuth = {isAuthenticated} profile = {is_profile}>
       <Navbar.NavInner scrolled = {scrolled} homepage = "true" clicked = {clicked}>
         <Navbar.HeaderWrapper clicked = {clicked}>
           <a href = "/"><Navbar.Logo src="../static/images/transfree-logo.png" scrolled = {scrolled} homepage = "true"/></a>
@@ -77,6 +78,38 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username, id, is_hom
         {isAuthenticated ? 
         <React.Fragment>
           <Navbar.NavigationCenter clicked = {clicked}>
+            {is_profile && clicked && choice == 'detail' ?
+              <Profile.ActionSect>
+                <Profile.ActionChoiceActive onClick = {() => setChoice("detail")} value = "detail">
+                    <Profile.ChoiceImg src = "../static/images/profile/detail-profile-blue.png"/>
+                    <Profile.AccountLinkActive>Detail Profile</Profile.AccountLinkActive>
+                    <Profile.ArrowRightImg src = "../static/images/profile/arrow-right-blue.png"/> 
+                </Profile.ActionChoiceActive>
+
+                <Profile.ActionChoice onClick = {() => setChoice("edit")} value = "edit">
+                    <Profile.ChoiceImg src = "../static/images/profile/edit-profile-white.png"/>
+                    <Profile.AccountLink>Edit Profile</Profile.AccountLink>
+                    <Profile.ArrowRightImg src = "../static/images/profile/arrow-right-white.png"/>
+                </Profile.ActionChoice>
+              </Profile.ActionSect>
+          : null}
+
+            {is_profile && clicked && choice == 'edit' ?
+              <Profile.ActionSect>
+                <Profile.ActionChoice onClick = {() => setChoice("detail")} value = "detail">
+                    <Profile.ChoiceImg src = "../static/images/profile/detail-profile-white.png"/>
+                    <Profile.AccountLink>Detail Profile</Profile.AccountLink>
+                    <Profile.ArrowRightImg src = "../static/images/profile/arrow-right-white.png"/> 
+                </Profile.ActionChoice>
+
+                <Profile.ActionChoiceActive onClick = {() => setChoice("edit")} value = "edit">
+                    <Profile.ChoiceImg src = "../static/images/profile/edit-profile-blue.png"/>
+                    <Profile.AccountLinkActive>Edit Profile</Profile.AccountLinkActive>
+                    <Profile.ArrowRightImg src = "../static/images/profile/arrow-right-blue.png"/>
+                </Profile.ActionChoiceActive>
+              </Profile.ActionSect>
+          : null}
+
             <Navbar.NavigationChild href = "/order" scrolled = {scrolled} homepage = "true" navChildColor = "#f5f5f5">
               Send Money
             </Navbar.NavigationChild>

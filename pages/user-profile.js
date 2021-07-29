@@ -297,7 +297,16 @@ function UserProfile(props) {
     return(
         <Profile.MainWrapper>
             <Header/>
-            <Menu isAuthenticated = {true} username = {info.fullName} id = {info.idNumber} scrolled_props = "true" is_homepage = "false"/>
+            <Menu 
+                isAuthenticated = {true} 
+                username = {info.fullName} 
+                id = {info.idNumber} 
+                scrolled_props = "true" 
+                is_homepage = "false" 
+                is_profile = "true"
+                choice = {choice}
+                setChoice = {setChoice}
+                />
 
             {choice == 'detail' ? 
 
@@ -413,19 +422,19 @@ function UserProfile(props) {
             </Profile.Wrapper> 
         : 
             <Profile.Wrapper>
-                <Profile.ActionSect>
+                {/* <Profile.ActionSect>
                     <Profile.ActionChoice onClick = {handleChoiceChange} value = "detail">
                         <Profile.ChoiceImg src = "../static/images/profile/detail-profile-white.png"/>
                         <Profile.AccountLink>Detail Profile</Profile.AccountLink>
                         <Profile.ArrowRightImg src = "../static/images/profile/arrow-right-white.png"/> 
                     </Profile.ActionChoice>
 
-                    <Profile.ActionChoiceActive onClick = {handleChoiceChange} value = "edit">
+                    <Profile.ActionChoiceEdit onClick = {handleChoiceChange} value = "edit">
                         <Profile.ChoiceImg src = "../static/images/profile/edit-profile-blue.png"/>
                         <Profile.AccountLinkActive>Edit Profile</Profile.AccountLinkActive>
                         <Profile.ArrowRightImg src = "../static/images/profile/arrow-right-blue.png"/>
-                    </Profile.ActionChoiceActive>
-                </Profile.ActionSect>
+                    </Profile.ActionChoiceEdit>
+                </Profile.ActionSect> */}
 
                 <Profile.ProfileSect>
                     <Profile.ProfileAction>

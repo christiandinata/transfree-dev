@@ -67,9 +67,11 @@ export const Nav = styled.div`
 	@media only screen and (max-width: 900px) {
 		background-color: ${({ homepage }) => (homepage ? "#fff" : "#009fe3")};
 		display: block;
-		height: ${({ clicked, isAuth }) => {
+		height: ${({ clicked, isAuth, profile }) => {
 			if (clicked) {
-				if (isAuth) {
+				if (isAuth && profile) {
+					return "620px";
+				} else if (isAuth) {
 					return "450px";
 				} else {
 					return "350px";
@@ -199,7 +201,7 @@ export const NavigationCenter = styled.div`
 		flex-direction: column;
 		background-color: #fff;
 		align-items: stretch;
-		margin: 16px 16px 16px 16px;
+		// margin: 16px 16px 16px 16px;
 	};
 `;
 
@@ -241,8 +243,9 @@ export const NavigationChild = styled.a`
 	@media only screen and (max-width: 900px) {
 		color: #2B2A35;
 		// margin: 16px 16px 0 16px;
-		margin-top: 16px;
-		margin-right: 0;
+		margin: 16px 0 16px 16px;
+		// margin-top: 16px;
+		// margin-right: 0;
 		padding-bottom: 16px;
 		border-bottom: 1px solid #E2E2E2;
 	}

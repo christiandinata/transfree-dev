@@ -24,6 +24,11 @@ export const ActionSect = styled.section`
     // width: 25%;
     background: #1687e5;
     padding-top: 38px;
+
+    @media only screen and (max-width: 900px) {
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
 `;
 
 export const ActionChoice = styled.button`
@@ -38,6 +43,13 @@ export const ActionChoice = styled.button`
     padding: 16px 23.3px 16px 16px;
     vertical-align: middle;
     width: 260px;
+
+    @media only screen and (max-width: 900px) {
+        margin-top: 0;
+        padding: 16px;
+        width: 90%;
+        text-align: left;
+    }
 `;
 
 export const ActionChoiceActive = styled(ActionChoice)`
@@ -167,10 +179,15 @@ export const AccountLink = styled.p`
     font-size: 14px;
     line-height: 26px;
     color: #ffffff;
+
+    @media only screen and (max-width: 900px) {
+        font-weight: 500;
+        line-height: 20px;
+    }
 `;
 
 export const AccountLinkActive = styled(AccountLink)`
-    color: #009FE3;
+    color: #009FE3 !important;
 `;
 
 export const AccountText = styled.h3`
