@@ -48,10 +48,47 @@ function ForgotPassword(props) {
 		confirmPassword: false,
 	});
 
+	const [spaceEntered, setSpaceEntered] = useState(false);
+	const [shortPassword, setShortPassword] = useState(false);
 	const [hiddenPass, setHiddenPass] = useState(true);
 	const [hiddenConfirmPass, setHiddenConfirmPass] = useState(true);
 	const [errorMsg, setErrorMsg] = useState(false);
 	const [verifyPassword, setVerifyPassword] = useState(true);
+
+	const size = useWindowSize();
+
+	function useWindowSize() {
+		// Initialize state with undefined width/height so server and client renders match
+		// Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
+		const [windowSize, setWindowSize] = useState({
+			width: undefined,
+			height: undefined,
+		});
+
+		useEffect(() => {
+			// only execute all the code below in client side
+			if (typeof window !== "undefined") {
+				// Handler to call on window resize
+				function handleResize() {
+					// Set window width/height to state
+					setWindowSize({
+						width: window.innerWidth,
+						height: window.innerHeight,
+					});
+				}
+
+				// Add event listener
+				window.addEventListener("resize", handleResize);
+
+				// Call handler right away so state gets updated with initial window size
+				handleResize();
+
+				// Remove event listener on cleanup
+				return () => window.removeEventListener("resize", handleResize);
+			}
+		}, []); // Empty array ensures that effect is only run on mount
+		return windowSize;
+	}
 
 	// function that handles form inputs
 	function handleChange(e) {
@@ -81,6 +118,18 @@ function ForgotPassword(props) {
 				setValues({
 					...values,
 					email: "",
+				});
+			}
+		} else if (!verifyPassword) {
+			if (name == "password") {
+				setValues({
+					...values,
+					password: "",
+				});
+			} else if (name == "confirmPassword") {
+				setValues({
+					...values,
+					confirmPassword: "",
 				});
 			}
 		}
@@ -146,9 +195,28 @@ function ForgotPassword(props) {
 
 	//Verifikasi untuk ganti password
 	function handleVerify(event) {
+		event.preventDefault();
+		setShortPassword(false);
 		if (values.password != values.confirmPassword) {
-			event.preventDefault();
+			if (values.password.length < 8) {
+				setVerifyPassword(false);
+				setShortPassword(true);
+				setError({
+					...error,
+					password: true,
+					confirmPassword: true,
+				});
+			} else {
+				setVerifyPassword(false);
+				setError({
+					...error,
+					password: true,
+					confirmPassword: true,
+				});
+			}
+		} else if (values.password.length < 8) {
 			setVerifyPassword(false);
+			setShortPassword(true);
 			setError({
 				...error,
 				password: true,
@@ -194,6 +262,7 @@ function ForgotPassword(props) {
 					setCountdown({
 						...countdown,
 						seconds: 59,
+						minutes: 4,
 					});
 					setValues({ ...values, sid: response.data.serviceSid });
 					setErrorMsg(false);
@@ -209,7 +278,7 @@ function ForgotPassword(props) {
 	}
 
 	const [countdown, setCountdown] = useState({
-		minutes: "00",
+		minutes: 4,
 		seconds: 59,
 	});
 
@@ -225,11 +294,26 @@ function ForgotPassword(props) {
 						...countdown,
 						seconds: countdown.seconds - 1,
 					});
+				} else {
+					if (countdown.minutes == 0) {
+						setCountdown({
+							...countdown,
+							seconds: 0,
+							minutes: 0,
+						});
+					} else {
+						setCountdown({
+							...countdown,
+							minutes: countdown.minutes - 1,
+							seconds: 59,
+						});
+					}
 				}
 			}, 1000);
 			return () => clearTimeout(counter);
 		} else {
 			countdown.seconds = 59;
+			countdown.minutes = 4;
 		}
 	});
 
@@ -275,7 +359,7 @@ function ForgotPassword(props) {
 							)}
 							{step == "otp" && (
 								<>
-									<BelowHeading1>
+									<BelowHeading1 className="bold">
 										Enter the Verification Code
 									</BelowHeading1>
 									<BelowHeading step="otp">
@@ -343,12 +427,18 @@ function ForgotPassword(props) {
 										handleCodeChange(value)
 									}
 									numInputs={6}
-									containerStyle="containerStyling"
+									containerStyle={
+										size.width < 375
+											? "smallscreen"
+											: "containerStyling"
+									}
 									inputStyle={
 										errorMsg
 											? "inputStyling error"
 											: values.code.toString().length == 6
 											? "inputStyling filled"
+											: size.width < 375
+											? "inputStyling-smallscreen"
 											: "inputStyling"
 									}
 									isInputNum={true}
@@ -359,12 +449,13 @@ function ForgotPassword(props) {
 									hasErrored={errorMsg ? "true" : null}
 									errorStyle="errorStyling"
 								/>
-								{countdown.seconds > 0 ? (
+								{countdown.minutes > 0 ||
+								countdown.seconds > 0 ? (
 									<ResendCodeDiv>
 										Resend in{" "}
 										<b>
 											{" "}
-											{countdown.minutes}:
+											0{countdown.minutes}:
 											{countdown.seconds < 10
 												? "0"
 												: null}
@@ -407,7 +498,17 @@ function ForgotPassword(props) {
 										required
 										placeholder="Password"
 										error={error.password}
-										onChange={handleChange}
+										onKeyDown={(e) => {
+											if (e.keyCode == 32) {
+												setSpaceEntered(true);
+												alert(
+													"Password doens't allow a space"
+												);
+											} else {
+												setSpaceEntered(false);
+											}
+										}}
+										onChange={!spaceEntered && handleChange}
 										onFocus={handleOnFocus}
 										onBlur={handleOnBlur}
 									/>
@@ -431,12 +532,15 @@ function ForgotPassword(props) {
 									</EyeIcon>
 								</InputContainer>
 								{error.password ||
-								(!filled.password && !verifyPassword) ? (
+								(!filled.password &&
+									(!verifyPassword || shortPassword)) ? (
 									<ErrorText>
 										{!verifyPassword &&
 										!selected.password &&
 										filled.password
-											? "Password and confirmation password do not match"
+											? shortPassword
+												? "Password minimum length is 8"
+												: "Password and confirmation password do not match"
 											: "Password cannot be blank"}
 									</ErrorText>
 								) : null}
@@ -473,7 +577,17 @@ function ForgotPassword(props) {
 										required
 										placeholder="Confirm New Password"
 										error={error.confirmPassword}
-										onChange={handleChange}
+										onKeyDown={(e) => {
+											if (e.keyCode == 32) {
+												setSpaceEntered(true);
+												alert(
+													"Password doens't allow a space"
+												);
+											} else {
+												setSpaceEntered(false);
+											}
+										}}
+										onChange={!spaceEntered && handleChange}
 										onFocus={handleOnFocus}
 										onBlur={handleOnBlur}
 									/>
@@ -500,12 +614,15 @@ function ForgotPassword(props) {
 									</EyeIcon>
 								</InputContainer>
 								{error.confirmPassword ||
-								(!filled.confirmPassword && !verifyPassword) ? (
+								(!filled.confirmPassword &&
+									(!verifyPassword || shortPassword)) ? (
 									<ErrorText>
 										{!verifyPassword &&
 										!selected.confirmPassword &&
 										filled.confirmPassword
-											? "Password and confirmation password do not match"
+											? shortPassword
+												? "Password minimum length is 8"
+												: "Password and confirmation password do not match"
 											: "Confirmation password cannot be blank"}
 									</ErrorText>
 								) : null}
@@ -584,6 +701,19 @@ function ForgotPassword(props) {
 					align-items: center;
 				}
 
+				.containerStyling > div {
+					width: 48px;
+					height: 54px;
+					margin-left: 4px;
+					margin-right: 4px;
+				}
+
+				.smallscreen {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
+
 				.inputStyling {
 					font-size: 20px;
 					line-height: 24px;
@@ -591,10 +721,25 @@ function ForgotPassword(props) {
 					font-weight: 700;
 					width: 48px !important;
 					height: 54px;
-					margin: 4px;
 					border: 1px solid #e2e2e2;
 					border-radius: 4px;
+					margin-left: -3px;
 				}
+
+				.inputStyling-smallscreen {
+					font-size: 20px;
+					line-height: 24px;
+					font-weight: 700;
+					color: #232933;
+					width: 40px !important;
+					height: 48px;
+					border: 1px solid #e2e2e2;
+					border-radius: 4px;
+					padding: 0 !important;
+					margin-left: 4px;
+					margin-right: 4px;
+				}
+
 				.inputStyling.error {
 					color: #ff0000;
 					font-weight: 700;
@@ -632,6 +777,14 @@ const RecoveryContainer = styled.div`
 	justify-content: center;
 	background-image: url("../static/images/Batik_World_Map_1.png");
 	background-repeat: no-repeat;
+	background-color: #f3f5f7;
+
+	@media (max-width: 620px) {
+		background-image: none;
+		background-repeat: none;
+		background-color: #f3f5f7;
+		min-height: 620px;
+	}
 `;
 
 const RecoveryForm = styled.form`
@@ -645,6 +798,20 @@ const RecoveryForm = styled.form`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+
+	transition: 0.4s all ease-in;
+
+	@media (max-width: 620px) {
+		width: 344px;
+		margin-right: 16px;
+		margin-left: 16px;
+		border: none;
+		border-radius: 4px;
+	}
+
+	@media (max-width: 375px) {
+		width: 90vw;
+	}
 `;
 
 const RecoveryFormInner = styled.div`
@@ -652,6 +819,15 @@ const RecoveryFormInner = styled.div`
 	display: flex;
 	height: 100%;
 	flex-direction: column;
+	transition: 0.4s all ease-in;
+
+	@media (max-width: 620px) {
+		width: 312px;
+	}
+
+	@media (max-width: 375px) {
+		width: 80vw;
+	}
 `;
 
 const Heading = styled.p`
@@ -662,6 +838,7 @@ const Heading = styled.p`
 	color: #009fe3;
 	margin-bottom: 32px;
 	margin-top: 32px;
+	word-wrap: break-word;
 `;
 
 const BelowHeading1 = styled.div`
@@ -940,6 +1117,10 @@ const CopyrightDiv = styled.div`
 	text-align: center;
 	letter-spacing: 0.2px;
 	color: #232933;
+
+	@media (max-width: 629px) {
+		height: 96px;
+	}
 `;
 
 ForgotPassword.getInitialProps = async (ctx) => {

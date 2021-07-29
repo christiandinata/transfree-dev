@@ -31,7 +31,6 @@ class Dashboard extends React.Component {
       fromAmount: 1000,
       toAmount: 0
     };
-
     this.toggleSource = this.toggleSource.bind(this);
     this.hideSource = this.hideSource.bind(this);
     this.toggleDestination = this.toggleDestination.bind(this);
@@ -41,6 +40,8 @@ class Dashboard extends React.Component {
     this.reverse = this.reverse.bind(this);
     this.selectDestination = this.selectDestination.bind(this);
     this.selectSource = this.selectSource.bind(this);
+    this.disabledSource = this.disabledSource.bind(this);
+    this.disabledDestination = this.disabledDestination.bind(this);
   }
 
   static async getInitialProps(ctx) {
@@ -56,6 +57,11 @@ class Dashboard extends React.Component {
       rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
       toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
     })
+    document.addEventListener('mousedown', this.handleClick)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClick)
   }
 
   reverse(country, country2) {
@@ -95,7 +101,6 @@ class Dashboard extends React.Component {
         });
       }
     }
-
   }
 
   toggleSource() {
@@ -126,97 +131,95 @@ class Dashboard extends React.Component {
     });
   }
 
+  disabledSource(country){
+    if(country == this.state.toCurrency){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  disabledDestination(country){
+    if(country == this.state.fromCurrency){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
   selectSource(country) {
-    if (country == 'idr') {
-      this.props.getRates(this.state.toCurrency, country).then(() => {
-        if (this.state.toCurrency == 'idr') {
-          this.setState({
-            rate: 1,
-            fromCurrency: country,
-            toAmount: this.state.fromAmount
-          });
-        } else {
+    if(country != this.state.toCurrency){
+      if (country == 'idr') {
+        this.props.getRates(this.state.toCurrency, country).then(() => {
           this.setState({
             rate: this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100),
             fromCurrency: country,
             toAmount: this.state.fromAmount / (this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100))
           });
-        }
-      });
-    } else {
-      this.props.getRates(country, this.state.toCurrency).then(() => {
-        if (this.state.toCurrency == 'idr') {
-          this.setState({
-            rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
-            fromCurrency: country,
-            toAmount: this.state.fromAmount / (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
-          })
-        } else {
-          this.setState({
-            rate: this.props.rate,
-            fromCurrency: country,
-            toAmount: this.state.fromAmount / this.props.rate
-          });
-        }
-      });
+        });
+      } else {
+        this.props.getRates(country, this.state.toCurrency).then(() => {
+          if (this.state.toCurrency == 'idr') {
+            this.setState({
+              rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
+              fromCurrency: country,
+              toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
+            })
+          } else {
+            this.setState({
+              rate: this.props.rate,
+              fromCurrency: country,
+              toAmount: this.state.fromAmount / this.props.rate
+            });
+          }
+        });
+      }
+      this.hideSource();
     }
-    this.hideSource();
   }
 
   selectDestination(country) {
-    console.log(this.state)
-    if (country == 'idr') {
-      this.props.getRates(this.state.fromCurrency, country).then(() => {
-        if (this.state.fromCurrency == 'idr') {
-          this.setState({
-            rate: 1,
-            toCurrency: country,
-            toAmount: this.state.fromAmount
-          });
-        } else {
+    if(country != this.state.fromCurrency){
+      if (country == 'idr') {
+        this.props.getRates(this.state.fromCurrency, country).then(() => {
           this.setState({
             rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
             toCurrency: country,
             toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
           });
-        }
-      });
-    } else {
-      if (this.state.fromCurrency == 'idr') {
-        this.props.getRates(country, this.state.fromCurrency).then(() => {
-          this.setState({
-            rate: this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100),
-            toCurrency: country,
-            toAmount: this.state.fromAmount / (this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100))
-          });
         });
       } else {
-        this.props.getRates(this.state.fromCurrency, country).then(() => {
-          this.setState({
-            rate: this.props.rate,
-            toCurrency: country,
-            toAmount: this.state.fromAmount * this.props.rate
+        if (this.state.fromCurrency == 'idr') {
+          this.props.getRates(country, this.state.fromCurrency).then(() => {
+            this.setState({
+              rate: this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100),
+              toCurrency: country,
+              toAmount: this.state.fromAmount / (this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100))
+            });
           });
-        });
+        } else {
+          this.props.getRates(this.state.fromCurrency, country).then(() => {
+            this.setState({
+              rate: this.props.rate,
+              toCurrency: country,
+              toAmount: this.state.fromAmount * this.props.rate
+            });
+          });
+        }
       }
+      this.hideDestination();
     }
-    this.hideDestination();
   }
 
   handleSourceChange(e) {
     const fromAmount = e.target.value.replace(/,/g, '');
     if (this.state.fromCurrency == 'idr') {
-      if (fromAmount < 100000) {
-        this.setState({
-          fromAmount: fromAmount,
-          toAmount: 0
-        })
-      } else {
         this.setState({
           fromAmount: fromAmount,
           toAmount: fromAmount / this.state.rate
         })
-      }
     } else {
       this.setState({
         fromAmount: fromAmount,
@@ -240,6 +243,17 @@ class Dashboard extends React.Component {
     }
   }
 
+  handleClick = (e) => {
+    if(e.target.className != "input-country") {
+      if(this.state.isSourceActive) {
+        this.toggleSource()
+      }
+      if(this.state.isDestinationActive) {
+        this.toggleDestination()
+      }
+    }
+  }
+
   render() {
     return (
       <div>
@@ -257,7 +271,8 @@ class Dashboard extends React.Component {
                 onChange={this.handleSourceChange}
                 onSelect={this.selectSource} 
                 onClick={this.toggleSource}
-                show={this.state.isSourceActive}/>
+                show={this.state.isSourceActive}
+                disabled={this.disabledSource}/>
               <Hero.InputNumber
                 label={"Recipient gets"}
                 amount={this.state.toAmount}
@@ -265,7 +280,8 @@ class Dashboard extends React.Component {
                 onChange={this.handleDestinationChange}
                 onSelect={this.selectDestination} 
                 onClick={this.toggleDestination}
-                show={this.state.isDestinationActive}/>
+                show={this.state.isDestinationActive}
+                disabled={this.disabledDestination}/>
               <Hero.RateAndFee
                 rate={this.state.rate}
                 fee={0}/>

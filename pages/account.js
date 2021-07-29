@@ -8,6 +8,7 @@ import { getCookie } from '../utils/cookie';
 import { AwaitingConfirmation } from '../components/order/Pending';
 import { EmptyTransaction, EmptySearch } from '../components/transactions/EmptyTransaction';
 import { NavBarWhite } from '../components/MenuComponents';
+import Menu from '../components/menu.js';
 import Footer from '../components/footer';
 import moment from 'moment';
 
@@ -21,7 +22,7 @@ const ContainerFluid = styled.div`
 `;
 
 const ContentContainer = styled.div`
-  margin-top: 10px;
+  margin: 10px;
 `;
 
 const BackgroundContainer = styled.div`
@@ -49,9 +50,10 @@ const BackgroundContainer = styled.div`
     line-height: 55px;
   }
 
-  @media only screen and (max-width: 774px) {
+  @media only screen and (max-width: 768px) {
     >.title{
-      top: 25%;
+      min-width: 400px;
+      font-size: 32px;
     }
 
     >.image{
@@ -72,6 +74,7 @@ const SearchContainer = styled.div`
 
   @media only screen and (max-width: 640px) {
     width: auto;
+    margin-left: 2px;
   }
 `;
 
@@ -103,7 +106,7 @@ const SearchBar = styled.input`
   }
 
   @media only screen and (max-width: 640px) {
-    margin-right: 10px;
+    margin-right: 8px;
   }
 `;
 
@@ -128,10 +131,6 @@ const AllItemContainer = styled.div`
   max-width: 1020px;
   height: auto;
   margin: 20px auto;
-
-  @media only screen and (max-width: 800px) {
-    padding: 0px 10px 0px 10px;
-  }
 `;
 
 const ItemContainer = styled.div`
@@ -155,8 +154,8 @@ const ItemContainer = styled.div`
     border-color: #009FE3;
   `}
 
-  @media only screen and (max-width: 600px) {
-    padding: 20px;
+  @media only screen and (max-width: 768px) {
+    padding: 15px;
   }
 `;
 
@@ -179,6 +178,10 @@ const Date = styled.span`
 
   >.completed{
     color: #00A000;
+  }
+
+  >.canceled{
+    color: #FF0000;
   }
 `;
 
@@ -226,6 +229,14 @@ const Divider = styled.div`
   width: 2px;
   margin: -10px 11px -5px;
   background: #F2F4F7;
+
+  @media only screen and (max-width: 768px) {
+    margin-left: 9px;
+  }
+
+  ${({ hide }) => hide && `
+    display: none;
+  `}
 `;
 
 const ListItem = styled.li`
@@ -239,12 +250,19 @@ const ListItem = styled.li`
     margin-left: 20px;
   }
 
-  @media only screen and (max-width: 400px) {
+  @media only screen and (max-width: 768px) {
+    padding-left: 2px;
+
     >.textItem{
-      font-size: 12.5px;
+      font-size: 13.5px;
       margin-left: 10px;
+      margin-right: -5px;
     }
   }
+
+  ${({ hide }) => hide && `
+    display: none;
+  `}
 `;
 
 /* Displays order item list and each details */
@@ -286,8 +304,8 @@ class OrderItem extends React.Component {
               <ItemRow>
                 <ItemColumn left>
                   <Date>
-                    <span className={order.completedAt == 0.0 ? 'processing' : 'completed'}>
-                      {order.completedAt == 0.0 ? 'Processing' : 'Completed on '+ moment(order.completedAt).format("DD/MM/YYYY HH:mm")}
+                    <span className={order.canceledAt? 'canceled' : order.completedAt == 0.0 ? 'processing' : 'completed'}>
+                      {order.canceledAt? 'Canceled on ' + moment(order.canceledAt).format("DD/MM/YYYY HH:mm") : order.completedAt == 0.0 ? 'Processing' : 'Completed on '+ moment(order.completedAt).format("DD/MM/YYYY HH:mm")}
                     </span>
                   </Date>
                 </ItemColumn>
@@ -304,25 +322,27 @@ class OrderItem extends React.Component {
                 </ListItem>
                 <Divider/>
                 <ListItem>
-                  <Bullet blue={moment(moment().format("DD/MM/YYYY HH:mm")).isAfter(moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) || order.receivedAt != 0.0}><div className="smallBullet"/></Bullet>
+                  <Bullet blue={moment(moment().format("DD/MM/YYYY HH:mm")).isAfter(moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) || order.receivedAt != 0.0 || order.canceledAt}><div className="smallBullet"/></Bullet>
                   <p className="textItem">
-                    {(moment(moment().format("DD/MM/YYYY HH:mm"))
-                    .isAfter
-                    (moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) )
-                    ||
-                    (order.receivedAt != 0.0)
+                    { (moment(moment().format("DD/MM/YYYY HH:mm")).isAfter(moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) ) ||
+                      (order.receivedAt != 0.0)
                     ?
-                    ('We are processing your ' + order.toCurrency.toUpperCase() +' booking')
+                      ('We are processing your ' + order.toCurrency.toUpperCase() +' booking')
+                    :
+                    (order.canceledAt)
+                    ?
+                      ('Canceled on ' + moment(order.canceledAt).format("DD/MM/YYYY HH:mm"))
                     :
                     ('We are waiting to process your ' + order.toCurrency.toUpperCase() +' booking') }
                   </p>
                 </ListItem>
-                <Divider/>
-                <ListItem>
-                  <Bullet blue={order.completedAt != 0.0}><div className="smallBullet"/></Bullet>
+                <Divider hide={order.canceledAt && !(moment(moment().format("DD/MM/YYYY HH:mm")).isAfter(moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) || order.receivedAt != 0)}/>
+                <ListItem hide={order.canceledAt && !(moment(moment().format("DD/MM/YYYY HH:mm")).isAfter(moment(order.createdAt).add('hours', 1).format("DD/MM/YYYY HH:mm")) || order.receivedAt != 0)}>
+                  <Bullet blue={order.completedAt != 0.0 || order.canceledAt}><div className="smallBullet"/></Bullet>
                   <p className="textItem">
-                    {order.completedAt == 0.0 ? ('We will complete your transfer') :  ('Completed on ')}
-                    {order.completedAt == 0.0 ? '' : <span style={{fontWeight: "bolder"}}>{moment(order.completedAt).format("DD/MM/YYYY HH:mm")}</span>}
+                    {order.canceledAt ? ('Canceled on ') : order.completedAt == 0.0 ? ('We will complete your transfer') :  ('Completed on ')}
+                    {order.canceledAt ? <span style={{fontWeight: "bolder"}}>{(moment(order.canceledAt).format("DD/MM/YYYY HH:mm"))} </span> :
+                      order.completedAt == 0.0 ? '' : <span style={{fontWeight: "bolder"}}>{moment(order.completedAt).format("DD/MM/YYYY HH:mm")}</span>}
                   </p>
                 </ListItem>
               </ItemDetail>
@@ -359,10 +379,17 @@ class Account extends React.Component {
 
   navbarTransaction(){
     return(
-      <NavBarWhite 
-        isAuthenticated={true} 
-        username={this.props.username} 
-        id={this.props.id}
+      // <NavBarWhite 
+      //   isAuthenticated={true} 
+      //   username={this.props.username} 
+      //   id={this.props.id}
+      //   current={"transactions"}/>
+      <Menu 
+        isAuthenticated = {true} 
+        username = {this.props.username} 
+        id = {this.props.id} 
+        scrolled_props = "true" 
+        is_homepage = "false"
         current={"transactions"}/>
     )
   }
@@ -387,8 +414,10 @@ class Account extends React.Component {
           String(this.props.orderArray[order].fromAmount).indexOf(words[word]) > -1 ||
           String(this.props.orderArray[order].toAmount).indexOf(words[word]) > -1 ||
           moment(this.props.orderArray[order].completedAt).format("DD/MM/YYYY HH:mm").indexOf(words[word]) > -1|| 
-          ("processing".indexOf(words[word]) > -1 && this.props.orderArray[order].completedAt == 0) ||
-          ("completed".indexOf(words[word]) > -1 && this.props.orderArray[order].completedAt > 0)
+          (this.props.orderArray[order].canceledAt && moment(this.props.orderArray[order].canceledAt).format("DD/MM/YYYY HH:mm").indexOf(words[word]) > -1) || 
+          ("processing".indexOf(words[word]) > -1 && this.props.orderArray[order].completedAt == 0 && !this.props.orderArray[order].canceledAt) ||
+          ("completed".indexOf(words[word]) > -1 && this.props.orderArray[order].completedAt > 0 && !this.props.orderArray[order].canceledAt) ||
+          ("canceled".indexOf(words[word]) > -1 && this.props.orderArray[order].canceledAt)
           ){
             count++;
         }

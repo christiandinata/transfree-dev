@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import rateActions from '../../redux/actions';
-import { Converter, InputNumber, RateAndFee } from '../order/Converter';
-import { ModalPopUp } from './PopUp';
-
+import rateActions from '../../../redux/actions';
+import { Converter, InputNumber, RateAndFee } from '../Converter';
+import { ModalPopUp } from '../PopUp';
+import { Button, ButtonContainer } from '../Buttons';
 
 const OrderContainer = styled.div`
   background: #FFFFFF;
@@ -27,36 +27,6 @@ const OrderDetails = styled.p`
   color: #626B79;
 `;
 
-const ButtonContainer = styled.div`
-  padding-top: 40px;
-`;
-
-const Button = styled.button`
-  border: 1px solid #009FE3;
-  border-radius: 4px;
-
-  width: 100%;
-  height: 50px;
-  font-size: 16px;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 8px 24px;
-  margin-bottom: 10px;
-  transition: 0.2s;
-
-  background-color: ${props => props.secondary ? 'white' : '#009FE3'};
-  color: ${props => props.secondary ? '#009FE3' : 'white'};
-
-  ${({ disabled }) => disabled && `
-    opacity: 0.8;
-    background: grey;
-    border-color: grey;
-  `}
-`;
-
 class OrderAmount extends React.Component {
   constructor({ props }) {
     super(props);
@@ -69,13 +39,13 @@ class OrderAmount extends React.Component {
       toAmount: 0,
       currentDay: new Date(),
       duration: '',
+      receivedOn: '',
       oos: false,
+      errorOos: false,
       errorTransaction: false,
       errorMessage: '',
       activeElement: ''
     };
-
-    this.receiveOn = React.createRef();
 
     this.updateActiveElement = this.updateActiveElement.bind(this);
     this.updateDeactiveElement = this.updateDeactiveElement.bind(this);
@@ -83,10 +53,12 @@ class OrderAmount extends React.Component {
     this.toggleModalOOS = this.toggleModalOOS.bind(this);
     this.toggleModalError = this.toggleModalError.bind(this);
     this.selectSource = this.selectSource.bind(this);
+    this.disabledSource = this.disabledSource.bind(this);
     this.hideSource = this.hideSource.bind(this);
     this.toggleDestination = this.toggleDestination.bind(this);
     this.hideDestination = this.hideDestination.bind(this);
     this.selectDestination = this.selectDestination.bind(this);
+    this.disabledDestination = this.disabledDestination.bind(this);
     this.handleSourceChange = this.handleSourceChange.bind(this);
     this.handleDestinationChange = this.handleDestinationChange.bind(this);
     this.checkDuration = this.checkDuration.bind(this);
@@ -113,7 +85,7 @@ class OrderAmount extends React.Component {
   }
 
   toggleModalOOS() {
-    this.setState({ oos: !this.state.oos })
+    this.setState({ errorOos: !this.state.errorOos })
   }
 
   toggleModalError() {
@@ -156,80 +128,86 @@ class OrderAmount extends React.Component {
     });
   }
 
-  selectSource(country) {
-    if (country == 'idr') {
-      this.props.getRates(this.state.toCurrency, country).then(() => {
-        if (this.state.toCurrency == 'idr') {
-          this.setState({
-            rate: 1,
-            fromCurrency: country,
-            toAmount: this.state.fromAmount
-          });
-        } else {
-          this.setState({
-            rate: this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100),
-            fromCurrency: country,
-            toAmount: this.state.fromAmount / (this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100))
-          });
-        }
-      });
-    } else {
-      this.props.getRates(country, this.state.toCurrency).then(() => {
-        if (this.state.toCurrency == 'idr') {
-          this.setState({
-            rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
-            fromCurrency: country,
-            toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
-          })
-        } else {
-          this.setState({
-            rate: this.props.rate,
-            fromCurrency: country,
-            toAmount: this.state.fromAmount / this.props.rate
-          });
-        }
-      });
+  disabledSource(country){
+    if(country == this.state.toCurrency){
+      return true;
     }
-    this.hideSource();
+    else{
+      return false;
+    }
   }
 
-  selectDestination(country) {
-    if (country == 'idr') {
-      this.props.getRates(this.state.fromCurrency, country).then(() => {
-        if (this.state.fromCurrency == 'idr') {
-          this.setState({
-            rate: 1,
-            toCurrency: country,
-            toAmount: this.state.fromAmount
-          });
-        } else {
-          this.setState({
-            rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
-            toCurrency: country,
-            toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
-          });
-        }
-      });
-    } else {
-      if (this.state.fromCurrency == 'idr') {
-        this.props.getRates(country, this.state.fromCurrency).then(() => {
+  disabledDestination(country){
+    if(country == this.state.fromCurrency){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  selectSource(country) {
+    if(country != this.state.toCurrency){
+      if (country == 'idr') {
+        this.props.getRates(this.state.toCurrency, country).then(() => {
           this.setState({
             rate: this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100),
-            toCurrency: country,
+            fromCurrency: country,
             toAmount: this.state.fromAmount / (this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100))
           });
         });
       } else {
-        this.props.getRates(this.state.fromCurrency, country).then(() => {
-          this.setState({
-            rate: this.props.rate,
-            toCurrency: country,
-            toAmount: this.state.fromAmount * this.props.rate
-          });
+        this.props.getRates(country, this.state.toCurrency).then(() => {
+          if (this.state.toCurrency == 'idr') {
+            this.setState({
+              rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
+              fromCurrency: country,
+              toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
+            })
+          } else {
+            this.setState({
+              rate: this.props.rate,
+              fromCurrency: country,
+              toAmount: this.state.fromAmount / this.props.rate
+            });
+          }
         });
       }
+      this.hideSource();
     }
-    this.hideDestination();
+  }
+
+  selectDestination(country) {
+    if(country != this.state.fromCurrency){
+      if (country == 'idr') {
+        this.props.getRates(this.state.fromCurrency, country).then(() => {
+          this.setState({
+            rate: this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100),
+            toCurrency: country,
+            toAmount: this.state.fromAmount * (this.props.rate - (this.props.rate * this.props.adjustedRates.lowerMargin / 100))
+          });
+        });
+      } else {
+        if (this.state.fromCurrency == 'idr') {
+          this.props.getRates(country, this.state.fromCurrency).then(() => {
+            this.setState({
+              rate: this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100),
+              toCurrency: country,
+              toAmount: this.state.fromAmount / (this.props.rate + (this.props.rate * this.props.adjustedRates.upperMargin / 100))
+            });
+          });
+        } else {
+          this.props.getRates(this.state.fromCurrency, country).then(() => {
+            this.setState({
+              rate: this.props.rate,
+              toCurrency: country,
+              toAmount: this.state.fromAmount * this.props.rate
+            });
+          });
+        }
+      }
+      this.hideDestination();
+    }
   }
 
   handleSourceChange(e) {
@@ -285,6 +263,7 @@ class OrderAmount extends React.Component {
       ( this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' && 
         this.state.currentDay.getDay() == '7'))
       {
+        this.setState({receivedOn: 'Next Working Day'})
         return 1;
       }
 
@@ -302,7 +281,7 @@ class OrderAmount extends React.Component {
   saveAndContinue = (e) => {
     e.preventDefault();
     if(this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr'){
-      this.setState({oos:true});
+      this.setState({oos:true, errorOos: true});
     }
     else if(this.state.fromCurrency == 'idr' && (this.state.fromAmount <100000)){
       this.setState({ errorTransaction:true,
@@ -346,7 +325,8 @@ class OrderAmount extends React.Component {
                   onClick={this.toggleSource}
                   onFocus={this.updateActiveElement}
                   onBlur={this.updateDeactiveElement}
-                  show={this.state.isSourceActive}/>
+                  show={this.state.isSourceActive}
+                  disabled={this.disabledSource}/>
                 <InputNumber
                   label={"Recipient gets"}
                   id={"receive"}
@@ -358,7 +338,8 @@ class OrderAmount extends React.Component {
                   onClick={this.toggleDestination}
                   onFocus={this.updateActiveElement}
                   onBlur={this.updateDeactiveElement}
-                  show={this.state.isDestinationActive}/>
+                  show={this.state.isDestinationActive}
+                  disabled={this.disabledDestination}/>
               <div style={{marginLeft: "20px", marginRight:"20px"}}>
                 <RateAndFee
                   rate={this.state.rate}
@@ -366,38 +347,36 @@ class OrderAmount extends React.Component {
               </div>
               </Converter>
             </div>
-
+            <p style={{maxWidth: "100%", marginBottom: "0"}}><span style={{color: '#FF9800'}}>*</span>
+            <span> Your transfer will be processed immediately. </span>
             {             
                 this.checkDuration() == 1 ?
-                 <p style={{maxWidth: "100%", marginBottom: "0"}}><span style={{color: '#FF9800'}}>*</span> Your transfer will be processed immediately.
-                 The recipient will get the money on the <span ref = {this.receiveOn} className="received-on-weekend">next Working Day</span></p>  
+                 <span>The recipient will get the money on the next Working Day</span>
                  :
                  (this.checkDuration() == 2) ?
-                 <p style={{maxWidth: "100%", marginBottom: "0"}}><span style={{color: '#FF9800'}}>*</span> Your transfer will be processed immediately.
-                 The recipient will get the money in less than <span ref = {this.receiveOn} className="received-on" value = "2">24 hours</span>, 
-                 but kindly note, there is a chance that the money will arrive in more than <span id="exception" className="received-on">36 hours</span>.</p>
+                 <span>The recipient will get the money in less than 24 hours, 
+                 but kindly note, there is a chance that the money will arrive in more than 36 hours.</span>
                  :
-                 <p style={{maxWidth: "100%", marginBottom: "0"}}><span style={{color: '#FF9800'}}>*</span> Your transfer will be processed immediately.
-                 The recipient will get the money in less than <span ref = {this.receiveOn} className="received-on" value = "3">24 hours.</span></p> 
+                 <span>The recipient will get the money in less than 24 hours.</span>
               }
+            </p>
             
             <ButtonContainer>
-		          {(this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' && this.props.adjustedRates.idrToGbpOos == 'true')
-                  ||
-                  (this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr' && this.props.adjustedRates.gbpToIdrOos == 'true')
-                  ||
-                  (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur' && this.props.adjustedRates.idrToEurOos == 'true')
-                  ||
-                  (this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr' && this.props.adjustedRates.eurToIdrOos == 'true')
-                  ?
-                  <Button disabled={true}>Out Of Stock</Button>
-                  :
-                  <Button onClick={this.saveAndContinue}>Continue</Button>
+		          {((this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' && this.props.adjustedRates.idrToGbpOos == 'true') ||
+                (this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr' && this.props.adjustedRates.gbpToIdrOos == 'true') ||
+                (this.state.fromCurrency == 'idr' && this.state.toCurrency == 'eur' && this.props.adjustedRates.idrToEurOos == 'true') ||
+                (this.state.fromCurrency == 'eur' && this.state.toCurrency == 'idr' && this.props.adjustedRates.eurToIdrOos == 'true') ||
+                (this.state.fromCurrency == 'gbp' && this.state.toCurrency == 'idr' && this.state.oos))
+                ?
+                <Button disabled={true}>Out Of Stock</Button>
+                :
+                <Button onClick={this.saveAndContinue}>Continue</Button>
               }
             </ButtonContainer>           
         </OrderContainer>
+
         <ModalPopUp
-          open={this.state.oos}
+          open={this.state.errorOos}
           toggleModal={this.toggleModalOOS}
           icon={'../static/images/Asset Web/send money/ic-error.svg'}
           title={"We are out of stock"}

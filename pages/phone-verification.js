@@ -20,6 +20,41 @@ function PhoneVerification(props) {
 		isValidCode: true,
 	});
 
+	const size = useWindowSize();
+
+	function useWindowSize() {
+		// Initialize state with undefined width/height so server and client renders match
+		// Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
+		const [windowSize, setWindowSize] = useState({
+			width: undefined,
+			height: undefined,
+		});
+
+		useEffect(() => {
+			// only execute all the code below in client side
+			if (typeof window !== "undefined") {
+				// Handler to call on window resize
+				function handleResize() {
+					// Set window width/height to state
+					setWindowSize({
+						width: window.innerWidth,
+						height: window.innerHeight,
+					});
+				}
+
+				// Add event listener
+				window.addEventListener("resize", handleResize);
+
+				// Call handler right away so state gets updated with initial window size
+				handleResize();
+
+				// Remove event listener on cleanup
+				return () => window.removeEventListener("resize", handleResize);
+			}
+		}, []); // Empty array ensures that effect is only run on mount
+		return windowSize;
+	}
+
 	const [filledCode, setFilledCode] = useState(false);
 	const [error, setError] = useState(false);
 	const [errorMsg, setErrorMsg] = useState(false);
@@ -105,10 +140,16 @@ function PhoneVerification(props) {
 								value={state.code}
 								onChange={(value) => handleChange(value)}
 								numInputs={6}
-								containerStyle="containerStyling"
+								containerStyle={
+									size.width < 375
+										? "smallscreen"
+										: "containerStyling"
+								}
 								inputStyle={
 									errorMsg
 										? "inputStyling error"
+										: size.width < 375
+										? "inputStyling-smallscreen"
 										: "inputStyling"
 								}
 								focusStyle={
@@ -130,18 +171,18 @@ function PhoneVerification(props) {
 									</Link>
 								</p>
 							</BelowHeading>
-							<Button type="submit">
-								{props.inProgress ? (
-									<FontAwesomeIcon
-										icon="sync-alt"
-										spin
-										style={{ width: 25, height: 25 }}
-									/>
-								) : (
-									"Verify code"
-								)}
-							</Button>
 						</center>
+						<Button type="submit">
+							{props.inProgress ? (
+								<FontAwesomeIcon
+									icon="sync-alt"
+									spin
+									style={{ width: 25, height: 25 }}
+								/>
+							) : (
+								"Verify code"
+							)}
+						</Button>
 					</FormInner>
 				</Form>
 			</FormContainer>
@@ -150,7 +191,21 @@ function PhoneVerification(props) {
 					display: flex;
 					justify-content: center;
 					align-items: center;
-					margin: 80px 0;
+					margin: 80px 4px;
+				}
+
+				.containerStyling > div {
+					width: 48px;
+					height: 54px;
+					margin-left: 4px;
+					margin-right: 4px;
+				}
+
+				.smallscreen {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					margin: 80px 4px;
 				}
 
 				.inputStyling {
@@ -160,14 +215,30 @@ function PhoneVerification(props) {
 					color: #232933;
 					width: 48px !important;
 					height: 54px;
-					margin: 4px;
 					border: 1px solid #e2e2e2;
 					border-radius: 4px;
+					padding: 0 !important;
+					margin-left: -2px;
+					margin-right: 4px;
 				}
 
 				.inputStyling.error {
 					color: #ff0000;
 					font-weight: 700;
+				}
+
+				.inputStyling-smallscreen {
+					font-size: 20px;
+					line-height: 24px;
+					font-weight: 700;
+					color: #232933;
+					width: 40px !important;
+					height: 48px;
+					border: 1px solid #e2e2e2;
+					border-radius: 4px;
+					padding: 0 !important;
+					margin-left: 4px;
+					margin-right: 4px;
 				}
 
 				.focusStyling {
@@ -199,6 +270,11 @@ const FormInner = styled.div`
 	margin: 0 4px;
 	display: flex;
 	flex-direction: column;
+	transition: 0.4s all ease-in;
+
+	@media (max-width: 620px) {
+		width: 312px;
+	}
 `;
 
 const Heading = styled.p`
@@ -221,6 +297,7 @@ const BelowHeading = styled.div`
 
 const Button = styled.button`
 	width: 328px;
+	padding: 8px 24px;
 	margin-top: 50px;
 	margin-bottom: 40px;
 	height: 40px;
@@ -233,9 +310,18 @@ const Button = styled.button`
 	border: none;
 	transition: 0.4s ease all;
 	letter-spacing: 0.2px;
+	place-self: center;
 
 	&:hover {
 		background-color: #068ec8;
+	}
+
+	@media (max-width: 620px) {
+		width: 296px;
+	}
+
+	@media (max-width: 375px) {
+		width: 70vw;
 	}
 `;
 

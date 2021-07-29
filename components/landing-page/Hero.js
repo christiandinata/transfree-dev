@@ -12,6 +12,7 @@ export const MapBackground = styled.div`
   height: 750px;
   @media only screen and (max-width: 800px) {
     height: 1280px;
+    background: none;
   }`
 
 export const Overlay = styled.div`
@@ -53,8 +54,10 @@ export const Converter = styled.div`
   background: #FFFFFF;
   border-radius: 16px;
   color: #626B79;
+  position: relative;
   padding: 2rem 0;
-  flex-basis: 35%;
+  flex-basis: 55%;
+  max-width: 400px;
   @media only screen and (max-width: 800px) {
     text-align: left;
   }`
@@ -91,8 +94,6 @@ const Exchange = styled.div`
     `
 
 const Currency = styled.div`
-    position: relative;
-
     button {
       align-items: center;
       border: none;
@@ -120,7 +121,7 @@ const Currency = styled.div`
 
 const DropDownMenu = styled.div`
     position: absolute;
-    right: 5%;
+    right: 3%;
     z-index: 5;
     padding: 0 0 .5rem;
     margin: .125rem 0 0;
@@ -147,7 +148,18 @@ const DropDownItem = styled.li`
       background: #009FE380;
       color: #FFFFFF;
       cursor: pointer;
-    }`
+    }
+
+    ${({ disabled }) => disabled && `
+    opacity: 0.6;
+
+    &:hover {
+      background: grey;
+      color: #FFFFFF;
+      cursor: default;
+    }
+  `}    
+`
 
 const SearchBar = styled.div`
   align-items: center;
@@ -241,6 +253,7 @@ export function FlagOptions(props) {
       <SearchBar>
       <FontAwesomeIcon icon={faSearch} style={iconStyle}/>
         <input
+          className="currency-search-bar"
           type="text"
           pattern="[a-zA-Z]*"
           placeholder="Enter a country or a currency"
@@ -251,6 +264,7 @@ export function FlagOptions(props) {
       {displayedFlags.map((flag, index) => (
         <DropDownItem
           key={index}
+          disabled={props.disabled(flag.country)}
           onClick={() => props.onSelect(flag.country)}>
           <span className={"flag-icon flag-icon-" + flag.country.substring(0,2) + " flag-icon-squared" }/>
           { `(${flag.country.toUpperCase()}) ${flag.cur}` }
@@ -259,7 +273,7 @@ export function FlagOptions(props) {
       </ul>
     </DropDownMenu>
     :
-    ""
+    null
   )
 }
 
@@ -281,13 +295,14 @@ export function InputNumber(props) {
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)} />
         <Currency>
-          <button onClick={() => props.onClick()}>
+          <button className="input-country" onClick={() => props.onClick()}>
             <span className={"flag-icon flag-icon-"+ props.currency.substring(0,2) +" flag-icon-squared"}/>
             { props.currency }
             <FontAwesomeIcon className="caret" icon="caret-down" />
           </button>
           <FlagOptions
             show={props.show}
+            disabled={(c) => props.disabled(c)}
             onSelect={(c) => props.onSelect(c)} />
         </Currency>
       </InputFlex>

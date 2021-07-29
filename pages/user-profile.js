@@ -2,7 +2,6 @@ import CustomDatePicker from '../components/CustomDatePicker';
 import moment from 'moment';
 import Header from "../components/header";
 import Menu from "../components/menu";
-import { NavBarWhite } from '../components/MenuComponents';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faEye,
@@ -15,8 +14,8 @@ import '../styles/user-profile.css';
 import {connect} from "react-redux";
 import initialize from "../utils/initialize";
 import actions from "../redux/actions";
-import { getCookie } from "../utils/cookie";
-import Link from "next/link";
+import {getCookie} from "../utils/cookie";
+import Link from 'next/link';
 import ENV from "../config";
 import * as axios from "axios";
 import React, { useEffect, useState } from 'react';
@@ -74,11 +73,27 @@ function UserProfile(props) {
         phone: false
     })
 
-    const [choice, setChoice] = useState('detail')
+    const [error, setError] = useState({
+        emailUser: false,
+        password: false,
+        confirmPassword: false,
+        phone: false
+    })
+
+    const [choice, setChoice] = useState('edit')
     const [hiddenPass, setHidden] = useState(true)
     const [hiddenConfirm, setConfirm] = useState(true)
+    const [space, setSpace] = useState(false)
     const [popup, setPopup] = useState(false)
     const [success, setSuccess] = useState(false)
+
+    const validateEmailFormat = (value) => {
+        let format = "^[a-zA-Z0-9+_.-]+@[a-zA-Z.-]+(?:\.[a-zA-Z-]+)+$"
+        if(value.match(format)) {
+            return true
+        }
+        return false
+    }
 
     const handleChoiceChange = (e) => {
         e.preventDefault()
@@ -87,6 +102,40 @@ function UserProfile(props) {
 
     const handleInputChange = (e) => {
         const {name, value} = e.target
+        
+        // Check if the password length is less than 8 characters
+        if(name == 'password' || name == 'confirmPassword') {
+            if(value.length < 8) {
+                setError({
+                    ...error,
+                    [name]: true
+                })
+            }
+            else {
+                setError({
+                    ...error,
+                    [name]: false
+                })
+            }
+        }
+        
+        // Check if the email matches the standard format
+        else if(name == 'emailUser') {
+            if(!validateEmailFormat(value)) {
+                setError({
+                    ...error,
+                    [name]: true
+                })
+            }
+            else {
+                setError({
+                    ...error,
+                    [name]: false
+                })
+            }
+        }
+
+        // Set the input
         setInfo({
             ...info, 
             [name]: value
@@ -94,6 +143,23 @@ function UserProfile(props) {
     }
 
     const handlePhoneChange = (value) => {
+        // Check if the phone number length is less than 8 characters or more than 15 characters
+        // The minimum 8 characters include: 
+        // 1 character for '+' sign and 2 characters for country code (ex: 62 for Indonesia)
+        if(value.length < 8 || value.length > 15) {
+            setError({
+                ...error,
+                phone: true
+            })
+        }
+        else {
+            setError({
+                ...error,
+                phone: false
+            })
+        }
+
+        // Set the input
         setInfo({
             ...info, 
             phone: value
@@ -146,8 +212,19 @@ function UserProfile(props) {
         setPopup(false)
     }
 
+    const checkAllData = () => {
+        if(error.emailUser == true || 
+            error.password == true || 
+            error.confirmPassword == true || 
+            error.phone == true || 
+            info.password != info.confirmPassword) {
+            return false
+        }
+        return true
+    }
+
     const updateUser = async () => {
-        if(info.password == info.confirmPassword) {
+        if(checkAllData()) {
             axios
                 .post(
                     ENV.API + `/v1/user/checkEmail`,
@@ -220,7 +297,7 @@ function UserProfile(props) {
     return(
         <React.Fragment>
             <Header/>
-            <NavBarWhite isAuthenticated = {true} username = {info.fullName} id = {info.idNumber}/>
+            <Menu isAuthenticated = {true} username = {info.fullName} id = {info.idNumber} scrolled_props = "true" is_homepage = "false"/>
 
             {choice == 'detail' ? 
 
@@ -353,9 +430,7 @@ function UserProfile(props) {
                 <Profile.ProfileSect>
                     <Profile.ProfileAction>
                         <Profile.AccountText>Account Profile</Profile.AccountText>
-                        <Link href="/logout" passHref>
-                            <Profile.LogOutButton>Log Out</Profile.LogOutButton>
-                        </Link>
+                        <Profile.LogOutButton href = "/logout">Log Out</Profile.LogOutButton>
                     </Profile.ProfileAction>
                     
                     <Profile.EditWrapper>
@@ -484,9 +559,9 @@ function UserProfile(props) {
                                 </Profile.SectionType>
 
                                 <form>
-                                    <Profile.FormRow>
-                                        <Profile.FormLabel filled = {focus.emailUser}>Email Address</Profile.FormLabel>
-                                        <Profile.InputText 
+                                    <Profile.FormLabel filled = {focus.emailUser}>Email Address</Profile.FormLabel>
+                                    <Profile.FormRowAccount filled = {focus.emailUser} error = {error.emailUser}>
+                                        <Profile.InputTextPassword 
                                             type = "text" 
                                             name = "emailUser"
                                             value = {info.emailUser}
@@ -495,17 +570,32 @@ function UserProfile(props) {
                                             onFocus = {handleFocusChange}
                                             onBlur = {handleBlurChange}
                                         />
-                                    </Profile.FormRow>
+                                    </Profile.FormRowAccount>
+                                    {error.emailUser ? 
+                                        <Profile.ErrorMessage>
+                                            The email format doesn't match the standard format
+                                        </Profile.ErrorMessage>  
+                                        : null
+                                    }
 
                                     <Profile.FormLabel filled = {focus.password}>Password</Profile.FormLabel>
-                                    <Profile.FormRowPassword filled = {focus.password}>
+                                    <Profile.FormRowAccount filled = {focus.password} error = {error.password}>
                                         <Profile.InputTextPassword 
                                             type = {hiddenPass ? "password" : "text"}
                                             name = "password"
                                             value = {info.password}
-                                            onChange = {handleInputChange}
+                                            onChange = {!space && handleInputChange}
                                             onFocus = {handleFocusChange}
                                             onBlur = {handleBlurChange}
+                                            onKeyDown = {(e) => {
+                                                if(e.keyCode == 32) {
+                                                    setSpace(true)
+                                                    alert("Password doesn't allow a space")
+                                                }
+                                                else {
+                                                    setSpace(false)
+                                                }
+                                            }}
                                         />
                                         <Profile.EyePic>
                                             {hiddenPass ? 
@@ -520,17 +610,32 @@ function UserProfile(props) {
                                                 />
                                             }
                                         </Profile.EyePic>
-                                    </Profile.FormRowPassword>
+                                    </Profile.FormRowAccount>
+                                    {error.password ? 
+                                        <Profile.ErrorMessage>
+                                            The minimum character is 8
+                                        </Profile.ErrorMessage>  
+                                        : null
+                                    }
 
                                     <Profile.FormLabel filled = {focus.confirmPassword}>Confirm New Password</Profile.FormLabel>
-                                    <Profile.FormRowPassword filled = {focus.confirmPassword}>
+                                    <Profile.FormRowAccount filled = {focus.confirmPassword} error = {error.confirmPassword}>
                                         <Profile.InputTextPassword 
                                             type = {hiddenConfirm ? "password" : "text"}
                                             name = "confirmPassword"
                                             value = {info.confirmPassword}
-                                            onChange = {handleInputChange}
+                                            onChange = {!space && handleInputChange}
                                             onFocus = {handleFocusChange}
                                             onBlur = {handleBlurChange}
+                                            onKeyDown = {(e) => {
+                                                if(e.keyCode == 32) {
+                                                    setSpace(true)
+                                                    alert("Password doesn't allow a space")
+                                                }
+                                                else {
+                                                    setSpace(false)
+                                                }
+                                            }}
                                         />
                                         <Profile.EyePic>
                                             {hiddenConfirm ? 
@@ -545,10 +650,16 @@ function UserProfile(props) {
                                                 />
                                             }
                                         </Profile.EyePic>
-                                    </Profile.FormRowPassword>
+                                    </Profile.FormRowAccount>
+                                    {error.confirmPassword ? 
+                                        <Profile.ErrorMessage>
+                                            The minimum character is 8
+                                        </Profile.ErrorMessage>  
+                                        : null
+                                    }
 
                                     <Profile.FormLabel filled = {focus.phone}>Phone Number</Profile.FormLabel>
-                                    <Profile.FormRowPhone filled = {focus.phone}>
+                                    <Profile.FormRowPhone filled = {focus.phone} error = {error.phone}>
                                         <Profile.PhoneInput
                                             country = "ID"
                                             value = {info.phone}
@@ -558,6 +669,12 @@ function UserProfile(props) {
                                             onBlur = {(value) => handlePhoneBlurChange(value)}
                                         />
                                     </Profile.FormRowPhone>
+                                    {error.phone ? 
+                                        <Profile.ErrorMessage>
+                                            The minimum character is 8 and the maximum character is 15, include the '+' sign and the country code
+                                        </Profile.ErrorMessage>  
+                                        : null
+                                    }
                                 </form>
                             </Profile.EditData>
 
@@ -597,7 +714,7 @@ function UserProfile(props) {
                         padding: 5px;
                         height: 35px;
                         border: none;
-                        font-family: "Avenir Next LT Pro", sans-serif;
+                        font-family: "Avenir LT Pro", sans-serif;
                         font-size: 16px;
                         color: #626B79;
                     }
@@ -618,7 +735,7 @@ UserProfile.getInitialProps = async (ctx) => {
 }
 
 const mapStateToProps = (state) => ({
-	user: state.user.user_data,
-});
+    user: state.user.user_data,
+})
 //Mengirimkan user profile
 export default connect(mapStateToProps)(UserProfile);

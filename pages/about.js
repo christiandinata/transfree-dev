@@ -9,6 +9,7 @@ import initialize from '../utils/initialize.js';
 import actions from '../redux/actions/index.js';
 import { getCookie } from '../utils/cookie';
 import { NavBarWhite } from '../components/MenuComponents.js';
+import Menu from '../components/menu.js';
 import { MobilePlatform } from '../components/landing-page/MobilePlatform.js';
 
 const Story = styled.div`
@@ -41,7 +42,7 @@ const StoryFlex = styled.div`
   p {
     margin-top: 16px;
   }
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 960px) {
     flex-direction: column;
     text-align: center;
     align-items: center;
@@ -136,7 +137,8 @@ class About extends Component {
     return (
       <div>
         <Header />
-        <NavBarWhite isAuthenticated={this.props.isAuthenticated} username={this.props.username} id={this.props.id} />
+        {/* <NavBarWhite isAuthenticated={this.props.isAuthenticated} username={this.props.username} /> */}
+        <Menu isAuthenticated = {this.props.isAuthenticated} username = {this.props.username} scrolled_props = "true" is_homepage = "false"/>
         <Info.BlueHeader>
           <Info.Batik>
             <h1>About Transfree</h1>

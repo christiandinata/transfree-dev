@@ -152,14 +152,18 @@ function StyledDropzone (props) {
     // Make sure to revoke the data uris to avoid memory leaks
     files.forEach(file => URL.revokeObjectURL(file.preview))
   }, [files])
+<<<<<<< HEAD
+
+=======
   
+>>>>>>> design/uiux
   const thumbs = files.map(file => (
     <div style={thumb} key={file.name}>
-        <img
-            src={file.preview}
-            style={img}
-        />  
-        {hideInstruction()}     
+      <img
+        src={file.preview}
+        style={img}
+      />  
+      {hideInstruction()}     
     </div>
   ));
 
@@ -196,10 +200,22 @@ function StyledDropzone (props) {
         >
         <HoverOverlay isOverlay={isOverlay}/>
         <input { ...getInputProps() }/>
+<<<<<<< HEAD
+        <div id={props.id} style={{textAlign:"center"}}>
+          <div className="styled-dropzone-placeholder">
+            <img src={props.image}></img>
+          </div>
+
+          <p className='styled-dropzone-instruction' >
+              {/* <b>Drag and Drop</b> or <b>Browse Files</b><br/>
+              Max 10 MB */}
+          </p>
+=======
         <div id={props.id} style={{ textAlign: "center" }}>
           <div className="styled-dropzone-placeholder">
             <img src={props.image}></img>
           </div>
+>>>>>>> design/uiux
         </div>
         <aside style={thumbsContainer}>
           {thumbs}

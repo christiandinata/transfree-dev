@@ -2,8 +2,10 @@ import Link from 'next/link';
 import styled from  'styled-components';
 import NumberFormat from 'react-number-format';
 import { connect } from 'react-redux';
-import orderActions from '../../redux/actions';
-import { ModalPopUp } from './PopUp';
+import orderActions from '../../../redux/actions';
+import { ModalPopUp } from '../PopUp';
+import { Button, ButtonContainer } from '../Buttons';
+import { AmountColumn, AmountContainer, ItemRow } from '../AmountContainer';
 
 const ReviewContainer = styled.div `
   background: #FFFFFF;
@@ -46,15 +48,6 @@ const ItemContainer = styled.div`
   flex-direction: column;
 `;
 
-const ItemRow = styled.div`
-  display: flex;
-  padding: 2.5px 0px 2.5px;
-  
-  ${({ hide }) => hide && `
-    display: none;
-  `}
-`;
-
 const TransColumn = styled.span`
   flex-basis: ${props => props.left ? '40%' : '60%'};
   text-align: ${props => props.left ? 'left' : 'right'};
@@ -64,16 +57,6 @@ const TransColumn = styled.span`
   >.link {
     color: #009FE3;
   }
-`;
-
-const AmountColumn = styled.span`
-  color: white;
-  padding-bottom: ${props => props.left ? '0px' : '2.5px'};
-  padding-top: ${props => props.left ? '4.75px' : '2.5px'};
-  flex-basis: ${props => props.left ? '60%' : '40%'};
-  text-align: ${props => props.left ? 'left' : 'right'};
-  font-size: ${props => props.left ? '16px' : '20px'};
-  font-family: ${props => props.left ? 'Avenir Next LT Pro' : 'Avenir Next LT Pro Bold'};
 `;
 
 const BottomColumn = styled.span`
@@ -88,42 +71,6 @@ const NoteSpan = styled.span`
   ${({ hide }) => hide && `
     display: none;
   `}
-`;
-
-const AmountContainer = styled.div`
-  background: #1E345B;
-  color: white;
-  margin: 45px -30px 30px -30px;
-  padding: 0px 20px 0px 20px; 
-
-  @media only screen and (max-width: 800px) {
-    margin: 45px -20px 30px -20px;
-    padding: 0px 10px 0px 10px;
-  }
-`;
-
-const ButtonContainer = styled.div`
-  padding-top: 40px;
-`;
-
-const Button = styled.button`
-  border: 1px solid #009FE3;
-  border-radius: 4px;
-
-  width: 100%;
-  height: 50px;
-  font-size: 16px;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 8px 24px;
-  margin-bottom: 10px;
-  transition: 0.2s;
-
-  background-color: ${props => props.secondary ? 'white' : '#009FE3'};
-  color: ${props => props.secondary ? '#009FE3' : 'white'};
 `;
 
 class Review extends React.Component {

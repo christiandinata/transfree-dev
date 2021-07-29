@@ -14,12 +14,12 @@ export const List = [
 			{
 				heading: "What if I've forgotten my password ?",
 				belowHeading:
-					"For every new transfer you do, you can save the recipient detail by ticking the box 'save account' in the form transaction section. If you want to delete your recipient, open Recipient List tab, choose your recipient that you want to delete, and click on Delete button.",
+					"You can click on forget password in our website or apps. We will send you an email to reset your password.",
 			},
 			{
 				heading: "What if I didn't get the email to reset my password?",
 				belowHeading:
-					"For every new transfer you do, you can save the recipient detail by ticking the box 'save account' in the form transaction section. If you want to delete your recipient, open Recipient List tab, choose your recipient that you want to delete, and click on Delete button.",
+					"Contact our customer support (email to admin@transfree.id or WhatsApp +44 7490 090659) to let us know and resolve this issue. We will contact you in maximum 48 hours.",
 			},
 		],
 	},

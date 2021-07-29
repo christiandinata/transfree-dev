@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import Header from '../components/header';
-import OrderAmount from '../components/order/OrderAmount';
-import Recipient from '../components/order/Recipient';
-import Review from '../components/order/Review';
-import Pay from '../components/order/Pay';
-import Status from '../components/order/Status';
+import OrderAmount from '../components/order/steps/OrderAmount';
+import Recipient from '../components/order/steps/Recipient';
+import Review from '../components/order/steps/Review';
+import Pay from '../components/order/steps/Pay';
+import Status from '../components/order/steps/Status';
 import { connect } from 'react-redux';
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
@@ -42,22 +42,23 @@ const ProgressContainer = styled.div`
   background-color: white;
   box-shadow: 0px 5px 20px rgba(98, 107, 121, 0.15);
   position: fixed;
-  z-index: 1;
+  z-index: 10;
 
-  @media only screen and (max-width: 760px) {
+  @media only screen and (max-width: 660px) {
     min-width: 800px;
+    justify-content: flex-start;
 
     ${({ step }) => step == 1 && `
       padding-left: 15px;
-      left: -85px;
+      left: 0px;
     `}
 
     ${({ step }) => step == 2 && `
-      left: -230px;
-    `}
+      left: -150px;
+    `} 
 
     ${({ step }) => step >=3 && `
-      right: -40px;
+      right: -100px;
     `}
   }
 `;
@@ -350,7 +351,9 @@ class Order extends React.Component {
               <AwaitingConfirmation/>
             </div>
           </ContainerFluid>
-          {/* <Footer/> */}
+          <div style={{overflow: "hidden"}}>
+            <Footer/>
+          </div>
         </div>
       )
     }

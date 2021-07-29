@@ -9,6 +9,12 @@ const Base = styled.div`
   justify-content: center;
   padding-top: 80px;
   padding-bottom: 80px;
+
+  @media only screen and (max-width: 900px) {
+    padding-top: 49.31px;
+    display: block;
+    // justify-content: space-between;
+  }
 `;
 
 const Copyright = styled.div`
@@ -22,6 +28,13 @@ const Row = styled.div`
     minmax(184px, 1fr));
   grid-gap: 24px;
   padding-right: 50px;
+
+  @media only screen and (max-width: 900px) {
+    grid-template-columns: repeat(auto-fill, 
+                           minmax(150px, 1fr));
+    grid-gap: 17px;
+    padding-right: 20px;
+  }
 `;
 
 const Column = styled.section`
@@ -29,12 +42,28 @@ const Column = styled.section`
   flex-direction: column;
   text-align: left;
   margin-left: 24px;
+
+  @media only screen and (max-width: 900px) {
+    margin-left: 16px;
+  }
 `;
 
 const Contacts = styled.div`
   padding-top: 45px;
   padding-left: 50px;
   padding-right: 36px;
+
+  @media only screen and (max-width: 900px) {
+    display: flex;
+    // margin: 0 16px 36px 20px;
+    margin-bottom: 36px;
+    padding: 0;
+    justify-content: space-between;
+  }
+
+  @media only screen and (max-width: 450px) {
+    display: block;
+  }
 `;
 
 const Brand = styled.img`
@@ -42,6 +71,13 @@ const Brand = styled.img`
   height: 47.14px;
   object-fit: scale-down;
   margin-bottom: 27.43px;
+
+  @media only screen and (max-width: 900px) {
+    max-width: 30%;
+    height: auto;
+    margin-bottom: 0;
+    margin-left: 20px;
+  }
 `;
 
 const LogoDiv = styled.div`
@@ -49,6 +85,15 @@ const LogoDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media only screen and (max-width: 900px) {
+    margin-right: 16px;
+  }
+
+  @media only screen and (max-width: 450px) {
+    justify-content: flex-start;
+    margin-top: 20px;
+  }
 `;
 
 const SocialLogo = styled.a`
@@ -79,6 +124,10 @@ const FooterLink = styled.a`
   font-weight: normal;
   text-decoration: none;
   margin-bottom: 16px;
+
+  &:hover {
+    color: #009fe3;
+  }
 `;
 
 const FooterText = styled.span`
@@ -100,6 +149,11 @@ const CopyrightText = styled(FooterText)`
   display: block;
   margin-top: 1em;
   margin-bottom: 1em;
+
+  @media only screen and (max-width: 900px) {
+    padding: 24px 16px;
+    margin-bottom: -5em;
+  }
 `;
 
 const TrademarkText = styled(FooterText)`
@@ -107,6 +161,10 @@ const TrademarkText = styled(FooterText)`
   display: block;
   margin-top: 1em;
   margin-bottom: 1em;
+
+  @media only screen and (max-width: 900px) {
+    display: none;
+  }
 `;
 
 const Footer = () => (
@@ -134,7 +192,7 @@ const Footer = () => (
 
         <Column>
           <Title>Contacts</Title>
-          <FooterText>+44 7985 497391</FooterText>
+          <FooterLink href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree" target="_blank">+44 7985 497391</FooterLink>
           <FooterText>admin@transfree.id</FooterText>
           <FooterLink href = "/complaint_feefback">Complaint and Feedback</FooterLink>
         </Column>
@@ -146,7 +204,7 @@ const Footer = () => (
 
         <Column>
           <Title>License</Title>
-          <LicensePhoto src = "../static/images/partners/bank-indonesia.png"></LicensePhoto>
+          <LicensePhoto src = "../static/images/partners/logo-bank-indonesia.png"></LicensePhoto>
         </Column>
       </Row>
     </Base>
