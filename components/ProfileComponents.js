@@ -3,8 +3,9 @@ import styled from "styled-components";
 
 export const MainWrapper = styled.div`
     @media only screen and (max-width: 900px) {
-        width: 100%;
+        // width: 100%;
         overflow-x: hidden;
+        box-sizing: border-box;
     }
 `;
 
@@ -287,12 +288,16 @@ export const EditWrapper = styled.div`
         margin-left: 15px;
         margin-right: 15px;
         display: block;
-        width: 100%;
+        // width: 100%;
     }
 `;
 
 export const EditData = styled.section`
     margin-top: 40px;
+
+    @media only screen and (max-width: 900px) {
+        width: 100%;
+    }
 `;
 
 export const SectionType = styled.div`
@@ -305,11 +310,16 @@ export const SectionTitle = styled(SectionName)`
 
 export const FormRow = styled.div`
     margin-bottom: 16px;
+
+    @media only screen and (max-width: 900px) {
+        // margin-right: 31px;
+        width: 100%;
+    }
 `;
 
 export const FormRowPhone = styled(FormRow)`
     // width: 150px;
-    width: 100%;
+    // width: 100%;
     border: ${({ filled, error }) => {
         if (filled) {
             if (error) {
@@ -329,7 +339,7 @@ export const FormRowPhone = styled(FormRow)`
 export const FormRowAccount = styled(FormRow)`
     border-radius: 4px;
     // width: 450px;
-    width: 100%;
+    // width: 100%;
     margin-bottom: ${({ error }) => (
         error ? "2px" : "16px")}; 
     border: ${({ filled, error }) => {
@@ -347,7 +357,7 @@ export const FormRowAccount = styled(FormRow)`
 
 export const ButtonSection = styled.section`
     margin-top: 40px;
-    width: 100%;
+    // width: 100%;
 `;
 
 export const EditProfileButton = styled.button`

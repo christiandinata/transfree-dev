@@ -80,7 +80,7 @@ function UserProfile(props) {
         phone: false
     })
 
-    const [choice, setChoice] = useState('detail')
+    const [choice, setChoice] = useState('edit')
     const [hiddenPass, setHidden] = useState(true)
     const [hiddenConfirm, setConfirm] = useState(true)
     const [space, setSpace] = useState(false)
@@ -451,8 +451,8 @@ function UserProfile(props) {
                                 </Profile.SectionType>
 
                                 <form>
+                                    <Profile.FormLabel filled = {focus.fullName}>Full Name</Profile.FormLabel>
                                     <Profile.FormRow>
-                                        <Profile.FormLabel filled = {focus.fullName}>Full Name</Profile.FormLabel>
                                         <Profile.InputText 
                                             type = "text" 
                                             name = "fullName"
@@ -465,8 +465,8 @@ function UserProfile(props) {
                                         />
                                     </Profile.FormRow>
 
+                                    <Profile.FormLabel filled = {focus.idNumber}>ID Number</Profile.FormLabel>
                                     <Profile.FormRow>
-                                        <Profile.FormLabel filled = {focus.idNumber}>ID Number</Profile.FormLabel>
                                         <Profile.InputText 
                                             type = "text" 
                                             name = "idNumber"
@@ -479,8 +479,8 @@ function UserProfile(props) {
                                         />
                                     </Profile.FormRow>
 
+                                    <Profile.FormLabel filled = {focus.dob}>Date of Birth</Profile.FormLabel>
                                     <Profile.FormRow>
-                                        <Profile.FormLabel filled = {focus.dob}>Date of Birth</Profile.FormLabel>
                                         <Profile.InputText 
                                             type = "text" 
                                             name = "dob"
@@ -494,8 +494,8 @@ function UserProfile(props) {
                                         />
                                     </Profile.FormRow>
 
+                                    <Profile.FormLabel filled = {focus.pob}>Place of Birth</Profile.FormLabel>
                                     <Profile.FormRow>
-                                        <Profile.FormLabel filled = {focus.pob}>Place of Birth</Profile.FormLabel>
                                         <Profile.InputText 
                                             type = "text" 
                                             name = "pob"
@@ -509,8 +509,8 @@ function UserProfile(props) {
                                         />
                                     </Profile.FormRow>
 
+                                    <Profile.FormLabel filled = {focus.gender}>Gender</Profile.FormLabel>
                                     <Profile.FormRow>
-                                        <Profile.FormLabel filled = {focus.gender}>Gender</Profile.FormLabel>
                                         <Profile.InputText 
                                             type = "text" 
                                             name = "gender"
@@ -546,8 +546,8 @@ function UserProfile(props) {
                                         </Profile.RadioWrapper>
                                     </Profile.FormRow>
 
+                                    <Profile.FormLabel filled = {focus.address}>Address</Profile.FormLabel>
                                     <Profile.FormRow>
-                                        <Profile.FormLabel filled = {focus.address}>Address</Profile.FormLabel>
                                         <Profile.InputText 
                                             type = "text" 
                                             name = "address"
