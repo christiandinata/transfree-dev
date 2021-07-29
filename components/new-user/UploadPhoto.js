@@ -1,4 +1,4 @@
-import { useState, Fragment } from 'react'
+import { useState, useEffect, Fragment } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -59,11 +59,10 @@ const ConsentDiv = styled.div`
     }
   }`
 
-const SectionName = styled.div`
+const SectionName = styled.h2`
   margin-top: 0;
   margin-bottom: 4px;
-  font-style: normal
-  font-weight: bold;
+  font-style: normal;
   font-size: 20px;
   line-height: 28px;
   color: #232933;
@@ -77,10 +76,17 @@ const Warning = styled.p`
 `
 
 function UploadPhoto (props) {
+
   const [photoId, setPhotoId] = useState('')
   const [photoFace, setPhotoFace] = useState('')
   const [isTermsAgreed, setIsTermsAgreed] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
+
+  useEffect(() => {
+    if(isTermsAgreed && checkPhotoValid()) {
+      setErrorMessage('')
+    }
+  })
 
   function handleOnClickButton(e) {
     e.preventDefault()
@@ -126,6 +132,10 @@ function UploadPhoto (props) {
     return true
   }
 
+  function handleCheckTnC() {
+    setIsTermsAgreed(!isTermsAgreed)
+  }
+
   return (
     <Fragment>
       <InstructionDiv>
@@ -141,7 +151,7 @@ function UploadPhoto (props) {
         <p>We will not under any circumstances, use your personal information irresponsibly. 
           For more information see our <a href="/privacy-policy" target="_blank">Privacy Policy</a></p>
         <CheckDiv>
-          <input type="checkbox" id="agree" checked={ isTermsAgreed } onChange={ () => setIsTermsAgreed(!isTermsAgreed) }/>
+          <input type="checkbox" id="agree" checked={ isTermsAgreed } onChange={ handleCheckTnC }/>
           <label htmlFor="agree">I agree to the <a href="/terms" target="_blank">Terms and Condition</a></label>
         </CheckDiv>
         <Warning>{ errorMessage ? errorMessage : null }</Warning>

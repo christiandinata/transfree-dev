@@ -156,7 +156,6 @@ function CreateProfile(props) {
     })
 
     if(!value) {
-      console.log(name)
       setError({
         ...error,
         [name]: true
@@ -171,14 +170,22 @@ function CreateProfile(props) {
 
   function handleOnChange(e) {
     const { name, value } = e.target
-    if( name == "idNumber" && /^[A-za-z0-9]*$/.test(value)) {
+    if( name == "idNumber" && /^[A-za-z0-9]*$/.test(value) ){
       setFormData({
         ...formData,
         [name]: value.replace(/[\[\]^`_\\]/gi, '')
       })
     } else if (
-      (name == "address" || name == "pob") &&
+      name == "pob" &&
       /^[A-z]*((-|\s)*[A-z\s])*$/.test(value)
+    ) {
+      setFormData({
+        ...formData,
+        [name]: value
+      })
+    } else if (
+      name == "address" &&
+      /^[A-z0-9\.\,]*((-|\s)*[A-z0-9\.\,\s])*$/.test(value)
     ) {
       setFormData({
         ...formData,
@@ -271,6 +278,9 @@ function CreateProfile(props) {
                   dob: false
                 })
               }}
+              showMonthDropdown
+              showYearDropdown
+              maxDate={ new Date() }
               onFocus ={ handleOnFocus }
               onBlur={ handleOnBlur } />
             <img src="../../static/images/new-ui/ic-calendar.svg" alt="ic-cal"/>

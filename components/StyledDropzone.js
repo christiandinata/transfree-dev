@@ -138,7 +138,6 @@ function StyledDropzone (props) {
               preview: URL.createObjectURL(file)
             })
           ])
-          console.log(file.size/(1024*1024))
         }
       },
       error(e) {
