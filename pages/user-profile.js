@@ -19,28 +19,32 @@ import Link from 'next/link';
 import ENV from "../config";
 import * as axios from "axios";
 import React, { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const SuccessModal = (props) => {
+const SuccessModal = () => {
     const [visible, setVisible] = useState(true)
 
     useEffect(() => {
         setTimeout(() => 
-            setVisible(false), props.delay)
-    }, [props.delay])
+            setVisible(false), 3000)
+    }, [])
 
     return (
         visible ? 
-        <Profile.ModalSuccessContainer>
-            <Profile.ModalSuccessWrapper>
-                <Profile.ModalSuccessText>
-                    <Profile.ModalSuccessImg src = "../static/images/profile/check.png"/>
+        <div>
+            <Profile.ModalSuccessContainer>
+                <Profile.ModalSuccessWrapper>
+                    <Profile.ModalSuccessText>
+                        <Profile.ModalSuccessImg src = "../static/images/profile/check.png"/>
 
-                    <Profile.ModalSuccessTitle>
-                        Your profile has been saved
-                    </Profile.ModalSuccessTitle>
-                </Profile.ModalSuccessText>
-            </Profile.ModalSuccessWrapper>
-        </Profile.ModalSuccessContainer>
+                        <Profile.ModalSuccessTitle>
+                            Your profile has been saved
+                        </Profile.ModalSuccessTitle>
+                    </Profile.ModalSuccessText>
+                </Profile.ModalSuccessWrapper>
+            </Profile.ModalSuccessContainer>
+        </div>
         :
         null
     )
@@ -273,6 +277,7 @@ function UserProfile(props) {
     
                                 setSuccess(true)
                                 setChoice('detail')
+                                toast.success("Your profile has been saved")
                                 setPopup(false)
                             })
                             .catch((error) => {
@@ -296,6 +301,7 @@ function UserProfile(props) {
 
     return(
         <Profile.MainWrapper>
+            {console.log(success)}
             <Header/>
             <Menu 
                 isAuthenticated = {true} 
@@ -328,6 +334,7 @@ function UserProfile(props) {
                 <Profile.ProfileSect>
                     <Profile.ProfileAction>
                         <Profile.AccountText>Account Profile</Profile.AccountText>
+                        {success && <ToastContainer position = {"top-center"} autoClose = {3000}/>}
                         <Link href="/logout" passHref>
                             <Profile.LogOutButton>Log Out</Profile.LogOutButton>
                         </Link>
@@ -410,13 +417,6 @@ function UserProfile(props) {
                         </Profile.Data>
                         
                         <Profile.Divider></Profile.Divider>
-
-                        {success ? 
-                            <div>
-                                <SuccessModal delay = "3000"></SuccessModal>
-                            </div>
-                            :
-                        null}
                     </div>
                 </Profile.ProfileSect>
             </Profile.Wrapper> 
