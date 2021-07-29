@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 import initialize from '../utils/initialize.js';
 import actions from '../redux/actions/index.js';
 import { getCookie } from '../utils/cookie';
-import { NavBarWhite } from '../components/MenuComponents.js';
 import Menu from '../components/menu.js';
 import { MobilePlatform } from '../components/landing-page/MobilePlatform.js';
 
@@ -137,7 +136,6 @@ class About extends Component {
     return (
       <div>
         <Header />
-        {/* <NavBarWhite isAuthenticated={this.props.isAuthenticated} username={this.props.username} /> */}
         <Menu isAuthenticated = {this.props.isAuthenticated} username = {this.props.username} scrolled_props = "true" is_homepage = "false"/>
         <Info.BlueHeader>
           <Info.Batik>
