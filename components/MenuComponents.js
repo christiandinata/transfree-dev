@@ -24,6 +24,7 @@ export function NavBarBlue(props) {
 								style={{
 									width: 24,
 									height: 24,
+									color: "white",
 									marginRight: "8px",
 								}}
 							/>
