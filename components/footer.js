@@ -104,7 +104,7 @@ const SocialLogo = styled.a`
 const SocialPic = styled.img`
   width: 24px;
   height: 24px;
-  scale-down: object-fit;
+  object-fit: scale-down;
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
 

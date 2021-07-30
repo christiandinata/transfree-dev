@@ -114,8 +114,9 @@ export const HeaderWrapper = styled.div`
 `;
 
 export const Logo = styled.img`
-	width: 88px;
-	height: 17px;
+	width: 110px;
+	height: 30px;
+	object-fit: scale-down;
 	-webkit-filter: ${({ scrolled, homepage }) =>
 		homepage && !scrolled ? "brightness(0) invert(1)" : "none"};
 	filter: ${({ scrolled, homepage }) =>
