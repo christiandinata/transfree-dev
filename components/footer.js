@@ -153,6 +153,25 @@ const FooterText = styled.span`
   margin-bottom: 16px;
 `;
 
+const FooterEmail = styled.button`
+  outline: none;
+  text-decoration: none;
+  border: none;
+  background-color: #fff;
+  color: #626B79;
+  font-size: 16px;
+  line-height: 24px;
+  font-style: normal;
+  font-weight: normal;
+  margin-bottom: 16px;
+  text-align: left;
+  padding: 0;
+
+  &:hover {
+    color: #009fe3;
+  }
+`;
+
 const CopyrightText = styled(FooterText)`
   font-weight: 500;
   text-align: center;
@@ -180,6 +199,17 @@ const TrademarkText = styled(FooterText)`
   }
 `;
 
+const handleEmailClick = () => {
+  // Terlalu ngezoom tampilannya
+  window.location.href = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + 'admin@transfree.id'
+
+  // Open ke Mail app
+  // window.location.href = 'mailto:admin@transfree.id'
+
+  // Compose doang
+  // window.location.href = 'https://mail.google.com/mail/u/0/#compose'
+}
+
 const Footer = () => (
   <div>
     <Base>
@@ -206,7 +236,8 @@ const Footer = () => (
         <Column>
           <Title>Contacts</Title>
           <FooterLink href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree" target="_blank">+44 7985 497391</FooterLink>
-          <FooterText>admin@transfree.id</FooterText>
+          <FooterEmail onClick = {handleEmailClick}>admin@transfree.id</FooterEmail>
+          {/* <FooterText>admin@transfree.id</FooterText> */}
           <FooterLink href = "/complaint_feefback">Complaint and Feedback</FooterLink>
         </Column>
 

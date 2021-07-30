@@ -228,7 +228,10 @@ function UserProfile(props) {
     }
 
     const updateUser = async () => {
-        if(checkAllData()) {
+        if(info.password == '' || info.confirmPassword == '') {
+            alert("Password or confirm password field cannot be blank")
+        }
+        else if(checkAllData()) {
             axios
                 .post(
                     ENV.API + `/v1/user/checkEmail`,
@@ -439,7 +442,9 @@ function UserProfile(props) {
                 <Profile.ProfileSect>
                     <Profile.ProfileAction>
                         <Profile.AccountText>Account Profile</Profile.AccountText>
-                        <Profile.LogOutButton href = "/logout">Log Out</Profile.LogOutButton>
+                        <Link href="/logout" passHref>
+                            <Profile.LogOutButton>Log Out</Profile.LogOutButton>
+                        </Link>
                     </Profile.ProfileAction>
                     
                     <Profile.EditWrapper>
@@ -593,6 +598,7 @@ function UserProfile(props) {
                                             type = {hiddenPass ? "password" : "text"}
                                             name = "password"
                                             value = {info.password}
+                                            required
                                             onChange = {!space && handleInputChange}
                                             onFocus = {handleFocusChange}
                                             onBlur = {handleBlurChange}
@@ -633,6 +639,7 @@ function UserProfile(props) {
                                             type = {hiddenConfirm ? "password" : "text"}
                                             name = "confirmPassword"
                                             value = {info.confirmPassword}
+                                            required
                                             onChange = {!space && handleInputChange}
                                             onFocus = {handleFocusChange}
                                             onBlur = {handleBlurChange}

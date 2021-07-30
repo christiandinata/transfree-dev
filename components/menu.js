@@ -64,7 +64,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username, id, is_hom
             </Navbar.NavigationChild>
 
             <Navbar.SignInButton href = "/login" scrolled = {scrolled} homepage = "true">
-              Sign In
+              Log In
             </Navbar.SignInButton>
 
             <Navbar.RegisterButton href = "/signup" scrolled = {scrolled} homepage = "true">
