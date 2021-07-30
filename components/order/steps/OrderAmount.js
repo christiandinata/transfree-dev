@@ -39,7 +39,6 @@ class OrderAmount extends React.Component {
       toAmount: 0,
       currentDay: new Date(),
       duration: '',
-      receivedOn: '',
       oos: false,
       errorOos: false,
       errorTransaction: false,
@@ -263,7 +262,6 @@ class OrderAmount extends React.Component {
       ( this.state.fromCurrency == 'idr' && this.state.toCurrency == 'gbp' && 
         this.state.currentDay.getDay() == '7'))
       {
-        this.setState({receivedOn: 'Next Working Day'})
         return 1;
       }
 
