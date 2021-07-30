@@ -67,9 +67,11 @@ export const Nav = styled.div`
 	@media only screen and (max-width: 900px) {
 		background-color: ${({ homepage }) => (homepage ? "#fff" : "#009fe3")};
 		display: block;
-		height: ${({ clicked, isAuth }) => {
+		height: ${({ clicked, isAuth, profile }) => {
 			if (clicked) {
-				if (isAuth) {
+				if (isAuth && profile) {
+					return "605px";
+				} else if (isAuth) {
 					return "450px";
 				} else {
 					return "350px";
@@ -199,7 +201,7 @@ export const NavigationCenter = styled.div`
 		flex-direction: column;
 		background-color: #fff;
 		align-items: stretch;
-		margin: 16px 16px 16px 16px;
+		// margin: 16px 16px 16px 16px;
 	};
 `;
 
@@ -241,8 +243,9 @@ export const NavigationChild = styled.a`
 	@media only screen and (max-width: 900px) {
 		color: #2B2A35;
 		// margin: 16px 16px 0 16px;
-		margin-top: 16px;
-		margin-right: 0;
+		margin: 16px 0 16px 16px;
+		// margin-top: 16px;
+		// margin-right: 0;
 		padding-bottom: 16px;
 		border-bottom: 1px solid #E2E2E2;
 	}
@@ -374,4 +377,75 @@ export const ProfileInfo = styled.p`
 	}};
 	padding-left: ${({ id }) => (id ? "8px" : "0")};
 	margin-right: ${({ name }) => (name ? "8px" : "0")};
+`;
+
+export const ActionSect = styled.section`
+    // width: 25%;
+    background: #1687e5;
+    padding-top: 38px;
+
+    @media only screen and (max-width: 900px) {
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+`;
+
+export const ActionChoice = styled.button`
+    display: block;
+    margin: 0 24px;
+    margin-top: 24px;
+    background: transparent;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    padding: 16px 23.3px 16px 16px;
+    vertical-align: middle;
+    width: 260px;
+
+    @media only screen and (max-width: 900px) {
+        margin-top: 0;
+        padding: 16px;
+        width: 90%;
+        text-align: left;
+    }
+`;
+
+export const ActionChoiceActive = styled(ActionChoice)`
+    background: #fff;
+    border: 1px solid #fff;
+`;
+
+export const ChoiceImg = styled.img`
+    width: 24px;
+    height: 24px;
+    object-fit: scale-down;
+    display: inline;
+    float: left;
+    margin-right: 16px;
+`;
+
+export const ArrowRightImg = styled.img`
+    display: inline;
+    float: right;
+    margin-left: 71.3px;
+`;
+
+export const AccountLink = styled.p`
+    display: inline;
+    font-family: 'Avenir Next LT Pro';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 26px;
+    color: #ffffff;
+
+    @media only screen and (max-width: 900px) {
+        font-weight: 500;
+        line-height: 20px;
+    }
+`;
+
+export const AccountLinkActive = styled(AccountLink)`
+    color: #009FE3 !important;
 `;

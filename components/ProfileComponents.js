@@ -1,17 +1,34 @@
 import Phone from "react-phone-number-input";
 import styled from "styled-components";
 
+export const MainWrapper = styled.div`
+    @media only screen and (max-width: 900px) {
+        // width: 100%;
+        overflow-x: hidden;
+        box-sizing: border-box;
+    }
+`;
+
 export const Wrapper = styled.div`
     display: flex;
     background-color: #fff;
     margin-top: 72px;
     // height: 952px;
+
+    @media only screen and (max-width: 900px) {
+        display: block;
+        width: 100%;
+    }
 `;
 
 export const ActionSect = styled.section`
     // width: 25%;
     background: #1687e5;
     padding-top: 38px;
+
+    @media only screen and (max-width: 900px) {
+        display: none;
+    }
 `;
 
 export const ActionChoice = styled.button`
@@ -26,11 +43,19 @@ export const ActionChoice = styled.button`
     padding: 16px 23.3px 16px 16px;
     vertical-align: middle;
     width: 260px;
+
+    @media only screen and (max-width: 900px) {
+        display: none;
+    }
 `;
 
 export const ActionChoiceActive = styled(ActionChoice)`
     background: #fff;
     border: 1px solid #fff;
+
+    @media only screen and (max-width: 900px) {
+        display: none;
+    }
 `;
 
 export const ChoiceImg = styled.img`
@@ -40,18 +65,30 @@ export const ChoiceImg = styled.img`
     display: inline;
     float: left;
     margin-right: 16px;
+
+    @media only screen and (max-width: 900px) {
+        display: none;
+    }
 `;
 
 export const ArrowRightImg = styled.img`
     display: inline;
     float: right;
     margin-left: 71.3px;
+
+    @media only screen and (max-width: 900px) {
+        display: none;
+    }
 `;
 
 export const ProfileSect = styled.section`
     // width: 75%;
     flex-grow: 1;
     background: #fff;
+
+    @media only screen and (max-width: 900px) {
+        width: 100%;
+    }
 `;
 
 export const ProfileAction = styled.div`
@@ -59,11 +96,21 @@ export const ProfileAction = styled.div`
     // overflow: hidden;
     display: flex;
     justify-content: space-between;
+
+    @media only screen and (max-width: 900px) {
+        width: 100%;
+    }
 `;
 
 export const Data = styled.section`
     display: flex;
     padding-bottom: 32px;
+
+    @media only screen and (max-width: 900px) {
+        display: block;
+        width: 100%;
+        // overflow: auto;
+    }
 `;
 
 export const Divider = styled.div`
@@ -77,11 +124,22 @@ export const Divider = styled.div`
         height: 1px;
         width: 100%;
     }
+
+    @media only screen and (max-width: 900px) {
+        margin: 0 16px;   
+    }
 `;
 
 export const Table = styled.table`
     margin: 56px 0 0 40px;
     border-spacing: 0 12px;
+    
+    @media only screen and (max-width: 900px) {
+        margin: 0;
+        padding: 0 16px;
+        width: 100%;
+        table-layout: fixed;
+    }
 `;
 
 export const TableRow = styled.tr`
@@ -107,10 +165,19 @@ export const TableDetail = styled.td`
     font-size: 16px;
     line-height: 24px;  
     color: #626B79;
+    word-wrap: break-word;
+
+    @media only screen and (max-width: 900px) {
+        text-align: right;
+    }
 `;
 
 export const TableDetailPersonal = styled(TableDetail)`
     padding-left: 15px;
+
+    @media only screen and (max-width: 900px) {
+        padding-left: 0;
+    }
 `;
 
 export const AccountLink = styled.p`
@@ -121,10 +188,14 @@ export const AccountLink = styled.p`
     font-size: 14px;
     line-height: 26px;
     color: #ffffff;
+
+    @media only screen and (max-width: 900px) {
+        display: none;
+    }
 `;
 
 export const AccountLinkActive = styled(AccountLink)`
-    color: #009FE3;
+    color: #009FE3 !important;
 `;
 
 export const AccountText = styled.h3`
@@ -135,6 +206,10 @@ export const AccountText = styled.h3`
     font-size: 24px;
     line-height: 32px;
     margin: 24px;
+
+    @media only screen and (max-width: 900px) {
+        margin-left: 16px;
+    }
 `;
 
 export const LogOutButton = styled.a`
@@ -143,8 +218,8 @@ export const LogOutButton = styled.a`
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
-    text-align: right;
     letter-spacing: 0.2px;
+    text-align: center;
     color: #F39200;
     background: #FFFFFF;
     padding: 8px 24px;
@@ -155,6 +230,14 @@ export const LogOutButton = styled.a`
 
     &:hover {
         background: #EAEAEA;
+    }
+
+    @media only screen and (max-width: 900px) {
+        margin-right: 16px;
+    }
+
+    @media only screen and (max-width: 320px) {
+        padding: 8px;
     }
 `;
 
@@ -180,11 +263,25 @@ export const SectionExp = styled.p`
 export const DataSubPersonal = styled.div`
     margin: 48px 24px;
     width: 25%;
+
+    @media only screen and (max-width: 900px) {
+        margin-left: 0;
+        padding-left: 15px;
+        margin-bottom: 20px;
+        margin-right: 0;
+        width: 100%;
+    }
 `;
 
 export const DataSubAccount = styled.div`
     margin: 43px 24px;
     width: 25%;
+
+    @media only screen and (max-width: 900px) {
+        margin-left: 15px;
+        margin-bottom: 20px;
+        width: 100%;
+    }
 `;
 
 export const EditWrapper = styled.div`
@@ -192,10 +289,22 @@ export const EditWrapper = styled.div`
     justify-content: center;
     align-items: center;
     // background-color #000;
+
+    @media only screen and (max-width: 900px) {
+        justify-content: flex-start;
+        margin-left: 15px;
+        margin-right: 15px;
+        display: block;
+        // width: 100%;
+    }
 `;
 
 export const EditData = styled.section`
     margin-top: 40px;
+
+    @media only screen and (max-width: 900px) {
+        width: 100%;
+    }
 `;
 
 export const SectionType = styled.div`
@@ -208,10 +317,16 @@ export const SectionTitle = styled(SectionName)`
 
 export const FormRow = styled.div`
     margin-bottom: 16px;
+
+    @media only screen and (max-width: 900px) {
+        // margin-right: 31px;
+        width: 100%;
+    }
 `;
 
 export const FormRowPhone = styled(FormRow)`
-    width: 450px;
+    // width: 150px;
+    // width: 100%;
     border: ${({ filled, error }) => {
         if (filled) {
             if (error) {
@@ -230,7 +345,8 @@ export const FormRowPhone = styled(FormRow)`
 
 export const FormRowAccount = styled(FormRow)`
     border-radius: 4px;
-    width: 450px;
+    // width: 450px;
+    // width: 100%;
     margin-bottom: ${({ error }) => (
         error ? "2px" : "16px")}; 
     border: ${({ filled, error }) => {
@@ -248,13 +364,13 @@ export const FormRowAccount = styled(FormRow)`
 
 export const ButtonSection = styled.section`
     margin-top: 40px;
+    // width: 100%;
 `;
 
 export const EditProfileButton = styled.button`
     display: block;
     text-decoration: none;
     outline: none;
-    border: none !important;
     border: 1px solid #009FE3;
     border-radius: 4px;
     padding: 8px 24px;
@@ -264,7 +380,8 @@ export const EditProfileButton = styled.button`
     font-size: 16px;
     line-height: 24px;
     text-align: center;
-    width: 450px;
+    // width: 450px;
+    width: 100%;
 `;
 
 export const SaveEditButton = styled(EditProfileButton)`
@@ -312,7 +429,11 @@ export const InputText = styled.input`
     border-radius: 4px;
     background: ${({ dis }) => (
 		dis ? "#E9E9E9" : "#FFFFFF")}; 
-    width: 418px;   
+    width: 418px;
+    // width: 100%;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
     outline: none;
     color: #9A9A9A;
 
@@ -321,11 +442,17 @@ export const InputText = styled.input`
         border: 2px solid #068EC8;
         color: #232933;
     }
+
+    @media only screen and (max-width: 900px) {
+        // width: 150%;
+        width: 100%;
+    }
 `;
 
 export const InputTextPassword = styled(InputText)`
     border: none !important;
-    width: 380px !important;
+    // width: 380px !important;
+    width: 90%;
     &:focus {
         background: #fff;
         border: none;
@@ -368,7 +495,7 @@ export const PhoneInput = styled(Phone)`
     font-size: 16px;
     line-height: 24px;
     height: 48px;
-    padding: 0 16px;
+    // padding: 0 16px;
     background: #fff;
     width: 420px;
 
