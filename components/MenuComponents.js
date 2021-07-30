@@ -9,12 +9,12 @@ export function NavBarBlue(props) {
 		<>
 			<Nav>
 				<NavInner>
-					<a style={{ height: 17 }} href="/index">
+					<LogoLinkBlue style={{ height: 17 }} href="/index">
 						<LogoBlue
 							src="../static/images/transfree-logo.png"
 							homepage="false"
 						/>
-					</a>
+					</LogoLinkBlue>
 					<NavigationBlue clicked = "true">
 						<NavigationChildBlue
 							navChildColor={props.navChildColor}
@@ -73,7 +73,7 @@ export const Nav = styled.div`
 				if (isAuth && profile) {
 					return "605px";
 				} else if (isAuth) {
-					return "450px";
+					return "459px";
 				} else {
 					return "350px";
 				}
@@ -100,6 +100,7 @@ export const NavInner = styled.div`
 		margin: 0;
 		// background-color: #fff;
 		width: 100%;
+		border-bottom: none;
 	}
 `;
 
@@ -135,8 +136,9 @@ export const Logo = styled.img`
 
 // The Logo component for NavBarBlue()
 export const LogoBlue = styled.img`
-	width: 88px;
-	height: 17px;
+	width: 100px;
+	height: 30px;
+	object-fit: scale-down;
 	-webkit-filter: ${({ scrolled, homepage }) =>
 		homepage && !scrolled ? "brightness(0) invert(1)" : "none"};
 	filter: ${({ scrolled, homepage }) =>
@@ -147,6 +149,10 @@ export const LogoBlue = styled.img`
 	@media only screen and (max-width: 900px) {
 		padding: 0 20px;
 	}
+`;
+
+export const LogoLinkBlue = styled.a`
+	margin-top: -15px;
 `;
 
 export const ExpandButton = styled.button`
@@ -277,7 +283,7 @@ export const NavigationChildBlue = styled.a`
   	`}
 	
 	@media only screen and (max-width: 900px) {
-		color: #2B2A35;
+		color: #fff;
 		// margin: 16px 16px 0 16px;
 		margin-top: 16px;
 		margin-right: 0;
