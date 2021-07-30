@@ -101,6 +101,19 @@ const SocialLogo = styled.a`
   text-decoration: none;
 `;
 
+const SocialPic = styled.img`
+  width: 24px;
+  height: 24px;
+  scale-down: object-fit;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+
+  &:hover {
+    -webkit-filter: none;
+    filter: none;
+  }
+`;
+
 const LicensePhoto = styled.img`
   width: 150px;
   height: 150px;
@@ -173,11 +186,11 @@ const Footer = () => (
       <Contacts>
         <Brand src = "../static/images/transfree-logo.png"></Brand> 
         <LogoDiv>
-          <SocialLogo href = "https://www.facebook.com/transfree.id.9"><img src = "../static/images/Footer/facebook-logo.png"></img></SocialLogo>
-          <SocialLogo href = "https://www.instagram.com/transfree_id/?hl=en"><img src = "../static/images/Footer/instagram-logo.png"></img> </SocialLogo>
-          <SocialLogo href = "https://www.linkedin.com/company/transfreeid"><img src = "../static/images/Footer/linkedin-logo.png"></img> </SocialLogo>
-          <SocialLogo href = "https://www.youtube.com/channel/UCGZ9uWFrBSAKwh6YE4q2hyA/videos"><img src = "../static/images/Footer/youtube-logo.png"></img></SocialLogo>
-          <SocialLogo href = "https://medium.com/transfree"><img src = "../static/images/Footer/medium-logo.png"></img> </SocialLogo>
+          <SocialLogo href = "https://www.facebook.com/transfree.id.9"><SocialPic src = "../static/images/Footer/facebook-logo.png"></SocialPic></SocialLogo>
+          <SocialLogo href = "https://www.instagram.com/transfree_id/?hl=en"><SocialPic src = "../static/images/Footer/instagram-logo.png"></SocialPic> </SocialLogo>
+          <SocialLogo href = "https://www.linkedin.com/company/transfreeid"><SocialPic src = "../static/images/Footer/linkedin-logo.png"></SocialPic> </SocialLogo>
+          <SocialLogo href = "https://www.youtube.com/channel/UCGZ9uWFrBSAKwh6YE4q2hyA/videos"><SocialPic src = "../static/images/Footer/youtube-logo.png"></SocialPic></SocialLogo>
+          <SocialLogo href = "https://medium.com/transfree"><SocialPic src = "../static/images/Footer/medium-logo.png"></SocialPic> </SocialLogo>
         </LogoDiv>
       </Contacts>
 
