@@ -1,215 +1,327 @@
-import { useState, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import CustomDatePicker from '../CustomDatePicker';
-import MobilePopup from '../MobilePopup';
-import profileActions from '../../redux/actions/profileActions';
-import '../../styles/components/new-user/CreateProfile.css';
+import { useState } from 'react'
+import { connect } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import DatePicker from 'react-datepicker'
+import profileActions from '../../redux/actions/profileActions'
+import * as Profile from '../ProfileComponents'
+import { PrButton } from '../landing-page/Buttons'
+import styled from 'styled-components'
 
-function CreateProfile (props) {
-  const [idType, setIdType] = useState('KTP');
-  const [idNumber, setIdNumber] = useState('');
-  const [gender, setGender] = useState('Male');
-  const [placeOfBirth, setPlaceOfBirth] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState(new Date());
-  const [address, setAddress] = useState('');
-  const [isIdNumberValid, setIsIdNumberValid] = useState(true);
-  const [isPobValid, setIsPobValid] = useState(true);
-  const [isAddressValid, setIsAddressValid] = useState(true);
-  const [isSkipPopupVisible, setIsSkipPopupVisible] = useState(true);
+const InfoFlex = styled.div`
+  margin: 2rem auto;
+  width: 55%;
+  select {
+    border: 1px solid #e2e2e2;
+  }
+  input, select {
+    box-sizing: border-box;
+    padding: 12px 16px;
+    border-radius: 4px;
+    background: #FFFFFF;
+    font-family: "Avenir Next LT Pro", sans-serif;
+    outline: none;
+    width: 100%;
+    color: #9A9A9A;
+    &:focus {
+      background: #fff;
+      border: 2px solid #068EC8;
+      color: #232933;
+    }
+  }
+  .react-datepicker {
+    font-family: "Avenir Next LT Pro", sans-serif;
+  }
+  .react-datepicker-wrapper {
+    display: block;
+    input {
+      border: ${ props => props.dateError ? "2px solid red" : "1px solid #E2E2E2"};
+      &:focus {
+        border: 2px solid #068EC8;
+        color: #232933;
+      }
+    }
+  }
+  .react-datepicker__header {
+    background-color: #FFFFFF;
+  }
+  img {
+    position: absolute;
+    bottom: 0.6rem;
+    right: 0.75rem;
+  }
+  a {
+    font-size: 1rem;
+    color: #068EC8;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  @media only screen and (max-width: 720px) {
+    width: 95%;
+  } 
+`
 
-  if (props.response && !props.errorMessage) {
+const InfoInput = styled.input`
+  border: ${ props => props.error ? "2px solid red" : "1px solid #E2E2E2" };
+`
+
+const InfoLabel = styled.label`
+  margin-top: 1.5rem;
+  display: block;
+  margin-left: 8px;
+  margin-bottom: 4px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  color: ${ props => props.filled ? "#068EC8" : (props.error ? "red" : "#9A9A9A") };
+`
+
+const ErrorSpan = styled.span`
+  margin: 4px auto 0 8px;
+  font-size: 12px;
+  color: red;
+`
+
+function CreateProfile(props) {
+
+  const [focus, setFocus] = useState({
+    idType: false,
+    idNumber: false,
+    gender: false,
+    dob: false,
+    pob: false,
+    address: false
+  })
+
+  const [formData, setFormData] = useState({
+    idType: "KTP",
+    idNumber: "",
+    gender: "Male",
+    dob: "",
+    pob: "",
+    address: ""
+  })
+
+  const [error, setError] = useState({
+    idType: false,
+    idNumber: false,
+    gender: false,
+    dob: false,
+    pob: false,
+    address: false
+  })
+
+  if (props.response) {
     props.nextStep()
   }
-  //Function cek validitas nomer identitas
-  function checkIdnumber(e) {
-    if (e.target.value === '') {
-      setIsIdNumberValid(false)
-    } else {
-      setIsIdNumberValid(true)
-    }
-  }
-  //Function cek validitas tempat lahir
-  function checkPob(e) {
-    if (e.target.value === '') {
-      setIsPobValid(false)
-    } else {
-      setIsPobValid(true)
-    }
-  }
-  //Function cek validitas alamat
-  function checkAddress(e) {
-    if (e.target.value === '') {
-      setIsAddressValid(false)
-    } else {
-      setIsAddressValid(true)
-    }
-  }
-  
 
   function handleOnClickButton(e) {
     e.preventDefault()
-
-    if (!checkIdDataValid()) {
-      return
-    }
-    //setelah data valid, data disimpan dalam profile
-    props.createProfile({
-        idType: idType,
-        idNumber: idNumber,
-        gender: gender,
-        pob: placeOfBirth,
-        dob: dateOfBirth,
-        address: address,
+    
+    if(isDataValid()) {
+      props.createProfile({
+        ...formData,
         email: props.userData.email,
       },
       'createProfile'
-    )
+      )
+    } else {
+      setError({
+        ...error,
+        'dob': !(!!formData['dob']),
+        'pob': !(!!formData['pob']),
+        'idNumber': !(!!formData['idNumber']),
+        'address': !(!!formData['address'])
+      })
+    }
   }
 
-  //Pengecakan validitas data, disini hanya periksa apakah kosong atau tidak
-  function checkIdDataValid() {
-    let isValid = true
+  // Pengecakan validitas data, disini hanya periksa apakah kosong atau tidak
+  function isDataValid() {
+    return !Object.values(formData).includes('')
+  }
 
-    if (idNumber === '') {
-      isValid = false
-      setIsIdNumberValid(false)
+  function handleOnFocus(e) {
+    const { name } = e.target
+    setFocus({
+      ...focus,
+      [name]: true
+    })
+  }
+
+  function handleOnBlur(e) {
+    const { name, value } = e.target
+    setFocus({
+      ...focus,
+      [name]: false
+    })
+
+    if(!value) {
+      setError({
+        ...error,
+        [name]: true
+      })
+    } else {
+      setError({
+        ...error,
+        [name]: false
+      })
     }
+  }
 
-    if (placeOfBirth === '') {
-      isValid = false
-      setIsPobValid(false)
+  function handleOnChange(e) {
+    const { name, value } = e.target
+    console.log(name + " " + value)
+    if( name == "idNumber" && /^[A-za-z0-9]*$/.test(value) ){
+      setFormData({
+        ...formData,
+        [name]: value.replace(/[\[\]^`_\\]/gi, '')
+      })
+    } else if (
+      name == "pob" &&
+      /^[A-z]*((-|\s)*[A-z\s])*$/.test(value)
+    ) {
+      setFormData({
+        ...formData,
+        [name]: value
+      })
+    } else if (
+      name == "address" &&
+      /^[A-z0-9\.\,]*((-|\s)*[A-z0-9\.\,\s])*$/.test(value)
+    ) {
+      setFormData({
+        ...formData,
+        [name]: value
+      })
+    } else if ( name == "gender" || name == "idType" ) {
+      setFormData({
+        ...formData,
+        [name]: value
+      })
     }
+  }
 
-    if (address === '') {
-      isValid = false
-      setIsAddressValid(false)
-    }
-
-    return isValid
+  function handleDateChange(date) {
+    setFormData({
+      ...formData,
+      dob: date
+    }) 
+    setFocus({
+      ...focus,
+      dob: false
+    })
+    setError({
+      ...error,
+      dob: false
+    })
   }
 
   return(
     // Menanyakan apakah user ingin mengisi profile sendiri atau tidak
-    <Fragment>
-      <div className='create-profile-form-body-heading'>
-        <div className='create-profile-form-skip'>
-          <a onClick={ props.nextStep } >
-            Do you want us to fill the form for you?
-          </a>
-        </div>
-        <div className='create-profile-profile-picture'>
-          <img src='../../static/images/profile.svg' alt="Profile"/>
-        </div>
-      </div>
-      <div className='create-profile-form-body'>
-        <div className='create-profile-form-box'>
-          <p className="create-profile-form-description">
-            According to the regulation from Bank Indonesia,<br/>we have to verify your identity. Please provide your identity.
-          </p>
-          <div className='create-profile-form-field-container'>
-            <div classname='create-profile-form-field-container-column'>
-              <div className='create-profile-form-field'>
-                <label className='create-profile-form-label' htmlFor='id-type'>
-                  ID Type
-                </label>
-                <select
-                  id='id-type'
-                  value={ idType }
-                  onChange={ (e) => setIdType(e.target.value) }
-                >
-                  <option value='KTP'>KTP</option>
-                  <option value='Passport'>Passport</option>
-                  <option value='SIM'>SIM</option>
-                </select>
-              </div>
-              <div className='create-profile-form-field'>
-                <label className='create-profile-form-label' htmlFor='id-number'>
-                  ID Number
-                </label>
-                <input
-                  id='id-number'
-                  placeholder='Enter ID number'
-                  value={ idNumber }
-                  onChange={ (e) => setIdNumber(e.target.value) }
-                  onBlur={ checkIdnumber }
-                />
-                <span className={ isIdNumberValid ? 'form-error-label-hidden' : 'form-error-label' }>
-                  You must input your ID Number (KTP/Passport/SIM)!
-                </span>
-              </div>
-              <div className='create-profile-form-field'>
-                <label className='create-profile-form-label' htmlFor='gender'>
-                  Gender
-                </label>
-                <select
-                  id='gender'
-                  placeholder='Choose your gender'
-                  value={ gender }
-                  onChange={ (e) => setGender(e.target.value) }
-                >
-                  <option value='Male'>Male</option>
-                  <option value='Female'>Female</option>
-                  <option value='Others'>Others</option>
-                </select>
-              </div>
-            </div>
-            <div classname='create-profile-form-field-container-column'>
-              <div className='create-profile-form-field'>
-                <label className='create-profile-form-label' htmlFor='pob'>
-                  Place of Birth
-                </label>
-                <input
-                  id='pob'
-                  placeholder='Enter the city (e.g. Jakarta)'
-                  value={ placeOfBirth }
-                  onChange={ (e) => setPlaceOfBirth(e.target.value) }
-                  onBlur={ checkPob }
-                />
-                <span className={ isPobValid ? 'form-error-label-hidden' : 'form-error-label' }>
-                  Your Place of Birth may not be empty.
-                </span>
-              </div>
-              <div className='create-profile-form-field'>
-                <label className='create-profile-form-label' htmlFor='dob'>
-                  Date of Birth
-                </label>
-                <CustomDatePicker date={ dateOfBirth } onChange={ setDateOfBirth } />
-              </div>
-              <div className='create-profile-form-field'>
-                <label className='create-profile-form-label' htmlFor='address'>
-                  Address
-                </label>
-                <input
-                  id='address'
-                  placeholder='Enter your full address'
-                  value={ address }
-                  onChange={ (e) => setAddress(e.target.value) }
-                  onBlur={ checkAddress }/>
-                <span className={ isAddressValid ? 'form-error-label-hidden' : 'form-error-label' }>
-                  Your address may not be empty.
-                </span> 
-              </div>
-            </div>
+    <InfoFlex dateError={ error.dob }>
+      <Profile.EditData>
+        <Profile.SectionType>
+          <Profile.SectionTitle>
+            Please provide your identity.
+          </Profile.SectionTitle>
+          <Profile.SectionExp>
+            According to the regulation from Bank Indonesia, 
+            we have to verify your identity.
+          </Profile.SectionExp>
+        </Profile.SectionType>
+      </Profile.EditData>
+      
+      <a onClick={ props.nextStep }>
+        Do you want us to fill the form for you?
+      </a>
+
+      <form>
+        <InfoLabel filled={ focus.idType } error={ false }>ID Type</InfoLabel>
+        <select
+          name="idType"
+          value={ formData.idType }
+          onFocus={ handleOnFocus }
+          onBlur={ handleOnBlur }
+          onChange={ handleOnChange }>
+            <option value="KTP">KTP</option>
+            <option value="Passport">Passport</option>
+            <option value="SIM">SIM</option>
+        </select>
+        <InfoLabel filled={ focus.idNumber } error={ error.idNumber }>ID Number</InfoLabel>
+        <InfoInput
+          type="text"
+          name="idNumber"
+          value={ formData.idNumber }
+          onFocus={ handleOnFocus }
+          onBlur={ handleOnBlur }
+          onChange={ handleOnChange }
+          error={ error.idNumber } />
+        { error.idNumber ? (<ErrorSpan>ID Number cannot be blank</ErrorSpan>) : null }
+        <InfoLabel filled={ focus.gender } error={ false }>Gender</InfoLabel>
+        <select
+          name="gender"
+          value={ formData.gender }
+          onFocus={ handleOnFocus }
+          onBlur={ handleOnBlur }
+          onChange={ handleOnChange }>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+        <InfoLabel filled={ focus.pob } error={ error.pob }>Place of Birth</InfoLabel>
+        <InfoInput
+          type="text"
+          name="pob"
+          value={ formData.pob }
+          onFocus ={ handleOnFocus }
+          onBlur={ handleOnBlur }
+          onChange={ handleOnChange }
+          error={ error.pob } />
+        { error.pob ? (<ErrorSpan>Place of birth cannot be blank</ErrorSpan>) : null }
+        <InfoLabel filled={ focus.dob } error={ error.dob }>Date of Birth</InfoLabel>
+          <div style={{ position: "relative" }}>
+            <DatePicker
+              name="dob"
+              dateFormat="dd-MM-yyyy"
+              error={ error.dob }
+              selected={ formData.dob }
+              onChange={ (date) => handleDateChange(date) }
+              showMonthDropdown
+              showYearDropdown
+              maxDate={ new Date() }
+              onFocus ={ handleOnFocus }
+              onBlur={ handleOnBlur } />
+            <img src="../../static/images/new-ui/ic-calendar.svg" alt="ic-cal"/>
           </div>
-          <p className="create-profile-form-note">
-            *data must match to your id card
-          </p>
-        </div>
-        {
-          props.errorMessage
-          ? <div className='create-profile-error-message'>{ props.errorMessage }</div>
-          : ''
-        }
-        <button className='form-submit-button' onClick={ handleOnClickButton }>
-          {
-            props.isInProgress
-              ? ( <FontAwesomeIcon icon='sync-alt' spin/> )
-              : 'Continue'
-          }
-        </button>
-      </div>
-    </Fragment>
+        { error.dob ? (<ErrorSpan>Date of birth cannot be blank</ErrorSpan>) : null }
+        <InfoLabel filled={ focus.address } error={ error.address }>Address</InfoLabel>
+        <InfoInput
+          type="text"
+          name="address"
+          value={ formData.address }
+          onFocus ={ handleOnFocus }
+          onBlur={ handleOnBlur }
+          onChange={ handleOnChange }
+          error={ error.address } />
+        { error.address ? (<ErrorSpan>Address cannot be blank</ErrorSpan>) : null }
+        <Profile.ButtonSection>
+          <PrButton 
+            type="submit"
+            style={{ width: '100%' }}
+            onClick={ handleOnClickButton }>
+              {
+                props.isInProgress ?
+                (<FontAwesomeIcon icon='sync-alt' spin/>)
+                :
+                "Continue"
+              }
+          </PrButton>
+        </Profile.ButtonSection>
+      </form>
+      
+    </InfoFlex>
   )
 }
 
@@ -219,6 +331,7 @@ const mapStateToProps = (state) => {
     isInProgress: state.profile.inProgress,
     response: state.profile.response,
     errorMessage: state.profile.errorMessage,
+    userData: state.user.user_data
   }
 }
 

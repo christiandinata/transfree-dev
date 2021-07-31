@@ -260,6 +260,9 @@ class Recipient extends React.Component {
     this.updateBsbCode = this.updateBsbCode.bind(this);
     this.updateRoutingNumber = this.updateRoutingNumber.bind(this);
 
+    this.handleOnChange = this.handleOnChange.bind(this);
+
+
     this.updateActiveElement = this.updateActiveElement.bind(this);
     this.updateDeactiveElement = this.updateDeactiveElement.bind(this);
 
@@ -598,6 +601,12 @@ class Recipient extends React.Component {
     this.props.previousStep();
   }
 
+  handleOnChange(e){
+    const value = e.target.value;
+    console.log(value);
+      e.target.value = value.replace(/[!$%#@&*^]/, '');
+  }
+
   checkSaveRecipient = () => {
     this.setState({isSaveRecipient : !this.state.isSaveRecipient})
   }
@@ -660,6 +669,7 @@ class Recipient extends React.Component {
                 placeholder="e.g. John Doe"
                 ref={this.bankAccountNumber}
                 defaultValue={this.props.data.bankAccountNumber}
+                onChange={this.handleOnChange}
                 onFocus={this.updateActiveElement}
                 onBlur={this.checkBankAccountNumber}/>
               <ErrorLabel hide={this.state.isBankAccountNumberValid}>Bank account name may not be empty.</ErrorLabel>
@@ -675,9 +685,10 @@ class Recipient extends React.Component {
                 placeholder="e.g. John Doe Taslim"
                 ref={this.name}
                 defaultValue={this.props.data.name}
+                onChange={this.handleOnChange}
                 onFocus={this.updateActiveElement}
                 onBlur={this.checkName}/>
-              <ErrorLabel hide={this.state.isNameValid}>Recipient's full name may not be empty.</ErrorLabel>
+              <ErrorLabel hide={this.state.isNameValid}>Recipient's name may not be empty.</ErrorLabel>
             </RecipientField>
 
             <RecipientField hide={!(this.state.toCurrency == 'idr'

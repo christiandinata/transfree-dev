@@ -6,7 +6,7 @@ import * as Navbar from './MenuComponents';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { useEffect, useState } from 'react';
 
-const Menu = ({isAuthenticated, isApproved, deauthenticate, username, id, is_homepage}) => {
+const Menu = ({isAuthenticated, isApproved, deauthenticate, username, id, is_homepage, is_profile, choice, setChoice}) => {
   const [scrolled, setScrolled] = useState(false)
   const [clicked, setClicked] = useState(false)
   const [isHomepage, setIsHomepage] = useState(is_homepage)
@@ -42,7 +42,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username, id, is_hom
   }, [isHomepage])
 
   return(
-    <Navbar.Nav scrolled = {scrolled} homepage = "true" marginTop = "-72px" clicked = {clicked} isAuth = {isAuthenticated}>
+    <Navbar.Nav scrolled = {scrolled} homepage = "true" marginTop = "-72px" clicked = {clicked} isAuth = {isAuthenticated} profile = {is_profile}>
       <Navbar.NavInner scrolled = {scrolled} homepage = "true" clicked = {clicked}>
         <Navbar.HeaderWrapper clicked = {clicked}>
           <a href = "/"><Navbar.Logo src="../static/images/transfree-logo.png" scrolled = {scrolled} homepage = "true"/></a>
@@ -64,7 +64,7 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username, id, is_hom
             </Navbar.NavigationChild>
 
             <Navbar.SignInButton href = "/login" scrolled = {scrolled} homepage = "true">
-              Sign In
+              Log In
             </Navbar.SignInButton>
 
             <Navbar.RegisterButton href = "/signup" scrolled = {scrolled} homepage = "true">
@@ -77,6 +77,38 @@ const Menu = ({isAuthenticated, isApproved, deauthenticate, username, id, is_hom
         {isAuthenticated ? 
         <React.Fragment>
           <Navbar.NavigationCenter clicked = {clicked}>
+            {is_profile && clicked && choice == 'detail' ?
+              <Navbar.ActionSect>
+                <Navbar.ActionChoiceActive onClick = {() => setChoice("detail")} value = "detail">
+                    <Navbar.ChoiceImg src = "../static/images/profile/detail-profile-blue.png"/>
+                    <Navbar.AccountLinkActive>Detail Profile</Navbar.AccountLinkActive>
+                    <Navbar.ArrowRightImg src = "../static/images/profile/arrow-right-blue.png"/> 
+                </Navbar.ActionChoiceActive>
+
+                <Navbar.ActionChoice onClick = {() => setChoice("edit")} value = "edit">
+                    <Navbar.ChoiceImg src = "../static/images/profile/edit-profile-white.png"/>
+                    <Navbar.AccountLink>Edit Profile</Navbar.AccountLink>
+                    <Navbar.ArrowRightImg src = "../static/images/profile/arrow-right-white.png"/>
+                </Navbar.ActionChoice>
+              </Navbar.ActionSect>
+          : null}
+
+            {is_profile && clicked && choice == 'edit' ?
+              <Navbar.ActionSect>
+                <Navbar.ActionChoice onClick = {() => setChoice("detail")} value = "detail">
+                    <Navbar.ChoiceImg src = "../static/images/profile/detail-profile-white.png"/>
+                    <Navbar.AccountLink>Detail Profile</Navbar.AccountLink>
+                    <Navbar.ArrowRightImg src = "../static/images/profile/arrow-right-white.png"/> 
+                </Navbar.ActionChoice>
+
+                <Navbar.ActionChoiceActive onClick = {() => setChoice("edit")} value = "edit">
+                    <Navbar.ChoiceImg src = "../static/images/profile/edit-profile-blue.png"/>
+                    <Navbar.AccountLinkActive>Edit Profile</Navbar.AccountLinkActive>
+                    <Navbar.ArrowRightImg src = "../static/images/profile/arrow-right-blue.png"/>
+                </Navbar.ActionChoiceActive>
+              </Navbar.ActionSect>
+          : null}
+
             <Navbar.NavigationChild href = "/order" scrolled = {scrolled} homepage = "true" navChildColor = "#f5f5f5">
               Send Money
             </Navbar.NavigationChild>

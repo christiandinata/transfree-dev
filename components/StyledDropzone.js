@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import styled from 'styled-components'
+import Compressor from 'compressorjs'
 
 const DropzoneDiv = styled.div`
   display: flex;
@@ -65,20 +66,21 @@ const OverlayDiv = styled.div`
 // Styling
 const thumbsContainer = {
   display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap',
+  flexWrap: "wrap"
 }
 
 const thumb = {
-  maxWidth: "320px",
-  maxHeight: "220px",
-  margin: "auto"
+  maxWidth: "100%",
+  maxHeight: "235px",
+  margin: "auto",
+  overflow: "hidden"
 }
 
 const img = {
-  width: "320px",
-  height: "220px",
-  objectFit: "cover"
+  maxWidth: "100%",
+  maxHeight: "100%",
+  objectFit: "cover",
+  borderRadius: "4px"
 }
 
 const activeStyle = {
@@ -109,19 +111,39 @@ function StyledDropzone (props) {
 
   //Menerima file yang diupload user
   const onDrop = useCallback(acceptedFiles => {
-    const file = acceptedFiles[0]
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
-    reader.onload = (event) => {
-      props.onDrop(event.target.result)
-    }
+    var file = acceptedFiles[0]
 
-    // Membuat file yang diupload menjadi suatu variabel
-    setFiles([
-      Object.assign(file, {
-        preview: URL.createObjectURL(file)
-      })
-    ])
+    // Handle file size more than 2MB
+    new Compressor(file, {
+      quality: 0.8,
+      convertSize: 2000000,
+      success(result) {
+        file = new File([result], result.name, { lastModified: new Date() })
+        
+        if (file.size / (1024*1024) > 2) {
+          // Image size too big after compression
+          props.onError("Your photo is too large! (More than 2MB)")
+        
+        } else {
+          // Image size is less than 2MB
+          const reader = new FileReader()
+          reader.readAsDataURL(file)
+          reader.onload = (event) => {
+            props.onDrop(event.target.result)
+          }
+
+          // Membuat file yang diupload menjadi suatu variabel
+          setFiles([
+            Object.assign(file, {
+              preview: URL.createObjectURL(file)
+            })
+          ])
+        }
+      },
+      error(e) {
+        props.onError("There is an error in compressing your photo")
+      }
+    })
   }, [])
 
   //membuat preview untuk file yang diupload

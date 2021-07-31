@@ -3,7 +3,6 @@ import Footer from '../components/footer.js';
 import styled from 'styled-components';
 import { Component } from 'react';
 import * as Info from '../components/Info.js';
-import { NavBarWhite } from '../components/MenuComponents.js';
 import Menu from '../components/menu';
 import initialize from '../utils/initialize.js';
 import actions from '../redux/actions/index.js';
@@ -29,7 +28,6 @@ const WithImage = styled.div`
     object-fit: cover;
     filter: drop-shadow(12px 20px 40px rgba(12, 12, 12, 0.1));
     padding-bottom: 2rem;
-    width: 75%;
   }
 
   @media only screen and (max-width: 800px) {

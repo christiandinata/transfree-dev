@@ -101,6 +101,19 @@ const SocialLogo = styled.a`
   text-decoration: none;
 `;
 
+const SocialPic = styled.img`
+  width: 24px;
+  height: 24px;
+  object-fit: scale-down;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+
+  &:hover {
+    -webkit-filter: none;
+    filter: none;
+  }
+`;
+
 const LicensePhoto = styled.img`
   width: 150px;
   height: 150px;
@@ -140,6 +153,25 @@ const FooterText = styled.span`
   margin-bottom: 16px;
 `;
 
+const FooterEmail = styled.button`
+  outline: none;
+  text-decoration: none;
+  border: none;
+  background-color: #fff;
+  color: #626B79;
+  font-size: 16px;
+  line-height: 24px;
+  font-style: normal;
+  font-weight: normal;
+  margin-bottom: 16px;
+  text-align: left;
+  padding: 0;
+
+  &:hover {
+    color: #009fe3;
+  }
+`;
+
 const CopyrightText = styled(FooterText)`
   font-weight: 500;
   text-align: center;
@@ -167,17 +199,28 @@ const TrademarkText = styled(FooterText)`
   }
 `;
 
+const handleEmailClick = () => {
+  // Terlalu ngezoom tampilannya
+  window.location.href = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + 'admin@transfree.id'
+
+  // Open ke Mail app
+  // window.location.href = 'mailto:admin@transfree.id'
+
+  // Compose doang
+  // window.location.href = 'https://mail.google.com/mail/u/0/#compose'
+}
+
 const Footer = () => (
   <div>
     <Base>
       <Contacts>
         <Brand src = "../static/images/transfree-logo.png"></Brand> 
         <LogoDiv>
-          <SocialLogo href = "https://www.facebook.com/transfree.id.9"><img src = "../static/images/Footer/facebook-logo.png"></img></SocialLogo>
-          <SocialLogo href = "https://www.instagram.com/transfree_id/?hl=en"><img src = "../static/images/Footer/instagram-logo.png"></img> </SocialLogo>
-          <SocialLogo href = "https://www.linkedin.com/company/transfreeid"><img src = "../static/images/Footer/linkedin-logo.png"></img> </SocialLogo>
-          <SocialLogo href = "https://www.youtube.com/channel/UCGZ9uWFrBSAKwh6YE4q2hyA/videos"><img src = "../static/images/Footer/youtube-logo.png"></img></SocialLogo>
-          <SocialLogo href = "https://medium.com/transfree"><img src = "../static/images/Footer/medium-logo.png"></img> </SocialLogo>
+          <SocialLogo href = "https://www.facebook.com/transfree.id.9"><SocialPic src = "../static/images/Footer/facebook-logo.png"></SocialPic></SocialLogo>
+          <SocialLogo href = "https://www.instagram.com/transfree_id/?hl=en"><SocialPic src = "../static/images/Footer/instagram-logo.png"></SocialPic> </SocialLogo>
+          <SocialLogo href = "https://www.linkedin.com/company/transfreeid"><SocialPic src = "../static/images/Footer/linkedin-logo.png"></SocialPic> </SocialLogo>
+          <SocialLogo href = "https://www.youtube.com/channel/UCGZ9uWFrBSAKwh6YE4q2hyA/videos"><SocialPic src = "../static/images/Footer/youtube-logo.png"></SocialPic></SocialLogo>
+          <SocialLogo href = "https://medium.com/transfree"><SocialPic src = "../static/images/Footer/medium-logo.png"></SocialPic> </SocialLogo>
         </LogoDiv>
       </Contacts>
 
@@ -193,7 +236,8 @@ const Footer = () => (
         <Column>
           <Title>Contacts</Title>
           <FooterLink href="https://api.whatsapp.com/send?phone=447490090659&text=Hello%20Transfree" target="_blank">+44 7985 497391</FooterLink>
-          <FooterText>admin@transfree.id</FooterText>
+          <FooterEmail onClick = {handleEmailClick}>admin@transfree.id</FooterEmail>
+          {/* <FooterText>admin@transfree.id</FooterText> */}
           <FooterLink href = "/complaint_feefback">Complaint and Feedback</FooterLink>
         </Column>
 

@@ -19,28 +19,32 @@ import Link from 'next/link';
 import ENV from "../config";
 import * as axios from "axios";
 import React, { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const SuccessModal = (props) => {
+const SuccessModal = () => {
     const [visible, setVisible] = useState(true)
 
     useEffect(() => {
         setTimeout(() => 
-            setVisible(false), props.delay)
-    }, [props.delay])
+            setVisible(false), 3000)
+    }, [])
 
     return (
         visible ? 
-        <Profile.ModalSuccessContainer>
-            <Profile.ModalSuccessWrapper>
-                <Profile.ModalSuccessText>
-                    <Profile.ModalSuccessImg src = "../static/images/profile/check.png"/>
+        <div>
+            <Profile.ModalSuccessContainer>
+                <Profile.ModalSuccessWrapper>
+                    <Profile.ModalSuccessText>
+                        <Profile.ModalSuccessImg src = "../static/images/profile/check.png"/>
 
-                    <Profile.ModalSuccessTitle>
-                        Your profile has been saved
-                    </Profile.ModalSuccessTitle>
-                </Profile.ModalSuccessText>
-            </Profile.ModalSuccessWrapper>
-        </Profile.ModalSuccessContainer>
+                        <Profile.ModalSuccessTitle>
+                            Your profile has been saved
+                        </Profile.ModalSuccessTitle>
+                    </Profile.ModalSuccessText>
+                </Profile.ModalSuccessWrapper>
+            </Profile.ModalSuccessContainer>
+        </div>
         :
         null
     )
@@ -80,7 +84,7 @@ function UserProfile(props) {
         phone: false
     })
 
-    const [choice, setChoice] = useState('edit')
+    const [choice, setChoice] = useState('detail')
     const [hiddenPass, setHidden] = useState(true)
     const [hiddenConfirm, setConfirm] = useState(true)
     const [space, setSpace] = useState(false)
@@ -224,7 +228,10 @@ function UserProfile(props) {
     }
 
     const updateUser = async () => {
-        if(checkAllData()) {
+        if(info.password == '' || info.confirmPassword == '') {
+            alert("Password or confirm password field cannot be blank")
+        }
+        else if(checkAllData()) {
             axios
                 .post(
                     ENV.API + `/v1/user/checkEmail`,
@@ -273,6 +280,7 @@ function UserProfile(props) {
     
                                 setSuccess(true)
                                 setChoice('detail')
+                                toast.success("Your profile has been saved")
                                 setPopup(false)
                             })
                             .catch((error) => {
@@ -295,9 +303,19 @@ function UserProfile(props) {
     }
 
     return(
-        <React.Fragment>
+        <Profile.MainWrapper>
+            {console.log(success)}
             <Header/>
-            <Menu isAuthenticated = {true} username = {info.fullName} id = {info.idNumber} scrolled_props = "true" is_homepage = "false"/>
+            <Menu 
+                isAuthenticated = {true} 
+                username = {info.fullName} 
+                id = {info.idNumber} 
+                scrolled_props = "true" 
+                is_homepage = "false" 
+                is_profile = "true"
+                choice = {choice}
+                setChoice = {setChoice}
+                />
 
             {choice == 'detail' ? 
 
@@ -319,6 +337,7 @@ function UserProfile(props) {
                 <Profile.ProfileSect>
                     <Profile.ProfileAction>
                         <Profile.AccountText>Account Profile</Profile.AccountText>
+                        {success && <ToastContainer position = {"top-center"} autoClose = {3000}/>}
                         <Link href="/logout" passHref>
                             <Profile.LogOutButton>Log Out</Profile.LogOutButton>
                         </Link>
@@ -401,13 +420,6 @@ function UserProfile(props) {
                         </Profile.Data>
                         
                         <Profile.Divider></Profile.Divider>
-
-                        {success ? 
-                            <div>
-                                <SuccessModal delay = "3000"></SuccessModal>
-                            </div>
-                            :
-                        null}
                     </div>
                 </Profile.ProfileSect>
             </Profile.Wrapper> 
@@ -430,7 +442,9 @@ function UserProfile(props) {
                 <Profile.ProfileSect>
                     <Profile.ProfileAction>
                         <Profile.AccountText>Account Profile</Profile.AccountText>
-                        <Profile.LogOutButton href = "/logout">Log Out</Profile.LogOutButton>
+                        <Link href="/logout" passHref>
+                            <Profile.LogOutButton>Log Out</Profile.LogOutButton>
+                        </Link>
                     </Profile.ProfileAction>
                     
                     <Profile.EditWrapper>
@@ -442,8 +456,8 @@ function UserProfile(props) {
                                 </Profile.SectionType>
 
                                 <form>
+                                    <Profile.FormLabel filled = {focus.fullName}>Full Name</Profile.FormLabel>
                                     <Profile.FormRow>
-                                        <Profile.FormLabel filled = {focus.fullName}>Full Name</Profile.FormLabel>
                                         <Profile.InputText 
                                             type = "text" 
                                             name = "fullName"
@@ -456,8 +470,8 @@ function UserProfile(props) {
                                         />
                                     </Profile.FormRow>
 
+                                    <Profile.FormLabel filled = {focus.idNumber}>ID Number</Profile.FormLabel>
                                     <Profile.FormRow>
-                                        <Profile.FormLabel filled = {focus.idNumber}>ID Number</Profile.FormLabel>
                                         <Profile.InputText 
                                             type = "text" 
                                             name = "idNumber"
@@ -470,8 +484,8 @@ function UserProfile(props) {
                                         />
                                     </Profile.FormRow>
 
+                                    <Profile.FormLabel filled = {focus.dob}>Date of Birth</Profile.FormLabel>
                                     <Profile.FormRow>
-                                        <Profile.FormLabel filled = {focus.dob}>Date of Birth</Profile.FormLabel>
                                         <Profile.InputText 
                                             type = "text" 
                                             name = "dob"
@@ -485,8 +499,8 @@ function UserProfile(props) {
                                         />
                                     </Profile.FormRow>
 
+                                    <Profile.FormLabel filled = {focus.pob}>Place of Birth</Profile.FormLabel>
                                     <Profile.FormRow>
-                                        <Profile.FormLabel filled = {focus.pob}>Place of Birth</Profile.FormLabel>
                                         <Profile.InputText 
                                             type = "text" 
                                             name = "pob"
@@ -500,8 +514,8 @@ function UserProfile(props) {
                                         />
                                     </Profile.FormRow>
 
+                                    <Profile.FormLabel filled = {focus.gender}>Gender</Profile.FormLabel>
                                     <Profile.FormRow>
-                                        <Profile.FormLabel filled = {focus.gender}>Gender</Profile.FormLabel>
                                         <Profile.InputText 
                                             type = "text" 
                                             name = "gender"
@@ -537,8 +551,8 @@ function UserProfile(props) {
                                         </Profile.RadioWrapper>
                                     </Profile.FormRow>
 
+                                    <Profile.FormLabel filled = {focus.address}>Address</Profile.FormLabel>
                                     <Profile.FormRow>
-                                        <Profile.FormLabel filled = {focus.address}>Address</Profile.FormLabel>
                                         <Profile.InputText 
                                             type = "text" 
                                             name = "address"
@@ -584,6 +598,7 @@ function UserProfile(props) {
                                             type = {hiddenPass ? "password" : "text"}
                                             name = "password"
                                             value = {info.password}
+                                            required
                                             onChange = {!space && handleInputChange}
                                             onFocus = {handleFocusChange}
                                             onBlur = {handleBlurChange}
@@ -624,6 +639,7 @@ function UserProfile(props) {
                                             type = {hiddenConfirm ? "password" : "text"}
                                             name = "confirmPassword"
                                             value = {info.confirmPassword}
+                                            required
                                             onChange = {!space && handleInputChange}
                                             onFocus = {handleFocusChange}
                                             onBlur = {handleBlurChange}
@@ -710,6 +726,10 @@ function UserProfile(props) {
                 </Profile.ProfileSect>
 
                 <style jsx global>{`
+                    .react-phone-number-input {
+                        width: 100%;
+                    }
+
                     .react-phone-number-input__input {
                         padding: 5px;
                         height: 35px;
@@ -718,11 +738,15 @@ function UserProfile(props) {
                         font-size: 16px;
                         color: #626B79;
                     }
+
+                    .react-phone-number-input__country {
+                        margin-left: 0.5em; 
+                    }
                 `}
                 </style>
             </Profile.Wrapper> 
             }
-        </React.Fragment>
+        </Profile.MainWrapper>
     )
 }
 
