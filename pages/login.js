@@ -234,7 +234,7 @@ function Login(props) {
 									style={{ width: 25, height: 25 }}
 								/>
 							) : (
-								"Sign In"
+								"Log In"
 							)}
 						</Button>
 					</FormInner>

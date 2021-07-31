@@ -282,7 +282,7 @@ function Signup(props) {
 							<BelowHeading>
 								Already have an account ?{" "}
 								<Link href="/login">
-									<a>Sign In</a>
+									<a>Log In</a>
 								</Link>
 							</BelowHeading>
 						</center>

@@ -676,7 +676,7 @@ function ForgotPassword(props) {
 						{step != "success" ? (
 							<BelowButton>
 								<span onClick={() => Router.push("/login")}>
-									Back to Login
+									Back to Log In
 								</span>
 							</BelowButton>
 						) : (
@@ -684,7 +684,7 @@ function ForgotPassword(props) {
 								type="submit"
 								success={true}
 								onClick={() => Router.push("/login")}>
-								Login
+								Log In
 							</Button>
 						)}
 					</RecoveryFormInner>
@@ -775,8 +775,6 @@ const RecoveryContainer = styled.div`
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	background-image: url("../static/images/Batik_World_Map_1.png");
-	background-repeat: no-repeat;
 	background-color: #f3f5f7;
 
 	@media (max-width: 620px) {
