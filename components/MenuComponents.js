@@ -202,7 +202,7 @@ export const NavigationCenter = styled.div`
 		background-color: #fff;
 		align-items: stretch;
 		// margin: 16px 16px 16px 16px;
-	} ;
+	}
 `;
 
 // The Navigation component for NavBarBlue() function
