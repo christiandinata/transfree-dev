@@ -15,31 +15,31 @@ app.prepare()
 
 		server.get("/", (req, res) => {
 			if (req.cookies.token) {
-				res.redirect("/home");
+				res.redirect("/user/home");
 			} else {
 				return app.render(req, res, "/index", req.query);
 			}
 		});
 
-		server.get("/account", (req, res) => {
+		server.get("/user/account", (req, res) => {
 			if (!req.cookies.token) {
 				res.redirect("/");
 			} else {
-				return app.render(req, res, "/account", req.query);
+				return app.render(req, res, "/user/account", req.query);
 			}
 		});
 
-		server.get("/home", (req, res) => {
+		server.get("/user/home", (req, res) => {
 			if (!req.cookies.token) {
 				res.redirect("/login");
 			} else {
-				return app.render(req, res, "/home", req.query);
+				return app.render(req, res, "/user/home", req.query);
 			}
 		});
 
 		server.get("/login", (req, res) => {
 			if (req.cookies.token) {
-				res.redirect("/home");
+				res.redirect("/user/home");
 			} else {
 				return app.render(req, res, "/login", req.query);
 			}
@@ -55,7 +55,7 @@ app.prepare()
 
 		server.get("/signup", (req, res) => {
 			if (req.cookies.token) {
-				res.redirect("/home");
+				res.redirect("/user/home");
 			} else {
 				return app.render(req, res, "/signup", req.query);
 			}
@@ -101,11 +101,11 @@ app.prepare()
 			}
 		});
 
-		server.get("/order", (req, res) => {
+		server.get("/user/order", (req, res) => {
 			if (!req.cookies.token) {
 				res.redirect("/login");
 			} else {
-				return app.render(req, res, "/order", req.query);
+				return app.render(req, res, "/user/order", req.query);
 			}
 		});
 
@@ -160,11 +160,11 @@ app.prepare()
 			}
 		});
 
-		server.get("/profile", (req, res) => {
+		server.get("/user/profile", (req, res) => {
 			if (!req.cookies.token) {
 				res.redirect("/login");
 			} else {
-				return app.render(req, res, "/profile", req.query.oid);
+				return app.render(req, res, "/user/profile", req.query.oid);
 			}
 		});
 

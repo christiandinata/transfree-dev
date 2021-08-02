@@ -323,7 +323,7 @@ function ForgotPassword(props) {
 			<NavBarBlue
 				navChildColor="#fff"
 				navText="Account"
-				endpoint="/account"
+				endpoint="/user/account"
 			/>
 			{step == "otp" && errorMsg ? (
 				<ErrorDiv>

@@ -1,9 +1,9 @@
-import Header from "../components/header.js";
-import Menu from "../components/menu.js";
+import Header from "../../components/header.js";
+import Menu from "../../components/menu.js";
 import { connect } from "react-redux";
-import actions from "../redux/actions";
-import initialize from "../utils/initialize";
-import { getCookie } from "../utils/cookie";
+import actions from "../../redux/actions";
+import initialize from "../../utils/initialize";
+import { getCookie } from "../../utils/cookie";
 import Link from "next/link";
 
 class Profile extends React.Component {
